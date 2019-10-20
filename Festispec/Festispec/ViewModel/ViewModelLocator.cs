@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using Festispec.ViewModel.Graph;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -41,7 +42,47 @@ namespace Festispec.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public GraphViewModel Graph
+        {
+            get
+            {
+                return new GraphViewModel();
+            }
+        }
         
+        public SalesGraphViewModel SaleGraph
+        {
+            get
+            {
+                return new SalesGraphViewModel();
+            }
+        }
+
+        public InspectorGraphViewModel InspectorGraph
+        {
+            get
+            {
+                return new InspectorGraphViewModel();
+            }
+        }
+
+        public OffertesGraphViewModel OfferteGraph
+        {
+            get
+            {
+                return new OffertesGraphViewModel();
+            }
+        }
+
+        public SalesMapGraphViewModel SalesMapGraph
+        {
+            get
+            {
+                return new SalesMapGraphViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
