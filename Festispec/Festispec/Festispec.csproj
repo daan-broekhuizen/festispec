@@ -86,15 +86,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AvailabilityModel.cs" />
     <Compile Include="Model\InspectorModel.cs" />
+    <Compile Include="Model\Misc\DateTimeExtension.cs" />
     <Compile Include="Model\Misc\EnumMonth.cs" />
     <Compile Include="Model\Misc\EnumOfferteStatus.cs" />
     <Compile Include="Model\MultipleChoiceQuestion.cs" />
     <Compile Include="Model\OfferteModel.cs" />
     <Compile Include="Model\OpenQuestion.cs" />
     <Compile Include="Model\Question.cs" />
+    <Compile Include="Model\Repositories\AvailabilityRepository.cs" />
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\SaleModel.cs" />
+    <Compile Include="ViewModel\AvailabilityViewModel.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />
     <Compile Include="ViewModel\Graph\InspectorGraphViewModel.cs" />
     <Compile Include="ViewModel\Graph\OffertesGraphViewModel.cs" />
@@ -105,6 +109,9 @@
     <Compile Include="ViewModel\QuestionListViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AvailabilityView.xaml.cs">
+      <DependentUpon>AvailabilityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
     </Compile>
@@ -126,6 +133,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AvailabilityView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\GraphView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

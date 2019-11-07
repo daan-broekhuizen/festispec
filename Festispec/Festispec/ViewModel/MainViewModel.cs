@@ -19,6 +19,9 @@ namespace Festispec.ViewModel
         public ICommand OpenQuestionListCommand { get; set; }
         private QuestionListView _questionListView;
 
+        public ICommand OpenAvailabilityCommand { get; set; }
+        private AvailabilityView _availabilityView;
+
         public MainViewModel()
         {
             this.OpenGraphCommand = new RelayCommand(() => {
@@ -36,6 +39,12 @@ namespace Festispec.ViewModel
             {
                 this._questionListView = new QuestionListView();
                 this._questionListView.Show();
+            });
+
+            this.OpenAvailabilityCommand = new RelayCommand(() =>
+            {
+                this._availabilityView = new AvailabilityView();
+                this._availabilityView.Show();
             });
         }
     }

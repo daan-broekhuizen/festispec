@@ -113,6 +113,14 @@ namespace Festispec.ViewModel
             }
         }
 
+        public AvailabilityViewModel Availability
+        {
+            get
+            {
+                return new AvailabilityViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
