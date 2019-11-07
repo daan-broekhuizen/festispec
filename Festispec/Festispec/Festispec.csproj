@@ -89,7 +89,10 @@
     <Compile Include="Model\InspectorModel.cs" />
     <Compile Include="Model\Misc\EnumMonth.cs" />
     <Compile Include="Model\Misc\EnumOfferteStatus.cs" />
+    <Compile Include="Model\MultipleChoiceQuestion.cs" />
     <Compile Include="Model\OfferteModel.cs" />
+    <Compile Include="Model\OpenQuestion.cs" />
+    <Compile Include="Model\Question.cs" />
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\SaleModel.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />
@@ -98,9 +101,18 @@
     <Compile Include="ViewModel\Graph\SalesGraphViewModel.cs" />
     <Compile Include="ViewModel\Graph\SalesMapGraphViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\QuestionEditVM.cs" />
+    <Compile Include="ViewModel\QuestionListViewModel.cs" />
+    <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionEditView.xaml.cs">
+      <DependentUpon>QuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionListView.xaml.cs">
+      <DependentUpon>QuestionListView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +127,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\GraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

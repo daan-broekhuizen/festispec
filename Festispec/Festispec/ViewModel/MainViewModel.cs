@@ -13,11 +13,29 @@ namespace Festispec.ViewModel
         public ICommand OpenGraphCommand { get; set; }
         private GraphView _graphView;
 
+        public ICommand OpenQuestoinEditCommand { get; set; }
+        private QuestionEditView _questionEditView;
+
+        public ICommand OpenQuestionListCommand { get; set; }
+        private QuestionListView _questionListView;
+
         public MainViewModel()
         {
             this.OpenGraphCommand = new RelayCommand(() => {
                 this._graphView = new GraphView();
                 this._graphView.Show();
+            });
+
+            this.OpenQuestoinEditCommand = new RelayCommand(() =>
+            {
+                this._questionEditView = new QuestionEditView();
+                this._questionEditView.Show();
+            });
+
+            this.OpenQuestionListCommand = new RelayCommand(() =>
+            {
+                this._questionListView = new QuestionListView();
+                this._questionListView.Show();
             });
         }
     }

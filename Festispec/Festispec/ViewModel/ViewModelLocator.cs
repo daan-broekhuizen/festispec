@@ -28,6 +28,9 @@ namespace Festispec.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
+        /// 
+        private QuestionListViewModel _questionList;
+
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -80,6 +83,33 @@ namespace Festispec.ViewModel
             get
             {
                 return new SalesMapGraphViewModel();
+            }
+        }
+
+        public QuestionListViewModel QuestionsList
+        {
+            get
+            {
+                if(_questionList == null)
+                {
+                    _questionList = new QuestionListViewModel();
+                    return _questionList;
+                }
+                return _questionList;
+                
+            }
+        }
+
+        public QuestionEditVM QuestionEdit
+        {
+            get
+            {
+                if (_questionList == null)
+                {
+                    _questionList = new QuestionListViewModel();
+                    return new QuestionEditVM(_questionList);
+                }
+                return new QuestionEditVM(_questionList);
             }
         }
 
