@@ -1,23 +1,28 @@
-﻿<Window x:Class="Festispec.NavigationBar"
+﻿<Window x:Class="Festispec.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec"
         mc:Ignorable="d"
-        Title="NavigationBar" Height="450" Width="800"
+        Title="FestiSpec" Height="450" Width="800"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-
-    <Grid Background="DimGray" Width="142" Height="420" VerticalAlignment="Top" HorizontalAlignment="Left">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="142"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+    <Grid Background="DimGray"  Height="420" VerticalAlignment="Top" HorizontalAlignment="Left">
+        
         <Image Width="86" Source="/Images/Profile.png" Margin="28,10,28,355" HorizontalAlignment="Center"/>
-        <TextBlock Text="Username" Margin="42,70,-43,-70" Foreground="LightGray"/>
+        <TextBlock Text="Username" Margin="42,70,27.714,335" Foreground="LightGray"/>
         <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,-117,0,117"/>
 
         <Image Width="28" Source="/Images/Homeicon.png" Margin="16,107,98,293" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Margin="44,107,28,293"/>
+        <Button Height="20" Width="70" Background="DimGray" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Margin="44,107,28,293" Command="{Binding ShowDashboardView}"/>
 
         <Image Width="28" Source="/Images/Person.png" Margin="16,137,98,263" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="ShowCustomersView"/>
+        <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="{Binding ShowCustomerView}"/>
 
         <Image Width="28" Source="/Images/Paper.png" Margin="16,167,98,232" HorizontalAlignment="Center"/>
         <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233"/>
@@ -34,6 +39,8 @@
         <Image Width="28" Source="/Images/Notification.png" Margin="16,288,98,110" HorizontalAlignment="Center"/>
         <Button Height="20" Width="70" Background="DimGray" Content="Meldingen" Foreground="LightGray" BorderThickness="0" Margin="44,288,28,115"/>
 
-        <Frame x:Name="Main"/>
+        
+    </Grid>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>

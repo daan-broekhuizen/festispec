@@ -18,7 +18,7 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Page1 : UserControl
     {
         public Page1()
         {

@@ -1,8 +1,9 @@
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModel
 {
@@ -26,27 +27,34 @@ namespace Festispec.ViewModel
         /// 
 
         public ICommand ShowCustomerView { get; set; }
-        private SideBarMenu _MainViewWindow;
-        private Frame _currentFrame;
+        public ICommand ShowJobView { get; set; }
+        public ICommand ShowQuotationView { get; set; }
+        public ICommand ShowDashboardView { get; set; }
+        public ICommand ShowMessageView { get; set; }
+        public ICommand ShowAccountView { get; set; }
+        public ICommand ShowPlanningView { get; set; }
+        public ICommand ShowCalendarView { get; set; }
+
+        private UserControl currentPage;
+        public UserControl CurrentPage 
+        {
+            get => currentPage; 
+            set
+            {
+                currentPage = value;
+                RaisePropertyChanged("CurrentPage");
+            }
+        }
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
-            ///
-            _MainViewWindow = (SideBarMenu) Application.Current.MainWindow;
-            ShowCustomerView = new RelayCommand(ShowCustomerPage);
-            _currentFrame = _MainViewWindow.MainFrame;
+            CurrentPage = new UserControl();
+            ShowCustomerView = new RelayCommand(ShowCustomer);
+            ShowDashboardView = new RelayCommand(ShowDashboard);
         }
 
-        public void ShowCustomerPage()
-        {
-            _currentFrame.Content = new Page1();
-        }
+        private void ShowDashboard() => CurrentPage = new HomeWindow();
+        private void ShowCustomer() => CurrentPage = new Page1();
     }
+
+
 }
