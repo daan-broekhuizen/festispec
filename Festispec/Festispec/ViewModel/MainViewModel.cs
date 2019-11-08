@@ -1,4 +1,6 @@
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModel
 {
@@ -19,6 +21,9 @@ namespace Festispec.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
+        /// 
+
+        public ICommand ShowCustomerView { get; set }
         public MainViewModel()
         {
             ////if (IsInDesignMode)
@@ -29,6 +34,15 @@ namespace Festispec.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            ///
+
+            ShowCustomerView = new RelayCommand(ShowCustomerPage);
+        }
+
+        public void ShowCustomerPage()
+        {
+            Page1 page1 = new Page1();
+            Main.Content = page1;
         }
     }
 }

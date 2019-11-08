@@ -83,6 +83,9 @@
     <Compile Include="HomeWindow.xaml.cs">
       <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SideBarMenu.xaml.cs">
+      <DependentUpon>SideBarMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
@@ -126,9 +129,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SideBarMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\profile.jpg" />
+    <Resource Include="Images\Profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Homeicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Paper.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\agenda.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Notification.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

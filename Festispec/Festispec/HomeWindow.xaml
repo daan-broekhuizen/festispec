@@ -7,11 +7,48 @@
         mc:Ignorable="d"
         Title="HomeWindow" Height="450" Width="800">
     <StackPanel>
-        <Grid Background="LightGray" Width="142" Height="420" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <Image Height="100" Width="100" Source="/Images/Profile.jpg" Margin="20,10,22,310" HorizontalAlignment="Center"/>
 
+        
+        <!-- Navigation Bar-->
+        <Grid Background="DimGray" Width="142" Height="420" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Image Width="86" Source="/Images/Profile.png" Margin="28,10,28,355" HorizontalAlignment="Center"/>
+            <TextBlock Text="Username" Margin="42,70,-43,-70" Foreground="LightGray"/>
+            <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,-117,0,117"/>
+
+            <Image Width="28" Source="/Images/Homeicon.png" Margin="16,107,98,293" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Margin="44,107,28,293"/>
+
+            <Image Width="28" Source="/Images/Person.png" Margin="16,137,98,263" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263"/>
+
+            <Image Width="28" Source="/Images/Paper.png" Margin="16,167,98,232" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233"/>
+
+            <Image Width="28" Source="/Images/Paper.png" Margin="16,197,98,201" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Offerte" Foreground="LightGray" BorderThickness="0" Margin="44,198,28,201"/>
+
+            <Image Width="28" Source="/Images/Agenda.png" Margin="16,228,98,170" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Agenda" Foreground="LightGray" BorderThickness="0" Margin="44,228,28,169"/>
+
+            <Image Width="28" Source="/Images/Schedule.png" Margin="16,258,98,140" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Planning" Foreground="LightGray" BorderThickness="0" Margin="44,258,28,140"/>
+
+            <Image Width="28" Source="/Images/Notification.png" Margin="16,288,98,110" HorizontalAlignment="Center"/>
+            <Button Height="20" Width="70" Background="DimGray" Content="Meldingen" Foreground="LightGray" BorderThickness="0" Margin="44,288,28,115"/>
+
+            <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,179,0,-179"/>
+        <TextBlock Text="Uitloggen" Margin="42,396,-46,-6" Foreground="LightGray"/>
+
+        <TextBlock Text="Example - Example" Margin="147,6,-111,395" Foreground="Black"/>
+
+        <TextBlock Text="Title" Margin="190,38,-156,338" Foreground="Black" FontSize="30" FontWeight="Bold"/>
+
+        <Button Content="Example aanmaken" Height="20" Width="120" Margin="190,92,-168,308"/>
+
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="142,137,-655,232" StrokeThickness="0"/>
+
+            <TextBox Width="500" Height="30" Margin="190,148,-548,242" />
         </Grid>
-
 
 
     </StackPanel>
