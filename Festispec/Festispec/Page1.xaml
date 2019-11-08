@@ -14,11 +14,11 @@
 
         <TextBlock Text="Title" Margin="190,38,-156,338" Foreground="Black" FontSize="30" FontWeight="Bold"/>
 
-        <Button Content="Example aanmaken" Height="20" Width="120" Margin="190,92,-168,308"/>
+        <Button Content="Example aanmaken" Height="20" Width="120" Margin="190,88,490,312.8"/>
 
-        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="142,137,-655,232" StrokeThickness="0"/>
+        <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="142,137,40,231.8" StrokeThickness="0"/>
 
-        <TextBox Width="500" Height="30" Margin="190,148,-548,242" />
+        <TextBox Width="500" Height="30" Margin="190,159,110,231.8" />
         </Grid>
     </StackPanel>
 </Page>

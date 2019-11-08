@@ -23,7 +23,7 @@ namespace Festispec.ViewModel
         /// </summary>
         /// 
 
-        public ICommand ShowCustomerView { get; set }
+        public ICommand ShowCustomerView { get; set; }
         public MainViewModel()
         {
             ////if (IsInDesignMode)
@@ -41,8 +41,7 @@ namespace Festispec.ViewModel
 
         public void ShowCustomerPage()
         {
-            Page1 page1 = new Page1();
-            Main.Content = page1;
+            
         }
     }
 }
