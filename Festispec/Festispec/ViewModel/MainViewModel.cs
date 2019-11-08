@@ -1,3 +1,5 @@
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -24,6 +26,8 @@ namespace Festispec.ViewModel
         /// 
 
         public ICommand ShowCustomerView { get; set; }
+        private SideBarMenu _MainViewWindow;
+        private Frame _currentFrame;
         public MainViewModel()
         {
             ////if (IsInDesignMode)
@@ -35,13 +39,14 @@ namespace Festispec.ViewModel
             ////    // Code runs "for real"
             ////}
             ///
-
+            _MainViewWindow = (SideBarMenu) Application.Current.MainWindow;
             ShowCustomerView = new RelayCommand(ShowCustomerPage);
+            _currentFrame = _MainViewWindow.MainFrame;
         }
 
         public void ShowCustomerPage()
         {
-            
+            _currentFrame.Content = new Page1();
         }
     }
 }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Festispec
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class NavigationBar : Window
     {
-        public Window1()
+        public NavigationBar()
         {
             InitializeComponent();
         }

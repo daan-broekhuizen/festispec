@@ -17,9 +17,9 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class NavigationBar : Window
+    public partial class SideBarMenu : Window
     {
-        public NavigationBar()
+        public SideBarMenu()
         {
             InitializeComponent();
         }
