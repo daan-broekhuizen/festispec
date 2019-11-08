@@ -47,6 +47,8 @@ namespace Festispec.ViewModel
             {
                 this._questionMultipleChoicEditView = new QuestionMultipleChoiceEditView();
                 this._questionMultipleChoicEditView.Show();
+            });
+
             this.OpenAvailabilityCommand = new RelayCommand(() =>
             {
                 this._availabilityView = new AvailabilityView();

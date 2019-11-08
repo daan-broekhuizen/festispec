@@ -123,6 +123,8 @@ namespace Festispec.ViewModel
                     return new MultipleChoiceQuestionEditViewModel(_questionList);
                 }
                 return new MultipleChoiceQuestionEditViewModel(_questionList);
+            }
+        }
         public AvailabilityViewModel Availability
         {
             get
