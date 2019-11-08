@@ -1,0 +1,33 @@
+﻿<Window x:Class="Festispec.View.QuestionMultipleChoiceEditView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec.View"
+        mc:Ignorable="d"
+        Title="QuestionMultipleChoiceEditView" Height="450" Width="800"
+        DataContext="{Binding MultipleChoiceQuestionEdit, Source={StaticResource Locator}}">
+    <Grid>
+        
+
+        <TextBlock Text="Nieuwe multiplechoice vraag" FontSize="30"/>
+
+        <TextBlock Text="Vraag tekst:" FontSize="30" Margin="0,43,627,335.4"/>
+        <TextBox Text="{Binding Path=Question.QuestionText}" FontSize="20" Margin="0,109,0,238.4"/>
+
+        <TextBlock Text="Antwoord 1" FontSize="20" Margin="0,196,668,170.4"/>
+        <TextBox Text="{Binding Path=PosAnswerA}" Margin="0,232,562,123.4"/>
+
+        <TextBlock Text="Antwoord 2" FontSize="20" Margin="349,196,319,175.4"/>
+        <TextBox Text="{Binding Path=PosAnswerB}" Margin="311,232,251,123.4"/>
+
+        <TextBlock Text="Antwoord 3" FontSize="20" Margin="0,300,668,83.4"/>
+        <TextBox Text="{Binding Path=PosAnswerC}" Margin="0,340,562,15.4"/>
+
+        <TextBlock Text="Antwoord 4" FontSize="20" Margin="349,300,329,90.4"/>
+        <TextBox Text="{Binding Path=PosAnswerD}" Margin="311,340,251,15.4"/>
+        
+        <Button Content="Voeg vraag toe" FontSize="20" Command="{Binding AddQuestionCommand}" Margin="577,321,10,15.4"/>
+        
+    </Grid>
+</Window>

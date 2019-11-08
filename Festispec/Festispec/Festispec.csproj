@@ -101,8 +101,11 @@
     <Compile Include="ViewModel\Graph\SalesGraphViewModel.cs" />
     <Compile Include="ViewModel\Graph\SalesMapGraphViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MultipleChoiceQuestionEditViewModel.cs" />
+    <Compile Include="ViewModel\MultipleChoiceQuestionViewModel.cs" />
     <Compile Include="ViewModel\QuestionEditVM.cs" />
     <Compile Include="ViewModel\QuestionListViewModel.cs" />
+    <Compile Include="ViewModel\QuestionMultipleChoiceVM.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\GraphView.xaml.cs">
@@ -113,6 +116,9 @@
     </Compile>
     <Compile Include="View\QuestionListView.xaml.cs">
       <DependentUpon>QuestionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionMultipleChoiceEditView.xaml.cs">
+      <DependentUpon>QuestionMultipleChoiceEditView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuestionListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionMultipleChoiceEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

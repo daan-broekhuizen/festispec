@@ -33,5 +33,41 @@ namespace Festispec.ViewModel
             get { return QList;}      
         }
 
+        public List<Question> GetMultipleChoiceQuestions
+        {
+            get { List<Question> q = new List<Question>();
+                for (int i = 0; i < QList.Count; i++)
+                {
+                    if (QList[i] is MultipleChoiceQuestion)
+                    {
+                        q.Add(QList[i]);
+
+                    }
+                }
+
+                return q;
+            }
+        }
+
+        public List<Question> GetOpenQuestions
+        {
+            get
+            {
+                List<Question> q = new List<Question>();
+                for (int i = 0; i < QList.Count; i++)
+                {
+                    if (QList[i] is OpenQuestion)
+                    {
+                        q.Add(QList[i]);
+
+                    }
+                }
+
+                return q;
+            }
+        }
+
+
+
     }
 }

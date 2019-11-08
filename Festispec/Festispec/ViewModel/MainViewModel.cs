@@ -19,6 +19,9 @@ namespace Festispec.ViewModel
         public ICommand OpenQuestionListCommand { get; set; }
         private QuestionListView _questionListView;
 
+        public ICommand OpenMultipleChoiceQuestoinEditCommand { get; set; }
+        private QuestionMultipleChoiceEditView _questionMultipleChoicEditView;
+
         public MainViewModel()
         {
             this.OpenGraphCommand = new RelayCommand(() => {
@@ -36,6 +39,12 @@ namespace Festispec.ViewModel
             {
                 this._questionListView = new QuestionListView();
                 this._questionListView.Show();
+            });
+
+            this.OpenMultipleChoiceQuestoinEditCommand = new RelayCommand(() =>
+            {
+                this._questionMultipleChoicEditView = new QuestionMultipleChoiceEditView();
+                this._questionMultipleChoicEditView.Show();
             });
         }
     }

@@ -8,11 +8,26 @@
         DataContext="{Binding QuestionsList, Source={StaticResource Locator} }"
         Title="QuestionListView" Height="450" Width="800">
     <Grid>
-        <DataGrid ItemsSource="{Binding GetList}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding GetOpenQuestions}" AutoGenerateColumns="False" Margin="0,0,0,209.4">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="50" Binding="{Binding QuestionID}" FontSize="30" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Vraag" Width="300" Binding="{Binding QuestionText}" FontSize="30" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Anwser" Width="440" Binding="{Binding Answer}" FontSize="20"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid ItemsSource="{Binding GetMultipleChoiceQuestions}" AutoGenerateColumns="False" Margin="0,209,0,0.4">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Width="50" Binding="{Binding QuestionID}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Vraag" Width="200" Binding="{Binding QuestionText}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="A"  Width="100" Binding="{Binding AnswerA}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="B"  Width="100" Binding="{Binding AnswerB}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="C"  Width="100" Binding="{Binding AnswerC}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="D"  Width="100" Binding="{Binding AnswerD}" FontSize="30" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Anwser" Width="100" Binding="{Binding Answer}" FontSize="30"/>
+
+                <!--<DataGridComboBoxColumn Header="Anwser" Width="150" ItemsSource="{Binding GetCharCollection}"  SelectedItemBinding="{Binding GetCharCollection}">
+                    
+                </DataGridComboBoxColumn>-->
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

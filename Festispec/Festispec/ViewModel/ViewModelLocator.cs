@@ -113,6 +113,19 @@ namespace Festispec.ViewModel
             }
         }
 
+        public MultipleChoiceQuestionEditViewModel MultipleChoiceQuestionEdit
+        {
+            get
+            {
+                if (_questionList == null)
+                {
+                    _questionList = new QuestionListViewModel();
+                    return new MultipleChoiceQuestionEditViewModel(_questionList);
+                }
+                return new MultipleChoiceQuestionEditViewModel(_questionList);
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

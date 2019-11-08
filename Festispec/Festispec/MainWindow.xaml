@@ -17,7 +17,8 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Button Grid.Column="0" Grid.Row="0" Content="Grafieken" FontSize="20" Command="{Binding OpenGraphCommand}" />
-        <Button Grid.Column="1" Content="Vraag maken" FontSize="20" Command="{Binding OpenQuestoinEditCommand}"/>
+        <Button Grid.Column="1" Content="Openvraag maken" FontSize="20" Command="{Binding OpenQuestoinEditCommand}" Margin="0,0,202,0"/>
+        <Button Grid.Column="1" Content="Meerkeuzevraag maken" FontSize="15" Command="{Binding OpenMultipleChoiceQuestoinEditCommand}" Margin="202,0,0,0"/>
         <Button Grid.Column="1" Content ="Vragen beantwoorden" FontSize="20" Margin="0,209,0,0" Grid.RowSpan="2" Command="{Binding OpenQuestionListCommand}"/>
     </Grid>
 </Window>

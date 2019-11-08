@@ -8,8 +8,10 @@
         Title="QuestionAdd" Height="450" Width="800"
         DataContext="{Binding QuestionEdit, Source={StaticResource Locator} }">
     <Grid>
-        <TextBlock Text="Vraag tekst:" FontSize="30" Margin="26,39,577,290" RenderTransformOrigin="0.511,0.833"/>
-        <TextBox Text="{Binding Path=Question.QuestionText}" Margin="26,134,270,171" FontSize="20"/>
+        <TextBlock Text="Nieuwe open vraag" FontSize="30" Margin="26,25,490,341" RenderTransformOrigin="0.511,0.833"/>
+        
+        <TextBlock Text="Vraag tekst:" FontSize="30" Margin="26,110,577,256" RenderTransformOrigin="0.511,0.833"/>
+        <TextBox Text="{Binding Path=Question.QuestionText}" Margin="26,168,270,137" FontSize="20"/>
 
         <Button Content="Voeg Vraag toe" Command="{Binding AddQuestionCommand}" Margin="95,318,442,41"/>
 
