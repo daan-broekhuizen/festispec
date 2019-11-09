@@ -53,7 +53,7 @@ namespace Festispec.ViewModel
         }
 
         private void ShowDashboard() => CurrentView = new TestView();
-        private void ShowCustomers() => CurrentView = new Page1();
+        private void ShowCustomers() => CurrentView = new CustomersWindow();
         private void ShowJobs() => CurrentView = new TestView();
 
     }

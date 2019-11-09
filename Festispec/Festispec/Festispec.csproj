@@ -80,11 +80,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Customer.cs" />
+    <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="View\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Page1.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
+      <DependentUpon>CustomersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -123,13 +125,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Search.png" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="View\TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Page1.xaml">
+    <Page Include="View\CustomersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\festispec_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

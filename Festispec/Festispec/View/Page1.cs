@@ -18,11 +18,26 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : UserControl
+    public partial class CustomersWindow : UserControl
     {
-        public Page1()
+        public CustomersWindow()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

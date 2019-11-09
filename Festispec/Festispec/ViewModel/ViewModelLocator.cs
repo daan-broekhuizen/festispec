@@ -41,6 +41,14 @@ namespace Festispec.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public CustomerListViewModel CustomerList
+        {
+            get
+            {
+                return new CustomerListViewModel();
+            }
+        }
         
         public static void Cleanup()
         {
