@@ -17,9 +17,9 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for HomeWindow.xaml
     /// </summary>
-    public partial class HomeWindow : UserControl
+    public partial class TestView : UserControl
     {
-        public HomeWindow()
+        public TestView()
         {
             InitializeComponent();
         }

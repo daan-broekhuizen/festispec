@@ -25,7 +25,7 @@
         <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="{Binding ShowCustomersView}"/>
 
         <Image Width="28" Source="/Images/Paper.png" Margin="16,167,98,232" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233"/>
+        <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233" Command="{Binding ShowJobsView}"/>
 
         <Image Width="28" Source="/Images/Paper.png" Margin="16,197,98,201" HorizontalAlignment="Center"/>
         <Button Height="20" Width="70" Background="DimGray" Content="Offerte" Foreground="LightGray" BorderThickness="0" Margin="44,198,28,201"/>
@@ -40,7 +40,7 @@
         <Button Height="20" Width="70" Background="DimGray" Content="Meldingen" Foreground="LightGray" BorderThickness="0" Margin="44,288,28,115"/>
 
             <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,179,0,-179"/>
-            <TextBlock Text="Uitloggen" Margin="42,396,-46,-6" Foreground="LightGray"/>
+            <TextBlock Text="Uitloggen" Margin="42,396,40.714,-6" Foreground="LightGray"/>
 
 
         </Grid>

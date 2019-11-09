@@ -34,8 +34,6 @@ namespace Festispec.ViewModel
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
 
-        private ViewFactory _viewFactory;
-
         private UserControl _currentView;
         public UserControl CurrentView 
         {
@@ -46,20 +44,17 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("CurrentView");
             }
         }
+
         public MainViewModel()
         {
-            _viewFactory = new ViewFactory();
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
+            ShowJobsView = new RelayCommand(ShowJobs);
         }
 
-        private void ShowDashboard() => CurrentView = _viewFactory.GetView("Dashboard");
-        private void ShowCustomers() => CurrentView = _viewFactory.GetView("Customers");
-        private void ShowJobs() => CurrentView = _viewFactory.GetView("Jobs");
-        private void ShowQuotations() => CurrentView = _viewFactory.GetView("Quotations");
-        private void ShowMessages() => CurrentView = _viewFactory.GetView("Messages");
-        private void ShowPlanning() => CurrentView = _viewFactory.GetView("Planning");
-        private void ShowSchedule() => CurrentView = _viewFactory.GetView("Schedule");
+        private void ShowDashboard() => CurrentView = new TestView();
+        private void ShowCustomers() => CurrentView = new Page1();
+        private void ShowJobs() => CurrentView = new TestView();
 
     }
 
