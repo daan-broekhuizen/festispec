@@ -25,35 +25,42 @@ namespace Festispec.ViewModel
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         /// 
-
-        public ICommand ShowCustomerView { get; set; }
-        public ICommand ShowJobView { get; set; }
-        public ICommand ShowQuotationView { get; set; }
+        public ICommand ShowCustomersView { get; set; }
+        public ICommand ShowJobsView { get; set; }
+        public ICommand ShowQuotationsView { get; set; }
         public ICommand ShowDashboardView { get; set; }
-        public ICommand ShowMessageView { get; set; }
+        public ICommand ShowMessagesView { get; set; }
         public ICommand ShowAccountView { get; set; }
         public ICommand ShowPlanningView { get; set; }
-        public ICommand ShowCalendarView { get; set; }
+        public ICommand ShowScheduleView { get; set; }
 
-        private UserControl currentPage;
-        public UserControl CurrentPage 
+        private ViewFactory _viewFactory;
+
+        private UserControl _currentView;
+        public UserControl CurrentView 
         {
-            get => currentPage; 
+            get => _currentView; 
             set
             {
-                currentPage = value;
-                RaisePropertyChanged("CurrentPage");
+                _currentView = value;
+                RaisePropertyChanged("CurrentView");
             }
         }
         public MainViewModel()
         {
-            CurrentPage = new UserControl();
-            ShowCustomerView = new RelayCommand(ShowCustomer);
+            _viewFactory = new ViewFactory();
+            ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
         }
 
-        private void ShowDashboard() => CurrentPage = new HomeWindow();
-        private void ShowCustomer() => CurrentPage = new Page1();
+        private void ShowDashboard() => CurrentView = _viewFactory.GetView("Dashboard");
+        private void ShowCustomers() => CurrentView = _viewFactory.GetView("Customers");
+        private void ShowJobs() => CurrentView = _viewFactory.GetView("Jobs");
+        private void ShowQuotations() => CurrentView = _viewFactory.GetView("Quotations");
+        private void ShowMessages() => CurrentView = _viewFactory.GetView("Messages");
+        private void ShowPlanning() => CurrentView = _viewFactory.GetView("Planning");
+        private void ShowSchedule() => CurrentView = _viewFactory.GetView("Schedule");
+
     }
 
 

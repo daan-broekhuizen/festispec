@@ -22,7 +22,7 @@
         <Button Height="20" Width="70" Background="DimGray" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Margin="44,107,28,293" Command="{Binding ShowDashboardView}"/>
 
         <Image Width="28" Source="/Images/Person.png" Margin="16,137,98,263" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="{Binding ShowCustomerView}"/>
+        <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="{Binding ShowCustomersView}"/>
 
         <Image Width="28" Source="/Images/Paper.png" Margin="16,167,98,232" HorizontalAlignment="Center"/>
         <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233"/>
@@ -39,8 +39,11 @@
         <Image Width="28" Source="/Images/Notification.png" Margin="16,288,98,110" HorizontalAlignment="Center"/>
         <Button Height="20" Width="70" Background="DimGray" Content="Meldingen" Foreground="LightGray" BorderThickness="0" Margin="44,288,28,115"/>
 
-        
-    </Grid>
-        <ContentControl Grid.Column="1" Content="{Binding CurrentPage}"/>
+            <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,179,0,-179"/>
+            <TextBlock Text="Uitloggen" Margin="42,396,-46,-6" Foreground="LightGray"/>
+
+
+        </Grid>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}"/>
     </Grid>
 </Window>
