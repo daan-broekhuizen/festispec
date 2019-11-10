@@ -56,5 +56,27 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="Seeds" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Account.sql" />
+    <Build Include="Tables\Rol_lookup.sql" />
+    <Build Include="Tables\Beschikbaarheid_inspecteurs.sql" />
+    <Build Include="Tables\Opdracht.sql" />
+    <Build Include="Tables\Status_lookup.sql" />
+    <Build Include="Tables\Klant.sql" />
+    <Build Include="Tables\Ingeplande_inspecteurs.sql" />
+    <Build Include="Tables\Contactpersoon.sql" />
+    <Build Include="Tables\Offerte.sql" />
+    <Build Include="Tables\Inspectieformulier.sql" />
+    <Build Include="Tables\Vraag.sql" />
+    <Build Include="Tables\Vraagtype_lookup.sql" />
+    <Build Include="Tables\Vraag_mogelijk_antwoord.sql" />
+    <Build Include="Tables\Inspectieformulier_vragenlijst_combinatie.sql" />
+    <Build Include="Tables\Antwoorden.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="FestiSpecDB.refactorlog" />
   </ItemGroup>
 </Project>
