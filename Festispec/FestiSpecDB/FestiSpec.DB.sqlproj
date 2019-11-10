@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>FestiSpecDB</Name>
+    <Name>FestiSpec.DB</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{e5899853-6cf1-4446-8ea3-eea92bb96133}</ProjectGuid>
@@ -78,5 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FestiSpecDB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FestiSpec.DB.publish.xml" />
   </ItemGroup>
 </Project>

@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec", "Festispec\Festispec.csproj", "{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FestiSpecDB", "FestiSpecDB\FestiSpecDB.sqlproj", "{E5899853-6CF1-4446-8EA3-EEA92BB96133}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FestiSpec.DB", "FestiSpecDB\FestiSpec.DB.sqlproj", "{E5899853-6CF1-4446-8EA3-EEA92BB96133}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FestiSpec.Domain", "FestiSpec.Domain\FestiSpec.Domain.csproj", "{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{E5899853-6CF1-4446-8EA3-EEA92BB96133}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5899853-6CF1-4446-8EA3-EEA92BB96133}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5899853-6CF1-4446-8EA3-EEA92BB96133}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
