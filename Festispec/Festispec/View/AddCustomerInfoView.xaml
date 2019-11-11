@@ -14,22 +14,22 @@
             <RowDefinition Height="0.1*" MaxHeight="80"/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.1*" MaxHeight="80"/>
-            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.4*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
-        <Viewbox Stretch="Uniform" HorizontalAlignment="Left">
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Left" MaxWidth="300">
             <TextBlock Padding="20" Text="Klant Aanmaken"  Foreground="Black" FontWeight="Bold"/>
         </Viewbox>
-        <Viewbox Stretch="Uniform"  HorizontalAlignment="Right">
+        <Viewbox Stretch="Uniform"  HorizontalAlignment="Right" MaxWidth="200">
             <Image Margin="35" Source="/Images/festispec_logo.png"></Image>
         </Viewbox>
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox  Grid.Row="1" HorizontalAlignment="Left">
-            <TextBlock FontWeight="Bold" Padding="10" Text="Klant" RenderTransformOrigin="0.839,0.839"/>
+            <TextBlock FontWeight="Bold" Padding="15" Text="Klant" RenderTransformOrigin="0.839,0.839"/>
         </Viewbox>
         <Rectangle Grid.Row="3" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox  Grid.Row="3" HorizontalAlignment="Left">
-            <TextBlock FontWeight="Bold" Padding="10" Text="Adres" RenderTransformOrigin="0.839,0.839"/>
+            <TextBlock FontWeight="Bold" Padding="15" Text="Adres" RenderTransformOrigin="0.839,0.839"/>
         </Viewbox>
     </Grid>
 </Page>
