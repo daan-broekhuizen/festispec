@@ -41,6 +41,7 @@ namespace Festispec.ViewModel
             var navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
             navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
+            navigationService.Configure("AddCustomerInfo", new Uri("../View/AddCustomerInfoView.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
         }

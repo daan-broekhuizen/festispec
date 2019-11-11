@@ -45,7 +45,7 @@ namespace Festispec.ViewModel
         }
 
 
-        private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
+        private void ShowDashboard() => navigationService.NavigateTo("AddCustomerInfo");
         private void ShowCustomers() => navigationService.NavigateTo("Customers");
 
     }
