@@ -78,6 +78,6 @@
             
             
         </Grid>
-        <ContentControl Grid.Column="1" Content="{Binding CurrentView}"/>
+        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
