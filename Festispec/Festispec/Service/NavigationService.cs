@@ -21,17 +21,11 @@ namespace Festispec.Service
         
         public string CurrentPageKey
         {
-            get
-            {
-                return _currentPageKey;
-            }
-
+            get =>  _currentPageKey;
             private set
             {
                 if (_currentPageKey == value)
-                {
                     return;
-                }
 
                 _currentPageKey = value;
                 OnPropertyChanged("CurrentPageKey");
@@ -62,16 +56,13 @@ namespace Festispec.Service
             lock (_pagesByKey)
             {
                 if (!_pagesByKey.ContainsKey(pageKey))
-                {
                     throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
-                }
 
-                var frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
+                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
 
                 if (frame != null)
-                {
                     frame.Source = _pagesByKey[pageKey];
-                }
+
                 Parameter = parameter;
                 _historic.Add(pageKey);
                 CurrentPageKey = pageKey;
@@ -83,40 +74,29 @@ namespace Festispec.Service
             lock (_pagesByKey)
             {
                 if (_pagesByKey.ContainsKey(key))
-                {
                     _pagesByKey[key] = pageType;
-                }
                 else
-                {
                     _pagesByKey.Add(key, pageType);
-                }
             }
         }
 
         private static FrameworkElement GetDescendantFromName(DependencyObject parent, string name)
         {
-            var count = VisualTreeHelper.GetChildrenCount(parent);
+            int count = VisualTreeHelper.GetChildrenCount(parent);
 
-            if (count < 1)
-            {
-                return null;
-            }
+            if (count < 1) return null;
 
-            for (var i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-                var frameworkElement = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
+                FrameworkElement frameworkElement = VisualTreeHelper.GetChild(parent, i) as FrameworkElement;
                 if (frameworkElement != null)
                 {
                     if (frameworkElement.Name == name)
-                    {
                         return frameworkElement;
-                    }
 
                     frameworkElement = GetDescendantFromName(frameworkElement, name);
                     if (frameworkElement != null)
-                    {
                         return frameworkElement;
-                    }
                 }
             }
             return null;

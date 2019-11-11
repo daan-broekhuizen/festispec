@@ -38,7 +38,7 @@ namespace Festispec.ViewModel
 
         private static void SetupNavigation()
         {
-            var navigationService = new NavigationService();
+            NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
             navigationService.Configure("Customers", new Uri("../View/Page1.xaml", UriKind.Relative));
 
