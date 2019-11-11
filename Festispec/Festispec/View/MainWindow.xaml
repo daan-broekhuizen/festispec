@@ -24,7 +24,7 @@
                     <RowDefinition Height="0.2*"/>
                     <RowDefinition Height="0.1*"/>
                 </Grid.RowDefinitions>
-                <Image Margin="10" Source="/Images/Profile.png" />
+                <Image Margin="10" Source="/Images/Profile.png"/>
                 <Viewbox Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <TextBlock Padding="1" Text="Username" HorizontalAlignment="Center" Foreground="LightGray"/>
                 </Viewbox>
@@ -46,25 +46,25 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image Source="/Images/Homeicon.png"  HorizontalAlignment="Left"/>
+                    <Image Source="/Images/Dashboard.png"  HorizontalAlignment="Left"/>
                     <Button Grid.Column="1" Background="DimGray" Margin="10" HorizontalAlignment="Left" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Command="{Binding ShowDashboardView}"/>
 
-                    <Image Grid.Row ="1"   Source="/Images/Person.png"  HorizontalAlignment="Left"/>
+                    <Image Grid.Row ="1"   Source="/Images/Customers.png"  HorizontalAlignment="Left"/>
                     <Button Grid.Row ="1" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Klant" Foreground="LightGray" BorderThickness="0"  Command="{Binding ShowCustomersView}"/>
 
-                    <Image Grid.Row ="2"  Source="/Images/Paper.png" HorizontalAlignment="Left" />
+                    <Image Grid.Row ="2"  Source="/Images/Jobs.png" HorizontalAlignment="Left" />
                     <Button Grid.Row ="2" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left"  Content="Opdracht" Foreground="LightGray" BorderThickness="0"  Command="{Binding ShowJobsView}"/>
 
-                    <Image Grid.Row ="3"  Source="/Images/Paper.png"  HorizontalAlignment="Left" />
+                    <Image Grid.Row ="3"  Source="/Images/Jobs.png"  HorizontalAlignment="Left" />
                     <Button Grid.Row ="3" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Offerte" Foreground="LightGray" BorderThickness="0"/>
 
-                    <Image Grid.Row ="4"  Source="/Images/Agenda.png"  HorizontalAlignment="Left" />
+                    <Image Grid.Row ="4"  Source="/Images/Calendar.png"  HorizontalAlignment="Left" />
                     <Button Grid.Row ="4" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Agenda" Foreground="LightGray" BorderThickness="0"/>
 
-                    <Image Grid.Row ="5"  Source="/Images/Schedule.png"  HorizontalAlignment="Left" />
+                    <Image Grid.Row ="5"  Source="/Images/Calendar.png"  HorizontalAlignment="Left" />
                     <Button Grid.Row ="5" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Planning" Foreground="LightGray" BorderThickness="0"/>
 
-                    <Image  Grid.Row ="6"  Source="/Images/Notification.png"  HorizontalAlignment="Left" />
+                    <Image  Grid.Row ="6"  Source="/Images/Messages.png"  HorizontalAlignment="Left" />
                     <Button Grid.Row ="6" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Meldingen" Foreground="LightGray" BorderThickness="0"/>
                 </Grid>
             </Viewbox>
