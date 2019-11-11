@@ -7,42 +7,76 @@
         mc:Ignorable="d"
         Title="FestiSpec" Height="450" Width="800"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <Grid>
+    <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="142"/>
+            <ColumnDefinition Width="0.25*" MaxWidth="250"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-    <Grid Background="DimGray"  Height="420" VerticalAlignment="Top" HorizontalAlignment="Left">
-        
-        <Image Width="86" Source="/Images/Profile.png" Margin="28,10,28,355" HorizontalAlignment="Center"/>
-        <TextBlock Text="Username" Margin="42,70,27.714,335" Foreground="LightGray"/>
-        <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,-117,0,117"/>
+        <Grid Background="DimGray" HorizontalAlignment="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*" MaxHeight="200"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.1*" MaxHeight="60"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="0.2*"/>
+                    <RowDefinition Height="0.1*"/>
+                </Grid.RowDefinitions>
+                <Image Margin="10" Source="/Images/Profile.png" />
+                <Viewbox Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TextBlock Padding="1" Text="Username" HorizontalAlignment="Center" Foreground="LightGray"/>
+                </Viewbox>
+                <Line  Grid.Row ="2" Stretch="Fill" Stroke="LightGray"  X1="1"/>
+            </Grid>
 
-        <Image Width="28" Source="/Images/Homeicon.png" Margin="16,107,98,293" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Margin="44,107,28,293" Command="{Binding ShowDashboardView}"/>
+            <Viewbox Stretch="Uniform" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="600">
+                <Grid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Source="/Images/Homeicon.png"  HorizontalAlignment="Left"/>
+                    <Button Grid.Column="1" Background="DimGray" Margin="10" HorizontalAlignment="Left" Content="Dashboard" Foreground="LightGray" BorderThickness="0" Command="{Binding ShowDashboardView}"/>
 
-        <Image Width="28" Source="/Images/Person.png" Margin="16,137,98,263" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Klant" Foreground="LightGray" BorderThickness="0" Margin="44,137,28,263" Command="{Binding ShowCustomersView}"/>
+                    <Image Grid.Row ="1"   Source="/Images/Person.png"  HorizontalAlignment="Left"/>
+                    <Button Grid.Row ="1" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Klant" Foreground="LightGray" BorderThickness="0"  Command="{Binding ShowCustomersView}"/>
 
-        <Image Width="28" Source="/Images/Paper.png" Margin="16,167,98,232" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Opdracht" Foreground="LightGray" BorderThickness="0" Margin="44,168,28,233" Command="{Binding ShowJobsView}"/>
+                    <Image Grid.Row ="2"  Source="/Images/Paper.png" HorizontalAlignment="Left" />
+                    <Button Grid.Row ="2" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left"  Content="Opdracht" Foreground="LightGray" BorderThickness="0"  Command="{Binding ShowJobsView}"/>
 
-        <Image Width="28" Source="/Images/Paper.png" Margin="16,197,98,201" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Offerte" Foreground="LightGray" BorderThickness="0" Margin="44,198,28,201"/>
+                    <Image Grid.Row ="3"  Source="/Images/Paper.png"  HorizontalAlignment="Left" />
+                    <Button Grid.Row ="3" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Offerte" Foreground="LightGray" BorderThickness="0"/>
 
-        <Image Width="28" Source="/Images/Agenda.png" Margin="16,228,98,170" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Agenda" Foreground="LightGray" BorderThickness="0" Margin="44,228,28,169"/>
+                    <Image Grid.Row ="4"  Source="/Images/Agenda.png"  HorizontalAlignment="Left" />
+                    <Button Grid.Row ="4" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Agenda" Foreground="LightGray" BorderThickness="0"/>
 
-        <Image Width="28" Source="/Images/Schedule.png" Margin="16,258,98,140" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Planning" Foreground="LightGray" BorderThickness="0" Margin="44,258,28,140"/>
+                    <Image Grid.Row ="5"  Source="/Images/Schedule.png"  HorizontalAlignment="Left" />
+                    <Button Grid.Row ="5" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Planning" Foreground="LightGray" BorderThickness="0"/>
 
-        <Image Width="28" Source="/Images/Notification.png" Margin="16,288,98,110" HorizontalAlignment="Center"/>
-        <Button Height="20" Width="70" Background="DimGray" Content="Meldingen" Foreground="LightGray" BorderThickness="0" Margin="44,288,28,115"/>
+                    <Image  Grid.Row ="6"  Source="/Images/Notification.png"  HorizontalAlignment="Left" />
+                    <Button Grid.Row ="6" Grid.Column="1" Margin="10" Background="DimGray" HorizontalAlignment="Left" Content="Meldingen" Foreground="LightGray" BorderThickness="0"/>
+                </Grid>
+            </Viewbox>
 
-            <Line Stretch="Fill" Stroke="LightGray" X2="1" Margin="0,179,0,-179"/>
-            <TextBlock Text="Uitloggen" Margin="42,396,40.714,-6" Foreground="LightGray"/>
-
-
+            <Grid Grid.Row="2" >
+                <Line VerticalAlignment="Top" Stretch="Fill"  Stroke="LightGray" X1="1"/>
+                <Viewbox Stretch="Uniform"     >
+                    <TextBlock  Text="Uitloggen" Foreground="LightGray" Padding="10" />
+                </Viewbox>
+            </Grid>
+            
+            
         </Grid>
         <ContentControl Grid.Column="1" Content="{Binding CurrentView}"/>
     </Grid>
