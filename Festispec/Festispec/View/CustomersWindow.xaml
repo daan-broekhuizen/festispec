@@ -9,8 +9,36 @@
       d:DesignHeight="450" d:DesignWidth="800"
         DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
 
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" MaxHeight="150"/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.5*"/>
 
-    <StackPanel>
+
+
+        </Grid.RowDefinitions>
+
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Left">
+            <TextBlock Padding="20" Text="Klanten"  Foreground="Black" FontWeight="Bold"/>
+        </Viewbox>
+        <Viewbox Stretch="Uniform"  HorizontalAlignment="Right">
+            <Image Margin="35" Source="/Images/festispec_logo.png"></Image>
+        </Viewbox>
+
+        <Button Grid.Row ="0" Content="Klant aanmaken" Height="20" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0"/>
+
+
+        <Rectangle Grid.Row ="1" Fill="#FFF4F4F5" Stroke="Black"  Height="50" StrokeThickness="0" VerticalAlignment="Top" Margin="0,20,0,0"/>
+
+        <TextBox Height="30" Width="700" BorderThickness="0" VerticalAlignment="Center"  Grid.Row="1"/>
+        <Image Source="/Images/Search.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="30,30,50,30" Grid.Row="1"/>
+
+    </Grid>
+
+
+    <!--   <StackPanel>
         <Grid>
 
             <TextBlock Text="Klanten" Margin="81,43,-47,332.8" Foreground="Black" FontSize="20" FontWeight="Bold"/>
@@ -56,6 +84,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-        </Grid>
-    </StackPanel>
+        </Grid> 
+    </StackPanel> -->
 </Page>
