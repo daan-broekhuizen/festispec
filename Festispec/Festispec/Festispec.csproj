@@ -82,10 +82,11 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\Customer.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
-    <Compile Include="View\TestView.xaml.cs">
+    <Compile Include="Service\NavigationService.cs" />
+    <Compile Include="View\TestView.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Page1.cs">
+    <Compile Include="View\CustomersWindow.cs">
       <DependentUpon>CustomersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">

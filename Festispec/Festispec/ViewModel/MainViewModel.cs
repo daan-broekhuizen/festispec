@@ -1,3 +1,4 @@
+using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -34,27 +35,18 @@ namespace Festispec.ViewModel
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
 
-        private UserControl _currentView;
-        public UserControl CurrentView 
-        {
-            get => _currentView; 
-            set
-            {
-                _currentView = value;
-                RaisePropertyChanged("CurrentView");
-            }
-        }
+        private NavigationService navigationService;
 
-        public MainViewModel()
+        public MainViewModel(NavigationService navigation)
         {
+            navigationService = navigation;
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
-            ShowJobsView = new RelayCommand(ShowJobs);
         }
 
-        private void ShowDashboard() => CurrentView = new TestView();
-        private void ShowCustomers() => CurrentView = new CustomersWindow();
-        private void ShowJobs() => CurrentView = new TestView();
+
+        private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
+        private void ShowCustomers() => navigationService.NavigateTo("Customers");
 
     }
 
