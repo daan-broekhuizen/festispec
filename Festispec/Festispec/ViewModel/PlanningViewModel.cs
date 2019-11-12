@@ -13,7 +13,7 @@ namespace Festispec.ViewModel
     {
         public async Task CalculateDistance()
         {
-            var req = new DistanceMatrixRequest()
+            DistanceMatrixRequest req = new DistanceMatrixRequest()
             {
                 BingMapsKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
                 Origins = new List<SimpleWaypoint>()
