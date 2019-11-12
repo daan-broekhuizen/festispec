@@ -63,7 +63,7 @@
             <Viewbox  Grid.Row="4" HorizontalAlignment="Left">
                 <TextBlock Height="15" VerticalAlignment="Bottom" Text="Website" />
             </Viewbox>
-            <TextBox Text="{Binding CustomerViewModel.Name}" Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
+            <TextBox Text="{Binding CustomerViewModel.Telephone}" Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
             <TextBox Text="{Binding CustomerViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
             <TextBox Text="{Binding CustomerViewModel.Website}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="123456789..."  Grid.Row="5"/>
         </Grid>
