@@ -1,4 +1,9 @@
+using FestiSpec.Domain;
+using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
+using System;
+using System.Diagnostics;
+using System.Windows;
 
 namespace Festispec.ViewModel
 {
@@ -21,14 +26,11 @@ namespace Festispec.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            Account acc = new Account()
+            { Wachtwoord = "123", Gebruikersnaam = "Dummy"};
+
+            UserRepository repo = new UserRepository();
+            Debug.WriteLine(repo.Login(acc) + " ingelogd als: " + acc.Gebruikersnaam);
         }
     }
 }
