@@ -35,7 +35,7 @@
         <Label Content="Telefoonnummer: *" HorizontalAlignment="Left" Margin="395,130,0,0" VerticalAlignment="Top" Grid.Column="1"/>
         <TextBox HorizontalAlignment="Left" Height="22" Margin="395,214,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
         <Label Content="IBAN: *" HorizontalAlignment="Left" Margin="397,183,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button Content="Registreren" HorizontalAlignment="Left" Margin="133.4,380,0,0" VerticalAlignment="Top" Width="133" Click="Button_Click" Height="48" Grid.Column="1"/>
+        <Button Content="Registreren" HorizontalAlignment="Left" Margin="133.4,380,0,0" VerticalAlignment="Top" Width="133" Height="48" Grid.Column="1"/>
 
     </Grid>
 </Page>

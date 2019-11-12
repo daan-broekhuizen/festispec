@@ -26,11 +26,15 @@ namespace Festispec.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            Account acc = new Account()
-            { Wachtwoord = "123", Gebruikersnaam = "Dummy"};
+            //Account acc = new Account()
+            //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
 
-            UserRepository repo = new UserRepository();
-            Debug.WriteLine(repo.Login(acc) + " ingelogd als: " + acc.Gebruikersnaam);
+            //UserRepository repo = new UserRepository();
+            //Debug.WriteLine(repo.Login(acc) + " ingelogd als: " + acc.Gebruikersnaam);
+
+            PlanningViewModel c = new PlanningViewModel();
+            _ = c.CalculateDistance();
+            
         }
     }
 }
