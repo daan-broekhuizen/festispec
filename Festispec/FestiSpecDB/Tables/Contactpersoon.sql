@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Contactpersoon]
 (
-	[ContactpersoonID] INT NOT NULL PRIMARY KEY, 
+	[ContactpersoonID] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
     [KlantID] INT NOT NULL, 
     [Voornaam] NVARCHAR(30) NOT NULL, 
     [Tussenvoegsel] NVARCHAR(15) NOT NULL, 

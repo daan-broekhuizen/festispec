@@ -75,11 +75,13 @@
     <Build Include="Tables\Vraag_mogelijk_antwoord.sql" />
     <Build Include="Tables\Inspectieformulier_vragenlijst_combinatie.sql" />
     <Build Include="Tables\Antwoorden.sql" />
+    <Build Include="Tables\Rapport_template.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FestiSpecDB.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FestiSpec.DB.publish.xml" />
+    <PostDeploy Include="Seeds\Rol_lookukp_seed.sql" />
+    <None Include="Seeds\Account_seed.sql" />
   </ItemGroup>
 </Project>

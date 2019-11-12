@@ -133,4 +133,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="VIC_ID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c15e0f03-688d-4076-a4e6-ef556c424385" ChangeDateTime="11/12/2019 13:07:31">
+    <Property Name="ElementName" Value="[dbo].[Account].[Einddatume_certificering]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Account]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Einddatum_certificering" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6616faa5-b224-4e43-8ce3-5aa860181b30" ChangeDateTime="11/12/2019 13:44:28">
+    <Property Name="ElementName" Value="[dbo].[Rapport_template].[TemplateId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Rapport_template]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TemplateID" />
+  </Operation>
 </Operations>
