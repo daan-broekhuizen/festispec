@@ -13,8 +13,10 @@
 */
 
 using CommonServiceLocator;
+using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System;
 
 namespace Festispec.ViewModel
 {
@@ -30,8 +32,17 @@ namespace Festispec.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
             SimpleIoc.Default.Register<MainViewModel>();
+            SetupNavigation();
+        }
+
+        private static void SetupNavigation()
+        {
+            NavigationService navigationService = new NavigationService();
+            navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
+            navigationService.Configure("Customers", new Uri("../View/Page1.xaml", UriKind.Relative));
+
+            SimpleIoc.Default.Register<NavigationService>(() => navigationService);
         }
 
         public MainViewModel Main

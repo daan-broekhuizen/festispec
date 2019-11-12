@@ -1,4 +1,10 @@
+using Festispec.Service;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
@@ -19,16 +25,29 @@ namespace Festispec.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel()
+        /// 
+        public ICommand ShowCustomersView { get; set; }
+        public ICommand ShowJobsView { get; set; }
+        public ICommand ShowQuotationsView { get; set; }
+        public ICommand ShowDashboardView { get; set; }
+        public ICommand ShowMessagesView { get; set; }
+        public ICommand ShowAccountView { get; set; }
+        public ICommand ShowPlanningView { get; set; }
+        public ICommand ShowScheduleView { get; set; }
+
+        private NavigationService navigationService;
+
+        public MainViewModel(NavigationService navigation)
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+            navigationService = navigation;
+            ShowCustomersView = new RelayCommand(ShowCustomers);
+            ShowDashboardView = new RelayCommand(ShowDashboard);
         }
+
+        private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
+        private void ShowCustomers() => navigationService.NavigateTo("Customers");
+
     }
+
+
 }
