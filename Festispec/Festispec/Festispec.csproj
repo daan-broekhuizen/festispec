@@ -80,14 +80,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\CustomerViewModel\AddContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\AddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\AddCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\ContactPersonViewModel.cs" />
     <Compile Include="ViewModel\Customer.cs" />
+    <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="Service\NavigationService.cs" />
-    <Compile Include="View\AddCustomerInfoView.xaml.cs">
-      <DependentUpon>AddCustomerInfoView.xaml</DependentUpon>
+    <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
+      <DependentUpon>AddContactInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TestView.cs">
-      <DependentUpon>TestView.xaml</DependentUpon>
+    <Compile Include="View\CustomerView\AddContactPersonView.xaml.cs">
+      <DependentUpon>AddContactPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddCustomerInfoView.xaml.cs">
+      <DependentUpon>AddCustomerInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomersWindow.cs">
       <DependentUpon>CustomersWindow.xaml</DependentUpon>
@@ -138,11 +146,15 @@
     <Resource Include="Images\Messages.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\AddCustomerInfoView.xaml">
+    <Page Include="View\CustomerView\AddContactInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TestView.xaml">
+    <Page Include="View\CustomerView\AddContactPersonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerView\AddCustomerInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,6 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\festispec_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Plus_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

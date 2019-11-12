@@ -29,6 +29,7 @@ namespace Festispec.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
+        ///
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -41,7 +42,9 @@ namespace Festispec.ViewModel
             var navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
             navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
-            navigationService.Configure("AddCustomerInfo", new Uri("../View/AddCustomerInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddCustomerInfo", new Uri("../View/CustomerView/AddCustomerInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddContactInfo", new Uri("../View/CustomerView/AddContactInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddContactPerson", new Uri("../View/CustomerView/AddContactPersonView.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
         }
@@ -54,14 +57,11 @@ namespace Festispec.ViewModel
             }
         }
 
-        public CustomerListViewModel CustomerList
-        {
-            get
-            {
-                return new CustomerListViewModel();
-            }
-        }
-        
+        public CustomerListViewModel CustomerList => new CustomerListViewModel();
+        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
