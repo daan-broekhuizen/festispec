@@ -11,30 +11,75 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*" MaxHeight="150"/>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*" MaxHeight="150"/>
+            <RowDefinition Height="0.05*" MaxHeight="80"/>
             <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.45*"/>
 
 
 
         </Grid.RowDefinitions>
-
         <Viewbox Stretch="Uniform" HorizontalAlignment="Left">
             <TextBlock Padding="20" Text="Klanten"  Foreground="Black" FontWeight="Bold"/>
+        </Viewbox>
+        <Viewbox Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button Content="Klant aanmaken" Margin="25,50,0,0"/>
         </Viewbox>
         <Viewbox Stretch="Uniform"  HorizontalAlignment="Right">
             <Image Margin="35" Source="/Images/festispec_logo.png"></Image>
         </Viewbox>
+        <Rectangle Grid.Row="2" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
+        <Viewbox  Grid.Row="2" HorizontalAlignment="Center">
+            <TextBox Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
+        </Viewbox>
+        <Viewbox Grid.Row="2" HorizontalAlignment="Right">
+            <Image Margin="250,250,650,250" Source="/Images/Search.png"/>
+        </Viewbox>
 
-        <Button Grid.Row ="0" Content="Klant aanmaken" Height="20" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="50,0,0,0"/>
+        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Left">
+            <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>
+        </Viewbox>
 
+        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Right">
+            <TextBlock Margin="200,0,150,0" Padding="15" Text="Sorteren op:"  Foreground="Black"/>
+        </Viewbox>
 
-        <Rectangle Grid.Row ="1" Fill="#FFF4F4F5" Stroke="Black"  Height="50" StrokeThickness="0" VerticalAlignment="Top" Margin="0,20,0,0"/>
+        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Right">
+            <ComboBox MinWidth="50" Margin="0,5,50,5" Background="Yellow">
+                <ComboBoxItem Content="A - Z"/>
+                <ComboBoxItem Content="Z - A"/>
+            </ComboBox>
+        </Viewbox>
 
-        <TextBox Height="30" Width="700" BorderThickness="0" VerticalAlignment="Center"  Grid.Row="1"/>
-        <Image Source="/Images/Search.png" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="30,30,50,30" Grid.Row="1"/>
+        <Viewbox Grid.Row="6" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <ListBox ItemsSource="{Binding Customers}" BorderThickness="0" SelectionChanged="ListBox_SelectionChanged_2">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
 
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1"  Text="Klantnaam:" FontWeight="Bold" Margin="0,20,0,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                            <TextBlock Grid.Column="3" Text="Kvk-nummer:" FontWeight="Bold" Margin="0,20,0,0"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Adres}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                            <Button Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Viewbox>
+       
     </Grid>
 
 
