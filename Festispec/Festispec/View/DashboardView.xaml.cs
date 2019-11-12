@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
     /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class DashboardView : Page
     {
-        public Page1()
+        public DashboardView()
         {
             InitializeComponent();
         }

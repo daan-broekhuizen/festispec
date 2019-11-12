@@ -14,7 +14,6 @@ namespace Festispec.Service
 {
     public class NavigationService : INavigationService, INotifyPropertyChanged
     {
-        
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic;
         private string _currentPageKey;

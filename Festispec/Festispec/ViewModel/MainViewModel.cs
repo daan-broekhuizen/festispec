@@ -35,17 +35,18 @@ namespace Festispec.ViewModel
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
 
-        private NavigationService navigationService;
+        private NavigationService _navigationService;
 
         public MainViewModel(NavigationService navigation)
         {
-            navigationService = navigation;
+            _navigationService = navigation;
+
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
         }
 
-        private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
-        private void ShowCustomers() => navigationService.NavigateTo("Customers");
+        private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
+        private void ShowCustomers() => _navigationService.NavigateTo("Customers");
 
     }
 
