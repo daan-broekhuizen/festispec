@@ -17,7 +17,7 @@ namespace Festispec.ViewModel
             Account account = new Account();
 
             UserRepository repo = new UserRepository();
-            foreach (var c in repo.GetUsers())
+            foreach (Account c in repo.GetUsers())
             {
                 if (c.Gebruikersnaam == account.Gebruikersnaam)
                     return false;
