@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
