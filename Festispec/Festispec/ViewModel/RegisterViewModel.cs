@@ -19,10 +19,7 @@ namespace Festispec.ViewModel
             UserRepository repo = new UserRepository();
             foreach (Account c in repo.GetUsers())
             {
-                if (c.Gebruikersnaam == account.Gebruikersnaam)
-                    return false;
-                else
-                    return repo.Register(account);
+                return c.Gebruikersnaam == account.Gebruikersnaam ? false : repo.Register(account);
             }
             return false;
         }
