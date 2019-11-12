@@ -22,7 +22,7 @@ namespace Festispec.ViewModel
                 },
                 Destinations = new List<SimpleWaypoint>()
                 {
-                    new SimpleWaypoint("Dintel 16, 5172 CA Kaatsheuvel")
+                    new SimpleWaypoint("Griekenland")
                 },
                 DistanceUnits = DistanceUnitType.Kilometers,
                 TravelMode = TravelModeType.Driving
