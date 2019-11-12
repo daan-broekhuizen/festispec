@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Festispec.ViewModel;
 
 namespace Festispec
 {
@@ -26,19 +27,11 @@ namespace Festispec
             InitializeComponent();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+/*        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
+            CustomerListViewModel customerListViewModel = new CustomerListViewModel();
+            ComboBoxItem cbi = (ComboBoxItem)(sender as ComboBox).SelectedItem;
+            customerListViewModel.SortCustomers(cbi.Content.ToString());
+        }*/
     }
 }
