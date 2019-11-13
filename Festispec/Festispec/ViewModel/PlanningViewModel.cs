@@ -24,11 +24,11 @@ namespace Festispec.ViewModel
                 TravelMode = TravelModeType.Driving
             };
 
-            Response res = await req.Execute();
-            Resource r = res.ResourceSets[0].Resources[0];
-            DistanceMatrix m = r as DistanceMatrix;
-            DistanceMatrixCell c = m.Results[0];
-            Debug.WriteLine("Afstand: " + c.TravelDistance.ToString("n1") + " km");
+            Response response = await req.Execute();
+            Resource resource = response.ResourceSets[0].Resources[0];
+            DistanceMatrix matrix = resource as DistanceMatrix;
+            DistanceMatrixCell cell = matrix.Results[0];
+            Debug.WriteLine("Afstand: " + cell.TravelDistance.ToString("n1") + " km");
 
         }
     }

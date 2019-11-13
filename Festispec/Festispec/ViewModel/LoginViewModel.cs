@@ -7,10 +7,11 @@ using System.Windows.Input;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
 using FestiSpec.Domain;
+using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModel
 {
-    public class LoginViewModel
+    public class LoginViewModel  : ViewModelBase 
     {
         private string _userName;
         private string _password;
@@ -25,7 +26,7 @@ namespace Festispec.ViewModel
                 if (!string.Equals(this._userName, value))
                 {
                     this._userName = value;
-                    //RaisePropertyChanged(""); 
+                    RaisePropertyChanged("Username"); 
                 }
             }
         }
@@ -38,7 +39,7 @@ namespace Festispec.ViewModel
                 if (!string.Equals(this._password, value))
                 {
                     this._password = value;
-                    //RaisePropertyChanged(""); 
+                    RaisePropertyChanged("Password"); 
                 }
             }
         }

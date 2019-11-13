@@ -10,7 +10,7 @@ namespace Festispec.ViewModel
 {
     public class RegisterViewModel
     {
-        public bool Resgister()
+        public bool Register()
         {
             //TODO 
             // Hier een nieuw account maken en de waardes toekennen

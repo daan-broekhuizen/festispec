@@ -34,14 +34,10 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
-        
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public LoginViewModel Login => ServiceLocator.Current.GetInstance<LoginViewModel>();
+        public RegisterViewModel Register => ServiceLocator.Current.GetInstance<RegisterViewModel>();
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
