@@ -60,8 +60,6 @@ namespace Festispec.ViewModel
 
         private bool CanLogin() => UserName.Length > 0 && Password.Length > 0;
 
-
-
         private void Login()
         {
             Account currentAccount = new Account()
