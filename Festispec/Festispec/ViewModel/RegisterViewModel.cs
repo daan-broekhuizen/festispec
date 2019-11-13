@@ -14,11 +14,17 @@ namespace Festispec.ViewModel
         {
             //TODO 
             // Hier een nieuw account maken en de waardes toekennen
-            Account account = new Account();
+            // Deze is nog niet af aangezien ik nu nog niet verder kan
+            Account newAccount = new Account()
+            {
+                Gebruikersnaam = "",
+                Wachtwoord = "",
+                Rol = ""
+            };
 
             UserRepository repo = new UserRepository();
             foreach (Account c in repo.GetUsers())
-                return c.Gebruikersnaam == account.Gebruikersnaam ? false : repo.Register(account);
+                return c.Gebruikersnaam == newAccount.Gebruikersnaam ? false : repo.Register(newAccount);
 
             return false;
         }

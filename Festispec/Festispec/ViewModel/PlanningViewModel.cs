@@ -1,11 +1,7 @@
-﻿using System;
+﻿using BingMapsRESTToolkit;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using BingMapsRESTToolkit;
-using FestiSpec.Domain.Repositories;
 
 namespace Festispec.ViewModel
 {

@@ -6,37 +6,39 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
+using FestiSpec.Domain;
 
 namespace Festispec.ViewModel
 {
     public class LoginViewModel
     {
-        private string userName;
+        private string _userName;
+        private string _password;
+        private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
         public ICommand LoginCommand { get; set; }
         public string UserName
         {
-            get { return this.userName; }
+            get { return this._userName; }
             set
             {
                 // Implement with property changed handling for INotifyPropertyChanged
-                if (!string.Equals(this.userName, value))
+                if (!string.Equals(this._userName, value))
                 {
-                    this.userName = value;
-                    //RaisePropertyChanged(""); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                    this._userName = value;
+                    //RaisePropertyChanged(""); 
                 }
             }
         }
 
         public string Password
         {
-            get { return this.userName; }
+            get { return this._password; }
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
-                if (!string.Equals(this.userName, value))
+                if (!string.Equals(this._password, value))
                 {
-                    this.userName = value;
-                    //RaisePropertyChanged(""); // Method to raise the PropertyChanged event in your BaseViewModel class...
+                    this._password = value;
+                    //RaisePropertyChanged(""); 
                 }
             }
         }
@@ -47,17 +49,23 @@ namespace Festispec.ViewModel
             LoginCommand = new RelayCommand(login, canLogin);
         }
 
-        private bool canLogin()
-        {
-            return UserName.Length > 0 && Password.Length > 0;
-        }
+        private bool canLogin() => UserName.Length > 0 && Password.Length > 0;
 
 
 
         private void login()
         {
             UserRepository user = new UserRepository();
-            user.Login(new FestiSpec.Domain.Account { Wachtwoord = Password, Gebruikersnaam = UserName});
+            Account currentAccount = new Account()
+            {
+                Gebruikersnaam = _userName,
+                Wachtwoord = _password
+            };
+
+            if (user.Login(currentAccount))
+                user.LoggedInAccount = currentAccount;
+            else
+                _errorFeedback = "Foute inlog gegevens";
         }
 
     }

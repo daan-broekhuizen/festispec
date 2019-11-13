@@ -8,11 +8,12 @@ namespace FestiSpec.Domain.Repositories
 {
     public class UserRepository
     {
+        public Account LoggedInAccount { get; set; }
+
         public bool Register(Account account)
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-
                 context.Account.Add(account);
                 return context.SaveChanges() > 1;
             }
