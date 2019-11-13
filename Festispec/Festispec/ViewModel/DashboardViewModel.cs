@@ -1,4 +1,5 @@
 ﻿using Festispec.Service;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +26,19 @@ namespace Festispec.ViewModel
         public DashboardViewModel(NavigationService service)
         {
             _navigationService = service;
+            ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
+            ShowCustomersCommand = new RelayCommand(ShowCustomers);
+
         }
 
+        private void ShowAddCustomer()
+        {
+            _navigationService.NavigateTo("AddCustomerInfo");
+        }
 
+        private void ShowCustomers()
+        {
+            _navigationService.NavigateTo("Customers");
+        }
     }
 }

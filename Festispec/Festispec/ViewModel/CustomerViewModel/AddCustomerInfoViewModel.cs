@@ -18,7 +18,12 @@ namespace Festispec.ViewModel
         public AddCustomerInfoViewModel(NavigationService service)
         {
             _navigationService = service;
-            Customer = new CustomerViewModel();
+
+            if (service.Parameter is CustomerViewModel)
+                Customer = service.Parameter as CustomerViewModel;
+            else
+                Customer = new CustomerViewModel();
+
             NextPageCommand = new RelayCommand(NextPage);
         }
 

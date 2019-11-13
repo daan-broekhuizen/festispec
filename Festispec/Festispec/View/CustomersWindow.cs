@@ -27,11 +27,16 @@ namespace Festispec
             InitializeComponent();
         }
 
-/*        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        { 
-            CustomerListViewModel customerListViewModel = new CustomerListViewModel();
-            ComboBoxItem cbi = (ComboBoxItem)(sender as ComboBox).SelectedItem;
-            customerListViewModel.SortCustomers(cbi.Content.ToString());
-        }*/
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /*        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+                { 
+                    CustomerListViewModel customerListViewModel = new CustomerListViewModel();
+                    ComboBoxItem cbi = (ComboBoxItem)(sender as ComboBox).SelectedItem;
+                    customerListViewModel.SortCustomers(cbi.Content.ToString());
+                }*/
     }
 }
