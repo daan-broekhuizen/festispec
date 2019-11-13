@@ -81,7 +81,7 @@ namespace Festispec.ViewModel
         public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public ContactInfoViewModel ContactInfo => new ContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public ContactPeopleViewModel ContactPerson => new ContactPeopleViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public ContactPeopleViewModel ContactPeople => new ContactPeopleViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>()); 
         #endregion
 

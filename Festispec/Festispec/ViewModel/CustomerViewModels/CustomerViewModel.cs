@@ -32,21 +32,7 @@ namespace Festispec.ViewModel
             }
         }
 
-        public string HouseNumber
-        {
-            get 
-            {
-                if (_klant.Huisnummer != 0)
-                    return Convert.ToString(_klant.Huisnummer);
-                else
-                    return "";
-            }
-            set
-            {
-                _klant.Huisnummer = Convert.ToInt32(value);
-                RaisePropertyChanged("HouseNumber");
-            }
-        }
+        
 
         public string Addition
         {
@@ -74,6 +60,23 @@ namespace Festispec.ViewModel
             }
         }
 
+        public string HouseNumber
+        {
+            get
+            {
+                if (_klant.Huisnummer != 0)
+                    return Convert.ToString(_klant.Huisnummer);
+                else
+                    return "";
+            }
+            set
+            {
+                _klant.Huisnummer = Convert.ToInt32(value);
+                RaisePropertyChanged("HouseNumber");
+            }
+        }
+
+        /*
         public string BranchNumber
         {
             get
@@ -90,6 +93,9 @@ namespace Festispec.ViewModel
             }
         }
 
+        
+
+
         public string Telephone
         {
             get
@@ -105,6 +111,7 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Telephone");
             }
         }
+        */
 
         public string Email
         {

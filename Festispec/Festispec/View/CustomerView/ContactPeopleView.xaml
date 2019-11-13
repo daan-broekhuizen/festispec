@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.CustomerView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ContactPersonView">
+      Title="ContactPersonView"
+      DataContext="{Binding ContactPeople, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>

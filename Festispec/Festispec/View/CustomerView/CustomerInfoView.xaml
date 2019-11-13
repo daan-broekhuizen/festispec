@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.CustomerView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ShowCustomerInfo">
+      Title="ShowCustomerInfo"
+      DataContext ="{Binding CustomerInfo, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -100,9 +101,9 @@
                 <TextBlock  VerticalAlignment="Bottom" Text="Plaatsnaam"/>
             </Viewbox>
 
-            <TextBox Text="{Binding Customer.PostalCode}" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
-            <TextBox Text="{Binding Customer.HouseNumber}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
-            <TextBox Text="{Binding Customer.Addition}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
+            <TextBox Text="{Binding CustomerVM.PostalCode}" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
+            <TextBox Text="{Binding CustomerVM.HouseNumber}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding CustomerVM.Addition}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
             <TextBox Grid.Row="4"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Straatlaan..."/>
             <TextBox Grid.Row="4" Grid.Column="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
 
@@ -126,7 +127,7 @@
                         <Label Content=" Contact Klant "/>
                     </WrapPanel>
                 </Button>
-                <Button Background="White" BorderThickness="0" Command="{Binding ShowContactPersonCommand}">
+                <Button Background="White" BorderThickness="0" Command="{Binding ShowContactPeopleCommand}">
                     <WrapPanel Orientation="Vertical" Margin="0,0,10,0">
                         <Label BorderThickness="1" Background="White" BorderBrush="Black"/>
                         <Label Content="Contactpersoon"/>

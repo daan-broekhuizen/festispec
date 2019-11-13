@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.CustomerView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ContactInfoView">
+      Title="ContactInfoView"
+      DataContext="{Binding ContactInfo, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -62,9 +63,9 @@
             <Viewbox  Grid.Row="4" HorizontalAlignment="Left">
                 <TextBlock Height="15" VerticalAlignment="Bottom" Text="Website" />
             </Viewbox>
-            <TextBox Text="{Binding CustomerViewModel.Telephone}" Grid.Row="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  />
-            <TextBox Text="{Binding CustomerViewModel.Email}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="3"/>
-            <TextBox Text="{Binding CustomerViewModel.Website}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="5"/>
+            <TextBox Text="{Binding CustomerVM.Telephone}" Grid.Row="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  />
+            <TextBox Text="{Binding CustomerVM.Email}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="3"/>
+            <TextBox Text="{Binding CustomerVM.Website}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="5"/>
         </Grid>
 
 
@@ -87,7 +88,7 @@
                         <Label Content=" Contact Klant "/>
                     </WrapPanel>
                 </Button>
-                <Button Background="White" BorderThickness="0" Command="{Binding ShowContactPersonCommand}">
+                <Button Background="White" BorderThickness="0" Command="{Binding ShowContactPeopleCommand}">
                     <WrapPanel Orientation="Vertical" Margin="0,0,10,0">
                         <Label BorderThickness="1" Background="White" BorderBrush="Black"/>
                         <Label Content="Contactpersoon"/>
