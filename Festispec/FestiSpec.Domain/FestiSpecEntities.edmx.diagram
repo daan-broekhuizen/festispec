@@ -4,36 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1b449593a23a436180f7110a831b011a" Name="Diagram1">
-        <EntityTypeShape EntityType="FestiSpec.Domain.Account" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Antwoorden" Width="1.5" PointX="12.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Beschikbaarheid_inspecteurs" Width="1.5" PointX="6" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Contactpersoon" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Inspectieformulier" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Inspectieformulier_vragenlijst_combinatie" Width="1.5" PointX="10.5" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Klant" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Offerte" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Opdracht" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Rol_lookup" Width="1.5" PointX="1.5" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Status_lookup" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag_mogelijk_antwoord" Width="1.5" PointX="10.5" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Vraagtype_lookup" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Account__Rol__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Antwoorde__Inspe__6D0D32F4" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Beschikba__Medew__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Medewe__75A278F5" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Antwoorde__VIC_I__6C190EBB" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Contactpe__Klant__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Inspe__72C60C4A" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Opdra__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Vraag__73BA3083" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__KlantI__778AC167" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Offerte__Opdrach__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Status__76969D2E" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag__Vraagtype__787EE5A0" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__797309D9" ManuallyRouted="false" />
-        <AssociationConnector Association="FestiSpec.Domain.Ingeplande_inspecteurs" ManuallyRouted="false" />
+      <Diagram DiagramId="1b449593a23a436180f7110a831b011a" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="FestiSpec.Domain.Account" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Antwoorden" Width="1.5" PointX="9.75" PointY="9.125" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Beschikbaarheid_inspecteurs" Width="1.5" PointX="3" PointY="21.5" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Contactpersoon" Width="1.5" PointX="3" PointY="13.875" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Inspectieformulier" Width="1.5" PointX="5.25" PointY="8.75" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Inspectieformulier_vragenlijst_combinatie" Width="1.5" PointX="7.5" PointY="9.125" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Klant" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Offerte" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Opdracht" Width="1.5" PointX="3" PointY="6.375" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Rapport_template" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Rol_lookup" Width="1.5" PointX="1.5" PointY="18.5" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Status_lookup" Width="1.5" PointX="0.75" PointY="13.75" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag_mogelijk_antwoord" Width="1.5" PointX="7.5" PointY="5.75" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Vraagtype_lookup" Width="1.5" PointX="3" PointY="3.5" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Account__Rol__2B5F6B28" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Antwoorde__Inspe__2D47B39A" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Beschikba__Medew__2E3BD7D3" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Medewe__35DCF99B" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Antwoorde__VIC_I__2C538F61" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Contactpe__Klant__2F2FFC0C" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Inspe__33008CF0" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Opdra__320C68B7" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Vraag__33F4B129" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__KlantI__37C5420D" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Offerte__Opdrach__3D7E1B63" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Rappor__38B96646" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Status__36D11DD4" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag__Vraagtype__39AD8A7F" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__405A880E" />
+        <AssociationConnector Association="FestiSpec.Domain.Ingeplande_inspecteurs" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,26 +12,17 @@ namespace FestiSpec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Klant
+    public partial class Rapport_template
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Klant()
+        public Rapport_template()
         {
-            this.Contactpersoon = new HashSet<Contactpersoon>();
             this.Opdracht = new HashSet<Opdracht>();
         }
     
-        public long KvK_nummer { get; set; }
-        public string Naam { get; set; }
-        public string Postcode { get; set; }
-        public string Huisnummer { get; set; }
-        public long Telefoonnummer { get; set; }
-        public string Email { get; set; }
-        public string Website { get; set; }
-        public System.DateTime Laatste_weiziging { get; set; }
+        public int TemplateID { get; set; }
+        public string TemplateText { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Contactpersoon> Contactpersoon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opdracht> Opdracht { get; set; }
     }
