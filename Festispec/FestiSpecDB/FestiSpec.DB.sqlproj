@@ -81,7 +81,12 @@
     <RefactorLog Include="FestiSpecDB.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Seeds\Rol_lookukp_seed.sql" />
+    <None Include="Seeds\Rol_lookup_seed.sql" />
+    <None Include="Seeds\Vraagtype_lookup_seed.sql" />
+    <None Include="Seeds\Status_lookup_seed.sql" />
     <None Include="Seeds\Account_seed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploymentScript.sql" />
   </ItemGroup>
 </Project>
