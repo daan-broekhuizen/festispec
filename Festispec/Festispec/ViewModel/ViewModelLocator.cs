@@ -39,7 +39,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
         }
-
+        
         private static void SetupNavigation()
         {
             NavigationService navigationService = new NavigationService();

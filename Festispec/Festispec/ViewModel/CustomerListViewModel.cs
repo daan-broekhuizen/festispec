@@ -16,17 +16,17 @@ namespace Festispec.ViewModel
 {
     public class CustomerListViewModel : ViewModelBase
     {
-        private List<Klant> _customers;
-
-        public List<Klant> Customers
+        public List<CustomerViewModel> Customers { get; set; }
+        public CustomerViewModel SelectedCustomer
         {
-            get { return _customers; }
+            get => _selectedCustomer;
             set
             {
-                _customers = value;
-                RaisePropertyChanged("Customers");
+                _selectedCustomer = value;
+                RaisePropertyChanged("SelectedCustomer");
             }
         }
+        private CustomerViewModel _selectedCustomer;
 
         public string FilterCustomer { get; set; }
         public string SelectedBox { get; set; }
@@ -36,15 +36,24 @@ namespace Festispec.ViewModel
 
         public ICommand SearchCustomer { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
+        public ICommand ShowCustomerInfoCommand { get; set; }
+
         public CustomerListViewModel(NavigationService service)
         {
             _navigationService = service;
             CustomerRepository = new CustomerRepository();
             FilterCustomer = "";
-            Customers = CustomerRepository.GetKlanten();
+            Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
 
             SearchCustomer = new RelayCommand(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
+            ShowCustomerInfoCommand = new RelayCommand(ShowCustomerInfo);
+        }
+
+        private void ShowCustomerInfo()
+        {
+            if (SelectedCustomer != null)
+                _navigationService.NavigateTo("CustomerInfo", SelectedCustomer);
         }
 
         private void ShowAddCustomer()
@@ -54,14 +63,14 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer);
+            Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
         }
 
         public void SortCustomers(string sort)
         {
             String _sort = sort;
 
-            if(sort.Equals("A - Z"))
+            if (sort.Equals("A - Z"))
             {
                 Customers = null;
             }

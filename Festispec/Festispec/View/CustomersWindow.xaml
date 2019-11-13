@@ -5,7 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" 
+      xmlns:Interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+      mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
         DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
 
@@ -41,7 +42,7 @@
             <Viewbox HorizontalAlignment="Center" Grid.Row="2">
                 <StackPanel>
                 <Label></Label>
-                <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}" Click="Button_Click">
+                <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}">
                     Klant aanmaken
                 </Button>
                 <Label></Label>
@@ -81,8 +82,8 @@
             
         </Viewbox>
         
-        <ListBox Grid.Row="5" ItemsSource="{Binding Customers}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
-                <ListBox.ItemTemplate>
+        <ListBox x:Name="CustomerList" Grid.Row="5" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
+              <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">
                             <Grid.ColumnDefinitions>
@@ -96,10 +97,10 @@
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="1"  Text="Klantnaam:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Naam}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
                             <TextBlock Grid.Column="3" Text="Kvk-nummer:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="4" Text="{Binding Postcode}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                            <Button Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
+                            <TextBlock Grid.Column="4" Text="{Binding PostalCode}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                        <Button Command="{Binding ShowCustomerInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListView}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
