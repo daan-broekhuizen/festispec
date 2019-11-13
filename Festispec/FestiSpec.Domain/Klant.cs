@@ -29,6 +29,7 @@ namespace FestiSpec.Domain
         public string Email { get; set; }
         public string Website { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
+        public byte[] Klant_logo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contactpersoon> Contactpersoon { get; set; }

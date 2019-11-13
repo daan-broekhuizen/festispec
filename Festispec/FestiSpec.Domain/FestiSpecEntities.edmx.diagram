@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="FestiSpec.Domain.Rapport_template" Width="1.5" PointX="0.75" PointY="11.375" />
         <EntityTypeShape EntityType="FestiSpec.Domain.Rol_lookup" Width="1.5" PointX="1.5" PointY="18.5" />
         <EntityTypeShape EntityType="FestiSpec.Domain.Status_lookup" Width="1.5" PointX="0.75" PointY="13.75" />
-        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag" Width="1.5" PointX="5.25" PointY="1.875" />
         <EntityTypeShape EntityType="FestiSpec.Domain.Vraag_mogelijk_antwoord" Width="1.5" PointX="7.5" PointY="5.75" />
         <EntityTypeShape EntityType="FestiSpec.Domain.Vraagtype_lookup" Width="1.5" PointX="3" PointY="3.5" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Account__Rol__2B5F6B28" />
@@ -28,14 +27,15 @@
         <AssociationConnector Association="FestiSpec.Domain.FK__Contactpe__Klant__2F2FFC0C" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Inspe__33008CF0" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Opdra__320C68B7" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Vraag__33F4B129" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__KlantI__37C5420D" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Offerte__Opdrach__3D7E1B63" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Rappor__38B96646" />
         <AssociationConnector Association="FestiSpec.Domain.FK__Opdracht__Status__36D11DD4" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag__Vraagtype__39AD8A7F" />
-        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__405A880E" />
         <AssociationConnector Association="FestiSpec.Domain.Ingeplande_inspecteurs" />
+        <EntityTypeShape EntityType="FestiSpec.Domain.Vraag" Width="1.5" PointX="5.25" PointY="2" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Inspectie__Vraag__18178C8A" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag__Vraagtype__1DD065E0" />
+        <AssociationConnector Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__1EC48A19" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

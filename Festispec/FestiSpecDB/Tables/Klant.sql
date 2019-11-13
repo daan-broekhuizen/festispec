@@ -6,6 +6,7 @@
     [Huisnummer] NVARCHAR(4) NOT NULL,
 	[Telefoonnummer] BIGINT NOT NULL,
     [Email] NVARCHAR(130) NOT NULL, 
-    [Website] NVARCHAR(100) NULL, 
+    [Website] NVARCHAR(100) NULL,
+	[Klant_logo] IMAGE NULL,
     [Laatste_weiziging] DATETIME NOT NULL
 )
