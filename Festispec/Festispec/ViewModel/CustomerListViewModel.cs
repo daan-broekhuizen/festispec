@@ -27,6 +27,18 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Customers");
             }
         }
+
+        private List<CustomerViewModel> filteredcustomers;
+
+        public List<CustomerViewModel> FilteredCustomers
+        {
+            get => filteredcustomers;
+            set
+            {
+                filteredcustomers = value;
+                RaisePropertyChanged("FilteredCustomers");
+            }
+        }
         public CustomerViewModel SelectedCustomer
         {
             get => _selectedCustomer;
@@ -68,6 +80,7 @@ namespace Festispec.ViewModel
             CustomerRepository = new CustomerRepository();
             FilterCustomer = "";
             Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
+            FilteredCustomers = Customers;
 
             SearchCustomer = new RelayCommand(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
@@ -92,16 +105,16 @@ namespace Festispec.ViewModel
                 switch (SelectedBox.Content)
                 {
                     case "A - Z":
-                        Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        FilteredCustomers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                         break;
                     case "Z - A":
-                        Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        FilteredCustomers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                         break;
                 }
             }
             else
             {
-                Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                FilteredCustomers = GetFilteredKlanten();
 
             }
         }
@@ -117,16 +130,16 @@ namespace Festispec.ViewModel
                     switch (SelectedBox.Content)
                     {
                         case "A - Z":
-                            Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            FilteredCustomers = GetFilteredKlantenASC();
                             break;
                         case "Z - A":
-                            Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            FilteredCustomers = GetFilteredKlantenDESC();
                             break;
                     }
                 }
                 else
                 {
-                    Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                    FilteredCustomers = GetFilteredKlanten();
 
 
                 }
@@ -138,19 +151,45 @@ namespace Festispec.ViewModel
                     switch (SelectedBox.Content)
                     {
                         case "A - Z":
-                            Customers = CustomerRepository.GetKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            FilteredCustomers = GetKlantenASC();
                             break;
                         case "Z - A":
-                            Customers = CustomerRepository.GetKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            FilteredCustomers = GetKlantenDESC();
                             break;
                     }
                 }
                 else
                 {
-                    Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
+                    FilteredCustomers = Customers;
 
                 }
             }
+        }
+
+        public List<CustomerViewModel> GetFilteredKlanten()
+        {
+            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
+            return FilteredCustomers;
+        }
+        public List<CustomerViewModel> GetFilteredKlantenASC()
+        {
+            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).OrderBy(e => e.Name).ToList();
+            return FilteredCustomers;
+        }
+        public List<CustomerViewModel> GetFilteredKlantenDESC()
+        {
+            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).OrderByDescending(e => e.Name).ToList();
+            return FilteredCustomers;
+        }
+        public List<CustomerViewModel> GetKlantenASC()
+        {
+            FilteredCustomers = Customers.OrderBy(e => e.Name).ToList();
+            return FilteredCustomers;
+        }
+        public List<CustomerViewModel> GetKlantenDESC()
+        {
+            FilteredCustomers = Customers.OrderByDescending(e => e.Name).ToList();
+            return FilteredCustomers;
         }
     }
 }
