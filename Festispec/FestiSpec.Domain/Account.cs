@@ -33,9 +33,9 @@ namespace FestiSpec.Domain
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
         public string Email { get; set; }
-        public int Telefoonnummer { get; set; }
+        public Nullable<long> Telefoonnummer { get; set; }
         public Nullable<System.DateTime> Datum_certificering { get; set; }
-        public Nullable<System.DateTime> Einddatume_certificering { get; set; }
+        public Nullable<System.DateTime> Einddatum_certificering { get; set; }
         public string IBAN { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
     

@@ -93,6 +93,9 @@
       <DependentUpon>FestiSpecEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rapport_template.cs">
+      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Rol_lookup.cs">
       <DependentUpon>FestiSpecEntities.tt</DependentUpon>
     </Compile>

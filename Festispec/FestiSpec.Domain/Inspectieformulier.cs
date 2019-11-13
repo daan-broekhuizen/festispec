@@ -21,6 +21,7 @@ namespace FestiSpec.Domain
         }
     
         public int InspectieformulierID { get; set; }
+        public string InspectieFormulierTitel { get; set; }
         public Nullable<System.DateTime> Datum_inspectie { get; set; }
         public string Locatie { get; set; }
         public Nullable<int> OpdrachtID { get; set; }

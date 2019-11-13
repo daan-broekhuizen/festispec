@@ -15,12 +15,12 @@ namespace FestiSpec.Domain
     public partial class Contactpersoon
     {
         public int ContactpersoonID { get; set; }
-        public int KlantID { get; set; }
+        public long KlantID { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
         public string Email { get; set; }
-        public int Telefoon { get; set; }
+        public long Telefoon { get; set; }
         public string Notities { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
     

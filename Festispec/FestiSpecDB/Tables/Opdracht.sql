@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[Opdracht]
 (
-	[OpdrachtID] INT NOT NULL PRIMARY KEY, 
+	[OpdrachtID] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
     [Opdracht_naam] NVARCHAR(45) NOT NULL, 
     [Status] NVARCHAR(2) NOT NULL, 
     [Creatie_datum] DATE NOT NULL, 
-    [KlantID] INT NOT NULL, 
+    [KlantID] BIGINT NOT NULL, 
     [MedewerkerID] INT NOT NULL, 
 	[Gebruikte_rechtsgebieden] TEXT NULL,
     [Rapportage] TEXT NULL, 
