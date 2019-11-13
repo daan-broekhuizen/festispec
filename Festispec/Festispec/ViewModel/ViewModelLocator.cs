@@ -33,20 +33,22 @@ namespace Festispec.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<MainViewModel>();
+
             SetupNavigation();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DashboardViewModel>();
         }
 
         private static void SetupNavigation()
         {
-            var navigationService = new NavigationService();
-            navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
+            NavigationService navigationService = new NavigationService();
+            navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
             navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
             navigationService.Configure("AddCustomerInfo", new Uri("../View/CustomerView/AddCustomerInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactInfo", new Uri("../View/CustomerView/AddContactInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactPerson", new Uri("../View/CustomerView/AddContactPersonView.xaml", UriKind.Relative));
-
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
+
         }
 
         public MainViewModel Main
@@ -54,6 +56,14 @@ namespace Festispec.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+
+        public DashboardViewModel Dashboard
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DashboardViewModel>();
             }
         }
 

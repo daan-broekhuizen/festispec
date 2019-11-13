@@ -100,6 +100,10 @@
     <Compile Include="View\CustomersWindow.cs">
       <DependentUpon>CustomersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="View\DashboardView.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -158,7 +162,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomersWindow.xaml">
+    <Page Include="View\CustomersWindow.xaml" />
+    <Page Include="View\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,17 +176,30 @@
     <Resource Include="Images\Profile.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\festispec_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\User.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Plus_icon.png" />
     <ProjectReference Include="..\FestiSpec.Domain\FestiSpec.Domain.csproj">
       <Project>{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}</Project>
       <Name>FestiSpec.Domain</Name>
     </ProjectReference>
+    <Resource Include="Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dashboard_background.png" />
+    <Resource Include="Images\Dashboard_customers.png" />
+    <Resource Include="Images\Dashboard_jobs.png" />
+    <Resource Include="Images\Dashboard_messages.png" />
+    <Resource Include="Images\Dashboard_new_customer.png" />
+    <Resource Include="Images\Dashboard_new_job.png" />
+    <Resource Include="Images\Dashboard_new_quotation.png" />
+    <Resource Include="Images\Dashboard_planning.png" />
+    <Resource Include="Images\Dashboard_quotations.png" />
+    <Resource Include="Images\Dashboard_schedule.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dashboard_intro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\festispec_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
