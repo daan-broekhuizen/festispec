@@ -80,12 +80,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\CustomerViewModel\AddContactInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel\AddContactPersonViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel\AddCustomerInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel\ContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPeopleViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
     <Compile Include="ViewModel\Customer.cs" />
-    <Compile Include="ViewModel\CustomerViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerListViewModel.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
@@ -101,6 +104,15 @@
       <DependentUpon>CustomersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="View\CustomerView\ContactInfoView.xaml.cs">
+      <DependentUpon>ContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\ContactPeopleView.xaml.cs">
+      <DependentUpon>ContactPeopleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\CustomerInfoView.xaml.cs">
+      <DependentUpon>CustomerInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DashboardView.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
@@ -163,6 +175,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomersWindow.xaml" />
+    <Page Include="View\CustomerView\ContactInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerView\ContactPeopleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerView\CustomerInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DashboardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
