@@ -44,13 +44,17 @@ namespace Festispec.ViewModel
         {
             NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
+
+            #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
             navigationService.Configure("AddCustomerInfo", new Uri("../View/CustomerView/AddCustomerInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactInfo", new Uri("../View/CustomerView/AddContactInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactPerson", new Uri("../View/CustomerView/AddContactPersonView.xaml", UriKind.Relative));
             navigationService.Configure("CustomerInfo", new Uri("../View/CustomerView/CustomerInfoView.xaml", UriKind.Relative));
             navigationService.Configure("ContactInfo", new Uri("../View/CustomerView/ContactInfoView.xaml", UriKind.Relative));
-            navigationService.Configure("ContactPeople", new Uri("../View/CustomerView/ContactPeopleView.xaml", UriKind.Relative));
+            navigationService.Configure("ContactPeople", new Uri("../View/CustomerView/ContactPeopleView.xaml", UriKind.Relative)); 
+            #endregion
+
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
@@ -71,13 +75,15 @@ namespace Festispec.ViewModel
             }
         }
 
+        #region CustomerVM's
         public CustomerListViewModel CustomerList => new CustomerListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public ContactInfoViewModel ContactInfo => new ContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public ContactPeopleViewModel ContactPerson => new ContactPeopleViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>()); 
+        #endregion
 
 
         public static void Cleanup()
