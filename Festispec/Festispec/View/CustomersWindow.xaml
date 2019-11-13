@@ -54,8 +54,8 @@
         </Viewbox>
 
         <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Right">
-            <ComboBox MinWidth="50" Margin="0,15,100,15" Background="Yellow">
-                <ComboBoxItem Content="A - Z"/>
+            <ComboBox MinWidth="50" Margin="0,15,100,15" Background="Yellow" SelectedItem="{Binding SelectedBox}">
+                <ComboBoxItem Content="A - Z" />
                 <ComboBoxItem Content="Z - A"/>
             </ComboBox>
         </Viewbox>

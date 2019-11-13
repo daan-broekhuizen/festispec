@@ -28,7 +28,21 @@ namespace Festispec.ViewModel
         }
 
         public string FilterCustomer { get; set; }
-        public string SelectedBox { get; set; }
+
+        private ComboBoxItem _selectedBox;
+        public ComboBoxItem SelectedBox
+        {
+            get
+            {
+                return _selectedBox;
+            }
+            set
+            {
+                _selectedBox = value;
+                SortCustomers();
+            }
+
+        }
 
         private CustomerRepository CustomerRepository { get; set; }
 
@@ -44,18 +58,68 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer);
-        }
-
-        public void SortCustomers(string sort)
-        {
-            String _sort = sort;
-
-            if(sort.Equals("A - Z"))
+            if (SelectedBox != null) {
+                switch (SelectedBox.Content)
+                {
+                    case "A - Z":
+                        Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer);
+                        break;
+                    case "Z - A":
+                        Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer);
+                        break;
+                }
+            }
+            else
             {
-                Customers = null;
+                Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer);
+
             }
         }
+    
 
+
+        public void SortCustomers()
+        {
+            if(FilterCustomer != null)
+            {
+                if (SelectedBox != null)
+                {
+                    switch (SelectedBox.Content)
+                    {
+                        case "A - Z":
+                            Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer);
+                            break;
+                        case "Z - A":
+                            Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer);
+                            break;
+                    }
+                }
+                else
+                {
+                    Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer);
+
+                }
+            }
+            else
+            {
+                if (SelectedBox != null)
+                {
+                    switch (SelectedBox.Content)
+                    {
+                        case "A - Z":
+                            Customers = CustomerRepository.GetKlantenASC(FilterCustomer);
+                            break;
+                        case "Z - A":
+                            Customers = CustomerRepository.GetKlantenDESC(FilterCustomer);
+                            break;
+                    }
+                }
+                else
+                {
+                    Customers = CustomerRepository.GetKlanten();
+
+                }
+            }
+        }
     }
 }
