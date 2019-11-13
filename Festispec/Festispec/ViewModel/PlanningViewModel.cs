@@ -7,7 +7,7 @@ namespace Festispec.ViewModel
 {
     class PlanningViewModel
     {
-        public async Task CalculateDistance()
+        public async Task<double> CalculateDistance()
         {
             DistanceMatrixRequest req = new DistanceMatrixRequest()
             {
@@ -30,6 +30,7 @@ namespace Festispec.ViewModel
             DistanceMatrixCell cell = matrix.Results[0];
             Debug.WriteLine("Afstand: " + cell.TravelDistance.ToString("n1") + " km");
 
+            return cell.TravelDistance;
         }
     }
 }

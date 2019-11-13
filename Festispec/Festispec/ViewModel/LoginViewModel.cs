@@ -8,11 +8,16 @@ using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
 using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
+using System.Security.Cryptography;
+using Festispec.Utility;
 
 namespace Festispec.ViewModel
 {
     public class LoginViewModel  : ViewModelBase 
     {
+        private UserRepository _user;
+        private Encrypt _encrypt;
+
         private string _userName;
         private string _password;
         private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
@@ -47,24 +52,26 @@ namespace Festispec.ViewModel
 
         public LoginViewModel()
         {
-            LoginCommand = new RelayCommand(login, canLogin);
+            _encrypt = new Encrypt();
+            _user = new UserRepository();
+
+            LoginCommand = new RelayCommand(Login, CanLogin);
         }
 
-        private bool canLogin() => UserName.Length > 0 && Password.Length > 0;
+        private bool CanLogin() => UserName.Length > 0 && Password.Length > 0;
 
 
 
-        private void login()
+        private void Login()
         {
-            UserRepository user = new UserRepository();
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _userName,
-                Wachtwoord = _password
+                Wachtwoord = _encrypt.GetHashString(_password)
             };
 
-            if (user.Login(currentAccount))
-                user.LoggedInAccount = currentAccount;
+            if (_user.Login(currentAccount))
+                _user.LoggedInAccount = currentAccount;
             else
                 _errorFeedback = "Foute inlog gegevens";
         }
