@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Festispec.Service;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
@@ -45,15 +46,24 @@ namespace Festispec.ViewModel
         }
 
         private CustomerRepository CustomerRepository { get; set; }
+        private NavigationService _navigationService;
 
         public ICommand SearchCustomer { get; set; }
-        public CustomerListViewModel()
+        public ICommand ShowAddCustomerCommand { get; set; }
+        public CustomerListViewModel(NavigationService service)
         {
+            _navigationService = service;
             CustomerRepository = new CustomerRepository();
             FilterCustomer = "";
             Customers = CustomerRepository.GetKlanten();
 
             SearchCustomer = new RelayCommand(FilterCustomers);
+            ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
+        }
+
+        private void ShowAddCustomer()
+        {
+            _navigationService.NavigateTo("AddCustomerInfo");
         }
 
         public void FilterCustomers()

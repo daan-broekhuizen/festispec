@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using Festispec.Service;
+using Festispec.ViewModel;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
@@ -29,21 +30,33 @@ namespace Festispec.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
+        ///
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<MainViewModel>();
+
             SetupNavigation();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DashboardViewModel>();
         }
 
         private static void SetupNavigation()
         {
-            var navigationService = new NavigationService();
-            navigationService.Configure("Dashboard", new Uri("../View/TestView.xaml", UriKind.Relative));
+            NavigationService navigationService = new NavigationService();
+            navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
+
+            #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
-            navigationService.Configure("AddCustomerInfo", new Uri("../View/AddCustomerInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddCustomerInfo", new Uri("../View/CustomerView/AddCustomerInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddContactInfo", new Uri("../View/CustomerView/AddContactInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddContactPerson", new Uri("../View/CustomerView/AddContactPersonView.xaml", UriKind.Relative));
+            navigationService.Configure("CustomerInfo", new Uri("../View/CustomerView/CustomerInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("ContactInfo", new Uri("../View/CustomerView/ContactInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("ContactPeople", new Uri("../View/CustomerView/ContactPeopleView.xaml", UriKind.Relative)); 
+            #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
+
         }
 
         public MainViewModel Main
@@ -54,14 +67,25 @@ namespace Festispec.ViewModel
             }
         }
 
-        public CustomerListViewModel CustomerList
+        public DashboardViewModel Dashboard
         {
             get
             {
-                return new CustomerListViewModel();
+                return ServiceLocator.Current.GetInstance<DashboardViewModel>();
             }
         }
-        
+
+        #region CustomerVM's
+        public CustomerListViewModel CustomerList => new CustomerListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public ContactInfoViewModel ContactInfo => new ContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public ContactPeopleViewModel ContactPerson => new ContactPeopleViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>()); 
+        #endregion
+
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

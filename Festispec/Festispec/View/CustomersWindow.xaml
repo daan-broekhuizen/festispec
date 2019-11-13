@@ -6,61 +6,78 @@
       xmlns:local="clr-namespace:Festispec"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="720" d:DesignWidth="1280"
         DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*" MaxHeight="150"/>
-            <RowDefinition Height="0.05*" MaxHeight="80"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.05*"/>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.07*"/>
             <RowDefinition Height="0.05*"/>
             <RowDefinition Height="0.45*"/>
 
-
+         
 
         </Grid.RowDefinitions>
-        <Viewbox Stretch="Uniform" HorizontalAlignment="Left">
-            <TextBlock Padding="20" Text="Klanten"  Foreground="Black" FontWeight="Bold"/>
-        </Viewbox>
-        <Viewbox Stretch="Uniform" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-            <Button Content="Klant aanmaken" Margin="32,70,0,0"/>
-        </Viewbox>
-        <Viewbox Stretch="Uniform"  HorizontalAlignment="Right">
-            <Image Margin="35" Source="/Images/festispec_logo.png"></Image>
-        </Viewbox>
-        <Rectangle Grid.Row="2" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Viewbox  Grid.Row="2" HorizontalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
+                <TextBlock Text="Klanten"  Foreground="Black" FontWeight="Bold"/>
+            </Viewbox>
+            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
+                <Image Source="/Images/festispec_logo.png"></Image>
+            </Viewbox>
+            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
+                <StackPanel>
+                <Label></Label>
+                <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}" Click="Button_Click">
+                    Klant aanmaken
+                </Button>
+                <Label></Label>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        
+        <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
+        <Viewbox  Grid.Row="1" HorizontalAlignment="Center">
             <TextBox Text="{Binding FilterCustomer}" Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
         </Viewbox>
-        <Viewbox Grid.Row="2" HorizontalAlignment="Right">
+        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
             <Button Margin="200,200,650,200" Command="{Binding SearchCustomer}">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image  Source="/Images/Search.png"/>
+                        <Image   Source="/Images/Search.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
         </Viewbox>
 
-        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Left">
+        <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">
             <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>
         </Viewbox>
 
-        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Right">
-            <TextBlock Margin="200,0,150,0" Padding="15" Text="Sorteren op:"  Foreground="Black"/>
-        </Viewbox>
-
-        <Viewbox Grid.Row="4" Stretch="Uniform" HorizontalAlignment="Right">
-            <ComboBox MinWidth="50" Margin="0,15,100,15" Background="Yellow" SelectedItem="{Binding SelectedBox}">
-                <ComboBoxItem Content="A - Z" />
-                <ComboBoxItem Content="Z - A"/>
-            </ComboBox>
+        <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <WrapPanel Margin="0,0,20,0">
+                <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
+                <ComboBox Margin="10" Width="70" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
+                    <ComboBoxItem Content="A - Z"/>
+                    <ComboBoxItem Content="Z - A"/>
+                </ComboBox>
+            </WrapPanel>
         </Viewbox>
         
-        <ListBox Grid.Row="6" ItemsSource="{Binding Customers}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
+        <ListBox Grid.Row="5" ItemsSource="{Binding Customers}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
                 <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">

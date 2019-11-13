@@ -13,31 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for AddContactPersonView.xaml
     /// </summary>
-    public partial class CustomersWindow : UserControl
+    public partial class AddContactPersonView : Page
     {
-        public CustomersWindow()
+        public AddContactPersonView()
         {
             InitializeComponent();
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }
