@@ -1,5 +1,6 @@
 ﻿using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,13 @@ namespace Festispec.ViewModel
         public RegisterViewModel()
         {
             _user = new UserRepository();
+
+           // RegisterCommand = new RelayCommand(Register, CanRegister);
+        }
+
+        private bool CanRegister()
+        {
+            throw new NotImplementedException();
         }
 
         public bool Register()
@@ -26,8 +34,8 @@ namespace Festispec.ViewModel
             // Deze is nog niet af aangezien de values nog nergens zijn 
             Account newAccount = new Account()
             {
-                Gebruikersnaam = "", // Hier moet ook nog encryptie worden toegepast
-                Wachtwoord = "",
+                Gebruikersnaam = "", 
+                Wachtwoord = "", // Encryptie toepassen
                 Rol = ""
             };
 
