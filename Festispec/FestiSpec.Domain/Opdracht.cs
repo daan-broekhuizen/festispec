@@ -32,6 +32,7 @@ namespace FestiSpec.Domain
         public string Rapportage { get; set; }
         public Nullable<int> Rapportage_uses_template { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
+        public string Klantwensen { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
