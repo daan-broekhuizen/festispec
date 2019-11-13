@@ -15,46 +15,5 @@ namespace FestiSpec.Domain.Repositories
                 return context.Klant.ToList();
             }
         }
-
-        public List<Klant> GetFilteredKlanten(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).ToList();
-            }
-        }
-
-        public List<Klant> GetKlantenASC(string FilterCustomer)
-        {
-            using(FestiSpecEntities context = new FestiSpecEntities())  
-            {
-                return context.Klant.OrderBy(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetKlantenDESC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.OrderByDescending(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetFilteredKlantenASC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).OrderBy(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetFilteredKlantenDESC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).OrderByDescending(e => e.Naam).ToList();
-            }
-        }
-
     }
 }
