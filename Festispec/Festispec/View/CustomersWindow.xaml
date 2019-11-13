@@ -71,15 +71,11 @@
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="70" Height="20" Background="Yellow">
+                <ComboBox Margin="10" Width="70" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
                     <ComboBoxItem Content="A - Z"/>
                     <ComboBoxItem Content="Z - A"/>
                 </ComboBox>
             </WrapPanel>
-        </Viewbox>
-
-        <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right">
-            
         </Viewbox>
         
         <ListBox x:Name="CustomerList" Grid.Row="5" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">

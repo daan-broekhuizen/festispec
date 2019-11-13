@@ -16,7 +16,17 @@ namespace Festispec.ViewModel
 {
     public class CustomerListViewModel : ViewModelBase
     {
-        public List<CustomerViewModel> Customers { get; set; }
+        private List<CustomerViewModel> customers;
+
+        public List<CustomerViewModel> Customers 
+        { 
+            get => customers;
+            set
+            {
+                customers = value;
+                RaisePropertyChanged("Customers");
+            }
+        }
         public CustomerViewModel SelectedCustomer
         {
             get => _selectedCustomer;
@@ -29,7 +39,21 @@ namespace Festispec.ViewModel
         private CustomerViewModel _selectedCustomer;
 
         public string FilterCustomer { get; set; }
-        public string SelectedBox { get; set; }
+
+        private ComboBoxItem _selectedBox;
+        public ComboBoxItem SelectedBox
+        {
+            get
+            {
+                return _selectedBox;
+            }
+            set
+            {
+                _selectedBox = value;
+                SortCustomers();
+            }
+
+        }
 
         private CustomerRepository CustomerRepository { get; set; }
         private NavigationService _navigationService;
@@ -63,18 +87,70 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
-        }
-
-        public void SortCustomers(string sort)
-        {
-            String _sort = sort;
-
-            if (sort.Equals("A - Z"))
+            if (SelectedBox != null)
             {
-                Customers = null;
+                switch (SelectedBox.Content)
+                {
+                    case "A - Z":
+                        Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        break;
+                    case "Z - A":
+                        Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        break;
+                }
+            }
+            else
+            {
+                Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+
             }
         }
 
+
+
+        public void SortCustomers()
+        {
+            if (FilterCustomer != null)
+            {
+                if (SelectedBox != null)
+                {
+                    switch (SelectedBox.Content)
+                    {
+                        case "A - Z":
+                            Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            break;
+                        case "Z - A":
+                            Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            break;
+                    }
+                }
+                else
+                {
+                    Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+
+
+                }
+            }
+            else
+            {
+                if (SelectedBox != null)
+                {
+                    switch (SelectedBox.Content)
+                    {
+                        case "A - Z":
+                            Customers = CustomerRepository.GetKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            break;
+                        case "Z - A":
+                            Customers = CustomerRepository.GetKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            break;
+                    }
+                }
+                else
+                {
+                    Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
+
+                }
+            }
+        }
     }
 }
