@@ -91,10 +91,10 @@
 
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Column="1"  Text="Klantnaam:" FontWeight="Bold" Margin="0,20,0,0"/>
-                        <TextBlock Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
-                        <TextBlock Grid.Column="3" Text="Kvk-nummer:" FontWeight="Bold" Margin="0,20,0,0"/>
-                        <TextBlock Grid.Column="4" Text="{Binding KvK}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+                        <TextBlock Grid.Column="1"  Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,20,0,0"/>
+                        <TextBlock Grid.Column="2" Text="{Binding JobName}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
+                        <TextBlock Grid.Column="3" Text="JobID" FontWeight="Bold" Margin="0,20,0,0"/>
+                        <TextBlock Grid.Column="4" Text="{Binding JobID}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
                         <Button Command="{Binding ShowCustomerInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
                     </Grid>
                 </DataTemplate>

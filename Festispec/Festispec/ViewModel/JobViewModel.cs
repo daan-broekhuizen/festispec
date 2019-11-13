@@ -53,7 +53,7 @@ namespace Festispec.ViewModel
             }
         }
 
-        public int CustomerID
+        public long CustomerID
         {
             get => _opdracht.KlantID;
             set
@@ -90,16 +90,6 @@ namespace Festispec.ViewModel
             {
                 _opdracht.Rapportage = value;
                 RaisePropertyChanged("Report");
-            }
-        }
-
-        public string Advice
-        {
-            get => _opdracht.Advies;
-            set
-            {
-                _opdracht.Advies = value;
-                RaisePropertyChanged("Advice");
             }
         }
 

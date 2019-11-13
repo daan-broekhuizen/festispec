@@ -27,8 +27,8 @@ VALUES(293871, 'Bospop', '6003TU', '1', 0495678123,'bospop@hotmail.com', 'www.bo
 INSERT INTO Contactpersoon (KlantID, Voornaam, Tussenvoegsel, Achternaam, Email, Telefoon, Notities, Laatste_weiziging)
 VALUES(293871 , 'Dave', null, 'Davidson', 'DaveDavidson@gmail.com', 06111111111, 'Klaagt veel.', GETDATE())
 
-INSERT INTO Opdracht (Opdracht_naam, Status, Creatie_datum, KlantID, MedewerkerID, Gebruikte_rechtsgebieden, Laatste_weiziging)
-VALUES('Inspectie Bospop', 'rv', GETDATE(), 293871, (SELECT AccountID FROM Account WHERE Gebruikersnaam = 'FransDeWanks'), null, GETDATE()) 
+INSERT INTO Opdracht (Opdracht_naam, Status, Creatie_datum, KlantID, MedewerkerID, Gebruikte_rechtsgebieden, Laatste_weiziging, Klantwensen)
+VALUES('Inspectie Bospop', 'rv', GETDATE(), 293871, (SELECT AccountID FROM Account WHERE Gebruikersnaam = 'FransDeWanks'), null, GETDATE(), 'Wensen') 
 
 INSERT INTO Offerte (OpdrachtID, Totaalbedrag, Aanmaakdatum, Beschrijving, Klantbeslissing_reden, Laatste_weiziging)
 VALUES((SELECT OpdrachtID FROM Opdracht WHERE Opdracht_naam = 'Inspectie Bospop'), 2000.50, GETDATE(), 'we gaan een inspectie doen', 'ze vonden het goed', GETDATE())

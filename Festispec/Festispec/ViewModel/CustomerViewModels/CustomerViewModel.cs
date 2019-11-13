@@ -64,14 +64,14 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if (_klant.Huisnummer != 0)
+                if (_klant.Huisnummer == null)
                     return Convert.ToString(_klant.Huisnummer);
                 else
                     return "";
             }
             set
             {
-                _klant.Huisnummer = Convert.ToInt32(value);
+                _klant.Huisnummer = value;
                 RaisePropertyChanged("HouseNumber");
             }
         }
