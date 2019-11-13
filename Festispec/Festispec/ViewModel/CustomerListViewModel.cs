@@ -105,10 +105,10 @@ namespace Festispec.ViewModel
                 switch (SelectedBox.Content)
                 {
                     case "A - Z":
-                        FilteredCustomers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        FilteredCustomers = GetFilteredKlantenASC();
                         break;
                     case "Z - A":
-                        FilteredCustomers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        FilteredCustomers = GetFilteredKlantenDESC();
                         break;
                 }
             }
