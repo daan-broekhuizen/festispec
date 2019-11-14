@@ -78,7 +78,7 @@
             </WrapPanel>
         </Viewbox>
         
-        <ListBox x:Name="CustomerList" Grid.Row="5" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
+        <ListBox x:Name="CustomerList" Grid.Row="5" ItemsSource="{Binding FilteredCustomers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
               <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">
