@@ -13,7 +13,7 @@ using Festispec.Utility;
 
 namespace Festispec.ViewModel
 {
-    public class LoginViewModel  : ViewModelBase 
+    public class LoginViewModel : ViewModelBase 
     {
         private UserRepository _user;
         private Encrypt _encrypt;
