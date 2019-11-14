@@ -81,15 +81,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModel\CustomerViewModels\ContactInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\ContactPeopleViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
-    <Compile Include="ViewModel\Customer.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModel\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
@@ -107,8 +106,8 @@
     <Compile Include="View\CustomerView\ContactInfoView.xaml.cs">
       <DependentUpon>ContactInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomerView\ContactPeopleView.xaml.cs">
-      <DependentUpon>ContactPeopleView.xaml</DependentUpon>
+    <Compile Include="View\CustomerView\ContactPersonListView.xaml.cs">
+      <DependentUpon>ContactPersonListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\CustomerInfoView.xaml.cs">
       <DependentUpon>CustomerInfoView.xaml</DependentUpon>
@@ -179,7 +178,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomerView\ContactPeopleView.xaml">
+    <Page Include="View\CustomerView\ContactPersonListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

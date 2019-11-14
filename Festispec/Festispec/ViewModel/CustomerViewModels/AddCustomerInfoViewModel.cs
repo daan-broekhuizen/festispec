@@ -24,7 +24,15 @@ namespace Festispec.ViewModel
             else
                 Customer = new CustomerViewModel();
 
-            NextPageCommand = new RelayCommand(NextPage);
+            NextPageCommand = new RelayCommand(NextPage, CanNavigate);
+        }
+
+        private bool CanNavigate()
+        {
+            return Customer.KvK.Length == 8 &&
+                   Customer.Name != null &&
+                   Customer.PostalCode != null &&
+                   Customer.HouseNumber != null;
         }
 
         private void NextPage()

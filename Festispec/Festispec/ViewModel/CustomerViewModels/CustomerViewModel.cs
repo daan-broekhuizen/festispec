@@ -133,16 +133,27 @@ namespace Festispec.ViewModel
             }
         }
 
-        public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
+        private List<ContactPersonViewModel> _contacts;
+        public List<ContactPersonViewModel> Contacts 
+        { 
+            get => _contacts; 
+            set
+            {
+                _contacts = value;
+                RaisePropertyChanged("Contacts");
+            }
+        }
 
         public CustomerViewModel(Klant klant)
         {
             _klant = klant;
+            Contacts = klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)).ToList();
         }
 
         public CustomerViewModel()
         {
             _klant = new Klant();
+            Contacts = new List<ContactPersonViewModel>();
         }
     }
 }

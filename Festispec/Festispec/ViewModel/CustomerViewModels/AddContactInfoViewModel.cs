@@ -21,7 +21,12 @@ namespace Festispec.ViewModel
             _navigationService = service;
             if (service.Parameter is CustomerViewModel)
                 CustomerViewModel = service.Parameter as CustomerViewModel;
-            NextPageCommand = new RelayCommand(NextPage);
+            NextPageCommand = new RelayCommand(NextPage, CanNavigate);
+        }
+
+        private bool CanNavigate()
+        {
+            return CustomerViewModel.Email != null;
         }
 
         private void NextPage()

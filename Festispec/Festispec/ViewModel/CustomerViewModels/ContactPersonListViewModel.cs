@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class ContactPeopleViewModel
+    public class ContactPersonListViewModel
     {
         public ICommand ShowCustomerInfoCommand { get; set; }
         public ICommand ShowContactInfoCommand { get; set; }
@@ -18,7 +18,7 @@ namespace Festispec.ViewModel
 
         private NavigationService _navigationService;
 
-        public ContactPeopleViewModel(NavigationService service)
+        public ContactPersonListViewModel(NavigationService service)
         {
             _navigationService = service;
             //get customer from navigationservice
@@ -43,7 +43,6 @@ namespace Festispec.ViewModel
         private void ShowCustomerInfo()
         {
             _navigationService.NavigateTo("CustomerInfo", CustomerVM);
-
         }
     }
 }

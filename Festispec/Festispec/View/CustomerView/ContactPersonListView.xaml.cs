@@ -18,9 +18,9 @@ namespace Festispec.View.CustomerView
     /// <summary>
     /// Interaction logic for ContactPersonView.xaml
     /// </summary>
-    public partial class ContactPeopleView : Page
+    public partial class ContactPersonList : Page
     {
-        public ContactPeopleView()
+        public ContactPersonList()
         {
             InitializeComponent();
         }

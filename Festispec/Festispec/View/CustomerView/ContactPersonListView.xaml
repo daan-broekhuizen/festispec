@@ -1,0 +1,121 @@
+﻿<Page x:Class="Festispec.View.CustomerView.ContactPersonList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.CustomerView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ContactPersonView"
+      DataContext="{Binding ContactPersons, Source={StaticResource Locator}}">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="7.2*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
+                <TextBlock  Foreground="Black" FontWeight="Bold" Text="Klant" />
+            </Viewbox>
+            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
+                <Image Source="/Images/festispec_logo.png"></Image>
+            </Viewbox>
+        </Grid>
+
+
+        <ListBox x:Name="CustomerList" Grid.Row="2" ItemsSource="{Binding CustomerVM.Contacts}"  BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ListBox.ItemTemplate >
+                <DataTemplate>
+                    <Viewbox>
+                        <Grid Background="LightGray" Width="800" Height="200" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
+                            </Grid.RowDefinitions>
+                            <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock Height="15" Text="Naam"/>
+                            </Viewbox>
+                            <Viewbox Grid.Row="1" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock Height="15" Text="Notitie"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="1" VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Left" >
+                                <TextBlock VerticalAlignment="Bottom" Height="15" Text="Email"/>
+                            </Viewbox>
+                            <Viewbox  Grid.Row="5" HorizontalAlignment="Left" Grid.Column="1">
+                                <TextBlock Height="15" VerticalAlignment="Bottom" Text="Telefoon" />
+                            </Viewbox>
+                            <DockPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="5">
+                                <TextBox Text="{Binding Note}" FontSize="20" VerticalContentAlignment="Top" Margin="0,5,0,0"  Tag="0123456789..."/>
+
+                            </DockPanel>
+                            <TextBox Text="{Binding Name}" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
+                            <TextBox Text="{Binding Email}" FontSize="20"  VerticalContentAlignment="Center" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="4"/>
+                            <TextBox Text="{Binding Telephone}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1"  Grid.Row="6"/>
+
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
+        <Viewbox Grid.Row="1" HorizontalAlignment="Left">
+            <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Contactpersonen" RenderTransformOrigin="0.839,0.839"/>
+        </Viewbox>
+
+
+        <Viewbox Grid.Row="5" HorizontalAlignment="Right">
+            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding ShowAddJobCommand}">
+                Opdracht
+            </Button>
+        </Viewbox>
+        <Viewbox Grid.Row="5" HorizontalAlignment="Center">
+            <WrapPanel Orientation="Horizontal" Margin="5">
+                <Button Background="White" BorderThickness="0" Command="{Binding ShowCustomerInfoCommand}">
+                    <WrapPanel Orientation="Vertical">
+                        <Label BorderThickness="1" Background="White" BorderBrush="Black"/>
+                        <Label Content="Klantgegevens"/>
+                    </WrapPanel>
+                </Button>
+                <Button Background="White" BorderThickness="0" Command="{Binding ShowContactInfoCommand}">
+                    <WrapPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <Label BorderThickness="1" Background="White" BorderBrush="Black"/>
+                        <Label Content=" Contact Klant "/>
+                    </WrapPanel>
+                </Button>
+                <Button Background="White" BorderThickness="0">
+                    <WrapPanel Orientation="Vertical" Margin="0,0,10,0">
+                        <Label BorderThickness="1" Background="Black" BorderBrush="Black"/>
+                        <Label Content="Contactpersoon"/>
+                    </WrapPanel>
+                </Button>
+            </WrapPanel>
+        </Viewbox>
+    </Grid>
+</Page>

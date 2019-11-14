@@ -8,27 +8,55 @@ namespace FestiSpec.Domain.Repositories
 {
     public class CustomerRepository
     {
-        public List<Klant> GetKlanten()
+        public List<Klant> GetCustomers()
         {
             using(FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.ToList();
+                return context.Klant.Include("Contactpersoon").ToList();
             }
         }
 
-        public List<Klant> GetFilteredKlanten(string FilterCustomer)
+        public void UpdateCustomer(Klant klant)
+        {
+            using(FestiSpecEntities context = new FestiSpecEntities())
+            {
+                context.Entry(context.Klant.Where(c => c.KvK_nummer == klant.KvK_nummer).First()).CurrentValues.SetValues(klant);
+                context.SaveChanges();
+            }
+        }
+
+        public void CreateCustomer(Klant klant)
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).ToList();
+                context.Klant.Add(klant);
+                context.SaveChanges();
+            }
+        }
+
+        public void AddContactPerson(Contactpersoon contactpersoon)
+        {
+            using (FestiSpecEntities context = new FestiSpecEntities())
+            {
+                context.Contactpersoon.Add(contactpersoon);
+                context.SaveChanges();
+            }
+        }
+
+        #region Filters
+        public List<Klant> GetFilteredCustomers(string FilterCustomer)
+        {
+            using (FestiSpecEntities context = new FestiSpecEntities())
+            {
+                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).ToList();
             }
         }
 
         public List<Klant> GetKlantenASC(string FilterCustomer)
         {
-            using(FestiSpecEntities context = new FestiSpecEntities())  
+            using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.OrderBy(e => e.Naam).ToList();
+                return context.Klant.Include("Contactpersoon").OrderBy(e => e.Naam).ToList();
             }
         }
 
@@ -36,7 +64,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.OrderByDescending(e => e.Naam).ToList();
+                return context.Klant.Include("Contactpersoon").OrderByDescending(e => e.Naam).ToList();
             }
         }
 
@@ -44,7 +72,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).OrderBy(e => e.Naam).ToList();
+                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).OrderBy(e => e.Naam).ToList();
             }
         }
 
@@ -52,9 +80,10 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                return context.Klant.Where(e => e.Naam.Contains(FilterCustomer)).OrderByDescending(e => e.Naam).ToList();
+                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).OrderByDescending(e => e.Naam).ToList();
             }
-        }
+        } 
+        #endregion
 
     }
 }

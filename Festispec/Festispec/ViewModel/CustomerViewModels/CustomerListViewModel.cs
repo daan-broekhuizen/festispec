@@ -16,14 +16,13 @@ namespace Festispec.ViewModel
 {
     public class CustomerListViewModel : ViewModelBase
     {
-        private List<CustomerViewModel> customers;
-
+        private List<CustomerViewModel> _customers;
         public List<CustomerViewModel> Customers 
         { 
-            get => customers;
+            get => _customers;
             set
             {
-                customers = value;
+                _customers = value;
                 RaisePropertyChanged("Customers");
             }
         }
@@ -43,19 +42,15 @@ namespace Festispec.ViewModel
         private ComboBoxItem _selectedBox;
         public ComboBoxItem SelectedBox
         {
-            get
-            {
-                return _selectedBox;
-            }
+            get => _selectedBox;
             set
             {
                 _selectedBox = value;
                 SortCustomers();
             }
-
         }
 
-        private CustomerRepository CustomerRepository { get; set; }
+        private CustomerRepository _customerRepository;
         private NavigationService _navigationService;
 
         public ICommand SearchCustomer { get; set; }
@@ -65,9 +60,9 @@ namespace Festispec.ViewModel
         public CustomerListViewModel(NavigationService service)
         {
             _navigationService = service;
-            CustomerRepository = new CustomerRepository();
+            _customerRepository = new CustomerRepository();
             FilterCustomer = "";
-            Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
+            Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
 
             SearchCustomer = new RelayCommand(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
@@ -82,7 +77,7 @@ namespace Festispec.ViewModel
 
         private void ShowAddCustomer()
         {
-            _navigationService.NavigateTo("AddCustomerInfo");
+            _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
         }
 
         public void FilterCustomers()
@@ -92,18 +87,15 @@ namespace Festispec.ViewModel
                 switch (SelectedBox.Content)
                 {
                     case "A - Z":
-                        Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        Customers = _customerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                         break;
                     case "Z - A":
-                        Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                        Customers = _customerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                         break;
                 }
             }
             else
-            {
-                Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
-
-            }
+                Customers = _customerRepository.GetFilteredCustomers(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
         }
 
 
@@ -117,19 +109,15 @@ namespace Festispec.ViewModel
                     switch (SelectedBox.Content)
                     {
                         case "A - Z":
-                            Customers = CustomerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            Customers = _customerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                             break;
                         case "Z - A":
-                            Customers = CustomerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            Customers = _customerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                             break;
                     }
                 }
                 else
-                {
-                    Customers = CustomerRepository.GetFilteredKlanten(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
-
-
-                }
+                    Customers = _customerRepository.GetFilteredCustomers(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
             }
             else
             {
@@ -138,18 +126,15 @@ namespace Festispec.ViewModel
                     switch (SelectedBox.Content)
                     {
                         case "A - Z":
-                            Customers = CustomerRepository.GetKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            Customers = _customerRepository.GetKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                             break;
                         case "Z - A":
-                            Customers = CustomerRepository.GetKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
+                            Customers = _customerRepository.GetKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                             break;
                     }
                 }
                 else
-                {
-                    Customers = CustomerRepository.GetKlanten().Select(c => new CustomerViewModel(c)).ToList();
-
-                }
+                    Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
             }
         }
     }
