@@ -75,11 +75,17 @@
     <Build Include="Tables\Vraag_mogelijk_antwoord.sql" />
     <Build Include="Tables\Inspectieformulier_vragenlijst_combinatie.sql" />
     <Build Include="Tables\Antwoorden.sql" />
+    <Build Include="Tables\Rapport_template.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FestiSpecDB.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FestiSpec.DB.publish.xml" />
+    <None Include="Seeds\Rol_lookup_seed.sql" />
+    <None Include="Seeds\Vraagtype_lookup_seed.sql" />
+    <None Include="Seeds\Status_lookup_seed.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploymentScript.sql" />
   </ItemGroup>
 </Project>

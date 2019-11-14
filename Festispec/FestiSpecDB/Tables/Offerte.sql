@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Offerte]
 (
-	[OfferteID] INT NOT NULL PRIMARY KEY, 
+	[OfferteID] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
     [OpdrachtID] INT NOT NULL, 
     [Totaalbedrag] DECIMAL(10, 2) NULL, 
     [Aanmaakdatum] DATE NOT NULL, 

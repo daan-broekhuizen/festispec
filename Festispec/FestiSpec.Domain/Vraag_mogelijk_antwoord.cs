@@ -16,6 +16,7 @@ namespace FestiSpec.Domain
     {
         public int VraagID { get; set; }
         public int Antwoord_nummer { get; set; }
+        public string Antwoord_text { get; set; }
     
         public virtual Vraag Vraag { get; set; }
     }
