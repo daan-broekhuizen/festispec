@@ -34,10 +34,11 @@ namespace FestiSpec.Domain
         public virtual DbSet<Klant> Klant { get; set; }
         public virtual DbSet<Offerte> Offerte { get; set; }
         public virtual DbSet<Opdracht> Opdracht { get; set; }
+        public virtual DbSet<Rapport_template> Rapport_template { get; set; }
         public virtual DbSet<Rol_lookup> Rol_lookup { get; set; }
         public virtual DbSet<Status_lookup> Status_lookup { get; set; }
-        public virtual DbSet<Vraag> Vraag { get; set; }
         public virtual DbSet<Vraag_mogelijk_antwoord> Vraag_mogelijk_antwoord { get; set; }
         public virtual DbSet<Vraagtype_lookup> Vraagtype_lookup { get; set; }
+        public virtual DbSet<Vraag> Vraag { get; set; }
     }
 }

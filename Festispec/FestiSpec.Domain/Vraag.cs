@@ -24,7 +24,7 @@ namespace FestiSpec.Domain
         public int VraagID { get; set; }
         public string Vraagstelling { get; set; }
         public string Vraagtype { get; set; }
-        public string Bijlage { get; set; }
+        public byte[] Bijlage { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

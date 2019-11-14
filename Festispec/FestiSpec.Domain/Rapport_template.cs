@@ -12,24 +12,18 @@ namespace FestiSpec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Inspectieformulier
+    public partial class Rapport_template
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inspectieformulier()
+        public Rapport_template()
         {
-            this.Inspectieformulier_vragenlijst_combinatie = new HashSet<Inspectieformulier_vragenlijst_combinatie>();
+            this.Opdracht = new HashSet<Opdracht>();
         }
     
-        public int InspectieformulierID { get; set; }
-        public string InspectieFormulierTitel { get; set; }
-        public Nullable<System.DateTime> Datum_inspectie { get; set; }
-        public string Locatie { get; set; }
-        public Nullable<int> OpdrachtID { get; set; }
-        public string Beschrijving { get; set; }
-        public System.DateTime Laatste_weiziging { get; set; }
+        public int TemplateID { get; set; }
+        public string TemplateText { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
-        public virtual Opdracht Opdracht { get; set; }
+        public virtual ICollection<Opdracht> Opdracht { get; set; }
     }
 }
