@@ -18,19 +18,19 @@ namespace Festispec.ViewModel
         private UserRepository _user;
         private Encrypt _encrypt;
 
-        private string _userName;
+        private string _username;
         private string _password;
         private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
         public ICommand LoginCommand { get; set; }
-        public string UserName
+        public string Username
         {
-            get { return this._userName; }
+            get { return this._username; }
             set
             {
                 // Implement with property changed handling for INotifyPropertyChanged
-                if (!string.Equals(this._userName, value))
+                if (!string.Equals(this._username, value))
                 {
-                    this._userName = value;
+                    this._username = value;
                     RaisePropertyChanged("Username"); 
                 }
             }
@@ -58,13 +58,13 @@ namespace Festispec.ViewModel
             LoginCommand = new RelayCommand(Login, CanLogin);
         }
 
-        private bool CanLogin() => UserName.Length > 0 && Password.Length > 0;
+        private bool CanLogin() => Username.Length > 0 && Password.Length > 0;
 
         private void Login()
         {
             Account currentAccount = new Account()
             {
-                Gebruikersnaam = _userName,
+                Gebruikersnaam = _username,
                 Wachtwoord = _encrypt.GetHashString(_password)
             };
 
