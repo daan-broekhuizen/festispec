@@ -40,11 +40,9 @@ namespace Festispec.ViewModel
         {
             _navigationService.NavigateTo("ContactPersons", CustomerVM);
         }
-
         private void ShowContactInfo()
         {
             _navigationService.NavigateTo("ContactInfo", CustomerVM);
-
         }
     }
 }

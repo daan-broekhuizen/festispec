@@ -18,9 +18,6 @@
             <RowDefinition Height="0.07*"/>
             <RowDefinition Height="0.05*"/>
             <RowDefinition Height="0.45*"/>
-
-         
-
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -41,15 +38,15 @@
             </Viewbox>
             <Viewbox HorizontalAlignment="Center" Grid.Row="2">
                 <StackPanel>
-                <Label></Label>
-                <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}">
-                    Klant aanmaken
-                </Button>
-                <Label></Label>
+                    <Label></Label>
+                    <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}">
+                        Klant aanmaken
+                    </Button>
+                    <Label></Label>
                 </StackPanel>
             </Viewbox>
         </Grid>
-        
+
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox  Grid.Row="1" HorizontalAlignment="Center">
             <TextBox Text="{Binding FilterCustomer}" Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
@@ -77,80 +74,42 @@
                 </ComboBox>
             </WrapPanel>
         </Viewbox>
-        
-        <ListBox x:Name="CustomerList" Grid.Row="5" ItemsSource="{Binding FilteredCustomers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
-              <ListBox.ItemTemplate >
+
+        <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
+            <ListBox x:Name="CustomerList" ItemsSource="{Binding FilteredCustomers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=WidthHelperPanel}">
+                <ListBox.ItemTemplate >
                     <DataTemplate >
-                        <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">
+                        <Grid MaxHeight="50" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="LightGray" Margin="5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="1"  Text="Klantnaam:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="3" Text="Kvk-nummer:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="4" Text="{Binding KvK}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                        <Button Command="{Binding ShowCustomerInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
+                            <Viewbox HorizontalAlignment="Left" Grid.Column="0">
+                                <Image Margin="10" Source="/Images/Profile.png"  VerticalAlignment="Center"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="1">
+                                <Label Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                                <Label HorizontalContentAlignment="Left" Content="{Binding Name}" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="3">
+                                <Label  Content="Kvk-nummer:" FontWeight="Bold" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="4" HorizontalAlignment="Left">
+                                <Label HorizontalContentAlignment="Left" Content="{Binding KvK}" VerticalAlignment="Center"/>
+                            </Viewbox>
                         </Grid>
+
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-       
+
+
+        </Border>
+
     </Grid>
-
-
-    <!--   <StackPanel>
-        <Grid>
-
-            <TextBlock Text="Klanten" Margin="81,43,-47,332.8" Foreground="Black" FontSize="20" FontWeight="Bold"/>
-
-            <Button Content="Klant aanmaken" Height="20" Width="120" Margin="81,81,599,332.6"/>
-
-            <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="0,124,0,244.6" StrokeThickness="0"/>
-
-            <TextBox Height="30" Margin="81,144,112,259.6" BorderThickness="0" />
-
-            <Image Width="28" Source="/Images/Search.png" Margin="649,140,123,257.6" HorizontalAlignment="Center"/>
-            <Image Width="143" Source="/Images/festispec_logo.png" Margin="626,25,31,377.6" HorizontalAlignment="Center"/>
-
-            <TextBlock Text="Zoek Resultaten" Margin="81,211,-47,180.6" Foreground="Black" FontSize="15" FontWeight="Bold"/>
-
-            <TextBlock Text="Sorteren op:" Margin="426,211,288,202.6" Foreground="Black" FontSize="15"/>
-
-            <ComboBox Height="20" Width="100" Margin="588,211,112,202.6" Background="Yellow">
-                <ComboBoxItem Content="A - Z"/>
-                <ComboBoxItem Content="Z - A"/>
-            </ComboBox>
-            <ListBox Margin="81,253,112,9.6" ItemsSource="{Binding Customers}" BorderThickness="0" SelectionChanged="ListBox_SelectionChanged_2" Width="595">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Background="LightGray" Width="580" Height="50">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="1"  Text="Klantnaam:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="3" Text="Kvk-nummer:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="4" Text="{Binding Adres}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                            <Button Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-        </Grid> 
-    </StackPanel> -->
 </Page>

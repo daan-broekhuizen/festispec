@@ -31,10 +31,7 @@ namespace Festispec.ViewModel
             ShowAddJobCommand = new RelayCommand(ShowAddJob);
         }
 
-        private void ShowAddJob()
-        {
-            throw new NotImplementedException();
-        }
+        private void ShowAddJob(){}
 
         private void ShowContactPeople()
         {

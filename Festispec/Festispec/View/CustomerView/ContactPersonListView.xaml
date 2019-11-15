@@ -40,7 +40,7 @@
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <Viewbox>
-                        <Grid Background="LightGray" Width="800" Height="200" >
+                        <Grid Background="LightGray" Width="600" Height="200" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition/>

@@ -25,6 +25,7 @@ namespace FestiSpec.Domain
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<Antwoorden> Antwoorden { get; set; }
         public virtual DbSet<Beschikbaarheid_inspecteurs> Beschikbaarheid_inspecteurs { get; set; }
@@ -37,8 +38,8 @@ namespace FestiSpec.Domain
         public virtual DbSet<Rapport_template> Rapport_template { get; set; }
         public virtual DbSet<Rol_lookup> Rol_lookup { get; set; }
         public virtual DbSet<Status_lookup> Status_lookup { get; set; }
+        public virtual DbSet<Vraag> Vraag { get; set; }
         public virtual DbSet<Vraag_mogelijk_antwoord> Vraag_mogelijk_antwoord { get; set; }
         public virtual DbSet<Vraagtype_lookup> Vraagtype_lookup { get; set; }
-        public virtual DbSet<Vraag> Vraag { get; set; }
     }
 }
