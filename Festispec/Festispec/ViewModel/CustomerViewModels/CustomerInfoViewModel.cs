@@ -29,12 +29,11 @@ namespace Festispec.ViewModel
         private CustomerValidator _customerValidator;
         private CustomerRepository _customerRepository;
 
-        public CustomerInfoViewModel(NavigationService service)
+        public CustomerInfoViewModel(NavigationService service, CustomerRepository repo)
         {
-            //TODO: singletons (IoC)?
-            _customerRepository = new CustomerRepository();
-            _customerValidator = new CustomerValidator();
+            _customerRepository = repo;
             _navigationService = service;
+            _customerValidator = new CustomerValidator();
 
             //get customer from navigationservice
             if (service.Parameter is CustomerViewModel)

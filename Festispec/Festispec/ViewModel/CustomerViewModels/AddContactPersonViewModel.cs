@@ -70,11 +70,9 @@ namespace Festispec.ViewModel
         private NavigationService _navigationService;
         private CustomerRepository _customerRepo;
 
-        public AddContactPersonViewModel(NavigationService service)
+        public AddContactPersonViewModel(NavigationService service, CustomerRepository repo)
         {
-            //Singleton needed
-            _customerRepo = new CustomerRepository();
-
+            _customerRepo = repo;
             _navigationService = service;
 
             //get customer from navigationservice

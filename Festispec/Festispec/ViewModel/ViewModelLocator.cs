@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using Festispec.Service;
 using Festispec.ViewModel;
+using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
@@ -36,10 +37,19 @@ namespace Festispec.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SetupNavigation();
+            SetupRepositories();
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
         }
-        
+
+        //Register singleton repositories here
+        private static void SetupRepositories()
+        {
+            SimpleIoc.Default.Register<CustomerRepository>();
+        }
+
+        //Configure view mappings here and register navigation service
         private static void SetupNavigation()
         {
             NavigationService navigationService = new NavigationService();
@@ -59,29 +69,24 @@ namespace Festispec.ViewModel
 
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        
 
-        public DashboardViewModel Dashboard
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<DashboardViewModel>();
-            }
-        }
+        // Add getters for repos
+        public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
+
+        // Add viewmodels used for datacontext
+        #region Singleton VM's
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>(); 
+        #endregion
 
         #region CustomerVM's
-        public CustomerListViewModel CustomerList => new CustomerListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>()); 
+        public CustomerListViewModel CustomerList => new CustomerListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo); 
         #endregion
 
 

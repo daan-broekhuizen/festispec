@@ -70,10 +70,10 @@ namespace Festispec.ViewModel
 
         public ICommand SearchCustomer { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
-        public CustomerListViewModel(NavigationService service)
+        public CustomerListViewModel(NavigationService service, CustomerRepository repo)
         {
             _navigationService = service;
-            _customerRepository = new CustomerRepository();
+            _customerRepository = repo;
 
             Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
             FilteredCustomers = Customers;

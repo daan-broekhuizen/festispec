@@ -37,9 +37,11 @@ namespace Festispec.ViewModel
         }
 
         private NavigationService _navigationService;
+        private CustomerRepository _customerRepository;
 
-        public ContactPersonListViewModel(NavigationService service)
+        public ContactPersonListViewModel(NavigationService service, CustomerRepository repo)
         {
+            _customerRepository = repo;
             _navigationService = service;
             //get customer from navigationservice
             if (service.Parameter is CustomerViewModel)
@@ -70,7 +72,6 @@ namespace Festispec.ViewModel
                 Messenger.Default.Send(result.ToString(), this.GetHashCode());
             else
             {
-                CustomerRepository customerRepository = new CustomerRepository();
                 Contactpersoon newEntity = new Contactpersoon()
                 {
                     Voornaam = SelectedContact.Name,
@@ -83,11 +84,11 @@ namespace Festispec.ViewModel
                     Laatste_weiziging = DateTime.Now
                 };
 
-                Klant klant = customerRepository.GetCustomers().Where(c => c.KvK_nummer == CustomerVM.KvK).FirstOrDefault();
+                Klant klant = _customerRepository.GetCustomers().Where(c => c.KvK_nummer == CustomerVM.KvK).FirstOrDefault();
                 if (klant != null && klant.Contactpersoon.Where(c => c.Voornaam == newEntity.Voornaam).FirstOrDefault() == null)
-                    customerRepository.CreateContactPerson(newEntity);
+                    _customerRepository.CreateContactPerson(newEntity);
                 if (klant != null && klant.Contactpersoon.Where(c => c.Voornaam == newEntity.Voornaam).FirstOrDefault() != null)
-                    customerRepository.UpdateContactPerson(newEntity);
+                    _customerRepository.UpdateContactPerson(newEntity);
                 Messenger.Default.Send("Contactpersoon opgeslagen", this.GetHashCode());
 
             }
