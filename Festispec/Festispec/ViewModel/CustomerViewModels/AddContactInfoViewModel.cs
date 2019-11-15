@@ -16,6 +16,7 @@ namespace Festispec.ViewModel
     {
         public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand NextPageCommand { get; set; }
+
         private NavigationService _navigationService;
         private CustomerValidator _customerValidator;
 

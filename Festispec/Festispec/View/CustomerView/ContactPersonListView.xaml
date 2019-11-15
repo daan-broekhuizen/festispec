@@ -35,12 +35,11 @@
             </Viewbox>
         </Grid>
 
-
-        <ListBox x:Name="CustomerList" Grid.Row="2" ItemsSource="{Binding CustomerVM.Contacts}"  BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <Viewbox>
-                        <Grid Background="LightGray" Width="600" Height="200" Margin="10">
+        <Border x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
+            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+                <ListBox.ItemTemplate >
+                    <DataTemplate >
+                        <Grid MaxHeight="150" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="LightGray" Margin="5,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition/>
@@ -49,14 +48,14 @@
                                 <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.5*"/>
-                                <RowDefinition Height="0.5*"/>
-                                <RowDefinition/>
+                                <RowDefinition Height="20"/>
                                 <RowDefinition Height="0.5*"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="0.5*"/>
                                 <RowDefinition/>
                                 <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                 <TextBlock Height="15" Text="Naam"/>
@@ -79,10 +78,13 @@
                             <TextBox Text="{Binding Telephone}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1"  Grid.Row="6"/>
 
                         </Grid>
-                    </Viewbox>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+        </Border>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox Grid.Row="1" HorizontalAlignment="Left">
