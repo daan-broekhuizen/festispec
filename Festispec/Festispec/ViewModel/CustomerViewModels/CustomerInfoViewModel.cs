@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -41,28 +42,33 @@ namespace Festispec.ViewModel
             ShowContactPeopleCommand = new RelayCommand(ShowContactPeople);
             ShowContactInfoCommand = new RelayCommand(ShowContactInfo);
             ShowAddJobCommand = new RelayCommand(ShowAddJob);
-            SaveCustomerCommand = new RelayCommand(SaveCustomer, CanSaveCustomer);
-        }
-
-        private bool CanSaveCustomer() 
-        {
-            List<ValidationFailure> errors = _customerValidator.Validate(CustomerVM).Errors.ToList();
-            return errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0;
+            SaveCustomerCommand = new RelayCommand(SaveCustomer);
         }
 
         private void SaveCustomer()
         {
-            _customerRepository.UpdateCustomer(new Klant()
+            ValidationResult result = _customerValidator.Validate(CustomerVM);
+            if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
-                Naam = CustomerVM.Name,
-                Email = CustomerVM.Email,
-                Huisnummer = CustomerVM.HouseNumber,
-                KvK_nummer = CustomerVM.KvK,
-                Postcode = CustomerVM.PostalCode,
-                Website = CustomerVM.Website,
-                Laatste_weiziging = DateTime.Now,
-                Telefoonnummer = CustomerVM.Telephone
-            });
+                _customerRepository.UpdateCustomer(new Klant()
+                {
+                    Naam = CustomerVM.Name,
+                    Email = CustomerVM.Email,
+                    Huisnummer = CustomerVM.HouseNumber,
+                    KvK_nummer = CustomerVM.KvK,
+                    Postcode = CustomerVM.PostalCode,
+                    Website = CustomerVM.Website,
+                    Laatste_weiziging = DateTime.Now,
+                    Telefoonnummer = CustomerVM.Telephone
+                });
+            }
+            else
+            {
+                string message = "";
+                foreach (ValidationFailure failure in result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))))
+                    message += (failure.ErrorMessage + "\n");
+                MessageBox.Show(message);
+            }
         }
 
         private void ShowAddJob() { }
