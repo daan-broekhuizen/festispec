@@ -49,11 +49,10 @@ namespace Festispec.ViewModel
             get 
             {
                 if (_klant.Huisnummer == null) return "";
-                return Regex.Replace(_klant.Huisnummer, @"[^A-Z]+", String.Empty);
+                return Regex.Replace(_klant.Huisnummer, @"[^a-zA-Z]+", String.Empty);
             } 
             set
             {
-
                 _klant.Huisnummer = HouseNumber + value;
                 RaisePropertyChanged("Addition");
             }
@@ -63,22 +62,16 @@ namespace Festispec.ViewModel
             get => _klant.KvK_nummer;
             set
             {
-                _klant.KvK_nummer = Convert.ToInt32(value.PadLeft(8, '0')); ;
+                _klant.KvK_nummer = value;
                 RaisePropertyChanged("KvK");
             }
         }       
         public string Telephone
         {
-            get
-            {
-                if (_klant.Telefoonnummer != 0)
-                    return "0" + Convert.ToString(_klant.Huisnummer);
-                else
-                    return "";
-            }
+            get => _klant.Telefoonnummer;
             set
             {
-                _klant.KvK_nummer = Convert.ToInt32(value);
+                _klant.Telefoonnummer = value;
                 RaisePropertyChanged("Telephone");
             }
         }

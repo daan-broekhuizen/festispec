@@ -90,18 +90,12 @@
     <Compile Include="Validators\CustomerValidator.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
-    <Compile Include="C:\Users\bramc\OneDrive\Desktop\AddContactPersonViewModel.cs">
-      <Link>ViewModel\CustomerViewModels\AddContactPersonViewModel.cs</Link>
-    </Compile>
-    <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
-    <Compile Include="C:\Users\bramc\OneDrive\Desktop\ContactPersonViewModel.cs">
-      <Link>ViewModel\CustomerViewModels\ContactPersonViewModel.cs</Link>
-    </Compile>
+    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
-    <Compile Include="C:\Users\bramc\OneDrive\Desktop\CustomerViewModel.cs">
-      <Link>ViewModel\CustomerViewModels\CustomerViewModel.cs</Link>
-    </Compile>
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">

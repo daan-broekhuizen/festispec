@@ -31,15 +31,11 @@ namespace Festispec.ViewModel
         }
         public string Telephone
         {
-            get
-            {
-                if (_contactPerson.Telefoon == 0) return "";
-                 return Convert.ToString(_contactPerson.Telefoon);
-            }
+            get => _contactPerson.Telefoon;
             set
             {
-                _contactPerson.Telefoon = Convert.ToInt32(value);
-                RaisePropertyChanged("Email");
+                _contactPerson.Telefoon = value;
+                RaisePropertyChanged("Telephone");
             }
         }
         public string Note
@@ -47,7 +43,7 @@ namespace Festispec.ViewModel
             get => _contactPerson.Notities;
             set
             {
-                _contactPerson.Email = value;
+                _contactPerson.Notities = value;
                 RaisePropertyChanged("Note");
             }
         }
