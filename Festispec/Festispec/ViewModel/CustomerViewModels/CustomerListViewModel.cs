@@ -74,9 +74,10 @@ namespace Festispec.ViewModel
         {
             _navigationService = service;
             _customerRepository = new CustomerRepository();
-            FilterCustomer = "";
+
             Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
             FilteredCustomers = Customers;
+            FilterCustomer = "";
 
             SearchCustomer = new RelayCommand(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
@@ -88,10 +89,7 @@ namespace Festispec.ViewModel
                 _navigationService.NavigateTo("CustomerInfo", SelectedCustomer);
         }
 
-        private void ShowAddCustomer()
-        {
-            _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
-        }
+        private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
 
         public void FilterCustomers()
         {

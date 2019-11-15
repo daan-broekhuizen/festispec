@@ -27,6 +27,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
+                <StackPanel>
+                    <Label></Label>
+                    <Button Background="#FFF4F4F5" Command="{Binding CreateContactPersonCommand}">
+                        Nieuw contactpersoon
+                    </Button>
+                    <Label></Label>
+                </StackPanel>
+            </Viewbox>
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock  Foreground="Black" FontWeight="Bold" Text="Klant" />
             </Viewbox>
@@ -36,7 +45,7 @@
         </Grid>
 
         <Border x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="CustomerList" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="150" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="LightGray" Margin="5,5">
@@ -93,8 +102,8 @@
 
 
         <Viewbox Grid.Row="5" HorizontalAlignment="Right">
-            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding ShowAddJobCommand}">
-                Opdracht
+            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding SaveContactPersonCommand}">
+                Contactpersoon opslaan
             </Button>
         </Viewbox>
         <Viewbox Grid.Row="5" HorizontalAlignment="Center">

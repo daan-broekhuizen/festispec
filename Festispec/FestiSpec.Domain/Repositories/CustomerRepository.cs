@@ -35,6 +35,16 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
+        public void UpdateContactPerson(Contactpersoon contact)
+        {
+            using (FestiSpecEntities context = new FestiSpecEntities())
+            {
+                Klant toUpdate = context.Klant.Where(c => c.KvK_nummer == contact.KlantID).FirstOrDefault();
+                context.Entry(toUpdate).CurrentValues.SetValues(contact);
+                context.SaveChanges();
+            }
+        }
+
         public void CreateContactPerson(Contactpersoon contactpersoon)
         {
             using (FestiSpecEntities context = new FestiSpecEntities())

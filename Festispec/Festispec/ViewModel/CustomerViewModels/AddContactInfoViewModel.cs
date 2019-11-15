@@ -20,6 +20,7 @@ namespace Festispec.ViewModel
         private NavigationService _navigationService;
         private CustomerValidator _customerValidator;
 
+        //Properties for errors
         #region ErrorMessages
         private string _telephoneError;
         public string TelephoneError
@@ -49,6 +50,7 @@ namespace Festispec.ViewModel
             _customerValidator = new CustomerValidator();
             _navigationService = service;
 
+            //Get customer from navigation service
             if (service.Parameter is CustomerViewModel)
                 CustomerViewModel = service.Parameter as CustomerViewModel;
 
@@ -57,6 +59,7 @@ namespace Festispec.ViewModel
 
         private void NextPage()
         {
+            //Validate input and display relevant errors
             List<ValidationFailure> errors = _customerValidator.Validate(CustomerViewModel).Errors.ToList();
             ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
             ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();

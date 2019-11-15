@@ -106,8 +106,8 @@
     <Compile Include="View\CustomerView\AddCustomerInfoView.xaml.cs">
       <DependentUpon>AddCustomerInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CustomersWindow.cs">
-      <DependentUpon>CustomersWindow.xaml</DependentUpon>
+    <Compile Include="View\CustomerView\CustomersWindow.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="View\CustomerView\ContactInfoView.xaml.cs">
@@ -180,7 +180,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CustomersWindow.xaml" />
+    <Page Include="View\CustomerView\CustomerListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\CustomerView\ContactInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

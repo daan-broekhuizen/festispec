@@ -15,7 +15,7 @@ namespace Festispec.Validators
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Voer een naam in.");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Voer een email adres in");
-            RuleFor(x => x.Telephone).Must(IsValidTelephone).WithMessage("Voer een geldig telefoon nummer in (0612345678");
+            RuleFor(x => x.Telephone).Must(IsValidTelephone).WithMessage("Voer een geldig telefoonnummer in (0612345678)");
         }
 
         private bool IsValidTelephone(string arg)

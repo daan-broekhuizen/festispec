@@ -11,7 +11,6 @@ namespace Festispec.ViewModel
 {
     public class DashboardViewModel
     {
-        private NavigationService _navigationService;
         public ICommand ShowCustomersCommand { get; set; }
         public ICommand ShowJobsCommand { get; set; }
         public ICommand ShowQuotationsCommand { get; set; }
@@ -22,23 +21,16 @@ namespace Festispec.ViewModel
         public ICommand ShowScheduleCommand { get; set; }
         public ICommand ShowMessagesCommand { get; set; }
 
+        private NavigationService _navigationService;
 
         public DashboardViewModel(NavigationService service)
         {
             _navigationService = service;
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
             ShowCustomersCommand = new RelayCommand(ShowCustomers);
-
         }
 
-        private void ShowAddCustomer()
-        {
-            _navigationService.NavigateTo("AddCustomerInfo");
-        }
-
-        private void ShowCustomers()
-        {
-            _navigationService.NavigateTo("Customers");
-        }
+        private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo");
+        private void ShowCustomers() => _navigationService.NavigateTo("Customers");
     }
 }

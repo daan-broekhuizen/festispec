@@ -20,6 +20,7 @@ namespace Festispec.ViewModel
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
 
+        //ContactPersonVM and ErrorProperties
         #region BindingProperties
         private ContactPersonViewModel _contactPersonViewModel;
         public ContactPersonViewModel ContactPersonViewModel
@@ -68,14 +69,10 @@ namespace Festispec.ViewModel
 
         private NavigationService _navigationService;
         private CustomerRepository _customerRepo;
-        private CustomerValidator _customerValidator;
-        private ContactPersonValidator _contactValidator;
 
         public AddContactPersonViewModel(NavigationService service)
         {
             //Singleton needed
-            _customerValidator = new CustomerValidator();
-            _contactValidator = new ContactPersonValidator();
             _customerRepo = new CustomerRepository();
 
             _navigationService = service;
@@ -109,7 +106,7 @@ namespace Festispec.ViewModel
             _customerRepo.CreateCustomer(klant);
 
             //Create Contacts
-            CustomerViewModel.Contacts.ForEach(c =>
+            CustomerViewModel.Contacts.ToList().ForEach(c =>
             _customerRepo.CreateContactPerson(new Contactpersoon()
             {
                 Voornaam = c.Name,
@@ -129,13 +126,13 @@ namespace Festispec.ViewModel
         private bool CanSaveCustomer()
         {
             //Validate customer doublecheck? (errors are handled in relevant viewmodels)
-            return _customerValidator.Validate(CustomerViewModel).IsValid; 
+            return  new CustomerValidator().Validate(CustomerViewModel).IsValid; 
         }
 
         private void SaveContactPerson()
         {
             //Validate & get relevant errors
-            List<ValidationFailure> errors = _contactValidator.Validate(ContactPersonViewModel).Errors.ToList();
+            List<ValidationFailure> errors = new ContactPersonValidator().Validate(ContactPersonViewModel).Errors.ToList();
             ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
             ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
             ValidationFailure nameError = errors.Where(e => e.PropertyName.Equals("Name")).FirstOrDefault();
@@ -143,7 +140,7 @@ namespace Festispec.ViewModel
 
             if (errors.Count == 0)
             {
-                //Add contact to customer and create new contact
+                //Add contact to customervm and create new contact
                 CustomerViewModel.Contacts.Add(ContactPersonViewModel);
                 ContactPersonViewModel = new ContactPersonViewModel();
             }

@@ -5,6 +5,7 @@ using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,6 @@ namespace Festispec.ViewModel
         public ICommand ShowContactInfoCommand { get; set; }
         public ICommand ShowContactPeopleCommand { get; set; }
         public ICommand SaveCustomerCommand { get; set; }
-
         public ICommand ShowAddJobCommand { get; set; }
         public CustomerViewModel CustomerVM { get; set; }
 
@@ -31,9 +31,11 @@ namespace Festispec.ViewModel
 
         public CustomerInfoViewModel(NavigationService service)
         {
+            //TODO: singletons (IoC)?
             _customerRepository = new CustomerRepository();
             _customerValidator = new CustomerValidator();
             _navigationService = service;
+
             //get customer from navigationservice
             if (service.Parameter is CustomerViewModel)
                 CustomerVM = service.Parameter as CustomerViewModel;
@@ -47,9 +49,11 @@ namespace Festispec.ViewModel
 
         private void SaveCustomer()
         {
+            //Get validation errors, exclude kvk error
             ValidationResult result = _customerValidator.Validate(CustomerVM);
             if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
+                //if validated update customer
                 _customerRepository.UpdateCustomer(new Klant()
                 {
                     Naam = CustomerVM.Name,
@@ -61,29 +65,24 @@ namespace Festispec.ViewModel
                     Laatste_weiziging = DateTime.Now,
                     Telefoonnummer = CustomerVM.Telephone
                 });
+
             }
             else
             {
+                //Get error messages as string
                 string message = "";
-                foreach (ValidationFailure failure in result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))))
+                foreach(ValidationFailure failure in result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))))
                     message += (failure.ErrorMessage + "\n");
-                MessageBox.Show(message);
+                //Use messenger to send error message to view
+                //(Hashcode to match view and viewmodel - see code behind)
+                Messenger.Default.Send(message, this.GetHashCode());
             }
         }
 
         private void ShowAddJob() { }
 
-        private void ShowContactPeople()
-        {
-            _navigationService.NavigateTo("ContactPersons", CustomerVM);
-        }
-        private void ShowCustomerInfo()
-        {
-            _navigationService.NavigateTo("CustomerInfo", CustomerVM);
-        }
-        private void ShowContactInfo()
-        {
-            _navigationService.NavigateTo("ContactInfo", CustomerVM);
-        }
+        private void ShowContactPeople() => _navigationService.NavigateTo("ContactPersons", CustomerVM);
+        private void ShowCustomerInfo() => _navigationService.NavigateTo("CustomerInfo", CustomerVM);
+        private void ShowContactInfo() => _navigationService.NavigateTo("ContactInfo", CustomerVM);
     }
 }

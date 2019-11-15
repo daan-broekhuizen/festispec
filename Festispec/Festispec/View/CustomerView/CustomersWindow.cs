@@ -20,9 +20,9 @@ namespace Festispec
     /// Interaction logic for Page1.xaml
     /// </summary>
 
-    public partial class CustomersWindow : Page
+    public partial class CustomerListView : Page
     {
-        public CustomersWindow()
+        public CustomerListView()
         {
             InitializeComponent();
         }
@@ -32,11 +32,5 @@ namespace Festispec
 
         }
 
-        /*        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-                { 
-                    CustomerListViewModel customerListViewModel = new CustomerListViewModel();
-                    ComboBoxItem cbi = (ComboBoxItem)(sender as ComboBox).SelectedItem;
-                    customerListViewModel.SortCustomers(cbi.Content.ToString());
-                }*/
     }
 }

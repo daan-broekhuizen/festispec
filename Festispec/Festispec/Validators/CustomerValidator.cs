@@ -24,8 +24,8 @@ namespace Festispec.Validators
             RuleFor(x => x.HouseNumber).NotEmpty().WithMessage("Voer een huisnummer in.");
             RuleFor(x => x.PostalCode).Must(IsValidPostalCode).WithMessage("Voer een geldige postcode in (1234AB)");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Voer een email adres in");
-            RuleFor(x => x.Telephone).Length(10).WithMessage("Voer een geldig telefoon nummer in (0612345678");
-            RuleFor(x => x.Telephone).Must(IsNumericalSequence).WithMessage("Voer een geldig telefoon nummer in (0612345678");
+            RuleFor(x => x.Telephone).Length(10).WithMessage("Voer een geldig telefoonnummer in (0612345678)");
+            RuleFor(x => x.Telephone).Must(IsNumericalSequence).WithMessage("Voer een geldigtelefoon nummer in (0612345678)");
             RuleFor(x => x.HouseNumber).NotEmpty().WithMessage("Voer een huisnummer in");
         }
 

@@ -68,17 +68,27 @@
             <Viewbox  Grid.Row="4" HorizontalAlignment="Left">
                 <TextBlock Height="15" VerticalAlignment="Bottom" Text="Telefoon" />
             </Viewbox>
-            <Viewbox  Grid.Row="6" HorizontalAlignment="Left"/>
-            <DockPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="4">
-                <TextBox Text="{Binding ContactPersonViewModel.Note}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Top" Margin="0,5,0,0"  Tag="0123456789..."/>
-
-            </DockPanel>
+            <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" x:Name="Container">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBox  MaxWidth="{Binding Path=ActualWidth, ElementName=Container}" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding ContactPersonViewModel.Note}" FontSize="20" Margin="0,5,0,0" />
+                </ScrollViewer>
+            </Grid>
+            
+            
+            
             <TextBox Text="{Binding ContactPersonViewModel.Name}"  Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
             <TextBox Text="{Binding ContactPersonViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20"  VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
             <TextBox Text="{Binding ContactPersonViewModel.Telephone}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="123456789..."  Grid.Row="5"/>
-            <Label Content="{Binding NameError}" Foreground="Red" Grid.Column="1" Grid.Row="1" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-            <Label Content="{Binding EmailError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" />
-            <Label Content="{Binding TelephoneError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" />
+            <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0">
+                <Label Content="{Binding NameError}" Foreground="Red"  FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="20,0">
+                <Label Content="{Binding EmailError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="20,0">
+                <Label Content="{Binding TelephoneError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
+            </Viewbox>
+            
             <Viewbox Grid.Row="8" Grid.Column="1">
                 <Button  Background="White" BorderThickness="0" Margin="0, 5, 0, 10" Padding="20, 0"  Command="{Binding SaveContactPersonCommand}">
                     <WrapPanel>
