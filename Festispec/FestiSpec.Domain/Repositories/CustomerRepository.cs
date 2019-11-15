@@ -20,7 +20,8 @@ namespace FestiSpec.Domain.Repositories
         {
             using(FestiSpecEntities context = new FestiSpecEntities())
             {
-                context.Entry(context.Klant.Where(c => c.KvK_nummer == klant.KvK_nummer).First()).CurrentValues.SetValues(klant);
+                Klant toUpdate = context.Klant.Where(c => c.KvK_nummer == klant.KvK_nummer).FirstOrDefault();
+                context.Entry(toUpdate).CurrentValues.SetValues(klant);
                 context.SaveChanges();
             }
         }

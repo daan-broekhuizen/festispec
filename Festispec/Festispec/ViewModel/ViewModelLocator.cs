@@ -77,10 +77,9 @@ namespace Festispec.ViewModel
 
         #region CustomerVM's
         public CustomerListViewModel CustomerList => new CustomerListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public AddOrUpdateContactInfoViewModel AddContactInfo => new AddOrUpdateContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public AddOrUpdateCustomerInfoViewModel AddCustomerInfo => new AddOrUpdateCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public ContactInfoViewModel ContactInfo => new ContactInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>()); 
         #endregion

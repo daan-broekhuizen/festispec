@@ -29,6 +29,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
+                <StackPanel>
+                    <Label></Label>
+                    <Button Background="#FFF4F4F5" Command="{Binding ShowAddJobCommand}">
+                        Nieuwe opdracht
+                    </Button>
+                    <Label></Label>
+                </StackPanel>
+            </Viewbox>
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Klant"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
@@ -63,7 +72,7 @@
                 <TextBlock  VerticalAlignment="Bottom" Text="Vestigingsnummer"/>
             </Viewbox>
             <TextBox Text="{Binding CustomerVM.Name}" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center"   VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
-            <TextBox Text="{Binding CustomerVM.KvK}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"   Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding CustomerVM.KvK}" IsReadOnly="True" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"   Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
             <TextBox Text="{Binding CustomerVM.BranchNumber}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"  Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
         </Grid>
 
@@ -109,8 +118,8 @@
 
         </Grid>
         <Viewbox Grid.Row="5" HorizontalAlignment="Right">
-            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding ShowAddJobCommand}">
-                Opdracht
+            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding SaveCustomerCommand}">
+                Wijzigingen opslaan
             </Button>
         </Viewbox>
         <Viewbox Grid.Row="5" HorizontalAlignment="Center">

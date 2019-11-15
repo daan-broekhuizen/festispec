@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ContactInfoView"
-      DataContext="{Binding ContactInfo, Source={StaticResource Locator}}">
+      DataContext="{Binding CustomerInfo, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -27,6 +27,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
+                <StackPanel>
+                    <Label></Label>
+                    <Button Background="#FFF4F4F5" Command="{Binding ShowAddJobCommand}">
+                        Nieuwe opdracht
+                    </Button>
+                    <Label></Label>
+                </StackPanel>
+            </Viewbox>
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Klant"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
@@ -34,6 +43,8 @@
                 <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
         </Grid>
+        
+        
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox Grid.Row="1" HorizontalAlignment="Left">
@@ -70,8 +81,8 @@
 
 
         <Viewbox Grid.Row="5" HorizontalAlignment="Right">
-            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding ShowAddJobCommand}">
-                Opdracht
+            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding SaveCustomerCommand}">
+                Wijzigingen opslaan
             </Button>
         </Viewbox>
         <Viewbox Grid.Row="5" HorizontalAlignment="Center">

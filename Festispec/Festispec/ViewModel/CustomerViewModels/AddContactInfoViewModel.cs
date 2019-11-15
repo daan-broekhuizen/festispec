@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddOrUpdateContactInfoViewModel : ViewModelBase
+    public class AddContactInfoViewModel : ViewModelBase
     {
         public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand NextPageCommand { get; set; }
@@ -44,7 +44,7 @@ namespace Festispec.ViewModel
         } 
         #endregion
 
-        public AddOrUpdateContactInfoViewModel(NavigationService service)
+        public AddContactInfoViewModel(NavigationService service)
         {
             _customerValidator = new CustomerValidator();
             _navigationService = service;

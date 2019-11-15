@@ -87,8 +87,8 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Viewbox HorizontalAlignment="Left" Grid.Column="0">
-                                <Image Margin="10" Source="/Images/Profile.png"  VerticalAlignment="Center"/>
+                            <Viewbox  Grid.Column="0">
+                                <Image Margin="10" Source="/Images/Profile.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="1">
                                 <Label Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>

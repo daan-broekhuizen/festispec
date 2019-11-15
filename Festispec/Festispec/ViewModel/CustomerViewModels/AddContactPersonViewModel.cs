@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddOrUpdateContactPersonViewModel : ViewModelBase
+    public class AddContactPersonViewModel : ViewModelBase
     {
         public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand SaveCustomerCommand { get; set; }
@@ -71,7 +71,7 @@ namespace Festispec.ViewModel
         private CustomerValidator _customerValidator;
         private ContactPersonValidator _contactValidator;
 
-        public AddOrUpdateContactPersonViewModel(NavigationService service)
+        public AddContactPersonViewModel(NavigationService service)
         {
             //Singleton needed
             _customerValidator = new CustomerValidator();

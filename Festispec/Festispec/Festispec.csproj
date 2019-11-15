@@ -88,11 +88,10 @@
     </ApplicationDefinition>
     <Compile Include="Validators\ContactPersonValidator.cs" />
     <Compile Include="Validators\CustomerValidator.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\ContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateContactInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateContactPersonViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\AddOrUpdateCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
