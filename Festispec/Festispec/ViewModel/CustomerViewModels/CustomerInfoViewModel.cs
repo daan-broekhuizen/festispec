@@ -66,6 +66,8 @@ namespace Festispec.ViewModel
                     Telefoonnummer = CustomerVM.Telephone
                 });
 
+                Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
+
             }
             else
             {

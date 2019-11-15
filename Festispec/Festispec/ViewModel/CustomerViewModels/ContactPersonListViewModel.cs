@@ -22,8 +22,8 @@ namespace Festispec.ViewModel
         public ICommand ShowContactInfoCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
         public ICommand CreateContactPersonCommand { get; set; }
-
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
+        public CustomerViewModel CustomerVM { get; set; }
 
         private ContactPersonViewModel _selectedContact;
         public ContactPersonViewModel SelectedContact
@@ -35,7 +35,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("SelectedContact");
             }
         }
-        public CustomerViewModel CustomerVM { get; set; }
 
         private NavigationService _navigationService;
 
@@ -89,6 +88,8 @@ namespace Festispec.ViewModel
                     customerRepository.CreateContactPerson(newEntity);
                 if (klant != null && klant.Contactpersoon.Where(c => c.Voornaam == newEntity.Voornaam).FirstOrDefault() != null)
                     customerRepository.UpdateContactPerson(newEntity);
+                Messenger.Default.Send("Contactpersoon opgeslagen", this.GetHashCode());
+
             }
         }
 

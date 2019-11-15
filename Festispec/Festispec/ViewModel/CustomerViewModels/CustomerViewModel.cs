@@ -1,20 +1,17 @@
 ﻿using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Festispec.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
         private Klant _klant;
-        public string Name 
-        { 
+        public string Name
+        {
             get => _klant.Naam;
             set
             {
@@ -46,11 +43,11 @@ namespace Festispec.ViewModel
         }
         public string Addition
         {
-            get 
+            get
             {
                 if (_klant.Huisnummer == null) return "";
                 return Regex.Replace(_klant.Huisnummer, @"[^a-zA-Z]+", String.Empty);
-            } 
+            }
             set
             {
                 _klant.Huisnummer = HouseNumber + value;
@@ -65,7 +62,7 @@ namespace Festispec.ViewModel
                 _klant.KvK_nummer = value;
                 RaisePropertyChanged("KvK");
             }
-        }       
+        }
         public string Telephone
         {
             get => _klant.Telefoonnummer;
