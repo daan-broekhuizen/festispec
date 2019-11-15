@@ -16,9 +16,10 @@ namespace Festispec.ViewModel
 {
     public class CustomerListViewModel : ViewModelBase
     {
+        #region BindingProperties
         private List<CustomerViewModel> _customers;
-        public List<CustomerViewModel> Customers 
-        { 
+        public List<CustomerViewModel> Customers
+        {
             get => _customers;
             set
             {
@@ -45,6 +46,7 @@ namespace Festispec.ViewModel
             {
                 _selectedCustomer = value;
                 RaisePropertyChanged("SelectedCustomer");
+                ShowCustomerInfo();
             }
         }
         private CustomerViewModel _selectedCustomer;
@@ -60,15 +62,14 @@ namespace Festispec.ViewModel
                 _selectedBox = value;
                 SortCustomers();
             }
-        }
+        } 
+        #endregion
 
         private CustomerRepository _customerRepository;
         private NavigationService _navigationService;
 
         public ICommand SearchCustomer { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
-        public ICommand ShowCustomerInfoCommand { get; set; }
-
         public CustomerListViewModel(NavigationService service)
         {
             _navigationService = service;
@@ -79,7 +80,6 @@ namespace Festispec.ViewModel
 
             SearchCustomer = new RelayCommand(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
-            ShowCustomerInfoCommand = new RelayCommand(ShowCustomerInfo);
         }
 
         private void ShowCustomerInfo()
@@ -95,15 +95,13 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            if (SelectedBox != null)
+            if (SelectedBox == null) 
+                FilteredCustomers = GetFilteredKlanten();
+            else
             {
                 switch (SelectedBox.Content)
                 {
                     case "A - Z":
-                        Customers = _customerRepository.GetFilteredKlantenASC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
-                        break;
-                    case "Z - A":
-                        Customers = _customerRepository.GetFilteredKlantenDESC(FilterCustomer).Select(c => new CustomerViewModel(c)).ToList();
                         FilteredCustomers = GetFilteredKlantenASC();
                         break;
                     case "Z - A":
@@ -111,19 +109,15 @@ namespace Festispec.ViewModel
                         break;
                 }
             }
-            else
-            {
-                FilteredCustomers = GetFilteredKlanten();
-            }
         }
-
-
 
         public void SortCustomers()
         {
             if (FilterCustomer != null)
             {
-                if (SelectedBox != null)
+                if (SelectedBox == null)
+                    FilteredCustomers = GetFilteredKlanten();
+                else
                 {
                     switch (SelectedBox.Content)
                     {
@@ -135,14 +129,12 @@ namespace Festispec.ViewModel
                             break;
                     }
                 }
-                else
-                {
-                    FilteredCustomers = GetFilteredKlanten();
-                }
             }
             else
             {
-                if (SelectedBox != null)
+                if (SelectedBox == null)
+                    FilteredCustomers = Customers;
+                else
                 {
                     switch (SelectedBox.Content)
                     {
@@ -153,10 +145,6 @@ namespace Festispec.ViewModel
                             FilteredCustomers = GetKlantenDESC();
                             break;
                     }
-                }
-                else
-                {
-                    FilteredCustomers = Customers;
                 }
             }
         }

@@ -51,7 +51,7 @@ namespace Festispec.ViewModel
             {
                 Naam = CustomerViewModel.Name,
                 Email = CustomerViewModel.Email,
-                Huisnummer = Convert.ToInt32(CustomerViewModel.HouseNumber),
+                Huisnummer = CustomerViewModel.HouseNumber,
                 KvK_nummer = Convert.ToInt32(CustomerViewModel.KvK),
                 Postcode = CustomerViewModel.PostalCode,
                 Website = CustomerViewModel.Website,
@@ -62,7 +62,7 @@ namespace Festispec.ViewModel
             Klant entity = _customerRepo.GetCustomers().Where(c => c.KvK_nummer == klant.KvK_nummer).FirstOrDefault();
             //Add ContactPersons
             CustomerViewModel.Contacts.ForEach(c =>
-            _customerRepo.AddContactPerson(new Contactpersoon()
+            _customerRepo.CreateContactPerson(new Contactpersoon()
             {
                 Voornaam = c.Name,
                 Tussenvoegsel = c.Name,

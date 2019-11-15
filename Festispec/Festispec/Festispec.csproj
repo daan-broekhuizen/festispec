@@ -47,6 +47,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.1\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
@@ -57,6 +60,9 @@
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -80,14 +86,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validators\ContactPersonValidator.cs" />
+    <Compile Include="Validators\CustomerValidator.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
+    <Compile Include="C:\Users\bramc\OneDrive\Desktop\AddContactPersonViewModel.cs">
+      <Link>ViewModel\CustomerViewModels\AddContactPersonViewModel.cs</Link>
+    </Compile>
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
+    <Compile Include="C:\Users\bramc\OneDrive\Desktop\ContactPersonViewModel.cs">
+      <Link>ViewModel\CustomerViewModels\ContactPersonViewModel.cs</Link>
+    </Compile>
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
+    <Compile Include="C:\Users\bramc\OneDrive\Desktop\CustomerViewModel.cs">
+      <Link>ViewModel\CustomerViewModels\CustomerViewModel.cs</Link>
+    </Compile>
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">

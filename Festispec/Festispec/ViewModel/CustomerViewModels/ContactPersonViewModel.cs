@@ -20,7 +20,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Email");
             }
         }
-
         public string Name
         {
             get => _contactPerson.Voornaam;
@@ -30,7 +29,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Name");
             }
         }
-
         public string Telephone
         {
             get
@@ -44,8 +42,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Email");
             }
         }
-
-        
         public string Note
         {
             get => _contactPerson.Notities;
@@ -60,7 +56,6 @@ namespace Festispec.ViewModel
         {
             _contactPerson = contact;
         }
-
         public ContactPersonViewModel()
         {
             _contactPerson = new Contactpersoon();

@@ -34,56 +34,15 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
-        public void AddContactPerson(Contactpersoon contactpersoon)
+        public void CreateContactPerson(Contactpersoon contactpersoon)
         {
             using (FestiSpecEntities context = new FestiSpecEntities())
             {
-                context.Contactpersoon.Add(contactpersoon);
+                Klant klant = context.Klant.Where(k => k.KvK_nummer == contactpersoon.KlantID).FirstOrDefault();
+                klant.Contactpersoon.Add(contactpersoon);
                 context.SaveChanges();
             }
         }
-
-        #region Filters
-        public List<Klant> GetFilteredCustomers(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).ToList();
-            }
-        }
-
-        public List<Klant> GetKlantenASC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Include("Contactpersoon").OrderBy(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetKlantenDESC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Include("Contactpersoon").OrderByDescending(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetFilteredKlantenASC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).OrderBy(e => e.Naam).ToList();
-            }
-        }
-
-        public List<Klant> GetFilteredKlantenDESC(string FilterCustomer)
-        {
-            using (FestiSpecEntities context = new FestiSpecEntities())
-            {
-                return context.Klant.Include("Contactpersoon").Where(e => e.Naam.Contains(FilterCustomer)).OrderByDescending(e => e.Naam).ToList();
-            }
-        } 
-        #endregion
 
     }
 }
