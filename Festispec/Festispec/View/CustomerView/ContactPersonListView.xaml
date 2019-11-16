@@ -95,7 +95,7 @@
         <Viewbox HorizontalAlignment="Right" Grid.Row="1" Margin="20,0">
             <StackPanel>
                 <Label></Label>
-                <Button Padding="10,0" Background="White" Command="{Binding CreateContactPersonCommand}">
+                <Button Padding="10,5" Margin="10" Background="White" Command="{Binding CreateContactPersonCommand}">
                     Nieuw contactpersoon
                 </Button>
                 <Label></Label>
@@ -104,7 +104,7 @@
 
 
         <Viewbox Grid.Row="5" HorizontalAlignment="Right">
-            <Button  Background="#FFF4F4F5" Margin="10" Padding="20, 0" Command="{Binding SaveContactPersonCommand}">
+            <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveContactPersonCommand}">
                 Contactpersoon opslaan
             </Button>
         </Viewbox>
