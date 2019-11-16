@@ -51,6 +51,7 @@
         <Viewbox  Grid.Row="1" HorizontalAlignment="Center">
             <TextBox Text="{Binding FilterCustomer}" Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
         </Viewbox>
+        
         <Viewbox Grid.Row="1" HorizontalAlignment="Right">
             <Button Margin="200,200,650,200" Command="{Binding SearchCustomer}">
                 <Button.Template>
@@ -79,37 +80,34 @@
             <ListBox x:Name="CustomerList" ItemsSource="{Binding FilteredCustomers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
-                        <Grid MaxHeight="50" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="LightGray" Margin="5">
+                        <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Viewbox  Grid.Column="0">
-                                <Image Margin="10" Source="/Images/Profile.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Viewbox Margin="20,0,0,0" Grid.Column="0">
+                                <Image Margin="40" Source="/Images/festispec_logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="1">
-                                <Label Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <Label Margin="10" HorizontalContentAlignment="Right" Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
                             </Viewbox>
-                            <Viewbox Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                            <Viewbox Margin="10" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Left">
                                 <Label HorizontalContentAlignment="Left" Content="{Binding Name}" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="3">
-                                <Label  Content="Kvk-nummer:" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Margin="10" Content="Kvk-nummer:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="4" HorizontalAlignment="Left">
-                                <Label HorizontalContentAlignment="Left" Content="{Binding KvK}" VerticalAlignment="Center"/>
+                                <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding KvK}" VerticalAlignment="Center"/>
                             </Viewbox>
                         </Grid>
-
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-
         </Border>
-
     </Grid>
 </Page>

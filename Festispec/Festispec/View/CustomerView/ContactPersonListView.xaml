@@ -48,7 +48,7 @@
             <ListBox x:Name="CustomerList" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
-                        <Grid MaxHeight="150" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="LightGray" Margin="5,5">
+                        <Grid MaxHeight="150" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="#FFF4F4F5" Margin="5,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*" />
                                 <ColumnDefinition/>
@@ -66,6 +66,7 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
+                            <Rectangle Fill="White" Grid.RowSpan="6" Grid.Row="1" Width="10"/>
                             <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                 <TextBlock Height="15" Text="Naam"/>
                             </Viewbox>

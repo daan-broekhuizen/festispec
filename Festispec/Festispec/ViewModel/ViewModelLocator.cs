@@ -38,10 +38,7 @@ namespace Festispec.ViewModel
 
             SetupNavigation();
             RegisterRepositories();
-
-            //Register singeltonviews here
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<DashboardViewModel>();
+            RegisterViewModels();
         }
 
         //Register singleton repositories here
@@ -49,7 +46,12 @@ namespace Festispec.ViewModel
         {
             SimpleIoc.Default.Register<CustomerRepository>();
         }
-
+        //Register singeltonviews here
+        private static void RegisterViewModels()
+        {
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DashboardViewModel>();
+        }
         //Configure view mappings here and register navigation service
         private static void SetupNavigation()
         {
@@ -70,10 +72,10 @@ namespace Festispec.ViewModel
 
         }
 
-        // Add getters for repos
+        // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
 
-        // Add viewmodels used for datacontext
+        // Viewmodels used for datacontext
         #region Singleton VM's
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>(); 
@@ -88,7 +90,7 @@ namespace Festispec.ViewModel
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo); 
         #endregion
 
-
+        //Clean when logging out?
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
