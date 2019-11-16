@@ -37,14 +37,15 @@ namespace Festispec.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SetupNavigation();
-            SetupRepositories();
+            RegisterRepositories();
 
+            //Register singeltonviews here
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
         }
 
         //Register singleton repositories here
-        private static void SetupRepositories()
+        private static void RegisterRepositories()
         {
             SimpleIoc.Default.Register<CustomerRepository>();
         }
@@ -68,8 +69,6 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
-
-        
 
         // Add getters for repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
