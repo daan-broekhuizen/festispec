@@ -121,11 +121,7 @@ namespace Festispec.ViewModel
             _navigationService.NavigateTo("CustomerInfo", CustomerViewModel);
         }
 
-        private bool CanSaveCustomer()
-        {
-            //Validate customer doublecheck? (errors are handled in relevant viewmodels)
-            return  new CustomerValidator().Validate(CustomerViewModel).IsValid; 
-        }
+        private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerViewModel).IsValid;
 
         private void SaveContactPerson()
         {

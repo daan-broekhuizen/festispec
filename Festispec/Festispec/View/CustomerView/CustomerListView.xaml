@@ -72,9 +72,11 @@
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="70" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
-                    <ComboBoxItem Content="A - Z"/>
-                    <ComboBoxItem Content="Z - A"/>
+                <ComboBox Margin="10" Width="120" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
+                    <ComboBoxItem Content="Naam oplopend"/>
+                    <ComboBoxItem Content="Naam aflopend"/>
+                    <ComboBoxItem Content="KvK oplopend"/>
+                    <ComboBoxItem Content="KvK aflopend"/>
                 </ComboBox>
             </WrapPanel>
         </Viewbox>

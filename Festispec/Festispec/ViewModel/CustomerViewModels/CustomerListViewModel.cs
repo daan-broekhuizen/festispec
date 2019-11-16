@@ -91,10 +91,7 @@ namespace Festispec.ViewModel
 
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
 
-        public void FilterCustomers()
-        {
-                FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
-        }
+        public void FilterCustomers() => FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
 
         public void SortCustomers()
         {
@@ -102,11 +99,17 @@ namespace Festispec.ViewModel
             {
                 switch (SelectedBox.Content)
                 {
-                    case "A - Z":
+                    case "Naam oplopend":
                         FilteredCustomers = FilteredCustomers.OrderBy(e => e.Name).ToList();
                         break;
-                    case "Z - A":
+                    case "Naam aflopend":
                         FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.Name).ToList();
+                        break;
+                    case "KvK oplopend":
+                        FilteredCustomers = FilteredCustomers.OrderBy(e => e.KvK).ToList();
+                        break;
+                    case "KvK aflopend":
+                        FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.KvK).ToList();
                         break;
                 }
             }
