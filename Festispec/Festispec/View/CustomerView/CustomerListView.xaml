@@ -36,30 +36,33 @@
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
                 <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
-            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
-                <StackPanel>
-                    <Label></Label>
-                    <Button Width="100" Background="#FFF4F4F5" Command="{Binding ShowAddCustomerCommand}">
-                        Klant aanmaken
-                    </Button>
-                    <Label></Label>
-                </StackPanel>
-            </Viewbox>
+            
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Viewbox  Grid.Row="1" HorizontalAlignment="Center">
-            <TextBox Text="{Binding FilterCustomer}" Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
-        </Viewbox>
-        
-        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
-            <Button Margin="200,200,650,200" Command="{Binding SearchCustomer}">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox Padding="10,0" Text="{Binding FilterCustomer}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
+            <Button  HorizontalAlignment="Right" Command="{Binding SearchCustomer}">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image   Source="/Images/Search.png"/>
+                        <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+            <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
+                <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddCustomerCommand}">
+                    Klant aanmaken
+                </Button>
+            </Viewbox>
+        </Grid>
+        
+
+        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
+            
         </Viewbox>
 
         <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">

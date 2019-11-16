@@ -27,15 +27,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
-                <StackPanel>
-                    <Label></Label>
-                    <Button Background="#FFF4F4F5" Command="{Binding CreateContactPersonCommand}">
-                        Nieuw contactpersoon
-                    </Button>
-                    <Label></Label>
-                </StackPanel>
-            </Viewbox>
+            
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock  Foreground="Black" FontWeight="Bold" Text="Klant" />
             </Viewbox>
@@ -99,6 +91,15 @@
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
         <Viewbox Grid.Row="1" HorizontalAlignment="Left">
             <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Contactpersonen" RenderTransformOrigin="0.839,0.839"/>
+        </Viewbox>
+        <Viewbox HorizontalAlignment="Right" Grid.Row="1" Margin="20,0">
+            <StackPanel>
+                <Label></Label>
+                <Button Padding="10,0" Background="White" Command="{Binding CreateContactPersonCommand}">
+                    Nieuw contactpersoon
+                </Button>
+                <Label></Label>
+            </StackPanel>
         </Viewbox>
 
 

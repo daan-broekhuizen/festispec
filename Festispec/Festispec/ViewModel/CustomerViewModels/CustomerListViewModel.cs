@@ -93,84 +93,23 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            if (SelectedBox == null) 
-                FilteredCustomers = GetFilteredKlanten();
-            else
-            {
-                switch (SelectedBox.Content)
-                {
-                    case "A - Z":
-                        FilteredCustomers = GetFilteredKlantenASC();
-                        break;
-                    case "Z - A":
-                        FilteredCustomers = GetFilteredKlantenDESC();
-                        break;
-                }
-            }
+                FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
         }
 
         public void SortCustomers()
         {
-            if (FilterCustomer != null)
+            if (SelectedBox != null)
             {
-                if (SelectedBox == null)
-                    FilteredCustomers = GetFilteredKlanten();
-                else
+                switch (SelectedBox.Content)
                 {
-                    switch (SelectedBox.Content)
-                    {
-                        case "A - Z":
-                            FilteredCustomers = GetFilteredKlantenASC();
-                            break;
-                        case "Z - A":
-                            FilteredCustomers = GetFilteredKlantenDESC();
-                            break;
-                    }
+                    case "A - Z":
+                        FilteredCustomers = FilteredCustomers.OrderBy(e => e.Name).ToList();
+                        break;
+                    case "Z - A":
+                        FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.Name).ToList();
+                        break;
                 }
             }
-            else
-            {
-                if (SelectedBox == null)
-                    FilteredCustomers = Customers;
-                else
-                {
-                    switch (SelectedBox.Content)
-                    {
-                        case "A - Z":
-                            FilteredCustomers = GetKlantenASC();
-                            break;
-                        case "Z - A":
-                            FilteredCustomers = GetKlantenDESC();
-                            break;
-                    }
-                }
-            }
-        }
-
-        public List<CustomerViewModel> GetFilteredKlanten()
-        {
-            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
-            return FilteredCustomers;
-        }
-        public List<CustomerViewModel> GetFilteredKlantenASC()
-        {
-            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).OrderBy(e => e.Name).ToList();
-            return FilteredCustomers;
-        }
-        public List<CustomerViewModel> GetFilteredKlantenDESC()
-        {
-            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).OrderByDescending(e => e.Name).ToList();
-            return FilteredCustomers;
-        }
-        public List<CustomerViewModel> GetKlantenASC()
-        {
-            FilteredCustomers = Customers.OrderBy(e => e.Name).ToList();
-            return FilteredCustomers;
-        }
-        public List<CustomerViewModel> GetKlantenDESC()
-        {
-            FilteredCustomers = Customers.OrderByDescending(e => e.Name).ToList();
-            return FilteredCustomers;
         }
     }
 }
