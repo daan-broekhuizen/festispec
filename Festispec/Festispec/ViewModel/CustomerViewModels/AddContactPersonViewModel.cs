@@ -1,4 +1,5 @@
 ﻿using Festispec.Service;
+using Festispec.Utility.Converters;
 using Festispec.Validators;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
@@ -88,7 +89,6 @@ namespace Festispec.ViewModel
 
         private void SaveCustomer()
         {
-
             //Create Customer && add to db
             Klant klant = new Klant()
             {
@@ -99,7 +99,8 @@ namespace Festispec.ViewModel
                 Postcode = CustomerViewModel.PostalCode,
                 Website = CustomerViewModel.Website,
                 Laatste_weiziging = DateTime.Now,
-                Telefoonnummer = CustomerViewModel.Telephone
+                Telefoonnummer = CustomerViewModel.Telephone,
+                Klant_logo = ImageByteConverter.ImageToBytes(CustomerViewModel.Logo)
             };
             _customerRepo.CreateCustomer(klant);
 

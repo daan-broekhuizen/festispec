@@ -1,9 +1,15 @@
-﻿using FestiSpec.Domain;
+﻿using Festispec.Utility.Converters;
+using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel
 {
@@ -90,7 +96,16 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Website");
             }
         }
-
+        public BitmapImage Logo
+        {
+            get => ImageByteConverter.ByteToImage(_klant.Klant_logo);
+            set
+            {
+                _klant.Klant_logo = ImageByteConverter.ImageToBytes(value);
+                RaisePropertyChanged("Logo");
+            }
+        }
+        
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
 
         public CustomerViewModel(Klant klant)
@@ -101,6 +116,7 @@ namespace Festispec.ViewModel
         public CustomerViewModel()
         {
             _klant = new Klant();
+            Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             Contacts = new ObservableCollection<ContactPersonViewModel>();
         }
     }

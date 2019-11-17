@@ -1,10 +1,10 @@
 using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 using System;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel
 {
@@ -40,7 +40,7 @@ namespace Festispec.ViewModel
         public MainViewModel(NavigationService navigation)
         {
             _navigationService = navigation;
-
+            new PostcodeService().GetAdress("4811 AV");
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
         }

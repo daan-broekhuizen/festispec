@@ -33,7 +33,10 @@
                 <TextBlock Text="Klant Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="/Images/festispec_logo.png"></Image>
+                <Button Background="White" Click="Button_Click">
+                    <Image x:Name="CustomerLogo" Source="{Binding Path=Customer.Logo, Mode=TwoWay}"></Image>
+                </Button>
+                
             </Viewbox>
         </Grid>
 
@@ -63,7 +66,7 @@
                 <Label Content="{Binding CustomerError}" Foreground="Red" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
             </Viewbox>
             <TextBox Text="{Binding Customer.Name}" Grid.Row="2" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Naam..."/>
-            <TextBox Text="{Binding Customer.KvK}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="123456789..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding Customer.KvK}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12345678..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
         </Grid>
 
         <Rectangle Grid.Row="3" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>

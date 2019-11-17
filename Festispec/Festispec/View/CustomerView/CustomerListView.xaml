@@ -95,7 +95,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Viewbox Margin="20,0,0,0" Grid.Column="0">
-                                <Image Margin="40" Source="/Images/festispec_logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="1">
                                 <Label Margin="10" HorizontalContentAlignment="Right" Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>

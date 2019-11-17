@@ -27,6 +27,9 @@ namespace Festispec.View.CustomerView
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
-        private void ShowWindow(string message) => MessageBox.Show(message);
+        private void ShowWindow(string message) 
+        {
+            MessageBox.Show(message);
+        }
     }
 }
