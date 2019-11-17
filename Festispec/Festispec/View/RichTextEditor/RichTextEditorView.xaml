@@ -75,7 +75,7 @@
             <!-- Grootte -->
             <StackPanel Visibility="{Binding IsEditable}">
                 <Label Content="Lettergrootte" FontWeight="Bold" />
-                <TextBox Name="controlSize" Text="12">
+                <TextBox Name="controlSize" Text="">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
                             <i:InvokeCommandAction Command="{Binding FontSizeChangedCommand}">

@@ -50,13 +50,13 @@ namespace Festispec.ViewModel.RichTextEditor
             {
                 this._isEditable = value;
 
-                RaisePropertyChanged();
+                RaisePropertyChanged("IsEditable");
             }
         }
 
         public RichTextEditorViewModel()
         {
-            this.ModeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeMode((int)parameters[1]));
+            this.ModeChangedCommand = new RelayCommand<object[]>((parameters) => ChangeMode((DocumentDesigner)parameters[0], (int)parameters[1]));
             this.ApplyStyleCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyStyle((string)parameters[1]));
             this.FontTypeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontType((string)parameters[1]));
             this.FontSizeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontSize((string)parameters[1]));
@@ -65,7 +65,15 @@ namespace Festispec.ViewModel.RichTextEditor
             this.TestCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.Test());
             this.Content = "<html><body><h1>Header</h1><a href=\"http://www.google.nl\">Google</a><img src=\"https://www.perwez.be/actualites/images-actualites/test.png/@@images/image.png\" alt=\"test\" width=\"100\"/></body></html>";
 
-            this.IsEditable = Visibility.Visible;
+            this.IsEditable = Visibility.Hidden;
+        }
+
+        public void ChangeMode(DocumentDesigner designer, int selectedMode)
+        {
+            designer.ViewModel.ChangeMode(selectedMode);
+
+            if(selectedMode == 1)
+                this.IsEditable = Visibility.Hidden;
         }
 
         public void Save()

@@ -125,10 +125,7 @@ namespace Festispec.ViewModel.RichTextEditor
                 
                 doc.IndentBlockElements = AutoBool.Auto;
                 doc.IndentSpaces = 1;
-                //doc.MakeClean = true;
-                //doc.Quiet = true;
 
-                //doc.AttributeSortType = SortStrategy.Alpha;
                 doc.CleanAndRepair();
 
                 output = doc.Save();
