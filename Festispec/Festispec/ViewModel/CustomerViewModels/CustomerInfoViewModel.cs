@@ -1,4 +1,5 @@
 ﻿using Festispec.Service;
+using Festispec.Utility.Converters;
 using Festispec.Validators;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
@@ -62,7 +63,8 @@ namespace Festispec.ViewModel
                     Postcode = CustomerVM.PostalCode,
                     Website = CustomerVM.Website,
                     Laatste_weiziging = DateTime.Now,
-                    Telefoonnummer = CustomerVM.Telephone
+                    Telefoonnummer = CustomerVM.Telephone,
+                    Klant_logo = ImageByteConverter.ImageToBytes(CustomerVM.Logo)
                 });
 
                 Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
@@ -79,9 +81,7 @@ namespace Festispec.ViewModel
                 Messenger.Default.Send(message, this.GetHashCode());
             }
         }
-
         private void ShowAddJob() { }
-
         private void ShowContactPeople() => _navigationService.NavigateTo("ContactPersons", CustomerVM);
         private void ShowCustomerInfo() => _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         private void ShowContactInfo() => _navigationService.NavigateTo("ContactInfo", CustomerVM);

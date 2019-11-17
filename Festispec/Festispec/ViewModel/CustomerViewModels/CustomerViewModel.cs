@@ -96,7 +96,7 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Website");
             }
         }
-        public BitmapImage Logo
+        public ImageSource Logo
         {
             get => ImageByteConverter.ByteToImage(_klant.Klant_logo);
             set

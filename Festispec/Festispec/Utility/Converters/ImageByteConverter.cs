@@ -12,7 +12,7 @@ namespace Festispec.Utility.Converters
 {
     public class ImageByteConverter
     {
-        public static BitmapImage ByteToImage(byte[] imageData)
+        public static ImageSource ByteToImage(byte[] imageData)
         {
             BitmapImage image = new BitmapImage();
             if (imageData == null) return image;
@@ -23,16 +23,20 @@ namespace Festispec.Utility.Converters
             return image;
         }
 
-        public static byte[] ImageToBytes(BitmapImage image)
+        public static byte[] ImageToBytes(ImageSource image)
         {
-            byte[] data;
+            if (image == null) return null;
             PngBitmapEncoder encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(image));
+            BitmapImage target = image as BitmapImage;
+            encoder.Frames.Add(BitmapFrame.Create(target));
+
+            byte[] data;
             using (MemoryStream ms = new MemoryStream())
             {
                 encoder.Save(ms);
                 data = ms.ToArray();
             }
+
             return data;
         }
     }

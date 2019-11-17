@@ -34,7 +34,9 @@
                 <TextBlock Text="Klant"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="{Binding CustomerVM.Logo}"></Image>
+                <Button Background="White" Click="Button_Click" BorderThickness="0">
+                    <Image x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
+                </Button>
             </Viewbox>
         </Grid>
 
