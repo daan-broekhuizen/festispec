@@ -28,11 +28,11 @@ namespace FestiSpec.Domain
         public System.DateTime Creatie_datum { get; set; }
         public long KlantID { get; set; }
         public int MedewerkerID { get; set; }
+        public string Klantwensen { get; set; }
         public string Gebruikte_rechtsgebieden { get; set; }
         public string Rapportage { get; set; }
         public Nullable<int> Rapportage_uses_template { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
-        public string Klantwensen { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

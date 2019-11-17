@@ -30,10 +30,11 @@ namespace FestiSpec.Domain
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
-        public string Postcode { get; set; }
+        public string Stad { get; set; }
+        public string Straatnaam { get; set; }
         public string Huisnummer { get; set; }
         public string Email { get; set; }
-        public Nullable<long> Telefoonnummer { get; set; }
+        public string Telefoonnummer { get; set; }
         public Nullable<System.DateTime> Datum_certificering { get; set; }
         public Nullable<System.DateTime> Einddatum_certificering { get; set; }
         public string IBAN { get; set; }

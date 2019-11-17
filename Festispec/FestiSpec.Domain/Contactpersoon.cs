@@ -20,7 +20,7 @@ namespace FestiSpec.Domain
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
         public string Email { get; set; }
-        public long Telefoon { get; set; }
+        public string Telefoon { get; set; }
         public string Notities { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
     
