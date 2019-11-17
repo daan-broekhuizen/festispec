@@ -11,6 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -21,5 +22,7 @@
         <Button Grid.Column="1" Content="Meerkeuzevraag maken" FontSize="15" Command="{Binding OpenMultipleChoiceQuestoinEditCommand}" Margin="202.2,0,-0.4,210" Grid.RowSpan="2"/>
         <Button Grid.Column="1" Content ="Vragen beantwoorden" FontSize="20" Margin="0.2,0.4,-0.4,0" Command="{Binding OpenQuestionListCommand}" Grid.Row="1"/>
         <Button Grid.Column="0" Grid.Row="1" Content="Beschikbaarheid" FontSize="20" Command="{Binding OpenAvailabilityCommand}"/>
+
+        <Button Grid.Column="0" Grid.Row="2" Content="Text Editor" FontSize="20" Command="{Binding OpenTextEditorCommand}" />
     </Grid>
 </Window>

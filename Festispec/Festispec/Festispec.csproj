@@ -56,15 +56,29 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.16.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.16\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Unofficial.Microsoft.mshtml.7.0.3300\lib\net40\Microsoft.mshtml.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -76,6 +90,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TidyHTML5Managed, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TidyHtml5ManagedRepack.1.1.4\lib\net46\TidyHTML5Managed.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -111,6 +128,9 @@
     <Compile Include="ViewModel\QuestionListViewModel.cs" />
     <Compile Include="ViewModel\QuestionMultipleChoiceVM.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\RichTextEditor\MultiConverter.cs" />
+    <Compile Include="ViewModel\RichTextEditor\RichTextEditorViewModel.cs" />
+    <Compile Include="ViewModel\RichTextEditor\WebBrowserHelper.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AvailabilityView.xaml.cs">
       <DependentUpon>AvailabilityView.xaml</DependentUpon>
@@ -126,6 +146,12 @@
     </Compile>
     <Compile Include="View\QuestionMultipleChoiceEditView.xaml.cs">
       <DependentUpon>QuestionMultipleChoiceEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RichTextEditor\RichTextEditor.xaml.cs">
+      <DependentUpon>RichTextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RichTextEditor\RichTextEditorView.xaml.cs">
+      <DependentUpon>RichTextEditorView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +182,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuestionMultipleChoiceEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RichTextEditor\RichTextEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RichTextEditor\RichTextEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +232,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\TidyHtml5ManagedRepack.1.1.4\build\TidyHtml5ManagedRepack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TidyHtml5ManagedRepack.1.1.4\build\TidyHtml5ManagedRepack.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\TidyHtml5ManagedRepack.1.1.4\build\TidyHtml5ManagedRepack.targets" Condition="Exists('..\packages\TidyHtml5ManagedRepack.1.1.4\build\TidyHtml5ManagedRepack.targets')" />
 </Project>

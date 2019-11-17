@@ -1,4 +1,5 @@
 using Festispec.View;
+using Festispec.View.RichTextEditor;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -23,6 +24,9 @@ namespace Festispec.ViewModel
         private QuestionMultipleChoiceEditView _questionMultipleChoicEditView;
         public ICommand OpenAvailabilityCommand { get; set; }
         private AvailabilityView _availabilityView;
+
+        public ICommand OpenTextEditorCommand { get; set; }
+        private RichTextEditorView _richTextEditorView;
 
         public MainViewModel()
         {
@@ -53,6 +57,12 @@ namespace Festispec.ViewModel
             {
                 this._availabilityView = new AvailabilityView();
                 this._availabilityView.Show();
+            });
+
+            this.OpenTextEditorCommand = new RelayCommand(() =>
+            {
+                this._richTextEditorView = new RichTextEditorView();
+                this._richTextEditorView.Show();
             });
         }
     }

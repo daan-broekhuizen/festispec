@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using Festispec.ViewModel.Graph;
+using Festispec.ViewModel.RichTextEditor;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 
@@ -131,6 +132,11 @@ namespace Festispec.ViewModel
             {
                 return new AvailabilityViewModel();
             }
+        }
+
+        public RichTextEditorViewModel RichTextEditor
+        {
+            get => new RichTextEditorViewModel();
         }
 
         public static void Cleanup()
