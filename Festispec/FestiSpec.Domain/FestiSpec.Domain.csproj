@@ -50,99 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Antwoorden.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Beschikbaarheid_inspecteurs.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Contactpersoon.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="C__RefactorLog.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FestiSpecEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FestiSpecEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FestiSpecEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FestiSpecEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FestiSpecEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Inspectieformulier.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inspectieformulier_vragenlijst_combinatie.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Klant.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Offerte.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Opdracht.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
-    <Compile Include="Rapport_template.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Rol_lookup.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Status_lookup.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vraag.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vraagtype_lookup.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Vraag_mogelijk_antwoord.cs">
-      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="FestiSpecEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FestiSpecEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="FestiSpecEntities.edmx.diagram">
-      <DependentUpon>FestiSpecEntities.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FestiSpecEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FestiSpecEntities.Context.cs</LastGenOutput>
-      <DependentUpon>FestiSpecEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="FestiSpecEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FestiSpecEntities.edmx</DependentUpon>
-      <LastGenOutput>FestiSpecEntities.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
