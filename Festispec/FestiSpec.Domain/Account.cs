@@ -33,7 +33,7 @@ namespace FestiSpec.Domain
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
         public string Email { get; set; }
-        public Nullable<long> Telefoonnummer { get; set; }
+        public string Telefoonnummer { get; set; }
         public Nullable<System.DateTime> Datum_certificering { get; set; }
         public Nullable<System.DateTime> Einddatum_certificering { get; set; }
         public string IBAN { get; set; }
