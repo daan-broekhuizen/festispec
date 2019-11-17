@@ -40,7 +40,6 @@ namespace Festispec.ViewModel
         public MainViewModel(NavigationService navigation)
         {
             _navigationService = navigation;
-            new PostcodeService().GetAdress("4811 AV");
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
         }

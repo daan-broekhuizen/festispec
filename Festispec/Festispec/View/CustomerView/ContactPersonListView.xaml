@@ -36,9 +36,9 @@
             </Viewbox>
         </Grid>
 
-        <Border x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
-            <ListBox x:Name="CustomerList" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
-                <ListBox.ItemTemplate >
+        <Border BorderThickness="0" x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
+            <ListBox BorderThickness="0" x:Name="CustomerList" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}"  VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+                <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid MaxHeight="150" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="#FFF4F4F5" Margin="5,5">
                             <Grid.ColumnDefinitions>
