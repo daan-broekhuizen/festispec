@@ -13,6 +13,6 @@
     </UserControl.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
         <WebBrowser Name="webBrowser" Visibility="Visible"/>
-        <TextBox Name="htmlEditor" Visibility="Hidden" Text="{Binding DesignerContent, Mode=TwoWay}" AcceptsTab="True" />
+        <TextBox Name="htmlEditor" Visibility="Hidden" Text="{Binding DesignerContent, Mode=TwoWay}" AcceptsTab="True" AcceptsReturn="True" />
     </Grid>
 </UserControl>

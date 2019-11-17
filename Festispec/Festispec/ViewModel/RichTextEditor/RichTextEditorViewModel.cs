@@ -25,6 +25,7 @@ namespace Festispec.ViewModel.RichTextEditor
         public ICommand FontSizeChangedCommand { get; set; }
         public ICommand ApplyAlignmentCommand { get; set; }
         public ICommand AddImageCommand { get; set; }
+        public ICommand TestCommand { get; set; }
 
         // Properties
         private string _content;
@@ -61,6 +62,7 @@ namespace Festispec.ViewModel.RichTextEditor
             this.FontSizeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontSize((string)parameters[1]));
             this.ApplyAlignmentCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyAlignment((string)parameters[1]));
             this.AddImageCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.AddImage((string)parameters[1]));
+            this.TestCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.Test());
             this.Content = "<html><body><h1>Header</h1><a href=\"http://www.google.nl\">Google</a><img src=\"https://www.perwez.be/actualites/images-actualites/test.png/@@images/image.png\" alt=\"test\" width=\"100\"/></body></html>";
 
             this.IsEditable = Visibility.Visible;

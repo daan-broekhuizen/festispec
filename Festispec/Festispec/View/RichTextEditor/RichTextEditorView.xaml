@@ -170,6 +170,18 @@
                     </Button.CommandParameter>
                 </Button>
             </Grid>
+            
+            <!-- Test -->
+            <Label Content="Test" FontWeight="Bold" />
+            <Grid>
+                <Button Name="controlTest" Content="Test" Command="{Binding TestCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiConverter}">
+                            <Binding ElementName="documentDesigner" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using Festispec.ViewModel.RichTextEditor;
+using mshtml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
