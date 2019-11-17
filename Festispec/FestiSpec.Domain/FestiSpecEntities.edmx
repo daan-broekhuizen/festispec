@@ -19,7 +19,7 @@
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="4" />
           <Property Name="Email" Type="nvarchar" MaxLength="120" />
-          <Property Name="Telefoonnummer" Type="bigint" />
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="10" />
           <Property Name="Datum_certificering" Type="date" />
           <Property Name="Einddatum_certificering" Type="date" />
           <Property Name="IBAN" Type="nvarchar" MaxLength="18" />
@@ -49,12 +49,12 @@
             <PropertyRef Name="ContactpersoonID" />
           </Key>
           <Property Name="ContactpersoonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="KlantID" Type="bigint" Nullable="false" />
+          <Property Name="KlantID" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="Voornaam" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Tussenvoegsel" Type="nvarchar" MaxLength="15" />
           <Property Name="Achternaam" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="130" Nullable="false" />
-          <Property Name="Telefoon" Type="bigint" Nullable="false" />
+          <Property Name="Telefoon" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Notities" Type="text" />
           <Property Name="Laatste_weiziging" Type="datetime" Nullable="false" />
         </EntityType>
@@ -90,11 +90,11 @@
           <Key>
             <PropertyRef Name="KvK_nummer" />
           </Key>
-          <Property Name="KvK_nummer" Type="bigint" Nullable="false" />
+          <Property Name="KvK_nummer" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="Naam" Type="nvarchar" MaxLength="45" Nullable="false" />
           <Property Name="Postcode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Huisnummer" Type="nvarchar" MaxLength="4" Nullable="false" />
-          <Property Name="Telefoonnummer" Type="bigint" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="130" Nullable="false" />
           <Property Name="Website" Type="nvarchar" MaxLength="100" />
           <Property Name="Klant_logo" Type="image" />
@@ -120,7 +120,7 @@
           <Property Name="Opdracht_naam" Type="nvarchar" MaxLength="45" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="Creatie_datum" Type="date" Nullable="false" />
-          <Property Name="KlantID" Type="bigint" Nullable="false" />
+          <Property Name="KlantID" Type="nvarchar" MaxLength="8" Nullable="false" />
           <Property Name="MedewerkerID" Type="int" Nullable="false" />
           <Property Name="Klantwensen" Type="text" Nullable="false" />
           <Property Name="Gebruikte_rechtsgebieden" Type="text" />
@@ -175,7 +175,7 @@
           <Property Name="Afkorting" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="Beschrijving" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Account__Rol__0F824689">
+        <Association Name="FK__Account__Rol__2630A1B7">
           <End Role="Rol_lookup" Type="Self.Rol_lookup" Multiplicity="1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -187,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Antwoorde__Inspe__116A8EFB">
+        <Association Name="FK__Antwoorde__Inspe__2818EA29">
           <End Role="Account" Type="Self.Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -201,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Antwoorde__VIC_I__10766AC2">
+        <Association Name="FK__Antwoorde__VIC_I__2724C5F0">
           <End Role="Inspectieformulier_vragenlijst_combinatie" Type="Self.Inspectieformulier_vragenlijst_combinatie" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -215,7 +215,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Beschikba__Medew__125EB334">
+        <Association Name="FK__Beschikba__Medew__290D0E62">
           <End Role="Account" Type="Self.Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -229,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contactpe__Klant__1352D76D">
+        <Association Name="FK__Contactpe__Klant__2A01329B">
           <End Role="Klant" Type="Self.Klant" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -243,7 +243,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ingepland__Inspe__153B1FDF">
+        <Association Name="FK__Ingepland__Inspe__2BE97B0D">
           <End Role="Account" Type="Self.Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -257,7 +257,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ingepland__Opdra__1446FBA6">
+        <Association Name="FK__Ingepland__Opdra__2AF556D4">
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -271,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspectie__Inspe__17236851">
+        <Association Name="FK__Inspectie__Inspe__2DD1C37F">
           <End Role="Inspectieformulier" Type="Self.Inspectieformulier" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -285,7 +285,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspectie__Opdra__162F4418">
+        <Association Name="FK__Inspectie__Opdra__2CDD9F46">
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="0..1" />
           <End Role="Inspectieformulier" Type="Self.Inspectieformulier" Multiplicity="*" />
           <ReferentialConstraint>
@@ -297,7 +297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspectie__Vraag__18178C8A">
+        <Association Name="FK__Inspectie__Vraag__2EC5E7B8">
           <End Role="Vraag" Type="Self.Vraag" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -311,7 +311,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Offerte__Opdrach__190BB0C3">
+        <Association Name="FK__Offerte__Opdrach__2FBA0BF1">
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -325,7 +325,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__KlantI__1BE81D6E">
+        <Association Name="FK__Opdracht__KlantI__3296789C">
           <End Role="Klant" Type="Self.Klant" Multiplicity="1" />
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,7 +337,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__Medewe__19FFD4FC">
+        <Association Name="FK__Opdracht__Medewe__30AE302A">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="*" />
           <ReferentialConstraint>
@@ -349,7 +349,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__Rappor__1CDC41A7">
+        <Association Name="FK__Opdracht__Rappor__338A9CD5">
           <End Role="Rapport_template" Type="Self.Rapport_template" Multiplicity="0..1" />
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__Status__1AF3F935">
+        <Association Name="FK__Opdracht__Status__31A25463">
           <End Role="Status_lookup" Type="Self.Status_lookup" Multiplicity="1" />
           <End Role="Opdracht" Type="Self.Opdracht" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,7 +373,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vraag__Vraagtype__1DD065E0">
+        <Association Name="FK__Vraag__Vraagtype__347EC10E">
           <End Role="Vraagtype_lookup" Type="Self.Vraagtype_lookup" Multiplicity="1" />
           <End Role="Vraag" Type="Self.Vraag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -385,7 +385,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vraag_mog__Vraag__1EC48A19">
+        <Association Name="FK__Vraag_mog__Vraag__3572E547">
           <End Role="Vraag" Type="Self.Vraag" Multiplicity="1" />
           <End Role="Vraag_mogelijk_antwoord" Type="Self.Vraag_mogelijk_antwoord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -414,71 +414,71 @@
           <EntitySet Name="Vraag" EntityType="Self.Vraag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vraag_mogelijk_antwoord" EntityType="Self.Vraag_mogelijk_antwoord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vraagtype_lookup" EntityType="Self.Vraagtype_lookup" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Account__Rol__0F824689" Association="Self.FK__Account__Rol__0F824689">
+          <AssociationSet Name="FK__Account__Rol__2630A1B7" Association="Self.FK__Account__Rol__2630A1B7">
             <End Role="Rol_lookup" EntitySet="Rol_lookup" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Antwoorde__Inspe__116A8EFB" Association="Self.FK__Antwoorde__Inspe__116A8EFB">
+          <AssociationSet Name="FK__Antwoorde__Inspe__2818EA29" Association="Self.FK__Antwoorde__Inspe__2818EA29">
             <End Role="Account" EntitySet="Account" />
             <End Role="Antwoorden" EntitySet="Antwoorden" />
           </AssociationSet>
-          <AssociationSet Name="FK__Antwoorde__VIC_I__10766AC2" Association="Self.FK__Antwoorde__VIC_I__10766AC2">
+          <AssociationSet Name="FK__Antwoorde__VIC_I__2724C5F0" Association="Self.FK__Antwoorde__VIC_I__2724C5F0">
             <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
             <End Role="Antwoorden" EntitySet="Antwoorden" />
           </AssociationSet>
-          <AssociationSet Name="FK__Beschikba__Medew__125EB334" Association="Self.FK__Beschikba__Medew__125EB334">
+          <AssociationSet Name="FK__Beschikba__Medew__290D0E62" Association="Self.FK__Beschikba__Medew__290D0E62">
             <End Role="Account" EntitySet="Account" />
             <End Role="Beschikbaarheid_inspecteurs" EntitySet="Beschikbaarheid_inspecteurs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contactpe__Klant__1352D76D" Association="Self.FK__Contactpe__Klant__1352D76D">
+          <AssociationSet Name="FK__Contactpe__Klant__2A01329B" Association="Self.FK__Contactpe__Klant__2A01329B">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Contactpersoon" EntitySet="Contactpersoon" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ingepland__Inspe__153B1FDF" Association="Self.FK__Ingepland__Inspe__153B1FDF">
+          <AssociationSet Name="FK__Ingepland__Inspe__2BE97B0D" Association="Self.FK__Ingepland__Inspe__2BE97B0D">
             <End Role="Account" EntitySet="Account" />
             <End Role="Ingeplande_inspecteurs" EntitySet="Ingeplande_inspecteurs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ingepland__Opdra__1446FBA6" Association="Self.FK__Ingepland__Opdra__1446FBA6">
+          <AssociationSet Name="FK__Ingepland__Opdra__2AF556D4" Association="Self.FK__Ingepland__Opdra__2AF556D4">
             <End Role="Opdracht" EntitySet="Opdracht" />
             <End Role="Ingeplande_inspecteurs" EntitySet="Ingeplande_inspecteurs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspectie__Inspe__17236851" Association="Self.FK__Inspectie__Inspe__17236851">
+          <AssociationSet Name="FK__Inspectie__Inspe__2DD1C37F" Association="Self.FK__Inspectie__Inspe__2DD1C37F">
             <End Role="Inspectieformulier" EntitySet="Inspectieformulier" />
             <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspectie__Opdra__162F4418" Association="Self.FK__Inspectie__Opdra__162F4418">
+          <AssociationSet Name="FK__Inspectie__Opdra__2CDD9F46" Association="Self.FK__Inspectie__Opdra__2CDD9F46">
             <End Role="Opdracht" EntitySet="Opdracht" />
             <End Role="Inspectieformulier" EntitySet="Inspectieformulier" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspectie__Vraag__18178C8A" Association="Self.FK__Inspectie__Vraag__18178C8A">
+          <AssociationSet Name="FK__Inspectie__Vraag__2EC5E7B8" Association="Self.FK__Inspectie__Vraag__2EC5E7B8">
             <End Role="Vraag" EntitySet="Vraag" />
             <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offerte__Opdrach__190BB0C3" Association="Self.FK__Offerte__Opdrach__190BB0C3">
+          <AssociationSet Name="FK__Offerte__Opdrach__2FBA0BF1" Association="Self.FK__Offerte__Opdrach__2FBA0BF1">
             <End Role="Opdracht" EntitySet="Opdracht" />
             <End Role="Offerte" EntitySet="Offerte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__KlantI__1BE81D6E" Association="Self.FK__Opdracht__KlantI__1BE81D6E">
+          <AssociationSet Name="FK__Opdracht__KlantI__3296789C" Association="Self.FK__Opdracht__KlantI__3296789C">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Medewe__19FFD4FC" Association="Self.FK__Opdracht__Medewe__19FFD4FC">
+          <AssociationSet Name="FK__Opdracht__Medewe__30AE302A" Association="Self.FK__Opdracht__Medewe__30AE302A">
             <End Role="Account" EntitySet="Account" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Rappor__1CDC41A7" Association="Self.FK__Opdracht__Rappor__1CDC41A7">
+          <AssociationSet Name="FK__Opdracht__Rappor__338A9CD5" Association="Self.FK__Opdracht__Rappor__338A9CD5">
             <End Role="Rapport_template" EntitySet="Rapport_template" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Status__1AF3F935" Association="Self.FK__Opdracht__Status__1AF3F935">
+          <AssociationSet Name="FK__Opdracht__Status__31A25463" Association="Self.FK__Opdracht__Status__31A25463">
             <End Role="Status_lookup" EntitySet="Status_lookup" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vraag__Vraagtype__1DD065E0" Association="Self.FK__Vraag__Vraagtype__1DD065E0">
+          <AssociationSet Name="FK__Vraag__Vraagtype__347EC10E" Association="Self.FK__Vraag__Vraagtype__347EC10E">
             <End Role="Vraagtype_lookup" EntitySet="Vraagtype_lookup" />
             <End Role="Vraag" EntitySet="Vraag" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vraag_mog__Vraag__1EC48A19" Association="Self.FK__Vraag_mog__Vraag__1EC48A19">
+          <AssociationSet Name="FK__Vraag_mog__Vraag__3572E547" Association="Self.FK__Vraag_mog__Vraag__3572E547">
             <End Role="Vraag" EntitySet="Vraag" />
             <End Role="Vraag_mogelijk_antwoord" EntitySet="Vraag_mogelijk_antwoord" />
           </AssociationSet>
@@ -500,72 +500,72 @@
           <EntitySet Name="Rapport_template" EntityType="FestiSpec.Domain.Rapport_template" />
           <EntitySet Name="Rol_lookup" EntityType="FestiSpec.Domain.Rol_lookup" />
           <EntitySet Name="Status_lookup" EntityType="FestiSpec.Domain.Status_lookup" />
+          <EntitySet Name="Vraag" EntityType="FestiSpec.Domain.Vraag" />
           <EntitySet Name="Vraag_mogelijk_antwoord" EntityType="FestiSpec.Domain.Vraag_mogelijk_antwoord" />
           <EntitySet Name="Vraagtype_lookup" EntityType="FestiSpec.Domain.Vraagtype_lookup" />
-          <AssociationSet Name="FK__Account__Rol__2B5F6B28" Association="FestiSpec.Domain.FK__Account__Rol__2B5F6B28">
+          <AssociationSet Name="FK__Account__Rol__2630A1B7" Association="FestiSpec.Domain.FK__Account__Rol__2630A1B7">
             <End Role="Rol_lookup" EntitySet="Rol_lookup" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Antwoorde__Inspe__2D47B39A" Association="FestiSpec.Domain.FK__Antwoorde__Inspe__2D47B39A">
+          <AssociationSet Name="FK__Antwoorde__Inspe__2818EA29" Association="FestiSpec.Domain.FK__Antwoorde__Inspe__2818EA29">
             <End Role="Account" EntitySet="Account" />
             <End Role="Antwoorden" EntitySet="Antwoorden" />
           </AssociationSet>
-          <AssociationSet Name="FK__Beschikba__Medew__2E3BD7D3" Association="FestiSpec.Domain.FK__Beschikba__Medew__2E3BD7D3">
+          <AssociationSet Name="FK__Beschikba__Medew__290D0E62" Association="FestiSpec.Domain.FK__Beschikba__Medew__290D0E62">
             <End Role="Account" EntitySet="Account" />
             <End Role="Beschikbaarheid_inspecteurs" EntitySet="Beschikbaarheid_inspecteurs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Medewe__35DCF99B" Association="FestiSpec.Domain.FK__Opdracht__Medewe__35DCF99B">
+          <AssociationSet Name="FK__Opdracht__Medewe__30AE302A" Association="FestiSpec.Domain.FK__Opdracht__Medewe__30AE302A">
             <End Role="Account" EntitySet="Account" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Antwoorde__VIC_I__2C538F61" Association="FestiSpec.Domain.FK__Antwoorde__VIC_I__2C538F61">
+          <AssociationSet Name="FK__Antwoorde__VIC_I__2724C5F0" Association="FestiSpec.Domain.FK__Antwoorde__VIC_I__2724C5F0">
             <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
             <End Role="Antwoorden" EntitySet="Antwoorden" />
           </AssociationSet>
-          <AssociationSet Name="FK__Contactpe__Klant__2F2FFC0C" Association="FestiSpec.Domain.FK__Contactpe__Klant__2F2FFC0C">
+          <AssociationSet Name="FK__Contactpe__Klant__2A01329B" Association="FestiSpec.Domain.FK__Contactpe__Klant__2A01329B">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Contactpersoon" EntitySet="Contactpersoon" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspectie__Inspe__33008CF0" Association="FestiSpec.Domain.FK__Inspectie__Inspe__33008CF0">
+          <AssociationSet Name="FK__Inspectie__Inspe__2DD1C37F" Association="FestiSpec.Domain.FK__Inspectie__Inspe__2DD1C37F">
             <End Role="Inspectieformulier" EntitySet="Inspectieformulier" />
             <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inspectie__Opdra__320C68B7" Association="FestiSpec.Domain.FK__Inspectie__Opdra__320C68B7">
+          <AssociationSet Name="FK__Inspectie__Opdra__2CDD9F46" Association="FestiSpec.Domain.FK__Inspectie__Opdra__2CDD9F46">
             <End Role="Opdracht" EntitySet="Opdracht" />
             <End Role="Inspectieformulier" EntitySet="Inspectieformulier" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__KlantI__37C5420D" Association="FestiSpec.Domain.FK__Opdracht__KlantI__37C5420D">
+          <AssociationSet Name="FK__Inspectie__Vraag__2EC5E7B8" Association="FestiSpec.Domain.FK__Inspectie__Vraag__2EC5E7B8">
+            <End Role="Vraag" EntitySet="Vraag" />
+            <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Opdracht__KlantI__3296789C" Association="FestiSpec.Domain.FK__Opdracht__KlantI__3296789C">
             <End Role="Klant" EntitySet="Klant" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Offerte__Opdrach__3D7E1B63" Association="FestiSpec.Domain.FK__Offerte__Opdrach__3D7E1B63">
+          <AssociationSet Name="FK__Offerte__Opdrach__2FBA0BF1" Association="FestiSpec.Domain.FK__Offerte__Opdrach__2FBA0BF1">
             <End Role="Opdracht" EntitySet="Opdracht" />
             <End Role="Offerte" EntitySet="Offerte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Rappor__38B96646" Association="FestiSpec.Domain.FK__Opdracht__Rappor__38B96646">
+          <AssociationSet Name="FK__Opdracht__Rappor__338A9CD5" Association="FestiSpec.Domain.FK__Opdracht__Rappor__338A9CD5">
             <End Role="Rapport_template" EntitySet="Rapport_template" />
             <End Role="Opdracht" EntitySet="Opdracht" />
           </AssociationSet>
-          <AssociationSet Name="FK__Opdracht__Status__36D11DD4" Association="FestiSpec.Domain.FK__Opdracht__Status__36D11DD4">
+          <AssociationSet Name="FK__Opdracht__Status__31A25463" Association="FestiSpec.Domain.FK__Opdracht__Status__31A25463">
             <End Role="Status_lookup" EntitySet="Status_lookup" />
             <End Role="Opdracht" EntitySet="Opdracht" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vraag__Vraagtype__347EC10E" Association="FestiSpec.Domain.FK__Vraag__Vraagtype__347EC10E">
+            <End Role="Vraagtype_lookup" EntitySet="Vraagtype_lookup" />
+            <End Role="Vraag" EntitySet="Vraag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vraag_mog__Vraag__3572E547" Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__3572E547">
+            <End Role="Vraag" EntitySet="Vraag" />
+            <End Role="Vraag_mogelijk_antwoord" EntitySet="Vraag_mogelijk_antwoord" />
           </AssociationSet>
           <AssociationSet Name="Ingeplande_inspecteurs" Association="FestiSpec.Domain.Ingeplande_inspecteurs">
             <End Role="Account" EntitySet="Account" />
             <End Role="Opdracht" EntitySet="Opdracht" />
-          </AssociationSet>
-          <EntitySet Name="Vraag" EntityType="FestiSpec.Domain.Vraag" />
-          <AssociationSet Name="FK__Inspectie__Vraag__18178C8A" Association="FestiSpec.Domain.FK__Inspectie__Vraag__18178C8A">
-            <End Role="Vraag" EntitySet="Vraag" />
-            <End Role="Inspectieformulier_vragenlijst_combinatie" EntitySet="Inspectieformulier_vragenlijst_combinatie" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Vraag__Vraagtype__1DD065E0" Association="FestiSpec.Domain.FK__Vraag__Vraagtype__1DD065E0">
-            <End Role="Vraagtype_lookup" EntitySet="Vraagtype_lookup" />
-            <End Role="Vraag" EntitySet="Vraag" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Vraag_mog__Vraag__1EC48A19" Association="FestiSpec.Domain.FK__Vraag_mog__Vraag__1EC48A19">
-            <End Role="Vraag" EntitySet="Vraag" />
-            <End Role="Vraag_mogelijk_antwoord" EntitySet="Vraag_mogelijk_antwoord" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -582,15 +582,15 @@
           <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="Huisnummer" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Telefoonnummer" Type="Int64" />
+          <Property Name="Telefoonnummer" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Datum_certificering" Type="DateTime" Precision="0" />
           <Property Name="Einddatum_certificering" Type="DateTime" Precision="0" />
           <Property Name="IBAN" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Rol_lookup" Relationship="FestiSpec.Domain.FK__Account__Rol__2B5F6B28" FromRole="Account" ToRole="Rol_lookup" />
-          <NavigationProperty Name="Antwoorden" Relationship="FestiSpec.Domain.FK__Antwoorde__Inspe__2D47B39A" FromRole="Account" ToRole="Antwoorden" />
-          <NavigationProperty Name="Beschikbaarheid_inspecteurs" Relationship="FestiSpec.Domain.FK__Beschikba__Medew__2E3BD7D3" FromRole="Account" ToRole="Beschikbaarheid_inspecteurs" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Medewe__35DCF99B" FromRole="Account" ToRole="Opdracht" />
+          <NavigationProperty Name="Rol_lookup" Relationship="FestiSpec.Domain.FK__Account__Rol__2630A1B7" FromRole="Account" ToRole="Rol_lookup" />
+          <NavigationProperty Name="Antwoorden" Relationship="FestiSpec.Domain.FK__Antwoorde__Inspe__2818EA29" FromRole="Account" ToRole="Antwoorden" />
+          <NavigationProperty Name="Beschikbaarheid_inspecteurs" Relationship="FestiSpec.Domain.FK__Beschikba__Medew__290D0E62" FromRole="Account" ToRole="Beschikbaarheid_inspecteurs" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Medewe__30AE302A" FromRole="Account" ToRole="Opdracht" />
           <NavigationProperty Name="Opdracht1" Relationship="FestiSpec.Domain.Ingeplande_inspecteurs" FromRole="Account" ToRole="Opdracht" />
         </EntityType>
         <EntityType Name="Antwoorden">
@@ -600,11 +600,11 @@
           </Key>
           <Property Name="VIC_ID" Type="Int32" Nullable="false" />
           <Property Name="InspecteurID" Type="Int32" Nullable="false" />
-          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Antwoorde__Inspe__2D47B39A" FromRole="Antwoorden" ToRole="Account" />
-          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Antwoorde__VIC_I__2C538F61" FromRole="Antwoorden" ToRole="Inspectieformulier_vragenlijst_combinatie" />
           <Property Name="Antwoord_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Antwoord_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Antwoorde__Inspe__2818EA29" FromRole="Antwoorden" ToRole="Account" />
+          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Antwoorde__VIC_I__2724C5F0" FromRole="Antwoorden" ToRole="Inspectieformulier_vragenlijst_combinatie" />
         </EntityType>
         <EntityType Name="Beschikbaarheid_inspecteurs">
           <Key>
@@ -613,22 +613,22 @@
           </Key>
           <Property Name="MedewerkerID" Type="Int32" Nullable="false" />
           <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Beschikba__Medew__2E3BD7D3" FromRole="Beschikbaarheid_inspecteurs" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Beschikba__Medew__290D0E62" FromRole="Beschikbaarheid_inspecteurs" ToRole="Account" />
         </EntityType>
         <EntityType Name="Contactpersoon">
           <Key>
             <PropertyRef Name="ContactpersoonID" />
           </Key>
           <Property Name="ContactpersoonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="KlantID" Type="Int64" Nullable="false" />
+          <Property Name="KlantID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Tussenvoegsel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Achternaam" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="130" FixedLength="false" Unicode="true" />
-          <Property Name="Telefoon" Type="Int64" Nullable="false" />
+          <Property Name="Telefoon" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Notities" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Klant" Relationship="FestiSpec.Domain.FK__Contactpe__Klant__2F2FFC0C" FromRole="Contactpersoon" ToRole="Klant" />
+          <NavigationProperty Name="Klant" Relationship="FestiSpec.Domain.FK__Contactpe__Klant__2A01329B" FromRole="Contactpersoon" ToRole="Klant" />
         </EntityType>
         <EntityType Name="Inspectieformulier">
           <Key>
@@ -641,8 +641,8 @@
           <Property Name="OpdrachtID" Type="Int32" />
           <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Inspectie__Inspe__33008CF0" FromRole="Inspectieformulier" ToRole="Inspectieformulier_vragenlijst_combinatie" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Inspectie__Opdra__320C68B7" FromRole="Inspectieformulier" ToRole="Opdracht" />
+          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Inspectie__Inspe__2DD1C37F" FromRole="Inspectieformulier" ToRole="Inspectieformulier_vragenlijst_combinatie" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Inspectie__Opdra__2CDD9F46" FromRole="Inspectieformulier" ToRole="Opdracht" />
         </EntityType>
         <EntityType Name="Inspectieformulier_vragenlijst_combinatie">
           <Key>
@@ -651,25 +651,25 @@
           <Property Name="VIC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InspectieformulierID" Type="Int32" Nullable="false" />
           <Property Name="VraagID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Antwoorden" Relationship="FestiSpec.Domain.FK__Antwoorde__VIC_I__2C538F61" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Antwoorden" />
-          <NavigationProperty Name="Inspectieformulier" Relationship="FestiSpec.Domain.FK__Inspectie__Inspe__33008CF0" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Inspectieformulier" />
-          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Inspectie__Vraag__18178C8A" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Vraag" />
+          <NavigationProperty Name="Antwoorden" Relationship="FestiSpec.Domain.FK__Antwoorde__VIC_I__2724C5F0" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Antwoorden" />
+          <NavigationProperty Name="Inspectieformulier" Relationship="FestiSpec.Domain.FK__Inspectie__Inspe__2DD1C37F" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Inspectieformulier" />
+          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Inspectie__Vraag__2EC5E7B8" FromRole="Inspectieformulier_vragenlijst_combinatie" ToRole="Vraag" />
         </EntityType>
         <EntityType Name="Klant">
           <Key>
             <PropertyRef Name="KvK_nummer" />
           </Key>
-          <Property Name="KvK_nummer" Type="Int64" Nullable="false" />
+          <Property Name="KvK_nummer" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Naam" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Postcode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="Huisnummer" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
-          <Property Name="Telefoonnummer" Type="Int64" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="130" FixedLength="false" Unicode="true" />
           <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Contactpersoon" Relationship="FestiSpec.Domain.FK__Contactpe__Klant__2F2FFC0C" FromRole="Klant" ToRole="Contactpersoon" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__KlantI__37C5420D" FromRole="Klant" ToRole="Opdracht" />
           <Property Name="Klant_logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Contactpersoon" Relationship="FestiSpec.Domain.FK__Contactpe__Klant__2A01329B" FromRole="Klant" ToRole="Contactpersoon" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__KlantI__3296789C" FromRole="Klant" ToRole="Opdracht" />
         </EntityType>
         <EntityType Name="Offerte">
           <Key>
@@ -682,7 +682,7 @@
           <Property Name="Beschrijving" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Klantbeslissing_reden" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Offerte__Opdrach__3D7E1B63" FromRole="Offerte" ToRole="Opdracht" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Offerte__Opdrach__2FBA0BF1" FromRole="Offerte" ToRole="Opdracht" />
         </EntityType>
         <EntityType Name="Opdracht">
           <Key>
@@ -692,20 +692,20 @@
           <Property Name="Opdracht_naam" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Creatie_datum" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="KlantID" Type="Int64" Nullable="false" />
+          <Property Name="KlantID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="MedewerkerID" Type="Int32" Nullable="false" />
+          <Property Name="Klantwensen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Gebruikte_rechtsgebieden" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Rapportage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Rapportage_uses_template" Type="Int32" />
           <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Opdracht__Medewe__35DCF99B" FromRole="Opdracht" ToRole="Account" />
-          <NavigationProperty Name="Inspectieformulier" Relationship="FestiSpec.Domain.FK__Inspectie__Opdra__320C68B7" FromRole="Opdracht" ToRole="Inspectieformulier" />
-          <NavigationProperty Name="Klant" Relationship="FestiSpec.Domain.FK__Opdracht__KlantI__37C5420D" FromRole="Opdracht" ToRole="Klant" />
-          <NavigationProperty Name="Offerte" Relationship="FestiSpec.Domain.FK__Offerte__Opdrach__3D7E1B63" FromRole="Opdracht" ToRole="Offerte" />
-          <NavigationProperty Name="Rapport_template" Relationship="FestiSpec.Domain.FK__Opdracht__Rappor__38B96646" FromRole="Opdracht" ToRole="Rapport_template" />
-          <NavigationProperty Name="Status_lookup" Relationship="FestiSpec.Domain.FK__Opdracht__Status__36D11DD4" FromRole="Opdracht" ToRole="Status_lookup" />
+          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Opdracht__Medewe__30AE302A" FromRole="Opdracht" ToRole="Account" />
+          <NavigationProperty Name="Inspectieformulier" Relationship="FestiSpec.Domain.FK__Inspectie__Opdra__2CDD9F46" FromRole="Opdracht" ToRole="Inspectieformulier" />
+          <NavigationProperty Name="Klant" Relationship="FestiSpec.Domain.FK__Opdracht__KlantI__3296789C" FromRole="Opdracht" ToRole="Klant" />
+          <NavigationProperty Name="Offerte" Relationship="FestiSpec.Domain.FK__Offerte__Opdrach__2FBA0BF1" FromRole="Opdracht" ToRole="Offerte" />
+          <NavigationProperty Name="Rapport_template" Relationship="FestiSpec.Domain.FK__Opdracht__Rappor__338A9CD5" FromRole="Opdracht" ToRole="Rapport_template" />
+          <NavigationProperty Name="Status_lookup" Relationship="FestiSpec.Domain.FK__Opdracht__Status__31A25463" FromRole="Opdracht" ToRole="Status_lookup" />
           <NavigationProperty Name="Account1" Relationship="FestiSpec.Domain.Ingeplande_inspecteurs" FromRole="Opdracht" ToRole="Account" />
-          <Property Name="Klantwensen" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Rapport_template">
           <Key>
@@ -713,7 +713,7 @@
           </Key>
           <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TemplateText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Rappor__38B96646" FromRole="Rapport_template" ToRole="Opdracht" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Rappor__338A9CD5" FromRole="Rapport_template" ToRole="Opdracht" />
         </EntityType>
         <EntityType Name="Rol_lookup">
           <Key>
@@ -721,7 +721,7 @@
           </Key>
           <Property Name="Afkorting" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Betekenis" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Account__Rol__2B5F6B28" FromRole="Rol_lookup" ToRole="Account" />
+          <NavigationProperty Name="Account" Relationship="FestiSpec.Domain.FK__Account__Rol__2630A1B7" FromRole="Rol_lookup" ToRole="Account" />
         </EntityType>
         <EntityType Name="Status_lookup">
           <Key>
@@ -729,7 +729,20 @@
           </Key>
           <Property Name="Afkorting" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Betekenis" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Status__36D11DD4" FromRole="Status_lookup" ToRole="Opdracht" />
+          <NavigationProperty Name="Opdracht" Relationship="FestiSpec.Domain.FK__Opdracht__Status__31A25463" FromRole="Status_lookup" ToRole="Opdracht" />
+        </EntityType>
+        <EntityType Name="Vraag">
+          <Key>
+            <PropertyRef Name="VraagID" />
+          </Key>
+          <Property Name="VraagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vraagstelling" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Vraagtype" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Bijlage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Inspectie__Vraag__2EC5E7B8" FromRole="Vraag" ToRole="Inspectieformulier_vragenlijst_combinatie" />
+          <NavigationProperty Name="Vraagtype_lookup" Relationship="FestiSpec.Domain.FK__Vraag__Vraagtype__347EC10E" FromRole="Vraag" ToRole="Vraagtype_lookup" />
+          <NavigationProperty Name="Vraag_mogelijk_antwoord" Relationship="FestiSpec.Domain.FK__Vraag_mog__Vraag__3572E547" FromRole="Vraag" ToRole="Vraag_mogelijk_antwoord" />
         </EntityType>
         <EntityType Name="Vraag_mogelijk_antwoord">
           <Key>
@@ -739,7 +752,7 @@
           <Property Name="VraagID" Type="Int32" Nullable="false" />
           <Property Name="Antwoord_nummer" Type="Int32" Nullable="false" />
           <Property Name="Antwoord_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Vraag_mog__Vraag__1EC48A19" FromRole="Vraag_mogelijk_antwoord" ToRole="Vraag" />
+          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Vraag_mog__Vraag__3572E547" FromRole="Vraag_mogelijk_antwoord" ToRole="Vraag" />
         </EntityType>
         <EntityType Name="Vraagtype_lookup">
           <Key>
@@ -747,9 +760,9 @@
           </Key>
           <Property Name="Afkorting" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="Beschrijving" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Vraag__Vraagtype__1DD065E0" FromRole="Vraagtype_lookup" ToRole="Vraag" />
+          <NavigationProperty Name="Vraag" Relationship="FestiSpec.Domain.FK__Vraag__Vraagtype__347EC10E" FromRole="Vraagtype_lookup" ToRole="Vraag" />
         </EntityType>
-        <Association Name="FK__Account__Rol__2B5F6B28">
+        <Association Name="FK__Account__Rol__2630A1B7">
           <End Type="FestiSpec.Domain.Rol_lookup" Role="Rol_lookup" Multiplicity="1" />
           <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -761,7 +774,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Antwoorde__Inspe__2D47B39A">
+        <Association Name="FK__Antwoorde__Inspe__2818EA29">
           <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -775,7 +788,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Beschikba__Medew__2E3BD7D3">
+        <Association Name="FK__Beschikba__Medew__290D0E62">
           <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -789,7 +802,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__Medewe__35DCF99B">
+        <Association Name="FK__Opdracht__Medewe__30AE302A">
           <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="1" />
           <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
           <ReferentialConstraint>
@@ -801,7 +814,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Antwoorde__VIC_I__2C538F61">
+        <Association Name="FK__Antwoorde__VIC_I__2724C5F0">
           <End Type="FestiSpec.Domain.Inspectieformulier_vragenlijst_combinatie" Role="Inspectieformulier_vragenlijst_combinatie" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -815,7 +828,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Contactpe__Klant__2F2FFC0C">
+        <Association Name="FK__Contactpe__Klant__2A01329B">
           <End Type="FestiSpec.Domain.Klant" Role="Klant" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -829,7 +842,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspectie__Inspe__33008CF0">
+        <Association Name="FK__Inspectie__Inspe__2DD1C37F">
           <End Type="FestiSpec.Domain.Inspectieformulier" Role="Inspectieformulier" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -843,7 +856,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inspectie__Opdra__320C68B7">
+        <Association Name="FK__Inspectie__Opdra__2CDD9F46">
           <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="0..1" />
           <End Type="FestiSpec.Domain.Inspectieformulier" Role="Inspectieformulier" Multiplicity="*" />
           <ReferentialConstraint>
@@ -855,74 +868,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Opdracht__KlantI__37C5420D">
-          <End Type="FestiSpec.Domain.Klant" Role="Klant" Multiplicity="1" />
-          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Klant">
-              <PropertyRef Name="KvK_nummer" />
-            </Principal>
-            <Dependent Role="Opdracht">
-              <PropertyRef Name="KlantID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Offerte__Opdrach__3D7E1B63">
-          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="FestiSpec.Domain.Offerte" Role="Offerte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Opdracht">
-              <PropertyRef Name="OpdrachtID" />
-            </Principal>
-            <Dependent Role="Offerte">
-              <PropertyRef Name="OpdrachtID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Opdracht__Rappor__38B96646">
-          <End Type="FestiSpec.Domain.Rapport_template" Role="Rapport_template" Multiplicity="0..1" />
-          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rapport_template">
-              <PropertyRef Name="TemplateID" />
-            </Principal>
-            <Dependent Role="Opdracht">
-              <PropertyRef Name="Rapportage_uses_template" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Opdracht__Status__36D11DD4">
-          <End Type="FestiSpec.Domain.Status_lookup" Role="Status_lookup" Multiplicity="1" />
-          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Status_lookup">
-              <PropertyRef Name="Afkorting" />
-            </Principal>
-            <Dependent Role="Opdracht">
-              <PropertyRef Name="Status" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Ingeplande_inspecteurs">
-          <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="*" />
-          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Vraag">
-          <Key>
-            <PropertyRef Name="VraagID" />
-          </Key>
-          <Property Name="VraagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vraagstelling" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Vraagtype" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="Bijlage" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Laatste_weiziging" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Inspectieformulier_vragenlijst_combinatie" Relationship="FestiSpec.Domain.FK__Inspectie__Vraag__18178C8A" FromRole="Vraag" ToRole="Inspectieformulier_vragenlijst_combinatie" />
-          <NavigationProperty Name="Vraagtype_lookup" Relationship="FestiSpec.Domain.FK__Vraag__Vraagtype__1DD065E0" FromRole="Vraag" ToRole="Vraagtype_lookup" />
-          <NavigationProperty Name="Vraag_mogelijk_antwoord" Relationship="FestiSpec.Domain.FK__Vraag_mog__Vraag__1EC48A19" FromRole="Vraag" ToRole="Vraag_mogelijk_antwoord" />
-        </EntityType>
-        <Association Name="FK__Inspectie__Vraag__18178C8A">
+        <Association Name="FK__Inspectie__Vraag__2EC5E7B8">
           <End Type="FestiSpec.Domain.Vraag" Role="Vraag" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
@@ -936,7 +882,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vraag__Vraagtype__1DD065E0">
+        <Association Name="FK__Opdracht__KlantI__3296789C">
+          <End Type="FestiSpec.Domain.Klant" Role="Klant" Multiplicity="1" />
+          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klant">
+              <PropertyRef Name="KvK_nummer" />
+            </Principal>
+            <Dependent Role="Opdracht">
+              <PropertyRef Name="KlantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offerte__Opdrach__2FBA0BF1">
+          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="FestiSpec.Domain.Offerte" Role="Offerte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Opdracht">
+              <PropertyRef Name="OpdrachtID" />
+            </Principal>
+            <Dependent Role="Offerte">
+              <PropertyRef Name="OpdrachtID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opdracht__Rappor__338A9CD5">
+          <End Type="FestiSpec.Domain.Rapport_template" Role="Rapport_template" Multiplicity="0..1" />
+          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rapport_template">
+              <PropertyRef Name="TemplateID" />
+            </Principal>
+            <Dependent Role="Opdracht">
+              <PropertyRef Name="Rapportage_uses_template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Opdracht__Status__31A25463">
+          <End Type="FestiSpec.Domain.Status_lookup" Role="Status_lookup" Multiplicity="1" />
+          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_lookup">
+              <PropertyRef Name="Afkorting" />
+            </Principal>
+            <Dependent Role="Opdracht">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vraag__Vraagtype__347EC10E">
           <End Type="FestiSpec.Domain.Vraagtype_lookup" Role="Vraagtype_lookup" Multiplicity="1" />
           <End Type="FestiSpec.Domain.Vraag" Role="Vraag" Multiplicity="*" />
           <ReferentialConstraint>
@@ -948,7 +944,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vraag_mog__Vraag__1EC48A19">
+        <Association Name="FK__Vraag_mog__Vraag__3572E547">
           <End Type="FestiSpec.Domain.Vraag" Role="Vraag" Multiplicity="1" />
           <End Type="FestiSpec.Domain.Vraag_mogelijk_antwoord" Role="Vraag_mogelijk_antwoord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -959,6 +955,10 @@
               <PropertyRef Name="VraagID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="Ingeplande_inspecteurs">
+          <End Type="FestiSpec.Domain.Account" Role="Account" Multiplicity="*" />
+          <End Type="FestiSpec.Domain.Opdracht" Role="Opdracht" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -990,9 +990,9 @@
           <EntitySetMapping Name="Antwoorden">
             <EntityTypeMapping TypeName="FestiSpec.Domain.Antwoorden">
               <MappingFragment StoreEntitySet="Antwoorden">
+                <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
                 <ScalarProperty Name="Antwoord_image" ColumnName="Antwoord_image" />
                 <ScalarProperty Name="Antwoord_text" ColumnName="Antwoord_text" />
-                <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
                 <ScalarProperty Name="InspecteurID" ColumnName="InspecteurID" />
                 <ScalarProperty Name="VIC_ID" ColumnName="VIC_ID" />
               </MappingFragment>
@@ -1046,8 +1046,8 @@
           <EntitySetMapping Name="Klant">
             <EntityTypeMapping TypeName="FestiSpec.Domain.Klant">
               <MappingFragment StoreEntitySet="Klant">
-                <ScalarProperty Name="Klant_logo" ColumnName="Klant_logo" />
                 <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
+                <ScalarProperty Name="Klant_logo" ColumnName="Klant_logo" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
@@ -1074,11 +1074,11 @@
           <EntitySetMapping Name="Opdracht">
             <EntityTypeMapping TypeName="FestiSpec.Domain.Opdracht">
               <MappingFragment StoreEntitySet="Opdracht">
-                <ScalarProperty Name="Klantwensen" ColumnName="Klantwensen" />
                 <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
                 <ScalarProperty Name="Rapportage_uses_template" ColumnName="Rapportage_uses_template" />
                 <ScalarProperty Name="Rapportage" ColumnName="Rapportage" />
                 <ScalarProperty Name="Gebruikte_rechtsgebieden" ColumnName="Gebruikte_rechtsgebieden" />
+                <ScalarProperty Name="Klantwensen" ColumnName="Klantwensen" />
                 <ScalarProperty Name="MedewerkerID" ColumnName="MedewerkerID" />
                 <ScalarProperty Name="KlantID" ColumnName="KlantID" />
                 <ScalarProperty Name="Creatie_datum" ColumnName="Creatie_datum" />
@@ -1112,6 +1112,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Vraag">
+            <EntityTypeMapping TypeName="FestiSpec.Domain.Vraag">
+              <MappingFragment StoreEntitySet="Vraag">
+                <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
+                <ScalarProperty Name="Bijlage" ColumnName="Bijlage" />
+                <ScalarProperty Name="Vraagtype" ColumnName="Vraagtype" />
+                <ScalarProperty Name="Vraagstelling" ColumnName="Vraagstelling" />
+                <ScalarProperty Name="VraagID" ColumnName="VraagID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Vraag_mogelijk_antwoord">
             <EntityTypeMapping TypeName="FestiSpec.Domain.Vraag_mogelijk_antwoord">
               <MappingFragment StoreEntitySet="Vraag_mogelijk_antwoord">
@@ -1137,17 +1148,6 @@
               <ScalarProperty Name="AccountID" ColumnName="InspecteurID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Vraag">
-            <EntityTypeMapping TypeName="FestiSpec.Domain.Vraag">
-              <MappingFragment StoreEntitySet="Vraag">
-                <ScalarProperty Name="Laatste_weiziging" ColumnName="Laatste_weiziging" />
-                <ScalarProperty Name="Bijlage" ColumnName="Bijlage" />
-                <ScalarProperty Name="Vraagtype" ColumnName="Vraagtype" />
-                <ScalarProperty Name="Vraagstelling" ColumnName="Vraagstelling" />
-                <ScalarProperty Name="VraagID" ColumnName="VraagID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
