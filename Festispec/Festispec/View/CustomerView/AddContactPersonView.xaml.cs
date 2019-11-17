@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace Festispec.View
         public AddContactPersonView()
         {
             InitializeComponent();
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Kies een logo";
+            op.Filter = "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+                CustomerLogo.Source = new BitmapImage(new Uri(op.FileName));
         }
     }
 }
