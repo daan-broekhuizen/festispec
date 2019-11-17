@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.View.RichTextEditor"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        xmlns:browser="clr-namespace:Festispec.ViewModel.RichTextEditor"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:ViewModel="clr-namespace:Festispec.ViewModel.RichTextEditor"
         mc:Ignorable="d"
-        DataContext="{Binding RichTextEditor, Source={StaticResource Locator} }"
+        DataContext="{Binding RichTextEditor, Source={StaticResource Locator}}"
         Title="RichTextEditorView" Height="450" Width="800">
     <Window.Resources>
-        <browser:MultiConverter x:Key="MultiConverter" />
+        <ViewModel:MultiConverter x:Key="MultiConverter" />
+        <ViewModel:DocumentDesignerViewModel x:Key="ViewModel" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,9 +23,8 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0">
-            <WebBrowser Name="webBrowser" browser:WebBrowserHelper.Body="{Binding Content}" Tag="{Binding ElementName=controlMode, Path=SelectedIndex}" Visibility="Visible"/>
-            <TextBox Name="htmlEditor" Visibility="Hidden" Text="{Binding Content, Mode=TwoWay}" AcceptsTab="True" />
+        <Grid Grid.Row="0" Grid.Column="0" DataContext="{Binding RichTextEditor, Source={StaticResource Locator}}">
+            <local:DocumentDesigner x:Name="documentDesigner" DesignerContent="{Binding Content, Mode=TwoWay}" />
         </Grid>
             
         <StackPanel Grid.Row="0" Grid.Column="1">
@@ -37,8 +37,8 @@
                             <i:InvokeCommandAction Command="{Binding ModeChangedCommand}">
                                 <i:InvokeCommandAction.CommandParameter>
                                     <MultiBinding Converter="{StaticResource MultiConverter}">
-                                        <Binding ElementName="webBrowser" />
-                                        <Binding ElementName="htmlEditor" />
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlMode" Path="SelectedIndex" />
                                     </MultiBinding>
                                 </i:InvokeCommandAction.CommandParameter>
                             </i:InvokeCommandAction>
@@ -59,7 +59,7 @@
                             <i:InvokeCommandAction Command="{Binding FontTypeChangedCommand}">
                                 <i:InvokeCommandAction.CommandParameter>
                                     <MultiBinding Converter="{StaticResource MultiConverter}">
-                                        <Binding ElementName="webBrowser" />
+                                        <Binding ElementName="documentDesigner" />
                                         <Binding ElementName="controlType" Path="SelectedValue" />
                                     </MultiBinding>
                                 </i:InvokeCommandAction.CommandParameter>
@@ -71,7 +71,7 @@
                     <System:String>Roboto</System:String>
                 </ComboBox>
             </StackPanel>
-            
+
             <!-- Grootte -->
             <StackPanel Visibility="{Binding IsEditable}">
                 <Label Content="Lettergrootte" FontWeight="Bold" />
@@ -81,7 +81,7 @@
                             <i:InvokeCommandAction Command="{Binding FontSizeChangedCommand}">
                                 <i:InvokeCommandAction.CommandParameter>
                                     <MultiBinding Converter="{StaticResource MultiConverter}">
-                                        <Binding ElementName="webBrowser" />
+                                        <Binding ElementName="documentDesigner" />
                                         <Binding ElementName="controlSize" Path="Text" />
                                     </MultiBinding>
                                 </i:InvokeCommandAction.CommandParameter>
@@ -90,14 +90,14 @@
                     </i:Interaction.Triggers>
                 </TextBox>
             </StackPanel>
-            
+
             <!-- Style-->
             <Label Content="Styling" FontWeight="Bold" />
             <StackPanel Visibility="{Binding IsEditable}" Orientation="Horizontal">
                 <Button Name="controlBold" Content="Bold" Command="{Binding ApplyStyleCommand}" Tag="Bold">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlBold" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
@@ -106,7 +106,7 @@
                 <Button Name="controlItalic" Content="Italic" Command="{Binding ApplyStyleCommand}" Tag="Italic">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlItalic" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
@@ -115,20 +115,20 @@
                 <Button Name="controlUnderline" Content="Underline" Command="{Binding ApplyStyleCommand}" Tag="Underline">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlUnderline" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
                 </Button>
             </StackPanel>
-            
+
             <!-- Align -->
             <Label Content="Alignment" FontWeight="Bold" />
             <StackPanel Visibility="{Binding IsEditable}" Orientation="Horizontal">
                 <Button Name="controlAlignLeft" Content="Links" Command="{Binding ApplyAlignmentCommand}" Tag="JustifyLeft">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlAlignLeft" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
@@ -137,7 +137,7 @@
                 <Button Name="controlAlignCenter" Content="Midden" Command="{Binding ApplyAlignmentCommand}" Tag="JustifyCenter">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlAlignCenter" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
@@ -146,19 +146,30 @@
                 <Button Name="controlAlignRight" Content="Rechts" Command="{Binding ApplyAlignmentCommand}" Tag="JustifyRight">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
-                            <Binding ElementName="webBrowser" />
+                            <Binding ElementName="documentDesigner" />
                             <Binding ElementName="controlAlignRight" Path="Tag" />
                         </MultiBinding>
                     </Button.CommandParameter>
                 </Button>
             </StackPanel>
-            
+
             <!-- Image -->
-            <StackPanel Visibility="{Binding IsEditable}">
-                <Label Content="Afbeelding invoegen" FontWeight="Bold" />
-                <Button Content="Image" />
-            </StackPanel>
-            
+            <Label Content="Afbeelding invoegen" FontWeight="Bold" />
+            <Grid Visibility="{Binding IsEditable}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="controlAfbeelding" Grid.Column="0" Text="https://cdn.pixabay.com/photo/2013/07/12/17/47/test-pattern-152459_960_720.png" />
+                <Button Content="Add" Grid.Column="1" Command="{Binding AddImageCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiConverter}">
+                            <Binding ElementName="documentDesigner" />
+                            <Binding ElementName="controlAfbeelding" Path="Text" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

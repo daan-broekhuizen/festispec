@@ -138,7 +138,6 @@ namespace Festispec.ViewModel
         {
             get => new RichTextEditorViewModel();
         }
-
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

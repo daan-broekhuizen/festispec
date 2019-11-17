@@ -128,9 +128,9 @@
     <Compile Include="ViewModel\QuestionListViewModel.cs" />
     <Compile Include="ViewModel\QuestionMultipleChoiceVM.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\RichTextEditor\DocumentDesignerViewModel.cs" />
     <Compile Include="ViewModel\RichTextEditor\MultiConverter.cs" />
     <Compile Include="ViewModel\RichTextEditor\RichTextEditorViewModel.cs" />
-    <Compile Include="ViewModel\RichTextEditor\WebBrowserHelper.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\AvailabilityView.xaml.cs">
       <DependentUpon>AvailabilityView.xaml</DependentUpon>
@@ -147,8 +147,8 @@
     <Compile Include="View\QuestionMultipleChoiceEditView.xaml.cs">
       <DependentUpon>QuestionMultipleChoiceEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RichTextEditor\RichTextEditor.xaml.cs">
-      <DependentUpon>RichTextEditor.xaml</DependentUpon>
+    <Compile Include="View\RichTextEditor\DocumentDesigner.xaml.cs">
+      <DependentUpon>DocumentDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RichTextEditor\RichTextEditorView.xaml.cs">
       <DependentUpon>RichTextEditorView.xaml</DependentUpon>
@@ -185,7 +185,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RichTextEditor\RichTextEditor.xaml">
+    <Page Include="View\RichTextEditor\DocumentDesigner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
