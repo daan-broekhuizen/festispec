@@ -4,7 +4,7 @@
     [Opdracht_naam] NVARCHAR(45) NOT NULL, 
     [Status] NVARCHAR(2) NOT NULL, 
     [Creatie_datum] DATE NOT NULL, 
-    [KlantID] NVARCHAR(8) NOT NULL, 
+    [KlantID] BIGINT NOT NULL, 
     [MedewerkerID] INT NOT NULL,
 	[Klantwensen] TEXT NOT NULL,
 	[Gebruikte_rechtsgebieden] TEXT NULL,

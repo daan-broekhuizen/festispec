@@ -10,7 +10,7 @@
     [Postcode] NVARCHAR(6) NULL, 
     [Huisnummer] NVARCHAR(4) NULL, 
     [Email] NVARCHAR(120) NULL, 
-    [Telefoonnummer] NVARCHAR(10) NULL, 
+    [Telefoonnummer] BIGINT NULL, 
     [Datum_certificering] DATE NULL, 
     [Einddatum_certificering] DATE NULL, 
     [IBAN] NVARCHAR(18) NULL, 
