@@ -1,9 +1,11 @@
+using Festispec.View;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
@@ -21,11 +23,15 @@ namespace Festispec.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of the MainViewModel class.
-        /// </summary>
+        // Commands
+        public ICommand OpenLoginCommand { get; private set; }
+
+        // Views
+        private LoginView _loginView;
+
         public MainViewModel()
         {
+            
             //Account acc = new Account()
             //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
 
@@ -35,6 +41,13 @@ namespace Festispec.ViewModel
             PlanningViewModel c = new PlanningViewModel();
             _ = c.CalculateDistance();
             
+
+        }
+
+        private void OpenLogin()
+        {
+            this._loginView = new LoginView();
+            this._loginView.Show();
         }
     }
 }

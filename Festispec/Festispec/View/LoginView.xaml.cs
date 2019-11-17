@@ -18,9 +18,9 @@ namespace Festispec.View
     /// <summary>
     /// Interaction logic for Inloggen.xaml
     /// </summary>
-    public partial class Inloggen : Page
+    public partial class LoginView : Page
     {
-        public Inloggen()
+        public LoginView()
         {
             InitializeComponent();
         }
