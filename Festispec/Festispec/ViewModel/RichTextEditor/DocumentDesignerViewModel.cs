@@ -120,6 +120,7 @@ namespace Festispec.ViewModel.RichTextEditor
             using (Document doc = Document.FromString(input))
             {
                 doc.OutputXml = true;
+                doc.ShowWarnings = false;
                 doc.AddTidyMetaElement = false;
                 doc.IndentWithTabs = true;
                 
