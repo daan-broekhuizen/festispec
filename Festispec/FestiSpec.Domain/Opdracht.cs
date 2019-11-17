@@ -26,7 +26,7 @@ namespace FestiSpec.Domain
         public string Opdracht_naam { get; set; }
         public string Status { get; set; }
         public System.DateTime Creatie_datum { get; set; }
-        public long KlantID { get; set; }
+        public string KlantID { get; set; }
         public int MedewerkerID { get; set; }
         public string Klantwensen { get; set; }
         public string Gebruikte_rechtsgebieden { get; set; }

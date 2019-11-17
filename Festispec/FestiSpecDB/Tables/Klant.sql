@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Klant]
 (
-	[KvK_nummer] BIGINT NOT NULL PRIMARY KEY, 
+	[KvK_nummer] NVARCHAR(8) NOT NULL PRIMARY KEY, 
     [Naam] NVARCHAR(45) NOT NULL, 
     [Stad] NVARCHAR(50) NOT NULL, 
     [Straatnaam] NVARCHAR(50) NOT NULL,

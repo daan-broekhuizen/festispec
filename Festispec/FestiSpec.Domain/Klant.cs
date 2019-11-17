@@ -21,7 +21,7 @@ namespace FestiSpec.Domain
             this.Opdracht = new HashSet<Opdracht>();
         }
     
-        public long KvK_nummer { get; set; }
+        public string KvK_nummer { get; set; }
         public string Naam { get; set; }
         public string Stad { get; set; }
         public string Straatnaam { get; set; }

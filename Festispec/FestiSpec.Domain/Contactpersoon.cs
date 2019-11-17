@@ -15,7 +15,7 @@ namespace FestiSpec.Domain
     public partial class Contactpersoon
     {
         public int ContactpersoonID { get; set; }
-        public long KlantID { get; set; }
+        public string KlantID { get; set; }
         public string Voornaam { get; set; }
         public string Tussenvoegsel { get; set; }
         public string Achternaam { get; set; }
