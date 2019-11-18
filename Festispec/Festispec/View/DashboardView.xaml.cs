@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for HomeWindow.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class TestView : Page
+    public partial class DashboardView : Page
     {
-        public TestView()
+        public DashboardView()
         {
             InitializeComponent();
         }
