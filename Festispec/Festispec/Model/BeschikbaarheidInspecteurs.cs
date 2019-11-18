@@ -6,7 +6,8 @@ namespace Festispec.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Beschikbaarheid_inspecteurs
+    [Table("Beschikbaarheid_inspecteurs")]
+    public partial class BeschikbaarheidInspecteurs
     {
         [Key]
         [Column(Order = 0)]

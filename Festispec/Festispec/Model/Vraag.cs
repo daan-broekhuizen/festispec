@@ -12,8 +12,8 @@ namespace Festispec.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vraag()
         {
-            Inspectieformulier_vragenlijst_combinatie = new HashSet<Inspectieformulier_vragenlijst_combinatie>();
-            Vraag_mogelijk_antwoord = new HashSet<Vraag_mogelijk_antwoord>();
+            InspectieformulierVragenlijstCombinatie = new HashSet<InspectieformulierVragenlijstCombinatie>();
+            VraagMogelijkAntwoord = new HashSet<VraagMogelijkAntwoord>();
         }
 
         public int VraagID { get; set; }
@@ -29,14 +29,15 @@ namespace Festispec.Model
         [Column(TypeName = "image")]
         public byte[] Bijlage { get; set; }
 
-        public DateTime Laatste_weiziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
+        public virtual ICollection<InspectieformulierVragenlijstCombinatie> InspectieformulierVragenlijstCombinatie { get; set; }
 
-        public virtual Vraagtype_lookup Vraagtype_lookup { get; set; }
+        public virtual VraagType VraagtypeLookup { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vraag_mogelijk_antwoord> Vraag_mogelijk_antwoord { get; set; }
+        public virtual ICollection<VraagMogelijkAntwoord> VraagMogelijkAntwoord { get; set; }
     }
 }

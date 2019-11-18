@@ -26,7 +26,7 @@
                         Datum_certificering = c.DateTime(storeType: "date"),
                         Einddatum_certificering = c.DateTime(storeType: "date"),
                         IBAN = c.String(maxLength: 18),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.AccountID)
                 .ForeignKey("dbo.Rol_lookup", t => t.Rol)
@@ -40,7 +40,7 @@
                         InspecteurID = c.Int(nullable: false),
                         Antwoord_text = c.String(unicode: false, storeType: "text"),
                         Antwoord_image = c.Binary(storeType: "image"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.VIC_ID, t.InspecteurID })
                 .ForeignKey("dbo.Inspectieformulier_vragenlijst_combinatie", t => t.VIC_ID, cascadeDelete: true)
@@ -72,7 +72,7 @@
                         Locatie = c.String(unicode: false, storeType: "text"),
                         OpdrachtID = c.Int(),
                         Beschrijving = c.String(unicode: false, storeType: "text"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.InspectieformulierID)
                 .ForeignKey("dbo.Opdracht", t => t.OpdrachtID)
@@ -92,7 +92,7 @@
                         Gebruikte_rechtsgebieden = c.String(unicode: false, storeType: "text"),
                         Rapportage = c.String(unicode: false, storeType: "text"),
                         Rapportage_uses_template = c.Int(),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.OpdrachtID)
                 .ForeignKey("dbo.Klant", t => t.KlantID)
@@ -117,7 +117,7 @@
                         Email = c.String(nullable: false, maxLength: 130),
                         Website = c.String(maxLength: 100),
                         Klant_logo = c.Binary(storeType: "image"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.KvK_nummer);
             
@@ -133,7 +133,7 @@
                         Email = c.String(nullable: false, maxLength: 130),
                         Telefoon = c.String(nullable: false, maxLength: 10),
                         Notities = c.String(unicode: false, storeType: "text"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ContactpersoonID)
                 .ForeignKey("dbo.Klant", t => t.KlantID, cascadeDelete: true)
@@ -149,7 +149,7 @@
                         Aanmaakdatum = c.DateTime(nullable: false, storeType: "date"),
                         Beschrijving = c.String(unicode: false, storeType: "text"),
                         Klantbeslissing_reden = c.String(unicode: false, storeType: "text"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.OfferteID)
                 .ForeignKey("dbo.Opdracht", t => t.OpdrachtID, cascadeDelete: true)
@@ -181,7 +181,7 @@
                         Vraagstelling = c.String(nullable: false, unicode: false, storeType: "text"),
                         Vraagtype = c.String(nullable: false, maxLength: 2),
                         Bijlage = c.Binary(storeType: "image"),
-                        Laatste_weiziging = c.DateTime(nullable: false),
+                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.VraagID)
                 .ForeignKey("dbo.Vraagtype_lookup", t => t.Vraagtype)
@@ -229,18 +229,6 @@
                 .PrimaryKey(t => t.Afkorting);
             
             CreateTable(
-                "dbo.sysdiagrams",
-                c => new
-                    {
-                        diagram_id = c.Int(nullable: false, identity: true),
-                        name = c.String(nullable: false, maxLength: 128),
-                        principal_id = c.Int(nullable: false),
-                        version = c.Int(),
-                        definition = c.Binary(),
-                    })
-                .PrimaryKey(t => t.diagram_id);
-            
-            CreateTable(
                 "dbo.Ingeplande_inspecteurs",
                 c => new
                     {
@@ -258,9 +246,9 @@
         public override void Down()
         {
             DropForeignKey("dbo.Account", "Rol", "dbo.Rol_lookup");
+            DropForeignKey("dbo.Opdracht", "MedewerkerID", "dbo.Account");
             DropForeignKey("dbo.Ingeplande_inspecteurs", "OpdrachtID", "dbo.Opdracht");
             DropForeignKey("dbo.Ingeplande_inspecteurs", "InspecteurID", "dbo.Account");
-            DropForeignKey("dbo.Opdracht", "MedewerkerID", "dbo.Account");
             DropForeignKey("dbo.Beschikbaarheid_inspecteurs", "MedewerkerID", "dbo.Account");
             DropForeignKey("dbo.Antwoorden", "InspecteurID", "dbo.Account");
             DropForeignKey("dbo.Vraag", "Vraagtype", "dbo.Vraagtype_lookup");
@@ -292,7 +280,6 @@
             DropIndex("dbo.Antwoorden", new[] { "VIC_ID" });
             DropIndex("dbo.Account", new[] { "Rol" });
             DropTable("dbo.Ingeplande_inspecteurs");
-            DropTable("dbo.sysdiagrams");
             DropTable("dbo.Rol_lookup");
             DropTable("dbo.Beschikbaarheid_inspecteurs");
             DropTable("dbo.Vraagtype_lookup");

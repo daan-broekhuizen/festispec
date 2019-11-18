@@ -6,10 +6,11 @@ namespace Festispec.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Rol_lookup
+    [Table("Rol_lookup")]
+    public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rol_lookup()
+        public Rol()
         {
             Account = new HashSet<Account>();
         }

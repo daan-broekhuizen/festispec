@@ -82,26 +82,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201911181828496_Main.cs" />
-    <Compile Include="Migrations\201911181828496_Main.designer.cs">
-      <DependentUpon>201911181828496_Main.cs</DependentUpon>
+    <Compile Include="Migrations\201911182127136_Main.cs" />
+    <Compile Include="Migrations\201911182127136_Main.designer.cs">
+      <DependentUpon>201911182127136_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
-    <Compile Include="Model\Beschikbaarheid_inspecteurs.cs" />
+    <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
-    <Compile Include="Model\Inspectieformulier_vragenlijst_combinatie.cs" />
+    <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
     <Compile Include="Model\Klant.cs" />
     <Compile Include="Model\Offerte.cs" />
     <Compile Include="Model\Opdracht.cs" />
-    <Compile Include="Model\Rapport_template.cs" />
-    <Compile Include="Model\Rol_lookup.cs" />
+    <Compile Include="Model\RapportTemplate.cs" />
+    <Compile Include="Model\Repositories\TestRepository.cs" />
+    <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\NavigationService.cs" />
-    <Compile Include="Model\Status_lookup.cs" />
-    <Compile Include="Model\sysdiagrams.cs" />
+    <Compile Include="Model\Status.cs" />
     <Compile Include="View\TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
@@ -118,8 +118,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Vraag.cs" />
-    <Compile Include="Model\Vraagtype_lookup.cs" />
-    <Compile Include="Model\Vraag_mogelijk_antwoord.cs" />
+    <Compile Include="Model\VraagType.cs" />
+    <Compile Include="Model\VraagMogelijkAntwoord.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -135,8 +135,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201911181828496_Main.resx">
-      <DependentUpon>201911181828496_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911182127136_Main.resx">
+      <DependentUpon>201911182127136_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

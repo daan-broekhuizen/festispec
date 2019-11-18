@@ -6,10 +6,11 @@ namespace Festispec.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Status_lookup
+    [Table("Status_lookup")]
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Status_lookup()
+        public Status()
         {
             Opdracht = new HashSet<Opdracht>();
         }

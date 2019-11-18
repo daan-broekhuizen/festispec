@@ -19,16 +19,17 @@ namespace Festispec.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int InspecteurID { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Antwoord_text { get; set; }
+        [Column("Antwoord_text", TypeName = "text")]
+        public string AntwoordText { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] Antwoord_image { get; set; }
+        [Column("Antwoord_image", TypeName = "image")]
+        public byte[] AntwoordImage { get; set; }
 
-        public DateTime Laatste_weiziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         public virtual Account Account { get; set; }
 
-        public virtual Inspectieformulier_vragenlijst_combinatie Inspectieformulier_vragenlijst_combinatie { get; set; }
+        public virtual InspectieformulierVragenlijstCombinatie InspectieformulierVragenlijstCombinatie { get; set; }
     }
 }

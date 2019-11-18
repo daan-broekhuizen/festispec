@@ -6,10 +6,11 @@ namespace Festispec.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Inspectieformulier_vragenlijst_combinatie
+    [Table("Inspectieformulier_vragenlijst_combinatie")]
+    public partial class InspectieformulierVragenlijstCombinatie
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inspectieformulier_vragenlijst_combinatie()
+        public InspectieformulierVragenlijstCombinatie()
         {
             Antwoorden = new HashSet<Antwoorden>();
         }

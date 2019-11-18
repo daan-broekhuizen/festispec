@@ -13,9 +13,9 @@ namespace Festispec.Model
         public Account()
         {
             Antwoorden = new HashSet<Antwoorden>();
-            Beschikbaarheid_inspecteurs = new HashSet<Beschikbaarheid_inspecteurs>();
+            BeschikbaarheidInspecteurs = new HashSet<BeschikbaarheidInspecteurs>();
             Opdracht = new HashSet<Opdracht>();
-            Opdracht1 = new HashSet<Opdracht>();
+            Ingepland = new HashSet<Opdracht>();
         }
 
         public int AccountID { get; set; }
@@ -58,29 +58,30 @@ namespace Festispec.Model
         [StringLength(10)]
         public string Telefoonnummer { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? Datum_certificering { get; set; }
+        [Column("Datum_certificering", TypeName = "date")]
+        public DateTime? DatumCertificering { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? Einddatum_certificering { get; set; }
+        [Column("Einddatum_certificering", TypeName = "date")]
+        public DateTime? EinddatumCertificering { get; set; }
 
         [StringLength(18)]
         public string IBAN { get; set; }
 
-        public DateTime Laatste_weiziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
-        public virtual Rol_lookup Rol_lookup { get; set; }
+        public virtual Rol RolType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Antwoorden> Antwoorden { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Beschikbaarheid_inspecteurs> Beschikbaarheid_inspecteurs { get; set; }
+        public virtual ICollection<BeschikbaarheidInspecteurs> BeschikbaarheidInspecteurs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opdracht> Opdracht { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opdracht> Opdracht1 { get; set; }
+        public virtual ICollection<Opdracht> Ingepland { get; set; }
     }
 }

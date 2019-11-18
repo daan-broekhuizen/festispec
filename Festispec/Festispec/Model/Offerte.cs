@@ -21,10 +21,11 @@ namespace Festispec.Model
         [Column(TypeName = "text")]
         public string Beschrijving { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Klantbeslissing_reden { get; set; }
+        [Column("Klantbeslissing_reden", TypeName = "text")]
+        public string KlantbeslissingReden { get; set; }
 
-        public DateTime Laatste_weiziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         public virtual Opdracht Opdracht { get; set; }
     }

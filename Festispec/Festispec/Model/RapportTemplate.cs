@@ -6,23 +6,22 @@ namespace Festispec.Model
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Vraagtype_lookup
+    [Table("Rapport_template")]
+    public partial class RapportTemplate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Vraagtype_lookup()
+        public RapportTemplate()
         {
-            Vraag = new HashSet<Vraag>();
+            Opdracht = new HashSet<Opdracht>();
         }
 
         [Key]
-        [StringLength(2)]
-        public string Afkorting { get; set; }
+        public int TemplateID { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        public string Beschrijving { get; set; }
+        [Column(TypeName = "text")]
+        public string TemplateText { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vraag> Vraag { get; set; }
+        public virtual ICollection<Opdracht> Opdracht { get; set; }
     }
 }
