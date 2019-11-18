@@ -92,7 +92,7 @@
             </StackPanel>
 
             <!-- Style-->
-            <Label Content="Styling" FontWeight="Bold" />
+            <Label Content="Styling" FontWeight="Bold" Visibility="{Binding IsEditable}" />
             <StackPanel Visibility="{Binding IsEditable}" Orientation="Horizontal">
                 <Button Name="controlBold" Content="Bold" Command="{Binding ApplyStyleCommand}" Tag="Bold">
                     <Button.CommandParameter>
@@ -123,7 +123,7 @@
             </StackPanel>
 
             <!-- Align -->
-            <Label Content="Alignment" FontWeight="Bold" />
+            <Label Content="Alignment" FontWeight="Bold" Visibility="{Binding IsEditable}" />
             <StackPanel Visibility="{Binding IsEditable}" Orientation="Horizontal">
                 <Button Name="controlAlignLeft" Content="Links" Command="{Binding ApplyAlignmentCommand}" Tag="JustifyLeft">
                     <Button.CommandParameter>
@@ -154,7 +154,7 @@
             </StackPanel>
 
             <!-- Image -->
-            <Label Content="Afbeelding invoegen" FontWeight="Bold" />
+            <Label Content="Afbeelding invoegen" FontWeight="Bold" Visibility="{Binding IsEditable}" />
             <Grid Visibility="{Binding IsEditable}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
@@ -172,8 +172,8 @@
             </Grid>
             
             <!-- Test -->
-            <Label Content="Test" FontWeight="Bold" />
-            <Grid>
+            <Label Content="Test" FontWeight="Bold" Visibility="{Binding IsEditable}"  />
+            <Grid Visibility="{Binding IsEditable}">
                 <Button Name="controlTest" Content="Test" Command="{Binding TestCommand}">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
