@@ -32,6 +32,8 @@ namespace Festispec.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Festispec.View.LoginView"
+﻿<Window x:Class="Festispec.View.LoginView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -40,4 +40,4 @@
         <Button Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
 
     </Grid>
-</Page>
+</Window>

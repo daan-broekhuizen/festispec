@@ -68,7 +68,7 @@ namespace Festispec.ViewModel
             LoginCommand = new RelayCommand(Login, CanLogin);
         }
 
-        private bool CanLogin() => Username.Length > 0 && Password.Length > 0;
+        private bool CanLogin() => Username != null && Username.Length > 0 && Password.Length > 0;
 
         private void Login()
         {
