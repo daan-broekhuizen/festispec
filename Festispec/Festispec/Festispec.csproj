@@ -91,7 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Service\ImageSelectService.cs" />
-    <Compile Include="Service\PostcodeService.cs" />
+    <Compile Include="Service\LocationService.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
