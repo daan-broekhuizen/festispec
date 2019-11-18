@@ -35,7 +35,7 @@ namespace Festispec.ViewModel
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
 
-        private NavigationService navigationService;
+        private readonly NavigationService navigationService;
 
         public MainViewModel(NavigationService navigation)
         {
