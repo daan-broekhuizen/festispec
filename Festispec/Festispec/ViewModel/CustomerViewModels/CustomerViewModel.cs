@@ -122,10 +122,10 @@ namespace Festispec.ViewModel
         }
         public ImageSource Logo
         {
-            get => ImageByteConverter.ByteToImage(_klant.Klant_logo);
+            get => ImageByteConverter.BytesToImage(_klant.Klant_logo);
             set
             {
-                _klant.Klant_logo = ImageByteConverter.ImageToBytes(value);
+                _klant.Klant_logo = ImageByteConverter.PngImageToBytes(value);
                 RaisePropertyChanged("Logo");
             }
         }

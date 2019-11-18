@@ -30,8 +30,6 @@ namespace Festispec.View.CustomerView
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
-
-
         private void ShowWindow(string message) => MessageBox.Show(message);
     }
 }

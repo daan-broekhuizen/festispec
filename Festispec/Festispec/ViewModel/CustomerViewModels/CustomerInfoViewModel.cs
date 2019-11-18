@@ -65,7 +65,7 @@ namespace Festispec.ViewModel
                     Website = CustomerVM.Website,
                     Laatste_weiziging = DateTime.Now,
                     Telefoonnummer = CustomerVM.Telephone,
-                    Klant_logo = ImageByteConverter.ImageToBytes(CustomerVM.Logo)
+                    Klant_logo = ImageByteConverter.PngImageToBytes(CustomerVM.Logo)
                 });
 
                 Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());

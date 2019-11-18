@@ -101,7 +101,7 @@ namespace Festispec.ViewModel
                 Website = CustomerViewModel.Website,
                 Laatste_weiziging = DateTime.Now,
                 Telefoonnummer = CustomerViewModel.Telephone,
-                Klant_logo = ImageByteConverter.ImageToBytes(CustomerViewModel.Logo)
+                Klant_logo = ImageByteConverter.PngImageToBytes(CustomerViewModel.Logo)
             };
             _customerRepo.CreateCustomer(klant);
 

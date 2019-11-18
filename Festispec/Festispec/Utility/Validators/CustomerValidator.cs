@@ -27,6 +27,8 @@ namespace Festispec.Validators
             RuleFor(x => x.Telephone).Length(10).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
             RuleFor(x => x.Telephone).Must(IsNumericalSequence).WithMessage("Voer een geldig telefoonnummer in (0612345678).");
             RuleFor(x => x.City).NotEmpty().WithMessage("Voer een plaastnaam in.");
+            RuleFor(x => x.Streetname).NotEmpty().WithMessage("Voer een straatnaam in.");
+
         }
 
         private bool IsNumericalSequence(string arg)
