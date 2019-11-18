@@ -1,4 +1,5 @@
-﻿using Festispec.View.RichTextEditor;
+﻿using Festispec.Model.Misc;
+using Festispec.View.RichTextEditor;
 using GalaSoft.MvvmLight;
 using HtmlAgilityPack;
 using mshtml;
@@ -100,56 +101,10 @@ namespace Festispec.ViewModel.RichTextEditor
                         break;
                 }
 
-                this.DesignerContent = CleanHTML(document.documentElement.outerHTML, selectedMode == 2);
+                this.DesignerContent = WebUtils.CleanHTML(document.documentElement.outerHTML, selectedMode == 2);
 
                 this.Mode = selectedMode;
             }
-        }
-
-        /// <summary>
-        /// Maakt de HTML schoon (format)
-        /// </summary>
-        /// <param name="input">De schoon te maken HTML</param>
-        /// <param name="cleanEditable">Verwijdert de contenteditable tag</param>
-        /// <returns>De schone HTML</returns>
-        private string CleanHTML(string input, bool cleanEditable = false)
-        {
-            string output = input;
-
-            // Zorgt dat de HTML code netjes wordt.
-            using (Document doc = Document.FromString(input))
-            {
-                doc.OutputXml = true;
-                doc.ShowWarnings = false;
-                doc.AddTidyMetaElement = false;
-                doc.IndentWithTabs = true;
-                
-                doc.IndentBlockElements = AutoBool.Auto;
-                doc.IndentSpaces = 1;
-
-                doc.CleanAndRepair();
-
-                output = doc.Save();
-            }
-
-            /// Verwijder contenteditable attribuut van body.
-            using (StringWriter writer = new StringWriter())
-            {
-                HtmlDocument htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(output);
-
-                if (cleanEditable)
-                    htmlDocument.DocumentNode.SelectSingleNode("//body").Attributes.Remove("contenteditable");
-
-                htmlDocument.Save(writer);
-
-                output = writer.ToString();
-            }
-
-            // Maakt alle attributes lower case
-            output = Regex.Replace(output, @"<(.|\n)*?>", match => match.ToString().ToLower());
-
-            return output;
         }
 
         /// <summary>

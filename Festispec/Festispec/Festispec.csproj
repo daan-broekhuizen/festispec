@@ -108,6 +108,7 @@
     <Compile Include="Model\Misc\DateTimeExtension.cs" />
     <Compile Include="Model\Misc\EnumMonth.cs" />
     <Compile Include="Model\Misc\EnumOfferteStatus.cs" />
+    <Compile Include="Model\Misc\WebUtils.cs" />
     <Compile Include="Model\MultipleChoiceQuestion.cs" />
     <Compile Include="Model\OfferteModel.cs" />
     <Compile Include="Model\OpenQuestion.cs" />
