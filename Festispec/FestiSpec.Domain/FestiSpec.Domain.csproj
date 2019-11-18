@@ -101,6 +101,7 @@
     <Compile Include="Rapport_template.cs">
       <DependentUpon>FestiSpecEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Rol_lookup.cs">
       <DependentUpon>FestiSpecEntities.tt</DependentUpon>
     </Compile>

@@ -7,13 +7,14 @@
     [Voornaam] NVARCHAR(30) NOT NULL, 
     [Tussenvoegsel] NVARCHAR(15) NULL, 
     [Achternaam] NVARCHAR(30) NOT NULL, 
-    [Postcode] NVARCHAR(6) NULL, 
+    [Straatnaam] NVARCHAR(50) NULL, 
     [Huisnummer] NVARCHAR(4) NULL, 
     [Email] NVARCHAR(120) NULL, 
-    [Telefoonnummer] BIGINT NULL, 
+    [Telefoonnummer] NVARCHAR(10) NULL, 
     [Datum_certificering] DATE NULL, 
     [Einddatum_certificering] DATE NULL, 
     [IBAN] NVARCHAR(18) NULL, 
     [Laatste_weiziging] DATETIME NOT NULL,
-	FOREIGN KEY(Rol) REFERENCES Rol_lookup(Afkorting)
+	[Stad] NVARCHAR(50) NULL, 
+    FOREIGN KEY(Rol) REFERENCES Rol_lookup(Afkorting)
 )

@@ -31,8 +31,10 @@
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock  Foreground="Black" FontWeight="Bold" Text="Klant" />
             </Viewbox>
-            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="/Images/festispec_logo.png"></Image>
+            <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
+                <Button Margin="50" Background="White" Click="Button_Click" BorderThickness="0" VerticalContentAlignment="Center">
+                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
+                </Button>
             </Viewbox>
         </Grid>
 

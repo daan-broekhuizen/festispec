@@ -33,9 +33,9 @@
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Klant"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
-            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Button Background="White" Click="Button_Click" BorderThickness="0">
-                    <Image x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
+            <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
+                <Button Margin="50" Background="White" Click="Button_Click" BorderThickness="0" VerticalContentAlignment="Center">
+                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
                 </Button>
             </Viewbox>
         </Grid>
@@ -95,7 +95,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Viewbox Grid.Row="1" HorizontalAlignment="Left">
+            <Viewbox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBlock VerticalAlignment="Bottom" Text="Postcode"/>
             </Viewbox>
             <Viewbox Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Left">
@@ -104,18 +104,18 @@
             <Viewbox Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Toevoeging"/>
             </Viewbox>
-            <Viewbox Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0"  Grid.Row="1" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Straatnaam"/>
             </Viewbox>
-            <Viewbox Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Plaatsnaam"/>
             </Viewbox>
 
-            <TextBox Text="{Binding CustomerVM.PostalCode}" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
+            <TextBox Text="{Binding CustomerVM.PostalCode}" IsReadOnly="True" Grid.Row="4" Grid.Column="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
             <TextBox Text="{Binding CustomerVM.HouseNumber}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
             <TextBox Text="{Binding CustomerVM.Addition}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
-            <TextBox Grid.Row="4"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Straatlaan..."/>
-            <TextBox Grid.Row="4" Grid.Column="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
+            <TextBox Text="{Binding CustomerVM.Streetname}" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Straatlaan..."/>
+            <TextBox Text="{Binding CustomerVM.City}" Grid.Row="4" Grid.Column="0"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
 
         </Grid>
         <Viewbox Grid.Row="5" HorizontalAlignment="Right">
