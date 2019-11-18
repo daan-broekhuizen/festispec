@@ -7,18 +7,18 @@ namespace Festispec.ViewModel
 {
     class PlanningViewModel
     {
-        public async Task<double> CalculateDistance()
+        public async Task<double> CalculateDistance(string origin, string destination)
         {
             DistanceMatrixRequest req = new DistanceMatrixRequest()
             {
                 BingMapsKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
                 Origins = new List<SimpleWaypoint>()
                 {
-                    new SimpleWaypoint("Efteling, 5171 SL Kaatsheuvel")
+                    new SimpleWaypoint(origin)
                 },
                 Destinations = new List<SimpleWaypoint>()
                 {
-                    new SimpleWaypoint("Griekenland")
+                    new SimpleWaypoint(destination)
                 },
                 DistanceUnits = DistanceUnitType.Kilometers,
                 TravelMode = TravelModeType.Driving
