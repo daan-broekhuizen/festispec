@@ -33,7 +33,7 @@ namespace Festispec.ViewModel
 
         public MainViewModel()
         {
-            OpenLoginCommand = new RelayCommand(OpenLogin);
+            //OpenLoginCommand = new RelayCommand(OpenLogin);
             //Account acc = new Account()
             //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
 

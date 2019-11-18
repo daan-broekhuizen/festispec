@@ -49,6 +49,16 @@ namespace Festispec.ViewModel
             }
         }
 
+        public String ErrorFeedback
+        { 
+            get { return this._errorFeedback; } 
+            set
+            {
+                this._errorFeedback = value;
+                RaisePropertyChanged("ErrorFeedback");
+            }
+        }
+
 
         public LoginViewModel()
         {
