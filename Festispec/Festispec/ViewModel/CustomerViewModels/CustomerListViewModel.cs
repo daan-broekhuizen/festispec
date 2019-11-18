@@ -91,7 +91,11 @@ namespace Festispec.ViewModel
 
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
 
-        public void FilterCustomers() => FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
+        public void FilterCustomers()
+        {
+            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
+            SortCustomers();
+        }
 
         public void SortCustomers()
         {
