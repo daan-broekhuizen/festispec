@@ -70,7 +70,7 @@
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="70" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
+                <ComboBox Margin="10" Width="70" Height="20" SelectedItem="{Binding SelectedBox}">
                     <ComboBoxItem Content="A - Z"/>
                     <ComboBoxItem Content="Z - A"/>
                 </ComboBox>
@@ -80,7 +80,7 @@
         <ListBox x:Name="JobList" Grid.Row="5" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
             <ListBox.ItemTemplate >
                 <DataTemplate >
-                    <Grid Background="LightGray" Width="600" Height="50" Margin="40,0,40,0">
+                    <Grid Background="LightGray" Width="600" Height="50" Margin="0,0,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -94,12 +94,22 @@
                         <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
 
 
-                        <TextBlock Grid.Column="1" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,20,0,0"/>
-                            <TextBlock Grid.Column="2" Text="{Binding JobName}" HorizontalAlignment="Left" Margin="0,20,0,0"/>
-                   
-                        <TextBlock Grid.Column="3" Text="JobID" FontWeight="Bold" Margin="0,20,0,0"/>
-                        <TextBlock Grid.Column="4" Text="{Binding JobID}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
-                        <Button Command="{Binding ShowCustomerInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
+                        <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
+                        <TextBlock Grid.Column="1" Text="{Binding CustomerID}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+
+                        <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
+                        <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,5,0,0"/>
+
+                        <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,5" VerticalAlignment="Bottom" />
+                        <TextBlock Grid.Column="3" Text="{Binding CreationDate}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,5"/>
+
+                        <TextBlock Grid.Column="4" Text="Status" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
+                        <ComboBox Grid.Column="4" Width="70" Height="20" SelectedItem="{Binding SelectedBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                            <ComboBoxItem Content="A d- Z"/>
+                            <ComboBoxItem Content="Z - A"/>
+                        </ComboBox>
+
+                        <Button Command="{Binding ShowJobInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

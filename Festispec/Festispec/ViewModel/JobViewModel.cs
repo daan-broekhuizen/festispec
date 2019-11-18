@@ -102,5 +102,18 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("LastChange");
             }
         }
+
+
+        public string CustomerWishes
+        {
+            get => _opdracht.Klantwensen;
+            set
+            {
+                _opdracht.Klantwensen = value;
+                RaisePropertyChanged("CustomerWishes");
+            }
+        }
+
+        
     }
 }

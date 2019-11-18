@@ -57,6 +57,7 @@ namespace Festispec.ViewModel
 
             #region JobViews
             navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
+            navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
 
             #endregion
 
@@ -91,7 +92,8 @@ namespace Festispec.ViewModel
         #endregion
 
         #region JobsVM's
-        public JobListViewModel JobList => new JobListViewModel();
+        public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         #endregion
 
         public static void Cleanup()
