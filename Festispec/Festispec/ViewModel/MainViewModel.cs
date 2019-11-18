@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Festispec.ViewModel
 {
@@ -24,9 +25,8 @@ namespace Festispec.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        // Commands
-
-        // Views
+        private NavigationService navigationService;
+       
         public ICommand OpenLoginCommand { get; private set; }
         private LoginView _loginView;
         private MainWindow _mainWindow;
