@@ -149,7 +149,7 @@ namespace Festispec.ViewModel
         private async Task GetPostalCodeAsync()
         {
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
-            Address address = await new PostcodeService().GetPostcode(query);
+            Address address = await new LocationService().GetFullAdress(query);
             PostalCode = address.PostalCode;
         }
     }

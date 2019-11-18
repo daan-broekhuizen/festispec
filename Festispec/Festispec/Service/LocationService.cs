@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Festispec.Service
 {
-    public class PostcodeService
+    public class LocationService
     {
-        public async Task<Address> GetPostcode(string address)
+        public async Task<Address> GetFullAdress(string address)
         {
             GeocodeRequest req = new GeocodeRequest()
             {
