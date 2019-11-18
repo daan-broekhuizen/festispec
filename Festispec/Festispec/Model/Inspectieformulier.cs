@@ -24,8 +24,14 @@ namespace Festispec.Model
         [Column("Datum_inspectie", TypeName = "date")]
         public DateTime? DatumInspectie { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Locatie { get; set; }
+        [StringLength(50)]
+        public string Stad { get; set; }
+
+        [StringLength(50)]
+        public string Straatnaam { get; set; }
+
+        [StringLength(4)]
+        public string Huisnummer { get; set; }
 
         public int? OpdrachtID { get; set; }
 

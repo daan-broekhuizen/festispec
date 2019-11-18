@@ -82,9 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201911182127136_Main.cs" />
-    <Compile Include="Migrations\201911182127136_Main.designer.cs">
-      <DependentUpon>201911182127136_Main.cs</DependentUpon>
+    <Compile Include="Migrations\201911182213494_Main.cs" />
+    <Compile Include="Migrations\201911182213494_Main.designer.cs">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -98,7 +98,6 @@
     <Compile Include="Model\Offerte.cs" />
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
-    <Compile Include="Model\Repositories\TestRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Model\Status.cs" />
@@ -135,8 +134,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201911182127136_Main.resx">
-      <DependentUpon>201911182127136_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911182213494_Main.resx">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -180,6 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

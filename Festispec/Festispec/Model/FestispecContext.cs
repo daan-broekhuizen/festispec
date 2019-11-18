@@ -60,10 +60,6 @@ namespace Festispec.Model
                 .IsUnicode(false);
 
             modelBuilder.Entity<Inspectieformulier>()
-                .Property(e => e.Locatie)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Inspectieformulier>()
                 .Property(e => e.Beschrijving)
                 .IsUnicode(false);
 

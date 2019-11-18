@@ -231,7 +231,6 @@
             {
                 InspectieFormulierTitel = "Inspectie Bospop festival",
                 DatumInspectie = DateTime.Now,
-                Locatie = "Bospop festival terrein",
                 OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop").OpdrachtID,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie",
                 LaatsteWijziging = DateTime.Now
