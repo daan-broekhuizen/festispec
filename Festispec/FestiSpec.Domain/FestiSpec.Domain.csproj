@@ -62,6 +62,9 @@
     <Compile Include="Contactpersoon.cs">
       <DependentUpon>FestiSpecEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>FestiSpecEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="FestiSpecEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

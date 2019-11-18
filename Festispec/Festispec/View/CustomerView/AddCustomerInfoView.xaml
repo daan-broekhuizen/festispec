@@ -86,7 +86,7 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <Viewbox Grid.Row="1" HorizontalAlignment="Left">
+            <Viewbox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">
                 <TextBlock VerticalAlignment="Bottom" Text="Postcode"/>
             </Viewbox>
             <Viewbox Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Left">
@@ -95,18 +95,18 @@
             <Viewbox Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Toevoeging"/>
             </Viewbox>
-            <Viewbox Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0"  Grid.Row="1" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Straatnaam"/>
             </Viewbox>
-            <Viewbox Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Left">
+            <Viewbox Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Left">
                 <TextBlock  VerticalAlignment="Bottom" Text="Plaatsnaam"/>
             </Viewbox>
 
-            <TextBox Text="{Binding Customer.PostalCode}" Grid.Row="2" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
+            <TextBox Text="{Binding Customer.PostalCode}" IsReadOnly="True" Grid.Row="4" Grid.Column="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
             <TextBox Text="{Binding Customer.HouseNumber}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
             <TextBox Text="{Binding Customer.Addition}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
-            <TextBox Grid.Row="4" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Straatlaan..."/>
-            <TextBox Grid.Row="4" Grid.Column="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
+            <TextBox Text="{Binding Customer.Streetname}" Style="{StaticResource placeHolder}" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Straatlaan..."/>
+            <TextBox Text="{Binding Customer.City}" Grid.Row="4"  Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
             <Viewbox Grid.Column="2"  Grid.Row="4" HorizontalAlignment="Left">
                 <Label Content="{Binding AdresError}" Foreground="Red" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
             </Viewbox>

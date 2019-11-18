@@ -1,4 +1,5 @@
-﻿using Festispec.Utility.Converters;
+﻿using Festispec.Service;
+using Festispec.Utility.Converters;
 using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
 using System;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -25,12 +27,33 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Name");
             }
         }
+        private string _postalcode;
         public string PostalCode
         {
-            get => _klant.Postcode;
+            get => _postalcode;
             set
             {
-                _klant.Postcode = value;
+                _postalcode = value;
+                RaisePropertyChanged("PostalCode");
+            }
+        }
+        public string Streetname
+        {
+            get => _klant.Straatnaam;
+            set
+            {
+                _klant.Straatnaam = value;
+                GetPostalCodeAsync();
+                RaisePropertyChanged("PostalCode");
+            }
+        }
+        public string City
+        {
+            get => _klant.Stad;
+            set
+            {
+                _klant.Stad = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("PostalCode");
             }
         }
@@ -44,6 +67,7 @@ namespace Festispec.ViewModel
             set
             {
                 _klant.Huisnummer = value + Addition;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("HouseNumber");
             }
         }
@@ -57,6 +81,7 @@ namespace Festispec.ViewModel
             set
             {
                 _klant.Huisnummer = HouseNumber + value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("Addition");
             }
         }
@@ -105,9 +130,7 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Logo");
             }
         }
-        
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
-
         public CustomerViewModel(Klant klant)
         {
             _klant = klant;
@@ -118,6 +141,11 @@ namespace Festispec.ViewModel
             _klant = new Klant();
             Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             Contacts = new ObservableCollection<ContactPersonViewModel>();
+        }
+        private async Task GetPostalCodeAsync()
+        {
+            string address = $"{Streetname} {HouseNumber}{Addition} {City}";
+            PostalCode = await new PostcodeService().GetPostcode(address);
         }
     }
 }

@@ -154,4 +154,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Antwoord_text" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="54b1aae4-b7bb-4c4c-b95f-ad3d7719bf89" ChangeDateTime="11/17/2019 23:34:52">
+    <Property Name="ElementName" Value="[dbo].[Klant].[Postcode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Klant]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Straatnaam" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="777c769c-3615-4ba6-ad61-85fc88d927ee" ChangeDateTime="11/17/2019 23:38:29">
+    <Property Name="ElementName" Value="[dbo].[Account].[Postcode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Account]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Straatnaam" />
+  </Operation>
 </Operations>
