@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using Festispec.Service;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -28,14 +29,8 @@ namespace Festispec.View.CustomerView
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Kies een logo";
-            op.Filter = "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-                CustomerLogo.Source = new BitmapImage(new Uri(op.FileName));
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
+
 
         private void ShowWindow(string message) => MessageBox.Show(message);
     }

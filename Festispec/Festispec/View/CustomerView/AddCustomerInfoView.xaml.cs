@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Festispec.Service;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,13 +27,7 @@ namespace Festispec.View
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Kies een logo";
-            op.Filter = "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-                CustomerLogo.Source = new BitmapImage(new Uri(op.FileName));
-        }
+        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
+
     }
 }
