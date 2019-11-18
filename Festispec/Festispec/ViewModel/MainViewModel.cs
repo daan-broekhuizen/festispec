@@ -2,6 +2,7 @@ using Festispec.View;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -24,14 +25,14 @@ namespace Festispec.ViewModel
     public class MainViewModel : ViewModelBase
     {
         // Commands
-        public ICommand OpenLoginCommand { get; private set; }
 
         // Views
-        private LoginView _loginView;
+        public ICommand OpenMainCommand { get; private set; }
+        private MainWindow _mainWindow;
 
         public MainViewModel()
         {
-            
+            OpenMainCommand = new RelayCommand(OpenMain);
             //Account acc = new Account()
             //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
 
@@ -40,14 +41,12 @@ namespace Festispec.ViewModel
 
             PlanningViewModel c = new PlanningViewModel();
             _ = c.CalculateDistance();
-            
-
         }
 
-        private void OpenLogin()
-        {
-            this._loginView = new LoginView();
-            this._loginView.Show();
+        private void OpenMain()
+        { 
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
         }
     }
 }

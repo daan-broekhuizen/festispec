@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for Registreren.xaml
+    /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class Registreren : Page
+    public partial class RegisterView : Page
     {
-        public Registreren()
+        public RegisterView()
         {
             InitializeComponent();
         }
