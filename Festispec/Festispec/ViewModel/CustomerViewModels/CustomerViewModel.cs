@@ -1,19 +1,23 @@
-﻿using FestiSpec.Domain;
+﻿using Festispec.Utility.Converters;
+using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
         private Klant _klant;
-        public string Name 
-        { 
+        public string Name
+        {
             get => _klant.Naam;
             set
             {
@@ -21,7 +25,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Name");
             }
         }
-
         public string PostalCode
         {
             get => _klant.Postcode;
@@ -31,88 +34,50 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("PostalCode");
             }
         }
-
-        
-
-        public string Addition
-        {
-            get => _klant.Naam;
-            set
-            {
-                _klant.Naam = value;
-                RaisePropertyChanged("Addition");
-            }
-        }
-
-        public string KvK
-        {
-            get
-            {
-                if (_klant.KvK_nummer != 0)
-                    return Convert.ToString(_klant.KvK_nummer);
-                else
-                    return "";
-            }
-            set
-            {
-                _klant.KvK_nummer = Convert.ToInt32(value);
-                RaisePropertyChanged("KvK");
-            }
-        }
-
         public string HouseNumber
         {
             get
             {
-                if (_klant.Huisnummer == null)
-                    return Convert.ToString(_klant.Huisnummer);
-                else
-                    return "";
+                if (_klant.Huisnummer == null) return "";
+                return Regex.Match(_klant.Huisnummer, @"\d+").Value;
             }
             set
             {
-                _klant.Huisnummer = value;
+                _klant.Huisnummer = value + Addition;
                 RaisePropertyChanged("HouseNumber");
             }
         }
-
-        /*
-        public string BranchNumber
+        public string Addition
         {
             get
             {
-                if (_klant.KvK_nummer != 0)
-                    return Convert.ToString(_klant.KvK_nummer);
-                else
-                    return "";
+                if (_klant.Huisnummer == null) return "";
+                return Regex.Replace(_klant.Huisnummer, @"[^a-zA-Z]+", String.Empty);
             }
             set
             {
-                _klant.KvK_nummer = Convert.ToInt32(value);
-                RaisePropertyChanged("BranchNumber");
+                _klant.Huisnummer = HouseNumber + value;
+                RaisePropertyChanged("Addition");
             }
         }
-
-        
-
-
-        public string Telephone
+        public string KvK
         {
-            get
-            {
-                if (_klant.Huisnummer != 0)
-                    return Convert.ToString(_klant.Huisnummer);
-                else
-                    return "";
-            }
+            get => _klant.KvK_nummer;
             set
             {
-                _klant.KvK_nummer = Convert.ToInt32(value);
+                _klant.KvK_nummer = value;
+                RaisePropertyChanged("KvK");
+            }
+        }
+        public string Telephone
+        {
+            get => _klant.Telefoonnummer;
+            set
+            {
+                _klant.Telefoonnummer = value;
                 RaisePropertyChanged("Telephone");
             }
         }
-        */
-
         public string Email
         {
             get => _klant.Email;
@@ -122,7 +87,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Email");
             }
         }
-
         public string Website
         {
             get => _klant.Website;
@@ -132,17 +96,28 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Website");
             }
         }
-
+        public ImageSource Logo
+        {
+            get => ImageByteConverter.ByteToImage(_klant.Klant_logo);
+            set
+            {
+                _klant.Klant_logo = ImageByteConverter.ImageToBytes(value);
+                RaisePropertyChanged("Logo");
+            }
+        }
+        
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
 
         public CustomerViewModel(Klant klant)
         {
             _klant = klant;
+            Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
         }
-
         public CustomerViewModel()
         {
             _klant = new Klant();
+            Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+            Contacts = new ObservableCollection<ContactPersonViewModel>();
         }
     }
 }

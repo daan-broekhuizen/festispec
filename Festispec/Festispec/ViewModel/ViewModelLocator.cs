@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using Festispec.Service;
 using Festispec.ViewModel;
+using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
@@ -36,17 +37,29 @@ namespace Festispec.ViewModel
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SetupNavigation();
+            RegisterRepositories();
+            RegisterViewModels();
+        }
+
+        //Register singleton repositories here
+        private static void RegisterRepositories()
+        {
+            SimpleIoc.Default.Register<CustomerRepository>();
+        }
+        //Register singeltonviews here
+        private static void RegisterViewModels()
+        {
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
         }
-        
+        //Configure view mappings here and register navigation service
         private static void SetupNavigation()
         {
             NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
 
             #region CustomerViews
-            navigationService.Configure("Customers", new Uri("../View/CustomersWindow.xaml", UriKind.Relative));
+            navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
             navigationService.Configure("AddCustomerInfo", new Uri("../View/CustomerView/AddCustomerInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactInfo", new Uri("../View/CustomerView/AddContactInfoView.xaml", UriKind.Relative));
             navigationService.Configure("AddContactPerson", new Uri("../View/CustomerView/AddContactPersonView.xaml", UriKind.Relative));
@@ -59,27 +72,21 @@ namespace Festispec.ViewModel
             navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
             navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
 
+            navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative)); 
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
 
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        // Singleton repos
+        public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
 
-        public DashboardViewModel Dashboard
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<DashboardViewModel>();
-            }
-        }
+        // Viewmodels used for datacontext
+        #region Singleton VM's
+        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>(); 
+        #endregion
 
         #region CustomerVM's
         public CustomerListViewModel CustomerList => new CustomerListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());

@@ -21,13 +21,14 @@ namespace FestiSpec.Domain
             this.Opdracht = new HashSet<Opdracht>();
         }
     
-        public long KvK_nummer { get; set; }
+        public string KvK_nummer { get; set; }
         public string Naam { get; set; }
         public string Postcode { get; set; }
         public string Huisnummer { get; set; }
-        public long Telefoonnummer { get; set; }
+        public string Telefoonnummer { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
+        public byte[] Klant_logo { get; set; }
         public System.DateTime Laatste_weiziging { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

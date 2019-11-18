@@ -12,15 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Festispec.ViewModel;
 
-namespace Festispec.View.CustomerView
+namespace Festispec
 {
     /// <summary>
-    /// Interaction logic for ContactPersonView.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class ContactPeopleView : Page
+
+    public partial class CustomerListView : Page
     {
-        public ContactPeopleView()
+        public CustomerListView()
         {
             InitializeComponent();
         }

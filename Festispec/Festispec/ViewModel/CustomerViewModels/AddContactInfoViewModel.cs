@@ -1,4 +1,6 @@
 ﻿using Festispec.Service;
+using Festispec.Validators;
+using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -14,19 +16,66 @@ namespace Festispec.ViewModel
     {
         public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand NextPageCommand { get; set; }
+
         private NavigationService _navigationService;
+        private CustomerValidator _customerValidator;
+
+        //Properties for errors
+        #region ErrorMessages
+        private string _telephoneError;
+        public string TelephoneError
+        {
+            get => _telephoneError;
+            set
+            {
+                _telephoneError = value;
+                RaisePropertyChanged("TelephoneError");
+            }
+        }
+
+        private string _emailError;
+        public string EmailError
+        {
+            get => _emailError;
+            set
+            {
+                _emailError = value;
+                RaisePropertyChanged("EmailError");
+            }
+        } 
+        #endregion
 
         public AddContactInfoViewModel(NavigationService service)
         {
+            _customerValidator = new CustomerValidator();
             _navigationService = service;
+
+            //Get customer from navigation service
             if (service.Parameter is CustomerViewModel)
                 CustomerViewModel = service.Parameter as CustomerViewModel;
+
             NextPageCommand = new RelayCommand(NextPage);
         }
 
         private void NextPage()
         {
-            _navigationService.NavigateTo("AddContactPerson", CustomerViewModel);
+            //Validate input and display relevant errors
+            List<ValidationFailure> errors = _customerValidator.Validate(CustomerViewModel).Errors.ToList();
+            ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
+            ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
+
+            if (telephoneError == null && emailError == null)
+                _navigationService.NavigateTo("AddContactPerson", CustomerViewModel);
+
+            if (telephoneError != null)
+                TelephoneError = telephoneError.ErrorMessage;
+            else
+                TelephoneError = "";
+
+            if (emailError != null)
+                EmailError = emailError.ErrorMessage;
+            else
+                EmailError = "";
         }
     }
 }

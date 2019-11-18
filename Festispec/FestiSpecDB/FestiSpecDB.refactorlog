@@ -147,4 +147,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TemplateID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3dbacb60-8f49-456f-be47-6f2b268f91b2" ChangeDateTime="11/13/2019 21:01:34">
+    <Property Name="ElementName" Value="[dbo].[Antwoorden].[Antwoord]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Antwoorden]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Antwoord_text" />
+  </Operation>
 </Operations>

@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace Festispec.View.CustomerView
 {
     /// <summary>
-    /// Interaction logic for ContactInfoView.xaml
+    /// Interaction logic for ContactPersonView.xaml
     /// </summary>
-    public partial class ContactInfoView : Page
+    public partial class ContactPersonList : Page
     {
-        public ContactInfoView()
+        public ContactPersonList()
         {
             InitializeComponent();
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);

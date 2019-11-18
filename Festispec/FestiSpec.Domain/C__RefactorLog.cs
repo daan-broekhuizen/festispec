@@ -12,15 +12,8 @@ namespace FestiSpec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class Antwoorden
+    public partial class C__RefactorLog
     {
-        public int VIC_ID { get; set; }
-        public int InspecteurID { get; set; }
-        public string Antwoord_text { get; set; }
-        public byte[] Antwoord_image { get; set; }
-        public System.DateTime Laatste_weiziging { get; set; }
-    
-        public virtual Account Account { get; set; }
-        public virtual Inspectieformulier_vragenlijst_combinatie Inspectieformulier_vragenlijst_combinatie { get; set; }
+        public System.Guid OperationKey { get; set; }
     }
 }
