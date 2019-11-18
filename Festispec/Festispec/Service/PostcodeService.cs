@@ -10,7 +10,7 @@ namespace Festispec.Service
 {
     public class PostcodeService
     {
-        public async Task<string> GetPostcode(string address)
+        public async Task<Address> GetPostcode(string address)
         {
             GeocodeRequest req = new GeocodeRequest()
             {
@@ -20,7 +20,7 @@ namespace Festispec.Service
 
             Response response = await req.Execute();
             Location location = response.ResourceSets[0].Resources[0] as Location;
-            return location.Address.PostalCode;
+            return location.Address;
         }
     }
 }

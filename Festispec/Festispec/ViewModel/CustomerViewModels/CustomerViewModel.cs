@@ -1,4 +1,5 @@
-﻿using Festispec.Service;
+﻿using BingMapsRESTToolkit;
+using Festispec.Service;
 using Festispec.Utility.Converters;
 using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
@@ -144,8 +145,9 @@ namespace Festispec.ViewModel
         }
         private async Task GetPostalCodeAsync()
         {
-            string address = $"{Streetname} {HouseNumber}{Addition} {City}";
-            PostalCode = await new PostcodeService().GetPostcode(address);
+            string query = $"{Streetname} {HouseNumber}{Addition} {City}";
+            Address address = await new PostcodeService().GetPostcode(query);
+            PostalCode = address.PostalCode;
         }
     }
 }
