@@ -11,19 +11,27 @@
       DataContext="{Binding Login, Source={StaticResource Locator}}">
 
     <Grid>
-
-        <Label Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="334,121,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="334,152,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="334,180,0,0" VerticalAlignment="Top"/>
-        <Button Command="{Binding LoginCommand}" CommandParameter="{Binding LoginCommand}" Content="Inloggen" HorizontalAlignment="Left" Margin="359,264,0,0" VerticalAlignment="Top" Width="75" />
-        <Grid>
-
-            <Label Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="334,121,0,0" VerticalAlignment="Top"/>
-            <TextBox Text="{Binding Username}" HorizontalAlignment="Left" Height="23" Margin="334,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="334,180,0,0" VerticalAlignment="Top"/>
-            <TextBox  HorizontalAlignment="Left" Height="23" Margin="334,210,0,0" TextWrapping="Wrap" Text="{Binding Password}" VerticalAlignment="Top" Width="120"/>
-
-        </Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="0" Grid.Row="0" Source="/Images/festispec_logo.png"></Image>
+        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Inloggen bij FestiSpec"></Label>
+        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Gebruikersnaam:" FontSize="24"></Label>
+        <TextBox Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Wachtwoord:" FontSize="24"></Label>
+        <TextBox Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+        <Button Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16"></Button>
 
     </Grid>
 </Page>
