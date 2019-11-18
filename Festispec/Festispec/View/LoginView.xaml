@@ -11,6 +11,10 @@
       DataContext="{Binding Login, Source={StaticResource Locator}}">
 
     <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/Images/Dashboard_background.png"></ImageBrush>
+        </Grid.Background>
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
