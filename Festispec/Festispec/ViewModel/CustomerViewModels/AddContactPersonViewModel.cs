@@ -96,7 +96,7 @@ namespace Festispec.ViewModel
                 Email = CustomerViewModel.Email,
                 Huisnummer = CustomerViewModel.HouseNumber,
                 KvK_nummer = CustomerViewModel.KvK,
-                Straatnaam = CustomerViewModel.PostalCode,
+                Straatnaam = CustomerViewModel.Streetname,
                 Stad = CustomerViewModel.City,
                 Website = CustomerViewModel.Website,
                 Laatste_weiziging = DateTime.Now,

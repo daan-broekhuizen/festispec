@@ -18,7 +18,6 @@ namespace Festispec.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
-        private Klant _klant;
         public string Name
         {
             get => _klant.Naam;
@@ -28,7 +27,6 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Name");
             }
         }
-        private string _postalcode;
         public string PostalCode
         {
             get => _postalcode;
@@ -132,10 +130,15 @@ namespace Festispec.ViewModel
             }
         }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
+
+        private Klant _klant;
+        private string _postalcode;
+
         public CustomerViewModel(Klant klant)
         {
             _klant = klant;
             Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
+            GetPostalCodeAsync();
         }
         public CustomerViewModel()
         {
