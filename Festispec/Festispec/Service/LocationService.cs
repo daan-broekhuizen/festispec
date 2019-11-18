@@ -10,11 +10,12 @@ namespace Festispec.Service
 {
     public class LocationService
     {
+        private static string _bingApiKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU";
         public async Task<Address> GetFullAdress(string address)
         {
             GeocodeRequest req = new GeocodeRequest()
             {
-                BingMapsKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
+                BingMapsKey = _bingApiKey,
                 Query = "NL " + address
             };
 

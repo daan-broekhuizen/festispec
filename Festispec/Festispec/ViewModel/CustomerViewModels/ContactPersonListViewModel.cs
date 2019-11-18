@@ -57,7 +57,6 @@ namespace Festispec.ViewModel
             SelectedContact = new ContactPersonViewModel();
             CustomerVM.Contacts.Add(SelectedContact);
         }
-
         private void SaveContactPerson()
         {
             if(SelectedContact == null)
