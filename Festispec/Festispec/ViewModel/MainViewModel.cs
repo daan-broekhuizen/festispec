@@ -27,12 +27,13 @@ namespace Festispec.ViewModel
         // Commands
 
         // Views
-        public ICommand OpenMainCommand { get; private set; }
+        public ICommand OpenLoginCommand { get; private set; }
+        private LoginView _loginView;
         private MainWindow _mainWindow;
 
         public MainViewModel()
         {
-            OpenMainCommand = new RelayCommand(OpenMain);
+            OpenLoginCommand = new RelayCommand(OpenLogin);
             //Account acc = new Account()
             //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
 
@@ -43,8 +44,14 @@ namespace Festispec.ViewModel
             _ = c.CalculateDistance();
         }
 
+        //private void OpenLogin()
+        //{
+        //    _loginView = new LoginView();
+        //    _loginView.Show();
+        //}
+
         private void OpenMain()
-        { 
+        {
             _mainWindow = new MainWindow();
             _mainWindow.Show();
         }
