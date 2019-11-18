@@ -42,10 +42,6 @@ namespace Festispec.ViewModel
             navigationService = navigation;
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
-
-            var a = new Model.Repositories.TestRepository();
-            var b = a.Test();
-            Console.WriteLine("TESTT");
         }
 
         private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
