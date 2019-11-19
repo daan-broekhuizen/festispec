@@ -73,7 +73,6 @@ namespace Festispec.API.ImageShack
 
         public void Examples()
         {
-
             // Image Uploaden met byte array.
             /*
             UploadModel model = UploadImage(new FileData[]
