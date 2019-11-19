@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for NavigationBar.xaml
+    /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class MainWindow : Page
+    public partial class RegisterView : Page
     {
-        public MainWindow()
+        public RegisterView()
         {
             InitializeComponent();
         }

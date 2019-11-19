@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for NavigationBar.xaml
+    /// Interaction logic for ApplicationWindow.xaml
     /// </summary>
-    public partial class MainWindow : Page
+    public partial class ApplicationWindow : Window
     {
-        public MainWindow()
+        public ApplicationWindow()
         {
             InitializeComponent();
         }

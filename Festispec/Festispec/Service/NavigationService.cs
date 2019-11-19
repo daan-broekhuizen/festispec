@@ -14,14 +14,14 @@ namespace Festispec.Service
 {
     public class NavigationService : INavigationService, INotifyPropertyChanged
     {
-        
+
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic;
         private string _currentPageKey;
-        
+
         public string CurrentPageKey
         {
-            get =>  _currentPageKey;
+            get => _currentPageKey;
             private set
             {
                 if (_currentPageKey == value)
@@ -59,6 +59,24 @@ namespace Festispec.Service
                     throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
 
                 Frame frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
+
+                if (frame != null)
+                    frame.Source = _pagesByKey[pageKey];
+
+                Parameter = parameter;
+                _historic.Add(pageKey);
+                CurrentPageKey = pageKey;
+            }
+        }
+
+        public virtual void ApplicationNavigateTo(string pageKey, object parameter)
+        {
+            lock (_pagesByKey)
+            {
+                if (!_pagesByKey.ContainsKey(pageKey))
+                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
+
+                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "ApplicationFrame") as Frame;
 
                 if (frame != null)
                     frame.Source = _pagesByKey[pageKey];
