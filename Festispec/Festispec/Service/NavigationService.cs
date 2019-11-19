@@ -69,6 +69,24 @@ namespace Festispec.Service
             }
         }
 
+        public virtual void ApplicationNavigateTo(string pageKey, object parameter)
+        {
+            lock (_pagesByKey)
+            {
+                if (!_pagesByKey.ContainsKey(pageKey))
+                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
+
+                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "ApplicationFrame") as Frame;
+
+                if (frame != null)
+                    frame.Source = _pagesByKey[pageKey];
+
+                Parameter = parameter;
+                _historic.Add(pageKey);
+                CurrentPageKey = pageKey;
+            }
+        }
+
         public void Configure(string key, Uri pageType)
         {
             lock (_pagesByKey)

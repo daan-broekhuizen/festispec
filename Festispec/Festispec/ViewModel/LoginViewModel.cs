@@ -4,24 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
-using FestiSpec.Domain;
 using GalaSoft.MvvmLight;
 using System.Security.Cryptography;
 using Festispec.Utility;
+using FestiSpec.Domain.Repositories;
+using FestiSpec.Domain;
+using Festispec.Service;
+using Festispec.Model;
 
 namespace Festispec.ViewModel
 {
-    public class LoginViewModel : ViewModelBase 
+    public class LoginViewModel : ViewModelBase
     {
-        private UserRepository _user;
-        private Encrypt _encrypt;
-
-        private string _username;
-        private string _password;
+        private UserRepository _userRepository;
+        private Encryptor _encrypt;
+        private NavigationService _navigationService;
+        
         private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
         public ICommand LoginCommand { get; set; }
+
+        private string _username;
         public string Username
         {
             get { return this._username; }
@@ -31,11 +34,12 @@ namespace Festispec.ViewModel
                 if (!string.Equals(this._username, value))
                 {
                     this._username = value;
-                    RaisePropertyChanged("Username"); 
+                    RaisePropertyChanged("Username");
                 }
             }
         }
 
+        private string _password;
         public string Password
         {
             get { return this._password; }
@@ -44,31 +48,29 @@ namespace Festispec.ViewModel
                 if (!string.Equals(this._password, value))
                 {
                     this._password = value;
-                    RaisePropertyChanged("Password"); 
+                    RaisePropertyChanged("Password");
                 }
             }
         }
 
-        public String ErrorFeedback
-        { 
-            get { return this._errorFeedback; } 
+        public string ErrorFeedback
+        {
+            get { return this._errorFeedback; }
             set
             {
                 this._errorFeedback = value;
                 RaisePropertyChanged("ErrorFeedback");
             }
         }
-
-
-        public LoginViewModel()
+        
+        public LoginViewModel(NavigationService service, UserRepository repo)
         {
-            _encrypt = new Encrypt();
-            _user = new UserRepository();
-
-            LoginCommand = new RelayCommand(Login, CanLogin);
+            _userRepository = repo;
+            _encrypt = new Encryptor();
+            _navigationService = service;
+            LoginCommand = new RelayCommand(Login);
         }
 
-        private bool CanLogin() => Username != null && Username.Length > 0 && Password.Length > 0;
 
         private void Login()
         {
@@ -78,10 +80,11 @@ namespace Festispec.ViewModel
                 Wachtwoord = _encrypt.GetHashString(_password)
             };
 
-            if (_user.Login(currentAccount))
-                _user.LoggedInAccount = currentAccount;
+            Account account = _userRepository.GetAccount(currentAccount);
+            if (account != null)
+                _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
             else
-                _errorFeedback = "Foute inlog gegevens";
+                ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }
 
     }

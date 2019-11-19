@@ -115,8 +115,11 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
+    <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
@@ -126,6 +129,7 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -136,6 +140,9 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\ApplicationWindow.xaml.cs">
+      <DependentUpon>ApplicationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
     </Compile>
@@ -163,6 +170,10 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

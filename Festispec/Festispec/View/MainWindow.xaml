@@ -1,11 +1,13 @@
-﻿<Window x:Class="Festispec.MainWindow"
+﻿<Page x:Class="Festispec.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec"
         mc:Ignorable="d"
-        Title="FestiSpec" Height="720" Width="1280"
+        Title="FestiSpec"
+        d:DesignHeight="720" d:DesignWidth="1280"
+
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -116,4 +118,4 @@
         </Grid>
         <Frame Grid.Column="1" x:Name="MainFrame"/>
     </Grid>
-</Window>
+</Page>

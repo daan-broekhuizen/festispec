@@ -9,8 +9,6 @@ namespace FestiSpec.Domain.Repositories
 {
     public class UserRepository
     {
-        public Account LoggedInAccount { get; set; }
-
         public bool Register(Account account)
         {
             using (FestispecContext context = new FestispecContext())
@@ -20,17 +18,13 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
-        public bool Login(Account account)
+        public Account GetAccount(Account account)
         {
             using (FestispecContext context = new FestispecContext())
             {
                 Account acc = context.Account.FirstOrDefault(u => u.Gebruikersnaam == account.Gebruikersnaam
                  && u.Wachtwoord == account.Wachtwoord);
-
-                if (acc != null) // Ingelogd
-                    return true;
-                else    // Fout
-                    return false;
+                return acc;
             }
         }
 
