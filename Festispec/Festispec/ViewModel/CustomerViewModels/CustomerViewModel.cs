@@ -44,7 +44,7 @@ namespace Festispec.ViewModel
             {
                 _klant.Straatnaam = value;
                 GetPostalCodeAsync();
-                RaisePropertyChanged("PostalCode");
+                RaisePropertyChanged("Streetname");
             }
         }
         public string City
@@ -54,7 +54,7 @@ namespace Festispec.ViewModel
             {
                 _klant.Stad = value;
                 GetPostalCodeAsync();
-                RaisePropertyChanged("PostalCode");
+                RaisePropertyChanged("City");
             }
         }
         public string HouseNumber
