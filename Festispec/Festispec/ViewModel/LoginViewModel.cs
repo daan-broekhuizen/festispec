@@ -18,7 +18,6 @@ namespace Festispec.ViewModel
     public class LoginViewModel : ViewModelBase
     {
         private UserRepository _userRepository;
-        private Encryptor _encrypt;
         private NavigationService _navigationService;
         
         private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
@@ -66,7 +65,6 @@ namespace Festispec.ViewModel
         public LoginViewModel(NavigationService service, UserRepository repo)
         {
             _userRepository = repo;
-            _encrypt = new Encryptor();
             _navigationService = service;
             LoginCommand = new RelayCommand(Login);
         }
@@ -77,12 +75,12 @@ namespace Festispec.ViewModel
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _username,
-                Wachtwoord = _encrypt.GetHashString(_password)
+                Wachtwoord = _password
             };
 
             Account account = _userRepository.GetAccount(currentAccount);
             if (account != null)
-                _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
+                _navigationService.ApplicationNavigateTo("Main", null);
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }

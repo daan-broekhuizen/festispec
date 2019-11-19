@@ -26,18 +26,18 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Image Grid.Column="0" Grid.Row="0" Source="/Images/festispec_logo.png"></Image>
         <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Inloggen bij FestiSpec"></Label>
-        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Error:"></Label>
+        <Label Foreground="Red" FontSize="20" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding ErrorFeedback}"></Label>
         <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Gebruikersnaam:" FontSize="24"></Label>
-        <TextBox Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+        <TextBox Text="{Binding Username}" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
         <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Wachtwoord:" FontSize="24"></Label>
-        <TextBox Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
-        <Button Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
+        <TextBox Text="{Binding Password}" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+        <Button  Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
 
     </Grid>
 </Page>

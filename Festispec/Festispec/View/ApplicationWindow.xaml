@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cmd="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
         Title="ApplicationWindow" Height="720" Width="1280"
         DataContext="{Binding Application, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <cmd:EventToCommand PassEventArgsToCommand="True" Command="{Binding ShowLoginCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Frame x:Name="ApplicationFrame" NavigationUIVisibility="Hidden"></Frame>
     </Grid>

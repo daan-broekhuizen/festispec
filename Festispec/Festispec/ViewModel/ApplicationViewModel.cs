@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Festispec.Service;
+using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
@@ -18,7 +21,7 @@ namespace Festispec.ViewModel
 
         private void ShowLogin()
         {
-            _navigationService.NavigateApp("Login", null);
+            _navigationService.ApplicationNavigateTo("Login", null);
         }
     }
 }
