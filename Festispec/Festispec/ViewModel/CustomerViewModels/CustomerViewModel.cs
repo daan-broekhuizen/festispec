@@ -139,6 +139,8 @@ namespace Festispec.ViewModel
         {
             _klant = klant;
             Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
+            if(_klant.KlantLogo == null)
+                Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             GetPostalCodeAsync();
         }
         public CustomerViewModel()
