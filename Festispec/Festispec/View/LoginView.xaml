@@ -9,35 +9,40 @@
       Background="White"
       Title="Inloggen"
       DataContext="{Binding Login, Source={StaticResource Locator}}">
-
     <Grid>
+        <Viewbox Stretch="UniformToFill">
+            <Image Source="/Images/Dashboard_background.png"/>
+        </Viewbox>
+        <Grid>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/Images/Dashboard_background.png"></ImageBrush>
-        </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <Image Grid.Column="0" Grid.Row="0" Source="/Images/festispec_logo.png"></Image>
-        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Inloggen bij FestiSpec"></Label>
-        <Label Foreground="Red" FontSize="20" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding ErrorFeedback}"></Label>
-        <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Gebruikersnaam:" FontSize="24"></Label>
-        <TextBox Text="{Binding Username}" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
-        <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Wachtwoord:" FontSize="24"></Label>
-        <TextBox Text="{Binding Password}" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
-        <Button  Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
 
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0" Grid.Row="1" Source="/Images/festispec_logo.png"></Image>
+            <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Inloggen bij FestiSpec"></Label>
+            <Label Foreground="Red" FontSize="20" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding ErrorFeedback}"></Label>
+            <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Gebruikersnaam:" FontSize="24"></Label>
+            <TextBox Text="{Binding Username}" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+            <Label Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Wachtwoord:" FontSize="24"></Label>
+            <TextBox Text="{Binding Password}" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
+            <Button  Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
+
+        </Grid>
     </Grid>
+    
 </Page>
