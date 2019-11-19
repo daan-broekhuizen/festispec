@@ -22,10 +22,8 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Console.WriteLine(account.Gebruikersnaam + account.Wachtwoord);
                 Account acc = context.Account.Where(u => u.Gebruikersnaam == account.Gebruikersnaam
                  && u.Wachtwoord == account.Wachtwoord).FirstOrDefault();
-                Console.WriteLine(acc.Email);
                 return acc;
             }
         }
