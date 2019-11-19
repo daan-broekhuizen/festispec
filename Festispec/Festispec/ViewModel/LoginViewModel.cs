@@ -80,7 +80,7 @@ namespace Festispec.ViewModel
 
             Account account = _userRepository.GetAccount(currentAccount);
             if (account != null)
-                _navigationService.ApplicationNavigateTo("Main", null);
+                _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }
