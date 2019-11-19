@@ -41,14 +41,17 @@
     <Reference Include="BingMapsRESTToolkit, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BingMapsRESTToolkit.1.1.4\lib\net45\BingMapsRESTToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.1\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -60,8 +63,13 @@
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -83,30 +91,76 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Migrations\201911182213494_Main.cs" />
+    <Compile Include="Migrations\201911182213494_Main.designer.cs">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Antwoorden.cs" />
+    <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
+    <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\FestispecContext.cs" />
+    <Compile Include="Model\Inspectieformulier.cs" />
+    <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
+    <Compile Include="Model\Klant.cs" />
+    <Compile Include="Model\Offerte.cs" />
+    <Compile Include="Model\Opdracht.cs" />
+    <Compile Include="Model\RapportTemplate.cs" />
+    <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Rol.cs" />
+    <Compile Include="Service\ImageSelectService.cs" />
+    <Compile Include="Service\LocationService.cs" />
     <Compile Include="Service\NavigationService.cs" />
-    <Compile Include="Utility\Encrypt.cs" />
-    <Compile Include="ViewModel\PlanningViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="Model\Status.cs" />
+    <Compile Include="Utility\Converters\ImageByteConverter.cs" />
+    <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
+    <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\LoginView.xaml.cs">
-      <DependentUpon>LoginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RegisterView.xaml.cs">
-      <DependentUpon>RegisterView.xaml</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Model\Vraag.cs" />
+    <Compile Include="Model\VraagType.cs" />
+    <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
+      <DependentUpon>AddContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddContactPersonView.xaml.cs">
+      <DependentUpon>AddContactPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddCustomerInfoView.xaml.cs">
+      <DependentUpon>AddCustomerInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\ContactInfoView.xaml.cs">
+      <DependentUpon>ContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\ContactPersonListView.xaml.cs">
+      <DependentUpon>ContactPersonListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\CustomerInfoView.xaml.cs">
+      <DependentUpon>CustomerInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\CustomerListView.xaml.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
@@ -131,6 +185,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201911182213494_Main.resx">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -145,19 +202,75 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Images\Calendar.png" />
+    <Resource Include="Images\Customers.png" />
+    <Resource Include="Images\Dashboard.png" />
+    <Resource Include="Images\Jobs.png" />
+    <Resource Include="Images\Messages.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FestiSpec.Domain\FestiSpec.Domain.csproj">
-      <Project>{A5B9D29C-FAC2-4D3F-926E-3BA6291BA3E8}</Project>
-      <Name>FestiSpec.Domain</Name>
-    </ProjectReference>
+    <Resource Include="Images\Profile.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\festispec_logo.png" />
+    <Resource Include="Images\User.png" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\CustomerView\AddContactInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\AddContactPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\AddCustomerInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\ContactInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\ContactPersonListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\CustomerInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\CustomerListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_customer_logo.png" />
     <Resource Include="Images\Dashboard_background.png" />
+    <Resource Include="Images\Dashboard_customers.png" />
+    <Resource Include="Images\Dashboard_intro.png" />
+    <Resource Include="Images\Dashboard_jobs.png" />
+    <Resource Include="Images\Dashboard_messages.png" />
+    <Resource Include="Images\Dashboard_new_customer.png" />
+    <Resource Include="Images\Dashboard_new_job.png" />
+    <Resource Include="Images\Dashboard_new_quotation.png" />
+    <Resource Include="Images\Dashboard_planning.png" />
+    <Resource Include="Images\Dashboard_quotations.png" />
+    <Resource Include="Images\Dashboard_schedule.png" />
+    <Resource Include="Images\festispec_logo.png" />
+    <Resource Include="Images\Plus_icon.png" />
+    <Resource Include="Images\Search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

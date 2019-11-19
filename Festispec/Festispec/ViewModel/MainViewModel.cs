@@ -1,13 +1,10 @@
-using Festispec.View;
-using FestiSpec.Domain;
-using FestiSpec.Domain.Repositories;
+using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 using System;
-using System.Diagnostics;
-using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel
 {
@@ -25,35 +22,30 @@ namespace Festispec.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private NavigationService navigationService;
-       
-        public ICommand OpenLoginCommand { get; private set; }
-        private LoginView _loginView;
-        private MainWindow _mainWindow;
+        /// <summary>
+        /// Initializes a new instance of the MainViewModel class.
+        /// </summary>
+        /// 
+        public ICommand ShowCustomersView { get; set; }
+        public ICommand ShowJobsView { get; set; }
+        public ICommand ShowQuotationsView { get; set; }
+        public ICommand ShowDashboardView { get; set; }
+        public ICommand ShowMessagesView { get; set; }
+        public ICommand ShowAccountView { get; set; }
+        public ICommand ShowPlanningView { get; set; }
+        public ICommand ShowScheduleView { get; set; }
 
-        public MainViewModel()
+        private NavigationService _navigationService;
+
+        public MainViewModel(NavigationService navigation)
         {
-            //OpenLoginCommand = new RelayCommand(OpenLogin);
-            //Account acc = new Account()
-            //{ Wachtwoord = "123", Gebruikersnaam = "Dummy"};
-
-            //UserRepository repo = new UserRepository();
-            //Debug.WriteLine(repo.Login(acc) + " ingelogd als: " + acc.Gebruikersnaam);
-
-            PlanningViewModel c = new PlanningViewModel();
-            _ = c.CalculateDistance();
+            _navigationService = navigation;
+            ShowCustomersView = new RelayCommand(ShowCustomers);
+            ShowDashboardView = new RelayCommand(ShowDashboard);
         }
-
-        //private void OpenLogin()
-        //{
-        //    _loginView = new LoginView();
-        //    _loginView.Show();
-        //}
-
-        private void OpenMain()
-        {
-            _mainWindow = new MainWindow();
-            _mainWindow.Show();
-        }
+        private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
+        private void ShowCustomers() => _navigationService.NavigateTo("Customers");
     }
+
+
 }
