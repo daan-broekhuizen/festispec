@@ -32,7 +32,7 @@
                 </Grid.RowDefinitions>
                 <Image Grid.Row="1" Source="/Images/User.png"/>
                 <Viewbox Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <TextBlock  Text="Username" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray"/>
+                    <TextBlock  Text="{Binding AccountVM.Username}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="LightGray"/>
                 </Viewbox>
                 <Line  Grid.Row ="5" Stretch="Fill" Stroke="LightGray"  X1="1"/>
             </Grid>
