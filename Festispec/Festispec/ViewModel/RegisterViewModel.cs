@@ -1,4 +1,5 @@
-﻿using FestiSpec.Domain;
+﻿using Festispec.Model;
+using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;

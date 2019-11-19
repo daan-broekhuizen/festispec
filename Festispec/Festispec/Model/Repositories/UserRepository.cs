@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace FestiSpec.Domain.Repositories
 
         public bool Register(Account account)
         {
-            using (FestiSpecEntities context = new FestiSpecEntities())
+            using (FestispecContext context = new FestispecContext())
             {
                 context.Account.Add(account);
                 return context.SaveChanges() > 1;
@@ -21,7 +22,7 @@ namespace FestiSpec.Domain.Repositories
 
         public bool Login(Account account)
         {
-            using (FestiSpecEntities context = new FestiSpecEntities())
+            using (FestispecContext context = new FestispecContext())
             {
                 Account acc = context.Account.FirstOrDefault(u => u.Gebruikersnaam == account.Gebruikersnaam
                  && u.Wachtwoord == account.Wachtwoord);
@@ -29,13 +30,13 @@ namespace FestiSpec.Domain.Repositories
                 if (acc != null) // Ingelogd
                     return true;
                 else    // Fout
-                    return false;                
+                    return false;
             }
         }
 
         public List<Account> GetUsers()
         {
-            using( FestiSpecEntities context = new FestiSpecEntities())
+            using (FestispecContext context = new FestispecContext())
             {
                 return context.Account.ToList();
             }
