@@ -12,7 +12,7 @@
             <ColumnDefinition Width="0.25*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Background="DimGray" HorizontalAlignment="Center" >
+        <Grid Background="#5A5A5A" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="6*"/>
@@ -48,51 +48,55 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Margin="5" Grid.Row="0" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="0" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Dashboard.png" Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Dashboard"/>
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" HorizontalAlignment="Left" Grid.Row="1" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowCustomersView}">
+                    <Button Margin="5" HorizontalAlignment="Left" Grid.Row="1" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowCustomersView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Customers.png"   Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Klanten" />
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="2" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="2" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Opdrachten"/>
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="3" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="3" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Offertes"/>
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="4" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="4" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
-                            <Image Margin="0,0,10,0" Source="/Images/Dashboard.png"  Height="10" Width="10"/>
+
+                            <Image Margin="0,0,10,0" Source="/Images/Calendar.png"  Height="10" Width="10"/>
+
                             <TextBlock VerticalAlignment="Center" Text="Agenda" />
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="5" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="5" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
-                            <Image Margin="0,0,10,0" Source="/Images/Dashboard.png"   Height="10" Width="10"/>
+
+                            <Image Margin="0,0,10,0" Source="/Images/Calendar.png"   Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Planning" />
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="6" HorizontalAlignment="Left" Foreground="LightGray" Background="DimGray" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="6" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
-                            <Image Margin="0,0,10,0" Source="/Images/Dashboard.png"   Height="10" Width="10"/>
+
+                            <Image Margin="0,0,10,0" Source="/Images/Messages.png"   Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Meldingen" />
                         </WrapPanel>
                     </Button>
@@ -104,7 +108,7 @@
             <Grid Grid.Row="3" >
                 <Line VerticalAlignment="Top" Stretch="Fill"  Stroke="LightGray" X1="1"/>
                 <Viewbox Stretch="Uniform">
-                    <Button  Content="Uitloggen" BorderThickness="0" Background="DimGray" Foreground="LightGray" Margin="5" />
+                    <Button  Content="Uitloggen" BorderThickness="0" Background="#5A5A5A" Foreground="LightGray" Margin="5" />
                 </Viewbox>
             </Grid>
 

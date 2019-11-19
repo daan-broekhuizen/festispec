@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Festispec.Service;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +15,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for AddContactPersonView.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class AddContactPersonView : Page
     {
-        public Page1()
+        public AddContactPersonView()
         {
             InitializeComponent();
         }
+        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
+
     }
 }

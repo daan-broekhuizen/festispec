@@ -1,10 +1,10 @@
 using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 using System;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel
 {
@@ -35,18 +35,16 @@ namespace Festispec.ViewModel
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
 
-        private readonly NavigationService navigationService;
+        private NavigationService _navigationService;
 
         public MainViewModel(NavigationService navigation)
         {
-            navigationService = navigation;
+            _navigationService = navigation;
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
         }
-
-        private void ShowDashboard() => navigationService.NavigateTo("Dashboard");
-        private void ShowCustomers() => navigationService.NavigateTo("Customers");
-
+        private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
+        private void ShowCustomers() => _navigationService.NavigateTo("Customers");
     }
 
 
