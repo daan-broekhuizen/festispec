@@ -53,7 +53,6 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
             SimpleIoc.Default.Register<ApplicationViewModel>();
-            SimpleIoc.Default.Register<LoginViewModel>();
 
         }
         //Configure view mappings here and register navigation service
@@ -88,7 +87,7 @@ namespace Festispec.ViewModel
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
-        public LoginViewModel Login => ServiceLocator.Current.GetInstance<LoginViewModel>();
+        public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         #endregion
 
         #region CustomerVM's

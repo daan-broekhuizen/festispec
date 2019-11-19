@@ -116,7 +116,7 @@
             <Grid Grid.Row="3" >
                 <Line VerticalAlignment="Top" Stretch="Fill"  Stroke="LightGray" X1="1"/>
                 <Viewbox Stretch="Uniform">
-                    <Button  Content="Uitloggen" BorderThickness="0" Background="#5A5A5A" Foreground="LightGray" Margin="5" />
+                    <Button Command="{Binding LogoutCommand}" Content="Uitloggen" BorderThickness="0" Background="#5A5A5A" Foreground="LightGray" Margin="5" />
                 </Viewbox>
             </Grid>
 
