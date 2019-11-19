@@ -16,6 +16,12 @@ namespace Festispec.ViewModel
             _opdracht = opdracht;
         }
 
+        public JobViewModel()
+        {
+            _opdracht = new Opdracht();
+
+        }
+
         public int JobID
         {
             get => _opdracht.OpdrachtID;
@@ -119,9 +125,23 @@ namespace Festispec.ViewModel
 
         public string CustomerName
         {
-            get => _opdracht.Klant.Naam;
+            get
+            {
+                if(_opdracht.Klant == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return _opdracht.Klant.Naam;
+                }
+            }
             set
             {
+                if(_opdracht.Klant == null)
+                {
+                    _opdracht.Klant = new Klant();
+                }
                 _opdracht.Klant.Naam = value;
                 RaisePropertyChanged("CustomerName");
             }

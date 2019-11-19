@@ -45,6 +45,8 @@ namespace Festispec.ViewModel
         private static void RegisterRepositories()
         {
             SimpleIoc.Default.Register<CustomerRepository>();
+            SimpleIoc.Default.Register<JobRepository>();
+
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -71,6 +73,9 @@ namespace Festispec.ViewModel
             #region JobViews
             navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
             navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddJob", new Uri("../View/AddJobView.xaml", UriKind.Relative));
+
+
 
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
             #endregion
@@ -81,6 +86,8 @@ namespace Festispec.ViewModel
 
         // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
+        public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
+
 
         // Viewmodels used for datacontext
         #region Singleton VM's
@@ -99,7 +106,8 @@ namespace Festispec.ViewModel
 
         #region JobsVM's
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
+        public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo);
         #endregion
 
         //Clean when logging out?

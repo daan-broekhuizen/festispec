@@ -16,5 +16,24 @@ namespace FestiSpec.Domain.Repositories
                 return context.Opdracht.Include("Klant").ToList();
             }
         }
+
+        public void CreateJob(Opdracht opdracht)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                context.Opdracht.Add(opdracht);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateJob(Opdracht opdracht)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                Opdracht toUpdate = context.Opdracht.Where(c => c.OpdrachtNaam == opdracht.OpdrachtNaam).FirstOrDefault();
+                context.Entry(toUpdate).CurrentValues.SetValues(opdracht);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:Festispec.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddJobView">
+      Title="AddJobView"
+            DataContext="{Binding AddJob, Source={StaticResource Locator}}">
+    
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -79,5 +81,6 @@
         </Viewbox>
 
         <TextBox Grid.Row="4" Text="{Binding JobVM.CustomerWishes}"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" Tag="1234AB..." Margin="20,0,20,0"/>
+        <Button Content="Opdracht opslaan" Command="{Binding SaveJobCommand}"/>
     </Grid>
 </Page>

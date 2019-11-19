@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Festispec.Model;
 using Festispec.Service;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
@@ -71,6 +72,7 @@ namespace Festispec.ViewModel
         private JobRepository JobRepository { get; set; }
 
         public ICommand SearchJob { get; set; }
+        public ICommand ShowAddJobCommand { get; set; }
         private NavigationService _navigationService;
         public JobListViewModel(NavigationService service)
         {
@@ -79,7 +81,13 @@ namespace Festispec.ViewModel
             Jobs = JobRepository.GetOpdrachten().Select(c => new JobViewModel(c)).ToList();
             FilteredJobs = Jobs;
             SearchJob = new RelayCommand(FilterJobs);
+            ShowAddJobCommand = new RelayCommand(ShowAddJob);
             FilterJob = "";
+        }
+
+        public void ShowAddJob()
+        {
+            _navigationService.NavigateTo("AddJob");
         }
 
         public void ShowJobInfo()

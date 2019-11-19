@@ -117,6 +117,7 @@
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="ViewModel\AddJobViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
