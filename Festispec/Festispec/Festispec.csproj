@@ -108,6 +108,7 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\JobRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
     <Compile Include="Service\LocationService.cs" />
@@ -134,6 +135,9 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\AddJobView.xaml.cs">
+      <DependentUpon>AddJobView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +161,15 @@
     </Compile>
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\JobInfoViewModel.cs" />
+    <Compile Include="ViewModel\JobListViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModel.cs" />
+    <Compile Include="View\JobInfoView.xaml.cs">
+      <DependentUpon>JobInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\JobsWindow.xaml.cs">
+      <DependentUpon>JobsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -209,6 +222,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AddJobView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomerView\AddContactInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -240,6 +257,14 @@
     <Page Include="View\DashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\JobInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\JobsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

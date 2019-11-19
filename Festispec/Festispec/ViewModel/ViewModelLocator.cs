@@ -68,6 +68,13 @@ namespace Festispec.ViewModel
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
             #endregion
 
+            #region JobViews
+            navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
+            navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
+
+            navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
+            #endregion
+
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
@@ -88,6 +95,11 @@ namespace Festispec.ViewModel
         public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        #endregion
+
+        #region JobsVM's
+        public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         #endregion
 
         //Clean when logging out?
