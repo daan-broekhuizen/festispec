@@ -27,7 +27,6 @@ namespace Festispec.ViewModel
             get => _account.Gebruikersnaam;
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
                 _account.Gebruikersnaam = value;
                 RaisePropertyChanged("Username");
             }

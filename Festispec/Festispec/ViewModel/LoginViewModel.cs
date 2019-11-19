@@ -16,23 +16,18 @@ using Festispec.Model;
 namespace Festispec.ViewModel
 {
     public class LoginViewModel : ViewModelBase
-    {
-        private UserRepository _userRepository;
-        private NavigationService _navigationService;
-        
-        private string _errorFeedback; // Deze geeft de gebruiker uiteindelijk feedback daan dus deze mag je ook implementeren :)
+    {       
         public ICommand LoginCommand { get; set; }
 
         private string _username;
         public string Username
         {
-            get { return this._username; }
+            get { return _username; }
             set
             {
-                // Implement with property changed handling for INotifyPropertyChanged
                 if (!string.Equals(this._username, value))
                 {
-                    this._username = value;
+                    _username = value;
                     RaisePropertyChanged("Username");
                 }
             }
@@ -46,22 +41,26 @@ namespace Festispec.ViewModel
             {
                 if (!string.Equals(this._password, value))
                 {
-                    this._password = value;
+                    _password = value;
                     RaisePropertyChanged("Password");
                 }
             }
         }
 
+        private string _errorFeedback;
         public string ErrorFeedback
         {
-            get { return this._errorFeedback; }
+            get { return _errorFeedback; }
             set
             {
-                this._errorFeedback = value;
+                _errorFeedback = value;
                 RaisePropertyChanged("ErrorFeedback");
             }
         }
-        
+
+        private UserRepository _userRepository;
+        private NavigationService _navigationService;
+
         public LoginViewModel(NavigationService service, UserRepository repo)
         {
             _userRepository = repo;
