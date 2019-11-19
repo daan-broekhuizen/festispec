@@ -160,7 +160,22 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
+<<<<<<< Updated upstream
     <Compile Include="ViewModel\LoginViewModel.cs" />
+=======
+    <Compile Include="View\RapportageView.xaml.cs">
+      <DependentUpon>RapportageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+>>>>>>> Stashed changes
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -252,6 +267,7 @@
     <Resource Include="Images\Messages.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <Resource Include="Images\Profile.png" />
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +279,13 @@
   <ItemGroup>
     <Page Include="View\CustomerView\AddContactInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
+=======
+    <Page Include="View\RapportageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DashboardView.xaml">
+>>>>>>> Stashed changes
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\CustomerView\AddContactPersonView.xaml">
