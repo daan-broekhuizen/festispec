@@ -1,3 +1,4 @@
+using Festispec.API.ImageShack;
 using Festispec.View;
 using Festispec.View.RichTextEditor;
 using GalaSoft.MvvmLight;
@@ -27,6 +28,8 @@ namespace Festispec.ViewModel
 
         public ICommand OpenTextEditorCommand { get; set; }
         private RichTextEditorView _richTextEditorView;
+
+        public ICommand ExecuteApiCommand { get; set; }
 
         public MainViewModel()
         {
@@ -64,6 +67,14 @@ namespace Festispec.ViewModel
                 this._richTextEditorView = new RichTextEditorView();
                 this._richTextEditorView.Show();
             });
+
+            this.ExecuteApiCommand = new RelayCommand(ExecuteApiRequest);
+        }
+
+        private void ExecuteApiRequest()
+        {
+            ImageShackClient client = new ImageShackClient();
+            client.Examples();
         }
     }
 }

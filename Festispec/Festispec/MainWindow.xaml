@@ -24,5 +24,6 @@
         <Button Grid.Column="0" Grid.Row="1" Content="Beschikbaarheid" FontSize="20" Command="{Binding OpenAvailabilityCommand}"/>
 
         <Button Grid.Column="0" Grid.Row="2" Content="Text Editor" FontSize="20" Command="{Binding OpenTextEditorCommand}" />
+        <Button Grid.Column="1" Grid.Row="2" Content="API" FontSize="20" Command="{Binding ExecuteApiCommand}" />
     </Grid>
 </Window>
