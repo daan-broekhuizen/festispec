@@ -1,6 +1,7 @@
 ﻿using Festispec.Model;
 using Festispec.Service;
 using Festispec.Validators;
+using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
@@ -17,14 +18,13 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class ContactPersonListViewModel : ViewModelBase
+    public class ContactPersonListViewModel : CustomerViewModelBase
     {
         public ICommand ShowCustomerInfoCommand { get; set; }
         public ICommand ShowContactInfoCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
         public ICommand CreateContactPersonCommand { get; set; }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
-        public CustomerViewModel CustomerVM { get; set; }
         private ContactPersonViewModel _selectedContact;
         public ContactPersonViewModel SelectedContact
         {
@@ -36,17 +36,9 @@ namespace Festispec.ViewModel
             }
         }
 
-        private NavigationService _navigationService;
-        private CustomerRepository _customerRepository;
 
-        public ContactPersonListViewModel(NavigationService service, CustomerRepository repo)
+        public ContactPersonListViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
         {
-            _customerRepository = repo;
-            _navigationService = service;
-            //get customer from navigationservice
-            if (service.Parameter is CustomerViewModel)
-                CustomerVM = service.Parameter as CustomerViewModel;
-
             CreateContactPersonCommand = new RelayCommand(CreateContactPerson);
             SaveContactPersonCommand = new RelayCommand(SaveContactPerson);
             ShowCustomerInfoCommand = new RelayCommand(ShowCustomerInfo);

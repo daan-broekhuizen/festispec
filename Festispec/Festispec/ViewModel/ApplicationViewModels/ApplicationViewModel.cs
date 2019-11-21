@@ -9,13 +9,11 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class ApplicationViewModel
+    public class ApplicationViewModel : NavigatableViewModel
     {
         public ICommand ShowLoginCommand { get; set; }
-        private NavigationService _navigationService;
-        public ApplicationViewModel(NavigationService service)
+        public ApplicationViewModel(NavigationService service) : base(service)
         {
-            _navigationService = service;
             ShowLoginCommand = new RelayCommand(ShowLogin);
         }
 
