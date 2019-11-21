@@ -41,12 +41,12 @@ namespace Festispec.ViewModel
             ShowContactInfoCommand = new RelayCommand(ShowContactInfo);
         }
 
-        public void CreateContactPerson()
+        private void CreateContactPerson()
         {
             SelectedContact = new ContactPersonViewModel();
             CustomerVM.Contacts.Add(SelectedContact);
         }
-        public void SaveContactPerson()
+        private void SaveContactPerson()
         {
             if(SelectedContact == null)
             {
