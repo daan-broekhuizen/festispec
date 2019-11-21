@@ -1,6 +1,7 @@
 ﻿using Festispec.Model;
 using Festispec.Service;
 using Festispec.Validators;
+using Festispec.ViewModel.CustomerViewModels.Interfaces;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
@@ -17,7 +18,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class ContactPersonListViewModel : ViewModelBase
+    public class ContactPersonListViewModel : ViewModelBase, IContactPersonListViewModel
     {
         public ICommand ShowCustomerInfoCommand { get; set; }
         public ICommand ShowContactInfoCommand { get; set; }
@@ -53,12 +54,12 @@ namespace Festispec.ViewModel
             ShowContactInfoCommand = new RelayCommand(ShowContactInfo);
         }
 
-        private void CreateContactPerson()
+        public void CreateContactPerson()
         {
             SelectedContact = new ContactPersonViewModel();
             CustomerVM.Contacts.Add(SelectedContact);
         }
-        private void SaveContactPerson()
+        public void SaveContactPerson()
         {
             if(SelectedContact == null)
             {
