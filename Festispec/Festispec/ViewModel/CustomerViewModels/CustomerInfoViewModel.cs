@@ -54,6 +54,7 @@ namespace Festispec.ViewModel
             ValidationResult result = _customerValidator.Validate(CustomerVM);
             if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
+                Console.WriteLine(CustomerVM.HouseNumber);
                 //if validated update customer
                 _customerRepository.UpdateCustomer(new Klant()
                 {
