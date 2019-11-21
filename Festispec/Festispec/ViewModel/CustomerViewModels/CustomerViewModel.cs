@@ -126,8 +126,13 @@ namespace Festispec.ViewModel
             get => ImageByteConverter.BytesToImage(_klant.KlantLogo);
             set
             {
-                _klant.KlantLogo = ImageByteConverter.PngImageToBytes(value);
-                RaisePropertyChanged("Logo");
+                byte[] image = ImageByteConverter.PngImageToBytes(value);
+                if (image != null)
+                {
+                    _klant.KlantLogo = image;
+                    RaisePropertyChanged("Logo");
+                }
+                    
             }
         }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
