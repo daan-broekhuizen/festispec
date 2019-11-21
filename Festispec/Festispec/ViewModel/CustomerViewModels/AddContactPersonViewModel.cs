@@ -77,7 +77,7 @@ namespace Festispec.ViewModel
             SaveContactPersonCommand = new RelayCommand(SaveContactPerson);
         }
 
-        public void SaveCustomer()
+        private void SaveCustomer()
         {
             //Create Customer && add to db
             Klant klant = new Klant()
