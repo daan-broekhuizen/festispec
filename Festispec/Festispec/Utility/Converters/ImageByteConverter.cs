@@ -15,7 +15,7 @@ namespace Festispec.Utility.Converters
         public static ImageSource BytesToImage(byte[] imageData)
         {
             BitmapImage image = new BitmapImage();
-            if (imageData == null) return image;
+            if (imageData == null) return null;
             MemoryStream ms = new MemoryStream(imageData);
             image.BeginInit();
             image.StreamSource = ms;

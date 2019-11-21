@@ -66,7 +66,9 @@ namespace Festispec.ViewModel
             ValidationFailure customerError = errors.Where(e => e.PropertyName.Equals("Name") ||
                                                                 e.PropertyName.Equals("KvK")).FirstOrDefault();
             ValidationFailure adresError = errors.Where(e => e.PropertyName.Equals("PostalCode") ||
-                                                             e.PropertyName.Equals("HouseNumber")).FirstOrDefault();
+                                                             e.PropertyName.Equals("HouseNumber") ||
+                                                             e.PropertyName.Equals("Streetname") ||
+                                                             e.PropertyName.Equals("City")).FirstOrDefault();
             //If succesfull navigate to next page else update error properties
             if (customerError == null && adresError == null)
                 _navigationService.NavigateTo("AddContactInfo", Customer);

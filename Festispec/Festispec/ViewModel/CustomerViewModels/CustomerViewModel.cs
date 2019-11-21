@@ -126,8 +126,13 @@ namespace Festispec.ViewModel
             get => ImageByteConverter.BytesToImage(_klant.KlantLogo);
             set
             {
-                _klant.KlantLogo = ImageByteConverter.PngImageToBytes(value);
+                byte[] image = ImageByteConverter.PngImageToBytes(value);
+                if (image != null)
+                    _klant.KlantLogo = image;
+                else
+                    new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
                 RaisePropertyChanged("Logo");
+
             }
         }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
@@ -139,8 +144,6 @@ namespace Festispec.ViewModel
         {
             _klant = klant;
             Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
-            if(_klant.KlantLogo == null)
-                Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             GetPostalCodeAsync();
         }
         public CustomerViewModel()

@@ -28,7 +28,7 @@ namespace Festispec.Service
         {
             DistanceMatrixRequest req = new DistanceMatrixRequest()
             {
-                BingMapsKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
+                BingMapsKey = _bingApiKey,
                 Origins = new List<SimpleWaypoint>()
                 {
                     new SimpleWaypoint("Efteling, 5171 SL Kaatsheuvel")
