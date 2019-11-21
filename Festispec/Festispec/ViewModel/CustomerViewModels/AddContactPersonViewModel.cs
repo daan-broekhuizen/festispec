@@ -2,6 +2,7 @@
 using Festispec.Service;
 using Festispec.Utility.Converters;
 using Festispec.Validators;
+using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
@@ -16,7 +17,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddContactPersonViewModel : ViewModelBase
+    public class AddContactPersonViewModel : ViewModelBase, IAddContactPersonViewModel
     {
         public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand SaveCustomerCommand { get; set; }
@@ -88,7 +89,7 @@ namespace Festispec.ViewModel
             SaveContactPersonCommand = new RelayCommand(SaveContactPerson);
         }
 
-        private void SaveCustomer()
+        public void SaveCustomer()
         {
             //Create Customer && add to db
             Klant klant = new Klant()
@@ -124,9 +125,9 @@ namespace Festispec.ViewModel
             _navigationService.NavigateTo("CustomerInfo", CustomerViewModel);
         }
 
-        private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerViewModel).IsValid;
+        public bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerViewModel).IsValid;
 
-        private void SaveContactPerson()
+        public void SaveContactPerson()
         {
             //Validate & get relevant errors
             List<ValidationFailure> errors = new ContactPersonValidator().Validate(ContactPersonViewModel).Errors.ToList();
