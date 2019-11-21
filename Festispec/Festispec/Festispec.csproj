@@ -150,6 +150,9 @@
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />

@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddContactPersonViewModel : CustomerViewModelBase
+    public class AddContactPersonViewModel : CustomerViewModelBase, IAddContactPersonViewModel
     {
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
