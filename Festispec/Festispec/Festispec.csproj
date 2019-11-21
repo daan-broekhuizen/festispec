@@ -138,6 +138,7 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="Utility\Validators\QuotationValidator.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
@@ -162,6 +164,9 @@
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\QuotationViewModels\AddQuotationViewModel.cs" />
+    <Compile Include="ViewModel\QuotationViewModels\QuotationListViewModel.cs" />
+    <Compile Include="ViewModel\QuotationViewModels\QuotationViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
@@ -314,6 +319,9 @@
     <Resource Include="Images\festispec_logo.png" />
     <Resource Include="Images\Plus_icon.png" />
     <Resource Include="Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\QuotationView\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
