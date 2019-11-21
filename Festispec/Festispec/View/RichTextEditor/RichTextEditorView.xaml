@@ -172,9 +172,9 @@
             </Grid>
             
             <!-- Test -->
-            <Label Content="Test" FontWeight="Bold" Visibility="{Binding IsEditable}"  />
+            <Label Content="Selection Test" FontWeight="Bold" Visibility="{Binding IsEditable}"  />
             <Grid Visibility="{Binding IsEditable}">
-                <Button Name="controlTest" Content="Test" Command="{Binding TestCommand}">
+                <Button Name="controlTest" Content="Selected Test" Command="{Binding TestCommand}">
                     <Button.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiConverter}">
                             <Binding ElementName="documentDesigner" />
