@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+
 
 namespace Festispec.ViewModel.CustomerViewModels.Interfaces
 {
@@ -18,5 +14,6 @@ namespace Festispec.ViewModel.CustomerViewModels.Interfaces
         ICommand ShowContactInfoCommand { get; set; }
         ICommand SaveContactPersonCommand { get; set; }
         ICommand CreateContactPersonCommand { get; set; }
+
     }
 }

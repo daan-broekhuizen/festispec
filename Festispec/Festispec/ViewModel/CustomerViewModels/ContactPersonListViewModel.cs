@@ -3,18 +3,13 @@ using Festispec.Service;
 using Festispec.Validators;
 using Festispec.ViewModel.CustomerViewModels;
 using Festispec.ViewModel.CustomerViewModels.Interfaces;
-using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -38,7 +33,6 @@ namespace Festispec.ViewModel
         }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
 
-
         public ContactPersonListViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
         {
             CreateContactPersonCommand = new RelayCommand(CreateContactPerson);
@@ -47,12 +41,12 @@ namespace Festispec.ViewModel
             ShowContactInfoCommand = new RelayCommand(ShowContactInfo);
         }
 
-        private void CreateContactPerson()
+        public void CreateContactPerson()
         {
             SelectedContact = new ContactPersonViewModel();
             CustomerVM.Contacts.Add(SelectedContact);
         }
-        private void SaveContactPerson()
+        public void SaveContactPerson()
         {
             if(SelectedContact == null)
             {
