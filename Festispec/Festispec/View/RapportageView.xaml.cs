@@ -17,16 +17,13 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RapportageView : Page
     {
-        public MainWindow()
+        public RapportageView()
         {
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
     }
 }
