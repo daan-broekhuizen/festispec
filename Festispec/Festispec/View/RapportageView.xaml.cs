@@ -24,6 +24,9 @@ namespace Festispec
             InitializeComponent();
         }
 
-       
+        protected void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            //logic...
+        }
     }
 }

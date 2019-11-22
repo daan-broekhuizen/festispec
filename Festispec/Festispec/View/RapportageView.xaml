@@ -21,9 +21,9 @@
             <RowDefinition Height="0.4*"/>
         </Grid.RowDefinitions>
 
-        <Border Background="#ffffffff" BorderBrush="#ff707070" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
+        <Border Background="#ffffffff" BorderBrush="#ff707070"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
 
-            <TextBox TextWrapping="Wrap" Text="Adviesrapport voorbeeldtext" TextChanged="TextBox_TextChanged" Margin="35,10,50,9.8" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
+            <TextBox TextWrapping="Wrap" Text="Adviesrapport voorbeeldtext" TextChanged="TextBox_TextChanged" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
 
         </Border>
         <Grid  Width="auto" Height="auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2"/>
@@ -66,8 +66,11 @@
                 </Grid>
 
                 <Border Background="#ffffffff" BorderBrush="#ff707070" Grid.Row="3"/>
-                <TextBlock  Text="Lettergrootte" TextAlignment="left" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
-                <TextBlock  Text="12" TextAlignment="left" FontFamily="Segoe UI" TextWrapping="Wrap" Foreground="#ff707070" Grid.Row="3" Grid.Column="0"  Grid.RowSpan="3" HorizontalAlignment="Center" Margin="61,0.4,61,26.2" Width="70"/>
+                <Viewbox Grid.Row="2" Grid.Column="0">
+                    <Label Content="Lettergrootte" FontFamily="Segoe UI"  Foreground="#ff000000" HorizontalAlignment="Center" FontSize="60"/>
+                </Viewbox>
+                
+                <TextBlock  Text="12" TextAlignment="left" FontFamily="Segoe UI" TextWrapping="Wrap" Foreground="#ff707070" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
                 <Grid Grid.Row="3" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
@@ -78,16 +81,30 @@
 
                 </Grid>
                 <Border  Width="37" Height="32" Background="#ffffffff" BorderBrush="#ff707070" Margin="42,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBlock  Text="B" TextAlignment="left" FontFamily="Segoe UI"  Foreground="#ff707070" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0"/>
-                <Border Background="#ffffffff" BorderBrush="#ff707070" Margin="142,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBlock  Text="u" TextAlignment="left" FontFamily="Segoe UI"  Foreground="#ff707070" HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0"/>
+                <Viewbox  HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0">
+                    <Label  Content="B" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>                    
+                </Viewbox>
+                <Viewbox  HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0">
+                    <Label Content="u" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>
+                </Viewbox>
+                <Viewbox HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1">
+                    <Label  Content="I" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>
+                </Viewbox>
                 <Border Background="#ffffffff" BorderBrush="#ff707070" Margin="242,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBlock  Text="I" TextAlignment="left" FontFamily="Segoe UI"  Foreground="#ff707070" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
-                <TextBlock  Text="Letterkleur" TextAlignment="left" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center"/>
+                
+                <Viewbox Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center">
+                    <Label  Content="Letterkleur" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="60"/>
+                </Viewbox>
+                
 
                 
-                    <Border Background="#ffffffff" BorderBrush="#ff707070"/>
-                    
+                <Border Background="#ffffffff" BorderBrush="#ff707070"/>
+                <Viewbox Grid.Row="8" HorizontalAlignment="Center">
+                    <WrapPanel>
+                        <Label  Content="A" FontFamily="Segoe UI" Foreground="#ff707070" FontSize="60" />
+                    </WrapPanel>
+                </Viewbox>
+                
                 <Grid Grid.Row="9" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -99,9 +116,10 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="4*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Background="#ff000000" BorderBrush="#ff707070" Grid.Row="2" Grid.Column="1"/>
-                    <TextBlock  Text="A" TextAlignment="Center" FontFamily="Segoe UI" Foreground="#ff707070" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"/>
-                    <Path Stretch="uniform" Data="M 18 20.67890548706055 L 26.9296875 11.7421875 C 27.59062576293945 11.08125019073486 28.65937423706055 11.08125019073486 29.31328201293945 11.7421875 C 29.96718978881836 12.40312480926514 29.96718788146973 13.47187519073486 29.31328201293945 14.1328125 L 19.1953125 24.2578125 C 18.55546951293945 24.89765548706055 17.52890586853027 24.91171836853027 16.86796951293945 24.30703163146973 L 6.6796875 14.13984394073486 C 6.349218845367432 13.80937480926514 6.1875 13.37343788146973 6.1875 12.94453144073486 C 6.1875 12.515625 6.349218845367432 12.07968807220459 6.6796875 11.74921894073486 C 7.340624809265137 11.08828163146973 8.409375190734863 11.08828163146973 9.063281059265137 11.74921894073486 L 18 20.67890548706055 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Row="2" Grid.Column="2"/>
+                    <Border Background="#ff000000" BorderBrush="#ff707070" Grid.Row="0" Grid.Column="1"/>
+                    
+                    
+                    <Path Stretch="uniform" Data="M 18 20.67890548706055 L 26.9296875 11.7421875 C 27.59062576293945 11.08125019073486 28.65937423706055 11.08125019073486 29.31328201293945 11.7421875 C 29.96718978881836 12.40312480926514 29.96718788146973 13.47187519073486 29.31328201293945 14.1328125 L 19.1953125 24.2578125 C 18.55546951293945 24.89765548706055 17.52890586853027 24.91171836853027 16.86796951293945 24.30703163146973 L 6.6796875 14.13984394073486 C 6.349218845367432 13.80937480926514 6.1875 13.37343788146973 6.1875 12.94453144073486 C 6.1875 12.515625 6.349218845367432 12.07968807220459 6.6796875 11.74921894073486 C 7.340624809265137 11.08828163146973 8.409375190734863 11.08828163146973 9.063281059265137 11.74921894073486 L 18 20.67890548706055 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Row="0" Grid.Column="2"/>
 
                 </Grid>
                     
@@ -132,7 +150,8 @@
         
         <Grid Grid.Column="2" Grid.Row="1" Height="auto" Width="auto">            
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".1*"/>
+                <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.2*"/>
@@ -145,9 +164,9 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="4" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="0*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="1*"/>
@@ -163,16 +182,16 @@
 
             </Grid>
 
-            <TextBlock  Text="Afbeelding invoegen" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="3"/>
+            
 
 
 
 
 
-                <TextBlock  Text="Grafiek invoegen" TextAlignment="Center" FontFamily="Segoe UI" Foreground="#ff000000" Grid.Row="5" VerticalAlignment="Bottom"/>
-            <Grid Grid.Row="6">
+            
+            <Grid Grid.Row="6" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width=".05*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="1*"/>
@@ -189,9 +208,24 @@
                 <Path  Width="auto" Height="auto" Stretch="uniform" Data="M 30.92519569396973 16.875 L 17.021484375 16.875 L 26.28105545043945 26.13457107543945 C 26.63496208190918 26.48847770690918 27.21738433837891 26.51718902587891 27.58125114440918 26.17441558837891 C 29.84882926940918 24.03808784484863 31.40859413146973 21.15820503234863 31.8662109375 17.92090034484863 C 31.94472694396973 17.36660385131836 31.48476600646973 16.87500190734863 30.92519569396973 16.87500190734863 Z M 29.99765586853027 13.078125 C 29.51484298706055 6.078515529632568 23.92148399353027 0.485156238079071 16.921875 0.002343750093132257 C 16.38750076293945 -0.03457031399011612 15.9375 0.416015625 15.9375 0.9515625238418579 L 15.9375 14.0625 L 29.04902267456055 14.0625 C 29.58456993103027 14.0625 30.03456878662109 13.61250019073486 29.99765586853027 13.078125 Z M 13.125 16.875 L 13.125 2.971289157867432 C 13.125 2.411718845367432 12.63339805603027 1.951757907867432 12.07968711853027 2.0302734375 C 5.097070217132568 3.016992092132568 -0.240234375 9.1171875 0.00820312462747097 16.42792892456055 C 0.263671875 23.93613243103027 6.728320121765137 30.09316444396973 14.24003887176514 29.99882888793945 C 17.19316482543945 29.9619140625 19.921875 29.01035308837891 22.16543006896973 27.4189453125 C 22.62832069396973 27.0908203125 22.65878868103027 26.40937423706055 22.25742149353027 26.00800704956055 L 13.125 16.875 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="7"/>
 
             </Grid>
-                <TextBlock  Text="Grafiek bewerken" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="7"/>
-                <TextBlock  Text="Invoegen resultaten" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="1"/>
-                <TextBlock  Text="Ander template" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="2"/>
+            <Viewbox  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+                <Label  Content="Invoegen resultaten" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
+            </Viewbox>
+            <Viewbox  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+                <Label  Content="Ander template" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
+            </Viewbox>
+            <Viewbox  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">
+                <Label Content="Afbeelding invoegen" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
+            </Viewbox>
+            <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
+                <Label  Content="Grafiek invoegen" FontFamily="Segoe UI" Foreground="#ff000000" FontSize="24"/>
+            </Viewbox>
+            <Viewbox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left">
+                <Label  Content="Grafiek bewerken" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
+            </Viewbox>
+            
+           
+            
             </Grid>
         
         <Grid Background="DimGray" HorizontalAlignment="Left" Margin="0,0,0,0" Width="auto" Grid.RowSpan="3">
