@@ -291,6 +291,9 @@
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
         {
+            if (context.BeschikbaarheidInspecteurs.Count() > 0)
+                return;
+
             BeschikbaarheidInspecteurs[] beschikbaarheiden = new BeschikbaarheidInspecteurs[4];
             beschikbaarheiden[0] = new BeschikbaarheidInspecteurs()
             {
@@ -316,17 +319,21 @@
                 Datum = DateTime.Now.AddDays(3)
             };
 
-            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => x.Datum, beschikbaarheiden);
+            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheiden);
             context.SaveChanges();
         }
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
             Opdracht opdracht = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop");
-            opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+
+            if(opdracht.Ingepland.Count == 0)
+                opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
-            account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
+
+            if(account.Ingepland.Count == 0)
+                account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
 
             context.SaveChanges();
         }
