@@ -71,8 +71,10 @@
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
                 <ComboBox Margin="10" Width="70" Height="20" SelectedItem="{Binding SelectedBox}">
-                    <ComboBoxItem Content="A - Z"/>
-                    <ComboBoxItem Content="Z - A"/>
+                    <ComboBoxItem Content="Naam oplopend"/>
+                    <ComboBoxItem Content="Naam aflopend"/>
+                    <ComboBoxItem Content="Aanmaak datum oplopend"/>
+                    <ComboBoxItem Content="Aanmaak datum aflopend"/>
                 </ComboBox>
             </WrapPanel>
         </Viewbox>
@@ -144,10 +146,6 @@
 
                             <TextBlock Grid.Column="4" Text="Status" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
                             <ComboBox Grid.Column="4" Width="70" Height="20" SelectedItem="{Binding SelectedBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                <ComboBoxItem Content="Naam oplopend"/>
-                                <ComboBoxItem Content="Naam aflopend"/>
-                                <ComboBoxItem Content="Aanmaak datum oplopend"/>
-                                <ComboBoxItem Content="Aanmaak datum aflopend"/>
                             </ComboBox>
                         </Grid>
                     </DataTemplate>

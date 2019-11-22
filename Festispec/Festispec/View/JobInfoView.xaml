@@ -51,7 +51,9 @@
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="1" HorizontalAlignment="Left">
@@ -64,14 +66,65 @@
                 <TextBlock  VerticalAlignment="Bottom" Text="Opdracht Status"/>
             </Viewbox>
 
-            <Viewbox Grid.Column="1"  Grid.Row="3" HorizontalAlignment="Left">
-                <TextBlock  VerticalAlignment="Bottom" Text="Aanmaak Datum"/>
+            <Viewbox Grid.Column="1"  Grid.Row="4" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Eind Datum"/>
             </Viewbox>
 
-            <TextBox Text="{Binding JobVM.CustomerName}" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
-            <TextBox Text="{Binding JobVM.JobName}"  FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
-            <TextBox Text="{Binding JobVM.Status}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
-            <TextBox Text="{Binding JobVM.CreationDate}" Grid.Row="4" Grid.Column="1"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="Den Bosch..."/>
+            <Viewbox Grid.Column="0"  Grid.Row="4" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Begin Datum"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left">
+                <DatePicker SelectedDate="{Binding JobVM.StartDatum}">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+            </Viewbox>
+
+            <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
+                <DatePicker SelectedDate="{Binding JobVM.EindDatum}">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+            </Viewbox>
+
+            <TextBox Text="{Binding JobVM.CustomerName}" IsReadOnly="True" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
+            <TextBox Text="{Binding JobVM.JobName}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <ComboBox Name="ComboBoxStatus" Text="{Binding JobVM.Status}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
+
+            <Viewbox Grid.Row="6" Grid.Column="0">
+                <Label Content="{Binding BeginDateError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="6" Grid.Column="1">
+                <Label Content="{Binding EndDateError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="3" Grid.Column="0">
+                <Label Content="{Binding CustomerNameError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="3" Grid.Column="1">
+                <Label Content="{Binding JobNameError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="3" Grid.Column="2">
+                <Label Content="{Binding StatusError}" Foreground="Red" />
+            </Viewbox>
         </Grid>
 
         <Rectangle Grid.Row="3" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
@@ -79,8 +132,16 @@
             <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Klantenwensen" RenderTransformOrigin="0.839,0.839"/>
         </Viewbox>
 
-        <TextBox Grid.Row="4" Text="{Binding JobVM.CustomerWishes}"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" Tag="1234AB..." BorderThickness="0" Margin="20,0,20,0"/>
-
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.2*"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Text="{Binding JobVM.CustomerWishes}"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" Tag="1234AB..." Margin="20,0,20,0"/>
+            <Viewbox Grid.Row="1">
+                <Label Content="{Binding CustomerWishesError}" Foreground="Red" />
+            </Viewbox>
+        </Grid>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.25*"/>

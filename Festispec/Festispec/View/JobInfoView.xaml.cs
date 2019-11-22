@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Festispec.Model.Repositories;
 
 namespace Festispec.View
 {
@@ -23,6 +24,13 @@ namespace Festispec.View
         public JobInfoView()
         {
             InitializeComponent();
+            FillCombo();
+        }
+
+        private void FillCombo()
+        {
+            StatusRepository Srepo = new StatusRepository();
+            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
         }
     }
 }

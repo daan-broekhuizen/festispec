@@ -113,6 +113,7 @@
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
+    <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
     <Compile Include="Service\LocationService.cs" />

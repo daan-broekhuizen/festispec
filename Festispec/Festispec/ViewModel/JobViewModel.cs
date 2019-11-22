@@ -52,6 +52,26 @@ namespace Festispec.ViewModel
             }
         }
 
+        public DateTime StartDatum
+        {
+            get => _opdracht.StartDatum;
+            set
+            {
+                _opdracht.StartDatum = value;
+                RaisePropertyChanged("StartDatum");
+            }
+        }
+
+        public DateTime EindDatum
+        {
+            get => _opdracht.EindDatum;
+            set
+            {
+                _opdracht.EindDatum = value;
+                RaisePropertyChanged("EindDatum");
+            }
+        }
+
         public DateTime CreationDate
         {
             get => _opdracht.CreatieDatum;

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Festispec.Model.Repositories;
+using FestiSpec.Domain.Repositories;
 
 namespace Festispec.View
 {
@@ -23,6 +25,15 @@ namespace Festispec.View
         public AddJobView()
         {
             InitializeComponent();
+            FillCombo();
+        }
+
+        public void FillCombo()
+        {
+            CustomerRepository Crepo = new CustomerRepository();
+            StatusRepository Srepo = new StatusRepository();
+            Crepo.GetCustomers().ForEach(e => ComboBoxCustomers.Items.Add(e.Naam));
+            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
         }
     }
 }
