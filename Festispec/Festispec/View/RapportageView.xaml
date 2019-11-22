@@ -33,6 +33,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width=".1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height=".3*"/>
@@ -50,7 +51,7 @@
 
                 <Border  Background="#ffffffff" BorderBrush="#ff707070" Margin="0,43,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
                 <TextBlock  Text="Segoe UI" TextAlignment="left" FontFamily="Segoe UI"  TextWrapping="Wrap" Foreground="#ff707070" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="2">
+                <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
                         <ColumnDefinition Width="1*"/>
@@ -139,6 +140,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width=".1*"/>
             </Grid.ColumnDefinitions>
                 <Border Background="#fff2f2f2" BorderBrush="#ff707070" Grid.Column="1" Grid.Row="1" />
                 <TextBlock  Text="Opslaan" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
@@ -152,7 +154,8 @@
                 <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".1*"/>
                 <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".1*"/>
+            </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.2*"/>
                     <RowDefinition Height="1*"/>
