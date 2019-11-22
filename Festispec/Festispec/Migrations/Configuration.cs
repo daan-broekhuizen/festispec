@@ -194,6 +194,8 @@
                 OpdrachtNaam = "Inspectie Bospop",
                 Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
                 CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now,
+                EindDatum = DateTime.Now.AddDays(2),
                 KlantID = "293871",
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,

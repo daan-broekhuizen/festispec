@@ -95,6 +95,10 @@
     <Compile Include="Migrations\201911182213494_Main.designer.cs">
       <DependentUpon>201911182213494_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911221038060_main2.cs" />
+    <Compile Include="Migrations\201911221038060_main2.designer.cs">
+      <DependentUpon>201911221038060_main2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\AddJobViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
@@ -192,6 +197,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201911182213494_Main.resx">
       <DependentUpon>201911182213494_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911221038060_main2.resx">
+      <DependentUpon>201911221038060_main2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

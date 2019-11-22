@@ -31,6 +31,12 @@ namespace Festispec.Model
         [Column("Creatie_datum", TypeName = "date")]
         public DateTime CreatieDatum { get; set; }
 
+        [Column("Start_datum", TypeName = "date")]
+        public DateTime StartDatum { get; set; }
+
+        [Column("Eind_datum", TypeName = "date")]
+        public DateTime EindDatum { get; set; }
+
         [Required]
         [StringLength(8)]
         public string KlantID { get; set; }
