@@ -14,7 +14,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Festispec.ViewModel
 {
-    public class CustomerListViewModel : ViewModelBase
+    public class CustomerListViewModel : ViewModelBase, ICustomerListViewModel
     {
         #region BindingProperties
         private List<CustomerViewModel> _customers;
@@ -51,7 +51,16 @@ namespace Festispec.ViewModel
         }
         private CustomerViewModel _selectedCustomer;
 
-        public string FilterCustomer { get; set; }
+        private string _filterCustomer;
+        public string FilterCustomer
+        {
+            get => _filterCustomer;
+            set
+            {
+                _filterCustomer = value.ToLower();
+                RaisePropertyChanged("FilterCustomer");
+            }
+        }
 
         private ComboBoxItem _selectedBox;
         public ComboBoxItem SelectedBox
@@ -93,7 +102,7 @@ namespace Festispec.ViewModel
 
         public void FilterCustomers()
         {
-            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
+            FilteredCustomers = Customers.Where(e => e.Name.ToLower().Contains(FilterCustomer)).ToList();
             SortCustomers();
         }
 

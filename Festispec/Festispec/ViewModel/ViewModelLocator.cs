@@ -45,18 +45,23 @@ namespace Festispec.ViewModel
         private static void RegisterRepositories()
         {
             SimpleIoc.Default.Register<CustomerRepository>();
+            SimpleIoc.Default.Register<UserRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
+            SimpleIoc.Default.Register<ApplicationViewModel>();
+
         }
         //Configure view mappings here and register navigation service
         private static void SetupNavigation()
         {
             NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
+            navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
+            navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -74,11 +79,15 @@ namespace Festispec.ViewModel
 
         // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
+        public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
+
 
         // Viewmodels used for datacontext
         #region Singleton VM's
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
+        public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
+        public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         #endregion
 
         #region CustomerVM's

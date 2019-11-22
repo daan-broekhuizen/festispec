@@ -34,15 +34,33 @@ namespace Festispec.ViewModel
         public ICommand ShowAccountView { get; set; }
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
+        public ICommand LogoutCommand { get; set; }
+
+        private AccountViewModel _accountVM;
+        public AccountViewModel AccountVM
+        {
+            get => _accountVM;
+            set
+            {
+                _accountVM = value;
+                RaisePropertyChanged("AccountVM");
+            }
+        }
 
         private NavigationService _navigationService;
-
         public MainViewModel(NavigationService navigation)
         {
             _navigationService = navigation;
+            if (_navigationService.Parameter is AccountViewModel)
+                AccountVM = _navigationService.Parameter as AccountViewModel;
+
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
+            LogoutCommand = new RelayCommand(Logout);
         }
+
+        private void Logout() => _navigationService.ApplicationNavigateTo("Login", null);
+
         private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");
     }
