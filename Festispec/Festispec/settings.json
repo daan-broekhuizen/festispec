@@ -1,0 +1,8 @@
+﻿{
+  /* DO NOT CHANGE, Copy to settings.local.json to use */
+  "debugMode": false,
+  "account": {
+    "username": "HansKlok",
+    "password": "ab123"
+  }
+}

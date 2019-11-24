@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using Festispec.Utility;
+using Festispec.Utility.Builders;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +21,7 @@ namespace Festispec.Service
         private readonly List<string> _historic;
         private string _currentPageKey;
 
-        public bool IsDebugMode { get; set; }
+        public AppSettings AppSettings { get; set; }
 
         public string CurrentPageKey
         {
@@ -40,8 +42,7 @@ namespace Festispec.Service
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
 
-            // TODO: Toggle off
-            IsDebugMode = true;
+            AppSettings = (new SettingsBuilder()).Build();
         }
 
         public void GoBack()

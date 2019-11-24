@@ -156,14 +156,21 @@
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Service\ImageSelectService.cs" />
     <Compile Include="Service\LocationService.cs" />
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Service\WebService.cs" />
+    <Compile Include="Utility\Builders\SettingsBuilder.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
+    <Compile Include="Utility\AppSettings.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
@@ -258,11 +265,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -279,6 +281,12 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="settings.local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +369,9 @@
     <Resource Include="Images\Image.png" />
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

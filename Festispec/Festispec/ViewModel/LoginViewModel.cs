@@ -67,10 +67,10 @@ namespace Festispec.ViewModel
             _navigationService = service;
             LoginCommand = new RelayCommand(Login);
 
-            if (service.IsDebugMode)
+            if (service.AppSettings.DebugMode)
             {
-                _username = "HansKlok";
-                _password = "ab123";
+                _username = service.AppSettings.Account.Username;
+                _password = service.AppSettings.Account.Password;
 
                 Login();
             }
