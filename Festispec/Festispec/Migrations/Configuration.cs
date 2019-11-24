@@ -294,32 +294,32 @@
             if (context.BeschikbaarheidInspecteurs.Count() > 0)
                 return;
 
-            BeschikbaarheidInspecteurs[] beschikbaarheiden = new BeschikbaarheidInspecteurs[4];
-            beschikbaarheiden[0] = new BeschikbaarheidInspecteurs()
+            BeschikbaarheidInspecteurs[] beschikbaarheid = new BeschikbaarheidInspecteurs[4];
+            beschikbaarheid[0] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now
             };
 
-            beschikbaarheiden[1] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[1] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(1)
             };
 
-            beschikbaarheiden[2] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[2] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(2)
             };
 
-            beschikbaarheiden[3] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[3] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(3)
             };
 
-            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheiden);
+            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheid);
             context.SaveChanges();
         }
 
