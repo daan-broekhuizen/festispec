@@ -1,6 +1,7 @@
 ﻿{
   /* DO NOT CHANGE, Copy to settings.local.json to use */
   "debugMode": false,
+  "startupPage": "",
   "account": {
     "username": "HansKlok",
     "password": "ab123"

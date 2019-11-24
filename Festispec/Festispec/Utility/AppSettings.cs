@@ -13,6 +13,9 @@ namespace Festispec.Utility
         [JsonProperty("debugMode")]
         public bool DebugMode { get; set; }
 
+        [JsonProperty("startupPage")]
+        public string StartupPage { get; set; }
+
         [JsonProperty("account")]
         public User Account { get; set; }
 
