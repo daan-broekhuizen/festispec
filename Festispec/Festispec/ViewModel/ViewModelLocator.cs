@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using Festispec.Service;
 using Festispec.ViewModel;
+using Festispec.ViewModel.RapportageViewModels;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -62,6 +63,7 @@ namespace Festispec.ViewModel
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
             navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
             navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
+            navigationService.Configure("Rapportage", new Uri("../View/RapportageView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -88,6 +90,7 @@ namespace Festispec.ViewModel
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
+        public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         #region CustomerVM's

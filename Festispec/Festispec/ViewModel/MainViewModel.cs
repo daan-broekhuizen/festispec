@@ -48,6 +48,7 @@ namespace Festispec.ViewModel
         }
 
         private NavigationService _navigationService;
+
         public MainViewModel(NavigationService navigation)
         {
             _navigationService = navigation;
@@ -57,6 +58,8 @@ namespace Festispec.ViewModel
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
             LogoutCommand = new RelayCommand(Logout);
+
+            _navigationService.ApplicationNavigateTo("Rapportage", null);
         }
 
         private void Logout() => _navigationService.ApplicationNavigateTo("Login", null);

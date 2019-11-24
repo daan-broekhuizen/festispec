@@ -19,6 +19,8 @@ namespace Festispec.Service
         private readonly List<string> _historic;
         private string _currentPageKey;
 
+        public bool IsDebugMode { get; set; }
+
         public string CurrentPageKey
         {
             get => _currentPageKey;
@@ -37,7 +39,11 @@ namespace Festispec.Service
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
+
+            // TODO: Toggle off
+            IsDebugMode = true;
         }
+
         public void GoBack()
         {
             if (_historic.Count > 1)
@@ -46,6 +52,7 @@ namespace Festispec.Service
                 NavigateTo(_historic.Last(), null);
             }
         }
+
         public void NavigateTo(string pageKey)
         {
             NavigateTo(pageKey, null);

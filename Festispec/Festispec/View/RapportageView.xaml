@@ -4,11 +4,236 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec"
+        xmlns:component="clr-namespace:Festispec.View.Components"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ViewModel="clr-namespace:Festispec.ViewModel.Components"
+        xmlns:Converters="clr-namespace:Festispec.Utility.Converters"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="FestiSpec" d:DesignHeight="1080" d:DesignWidth="1920"
         Background="White"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <Converters:MultiConverter x:Key="MultiConverter" />
+        <ViewModel:DocumentDesignerViewModel x:Key="ViewModel" />
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}" />
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <!-- Mode -->
+            <StackPanel Margin="5" Grid.Row="0">
+                <Label Content="Mode" FontWeight="Bold" FontSize="16" />
 
+                <ComboBox Name="controlMode" SelectedIndex="0" Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ModeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlMode" Path="SelectedIndex" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="Weergeven" />
+                    <ComboBoxItem Content="Design" />
+                    <ComboBoxItem Content="HTML" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Type -->
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable}">
+                <Label Content="Lettertype" FontWeight="Bold" FontSize="16" />
+
+                <ComboBox Name="controlType" Style="{StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FontTypeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlType" Path="SelectedValue" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <System:String>Arial</System:String>
+                    <System:String>Roboto</System:String>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Grootte -->
+            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable}">
+                <Label Content="Lettergrootte" FontWeight="Bold" FontSize="16" />
+                <TextBox Name="controlSize" Text="" BorderBrush="#c8c8c8">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding FontSizeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlSize" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </StackPanel>
+            
+            <!-- Styling -->
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable}">
+                <Label Content="Styling" FontWeight="Bold" FontSize="16" />
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="B" Name="controlBold" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Bold">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlBold" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <Button Name="controlItalic" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlItalic" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                        <TextBlock TextDecorations="Underline" Text="C" />
+                    </Button>
+                    <Button FontSize="14" Name="controlUnderline" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlUnderline" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Kleur -->
+            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable}">
+                <Label Content="Letterkleur" FontWeight="Bold" FontSize="16" />
+                <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Closed">
+                            <i:InvokeCommandAction Command="{Binding FontColorChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlColor" Path="SelectedColor" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </xctk:ColorPicker>
+            </StackPanel>
+            
+            <!-- Afbeelding Invoegen -->
+            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable}">
+                <Label Content="Afbeelding Invoegen" FontWeight="Bold" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Images/Image.png" Stretch="Uniform" Width="25" Height="25"  />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Grafiek Invoegen -->
+            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable}">
+                <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlLineChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Line" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                    </Button>
+                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Bar" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Bar_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                    </Button>
+                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Extra" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                    </Button>
+                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Pie" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Invoegen Resultaten -->
+            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable}">
+                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
+            </StackPanel>
+            
+            <!-- Extra Opties -->
+            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable}">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptiesCommand}">Extra Opties</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+            
+            <!-- Ander Template -->
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable}">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Opslaan -->
+            <StackPanel Margin="5" Grid.Row="11">
+                <Button FontSize="16">
+                    <TextBlock TextDecorations="Underline" Text="Opslaan" />
+                </Button>
+            </StackPanel>
+            
+            <!-- Downloaden -->
+            <StackPanel Margin="5" Grid.Row="12">
+                <Button FontSize="16">
+                    <TextBlock TextDecorations="Underline" Text="Download" />
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    <!--
     <Grid Height="auto" Width="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -253,4 +478,5 @@
         </Grid>
 
     </Grid>
+    -->
 </Page>

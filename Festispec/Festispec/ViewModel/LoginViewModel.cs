@@ -66,6 +66,14 @@ namespace Festispec.ViewModel
             _userRepository = repo;
             _navigationService = service;
             LoginCommand = new RelayCommand(Login);
+
+            if (service.IsDebugMode)
+            {
+                _username = "HansKlok";
+                _password = "ab123";
+
+                Login();
+            }
         }
 
 

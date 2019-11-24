@@ -31,7 +31,11 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+                
             </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/View/Styling/ComboBoxFlatStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
