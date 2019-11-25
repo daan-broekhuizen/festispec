@@ -207,7 +207,7 @@
             <!-- Extra Opties -->
             <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable}">
                 <TextBlock>
-                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptiesCommand}">Extra Opties</Hyperlink>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptionsCommand}">Extra Opties</Hyperlink>
                 </TextBlock>
             </StackPanel>
             

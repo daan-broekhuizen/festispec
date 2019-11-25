@@ -27,7 +27,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         public ICommand SwitchTemplateCommand { get; set; }
         public ICommand CreateChartCommand { get; set; }
         public ICommand AddImageCommand { get; set; }
-        public ICommand ExtraOptiesCommand { get; set; }
+        public ICommand ExtraOptionsCommand { get; set; }
 
         // Properties
         private string _content;
