@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class DashboardViewModel
+    public class DashboardViewModel : NavigatableViewModel
     {
         public ICommand ShowCustomersCommand { get; set; }
         public ICommand ShowJobsCommand { get; set; }
@@ -21,11 +21,8 @@ namespace Festispec.ViewModel
         public ICommand ShowScheduleCommand { get; set; }
         public ICommand ShowMessagesCommand { get; set; }
 
-        private NavigationService _navigationService;
-
-        public DashboardViewModel(NavigationService service)
+        public DashboardViewModel(NavigationService service) : base(service)
         {
-            _navigationService = service;
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
             ShowCustomersCommand = new RelayCommand(ShowCustomers);
         }

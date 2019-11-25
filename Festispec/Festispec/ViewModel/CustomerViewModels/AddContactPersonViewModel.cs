@@ -17,9 +17,8 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddContactPersonViewModel : ViewModelBase, IAddContactPersonViewModel
+    public class AddContactPersonViewModel : CustomerViewModelBase, IAddContactPersonViewModel
     {
-        public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
 
@@ -70,46 +69,35 @@ namespace Festispec.ViewModel
         } 
         #endregion
 
-        private NavigationService _navigationService;
-        private CustomerRepository _customerRepo;
-
-        public AddContactPersonViewModel(NavigationService service, CustomerRepository repo)
+        public AddContactPersonViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
         {
-            _customerRepo = repo;
-            _navigationService = service;
-
-            //get customer from navigationservice
-            if (service.Parameter is CustomerViewModel)
-                CustomerViewModel = service.Parameter as CustomerViewModel;
-
             //Create empty contact
             ContactPersonViewModel = new ContactPersonViewModel();
-
             SaveCustomerCommand = new RelayCommand(SaveCustomer, CanSaveCustomer);
             SaveContactPersonCommand = new RelayCommand(SaveContactPerson);
         }
 
-        public void SaveCustomer()
+        private void SaveCustomer()
         {
             //Create Customer && add to db
             Klant klant = new Klant()
             {
-                Naam = CustomerViewModel.Name,
-                Email = CustomerViewModel.Email,
-                Huisnummer = CustomerViewModel.HouseNumber,
-                KvKNummer = CustomerViewModel.KvK,
-                Straatnaam = CustomerViewModel.Streetname,
-                Stad = CustomerViewModel.City,
-                Website = CustomerViewModel.Website,
+                Naam = CustomerVM.Name,
+                Email = CustomerVM.Email,
+                Huisnummer = CustomerVM.HouseNumber,
+                KvKNummer = CustomerVM.KvK,
+                Straatnaam = CustomerVM.Streetname,
+                Stad = CustomerVM.City,
+                Website = CustomerVM.Website,
                 LaatsteWijziging = DateTime.Now,
-                Telefoonnummer = CustomerViewModel.Telephone,
-                KlantLogo = ImageByteConverter.PngImageToBytes(CustomerViewModel.Logo)
+                Telefoonnummer = CustomerVM.Telephone,
+                KlantLogo = ImageByteConverter.PngImageToBytes(CustomerVM.Logo)
             };
-            _customerRepo.CreateCustomer(klant);
+            _customerRepository.CreateCustomer(klant);
 
             //Create Contacts
-            CustomerViewModel.Contacts.ToList().ForEach(c =>
-            _customerRepo.CreateContactPerson(new Contactpersoon()
+            CustomerVM.Contacts.ToList().ForEach(c =>
+            _customerRepository.CreateContactPerson(new Contactpersoon()
             {
                 Voornaam = c.Name,
                 Tussenvoegsel = c.Name,
@@ -122,12 +110,10 @@ namespace Festispec.ViewModel
             }));
 
             //Navigate to created CustomerInfo
-            _navigationService.NavigateTo("CustomerInfo", CustomerViewModel);
+            _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         }
-
-        public bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerViewModel).IsValid;
-
-        public void SaveContactPerson()
+        private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerVM).IsValid;
+        private void SaveContactPerson()
         {
             //Validate & get relevant errors
             List<ValidationFailure> errors = new ContactPersonValidator().Validate(ContactPersonViewModel).Errors.ToList();
@@ -139,7 +125,7 @@ namespace Festispec.ViewModel
             if (errors.Count == 0)
             {
                 //Add contact to customervm and create new contact
-                CustomerViewModel.Contacts.Add(ContactPersonViewModel);
+                CustomerVM.Contacts.Add(ContactPersonViewModel);
                 ContactPersonViewModel = new ContactPersonViewModel();
             }
 

@@ -32,7 +32,7 @@
             </Viewbox>
             <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
                 <Button Margin="50" Background="White" Click="Button_Click" BorderThickness="0" VerticalContentAlignment="Center">
-                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerViewModel.Logo, Mode=TwoWay}"></Image>
+                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
                 </Button>
             </Viewbox>
         </Grid>
@@ -65,9 +65,9 @@
             <Viewbox  Grid.Row="4" HorizontalAlignment="Left">
                 <TextBlock Height="15" VerticalAlignment="Bottom" Text="Website" />
             </Viewbox>
-            <TextBox TabIndex="0" Text="{Binding CustomerViewModel.Telephone}" Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
-            <TextBox TabIndex="1" Text="{Binding CustomerViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
-            <TextBox TabIndex="2" Text="{Binding CustomerViewModel.Website}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Www.JouwWebsite.nl..."  Grid.Row="5"/>
+            <TextBox TabIndex="0" Text="{Binding CustomerVM.Telephone}" Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="0123456789..."/>
+            <TextBox TabIndex="1" Text="{Binding CustomerVM.Email}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
+            <TextBox TabIndex="2" Text="{Binding CustomerVM.Website}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Www.JouwWebsite.nl..."  Grid.Row="5"/>
             <Viewbox Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0">
                 <Label  Content="{Binding TelephoneError}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
             </Viewbox>

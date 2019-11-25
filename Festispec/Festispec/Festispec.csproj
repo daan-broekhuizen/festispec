@@ -150,8 +150,12 @@
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
-    <Compile Include="ViewModel\AccountViewModel.cs" />
-    <Compile Include="ViewModel\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
@@ -160,13 +164,11 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
-    <Compile Include="ViewModel\DashboardViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\NavigatableViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -326,6 +328,7 @@
     <Resource Include="Images\Plus_icon.png" />
     <Resource Include="Images\Search.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
