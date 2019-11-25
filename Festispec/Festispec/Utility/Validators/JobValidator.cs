@@ -23,6 +23,8 @@ namespace Festispec.Utility.Validators
             RuleFor(x => x.StartDatum).NotEmpty().WithMessage("Selecteer een datum.");
             RuleFor(x => x.EindDatum).NotEmpty().WithMessage("Selecteer een datum.");
             RuleFor(x => x.CustomerWishes).NotEmpty().WithMessage("Voer klantenwensen in.");
+            RuleFor(x => x.EindDatum).GreaterThanOrEqualTo(x => x.StartDatum).WithMessage("EindDatum mag niet voor de startdatum liggen.");
+            RuleFor(x => x.StartDatum).LessThanOrEqualTo(x => x.EindDatum).WithMessage("Startdatum mag niet na de einddatum liggen.");
         }
     }
 }

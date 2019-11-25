@@ -30,7 +30,8 @@ namespace Festispec.View
         private void FillCombo()
         {
             StatusRepository Srepo = new StatusRepository();
-            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
+            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Afkorting));
+           
         }
     }
 }

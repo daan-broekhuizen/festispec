@@ -23,5 +23,13 @@ namespace Festispec.Model.Repositories
                 return context.Status.Where(e => e.Betekenis == Betekenis).Select(e => e.Afkorting).FirstOrDefault();
             }
         }
+
+        public string GetStatusDescription(string Status)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Status.Where(e => e.Afkorting == Status).Select(e => e.Betekenis).FirstOrDefault();
+            }
+        }
     }
 }

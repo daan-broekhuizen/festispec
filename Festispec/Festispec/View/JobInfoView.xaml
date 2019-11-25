@@ -92,7 +92,7 @@
 
             <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
                 <DatePicker SelectedDate="{Binding JobVM.EindDatum}">
-                    <DatePicker.Resources>
+                    <DatePicker.Resources >
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
                                 <Setter.Value>
@@ -106,9 +106,9 @@
                 </DatePicker>
             </Viewbox>
 
-            <TextBox Text="{Binding JobVM.CustomerName}" IsReadOnly="True" Grid.Row="2"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
+            <TextBox Text="{Binding JobVM.CustomerName}" IsReadOnly="True" Grid.Row="2"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0" Tag="1234AB..."/>
             <TextBox Text="{Binding JobVM.JobName}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="12..."  Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
-            <ComboBox Name="ComboBoxStatus" Text="{Binding JobVM.Status}"  FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
+            <ComboBox Name="ComboBoxStatus" FontSize="15" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="A..." Margin="0,5,0,0" Grid.Column="2" Grid.Row="2" SelectedItem="{Binding JobVM.Status}"/>
 
             <Viewbox Grid.Row="6" Grid.Column="0">
                 <Label Content="{Binding BeginDateError}" Foreground="Red" />
@@ -137,7 +137,7 @@
                 <RowDefinition Height="0.8*"/>
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row="0" Text="{Binding JobVM.CustomerWishes}"  FontSize="20" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" Tag="1234AB..." Margin="20,0,20,0"/>
+            <TextBox Grid.Row="0" Text="{Binding JobVM.CustomerWishes}"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" Height="60" Tag="1234AB..." Margin="20,0,20,0"/>
             <Viewbox Grid.Row="1">
                 <Label Content="{Binding CustomerWishesError}" Foreground="Red" />
             </Viewbox>
@@ -152,16 +152,27 @@
                 <ColumnDefinition Width="0.25*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Offerte" Margin="15,10,15,10"/>
-            <Button Grid.Column="2"  Content="Inspectieformulier" Margin="15,10,15,10"/>
-            <Button Grid.Column="3" Content="Inspectieresultaten" Margin="15,10,15,10"/>
-            <Button Grid.Column="4" Content="Rapport" Margin="15,10,15,10"/>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
+                    Offerte (formulier)
+                </Button>
+            </Viewbox>
+            <Viewbox Grid.Column="2" HorizontalAlignment="Right">
+                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
+                    Inspectieformulier
+                </Button>
+            </Viewbox>
+            <Viewbox Grid.Column="3" HorizontalAlignment="Right">
+                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
+                    Inspectieresultaten
+                </Button>
+            </Viewbox>
 
+            <Viewbox Grid.Column="4" HorizontalAlignment="Right">
+                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveJobCommand}">
+                    Wijzigingen opslaan
+                </Button>
+            </Viewbox>
         </Grid>
-        <Viewbox Grid.Row="5" HorizontalAlignment="Right">
-            <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveJobCommand}">
-                Wijzigingen opslaan
-            </Button>
-        </Viewbox>
     </Grid>
 </Page>

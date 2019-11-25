@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using Festispec.Model;
+using Festispec.Model.Repositories;
+using Festispec.Utility.Converters;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
@@ -51,12 +54,10 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Status");
             }
         }
-
         public DateTime StartDatum
         {
             get => _opdracht.StartDatum;
-            set
-            {
+            set { 
                 _opdracht.StartDatum = value;
                 RaisePropertyChanged("StartDatum");
             }
@@ -164,6 +165,16 @@ namespace Festispec.ViewModel
                 }
                 _opdracht.Klant.Naam = value;
                 RaisePropertyChanged("CustomerName");
+            }
+        }
+
+        public ImageSource Logo
+        {
+            get => ImageByteConverter.BytesToImage(_opdracht.Klant.KlantLogo);
+            set
+            {
+                _opdracht.Klant.KlantLogo = ImageByteConverter.PngImageToBytes(value);
+                RaisePropertyChanged("Logo");
             }
         }
 

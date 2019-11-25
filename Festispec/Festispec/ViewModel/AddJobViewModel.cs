@@ -112,7 +112,7 @@ namespace Festispec.ViewModel
             Opdracht opdracht = new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
-                Status = repo.GetStatus(JobVM.Status),
+                Status = JobVM.Status,
                 KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KvKNummer,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,

@@ -83,6 +83,7 @@ namespace Festispec.ViewModel
         public JobInfoViewModel(NavigationService service, JobRepository repo)
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
+            _navigationService = service;
             this.repo = repo;
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
@@ -99,7 +100,9 @@ namespace Festispec.ViewModel
                 LaatsteWijziging = DateTime.Now,
                 CreatieDatum = DateTime.Now,
                 MedewerkerID = 2,
-                OpdrachtID = JobVM.JobID
+                OpdrachtID = JobVM.JobID,
+                StartDatum = JobVM.StartDatum,
+                EindDatum = JobVM.EindDatum
             });
         }
 

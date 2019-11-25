@@ -38,30 +38,28 @@
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
                 <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
-            <Viewbox HorizontalAlignment="Center" Grid.Row="2">
-                <StackPanel>
-                    <Label></Label>
-                    <Button Width="120" Background="#FFF4F4F5" Command="{Binding ShowAddJobCommand}">
-                        Opdracht aanmaken
-                    </Button>
-                    <Label></Label>
-                </StackPanel>
-            </Viewbox>
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Viewbox  Grid.Row="1" HorizontalAlignment="Center">
-            <TextBox Text="{Binding FilterJob}" Margin="20,1,20,1" MinWidth="350" BorderThickness="0"/>
-        </Viewbox>
-        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
-            <Button Margin="200,200,650,200" Command="{Binding SearchJob}">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
+            <Button  HorizontalAlignment="Right" Command="{Binding SearchJob}">
                 <Button.Template>
                     <ControlTemplate>
-                        <Image   Source="/Images/Search.png"/>
+                        <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-        </Viewbox>
+            <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
+                <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddJobCommand}">
+                    Opdracht aanmaken
+                </Button>
+            </Viewbox>
+        </Grid>
 
         <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">
             <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>
@@ -70,7 +68,7 @@
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="70" Height="20" SelectedItem="{Binding SelectedBox}">
+                <ComboBox Margin="10" Width="120" Height="20" SelectedItem="{Binding SelectedBox}">
                     <ComboBoxItem Content="Naam oplopend"/>
                     <ComboBoxItem Content="Naam aflopend"/>
                     <ComboBoxItem Content="Aanmaak datum oplopend"/>
@@ -128,25 +126,27 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
 
                             </Grid.ColumnDefinitions>
 
-                            <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
+
+                            <Viewbox Margin="20,0,0,0" Grid.Column="0">
+                                <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,15"/>
+
+                            <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0"/>
+
+                            <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" />
+                            <TextBlock Grid.Column="3" Text="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy}}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15"/>
+
+                            <TextBlock Grid.Column="4" Text="Status" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Status}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15"/>
 
 
-                            <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                            <TextBlock Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-
-                            <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                            <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,5,0,0"/>
-
-                            <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,5" VerticalAlignment="Bottom" />
-                            <TextBlock Grid.Column="3" Text="{Binding CreationDate}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,5"/>
-
-                            <TextBlock Grid.Column="4" Text="Status" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                            <ComboBox Grid.Column="4" Width="70" Height="20" SelectedItem="{Binding SelectedBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                            </ComboBox>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
