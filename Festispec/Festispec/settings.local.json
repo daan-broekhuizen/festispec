@@ -1,0 +1,8 @@
+﻿{
+  "debugMode": true,
+  "startupPage": "Rapportage",
+  "account": {
+    "username": "HansKlok",
+    "password": "ab123"
+  }
+}

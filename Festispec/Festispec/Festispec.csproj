@@ -108,6 +108,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -146,7 +161,10 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Service\WebService.cs" />
+    <Compile Include="Utility\AppSettings.cs" />
+    <Compile Include="Utility\Builders\SettingsBuilder.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
+    <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
@@ -154,6 +172,7 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
@@ -180,6 +199,10 @@
     <Compile Include="View\ApplicationWindow.xaml.cs">
       <DependentUpon>ApplicationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Components\DocumentDesigner.xaml.cs">
+      <DependentUpon>DocumentDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Components\DocumentDesignerViewModel.cs" />
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
     </Compile>
@@ -214,6 +237,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Components\DocumentDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +252,10 @@
     <Page Include="View\RegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styling\ComboBoxFlatStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +283,12 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="settings.local.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -328,7 +365,13 @@
     <Resource Include="Images\Plus_icon.png" />
     <Resource Include="Images\Search.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Bar_Chart.png" />
+    <Resource Include="Images\Extra_Chart.png" />
+    <Resource Include="Images\Image.png" />
+    <Resource Include="Images\Line_Chart.png" />
+    <Resource Include="Images\Pie_Chart.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
