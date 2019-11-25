@@ -1,5 +1,5 @@
 ﻿{
-  "debugMode": true,
+  "debugMode": false,
   "startupPage": "Rapportage",
   "account": {
     "username": "HansKlok",
