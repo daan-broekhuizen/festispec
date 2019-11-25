@@ -16,6 +16,7 @@ using CommonServiceLocator;
 using Festispec.Service;
 using Festispec.ViewModel;
 using Festispec.ViewModel.RapportageViewModels;
+using Festispec.ViewModel.TemplateViewModels;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -75,6 +76,11 @@ namespace Festispec.ViewModel
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
             #endregion
 
+            #region TemplateViews
+            navigationService.Configure("TemplateOverview", new Uri("../View/TemplateView/TemplateOverviewView.xaml", UriKind.Relative));
+
+            #endregion
+
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
@@ -100,6 +106,10 @@ namespace Festispec.ViewModel
         public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        #endregion
+
+        #region Template VM's
+        public TemplateOverviewViewModel TemplateOverview => new TemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         //Clean when logging out?
