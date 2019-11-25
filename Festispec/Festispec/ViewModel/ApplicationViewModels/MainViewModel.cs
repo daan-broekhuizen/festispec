@@ -47,14 +47,20 @@ namespace Festispec.ViewModel
             }
         }
 
-        public MainViewModel(NavigationService navigation) : base(navigation)
+        private NavigationService _navigationService;
+
+        public MainViewModel(NavigationService navigation)
         {
+            _navigationService = navigation;
             if (_navigationService.Parameter is AccountViewModel)
                 AccountVM = _navigationService.Parameter as AccountViewModel;
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
             LogoutCommand = new RelayCommand(Logout);
+
+            if(navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
+                _navigationService.ApplicationNavigateTo(navigation.AppSettings.StartupPage, null);
         }
 
         private void Logout() => _navigationService.ApplicationNavigateTo("Login", null);

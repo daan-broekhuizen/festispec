@@ -59,11 +59,21 @@ namespace Festispec.ViewModel
         }
 
         private UserRepository _userRepository;
+        private NavigationService _navigationService;
 
-        public LoginViewModel(NavigationService service, UserRepository repo) : base(service)
+        public LoginViewModel(NavigationService service, UserRepository repo)
         {
             _userRepository = repo;
+            _navigationService = service;
             LoginCommand = new RelayCommand(Login);
+
+            if (service.AppSettings.DebugMode)
+            {
+                _username = service.AppSettings.Account.Username;
+                _password = service.AppSettings.Account.Password;
+
+                Login();
+            }
         }
 
 
@@ -81,6 +91,5 @@ namespace Festispec.ViewModel
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }
-
     }
 }
