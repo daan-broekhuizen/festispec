@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.View.TemplateView
 {
     /// <summary>
-    /// Interaction logic for TemplateOverviewView.xaml
+    /// Interaction logic for InspectieformulierTemplateOverviewView.xaml
     /// </summary>
-    public partial class TemplateOverviewView : Page
+    public partial class InspectieformulierTemplateOverviewView : Page
     {
-        public TemplateOverviewView()
+        public InspectieformulierTemplateOverviewView()
         {
             InitializeComponent();
         }

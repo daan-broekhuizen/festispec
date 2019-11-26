@@ -1,15 +1,15 @@
-﻿<Page x:Class="Festispec.View.TemplateView.TemplateOverviewView"
+﻿<Page x:Class="Festispec.View.TemplateView.RapportageTemplateOverviewView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.TemplateView"
       xmlns:components="clr-namespace:Festispec.View.Components"
-      xmlns:model="clr-namespace:Festispec.Model"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1280"
-      Title="TemplateOverviewView"
-      DataContext ="{Binding TemplateOverview, Source={StaticResource Locator}}">
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RapportageTemplateOverviewView"
+      DataContext ="{Binding RapportageTemplateOverview, Source={StaticResource Locator}}">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -17,7 +17,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <components:OverviewHeader x:Name="header" PageName="Templates" Grid.Row="0" />
-        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonText="Template Aanmaken" ButtonActionCommand="{Binding CreateButtonClickCommand}" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonText="Template Aanmaken" ButtonActionCommand="{Binding CreateButtonClickCommand}" SearchActionCommand="{Binding SearchButtonClickCommand}" />
 
         <ListView Grid.Row="3" ItemsSource="{Binding Templates}" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
             <ListView.ItemsPanel>
@@ -30,7 +30,7 @@
                     <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Grid.Row="0" Text="{Binding TemplateName}" FontSize="40" FontWeight="Bold" TextAlignment="Center" />
                         <TextBlock Grid.Row="1" Text="{Binding TemplateDescription}" TextWrapping="Wrap" MaxHeight="200" Margin="0, 20" />
-                        <Button Content="Aanmaken" Padding="5" />
+                        <Button Content="Aanmaken" Padding="5" Command="{Binding DataContext.SelectTemplateCommand, RelativeSource={RelativeSource AncestorType={x:Type local:RapportageTemplateOverviewView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

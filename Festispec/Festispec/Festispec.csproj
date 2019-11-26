@@ -162,6 +162,7 @@
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
@@ -181,6 +182,8 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\InspectieformulierTemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
@@ -245,11 +248,14 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RapportageView.xaml.cs">
+    <Compile Include="View\RapportageView\RapportageView.xaml.cs">
       <DependentUpon>RapportageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TemplateView\TemplateOverviewView.xaml.cs">
-      <DependentUpon>TemplateOverviewView.xaml</DependentUpon>
+    <Compile Include="View\TemplateView\InspectieformulierTemplateOverviewView.xaml.cs">
+      <DependentUpon>InspectieformulierTemplateOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
+      <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
@@ -271,7 +277,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RapportageView.xaml">
+    <Page Include="View\RapportageView\RapportageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,7 +289,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TemplateView\TemplateOverviewView.xaml">
+    <Page Include="View\TemplateView\InspectieformulierTemplateOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TemplateView\RapportageTemplateOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

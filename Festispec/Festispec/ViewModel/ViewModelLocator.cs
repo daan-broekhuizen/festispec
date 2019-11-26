@@ -13,6 +13,7 @@
 */
 
 using CommonServiceLocator;
+using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.ViewModel;
 using Festispec.ViewModel.RapportageViewModels;
@@ -48,6 +49,7 @@ namespace Festispec.ViewModel
         {
             SimpleIoc.Default.Register<CustomerRepository>();
             SimpleIoc.Default.Register<UserRepository>();
+            SimpleIoc.Default.Register<TemplateRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -77,7 +79,8 @@ namespace Festispec.ViewModel
             #endregion
 
             #region TemplateViews
-            navigationService.Configure("TemplateOverview", new Uri("../View/TemplateView/TemplateOverviewView.xaml", UriKind.Relative));
+            navigationService.Configure("RapportageTemplateOverview", new Uri("../View/TemplateView/RapportageTemplateOverviewView.xaml", UriKind.Relative));
+            navigationService.Configure("InspectieformulierTemplateOverview", new Uri("../View/TemplateView/InspectieformulierTemplateOverviewView.xaml", UriKind.Relative));
 
             #endregion
 
@@ -88,7 +91,7 @@ namespace Festispec.ViewModel
         // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
-
+        public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
 
         // Viewmodels used for datacontext
         #region Singleton VM's
@@ -109,7 +112,8 @@ namespace Festispec.ViewModel
         #endregion
 
         #region Template VM's
-        public TemplateOverviewViewModel TemplateOverview => new TemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
+        public InspectieformulierTemplateOverviewViewModel InspectieformulierTemplateOverview => new InspectieformulierTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
         //Clean when logging out?
