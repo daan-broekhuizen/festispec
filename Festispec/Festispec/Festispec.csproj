@@ -210,6 +210,12 @@
     <Compile Include="View\QuotationView\AddQuotationView.xaml.cs">
       <DependentUpon>AddQuotationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuotationView\QuotationListView.xaml.cs">
+      <DependentUpon>QuotationListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuotationView\QuotationView.xaml.cs">
+      <DependentUpon>QuotationView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +225,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuotationView\AddQuotationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuotationView\QuotationListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuotationView\QuotationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

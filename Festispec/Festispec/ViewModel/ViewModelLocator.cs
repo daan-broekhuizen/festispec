@@ -61,7 +61,7 @@ namespace Festispec.ViewModel
             NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
             navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
-            navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
+            navigationService.Configure("Login", new Uri("../View/QuotationView/QuotationView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
