@@ -59,12 +59,26 @@
         </Viewbox>
         <TextBox Grid.Column="2" BorderThickness="1" FontSize="16" Grid.ColumnSpan="2" Grid.Row="4" Padding="5" Margin="25,0" />
 
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="6" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition MinHeight="30"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <TextBox FontSize="18"  Padding="5" VerticalContentAlignment="Center" Style="{StaticResource placeHolder}" Tag="100000,00..." Margin="25, 0, 0 ,0"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border BorderThickness="0.5" BorderBrush="Black" Margin="25, 0, 0 ,0">
+                <TextBlock FontSize="18"  Padding="5" />
+            </Border>
+            <Viewbox Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Accepteren" />
+                    <Button Content="Afwijzen"/>
+                    <Button Content="Annuleren"/>
+                </StackPanel>
+            </Viewbox>
         </Grid>
         <Viewbox Grid.Row="7" HorizontalAlignment="Right" Grid.Column="2" VerticalAlignment="Top">
             <Button Background="#FFF4F4F5" Margin="20, 0, 20, 10"  Padding="20, 0" Command="{Binding SaveQuotationCommand}">
