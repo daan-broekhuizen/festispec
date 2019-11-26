@@ -38,14 +38,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    <Reference Include="BingMapsRESTToolkit, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BingMapsRESTToolkit.1.1.4\lib\net45\BingMapsRESTToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.5\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.5.1\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -56,30 +62,34 @@
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.11.16.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.16\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\Unofficial.Microsoft.mshtml.7.0.3300\lib\net40\Microsoft.mshtml.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -92,29 +102,191 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TidyHTML5Managed, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TidyHtml5Managed.1.1.0\lib\net46\TidyHTML5Managed.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="API\ApiClient.cs" />
+    <Compile Include="API\FileData.cs" />
+    <Compile Include="API\IClient.cs" />
+    <Compile Include="API\ImageShack\ImageContainer.cs" />
+    <Compile Include="API\ImageShack\ImageModel.cs" />
+    <Compile Include="API\ImageShack\ImageShackClient.cs" />
+    <Compile Include="API\ImageShack\UploadModel.cs" />
+    <Compile Include="Migrations\201911182213494_Main.cs" />
+    <Compile Include="Migrations\201911182213494_Main.designer.cs">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911252011031_Template_Update.cs" />
+    <Compile Include="Migrations\201911252011031_Template_Update.designer.cs">
+      <DependentUpon>201911252011031_Template_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911252059182_Template_Update1.cs" />
+    <Compile Include="Migrations\201911252059182_Template_Update1.designer.cs">
+      <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\Antwoorden.cs" />
+    <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
+    <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\FestispecContext.cs" />
+    <Compile Include="Model\Inspectieformulier.cs" />
+    <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
+    <Compile Include="Model\Klant.cs" />
+    <Compile Include="Model\Offerte.cs" />
+    <Compile Include="Model\Opdracht.cs" />
+    <Compile Include="Model\RapportTemplate.cs" />
+    <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\UserRepository.cs" />
+    <Compile Include="Model\Rol.cs" />
+    <Compile Include="Service\ImageSelectService.cs" />
+    <Compile Include="Service\LocationService.cs" />
+    <Compile Include="Service\NavigationService.cs" />
+    <Compile Include="Model\Status.cs" />
+    <Compile Include="Service\WebService.cs" />
+    <Compile Include="Utility\AppSettings.cs" />
+    <Compile Include="Utility\Builders\SettingsBuilder.cs" />
+    <Compile Include="Utility\Converters\ImageByteConverter.cs" />
+    <Compile Include="Utility\Converters\MultiConverter.cs" />
+    <Compile Include="Utility\Encryptor.cs" />
+    <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
+    <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\ContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\NavigatableViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Model\Vraag.cs" />
+    <Compile Include="Model\VraagType.cs" />
+    <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\ApplicationWindow.xaml.cs">
+      <DependentUpon>ApplicationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Components\DocumentDesigner.xaml.cs">
+      <DependentUpon>DocumentDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Components\DocumentDesignerViewModel.cs" />
+    <Compile Include="View\Components\OverviewHeader.xaml.cs">
+      <DependentUpon>OverviewHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\OverviewSearchBar.xaml.cs">
+      <DependentUpon>OverviewSearchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
+      <DependentUpon>AddContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddContactPersonView.xaml.cs">
+      <DependentUpon>AddContactPersonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\AddCustomerInfoView.xaml.cs">
+      <DependentUpon>AddCustomerInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\ContactInfoView.xaml.cs">
+      <DependentUpon>ContactInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\ContactPersonListView.xaml.cs">
+      <DependentUpon>ContactPersonListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\CustomerInfoView.xaml.cs">
+      <DependentUpon>CustomerInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerView\CustomerListView.xaml.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RapportageView.xaml.cs">
+      <DependentUpon>RapportageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateView\TemplateOverviewView.xaml.cs">
+      <DependentUpon>TemplateOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\ApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\DocumentDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Components\OverviewHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\OverviewSearchBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RapportageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styling\ComboBoxFlatStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TemplateView\TemplateOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -130,6 +302,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201911182213494_Main.resx">
+      <DependentUpon>201911182213494_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252011031_Template_Update.resx">
+      <DependentUpon>201911252011031_Template_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252059182_Template_Update1.resx">
+      <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -139,166 +320,90 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Scripts\jquery-3.4.1.min.map" />
-    <None Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Views\" />
+    <Resource Include="Images\Calendar.png" />
+    <Resource Include="Images\Customers.png" />
+    <Resource Include="Images\Dashboard.png" />
+    <Resource Include="Images\Jobs.png" />
+    <Resource Include="Images\Messages.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fullcalendar.css" />
-    <Content Include="Content\fullcalendar.min.css" />
-    <Content Include="Content\fullcalendar.print.css" />
-    <Content Include="Content\fullcalendar.print.min.css" />
-    <Content Include="Content\themes\base\accordion.css" />
-    <Content Include="Content\themes\base\all.css" />
-    <Content Include="Content\themes\base\autocomplete.css" />
-    <Content Include="Content\themes\base\base.css" />
-    <Content Include="Content\themes\base\button.css" />
-    <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
-    <Content Include="Content\themes\base\dialog.css" />
-    <Content Include="Content\themes\base\draggable.css" />
-    <Content Include="Scripts\fullcalendar.js" />
-    <Content Include="Scripts\fullcalendar.min.js" />
-    <Content Include="Scripts\gcal.js" />
-    <Content Include="Scripts\gcal.min.js" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
-    <Resource Include="Scripts\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Scripts\lib\cupertino\jquery-ui.min.css" />
-    <Content Include="Scripts\lib\jquery-ui.min.js" />
-    <Content Include="Scripts\lib\jquery.min.js" />
-    <Content Include="Scripts\lib\moment.min.js" />
-    <Content Include="Scripts\locale-all.js" />
-    <Content Include="Scripts\locale\af.js" />
-    <Content Include="Scripts\locale\ar-dz.js" />
-    <Content Include="Scripts\locale\ar-kw.js" />
-    <Content Include="Scripts\locale\ar-ly.js" />
-    <Content Include="Scripts\locale\ar-ma.js" />
-    <Content Include="Scripts\locale\ar-sa.js" />
-    <Content Include="Scripts\locale\ar-tn.js" />
-    <Content Include="Scripts\locale\ar.js" />
-    <Content Include="Scripts\locale\bg.js" />
-    <Content Include="Scripts\locale\bs.js" />
-    <Content Include="Scripts\locale\ca.js" />
-    <Content Include="Scripts\locale\cs.js" />
-    <Content Include="Scripts\locale\da.js" />
-    <Content Include="Scripts\locale\de-at.js" />
-    <Content Include="Scripts\locale\de-ch.js" />
-    <Content Include="Scripts\locale\de.js" />
-    <Content Include="Scripts\locale\el.js" />
-    <Content Include="Scripts\locale\en-au.js" />
-    <Content Include="Scripts\locale\en-ca.js" />
-    <Content Include="Scripts\locale\en-gb.js" />
-    <Content Include="Scripts\locale\en-ie.js" />
-    <Content Include="Scripts\locale\en-nz.js" />
-    <Content Include="Scripts\locale\es-do.js" />
-    <Content Include="Scripts\locale\es-us.js" />
-    <Content Include="Scripts\locale\es.js" />
-    <Content Include="Scripts\locale\et.js" />
-    <Content Include="Scripts\locale\eu.js" />
-    <Content Include="Scripts\locale\fa.js" />
-    <Content Include="Scripts\locale\fi.js" />
-    <Content Include="Scripts\locale\fr-ca.js" />
-    <Content Include="Scripts\locale\fr-ch.js" />
-    <Content Include="Scripts\locale\fr.js" />
-    <Content Include="Scripts\locale\gl.js" />
-    <Content Include="Scripts\locale\he.js" />
-    <Content Include="Scripts\locale\hi.js" />
-    <Content Include="Scripts\locale\hr.js" />
-    <Content Include="Scripts\locale\hu.js" />
-    <Content Include="Scripts\locale\id.js" />
-    <Content Include="Scripts\locale\is.js" />
-    <Content Include="Scripts\locale\it.js" />
-    <Content Include="Scripts\locale\ja.js" />
-    <Content Include="Scripts\locale\ka.js" />
-    <Content Include="Scripts\locale\kk.js" />
-    <Content Include="Scripts\locale\ko.js" />
-    <Content Include="Scripts\locale\lb.js" />
-    <Content Include="Scripts\locale\lt.js" />
-    <Content Include="Scripts\locale\lv.js" />
-    <Content Include="Scripts\locale\mk.js" />
-    <Content Include="Scripts\locale\ms-my.js" />
-    <Content Include="Scripts\locale\ms.js" />
-    <Content Include="Scripts\locale\nb.js" />
-    <Content Include="Scripts\locale\nl-be.js" />
-    <Content Include="Scripts\locale\nl.js" />
-    <Content Include="Scripts\locale\nn.js" />
-    <Content Include="Scripts\locale\pl.js" />
-    <Content Include="Scripts\locale\pt-br.js" />
-    <Content Include="Scripts\locale\pt.js" />
-    <Content Include="Scripts\locale\ro.js" />
-    <Content Include="Scripts\locale\ru.js" />
-    <Content Include="Scripts\locale\sk.js" />
-    <Content Include="Scripts\locale\sl.js" />
-    <Content Include="Scripts\locale\sq.js" />
-    <Content Include="Scripts\locale\sr-cyrl.js" />
-    <Content Include="Scripts\locale\sr.js" />
-    <Content Include="Scripts\locale\sv.js" />
-    <Content Include="Scripts\locale\th.js" />
-    <Content Include="Scripts\locale\tr.js" />
-    <Content Include="Scripts\locale\uk.js" />
-    <Content Include="Scripts\locale\vi.js" />
-    <Content Include="Scripts\locale\zh-cn.js" />
-    <Content Include="Scripts\locale\zh-tw.js" />
-    <Content Include="Scripts\moment-with-locales.js" />
-    <Content Include="Scripts\moment-with-locales.min.js" />
-    <Content Include="Scripts\moment.js" />
-    <Content Include="Scripts\moment.min.js" />
-    <Resource Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Resource Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Resource Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\menu.css" />
-    <Content Include="Content\themes\base\progressbar.css" />
-    <Content Include="Content\themes\base\resizable.css" />
-    <Content Include="Content\themes\base\selectable.css" />
-    <Content Include="Content\themes\base\selectmenu.css" />
-    <Content Include="Content\themes\base\slider.css" />
-    <Content Include="Content\themes\base\sortable.css" />
-    <Content Include="Content\themes\base\spinner.css" />
-    <Content Include="Content\themes\base\tabs.css" />
-    <Content Include="Content\themes\base\theme.css" />
-    <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.js" />
-    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Resource Include="Images\Profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\CustomerView\AddContactInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\AddContactPersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\AddCustomerInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\ContactInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\ContactPersonListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\CustomerInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerView\CustomerListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_customer_logo.png" />
+    <Resource Include="Images\Dashboard_background.png" />
+    <Resource Include="Images\Dashboard_customers.png" />
+    <Resource Include="Images\Dashboard_intro.png" />
+    <Resource Include="Images\Dashboard_jobs.png" />
+    <Resource Include="Images\Dashboard_messages.png" />
+    <Resource Include="Images\Dashboard_new_customer.png" />
+    <Resource Include="Images\Dashboard_new_job.png" />
+    <Resource Include="Images\Dashboard_new_quotation.png" />
+    <Resource Include="Images\Dashboard_planning.png" />
+    <Resource Include="Images\Dashboard_quotations.png" />
+    <Resource Include="Images\Dashboard_schedule.png" />
+    <Resource Include="Images\festispec_logo.png" />
+    <Resource Include="Images\Plus_icon.png" />
+    <Resource Include="Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bar_Chart.png" />
+    <Resource Include="Images\Extra_Chart.png" />
+    <Resource Include="Images\Image.png" />
+    <Resource Include="Images\Line_Chart.png" />
+    <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -307,6 +412,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets" Condition="Exists('..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets')" />
 </Project>
