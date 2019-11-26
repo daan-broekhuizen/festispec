@@ -17,9 +17,6 @@
             <RowDefinition Height="0.07*"/>
             <RowDefinition Height="0.05*"/>
             <RowDefinition Height="0.45*"/>
-
-
-
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -46,14 +43,16 @@
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
+
+            <!--<TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
             <Button  HorizontalAlignment="Right" Command="{Binding SearchJob}">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
                     </ControlTemplate>
                 </Button.Template>
-            </Button>
+            </Button>-->
+            
             <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
                 <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddJobCommand}">
                     Opdracht aanmaken
@@ -76,56 +75,17 @@
                 </ComboBox>
             </WrapPanel>
         </Viewbox>
-
-   <!--     <ListBox x:Name="JobList" Grid.Row="5" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0"  HorizontalAlignment="Center" VerticalAlignment="Top">
-            <ListBox.ItemTemplate >
-                <DataTemplate >
-                    <Grid Background="LightGray" Width="600" Height="50" Margin="0,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Source="/Images/Profile.png" Margin="28,10,28,9.6" HorizontalAlignment="Center"/>
-
-
-                        <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                        <TextBlock Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,5"/>
-
-                        <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                        <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,5,0,0"/>
-
-                        <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,5" VerticalAlignment="Bottom" />
-                        <TextBlock Grid.Column="3" Text="{Binding CreationDate}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,5"/>
-
-                        <TextBlock Grid.Column="4" Text="Status" FontWeight="Bold" Margin="0,5,0,0" VerticalAlignment="Top" />
-                        <ComboBox Grid.Column="4" Width="70" Height="20" SelectedItem="{Binding SelectedBox}" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                            <ComboBoxItem Content="A d- Z"/>
-                            <ComboBoxItem Content="Z - A"/>
-                        </ComboBox>
-
-                        <Button Command="{Binding ShowJobInfoCommand}" DataContext="{Binding DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}" Grid.Column="4" Content="Meer weergeven" Width="Auto" Height="Auto" Grid.ColumnSpan="2" Margin="83.2,15,10.2,10"/>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox> -->
-
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
             <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.07*"/>
+                                <ColumnDefinition Width="0.1*"/>
 
                             </Grid.ColumnDefinitions>
 

@@ -30,7 +30,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Opdracht toUpdate = context.Opdracht.Where(c => c.OpdrachtNaam == opdracht.OpdrachtNaam).FirstOrDefault();
+                Opdracht toUpdate = context.Opdracht.Where(c => c.OpdrachtID == opdracht.OpdrachtID).FirstOrDefault();
                 context.Entry(toUpdate).CurrentValues.SetValues(opdracht);
                 context.SaveChanges();
             }

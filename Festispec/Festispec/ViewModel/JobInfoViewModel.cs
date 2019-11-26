@@ -11,6 +11,7 @@ using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec.ViewModel
 {
@@ -98,12 +99,12 @@ namespace Festispec.ViewModel
                 KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KvKNummer,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,
-                CreatieDatum = DateTime.Now,
                 MedewerkerID = 2,
                 OpdrachtID = JobVM.JobID,
                 StartDatum = JobVM.StartDatum,
                 EindDatum = JobVM.EindDatum
             });
+            Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
         }
 
 

@@ -65,7 +65,7 @@
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
-                context.Status.AddOrUpdate(x => x.Afkorting, new Status() { Afkorting = status.Key, Betekenis = status.Value });
+                context.Status.AddOrUpdate(x => x.Betekenis, new Status() { Betekenis = status.Value });
 
             context.SaveChanges();
         }
@@ -192,7 +192,7 @@
             opdrachten[0] = new Opdracht()
             {
                 OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
+                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now,
                 EindDatum = DateTime.Now.AddDays(2),

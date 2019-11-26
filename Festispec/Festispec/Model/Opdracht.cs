@@ -25,7 +25,7 @@ namespace Festispec.Model
         public string OpdrachtNaam { get; set; }
 
         [Required]
-        [StringLength(2)]
+        [StringLength(30)]
         public string Status { get; set; }
 
         [Column("Creatie_datum", TypeName = "date")]

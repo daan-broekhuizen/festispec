@@ -99,6 +99,14 @@
     <Compile Include="Migrations\201911221038060_main2.designer.cs">
       <DependentUpon>201911221038060_main2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911261456297_UndoAfkorting.cs" />
+    <Compile Include="Migrations\201911261456297_UndoAfkorting.designer.cs">
+      <DependentUpon>201911261456297_UndoAfkorting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911261503157_UndoAfkorting1.cs" />
+    <Compile Include="Migrations\201911261503157_UndoAfkorting1.designer.cs">
+      <DependentUpon>201911261503157_UndoAfkorting1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -201,6 +209,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911221038060_main2.resx">
       <DependentUpon>201911221038060_main2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911261456297_UndoAfkorting.resx">
+      <DependentUpon>201911261456297_UndoAfkorting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911261503157_UndoAfkorting1.resx">
+      <DependentUpon>201911261503157_UndoAfkorting1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

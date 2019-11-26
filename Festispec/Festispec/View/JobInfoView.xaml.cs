@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Festispec.Model.Repositories;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec.View
 {
@@ -25,13 +26,16 @@ namespace Festispec.View
         {
             InitializeComponent();
             FillCombo();
+            Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
         private void FillCombo()
         {
             StatusRepository Srepo = new StatusRepository();
-            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Afkorting));
+            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
            
         }
+        private void ShowWindow(string message) => MessageBox.Show(message);
+
     }
 }
