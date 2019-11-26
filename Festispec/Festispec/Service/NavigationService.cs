@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using Festispec.Utility;
+using Festispec.Utility.Builders;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +20,7 @@ namespace Festispec.Service
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic;
         private string _currentPageKey;
+        public AppSettings AppSettings { get; set; }
 
         public string CurrentPageKey
         {
@@ -37,6 +40,8 @@ namespace Festispec.Service
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
+
+            AppSettings = (new SettingsBuilder()).Build();
         }
         public void GoBack()
         {

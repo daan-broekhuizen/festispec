@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
@@ -14,5 +11,8 @@ namespace Festispec.ViewModel
         CustomerViewModel SelectedCustomer { get; set; }
         string FilterCustomer { get; set; }
         ComboBoxItem SelectedBox { get; set; }
+
+        ICommand SearchCustomer { get; set; }
+        ICommand ShowAddCustomerCommand { get; set; }
     }
 }

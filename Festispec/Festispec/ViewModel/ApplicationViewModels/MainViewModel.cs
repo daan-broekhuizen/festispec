@@ -20,7 +20,7 @@ namespace Festispec.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : NavigatableViewModel
     {
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -47,16 +47,17 @@ namespace Festispec.ViewModel
             }
         }
 
-        private NavigationService _navigationService;
-        public MainViewModel(NavigationService navigation)
+        public MainViewModel(NavigationService navigation) : base(navigation)
         {
-            _navigationService = navigation;
             if (_navigationService.Parameter is AccountViewModel)
                 AccountVM = _navigationService.Parameter as AccountViewModel;
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
             LogoutCommand = new RelayCommand(Logout);
+
+            if (navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
+                _navigationService.ApplicationNavigateTo(navigation.AppSettings.StartupPage, null);
         }
 
         private void Logout() => _navigationService.ApplicationNavigateTo("Login", null);
