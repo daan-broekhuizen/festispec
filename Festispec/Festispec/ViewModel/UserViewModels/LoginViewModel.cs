@@ -15,7 +15,7 @@ using Festispec.Model;
 
 namespace Festispec.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : NavigatableViewModel
     {       
         public ICommand LoginCommand { get; set; }
 
@@ -59,13 +59,19 @@ namespace Festispec.ViewModel
         }
 
         private UserRepository _userRepository;
-        private NavigationService _navigationService;
 
-        public LoginViewModel(NavigationService service, UserRepository repo)
+        public LoginViewModel(NavigationService service, UserRepository repo) : base(service)
         {
             _userRepository = repo;
-            _navigationService = service;
             LoginCommand = new RelayCommand(Login);
+
+            if (service.AppSettings.DebugMode)
+            {
+                _username = service.AppSettings.Account.Username;
+                _password = service.AppSettings.Account.Password;
+
+                Login();
+            }
         }
 
 
