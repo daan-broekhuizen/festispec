@@ -1,4 +1,5 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FestiSpec.Domain.Repositories
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         public List<Klant> GetCustomers()
         {

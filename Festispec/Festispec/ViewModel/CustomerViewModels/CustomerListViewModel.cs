@@ -14,7 +14,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Festispec.ViewModel
 {
-    public class CustomerListViewModel : ViewModelBase
+    public class CustomerListViewModel : ViewModelBase, ICustomerListViewModel
     {
         #region BindingProperties
         private List<CustomerViewModel> _customers;

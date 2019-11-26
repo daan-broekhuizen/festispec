@@ -139,6 +139,7 @@
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
+    <Compile Include="Model\Repositories\ICustomerRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
@@ -161,8 +162,11 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\DashboardViewModel.cs" />
     <Compile Include="ViewModel\IJobViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\AddQuotationViewModel.cs" />
@@ -216,6 +220,9 @@
     <Compile Include="View\QuotationView\QuotationView.xaml.cs">
       <DependentUpon>QuotationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RapportageView.xaml.cs">
+      <DependentUpon>RapportageView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -233,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuotationView\QuotationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RapportageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

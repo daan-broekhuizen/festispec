@@ -291,42 +291,49 @@
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
         {
-            BeschikbaarheidInspecteurs[] beschikbaarheiden = new BeschikbaarheidInspecteurs[4];
-            beschikbaarheiden[0] = new BeschikbaarheidInspecteurs()
+            if (context.BeschikbaarheidInspecteurs.Count() > 0)
+                return;
+
+            BeschikbaarheidInspecteurs[] beschikbaarheid = new BeschikbaarheidInspecteurs[4];
+            beschikbaarheid[0] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now
             };
 
-            beschikbaarheiden[1] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[1] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(1)
             };
 
-            beschikbaarheiden[2] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[2] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(2)
             };
 
-            beschikbaarheiden[3] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[3] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(3)
             };
 
-            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => x.Datum, beschikbaarheiden);
+            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheid);
             context.SaveChanges();
         }
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
             Opdracht opdracht = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop");
-            opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+
+            if(opdracht.Ingepland.Count == 0)
+                opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
-            account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
+
+            if(account.Ingepland.Count == 0)
+                account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
 
             context.SaveChanges();
         }
