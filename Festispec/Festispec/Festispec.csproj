@@ -182,6 +182,33 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="View\QuestionnaireView\EditViews\MultiplechoiceQuestionEditView.xaml.cs">
+      <DependentUpon>MultiplechoiceQuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\OpenQuestionEditView.xaml.cs">
+      <DependentUpon>OpenQuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\PhotoQuestionEditView.xaml.cs">
+      <DependentUpon>PhotoQuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\QuestionnaireEditView.xaml.cs">
+      <DependentUpon>QuestionnaireEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\TableX2QuestionEditView.xaml.cs">
+      <DependentUpon>TableX2QuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\TableX3QuestionView.xaml.cs">
+      <DependentUpon>TableX3QuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\EditViews\TextOnlyQuestionEditView.xaml.cs">
+      <DependentUpon>TextOnlyQuestionEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\ShowViews\QuestionnaireShowView.xaml.cs">
+      <DependentUpon>QuestionnaireShowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionnaireView\ShowViews\TextOnlyQuestionShowView.xaml.cs">
+      <DependentUpon>TextOnlyQuestionShowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
@@ -253,6 +280,42 @@
     <Compile Include="View\TemplateView\TemplateOverviewView.xaml.cs">
       <DependentUpon>TemplateOverviewView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\QuestionnaireView\EditViews\MultiplechoiceQuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\OpenQuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\PhotoQuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\QuestionnaireEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\TableX2QuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\TableX3QuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\EditViews\TextOnlyQuestionEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\ShowViews\QuestionnaireShowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionnaireView\ShowViews\TextOnlyQuestionShowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -404,7 +467,6 @@
     <Resource Include="Images\Search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\QuestionnaireViewModels\" />
     <Resource Include="Images\Bar_Chart.png" />
     <Resource Include="Images\Extra_Chart.png" />
     <Resource Include="Images\Image.png" />
