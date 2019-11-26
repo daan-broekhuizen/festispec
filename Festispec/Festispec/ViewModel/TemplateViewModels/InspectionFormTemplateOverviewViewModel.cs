@@ -1,5 +1,4 @@
 ﻿using Festispec.Model;
-using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using System;
@@ -11,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModel.TemplateViewModels
 {
-    public class RapportageTemplateOverviewViewModel : TemplateOverviewViewModel
+    public class InspectionFormTemplateOverviewViewModel : TemplateOverviewViewModel
     {
-        private List<RapportTemplate> _unfilteredTemplates;
+        private List<Inspectieformulier> _unfilteredTemplates;
 
-        private List<RapportTemplate> _templates;
+        private List<Inspectieformulier> _templates;
 
-        public List<RapportTemplate> Templates
+        public List<Inspectieformulier> Templates
         {
             get
             {
@@ -30,9 +29,9 @@ namespace Festispec.ViewModel.TemplateViewModels
             }
         }
 
-        public RapportageTemplateOverviewViewModel(NavigationService service, TemplateRepository templateRepository) : base(service)
+        public InspectionFormTemplateOverviewViewModel(NavigationService service, TemplateRepository templateRepository) : base(service)
         {
-            _unfilteredTemplates = templateRepository.GetRapportTemplates();
+            _unfilteredTemplates = templateRepository.GetInspectieformulierTemplates();
             Templates = _unfilteredTemplates;
         }
 
@@ -46,14 +45,14 @@ namespace Festispec.ViewModel.TemplateViewModels
             if (string.IsNullOrEmpty(content))
                 Templates = _unfilteredTemplates;
             else
-                Templates = _unfilteredTemplates.Where(x => x.TemplateName.IndexOf(content, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                Templates = _unfilteredTemplates.Where(x => x.InspectieFormulierTitel.IndexOf(content, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
         }
 
         protected override void SelectTemplate(dynamic template)
         {
-            RapportTemplate rapportTemplate = template;
+            Inspectieformulier inspectieformulierTemplate = template;
 
-            _navigationService.NavigateTo("Rapportage", rapportTemplate);
+            _navigationService.NavigateTo("CreateInspectionForm", inspectieformulierTemplate);
         }
 
         protected override void EditTemplate(dynamic template)

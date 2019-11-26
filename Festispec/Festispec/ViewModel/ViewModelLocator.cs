@@ -16,6 +16,7 @@ using CommonServiceLocator;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.ViewModel;
+using Festispec.ViewModel.InspectionFormViewModels;
 using Festispec.ViewModel.RapportageViewModels;
 using Festispec.ViewModel.TemplateViewModels;
 using FestiSpec.Domain.Repositories;
@@ -66,7 +67,8 @@ namespace Festispec.ViewModel
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
             navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
             navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
-            navigationService.Configure("Rapportage", new Uri("../View/RapportageView.xaml", UriKind.Relative));
+            navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
+            navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -80,8 +82,7 @@ namespace Festispec.ViewModel
 
             #region TemplateViews
             navigationService.Configure("RapportageTemplateOverview", new Uri("../View/TemplateView/RapportageTemplateOverviewView.xaml", UriKind.Relative));
-            navigationService.Configure("InspectieformulierTemplateOverview", new Uri("../View/TemplateView/InspectieformulierTemplateOverviewView.xaml", UriKind.Relative));
-
+            navigationService.Configure("InspectionFormTemplateOverview", new Uri("../View/TemplateView/InspectionFormTemplateOverviewView.xaml", UriKind.Relative));
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
@@ -100,6 +101,7 @@ namespace Festispec.ViewModel
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         #region CustomerVM's
@@ -113,7 +115,7 @@ namespace Festispec.ViewModel
 
         #region Template VM's
         public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
-        public InspectieformulierTemplateOverviewViewModel InspectieformulierTemplateOverview => new InspectieformulierTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
+        public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
         //Clean when logging out?

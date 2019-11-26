@@ -26,7 +26,7 @@ namespace Festispec.Model.Repositories
 
             using (FestispecContext context = new FestispecContext())
             {
-                templates = context.Inspectieformulier.Where(x => x.OpdrachtID == 0).ToList();
+                templates = context.Inspectieformulier.Where(x => x.OpdrachtID == null).ToList();
             }
 
             return templates;

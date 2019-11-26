@@ -18,9 +18,9 @@ namespace Festispec.View.TemplateView
     /// <summary>
     /// Interaction logic for InspectieformulierTemplateOverviewView.xaml
     /// </summary>
-    public partial class InspectieformulierTemplateOverviewView : Page
+    public partial class InspectionFormTemplateOverviewView : Page
     {
-        public InspectieformulierTemplateOverviewView()
+        public InspectionFormTemplateOverviewView()
         {
             InitializeComponent();
         }
