@@ -15,6 +15,8 @@
 using CommonServiceLocator;
 using Festispec.Service;
 using Festispec.ViewModel;
+using Festispec.ViewModel.RapportageViewModels;
+using Festispec.ViewModel.TemplateViewModels;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -62,6 +64,7 @@ namespace Festispec.ViewModel
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
             navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
             navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
+            navigationService.Configure("Rapportage", new Uri("../View/RapportageView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -71,6 +74,11 @@ namespace Festispec.ViewModel
             navigationService.Configure("CustomerInfo", new Uri("../View/CustomerView/CustomerInfoView.xaml", UriKind.Relative));
             navigationService.Configure("ContactInfo", new Uri("../View/CustomerView/ContactInfoView.xaml", UriKind.Relative));
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
+            #endregion
+
+            #region TemplateViews
+            navigationService.Configure("TemplateOverview", new Uri("../View/TemplateView/TemplateOverviewView.xaml", UriKind.Relative));
+
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
@@ -88,6 +96,7 @@ namespace Festispec.ViewModel
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
+        public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         #region CustomerVM's
@@ -97,6 +106,10 @@ namespace Festispec.ViewModel
         public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
+        #endregion
+
+        #region Template VM's
+        public TemplateOverviewViewModel TemplateOverview => new TemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         //Clean when logging out?

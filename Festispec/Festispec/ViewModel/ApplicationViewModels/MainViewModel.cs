@@ -55,6 +55,9 @@ namespace Festispec.ViewModel
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
             LogoutCommand = new RelayCommand(Logout);
+
+            if (navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
+                _navigationService.ApplicationNavigateTo(navigation.AppSettings.StartupPage, null);
         }
 
         private void Logout() => _navigationService.ApplicationNavigateTo("Login", null);
