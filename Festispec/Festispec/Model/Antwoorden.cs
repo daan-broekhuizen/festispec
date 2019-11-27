@@ -19,6 +19,8 @@ namespace Festispec.Model
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int InspecteurID { get; set; }
 
+        public int AntwoordNummer { get; set; }
+
         [Column("Antwoord_text", TypeName = "text")]
         public string AntwoordText { get; set; }
 
