@@ -153,6 +153,7 @@
     <Compile Include="Model\Antwoorden.cs" />
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
     <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
@@ -180,7 +182,10 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
@@ -242,14 +247,20 @@
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
+      <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RapportageView.xaml.cs">
+    <Compile Include="View\RapportageView\RapportageView.xaml.cs">
       <DependentUpon>RapportageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TemplateView\TemplateOverviewView.xaml.cs">
-      <DependentUpon>TemplateOverviewView.xaml</DependentUpon>
+    <Compile Include="View\TemplateView\InspectionFormTemplateOverviewView.xaml.cs">
+      <DependentUpon>InspectionFormTemplateOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
+      <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
     </Compile>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
@@ -267,11 +278,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\InspectionFormView\CreateInspectionFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RapportageView.xaml">
+    <Page Include="View\RapportageView\RapportageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,7 +298,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TemplateView\TemplateOverviewView.xaml">
+    <Page Include="View\TemplateView\InspectionFormTemplateOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TemplateView\RapportageTemplateOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

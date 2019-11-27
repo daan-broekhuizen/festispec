@@ -1,3 +1,4 @@
+using Festispec.Model.Enums;
 using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -34,6 +35,8 @@ namespace Festispec.ViewModel
         public ICommand ShowAccountView { get; set; }
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
+        public ICommand ShowRapportageTemplatesView { get; set; }
+        public ICommand ShowInspectionFormTemplatesView { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         private AccountViewModel _accountVM;
@@ -54,6 +57,9 @@ namespace Festispec.ViewModel
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
+            ShowRapportageTemplatesView = new RelayCommand(ShowRapportageTemplates);
+            ShowInspectionFormTemplatesView = new RelayCommand(ShowInspectionFormTemplates);
+
             LogoutCommand = new RelayCommand(Logout);
 
             if (navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
@@ -64,6 +70,8 @@ namespace Festispec.ViewModel
 
         private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");
+        private void ShowRapportageTemplates() => _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
+        private void ShowInspectionFormTemplates() => _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);
     }
 
 
