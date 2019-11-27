@@ -162,10 +162,10 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
-    <Compile Include="Model\Repositories\Interfaces\ICustomerRepository.cs" />
-    <Compile Include="Model\Repositories\Interfaces\IQuestionnaireRepository.cs" />
+    <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IQuestionRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\Interfaces\IVOCRepository.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -253,6 +253,12 @@
     <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
       <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InspectionFormView\InspectionFormShowView.xaml.cs">
+      <DependentUpon>InspectionFormShowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionFormView\InspectionFromEditView.xaml.cs">
+      <DependentUpon>InspectionFromEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -265,42 +271,6 @@
     <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
       <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\QuestionnaireView\EditViews\MultiplechoiceQuestionEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\OpenQuestionEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\PhotoQuestionEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\QuestionnaireEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\TableX2QuestionEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\TableX3QuestionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\EditViews\TextOnlyQuestionEditView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\ShowViews\QuestionnaireShowView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\QuestionnaireView\ShowViews\TextOnlyQuestionShowView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -320,6 +290,14 @@
     <Page Include="View\InspectionFormView\CreateInspectionFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectionFormView\InspectionFormShowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionFormView\InspectionFromEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
