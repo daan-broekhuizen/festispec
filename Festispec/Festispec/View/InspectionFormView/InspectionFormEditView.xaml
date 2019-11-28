@@ -12,7 +12,7 @@
     <Page.Resources>
         <DataTemplate x:Key="OpenQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="80">
+                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -20,21 +20,20 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="4*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
                     <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="Open vraag:" FontWeight="Bold" FontSize="50" VerticalAlignment="Center"/>
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="Open vraag:" FontWeight="Bold" FontSize="100" VerticalAlignment="Center"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
-                        <TextBox Text="{Binding Path=Vraagstelling}" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}"/>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Text="{Binding Path=Vraagstelling}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
-                    <Viewbox Margin="10" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <Button>Add Image</Button>
                     </Viewbox>
                 </Grid>
@@ -102,7 +101,7 @@
         
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.4*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 
@@ -134,10 +133,10 @@
                 </Grid>
                 </Border>
 
-            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top">
-                
-            </ListBox>
-            </Grid>
+            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+
+
+        </Grid>
         
     </Grid>
 </Page>

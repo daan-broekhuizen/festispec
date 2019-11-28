@@ -266,9 +266,6 @@
       <DependentUpon>InspectionFormEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectionFormView\QuestionDataTemplateSelector.cs" />
-    <Compile Include="View\InspectionFormView\Testview.xaml.cs">
-      <DependentUpon>Testview.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -308,10 +305,6 @@
     <Page Include="View\InspectionFormView\InspectionFormEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\InspectionFormView\Testview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
