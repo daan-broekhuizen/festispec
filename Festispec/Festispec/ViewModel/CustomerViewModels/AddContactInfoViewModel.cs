@@ -1,6 +1,7 @@
 ﻿using Festispec.Service;
 using Festispec.Validators;
 using Festispec.ViewModel.CustomerViewModels;
+using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -39,18 +40,20 @@ namespace Festispec.ViewModel
                 _emailError = value;
                 RaisePropertyChanged("EmailError");
             }
-        } 
+        }
         #endregion
 
-        public AddContactInfoViewModel(NavigationService service) : base(service)
+        private CustomerValidator _customerValidator;
+        public AddContactInfoViewModel(NavigationService service, CustomerRepository repo) : base(service)
         {
+            _customerValidator = new CustomerValidator(repo);
             NextPageCommand = new RelayCommand(NextPage);
         }
 
         private void NextPage()
         {
             //Validate input and display relevant errors
-            List<ValidationFailure> errors =  new CustomerValidator().Validate(CustomerVM).Errors.ToList();
+            List<ValidationFailure> errors =  _customerValidator.Validate(CustomerVM).Errors.ToList();
             ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
             ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
 

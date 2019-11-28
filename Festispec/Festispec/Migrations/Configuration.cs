@@ -192,7 +192,7 @@
             opdrachten[0] = new Opdracht()
             {
                 OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
+                Status = context.Status.First(x => x.Afkorting == "rv").Betekenis,
                 CreatieDatum = DateTime.Now,
                 KlantID = "293871",
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,

@@ -39,7 +39,7 @@ namespace Festispec.ViewModel
         private void SaveCustomer()
         {
             //Get validation errors, exclude kvk error
-            ValidationResult result =  new CustomerValidator().Validate(CustomerVM);
+            ValidationResult result =  new CustomerValidator(_customerRepository).Validate(CustomerVM);
             if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
                 //if validated update customer

@@ -33,8 +33,8 @@
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Offerte Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
-            <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Margin="50" Source="/Images/festispec_logo.png"></Image>
+            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
+                <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
         </Grid>
 
@@ -49,7 +49,7 @@
         <Viewbox Grid.Row="5" Margin="20,0 " HorizontalAlignment="Left">
             <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
         </Viewbox>
-        <TextBox AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
+        <TextBox Text="{Binding QuotationVM.Description}" AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -60,7 +60,7 @@
                 <RowDefinition MinHeight="30"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <TextBox FontSize="18"  Padding="5" VerticalContentAlignment="Center" Style="{StaticResource placeHolder}" Tag="100000,00..." Margin="25, 0, 0 ,0"/>
+            <TextBox Text="{Binding QuotationVM.Price}" FontSize="18"  Padding="5" VerticalContentAlignment="Center" Style="{StaticResource placeHolder}" Tag="100000,00..." Margin="25, 0, 0 ,0"/>
         </Grid>
         <Viewbox Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Background="#FFF4F4F5" Margin="20, 0, 20, 10" Padding="20, 0" Command="{Binding SaveQuotationCommand}">

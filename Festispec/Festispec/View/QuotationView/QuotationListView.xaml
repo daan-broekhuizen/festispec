@@ -4,9 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.QuotationView"
+      xmlns:components="clr-namespace:Festispec.View.Components"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="QuotationListView">
+      Title="QuotationListView"
+      DataContext="{Binding QuotationList, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -34,27 +37,10 @@
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
                 <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
-
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
-            <TextBox Padding="10,0" Text="{Binding FilterCustomer}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15"  BorderThickness="0"/>
-            <Button  HorizontalAlignment="Right" Command="{Binding SearchCustomer}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Width="40" Margin="10,20,110,20" Source="/Images/Search.png"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Viewbox HorizontalAlignment="Center" Grid.Column="1" />
-        </Grid>
-
-
-        <Viewbox Grid.Row="1" HorizontalAlignment="Right">
-
-        </Viewbox>
-
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
         <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">
             <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>
         </Viewbox>
@@ -62,22 +48,35 @@
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
                 <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="120" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
-                    <ComboBoxItem Content="Naam oplopend"/>
-                    <ComboBoxItem Content="Naam aflopend"/>
-                    <ComboBoxItem Content="KvK oplopend"/>
-                    <ComboBoxItem Content="KvK aflopend"/>
+                <ComboBox Name="controlMode" SelectedIndex="0" Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SortChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <Binding ElementName="controlMode" Path="SelectedIndex" />
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="Opdrachtstatus (oplopend)"/>
+                    <ComboBoxItem Content="Opdrachtstatus (aflopend)"/>
+                    <ComboBoxItem Content="Aanmaakdatum (oplopend)"/>
+                    <ComboBoxItem Content="Aanmaakdatum (aflopend)"/>
+                    <ComboBoxItem Content="Laatst gewijzigd (oplopend)"/>
+                    <ComboBoxItem Content="Laatst gewijzigd (aflopend)"/>
                 </ComboBox>
             </WrapPanel>
         </Viewbox>
 
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredCustomers}" SelectedItem="{Binding SelectedCustomer}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="QuotationList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredQuotations}" SelectedItem="{Binding SelectedQuotation}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
-                        <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
+                        <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=QuotationList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -85,19 +84,25 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Viewbox Margin="20,0,0,0" Grid.Column="0">
-                                <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Viewbox>
-                            <Viewbox Grid.Column="1">
-                                <Label Margin="10" HorizontalContentAlignment="Right" Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
-                            </Viewbox>
-                            <Viewbox Margin="10" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Left">
-                                <Label HorizontalContentAlignment="Left" Content="{Binding Name}" VerticalAlignment="Center" />
+                                <Image Margin="40" Source="/Images/festispec_logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="3">
-                                <Label Margin="10" Content="Kvk-nummer:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Margin="10" HorizontalContentAlignment="Right" Content="Opdrachtnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
                             </Viewbox>
-                            <Viewbox Grid.Column="4" HorizontalAlignment="Left">
-                                <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding KvK}" VerticalAlignment="Center"/>
+                            <Viewbox Margin="10" Grid.Column="4" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                                <Label HorizontalContentAlignment="Left" Content="{Binding Job}" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="1">
+                                <Label Margin="10" Content="Offertenummer:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="2" HorizontalAlignment="Left">
+                                <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding QuotationId}" VerticalAlignment="Center"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="5" HorizontalAlignment="Left">
+                                <Label Margin="10" Content="Opdrachtstatus:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="6" HorizontalAlignment="Left" Width="30">
+                                <Ellipse Margin="10"  Fill="{Binding ColorCode}" VerticalAlignment="Center"/>
                             </Viewbox>
                         </Grid>
                     </DataTemplate>

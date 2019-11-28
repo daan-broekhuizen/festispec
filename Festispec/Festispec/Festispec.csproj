@@ -179,6 +179,7 @@
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
+    <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
@@ -193,7 +194,6 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
-    <Compile Include="ViewModel\IJobViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\AddQuotationViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\QuotationListViewModel.cs" />
@@ -257,8 +257,8 @@
     <Compile Include="View\QuotationView\QuotationListView.xaml.cs">
       <DependentUpon>QuotationListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\QuotationView\QuotationView.xaml.cs">
-      <DependentUpon>QuotationView.xaml</DependentUpon>
+    <Compile Include="View\QuotationView\ShowQuotationView.xaml.cs">
+      <DependentUpon>ShowQuotationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RapportageView.xaml.cs">
       <DependentUpon>RapportageView.xaml</DependentUpon>
@@ -294,7 +294,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\QuotationView\QuotationView.xaml">
+    <Page Include="View\QuotationView\ShowQuotationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -346,9 +346,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="settings.local.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -18,9 +18,9 @@ namespace Festispec.View.QuotationView
     /// <summary>
     /// Interaction logic for QuotationView.xaml
     /// </summary>
-    public partial class QuotationView : Page
+    public partial class ShowQuotationView : Page
     {
-        public QuotationView()
+        public ShowQuotationView()
         {
             InitializeComponent();
         }
