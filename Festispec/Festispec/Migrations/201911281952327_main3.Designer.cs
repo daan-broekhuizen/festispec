@@ -7,13 +7,13 @@ namespace Festispec.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class UndoAfkorting1 : IMigrationMetadata
+    public sealed partial class main3 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UndoAfkorting1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(main3));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911261503157_UndoAfkorting1"; }
+            get { return "201911281952327_main3"; }
         }
         
         string IMigrationMetadata.Source
