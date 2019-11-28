@@ -104,14 +104,13 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS Views\Availability.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\Calendar\baseCalendar.js" />
+    <Content Include="Scripts\Calendar\calendar.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -125,7 +124,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Antwoorden.cs" />
+    <Compile Include="Models\Beschikbaarheid_inspecteurs.cs" />
+    <Compile Include="Models\Contactpersoon.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
+    <Compile Include="Models\Inspectieformulier.cs" />
+    <Compile Include="Models\Inspectieformulier_vragenlijst_combinatie.cs" />
+    <Compile Include="Models\Klant.cs" />
+    <Compile Include="Models\Offerte.cs" />
+    <Compile Include="Models\Opdracht.cs" />
+    <Compile Include="Models\Rapport_template.cs" />
+    <Compile Include="Models\Rol_lookup.cs" />
+    <Compile Include="Models\Status_lookup.cs" />
+    <Compile Include="Models\Vraag.cs" />
+    <Compile Include="Models\Vraagtype_lookup.cs" />
+    <Compile Include="Models\Vraag_mogelijk_antwoord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
