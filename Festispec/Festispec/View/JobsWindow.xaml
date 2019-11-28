@@ -44,15 +44,15 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <!--<TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
+            <TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
             <Button  HorizontalAlignment="Right" Command="{Binding SearchJob}">
                 <Button.Template>
                     <ControlTemplate>
                         <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
                     </ControlTemplate>
                 </Button.Template>
-            </Button>-->
-            
+            </Button>
+
             <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
                 <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddJobCommand}">
                     Opdracht aanmaken

@@ -19,11 +19,8 @@ namespace Festispec.ViewModel
     {
         private NavigationService _navigationService;
         private JobRepository _jobRepo;
-
         public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
-
-        private DateTime _selectedDate;
 
         #region ErrorProperties
         private string _jobnameError;
