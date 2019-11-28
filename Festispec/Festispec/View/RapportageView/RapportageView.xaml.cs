@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.TemplateView
+namespace Festispec.View.RapportageView
 {
     /// <summary>
-    /// Interaction logic for TemplateOverviewView.xaml
+    /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class TemplateOverviewView : Page
+    public partial class RapportageView : Page
     {
-        public TemplateOverviewView()
+        public RapportageView()
         {
             InitializeComponent();
         }

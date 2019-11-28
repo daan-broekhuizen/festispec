@@ -29,6 +29,8 @@
             SeedVraagMogelijkAntwoord(context);
             SeedBeschikbaarheidInspecteurs(context);
             SeedIngepladeInspecteurs(context);
+            SeedRapportTemplates(context);
+            SeedInspectionFormTemplates(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -335,6 +337,36 @@
             if(account.Ingepland.Count == 0)
                 account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
 
+            context.SaveChanges();
+        }
+
+        private void SeedRapportTemplates(FestispecContext context)
+        {
+            RapportTemplate[] templates = new RapportTemplate[1];
+
+            templates[0] = new RapportTemplate()
+            {
+                TemplateName = "Test",
+                TemplateText = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN"
+            };
+
+            context.RapportTemplate.AddOrUpdate(x => x.TemplateID, templates);
+            context.SaveChanges();
+        }
+
+        private void SeedInspectionFormTemplates(FestispecContext context)
+        {
+            Inspectieformulier[] templates = new Inspectieformulier[1];
+
+            templates[0] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Test",
+                Beschrijving = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN",
+                DatumInspectie = DateTime.Now,
+                LaatsteWijziging = DateTime.Now
+            };
+
+            context.Inspectieformulier.AddOrUpdate(x => x.InspectieformulierID, templates);
             context.SaveChanges();
         }
     }

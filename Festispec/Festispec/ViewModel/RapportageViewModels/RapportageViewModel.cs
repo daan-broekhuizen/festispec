@@ -1,4 +1,5 @@
-﻿using Festispec.Service;
+﻿using Festispec.Model;
+using Festispec.Service;
 using Festispec.View.Components;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -17,6 +18,8 @@ namespace Festispec.ViewModel.RapportageViewModels
     {
         // Services
         private NavigationService _navigationService;
+
+        private RapportTemplate _template;
 
         // Commands
         public ICommand ModeChangedCommand { get; set; }
@@ -42,7 +45,6 @@ namespace Festispec.ViewModel.RapportageViewModels
             }
         }
 
-        // TODO: Omzetten naar bool ipv visibility
         private Visibility _isEditable;
 
         public Visibility IsEditable
@@ -73,6 +75,14 @@ namespace Festispec.ViewModel.RapportageViewModels
             CreateChartCommand = new RelayCommand(CreateChart);
 
             IsEditable = Visibility.Visible;
+
+            if (_navigationService.Parameter is RapportTemplate)
+                _template = (RapportTemplate)_navigationService.Parameter;
+        }
+
+        public void Init(RapportTemplate template)
+        {
+            _template = template;
         }
 
         public void ChangeMode(DocumentDesigner designer, int selectedMode)
