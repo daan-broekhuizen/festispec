@@ -52,22 +52,22 @@
 
         private void SeedStatus(FestispecContext context)
         {
-            Dictionary<string, string> statuses = new Dictionary<string, string>()
+            List<string> statuses = new List<string>()
             {
-                { "ia", "Inspectieformulier aangemaakt" },
-                { "iu", "Inspectie uitgevoerd" },
-                { "no", "Nieuwe opdracht" },
-                { "oa", "Offerte geaccepteerd" },
-                { "ob", "Opdracht beindingt" },
-                { "og", "Offerte geweigerd" },
-                { "ov", "Offerte verstuurt" },
-                { "pg", "Opdracht geannuleerd" },
-                { "ro", "Rapport opgesteld" },
-                { "rv", "Rekening verstuurt" },
+                { "Inspectieformulier aangemaakt" },
+                { "Inspectie uitgevoerd" },
+                { "Nieuwe opdracht" },
+                { "Offerte geaccepteerd" },
+                { "Opdracht beindingt" },
+                { "Offerte geweigerd" },
+                { "Offerte verstuurt" },
+                { "Opdracht geannuleerd" },
+                { "Rapport opgesteld" },
+                { "Rekening verstuurt" },
             };
 
-            foreach (KeyValuePair<string, string> status in statuses)
-                context.Status.AddOrUpdate(x => x.Afkorting, new Status() { Afkorting = status.Key, Betekenis = status.Value });
+            foreach (string status in statuses)
+                context.Status.AddOrUpdate(x => x.Betekenis, new Status() { Betekenis = status });
 
             context.SaveChanges();
         }
@@ -194,7 +194,7 @@
             opdrachten[0] = new Opdracht()
             {
                 OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
+                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
                 CreatieDatum = DateTime.Now,
                 KlantID = "293871",
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,

@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201911252059182_Template_Update1.designer.cs">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911281947413_main3.cs" />
+    <Compile Include="Migrations\201911281947413_main3.designer.cs">
+      <DependentUpon>201911281947413_main3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -329,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911252059182_Template_Update1.resx">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911281947413_main3.resx">
+      <DependentUpon>201911281947413_main3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
