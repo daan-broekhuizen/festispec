@@ -82,7 +82,7 @@
             <Viewbox  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="Verzonden"/>
-                    <CheckBox Command="{Binding RegisterSentCommand}" VerticalAlignment="Center" IsChecked="{Binding QuotationVM.IsSent}"/>
+                    <CheckBox VerticalAlignment="Center" IsEnabled="{Binding IsSendable}" IsChecked="{Binding QuotationVM.IsSent}"/>
                     <Button Margin="20,0,0,0" HorizontalAlignment="Left" Background="#FFF4F4F5" Grid.Column="1"  Padding="20, 5" Command="{Binding SaveQuotationCommand}" Content="Opslaan" />
                 </StackPanel>
             </Viewbox>
@@ -91,7 +91,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Button Background="#FFF4F4F5"  Padding="20, 5" Command="{Binding AcceptQuotationCommand}" Content="Accepteren" />
                     <Button Background="#FFF4F4F5" Margin="10, 0"  Padding="20, 0" Command="{Binding RejectQuotationCommand}" Content="Afwijzen"/>
-                    <Button Background="#FFF4F4F5"   Padding="20, 0" Command="{Binding CancelQuotationCommand}" Content="Annuleren"/>
+                    <Button Background="#FFF4F4F5"   Padding="20, 0" Command="{Binding CancelJobCommand}" Content="Annuleren"/>
                 </StackPanel>
             </Viewbox>
         </Grid>

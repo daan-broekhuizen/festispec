@@ -91,25 +91,24 @@ namespace Festispec.ViewModel.QuotationViewModels
             {
                 switch (Status)
                 {
-                    case "Offerte verzonden":
+                    case "ov":
                         return Colors.Yellow;
                     case "Opdracht geannuleerd":
                         return Colors.Black;
-                    case "Offerte geweigerd":
+                    case "og":
                         return Colors.Red;
                     case "Nieuwe opdracht":
                         return Colors.Blue;
                     default:
                         return Colors.Green;
                 }
-
             } 
         }
         public ImageSource Logo { get => ImageByteConverter.BytesToImage(_quotation.Opdracht.Klant.KlantLogo); }
         public QuotationViewModel(Offerte quotation)
         {
             _quotation = quotation;
-            if (Status != "Nieuwe opdracht")
+            if (Status != "no" && Status != "Nieuwe opdracht")
                 IsSent = true;
         }
         public QuotationViewModel()

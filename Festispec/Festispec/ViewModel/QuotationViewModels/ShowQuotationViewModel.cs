@@ -7,6 +7,8 @@ using System.Windows.Input;
 using Festispec.Model;
 using Festispec.Model.Repositories;
 using Festispec.Service;
+using Festispec.Utility.Validators;
+using FluentValidation.Results;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModel.QuotationViewModels
@@ -50,6 +52,7 @@ namespace Festispec.ViewModel.QuotationViewModels
                 RaisePropertyChanged("DecisionError");
             }
         }
+        public bool IsSendable { get => CanSave(); }
         public QuotationViewModel QuotationVM { get; set; }
 
         private QuotationRepository _quotationRepository;
@@ -60,43 +63,72 @@ namespace Festispec.ViewModel.QuotationViewModels
             if (service.Parameter is QuotationViewModel)
                 QuotationVM = service.Parameter as QuotationViewModel;
 
-            AcceptQuotationCommand = new RelayCommand(AcceptQuotation, QuotationVM.Status == "Offerte verstuurd");
-            CancelJobCommand = new RelayCommand(CancelJob, QuotationVM.Status == "Offerte verstuurd");
-            RejectQuotationCommand = new RelayCommand(RejectQuotation, QuotationVM.Status == "Offerte verstuurd");
+            AcceptQuotationCommand = new RelayCommand(AcceptQuotation, CanRegisterDecision);
+            CancelJobCommand = new RelayCommand(CancelJob, CanRegisterDecision);
+            RejectQuotationCommand = new RelayCommand(RejectQuotation, CanRegisterDecision);
             DownloadQuotationCommand = new RelayCommand(DownloadQuotation);
-            NewQuotationCommand = new RelayCommand(NewQuotation, QuotationVM.Status == "Offerte geweigerd");
-            SaveQuotationCommand = new RelayCommand(SaveQuotation);
+            NewQuotationCommand = new RelayCommand(NewQuotation, CanCreate);
+            SaveQuotationCommand = new RelayCommand(SaveQuotation, CanSave);
         }
 
+        private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd";
+        private bool CanSave()
+        {
+            return QuotationVM.Status == "Nieuwe opdracht" || QuotationVM.Status == "Offerte geweigerd";
+        }
+        private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurd" || QuotationVM.Status =="ov";
         private void SaveQuotation()
         {
-            if (QuotationVM.IsSent)
-                _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte verstuurt");
-        }
+            ValidationResult result = new QuotationValidator().Validate(QuotationVM);
+            if(result.IsValid)
+            {
+                decimal price;
+                Decimal.TryParse(QuotationVM.Price, out price);
+                _quotationRepository.UpdateQuotation(new Offerte()
+                {
+                    OfferteID = QuotationVM.QuotationId,
+                    OpdrachtID = QuotationVM.JobId,
+                    Beschrijving = QuotationVM.Description,
+                    Totaalbedrag = price,
+                    Aanmaakdatum = QuotationVM.CreationDate,
+                    LaatsteWijziging = DateTime.Now,
+                });
+                if (QuotationVM.IsSent)
+                    _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte verstuurt");
+            } 
+            else
+            {
+                DescriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault().ToString();
+                PriceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault().ToString();
+            }
 
+        }
         private void NewQuotation()
         {
             _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(new Offerte() { Opdracht = _quotationRepository.GetJob(QuotationVM.JobId)}));
         }
-
         private void DownloadQuotation()
         {
             throw new NotImplementedException();
         }
-
-        private void RejectQuotation()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void CancelJob()
-        {
-            throw new NotImplementedException();
-        }
-
+        private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");
+        private void CancelJob() => RegisterCustomerDecision("Opdracht geannuleerd");
         private void AcceptQuotation()
         {
-            throw new NotImplementedException();
+            if(QuotationVM.Decision != null)
+                _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
+            _quotationRepository.UpdateJobStatus(QuotationVM.QuotationId, "Offerte geaccepteerd");
+        }
+        private void RegisterCustomerDecision(string status)
+        {
+            if (QuotationVM.Decision != null)
+            {
+                _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
+                _quotationRepository.UpdateJobStatus(QuotationVM.QuotationId, status);
+                QuotationVM.Status = status;
+            }
+            else
+                DecisionError = "Voer een klantbeslissingsreden in.";
         }
     }
 }

@@ -24,6 +24,16 @@ namespace Festispec.Model.Repositories
             }
         }
 
+        public void UpdateDecision(int quotationId, string decision)
+        {
+            using(FestispecContext context = new FestispecContext())
+            {
+                Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotationId).FirstOrDefault();
+                toUpdate.KlantbeslissingReden = decision;
+                context.SaveChanges();
+            }
+        }
+
         public void CreateQuotation(Offerte quotation)
         {
             using(FestispecContext context = new FestispecContext())
@@ -50,7 +60,7 @@ namespace Festispec.Model.Repositories
             using (FestispecContext context = new FestispecContext())
             {
                 Opdracht toUpdate = context.Opdracht.Where(j => j.OpdrachtID == jobId).FirstOrDefault();
-                context.Entry(toUpdate).Property(j => j.Status).CurrentValue = status;
+                toUpdate.Status = context.Status.First(s => s.Betekenis == status).Afkorting;
                 context.SaveChanges();
             }
         }

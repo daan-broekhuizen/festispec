@@ -73,7 +73,7 @@ namespace Festispec.ViewModel.QuotationViewModels
             else
             {
                 DescriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault().ToString();
-                DescriptionError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault().ToString();
+                PriceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault().ToString();
             }
 
         }
