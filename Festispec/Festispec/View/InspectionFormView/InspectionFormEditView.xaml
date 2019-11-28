@@ -1,12 +1,51 @@
-﻿<Page x:Class="Festispec.View.QuestionnaireView.QuestionnaireView"
+﻿<Page x:Class="Festispec.View.InspectionFormView.InspectionFormEditView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Festispec.View.QuestionnaireView"
+      xmlns:local="clr-namespace:Festispec.View.InspectionFormView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="QuestionnaireView">
+      Title="QuestionnaireView"
+      DataContext="{Binding InspectionForm, Source={StaticResource Locator}}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="OpenQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="Open vraag:" FontWeight="Bold" FontSize="50" VerticalAlignment="Center"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4">
+                        <TextBox Text="{Binding Path=Vraagstelling}" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}"/>
+                    </Viewbox>
+                    <Viewbox Margin="10" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left">
+                        <Button>Add Image</Button>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        
+        <local:QuestionDataTemplateSelector x:Key="QuestionTemplateSelector"/>
+    
+    </Page.Resources>
+
+    
 
 
     <Grid Background="White">
@@ -55,7 +94,7 @@
             <ComboBox Grid.Row="8"/>
             <Label Content="Vraag invoegen" Grid.Row="9"/>
             <ComboBox Grid.Row="10"/>
-            <Button Grid.Row="11" Content="Toevoegen"/>
+            <Button Grid.Row="11" Content="Toevoegen" Command="{Binding AddOpenQuestionCommand}"/>
             <Button Content="Opslaan" Grid.Row="13"/>
 
         </Grid>
@@ -78,9 +117,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Content="Terug naar Opdracht" Grid.Column="1"/>
-                    <TextBox Text="Titel" Grid.Column="2"/>
-                    <TextBlock Text="Laatste Weiziging datum" Grid.Column="3"/>
-                    <TextBlock Text="Locatie" Grid.Column="3" VerticalAlignment="Bottom"/>
+                    <TextBox Text="{Binding Titel}" Grid.Column="2" FontSize="10"/>
+                    <Grid Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Laatste Weiziging datum" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Locatie" Grid.Row="1" VerticalAlignment="Center"/>
+                    </Grid>
+                    
                     <Image Name="Logo" Grid.Column="4"/>
                     
 
@@ -88,7 +134,7 @@
                 </Grid>
                 </Border>
 
-            <ListBox Grid.Row="1">
+            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top">
                 
             </ListBox>
             </Grid>

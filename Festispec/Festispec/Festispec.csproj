@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201911252059182_Template_Update1.designer.cs">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911280834521_AntwoordEnVOCChanges.cs" />
+    <Compile Include="Migrations\201911280834521_AntwoordEnVOCChanges.designer.cs">
+      <DependentUpon>201911280834521_AntwoordEnVOCChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -162,10 +166,10 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IQuestionRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
-    <Compile Include="Model\Repositories\Interfaces\IVOCRepository.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -186,6 +190,8 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
@@ -256,8 +262,12 @@
     <Compile Include="View\InspectionFormView\InspectionFormShowView.xaml.cs">
       <DependentUpon>InspectionFormShowView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\InspectionFormView\InspectionFromEditView.xaml.cs">
-      <DependentUpon>InspectionFromEditView.xaml</DependentUpon>
+    <Compile Include="View\InspectionFormView\InspectionFormEditView.xaml.cs">
+      <DependentUpon>InspectionFormEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InspectionFormView\QuestionDataTemplateSelector.cs" />
+    <Compile Include="View\InspectionFormView\Testview.xaml.cs">
+      <DependentUpon>Testview.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -295,9 +305,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\InspectionFormView\InspectionFromEditView.xaml">
+    <Page Include="View\InspectionFormView\InspectionFormEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InspectionFormView\Testview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
@@ -346,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911252059182_Template_Update1.resx">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911280834521_AntwoordEnVOCChanges.resx">
+      <DependentUpon>201911280834521_AntwoordEnVOCChanges.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

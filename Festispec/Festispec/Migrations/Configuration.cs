@@ -78,9 +78,12 @@
             {
                 { "av", "Afbeelding vraag" },
                 { "lv", "Lijst vraag" },
-                { "mv", "Meerkeuze vraag" },
+                { "m4", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
+                { "t2", "Tabel vraag X2"},
+                { "t3", "Tabel vraag X3"  },
+                { "tx", "Pure text" }
             };
 
             foreach (KeyValuePair<string, string> status in statuses)

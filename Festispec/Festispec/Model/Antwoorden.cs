@@ -17,9 +17,12 @@ namespace Festispec.Model
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int InspecteurID { get; set; }
-
         public int AntwoordNummer { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int InspecteurID { get; set; }
 
         [Column("Antwoord_text", TypeName = "text")]
         public string AntwoordText { get; set; }

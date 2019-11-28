@@ -22,6 +22,8 @@ namespace Festispec.Model
 
         public int VraagID { get; set; }
 
+        public int VraagVolgordeNummer { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Antwoorden> Antwoorden { get; set; }
 
