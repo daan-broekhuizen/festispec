@@ -1,5 +1,6 @@
 ﻿using Festispec.Service;
 using Festispec.Validators;
+using Festispec.ViewModel.CustomerViewModels;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -12,12 +13,8 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddCustomerInfoViewModel : ViewModelBase
+    public class AddCustomerInfoViewModel : CustomerViewModelBase
     {
-        private NavigationService _navigationService;
-        private CustomerValidator _customerValidator;
-
-        public CustomerViewModel Customer { get; set; }
         public ICommand NextPageCommand { get; set; }
 
         #region ErrorProperties
@@ -44,32 +41,25 @@ namespace Festispec.ViewModel
         } 
         #endregion
 
-        public AddCustomerInfoViewModel(NavigationService service)
+        public AddCustomerInfoViewModel(NavigationService service) : base(service)
         {
-            _navigationService = service;
-            _customerValidator = new CustomerValidator();
-
-            //If customer is passed through navigation service
-            //set customer to the service parameter
-            if (service.Parameter is CustomerViewModel)
-                Customer = service.Parameter as CustomerViewModel;
-            else
-                Customer = new CustomerViewModel();
-
+            if (CustomerVM == null) CustomerVM = new CustomerViewModel();
             NextPageCommand = new RelayCommand(NextPage);
         }
 
         private void NextPage()
         {
             //Validate input and show relevant input errors
-            List<ValidationFailure> errors = _customerValidator.Validate(Customer).Errors.ToList();
+            List<ValidationFailure> errors =  new CustomerValidator().Validate(CustomerVM).Errors.ToList();
             ValidationFailure customerError = errors.Where(e => e.PropertyName.Equals("Name") ||
                                                                 e.PropertyName.Equals("KvK")).FirstOrDefault();
             ValidationFailure adresError = errors.Where(e => e.PropertyName.Equals("PostalCode") ||
-                                                             e.PropertyName.Equals("HouseNumber")).FirstOrDefault();
+                                                             e.PropertyName.Equals("HouseNumber") ||
+                                                             e.PropertyName.Equals("Streetname") ||
+                                                             e.PropertyName.Equals("City")).FirstOrDefault();
             //If succesfull navigate to next page else update error properties
             if (customerError == null && adresError == null)
-                _navigationService.NavigateTo("AddContactInfo", Customer);
+                _navigationService.NavigateTo("AddContactInfo", CustomerVM);
             else
             {
                 if (customerError != null)
