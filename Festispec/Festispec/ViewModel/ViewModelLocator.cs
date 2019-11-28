@@ -13,12 +13,8 @@
 */
 
 using CommonServiceLocator;
-using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.ViewModel;
-using Festispec.ViewModel.InspectionFormViewModels;
-using Festispec.ViewModel.RapportageViewModels;
-using Festispec.ViewModel.TemplateViewModels;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -51,26 +47,18 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<CustomerRepository>();
             SimpleIoc.Default.Register<JobRepository>();
 
-            SimpleIoc.Default.Register<UserRepository>();
-            SimpleIoc.Default.Register<TemplateRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
         {
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DashboardViewModel>();
-            SimpleIoc.Default.Register<ApplicationViewModel>();
-
         }
         //Configure view mappings here and register navigation service
         private static void SetupNavigation()
         {
             NavigationService navigationService = new NavigationService();
             navigationService.Configure("Dashboard", new Uri("../View/DashboardView.xaml", UriKind.Relative));
-            navigationService.Configure("Main", new Uri("../View/MainWindow.xaml", UriKind.Relative));
-            navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
-            navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
-            navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -90,9 +78,6 @@ namespace Festispec.ViewModel
 
 
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
-            #region TemplateViews
-            navigationService.Configure("RapportageTemplateOverview", new Uri("../View/TemplateView/RapportageTemplateOverviewView.xaml", UriKind.Relative));
-            navigationService.Configure("InspectionFormTemplateOverview", new Uri("../View/TemplateView/InspectionFormTemplateOverviewView.xaml", UriKind.Relative));
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
@@ -103,17 +88,11 @@ namespace Festispec.ViewModel
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
         public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
 
-        public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
-        public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
 
         // Viewmodels used for datacontext
         #region Singleton VM's
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
-        public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
-        public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
-        public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
-        public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         #region CustomerVM's
@@ -129,9 +108,6 @@ namespace Festispec.ViewModel
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
         public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
         public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo);
-        #region Template VM's
-        public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
-        public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
         //Clean when logging out?

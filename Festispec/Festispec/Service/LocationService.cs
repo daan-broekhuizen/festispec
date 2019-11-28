@@ -23,30 +23,5 @@ namespace Festispec.Service
             Location location = response.ResourceSets[0].Resources[0] as Location;
             return location.Address;
         }
-
-        public async Task<double> CalculateDistance()
-        {
-            DistanceMatrixRequest req = new DistanceMatrixRequest()
-            {
-                BingMapsKey = _bingApiKey,
-                Origins = new List<SimpleWaypoint>()
-                {
-                    new SimpleWaypoint("Efteling, 5171 SL Kaatsheuvel")
-                },
-                Destinations = new List<SimpleWaypoint>()
-                {
-                    new SimpleWaypoint("Griekenland")
-                },
-                DistanceUnits = DistanceUnitType.Kilometers,
-                TravelMode = TravelModeType.Driving
-            };
-
-            Response response = await req.Execute();
-            Resource resource = response.ResourceSets[0].Resources[0];
-            DistanceMatrix matrix = resource as DistanceMatrix;
-            DistanceMatrixCell cell = matrix.Results[0];
-
-            return cell.TravelDistance;
-        }
     }
 }

@@ -19,7 +19,6 @@ namespace Festispec.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
-        private Klant _klant;
         public string Name
         {
             get => _klant.Naam;
@@ -27,6 +26,15 @@ namespace Festispec.ViewModel
             {
                 _klant.Naam = value;
                 RaisePropertyChanged("Name");
+            }
+        }
+        public string PostalCode
+        {
+            get => _postalcode;
+            set
+            {
+                _postalcode = value;
+                RaisePropertyChanged("PostalCode");
             }
         }
         public string Streetname
@@ -118,30 +126,21 @@ namespace Festispec.ViewModel
             get => ImageByteConverter.BytesToImage(_klant.KlantLogo);
             set
             {
-                byte[] image = ImageByteConverter.PngImageToBytes(value);
-                if (image != null)
-                    _klant.KlantLogo = image;
-                else
-                    new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+                _klant.KlantLogo = ImageByteConverter.PngImageToBytes(value);
                 RaisePropertyChanged("Logo");
-
-            }
-        }
-        private string _postalcode;
-        public string PostalCode
-        {
-            get => _postalcode;
-            set
-            {
-                _postalcode = value;
-                RaisePropertyChanged("PostalCode");
             }
         }
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
+
+        private Klant _klant;
+        private string _postalcode;
+
         public CustomerViewModel(Klant klant)
         {
             _klant = klant;
             Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
+            if(_klant.KlantLogo == null)
+                Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             GetPostalCodeAsync();
         }
         public CustomerViewModel()

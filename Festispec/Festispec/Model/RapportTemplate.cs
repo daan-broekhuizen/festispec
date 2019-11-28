@@ -21,12 +21,6 @@ namespace Festispec.Model
         [Column(TypeName = "text")]
         public string TemplateText { get; set; }
 
-        [MaxLength(50)]
-        public string TemplateName { get; set; }
-
-        [MaxLength(400)]
-        public string TemplateDescription { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opdracht> Opdracht { get; set; }
     }

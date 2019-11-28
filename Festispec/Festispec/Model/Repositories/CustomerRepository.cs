@@ -1,5 +1,4 @@
 ﻿using Festispec.Model;
-using Festispec.Model.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FestiSpec.Domain.Repositories
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository
     {
         public List<Klant> GetCustomers()
         {
@@ -41,7 +40,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Contactpersoon toUpdate = context.Contactpersoon.Where(c => c.ContactpersoonID == contact.ContactpersoonID).FirstOrDefault();
+                Klant toUpdate = context.Klant.Where(c => c.KvKNummer == contact.KlantID).FirstOrDefault();
                 context.Entry(toUpdate).CurrentValues.SetValues(contact);
                 context.SaveChanges();
             }

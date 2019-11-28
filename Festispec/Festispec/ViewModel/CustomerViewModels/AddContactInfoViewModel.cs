@@ -1,6 +1,5 @@
 ﻿using Festispec.Service;
 using Festispec.Validators;
-using Festispec.ViewModel.CustomerViewModels;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -13,9 +12,13 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class AddContactInfoViewModel : CustomerViewModelBase
+    public class AddContactInfoViewModel : ViewModelBase
     {
+        public CustomerViewModel CustomerViewModel { get; set; }
         public ICommand NextPageCommand { get; set; }
+
+        private NavigationService _navigationService;
+        private CustomerValidator _customerValidator;
 
         //Properties for errors
         #region ErrorMessages
@@ -42,20 +45,27 @@ namespace Festispec.ViewModel
         } 
         #endregion
 
-        public AddContactInfoViewModel(NavigationService service) : base(service)
+        public AddContactInfoViewModel(NavigationService service)
         {
+            _customerValidator = new CustomerValidator();
+            _navigationService = service;
+
+            //Get customer from navigation service
+            if (service.Parameter is CustomerViewModel)
+                CustomerViewModel = service.Parameter as CustomerViewModel;
+
             NextPageCommand = new RelayCommand(NextPage);
         }
 
         private void NextPage()
         {
             //Validate input and display relevant errors
-            List<ValidationFailure> errors =  new CustomerValidator().Validate(CustomerVM).Errors.ToList();
+            List<ValidationFailure> errors = _customerValidator.Validate(CustomerViewModel).Errors.ToList();
             ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
             ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
 
             if (telephoneError == null && emailError == null)
-                _navigationService.NavigateTo("AddContactPerson", CustomerVM);
+                _navigationService.NavigateTo("AddContactPerson", CustomerViewModel);
 
             if (telephoneError != null)
                 TelephoneError = telephoneError.ErrorMessage;

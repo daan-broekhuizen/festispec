@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Festispec.Service;
-using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
@@ -15,7 +14,7 @@ using GalaSoft.MvvmLight.Command;
 
 namespace Festispec.ViewModel
 {
-    public class CustomerListViewModel : CustomerViewModelBase, ICustomerListViewModel
+    public class CustomerListViewModel : ViewModelBase
     {
         #region BindingProperties
         private List<CustomerViewModel> _customers;
@@ -28,7 +27,9 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Customers");
             }
         }
+
         private List<CustomerViewModel> filteredcustomers;
+
         public List<CustomerViewModel> FilteredCustomers
         {
             get => filteredcustomers;
@@ -49,16 +50,9 @@ namespace Festispec.ViewModel
             }
         }
         private CustomerViewModel _selectedCustomer;
-        private string _filterCustomer;
-        public string FilterCustomer
-        {
-            get => _filterCustomer;
-            set
-            {
-                _filterCustomer = value.ToLower();
-                RaisePropertyChanged("FilterCustomer");
-            }
-        }
+
+        public string FilterCustomer { get; set; }
+
         private ComboBoxItem _selectedBox;
         public ComboBoxItem SelectedBox
         {
@@ -71,10 +65,16 @@ namespace Festispec.ViewModel
         } 
         #endregion
 
+        private CustomerRepository _customerRepository;
+        private NavigationService _navigationService;
+
         public ICommand SearchCustomer { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
-        public CustomerListViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
+        public CustomerListViewModel(NavigationService service, CustomerRepository repo)
         {
+            _navigationService = service;
+            _customerRepository = repo;
+
             Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
             FilteredCustomers = Customers;
             FilterCustomer = "";
@@ -88,13 +88,16 @@ namespace Festispec.ViewModel
             if (SelectedCustomer != null)
                 _navigationService.NavigateTo("CustomerInfo", SelectedCustomer);
         }
+
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
-        private void FilterCustomers()
+
+        public void FilterCustomers()
         {
-            FilteredCustomers = Customers.Where(e => e.Name.ToLower().Contains(FilterCustomer)).ToList();
+            FilteredCustomers = Customers.Where(e => e.Name.Contains(FilterCustomer)).ToList();
             SortCustomers();
         }
-        private void SortCustomers()
+
+        public void SortCustomers()
         {
             if (SelectedBox != null)
             {

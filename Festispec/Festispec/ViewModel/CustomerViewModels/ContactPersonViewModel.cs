@@ -12,7 +12,6 @@ namespace Festispec.ViewModel
     public class ContactPersonViewModel : ViewModelBase
     {
         private Contactpersoon _contactPerson;
-        public int Id => _contactPerson.ContactpersoonID;
         public string Email 
         { 
             get => _contactPerson.Email;

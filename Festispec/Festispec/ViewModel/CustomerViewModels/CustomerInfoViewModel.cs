@@ -2,7 +2,6 @@
 using Festispec.Service;
 using Festispec.Utility.Converters;
 using Festispec.Validators;
-using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
@@ -19,16 +18,29 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
-    public class CustomerInfoViewModel : CustomerViewModelBase
+    public class CustomerInfoViewModel : ViewModelBase
     {
         public ICommand ShowCustomerInfoCommand { get; set; }
         public ICommand ShowContactInfoCommand { get; set; }
         public ICommand ShowContactPeopleCommand { get; set; }
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand ShowAddJobCommand { get; set; }
+        public CustomerViewModel CustomerVM { get; set; }
 
-        public CustomerInfoViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
+        private NavigationService _navigationService;
+        private CustomerValidator _customerValidator;
+        private CustomerRepository _customerRepository;
+
+        public CustomerInfoViewModel(NavigationService service, CustomerRepository repo)
         {
+            _customerRepository = repo;
+            _navigationService = service;
+            _customerValidator = new CustomerValidator();
+
+            //get customer from navigationservice
+            if (service.Parameter is CustomerViewModel)
+                CustomerVM = service.Parameter as CustomerViewModel;
+
             ShowCustomerInfoCommand = new RelayCommand(ShowCustomerInfo);
             ShowContactPeopleCommand = new RelayCommand(ShowContactPeople);
             ShowContactInfoCommand = new RelayCommand(ShowContactInfo);
@@ -39,7 +51,7 @@ namespace Festispec.ViewModel
         private void SaveCustomer()
         {
             //Get validation errors, exclude kvk error
-            ValidationResult result =  new CustomerValidator().Validate(CustomerVM);
+            ValidationResult result = _customerValidator.Validate(CustomerVM);
             if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
                 //if validated update customer

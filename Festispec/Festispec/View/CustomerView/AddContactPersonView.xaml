@@ -32,7 +32,7 @@
             </Viewbox>
             <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
                 <Button Margin="50" Background="White" Click="Button_Click" BorderThickness="0" VerticalContentAlignment="Center">
-                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
+                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerViewModel.Logo, Mode=TwoWay}"></Image>
                 </Button>
             </Viewbox>
         </Grid>
@@ -72,15 +72,15 @@
             </Viewbox>
             <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" x:Name="Container">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <TextBox TabIndex="3" MaxWidth="{Binding Path=ActualWidth, ElementName=Container}" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding ContactPersonViewModel.Note}" FontSize="20" Margin="0,5,0,0" />
+                    <TextBox  MaxWidth="{Binding Path=ActualWidth, ElementName=Container}" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding ContactPersonViewModel.Note}" FontSize="20" Margin="0,5,0,0" />
                 </ScrollViewer>
             </Grid>
-
-
-
-            <TextBox TabIndex="0" Text="{Binding ContactPersonViewModel.Name}"  Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="Bart van de Ven..."/>
-            <TextBox TabIndex="1" Text="{Binding ContactPersonViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20"  VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
-            <TextBox TabIndex="2" Text="{Binding ContactPersonViewModel.Telephone}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="0612345678..."  Grid.Row="5"/>
+            
+            
+            
+            <TextBox Text="{Binding ContactPersonViewModel.Name}"  Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="Bart van de Ven..."/>
+            <TextBox Text="{Binding ContactPersonViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20"  VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
+            <TextBox Text="{Binding ContactPersonViewModel.Telephone}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="0612345678..."  Grid.Row="5"/>
             <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0">
                 <Label Content="{Binding NameError}" Foreground="Red"  FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
             </Viewbox>
