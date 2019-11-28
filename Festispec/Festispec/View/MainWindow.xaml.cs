@@ -17,7 +17,7 @@ namespace Festispec
     /// <summary>
     /// Interaction logic for NavigationBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
         public MainWindow()
         {
