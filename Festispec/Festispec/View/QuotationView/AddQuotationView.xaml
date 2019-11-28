@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.QuotationView"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-      Title="AddQuotationView">
+      Title="AddQuotationView"
+      DataContext="{Binding AddQuotation, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -43,11 +44,17 @@
             <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Offerte" RenderTransformOrigin="0.839,0.839"/>
         </Viewbox>
         <Viewbox Grid.Row="3" Margin="20,0 " HorizontalAlignment="Left">
-            <Label Content="Omschrijving"  HorizontalContentAlignment="Left"></Label>
+            <WrapPanel>
+                <Label Content="Omschrijving"  HorizontalContentAlignment="Left"></Label>
+                <Label Content="{Binding DescriptionError}"  HorizontalContentAlignment="Left"></Label>
+            </WrapPanel>
         </Viewbox>
         <TextBox BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
         <Viewbox Grid.Row="5" Margin="20,0 " HorizontalAlignment="Left">
-            <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
+            <WrapPanel>
+                <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
+                <Label Content="{Binding PriceError}" HorizontalContentAlignment="Left"></Label>
+            </WrapPanel>
         </Viewbox>
         <TextBox Text="{Binding QuotationVM.Description}" AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
         <Grid Grid.Row="6">

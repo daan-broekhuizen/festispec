@@ -14,7 +14,6 @@ namespace Festispec.ViewModel.QuotationViewModels
     public class QuotationViewModel : ViewModelBase
     {
         private Offerte _quotation;
-
         public int QuotationId { get => _quotation.OfferteID; }
         public string Job { get => _quotation.Opdracht.OpdrachtNaam; }
         public DateTime CreationDate { get => _quotation.Aanmaakdatum; }
@@ -66,7 +65,7 @@ namespace Festispec.ViewModel.QuotationViewModels
                 if (_quotation.Opdracht.Status != null)
                     return _quotation.Opdracht.Status;
                 else
-                    return "Nieuwe opdracht";
+                    return "no";
             }
             set
             {
@@ -93,11 +92,11 @@ namespace Festispec.ViewModel.QuotationViewModels
                 {
                     case "ov":
                         return Colors.Yellow;
-                    case "Opdracht geannuleerd":
+                    case "pg":
                         return Colors.Black;
                     case "og":
                         return Colors.Red;
-                    case "Nieuwe opdracht":
+                    case "no":
                         return Colors.Blue;
                     default:
                         return Colors.Green;
@@ -108,7 +107,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         public QuotationViewModel(Offerte quotation)
         {
             _quotation = quotation;
-            if (Status != "no" && Status != "Nieuwe opdracht")
+            if (Status != "no" && Status != "og")
                 IsSent = true;
         }
         public QuotationViewModel()

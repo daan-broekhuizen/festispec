@@ -47,8 +47,8 @@
 
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
-                <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Name="controlMode" SelectedIndex="0" Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
+                <TextBlock Margin="10" VerticalAlignment="Center" Text="Sorteren op:"  Foreground="Black"/>
+                <ComboBox Name="controlMode" SelectedIndex="0" Margin="10"  Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding SortChangedCommand}">
@@ -83,7 +83,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Viewbox Margin="20,0,0,0" Grid.Column="0">
-                                <Image Margin="40" Source="/Images/festispec_logo.png"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="3">
                                 <Label Margin="10" HorizontalContentAlignment="Right" Content="Opdrachtnaam:" FontWeight="Bold" VerticalAlignment="Center"/>

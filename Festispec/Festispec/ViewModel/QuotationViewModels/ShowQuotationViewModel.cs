@@ -71,12 +71,12 @@ namespace Festispec.ViewModel.QuotationViewModels
             SaveQuotationCommand = new RelayCommand(SaveQuotation, CanSave);
         }
 
-        private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd";
+        private bool CanCreate() => QuotationVM.Status == "og";
         private bool CanSave()
         {
-            return QuotationVM.Status == "Nieuwe opdracht" || QuotationVM.Status == "Offerte geweigerd";
+            return QuotationVM.Status == "no";
         }
-        private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurd" || QuotationVM.Status =="ov";
+        private bool CanRegisterDecision() => QuotationVM.Status =="ov";
         private void SaveQuotation()
         {
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
@@ -98,14 +98,24 @@ namespace Festispec.ViewModel.QuotationViewModels
             } 
             else
             {
-                DescriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault().ToString();
-                PriceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault().ToString();
+                ValidationFailure descriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault();
+                if (descriptionError != null)
+                    DescriptionError = descriptionError.ToString();
+
+                ValidationFailure priceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault();
+                if (priceError != null)
+                    PriceError = priceError.ToString();
             }
 
         }
         private void NewQuotation()
         {
-            _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(new Offerte() { Opdracht = _quotationRepository.GetJob(QuotationVM.JobId)}));
+            _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(
+                new Offerte()
+                {
+                    Opdracht = _quotationRepository.GetJob(QuotationVM.JobId),
+                    OpdrachtID = QuotationVM.JobId
+                }));
         }
         private void DownloadQuotation()
         {
@@ -117,15 +127,17 @@ namespace Festispec.ViewModel.QuotationViewModels
         {
             if(QuotationVM.Decision != null)
                 _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
-            _quotationRepository.UpdateJobStatus(QuotationVM.QuotationId, "Offerte geaccepteerd");
+            _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte geaccepteerd");
+            QuotationVM.Status = "og";
+
         }
         private void RegisterCustomerDecision(string status)
         {
             if (QuotationVM.Decision != null)
             {
                 _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
-                _quotationRepository.UpdateJobStatus(QuotationVM.QuotationId, status);
-                QuotationVM.Status = status;
+                _quotationRepository.UpdateJobStatus(QuotationVM.JobId, status);
+                QuotationVM.Status = new Status() { Betekenis = status }.Afkorting;
             }
             else
                 DecisionError = "Voer een klantbeslissingsreden in.";

@@ -55,25 +55,34 @@ namespace Festispec.ViewModel.QuotationViewModels
 
         private void SaveQuotation()
         {
-            if (QuotationVM.JobId == 0) return;
+            Console.WriteLine(QuotationVM.JobId);
+            if (QuotationVM.JobId < 1) return;
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
             if (result.IsValid)
             {
                 decimal price;
                 Decimal.TryParse(QuotationVM.Price, out price);
-                _quotationRepository.CreateQuotation(new Offerte()
+                Offerte quotation = new Offerte()
                 {
                     OpdrachtID = QuotationVM.JobId,
                     Beschrijving = QuotationVM.Description,
                     Totaalbedrag = price,
                     Aanmaakdatum = DateTime.Now,
                     LaatsteWijziging = DateTime.Now
-                });
+                };
+
+                _quotationRepository.CreateQuotation(quotation);
+                _navigationService.NavigateTo("ShowQuotation", QuotationVM);
             }
             else
             {
-                DescriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault().ToString();
-                PriceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault().ToString();
+                ValidationFailure descriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault();
+                if (descriptionError != null)
+                    DescriptionError = descriptionError.ToString();
+
+                ValidationFailure priceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault();
+                if (priceError != null)
+                    PriceError = priceError.ToString();
             }
 
         }

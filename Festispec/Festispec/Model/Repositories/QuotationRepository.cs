@@ -15,7 +15,6 @@ namespace Festispec.Model.Repositories
                 return context.Offerte.Include("Opdracht.Klant").ToList();
             }
         }
-
         public Opdracht GetJob(int jobId)
         {
             using(FestispecContext context = new FestispecContext())
@@ -23,17 +22,6 @@ namespace Festispec.Model.Repositories
                 return context.Opdracht.Find(jobId);
             }
         }
-
-        public void UpdateDecision(int quotationId, string decision)
-        {
-            using(FestispecContext context = new FestispecContext())
-            {
-                Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotationId).FirstOrDefault();
-                toUpdate.KlantbeslissingReden = decision;
-                context.SaveChanges();
-            }
-        }
-
         public void CreateQuotation(Offerte quotation)
         {
             using(FestispecContext context = new FestispecContext())
@@ -43,7 +31,6 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
-
         public void UpdateQuotation(Offerte quotation)
         {
             using(FestispecContext context = new FestispecContext())
@@ -53,8 +40,15 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
-
-        //Zit dit niet ook in jobrepo?
+        public void UpdateDecision(int quotationId, string decision)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotationId).FirstOrDefault();
+                toUpdate.KlantbeslissingReden = decision;
+                context.SaveChanges();
+            }
+        }
         public void UpdateJobStatus(int jobId, string status)
         {
             using (FestispecContext context = new FestispecContext())
