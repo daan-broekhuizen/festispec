@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.View.TemplateView
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for TemplateOverviewView.xaml
+    /// Interaction logic for JobsWindow.xaml
     /// </summary>
-    public partial class TemplateOverviewView : Page
+    public partial class JobsWindow : Page
     {
-        public TemplateOverviewView()
+        public JobsWindow()
         {
             InitializeComponent();
         }

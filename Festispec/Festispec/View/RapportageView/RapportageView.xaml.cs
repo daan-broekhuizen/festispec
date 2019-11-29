@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Festispec
+namespace Festispec.View.RapportageView
 {
     /// <summary>
     /// Interaction logic for NavigationBar.xaml
