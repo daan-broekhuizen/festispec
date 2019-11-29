@@ -20,7 +20,8 @@ namespace Festispec.Utility.Validators
         private bool IsValidPrice(string arg)
         {
             if (arg == null) return false;
-            return Decimal.TryParse(arg, out _);
+            string trimmed = arg.Trim('€');
+            return Decimal.TryParse(trimmed, out _);
         }
     }
 }

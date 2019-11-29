@@ -26,6 +26,12 @@ namespace Festispec.ViewModel
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
             ShowCustomersCommand = new RelayCommand(ShowCustomers);
             ShowQuotationsCommand = new RelayCommand(ShowQuotations);
+            ShowJobsCommand = new RelayCommand(ShowJobs);
+        }
+
+        private void ShowJobs()
+        {
+            _navigationService.NavigateTo("Jobs");
         }
 
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo");

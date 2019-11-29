@@ -46,14 +46,14 @@
         <Viewbox Grid.Row="3" Margin="20,0 " HorizontalAlignment="Left">
             <WrapPanel>
                 <Label Content="Omschrijving"  HorizontalContentAlignment="Left"></Label>
-                <Label Content="{Binding DescriptionError}"  HorizontalContentAlignment="Left"></Label>
+                <Label Foreground="Red" Content="{Binding DescriptionError}"  HorizontalContentAlignment="Left"></Label>
             </WrapPanel>
         </Viewbox>
         <TextBox BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
         <Viewbox Grid.Row="5" Margin="20,0 " HorizontalAlignment="Left">
             <WrapPanel>
                 <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
-                <Label Content="{Binding PriceError}" HorizontalContentAlignment="Left"></Label>
+                <Label Foreground="Red" Content="{Binding PriceError}" HorizontalContentAlignment="Left"></Label>
             </WrapPanel>
         </Viewbox>
         <TextBox Text="{Binding QuotationVM.Description}" AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
@@ -67,7 +67,7 @@
                 <RowDefinition MinHeight="30"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
-            <TextBox Text="{Binding QuotationVM.Price}" FontSize="18"  Padding="5" VerticalContentAlignment="Center" Style="{StaticResource placeHolder}" Tag="100000,00..." Margin="25, 0, 0 ,0"/>
+            <TextBox Text="{Binding QuotationVM.Price}" FontSize="16"  Padding="5" VerticalContentAlignment="Center" Style="{StaticResource placeHolder}" Tag="100000,00..." Margin="25, 0, 0 ,0"/>
         </Grid>
         <Viewbox Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Background="#FFF4F4F5" Margin="20, 0, 20, 10" Padding="20, 0" Command="{Binding SaveQuotationCommand}">

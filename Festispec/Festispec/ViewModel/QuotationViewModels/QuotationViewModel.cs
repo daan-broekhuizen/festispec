@@ -1,4 +1,5 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Converters;
 using GalaSoft.MvvmLight;
@@ -14,7 +15,11 @@ namespace Festispec.ViewModel.QuotationViewModels
     public class QuotationViewModel : ViewModelBase
     {
         private Offerte _quotation;
-        public int QuotationId { get => _quotation.OfferteID; }
+        public int QuotationId
+        { 
+            get => _quotation.OfferteID;
+            set => _quotation.OfferteID = value;
+        }
         public string Job { get => _quotation.Opdracht.OpdrachtNaam; }
         public DateTime CreationDate { get => _quotation.Aanmaakdatum; }
         public DateTime LastEdit { get => _quotation.LaatsteWijziging; }
@@ -47,11 +52,11 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         public string Price
         {
-            get => Convert.ToString(_quotation.Totaalbedrag);
+            get => "€" + Convert.ToString(_quotation.Totaalbedrag);
             set
             {
                 Decimal price;
-                if (Decimal.TryParse(value, out price))
+                if (Decimal.TryParse(value.Trim('€'), out price))
                 {
                     _quotation.Totaalbedrag = price;
                     RaisePropertyChanged("Price");
@@ -63,9 +68,13 @@ namespace Festispec.ViewModel.QuotationViewModels
             get
             {
                 if (_quotation.Opdracht.Status != null)
+                {
+                    if (IsLatestQuotation == false)
+                        return "Offerte geweigerd";
                     return _quotation.Opdracht.Status;
+                }
                 else
-                    return "no";
+                    return "Nieuwe opdracht";
             }
             set
             {
@@ -74,6 +83,8 @@ namespace Festispec.ViewModel.QuotationViewModels
                 RaisePropertyChanged("ColorCode");
             }
         }
+        public bool IsLatestQuotation { get; set; }
+
         private bool _isSent = false;
         public bool IsSent
         {
@@ -90,13 +101,13 @@ namespace Festispec.ViewModel.QuotationViewModels
             {
                 switch (Status)
                 {
-                    case "ov":
+                    case "Offerte verstuurt":
                         return Colors.Yellow;
-                    case "pg":
+                    case "Opdracht geannuleerd":
                         return Colors.Black;
-                    case "og":
+                    case "Offerte geweigerd":
                         return Colors.Red;
-                    case "no":
+                    case "Nieuwe opdracht":
                         return Colors.Blue;
                     default:
                         return Colors.Green;
@@ -104,10 +115,15 @@ namespace Festispec.ViewModel.QuotationViewModels
             } 
         }
         public ImageSource Logo { get => ImageByteConverter.BytesToImage(_quotation.Opdracht.Klant.KlantLogo); }
-        public QuotationViewModel(Offerte quotation)
+        public QuotationViewModel(Offerte quotation, QuotationRepository repo)
         {
             _quotation = quotation;
-            if (Status != "no" && Status != "og")
+            Offerte latest =  repo.GetQuotations().Where(q => q.OpdrachtID == quotation.OpdrachtID).OrderByDescending(q => q.OfferteID).FirstOrDefault();
+            if (latest != null && !latest.OfferteID.Equals(quotation.OfferteID))
+                IsLatestQuotation = false;
+            else
+                IsLatestQuotation = true;
+            if (Status != "Nieuwe opdracht")
                 IsSent = true;
         }
         public QuotationViewModel()

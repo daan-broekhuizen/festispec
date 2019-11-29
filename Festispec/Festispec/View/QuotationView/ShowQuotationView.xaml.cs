@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,10 @@ namespace Festispec.View.QuotationView
         public ShowQuotationView()
         {
             InitializeComponent();
+            Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
+
         }
+        private void ShowWindow(string message) => MessageBox.Show(message);
+
     }
 }

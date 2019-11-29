@@ -54,7 +54,7 @@ namespace Festispec.Model.Repositories
             using (FestispecContext context = new FestispecContext())
             {
                 Opdracht toUpdate = context.Opdracht.Where(j => j.OpdrachtID == jobId).FirstOrDefault();
-                toUpdate.Status = context.Status.First(s => s.Betekenis == status).Afkorting;
+                toUpdate.Status = context.Status.First(s => s.Betekenis == status).Betekenis;
                 context.SaveChanges();
             }
         }

@@ -141,7 +141,7 @@ namespace Festispec.ViewModel
 
         #region JobsVM's
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, QuotationRepo);
         public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
         #endregion
 

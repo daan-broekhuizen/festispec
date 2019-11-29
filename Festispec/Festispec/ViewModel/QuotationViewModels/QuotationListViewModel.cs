@@ -41,15 +41,15 @@ namespace Festispec.ViewModel.QuotationViewModels
         public ICommand SearchTextChangedCommand { get; set; }
         public ICommand SortChangedCommand { get; set; }
 
-        private Color[] _colorOrderAsc = { Colors.Green, Colors.Yellow, Colors.Red, Colors.Blue, Colors.Black };
-        private Color[] _colorOrderDsc = { Colors.Blue, Colors.Red, Colors.Yellow, Colors.Green, Colors.Black };
+        private Color[] _colorOrderAsc = { Colors.Green, Colors.Yellow, Colors.Blue, Colors.Red, Colors.Black };
+        private Color[] _colorOrderDsc = { Colors.Red, Colors.Blue, Colors.Yellow, Colors.Green, Colors.Black };
 
 
         private QuotationRepository _quotationRepository;
         public QuotationListViewModel(NavigationService service, QuotationRepository repo) : base(service)
         {
             _quotationRepository = repo;
-            var list = _quotationRepository.GetQuotations().Select(q => new QuotationViewModel(q)).ToList();
+            var list = _quotationRepository.GetQuotations().Select(q => new QuotationViewModel(q, _quotationRepository)).ToList();  
             Quotations = new ObservableCollection<QuotationViewModel>(list);
             FilteredQuotations = Quotations.ToList();
 
@@ -63,28 +63,28 @@ namespace Festispec.ViewModel.QuotationViewModels
             switch (sortMode)
             {
                 case 0:
-                    FilteredQuotations = Quotations.OrderBy(q => Array.IndexOf(_colorOrderAsc, q.ColorCode)).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderBy(q => Array.IndexOf(_colorOrderAsc, q.ColorCode)).ToList();
                     break;
                 case 1:
-                    FilteredQuotations = Quotations.OrderBy(q => Array.IndexOf(_colorOrderDsc, q.ColorCode)).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderBy(q => Array.IndexOf(_colorOrderDsc, q.ColorCode)).ToList();
                     break;
                 case 2:
-                    FilteredQuotations = Quotations.OrderBy(q => q.CreationDate).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderBy(q => q.QuotationId).ToList();
                     break;
                 case 3:
-                    FilteredQuotations = Quotations.OrderByDescending(q => q.CreationDate).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderByDescending(q => q.QuotationId).ToList();
                     break;
                 case 4:
-                    FilteredQuotations = Quotations.OrderBy(q => q.LastEdit).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderBy(q => q.LastEdit).ToList();
                     break;
                 case 5:
-                    FilteredQuotations = Quotations.OrderByDescending(q => q.LastEdit).ToList();
+                    FilteredQuotations = FilteredQuotations.OrderByDescending(q => q.LastEdit).ToList();
                     break;
             }
         }
         private void FilterQuotations(string searchText)
         {
-            FilteredQuotations = Quotations.Where(q => q.Job.ToLower().Contains(searchText.ToLower())).ToList();
+            FilteredQuotations = Quotations.Where(q => q.Job.ToLower().Contains(searchText.ToLower()) || q.Status.ToLower() == searchText.ToLower()).ToList();
         }
         private void ShowQuotation()
         {

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model;
+using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
+using Festispec.ViewModel.QuotationViewModels;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
@@ -17,13 +19,13 @@ namespace Festispec.ViewModel
 {
     public class JobInfoViewModel : ViewModelBase
     {
-
-
         public JobViewModel JobVM { get; set; }
 
         private NavigationService _navigationService;
         private JobRepository repo;
+        private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
+        public ICommand ShowQuotationCommand { get; set; }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -81,13 +83,33 @@ namespace Festispec.ViewModel
             }
         }
         #endregion
-        public JobInfoViewModel(NavigationService service, JobRepository repo)
+
+        public JobInfoViewModel(NavigationService service, JobRepository repo, QuotationRepository quotationRepo)
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
+            ShowQuotationCommand = new RelayCommand(ShowQuotation);
             _navigationService = service;
             this.repo = repo;
+            _quotationRepo = quotationRepo;
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
+        }
+
+        private void ShowQuotation()
+        {
+            Offerte latest = _quotationRepo.GetQuotations().Where(q => q.OpdrachtID == JobVM.JobID).OrderByDescending(q => q.OfferteID).FirstOrDefault();
+            if (latest != null)
+                _navigationService.NavigateTo("ShowQuotation", new QuotationViewModel(latest, _quotationRepo));
+            else
+            {
+                _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(
+                new Offerte()
+                {
+                    Opdracht = _quotationRepo.GetJob(JobVM.JobID),
+                    OpdrachtID = JobVM.JobID
+                }, _quotationRepo));
+            }
+
         }
 
         public void SaveJob()

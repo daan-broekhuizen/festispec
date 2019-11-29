@@ -10,6 +10,7 @@ using Festispec.Service;
 using Festispec.Utility.Validators;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec.ViewModel.QuotationViewModels
 {
@@ -62,7 +63,7 @@ namespace Festispec.ViewModel.QuotationViewModels
             _quotationRepository = repo;
             if (service.Parameter is QuotationViewModel)
                 QuotationVM = service.Parameter as QuotationViewModel;
-
+            Console.WriteLine(IsSendable);
             AcceptQuotationCommand = new RelayCommand(AcceptQuotation, CanRegisterDecision);
             CancelJobCommand = new RelayCommand(CancelJob, CanRegisterDecision);
             RejectQuotationCommand = new RelayCommand(RejectQuotation, CanRegisterDecision);
@@ -71,51 +72,67 @@ namespace Festispec.ViewModel.QuotationViewModels
             SaveQuotationCommand = new RelayCommand(SaveQuotation, CanSave);
         }
 
-        private bool CanCreate() => QuotationVM.Status == "og";
+        private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd" && QuotationVM.IsLatestQuotation == true;
         private bool CanSave()
         {
-            return QuotationVM.Status == "no";
+            return QuotationVM.Status == "Nieuwe opdracht";
         }
-        private bool CanRegisterDecision() => QuotationVM.Status =="ov";
+        private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurt";
         private void SaveQuotation()
         {
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
             if(result.IsValid)
             {
+                DescriptionError = "";
+                PriceError = "";
+                DecisionError = "";
+
+
                 decimal price;
-                Decimal.TryParse(QuotationVM.Price, out price);
+                Decimal.TryParse(QuotationVM.Price.Trim('€'), out price);
                 _quotationRepository.UpdateQuotation(new Offerte()
                 {
                     OfferteID = QuotationVM.QuotationId,
                     OpdrachtID = QuotationVM.JobId,
                     Beschrijving = QuotationVM.Description,
                     Totaalbedrag = price,
+                    KlantbeslissingReden = QuotationVM.Decision,
                     Aanmaakdatum = QuotationVM.CreationDate,
                     LaatsteWijziging = DateTime.Now,
-                });
+                }) ;
                 if (QuotationVM.IsSent)
+                {
                     _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte verstuurt");
+                    QuotationVM.Status = "Offerte verstuurt";
+                }
+                Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
+                _navigationService.NavigateTo("ShowQuotation", QuotationVM);
             } 
             else
             {
                 ValidationFailure descriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault();
                 if (descriptionError != null)
                     DescriptionError = descriptionError.ToString();
+                else
+                    DescriptionError = "";
 
                 ValidationFailure priceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault();
                 if (priceError != null)
                     PriceError = priceError.ToString();
+                else
+                    PriceError = "";
             }
 
         }
         private void NewQuotation()
         {
+            _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Nieuwe opdracht");
             _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(
                 new Offerte()
                 {
                     Opdracht = _quotationRepository.GetJob(QuotationVM.JobId),
                     OpdrachtID = QuotationVM.JobId
-                }));
+                }, _quotationRepository));
         }
         private void DownloadQuotation()
         {
@@ -128,16 +145,18 @@ namespace Festispec.ViewModel.QuotationViewModels
             if(QuotationVM.Decision != null)
                 _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
             _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte geaccepteerd");
-            QuotationVM.Status = "og";
+            QuotationVM.Status = "Offerte geaccepteerd";
+            DecisionError = "";
 
         }
         private void RegisterCustomerDecision(string status)
         {
             if (QuotationVM.Decision != null)
             {
+                DecisionError = "";
                 _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
                 _quotationRepository.UpdateJobStatus(QuotationVM.JobId, status);
-                QuotationVM.Status = new Status() { Betekenis = status }.Afkorting;
+                QuotationVM.Status = status;
             }
             else
                 DecisionError = "Voer een klantbeslissingsreden in.";

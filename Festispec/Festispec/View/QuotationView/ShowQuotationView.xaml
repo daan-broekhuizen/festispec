@@ -58,11 +58,20 @@
             <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Offerte" RenderTransformOrigin="0.839,0.839"/>
         </Viewbox>
         <Viewbox Grid.Row="3" Margin="20,0 " HorizontalAlignment="Left">
-            <Label Content="Omschrijving"  HorizontalContentAlignment="Left"></Label>
+            <WrapPanel>
+                <Label Content="Omschrijving"  HorizontalContentAlignment="Left"></Label>
+                <Label Margin="20,0,0,0" Foreground="Red" Content="{Binding DescriptionError}" HorizontalContentAlignment="Left"></Label>
+            </WrapPanel>
         </Viewbox>
             <TextBox Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding QuotationVM.Description}" FontSize="16"  Padding="5"  Margin="25,0,0,0" />
         <Viewbox Grid.Row="5" Margin="20,0 " HorizontalAlignment="Left">
-            <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
+            <WrapPanel>
+                <Label Content="Prijs" HorizontalContentAlignment="Left"></Label>
+                <Label Margin="20,0,0,0" Foreground="Red"  Content="{Binding PriceError}" HorizontalContentAlignment="Left"></Label>
+            </WrapPanel>
+        </Viewbox>
+        <Viewbox Grid.Row="5" Grid.Column="2" Margin="30,0 " HorizontalAlignment="Left">
+            <Label Foreground="Red" Content="{Binding DecisionError}" HorizontalContentAlignment="Left"></Label>
         </Viewbox>
         <Viewbox Grid.Row="3" Grid.Column="2" Margin="20,0 " HorizontalAlignment="Left">
             <Label Content="Klantbeslissing" HorizontalContentAlignment="Left"></Label>
@@ -86,7 +95,7 @@
                     <Button Margin="20,0,0,0" HorizontalAlignment="Left" Background="#FFF4F4F5" Grid.Column="1"  Padding="20, 5" Command="{Binding SaveQuotationCommand}" Content="Opslaan" />
                 </StackPanel>
             </Viewbox>
-            <TextBox Text="{Binding QuotationVM.Price}" Margin="25,0,0,0" FontSize="18"  Padding="5" />
+            <TextBox Text="{Binding QuotationVM.Price}" Margin="25,0,0,0" FontSize="16"  Padding="5" />
             <Viewbox Grid.Column="2" Margin="30,0">
                 <StackPanel Orientation="Horizontal">
                     <Button Background="#FFF4F4F5"  Padding="20, 5" Command="{Binding AcceptQuotationCommand}" Content="Accepteren" />

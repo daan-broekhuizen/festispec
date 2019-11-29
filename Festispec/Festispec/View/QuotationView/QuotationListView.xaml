@@ -80,6 +80,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="0.5*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Viewbox Margin="20,0,0,0" Grid.Column="0">
@@ -98,10 +99,10 @@
                                 <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding QuotationId}" VerticalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="5" HorizontalAlignment="Left">
-                                <Label Margin="10" Content="Opdrachtstatus:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Margin="10" Content="Offertestatus:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
                             </Viewbox>
-                            <Viewbox Grid.Column="6" HorizontalAlignment="Left" Width="30">
-                                <Ellipse Margin="10" Width="30" Height="30" VerticalAlignment="Center">
+                            <Viewbox Grid.Column="6" HorizontalAlignment="Left">
+                                <Ellipse Margin="10" HorizontalAlignment="Left" MinWidth="10" MinHeight="10" VerticalAlignment="Center">
                                     <Ellipse.Fill>
                                         <SolidColorBrush Color="{Binding ColorCode}"/>
                                     </Ellipse.Fill>
