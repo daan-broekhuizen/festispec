@@ -2,6 +2,7 @@
 using PdfSharp.Pdf;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace Festispec.Utility.Converters
 {
@@ -40,20 +41,18 @@ namespace Festispec.Utility.Converters
                 gfx.DrawString("FestiSpec Inc.", fontText, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.BottomLeft);
                 gfx.DrawString("1.", fontText, XBrushes.Black, new XRect(0, 0, page.Width, page.Height), XStringFormats.BottomRight);
 
-                if (!documentName.Contains(".pdf"))
-                    documentName += ".pdf";
 
                 if(canChooseCustomLocation)
                 {
-                    FolderBrowserDialog browser = new FolderBrowserDialog();
-                    string tempPath = "";
-
-                    if (browser.ShowDialog() == DialogResult.OK)
-                    {
-                        tempPath = browser.SelectedPath; // prints path
-                    }
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Title = "Save";
+                    saveFileDialog.Filter = "PDF Files (*.pdf) " +"|";
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        documentName = saveFileDialog.FileName;
                 }
-                    
+
+                if (!documentName.Contains(".pdf"))
+                    documentName += ".pdf";
 
                 document.Save(documentName);
                 StartPDF(documentName);
