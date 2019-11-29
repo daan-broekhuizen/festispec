@@ -12,6 +12,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels.Interfaces
     public interface IInspectionFormViewModel
     {
         Inspectieformulier InspectionForm { get; set; }
-        ObservableCollection<Vraag> Questions { get; }
+        ObservableCollection<QuestionViewModel> Questions { get; }
     }
 }

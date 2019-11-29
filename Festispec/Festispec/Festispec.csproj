@@ -192,6 +192,7 @@
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />

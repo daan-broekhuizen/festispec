@@ -77,8 +77,7 @@
             Dictionary<string, string> statuses = new Dictionary<string, string>()
             {
                 { "av", "Afbeelding vraag" },
-                { "lv", "Lijst vraag" },
-                { "m4", "Meerkeuze vraag" },
+                { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
                 { "t2", "Tabel vraag X2"},

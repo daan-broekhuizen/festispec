@@ -7,24 +7,36 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Festispec.View.InspectionFormView;
+using Festispec.ViewModel.InspectionFormViewModels;
 
 namespace Festispec.View.InspectionFormView
 {
     public class QuestionDataTemplateSelector : DataTemplateSelector
     {
-        public override DataTemplate SelectTemplate(object vraag, DependencyObject container)
+        public override DataTemplate SelectTemplate(object question, DependencyObject container)
         {
             FrameworkElement element = container as FrameworkElement;
 
-            if(element != null && vraag != null && vraag is Vraag)
+            if(element != null && question != null && question is QuestionViewModel)
             {
-                Vraag v = vraag as Vraag;
+                QuestionViewModel q = question as QuestionViewModel;
 
-                switch (v.Vraagtype)
+                switch (q.QuestionType)
                 {
                     case "ov":
                         return element.FindResource("OpenQuestionEdit") as DataTemplate;
-
+                    case "av":
+                        return element.FindResource("PictureQuestionEdit") as DataTemplate;
+                    case "tx":
+                        return element.FindResource("TextEdit") as DataTemplate;
+                    case "mv":
+                        return element.FindResource("MultipleChoiceQuestionEdit") as DataTemplate;
+                    case "sv":
+                        return element.FindResource("ScaleQuestionEdit") as DataTemplate;
+                    case "t2":
+                        return element.FindResource("Table2QuestionEdit") as DataTemplate;
+                    case "t3":
+                        return element.FindResource("Table3QuestionEdit") as DataTemplate;
                     default:
                         return null;
                 }

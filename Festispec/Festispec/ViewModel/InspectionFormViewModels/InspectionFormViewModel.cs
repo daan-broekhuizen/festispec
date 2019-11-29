@@ -19,6 +19,16 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         #region ICommands
         public ICommand ToEditModeCommand { get; set; }
         public ICommand AddOpenQuestionCommand { get; set; }
+        public ICommand AddMultipleChoiceQuestionCommand { get; set; }
+        public ICommand AddTextCommand { get; set; }
+        public ICommand AddPictureQuestionCommand { get; set; }
+        public ICommand AddScaleQuestionCommand { get; set; }
+        public ICommand AddTable2QuestionCommand { get; set; }
+        public ICommand AddTable3QuestionCommand { get; set; }
+        public ICommand ToShowModeCommand { get; set; }
+        public ICommand QuestionUpCommand { get; set; }
+        public ICommand QuestionDownCommand { get; set; }
+        public ICommand DeleteQuestionCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         #endregion
 
@@ -30,10 +40,22 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         private bool _editMode;
 
+        private QuestionViewModel _selectedVraag;
+
         public Inspectieformulier InspectionForm {
             get => _inspectionForm;
             set {
                 _inspectionForm = value;
+            }
+        }
+
+        public QuestionViewModel SelectedQuestion
+        {
+            get => _selectedVraag;
+            set
+            {
+                _selectedVraag = value;
+                RaisePropertyChanged("SelectedVraag");
             }
         }
 
@@ -52,7 +74,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public string Titel
         {
-            get => _titel;
+            get {
+                if (_titel == null)
+                {
+                    _titel = _inspectionForm.InspectieFormulierTitel;
+                }
+
+                return _titel;
+            }
             set
             {
                 _titel = value;
@@ -61,21 +90,42 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        private string _description;
+
+        public string Description
+        {
+            get
+            {
+                if (_description == null)
+                {
+                    _description = _inspectionForm.Beschrijving;
+                }
+
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                _inspectionForm.Beschrijving = _description;
+                RaisePropertyChanged("Description");
+            }
+        }
+
         
 
         #endregion
 
-        private ObservableCollection<Vraag> _questions;
-        public ObservableCollection<Vraag> Questions
+        private ObservableCollection<QuestionViewModel> _questions;
+        public ObservableCollection<QuestionViewModel> Questions
         {
             get
             {
                 if (_questions == null)
                 {
-                    _questions = new ObservableCollection<Vraag>();
+                    _questions = new ObservableCollection<QuestionViewModel>();
                     foreach (var voc in _inspectionForm.InspectieformulierVragenlijstCombinatie)
                     {
-                        _questions.Add(voc.Vraag);
+                        _questions.Add(new QuestionViewModel(voc.Vraag, _inspectionForm.InspectieformulierID)); ;
                     }
                 }
   
@@ -105,7 +155,18 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             ToEditModeCommand = new RelayCommand(ToEdit);
             AddOpenQuestionCommand = new RelayCommand(AddOpenQuestion);
+            AddMultipleChoiceQuestionCommand = new RelayCommand(AddMultipleChoiceQuestion);
+            AddTextCommand = new RelayCommand(AddText);
+            AddPictureQuestionCommand = new RelayCommand(AddPictureQuestion);
+            AddScaleQuestionCommand = new RelayCommand(AddScaleQuestion);
+            AddTable2QuestionCommand = new RelayCommand(AddTable2Question);
+            AddTable3QuestionCommand = new RelayCommand(AddTable3Question);
+            ToShowModeCommand = new RelayCommand(ToShowCommand);
             SaveCommand = new RelayCommand(Save);
+            QuestionUpCommand = new RelayCommand(QuestionUp);
+            QuestionDownCommand = new RelayCommand(QuestionDown);
+            DeleteQuestionCommand = new RelayCommand(RemoveQuestion);
+
         }
 
         #region Commands
@@ -123,23 +184,207 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void AddOpenQuestion()
         {
-            Vraag newQ = new Vraag
+            Vraag v = new Vraag
             {
                 Vraagtype = "ov",
-                Vraagstelling= "test"
             };
 
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
             Questions.Add(newQ);
+            SelectedQuestion = newQ;
             RaisePropertyChanged("Questions");
 
         }
-        #endregion
+
+        public void AddMultipleChoiceQuestion()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "mv",
+            };
+
+            for (int i = 0; i < 4; i++)
+            {
+                v.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
+                {
+                    AntwoordNummer = i + 1,
+                    Vraag = v
+                }) ;
+            }
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void AddText()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "tx",
+            };
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void AddPictureQuestion()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "av",
+            };
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void AddScaleQuestion()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "sv",
+            };
+
+            for (int i = 0; i < 5; i++)
+            {
+                v.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
+                {
+                    AntwoordNummer = i + 1,
+                    Vraag = v,
+                    AntwoordText = (i + 1).ToString()
+                });
+            }
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void AddTable2Question()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "t2",
+            };
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void AddTable3Question()
+        {
+            Vraag v = new Vraag
+            {
+                Vraagtype = "t3",
+            };
+
+            QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm.InspectieformulierID);
+            AddNewVIC(newQ);
+            Questions.Add(newQ);
+            SelectedQuestion = newQ;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void QuestionUp()
+        {
+            if (SelectedQuestion == null)
+            {
+                return;
+            }
+            int index = Questions.IndexOf(SelectedQuestion);
+            if (index == 0)
+            {
+                return;
+            }
+            else
+            {
+                Swap(index, index - 1);
+                RaisePropertyChanged("Questions");
+            }
+        }
+
+        public void QuestionDown()
+        {
+            if(SelectedQuestion == null)
+            {
+                return;
+            }
+            int index = Questions.IndexOf(SelectedQuestion);
+            if (index == Questions.Count() - 1)
+            {
+                return;
+            }
+            else
+            {
+                Swap(index, index + 1);
+                RaisePropertyChanged("Questions");
+            }
+        }
+
+        public void RemoveQuestion()
+        {
+            if (SelectedQuestion == null)
+            {
+                return;
+            }
+            for (int i = Questions.IndexOf(SelectedQuestion) + 1; i < Questions.Count(); i++)
+            {
+                Questions[i].OrderNumber = Questions[i].OrderNumber - 1;
+            }
+            Questions.Remove(SelectedQuestion);
+            SelectedQuestion = null;
+            RaisePropertyChanged("Questions");
+        }
+
+        public void ToShowCommand()
+        {
+            //todo
+        }
 
         public void Save()
         {
             //to DB
             //Laatse weiziging = cur date
             //Delete all voc and create new / update
+        }
+        #endregion
+
+        public void Swap(int index1, int index2)
+        {
+            QuestionViewModel memory = Questions[index1];
+            Questions[index1] = Questions[index2];
+            Questions[index2] = memory;
+            SelectedQuestion = Questions[index2];
+            Questions[index1].OrderNumber = index1 + 1;
+            Questions[index2].OrderNumber = index2 + 1;
+        }
+        
+        public void AddNewVIC(QuestionViewModel q)
+        {
+            q.VIC.Add(new InspectieformulierVragenlijstCombinatie
+            {
+                Inspectieformulier = _inspectionForm,
+                InspectieformulierID = _inspectionForm.InspectieformulierID,
+                Vraag = q.Question,
+                VraagID = q.QuestionID,
+                VraagVolgordeNummer = _questions.Count() + 1,
+            }
+                );
         }
     }
 }
