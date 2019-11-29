@@ -34,8 +34,8 @@
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Offerte Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
-            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="{Binding QuotationVM.Logo}"></Image>
+            <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
+                <Image Margin="50" VerticalAlignment="Center" Source="{Binding QuotationVM.Logo}"></Image>
             </Viewbox>
         </Grid>
 
