@@ -54,8 +54,8 @@ namespace Festispec.ViewModel.QuotationViewModels
             }
         }
         public bool IsSendable { get => CanSave(); }
-        public QuotationViewModel QuotationVM { get; set; }
 
+        public QuotationViewModel QuotationVM { get; set; }
         private QuotationRepository _quotationRepository;
 
         public ShowQuotationViewModel(NavigationService service, QuotationRepository repo) : base(service)
@@ -73,10 +73,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
 
         private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd" && QuotationVM.IsLatestQuotation == true;
-        private bool CanSave()
-        {
-            return QuotationVM.Status == "Nieuwe opdracht";
-        }
+        private bool CanSave() => QuotationVM.Status == "Nieuwe opdracht";
         private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurt";
         private void SaveQuotation()
         {

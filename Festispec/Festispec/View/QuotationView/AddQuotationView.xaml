@@ -56,7 +56,7 @@
                 <Label Foreground="Red" Content="{Binding PriceError}" HorizontalContentAlignment="Left"></Label>
             </WrapPanel>
         </Viewbox>
-        <TextBox Text="{Binding QuotationVM.Description}" AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
+        <TextBox TextWrapping="Wrap" Text="{Binding QuotationVM.Description}" AcceptsReturn="True" FontSize="16"  BorderThickness="1" Grid.Row="4" Padding="5" Margin="25,0" />
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
