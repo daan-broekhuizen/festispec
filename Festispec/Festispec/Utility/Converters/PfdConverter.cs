@@ -1,5 +1,6 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using System.IO;
 using System.Diagnostics;
 
 namespace Festispec.Utility.Converters
@@ -14,7 +15,7 @@ namespace Festispec.Utility.Converters
         /// <param name="description">Despription of the offerte</param>
         /// <param name="price"></param>
         /// <param name="customerNumber"></param>
-        public void Export(string title, string documentName, string description, string price, string customerNumber = null)
+        public void Export(string title, string documentName, string description, string price, string customerNumber = null, bool canChooseCustomLocation = true)
         {
             using (PdfDocument document = new PdfDocument())
             {
@@ -41,6 +42,18 @@ namespace Festispec.Utility.Converters
 
                 if (!documentName.Contains(".pdf"))
                     documentName += ".pdf";
+
+                if(canChooseCustomLocation)
+                {
+                    FolderBrowserDialog browser = new FolderBrowserDialog();
+                    string tempPath = "";
+
+                    if (browser.ShowDialog() == DialogResult.OK)
+                    {
+                        tempPath = browser.SelectedPath; // prints path
+                    }
+                }
+                    
 
                 document.Save(documentName);
                 StartPDF(documentName);
