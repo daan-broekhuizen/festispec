@@ -7,6 +7,7 @@ using System.Windows.Input;
 using Festispec.Model;
 using Festispec.Model.Repositories;
 using Festispec.Service;
+using Festispec.Utility.Converters;
 using Festispec.Utility.Validators;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -133,8 +134,10 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         private void DownloadQuotation()
         {
-            throw new NotImplementedException();
+            string title = "test";
+            new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price);
         }
+
         private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");
         private void CancelJob() => RegisterCustomerDecision("Opdracht geannuleerd");
         private void AcceptQuotation()
