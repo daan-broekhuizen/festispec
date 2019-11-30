@@ -72,7 +72,7 @@
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="2" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
+                    <Button Margin="5" Grid.Row="2" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowJobsView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Opdrachten"/>

@@ -148,6 +148,10 @@
     <Compile Include="Migrations\201911252059182_Template_Update1.designer.cs">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911281952327_main3.cs" />
+    <Compile Include="Migrations\201911281952327_main3.designer.cs">
+      <DependentUpon>201911281952327_main3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -162,6 +166,8 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\JobRepository.cs" />
+    <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
@@ -178,6 +184,8 @@
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="Utility\Validators\JobValidator.cs" />
+    <Compile Include="ViewModel\AddJobViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
@@ -210,6 +218,9 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\AddJobView.xaml.cs">
+      <DependentUpon>AddJobView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ApplicationWindow.xaml.cs">
       <DependentUpon>ApplicationWindow.xaml</DependentUpon>
     </Compile>
@@ -246,6 +257,15 @@
     </Compile>
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\JobInfoViewModel.cs" />
+    <Compile Include="ViewModel\JobListViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModel.cs" />
+    <Compile Include="View\JobInfoView.xaml.cs">
+      <DependentUpon>JobInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\JobsWindow.xaml.cs">
+      <DependentUpon>JobsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
       <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
@@ -330,6 +350,9 @@
     <EmbeddedResource Include="Migrations\201911252059182_Template_Update1.resx">
       <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911281952327_main3.resx">
+      <DependentUpon>201911281952327_main3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -363,6 +386,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AddJobView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomerView\AddContactInfoView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -394,6 +421,14 @@
     <Page Include="View\DashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\JobInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\JobsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

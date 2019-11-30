@@ -71,7 +71,7 @@ namespace Festispec.ViewModel
                 Messenger.Default.Send(message, this.GetHashCode());
             }
         }
-        private void ShowAddJob() { }
+        private void ShowAddJob() => _navigationService.NavigateTo("AddJob");
         private void ShowContactPeople() => _navigationService.NavigateTo("ContactPersons", CustomerVM);
         private void ShowCustomerInfo() => _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         private void ShowContactInfo() => _navigationService.NavigateTo("ContactInfo", CustomerVM);
