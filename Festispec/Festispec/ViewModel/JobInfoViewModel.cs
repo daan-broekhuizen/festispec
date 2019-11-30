@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model;
+using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
 using FestiSpec.Domain.Repositories;
@@ -22,8 +23,9 @@ namespace Festispec.ViewModel
         public JobViewModel JobVM { get; set; }
 
         private NavigationService _navigationService;
-        private JobRepository repo;
+        private JobRepository Jrepo;
         public ICommand SaveJobCommand { get; set; }
+        public List<string> Status { get; set; }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -81,18 +83,20 @@ namespace Festispec.ViewModel
             }
         }
         #endregion
-        public JobInfoViewModel(NavigationService service, JobRepository repo)
+        public JobInfoViewModel(NavigationService service, JobRepository Jrepo, StatusRepository Srepo)
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
             _navigationService = service;
-            this.repo = repo;
+            this.Jrepo = Jrepo;
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
+            Status = new List<string>();
+            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
         }
 
         public void SaveJob()
         {
-            repo.UpdateJob(new Opdracht()
+            Jrepo.UpdateJob(new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,

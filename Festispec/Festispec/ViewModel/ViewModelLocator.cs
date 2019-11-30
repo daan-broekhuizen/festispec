@@ -50,7 +50,7 @@ namespace Festispec.ViewModel
         {
             SimpleIoc.Default.Register<CustomerRepository>();
             SimpleIoc.Default.Register<JobRepository>();
-
+            SimpleIoc.Default.Register<StatusRepository>();
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
         }
@@ -103,6 +103,8 @@ namespace Festispec.ViewModel
         // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
         public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
+        public StatusRepository StatusRepo => ServiceLocator.Current.GetInstance<StatusRepository>();
+
 
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
@@ -128,8 +130,8 @@ namespace Festispec.ViewModel
 
         #region JobsVM's
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
-        public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo);
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, StatusRepo);
+        public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo, CustomerRepo, StatusRepo);
         #endregion
         #region Template VM's
         public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);

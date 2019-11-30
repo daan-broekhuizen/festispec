@@ -25,16 +25,9 @@ namespace Festispec.View
         public JobInfoView()
         {
             InitializeComponent();
-            FillCombo();
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
-        private void FillCombo()
-        {
-            StatusRepository Srepo = new StatusRepository();
-            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
-           
-        }
         private void ShowWindow(string message) => MessageBox.Show(message);
 
     }

@@ -25,15 +25,6 @@ namespace Festispec.View
         public AddJobView()
         {
             InitializeComponent();
-            FillCombo();
-        }
-
-        public void FillCombo()
-        {
-            CustomerRepository Crepo = new CustomerRepository();
-            StatusRepository Srepo = new StatusRepository();
-            Crepo.GetCustomers().ForEach(e => ComboBoxCustomers.Items.Add(e.Naam));
-            Srepo.GetAllStatus().ForEach(e => ComboBoxStatus.Items.Add(e.Betekenis));
         }
     }
 }
