@@ -21,6 +21,9 @@ namespace Festispec.ViewModel
         private JobRepository _jobRepo;
         public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
+        public List<string> Customers { get; set; }
+        public List<string> Status { get; set; }
+
 
         #region ErrorProperties
         private string _jobnameError;
@@ -89,7 +92,7 @@ namespace Festispec.ViewModel
             }
         }
         #endregion
-        public AddJobViewModel(NavigationService service, JobRepository repo)
+        public AddJobViewModel(NavigationService service, JobRepository repo, CustomerRepository Crepo, StatusRepository Srepo)
         {
             _navigationService = service;
             _jobRepo = repo;
@@ -100,6 +103,11 @@ namespace Festispec.ViewModel
                 JobVM = new JobViewModel();
 
             SaveJobCommand = new RelayCommand(CanSaveJob);
+            Customers = new List<string>();
+            Status = new List<string>();
+            Crepo.GetCustomers().ForEach(e => Customers.Add(e.Naam));
+            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+
         }
 
         private void SaveJob()

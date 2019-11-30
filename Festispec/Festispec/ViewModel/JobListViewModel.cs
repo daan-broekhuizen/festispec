@@ -120,6 +120,12 @@ namespace Festispec.ViewModel
                     case "Aanmaak datum aflopend":
                         FilteredJobs = FilteredJobs.OrderByDescending(e => e.CreationDate).ToList();
                         break;
+                    case "Status oplopend":
+                        FilteredJobs = FilteredJobs.OrderBy(e => e.Status).ToList();
+                        break;
+                    case "Status aflopend":
+                        FilteredJobs = FilteredJobs.OrderByDescending(e => e.Status).ToList();
+                        break;
                 }
             }
         }

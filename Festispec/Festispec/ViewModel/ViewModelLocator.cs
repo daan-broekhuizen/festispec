@@ -49,7 +49,7 @@ namespace Festispec.ViewModel
         {
             SimpleIoc.Default.Register<CustomerRepository>();
             SimpleIoc.Default.Register<JobRepository>();
-
+            SimpleIoc.Default.Register<StatusRepository>();
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<QuotationRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
@@ -90,6 +90,7 @@ namespace Festispec.ViewModel
 
             #region TemplateViews
             navigationService.Configure("TemplateOverview", new Uri("../View/TemplateView/TemplateOverviewView.xaml", UriKind.Relative));
+            #endregion
 
             #region JobViews
             navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
@@ -109,9 +110,10 @@ namespace Festispec.ViewModel
 
         // Singleton repos
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
+        public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
+        public StatusRepository StatusRepo => ServiceLocator.Current.GetInstance<StatusRepository>();
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
         public QuotationRepository QuotationRepo => ServiceLocator.Current.GetInstance<QuotationRepository>();
-        public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
 
         // Viewmodels used for datacontext
@@ -141,8 +143,8 @@ namespace Festispec.ViewModel
 
         #region JobsVM's
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, QuotationRepo);
-        public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo);
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, StatusRepo,  QuotationRepo);
+        public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo, CustomerRepo, StatusRepo);
         #endregion
 
         #region Template VM's
@@ -155,6 +157,5 @@ namespace Festispec.ViewModel
         {
             // TODO Clear the ViewModels
         }
-        #endregion
     }
 } 

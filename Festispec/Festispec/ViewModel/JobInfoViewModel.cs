@@ -26,6 +26,7 @@ namespace Festispec.ViewModel
         private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
         public ICommand ShowQuotationCommand { get; set; }
+        public List<string> Status { get; set; }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -84,15 +85,17 @@ namespace Festispec.ViewModel
         }
         #endregion
 
-        public JobInfoViewModel(NavigationService service, JobRepository repo, QuotationRepository quotationRepo)
+        public JobInfoViewModel(NavigationService service, JobRepository Jrepo, StatusRepository Srepo, QuotationRepository quotationRepo)
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
             ShowQuotationCommand = new RelayCommand(ShowQuotation);
             _navigationService = service;
-            this.repo = repo;
             _quotationRepo = quotationRepo;
+            this.Jrepo = Jrepo;
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
+            Status = new List<string>();
+            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
         }
 
         private void ShowQuotation()
@@ -114,7 +117,7 @@ namespace Festispec.ViewModel
 
         public void SaveJob()
         {
-            repo.UpdateJob(new Opdracht()
+            Jrepo.UpdateJob(new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,

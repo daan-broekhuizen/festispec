@@ -72,6 +72,9 @@
                     <ComboBoxItem Content="Naam aflopend"/>
                     <ComboBoxItem Content="Aanmaak datum oplopend"/>
                     <ComboBoxItem Content="Aanmaak datum aflopend"/>
+                    <ComboBoxItem Content="Status aflopend"/>
+                    <ComboBoxItem Content="Status oplopend"/>
+
                 </ComboBox>
             </WrapPanel>
         </Viewbox>
@@ -83,7 +86,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.1*"/>
                                 <ColumnDefinition Width="0.1*"/>
-                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.09*"/>
                                 <ColumnDefinition Width="0.07*"/>
                                 <ColumnDefinition Width="0.1*"/>
 
@@ -100,11 +103,11 @@
                             <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
                             <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0"/>
 
-                            <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" />
-                            <TextBlock Grid.Column="3" Text="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy}}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15"/>
+                            <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" MinHeight="10" MinWidth="40"/>
+                            <TextBlock Grid.Column="3" Text="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy}}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
 
-                            <TextBlock Grid.Column="4" Text="Status" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold"/>
-                            <TextBlock Grid.Column="4" Text="{Binding Status}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15"/>
+                            <TextBlock Grid.Column="4" Text="Status" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" MinHeight="10" MinWidth="40"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Status}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
 
 
                         </Grid>
