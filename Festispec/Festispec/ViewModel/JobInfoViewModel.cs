@@ -22,7 +22,7 @@ namespace Festispec.ViewModel
         public JobViewModel JobVM { get; set; }
 
         private NavigationService _navigationService;
-        private JobRepository repo;
+        private JobRepository Jrepo;
         private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
         public ICommand ShowQuotationCommand { get; set; }
