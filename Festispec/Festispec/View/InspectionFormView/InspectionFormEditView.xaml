@@ -38,11 +38,10 @@
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="10" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
-                    <Viewbox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <Button>Add Image</Button>
-                    </Viewbox>
                     <Viewbox Grid.Column="4" Grid.ColumnSpan="2">
-                        <Image Source="{Binding Path=Image}"/>
+                        <Button>
+                            <Image  x:Name="QuestionPicture" Source="{Binding Bijlage, Mode=TwoWay}"></Image>
+                        </Button>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -118,7 +117,7 @@
 
         <DataTemplate x:Key="MultipleChoiceQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3*"/>
@@ -133,6 +132,7 @@
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
                     </Grid.RowDefinitions>
                     <Viewbox Grid.Column="0" Grid.Row="1">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
@@ -152,7 +152,7 @@
 
         <DataTemplate x:Key="ScaleQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid x:Name="StandardView"  Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3*"/>
@@ -180,7 +180,36 @@
                     <Viewbox Grid.Column="4" Grid.ColumnSpan="2">
                         <Image Source="{Binding Path=Image}"/>
                     </Viewbox>
+                    <Viewbox Grid.Row="6">
+                    <Grid Grid.Row="6" Width="{Binding Path=ActualWidth, ElementName=StandardView}" MinWidth="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Grid.Column="1" MinWidth="100" MinHeight="100">
+                            <ComboBox>
+                                
+                            </ComboBox>
+                        </Viewbox>
+                        <Viewbox Grid.Column="3">
+                            <ComboBox>
+
+                            </ComboBox>
+                        </Viewbox>
+                        <Viewbox Grid.Column="5">
+                            <ComboBox>
+
+                            </ComboBox>
+                        </Viewbox>
+                    </Grid>
+                    </Viewbox>
                 </Grid>
+                
             </Border>
         </DataTemplate>
 

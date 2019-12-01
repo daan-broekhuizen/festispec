@@ -1,10 +1,13 @@
 ﻿using Festispec.Model;
+using Festispec.Utility.Converters;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -14,6 +17,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         private int _CurrentInspectionFormID;
         public bool Changed;
         public bool Created;
+        public int BottomValue;
+        public int TopValue;
+        public int ScaleSize;
 
         public QuestionViewModel(Vraag v, Inspectieformulier inspec)
         {
@@ -28,7 +34,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 InspectieformulierID = inspec.InspectieformulierID
             };
             VIC.Add(vic);
+            AddPossibleAnwsers();
         }
+
+        
 
         public int QuestionID
         {
@@ -98,6 +107,41 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _question.InspectieformulierVragenlijstCombinatie = value;
                 Changed = true;
                 RaisePropertyChanged("VIC");
+            }
+        }
+
+        public ImageSource Bijlage
+        {
+            get => ImageByteConverter.BytesToImage(_question.Bijlage);
+            set
+            {
+                byte[] image = ImageByteConverter.PngImageToBytes(value);
+                if (image != null)
+                    _question.Bijlage = image;
+                else
+                    new BitmapImage(new Uri(@"pack://application:,,,/Images/addImageIcon"));
+                RaisePropertyChanged("Bijlage");
+
+            }
+        }
+
+        public void AddPossibleAnwsers()
+        {
+            if (_question.Vraagtype == "sv")
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    _question.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
+                    {
+                        VraagID = _question.VraagID,
+                        AntwoordNummer = i + 1,
+                        AntwoordText = (i + 1).ToString()
+                    });
+                }
+
+                BottomValue = 0;
+                TopValue = 5;
+                ScaleSize = 5;
             }
         }
     }

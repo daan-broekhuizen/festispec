@@ -459,6 +459,9 @@
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\addImageIcon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -407,57 +407,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     
                 }
                 _repo.UpdateQuestionOrderInspectionForm(order);
-
-            /*if (Changed)
-            {
-                Changed = false;
-                LastChangeDate = DateTime.Now;
-                List<InspectieformulierVragenlijstCombinatie> order = new List<InspectieformulierVragenlijstCombinatie>();
-                int index = 0;
-                foreach(QuestionViewModel question in _questions)
-                {
-                    index++;
-                    if (question.Created)
-                    {
-                        question.Created = false;
-                        question.QuestionID = _repo.AddQuestion(question.Question);
-                        question.VIC.Add(new InspectieformulierVragenlijstCombinatie
-                        {
-                            InspectieformulierID = _inspectionForm.InspectieformulierID,
-                            VraagID = question.QuestionID,
-                            VraagVolgordeNummer = index
-                        });
-                        
-
-                        _repo.AddQuestionToInspectionForm(question.VIC.Where(v => v.InspectieformulierID == _inspectionForm.InspectieformulierID).FirstOrDefault());
-                    }
-                    else if (question.Changed)
-                    {
-                        _repo.UpdateQuestion(question.Question);
-                        question.Changed = false;
-                    }
-
-                    order.Add(question.VIC.Where(v => v.InspectieformulierID == _inspectionForm.InspectieformulierID).FirstOrDefault());
-                }
-
-                _repo.UpdateQuestionOrderInspectionForm(order);
-
-                if (_removedQuestions.Count() != 0)
-                {
-                    foreach (QuestionViewModel removed in _removedQuestions)
-                        {
-                            if (!removed.Created)
-                            {
-                                _repo.RemoveQuestionFromInspectionForm(removed.VIC.Where(v => v.InspectieformulierID == _inspectionForm.InspectieformulierID).FirstOrDefault());
-                            }
-                        }
-                        _removedQuestions.Clear();
-                }*/
-                
-                
-                
-
-
             }
         }
         #endregion
