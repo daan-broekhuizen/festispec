@@ -10,12 +10,13 @@ namespace Festispec.Model.Repositories
     {
         
 
-        public void CreateInspectieFormulier(Inspectieformulier inspec)
+        public int CreateInspectieFormulier(Inspectieformulier inspec)
         {
             using (FestispecContext context = new FestispecContext())
             {
                 context.Inspectieformulier.Add(inspec);
                 context.SaveChanges();
+                return context.Inspectieformulier.Max(i => i.InspectieformulierID);
             }
         }
 
@@ -49,8 +50,9 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Inspectieformulier Target = context.Inspectieformulier.Where(i => i.InspectieformulierID == inspec.InspectieformulierID).FirstOrDefault();
+                Inspectieformulier Target = context.Inspectieformulier.Include("InspectieFormulierVragenLijstCombinatie").Single(i => i.InspectieformulierID == inspec.InspectieformulierID);
                 context.Entry(Target).CurrentValues.SetValues(inspec);
+
                 context.SaveChanges();
             }
         }
@@ -98,12 +100,13 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void AddQueistion(Vraag question)
+        public int AddQuestion(Vraag question)
         {
             using (FestispecContext context = new FestispecContext())
             {
                 context.Vraag.Add(question);
                 context.SaveChanges();
+                return context.Vraag.Max(q => q.VraagID);
             }
         }
 

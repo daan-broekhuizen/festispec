@@ -313,7 +313,7 @@
             <Button Grid.Row="9" Content="Table X 2" Command="{Binding AddTable2QuestionCommand}"/>
             <Button Grid.Row="10" Content="Table X 3" Command="{Binding AddTable3QuestionCommand}"/>
             
-            <Button Content="Opslaan" Grid.Row="12"/>
+            <Button Content="Opslaan" Command="{Binding SaveCommand}" Grid.Row="12"/>
 
         </Grid>
 
@@ -349,8 +349,8 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Laatste Weiziging datum" Grid.Row="0" VerticalAlignment="Center"/>
-                        <TextBlock Text="Locatie" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Label Content="Laatste weiziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
+                        <Label Content="{Binding LastChangeDate}" Grid.Row="1" VerticalAlignment="Center" ContentStringFormat="d" FontSize="15"/>
                     </Grid>
                     
                     <Image Name="Logo" Grid.Column="4"/>

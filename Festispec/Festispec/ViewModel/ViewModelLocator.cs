@@ -126,6 +126,7 @@ namespace Festispec.ViewModel
 
         #region InspectionFormVM's
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
+       
         #endregion
 
         //Clean when logging out?

@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201911280834521_AntwoordEnVOCChanges.designer.cs">
       <DependentUpon>201911280834521_AntwoordEnVOCChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911291253325_RemovedQustionTime.cs" />
+    <Compile Include="Migrations\201911291253325_RemovedQustionTime.designer.cs">
+      <DependentUpon>201911291253325_RemovedQustionTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -357,6 +361,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911280834521_AntwoordEnVOCChanges.resx">
       <DependentUpon>201911280834521_AntwoordEnVOCChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291253325_RemovedQustionTime.resx">
+      <DependentUpon>201911291253325_RemovedQustionTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

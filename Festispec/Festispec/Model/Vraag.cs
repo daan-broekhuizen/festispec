@@ -29,9 +29,6 @@ namespace Festispec.Model
         [Column(TypeName = "image")]
         public byte[] Bijlage { get; set; }
 
-        [Column("Laatste_wijziging")]
-        public DateTime LaatsteWijziging { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InspectieformulierVragenlijstCombinatie> InspectieformulierVragenlijstCombinatie { get; set; }
 

@@ -12,17 +12,22 @@ namespace Festispec.ViewModel.InspectionFormViewModels
     {
         private Vraag _question;
         private int _CurrentInspectionFormID;
-        private List<InspectieformulierVragenlijstCombinatie> _VIC;
+        public bool Changed;
+        public bool Created;
 
-        public QuestionViewModel(Vraag v, int curInspecID)
+        public QuestionViewModel(Vraag v, Inspectieformulier inspec)
         {
             _question = v;
-            _CurrentInspectionFormID = curInspecID;
-            _VIC = new List<InspectieformulierVragenlijstCombinatie>();
-            foreach (var vic in _question.InspectieformulierVragenlijstCombinatie)
+            _CurrentInspectionFormID = inspec.InspectieformulierID;
+            List<InspectieformulierVragenlijstCombinatie> vicList = new List<InspectieformulierVragenlijstCombinatie>();
+            VIC = vicList;
+            Changed = false;
+            InspectieformulierVragenlijstCombinatie vic = new InspectieformulierVragenlijstCombinatie
             {
-                _VIC.Add(vic);
-            }
+                VraagID = v.VraagID,
+                InspectieformulierID = inspec.InspectieformulierID
+            };
+            VIC.Add(vic);
         }
 
         public int QuestionID
@@ -31,6 +36,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             set
             {
                 _question.VraagID = value;
+                Changed = true;
                 RaisePropertyChanged("QuestionID");
             }
         }
@@ -46,6 +52,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             set
             {
                 _question.Vraagstelling = value;
+                Changed = true;
                 RaisePropertyChanged("QuestionText");
             }
         }
@@ -56,6 +63,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             set
             {
                 _question.Vraagtype= value;
+                Changed = true;
                 RaisePropertyChanged("QuestionType");
             }
         }
@@ -66,17 +74,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             set
             {
                 _question.Bijlage = value;
+                Changed = true;
                 RaisePropertyChanged("Image");
-            }
-        }
-
-        public DateTime LastChange
-        {
-            get => _question.LaatsteWijziging;
-            set
-            {
-                _question.LaatsteWijziging = value;
-                RaisePropertyChanged("LastChange");
             }
         }
 
@@ -86,16 +85,18 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             set
             {
                 VIC.Where(i => i.InspectieformulierID == _CurrentInspectionFormID).FirstOrDefault().VraagVolgordeNummer = value;
+                Changed = true;
                 RaisePropertyChanged("OrderNumber");
             }
         }
 
-        public List<InspectieformulierVragenlijstCombinatie> VIC
+        public ICollection<InspectieformulierVragenlijstCombinatie> VIC
         {
-            get => _VIC;
+            get => _question.InspectieformulierVragenlijstCombinatie;
             set
             {
-                _VIC = value;
+                _question.InspectieformulierVragenlijstCombinatie = value;
+                Changed = true;
                 RaisePropertyChanged("VIC");
             }
         }

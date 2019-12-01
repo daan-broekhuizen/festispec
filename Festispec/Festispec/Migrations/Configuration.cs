@@ -251,14 +251,14 @@
             {
                 Vraagstelling = "Open vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                
             };
 
             vragen[1] = new Vraag()
             {
                 Vraagstelling = "Meerkeuze vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                
             };
 
             context.Vraag.AddOrUpdate(vragen);
