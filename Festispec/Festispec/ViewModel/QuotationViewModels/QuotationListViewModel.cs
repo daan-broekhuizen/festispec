@@ -49,7 +49,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         public QuotationListViewModel(NavigationService service, QuotationRepository repo) : base(service)
         {
             _quotationRepository = repo;
-            var list = _quotationRepository.GetQuotations().Select(q => new QuotationViewModel(q, _quotationRepository)).ToList();  
+            List<QuotationViewModel> list = _quotationRepository.GetQuotations().Select(q => new QuotationViewModel(q, _quotationRepository)).ToList();  
             Quotations = new ObservableCollection<QuotationViewModel>(list);
             FilteredQuotations = Quotations.ToList();
 
