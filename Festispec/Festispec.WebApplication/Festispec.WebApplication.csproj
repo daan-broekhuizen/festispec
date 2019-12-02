@@ -115,12 +115,18 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -135,6 +141,7 @@
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />
     <Compile Include="Models\Rapport_template.cs" />
+    <Compile Include="Models\Repository\UserRepository.cs" />
     <Compile Include="Models\Rol_lookup.cs" />
     <Compile Include="Models\Status_lookup.cs" />
     <Compile Include="Models\Vraag.cs" />
@@ -158,6 +165,12 @@
     <Content Include="Views\Availability\AvailabilityView.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Credentials\Create.cshtml" />
+    <Content Include="Views\Credentials\Delete.cshtml" />
+    <Content Include="Views\Credentials\Details.cshtml" />
+    <Content Include="Views\Credentials\Edit.cshtml" />
+    <Content Include="Views\Credentials\Index.cshtml" />
+    <Content Include="Views\Credentials\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
