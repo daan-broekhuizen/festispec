@@ -173,6 +173,7 @@
     <Compile Include="Service\WebService.cs" />
     <Compile Include="Utility\AppSettings.cs" />
     <Compile Include="Utility\Builders\SettingsBuilder.cs" />
+    <Compile Include="Utility\Converters\GridVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />

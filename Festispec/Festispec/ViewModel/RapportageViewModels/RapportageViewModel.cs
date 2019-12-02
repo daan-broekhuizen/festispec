@@ -1,6 +1,7 @@
 ﻿using Festispec.Model;
 using Festispec.Service;
 using Festispec.View.Components;
+using Festispec.View.RapportageView;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -21,16 +22,29 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         private RapportTemplate _template;
 
+        private bool _displayExtraOptions;
+        public bool DisplayExtraOptions {
+            get => _displayExtraOptions;
+            set
+            {
+                _displayExtraOptions = value;
+
+                RaisePropertyChanged("DisplayExtraOptions");
+            }
+        }
+
         // Commands
         public ICommand ModeChangedCommand { get; set; }
         public ICommand ApplyStyleCommand { get; set; }
         public ICommand FontTypeChangedCommand { get; set; }
         public ICommand FontSizeChangedCommand { get; set; }
         public ICommand FontColorChangedCommand { get; set; }
+        public ICommand ApplyAlignmentCommand { get; set; }
         public ICommand SwitchTemplateCommand { get; set; }
         public ICommand CreateChartCommand { get; set; }
         public ICommand AddImageCommand { get; set; }
         public ICommand ExtraOptionsCommand { get; set; }
+        public ICommand UnlockCommand { get; set; }
 
         // Properties
         private string _content;
@@ -73,8 +87,11 @@ namespace Festispec.ViewModel.RapportageViewModels
             SwitchTemplateCommand = new RelayCommand(() => { throw new NotImplementedException(); });
             AddImageCommand = new RelayCommand(AddImage);
             CreateChartCommand = new RelayCommand(CreateChart);
-
+            ExtraOptionsCommand = new RelayCommand(ShowExtraOptions);
+            UnlockCommand = new RelayCommand<DocumentDesigner>((designer) => designer.ViewModel.EnableMovement());
+            ApplyAlignmentCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyAlignment((string)parameters[1]));
             IsEditable = Visibility.Visible;
+            DisplayExtraOptions = false;
 
             if (_navigationService.Parameter is RapportTemplate)
                 _template = (RapportTemplate)_navigationService.Parameter;
@@ -102,6 +119,11 @@ namespace Festispec.ViewModel.RapportageViewModels
         public void CreateChart()
         {
             // TODO: Open Grafiek Create Scherm
+        }
+
+        public void ShowExtraOptions()
+        {
+            DisplayExtraOptions = !DisplayExtraOptions;
         }
     }
 }
