@@ -45,9 +45,6 @@ namespace Festispec.WebApplication.Controllers
             return View(account);
         }
 
-
-
-
         // GET: Credentials/Details/5
         public ActionResult Details(int? id)
         {
@@ -123,9 +120,8 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Account account = _context.Account.Find(id);
             if (account == null)
                 return HttpNotFound();
