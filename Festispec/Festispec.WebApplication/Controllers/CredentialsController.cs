@@ -12,12 +12,17 @@ namespace Festispec.WebApplication.Controllers
 {
     public class CredentialsController : Controller
     {
-        private FestiSpecContext db = new FestiSpecContext();
+        private FestiSpecContext _context;
+
+        public CredentialsController()
+        {
+             _context = new FestiSpecContext();
+        }
 
         // GET: Credentials
         public ActionResult Index()
         {
-            IQueryable<Account> account = db.Account.Include(a => a.Rol_lookup);
+            IQueryable<Account> account = _context.Account.Include(a => a.Rol_lookup);
             return View(account.ToList());
         }
 
@@ -29,7 +34,10 @@ namespace Festispec.WebApplication.Controllers
         [HttpPost]
         public ActionResult Login(Account account)
         {
-                Account user = db.Account.Where(a => a.Gebruikersnaam.Equals(account.Gebruikersnaam) && a.Wachtwoord.Equals(account.Wachtwoord)).FirstOrDefault();
+                Account user = _context.Account
+                .Where(a => a.Gebruikersnaam.Equals(account.Gebruikersnaam) && a.Wachtwoord.Equals(account.Wachtwoord))
+                .FirstOrDefault();
+
             if (user != null)
                 return RedirectToAction("Index");
             else
@@ -44,21 +52,20 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = db.Account.Find(id);
+
+            Account account = _context.Account.Find(id);
+
             if (account == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(account);
         }
 
         // GET: Credentials/Create
         public ActionResult Create()
         {
-            ViewBag.Rol = new SelectList(db.Rol_lookup, "Afkorting", "Betekenis");
+            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis");
             return View();
         }
 
@@ -68,12 +75,14 @@ namespace Festispec.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Account.Add(account);
-                db.SaveChanges();
+                _context.Account.Add(account);
+                _context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Rol = new SelectList(db.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+
             return View(account);
         }
 
@@ -81,15 +90,15 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Account account = db.Account.Find(id);
+
+            Account account = _context.Account.Find(id);
+
             if (account == null)
-            {
                 return HttpNotFound();
-            }
-            ViewBag.Rol = new SelectList(db.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+
+            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+
             return View(account);
         }
 
@@ -102,11 +111,11 @@ namespace Festispec.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(account).State = EntityState.Modified;
-                db.SaveChanges();
+                _context.Entry(account).State = EntityState.Modified;
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Rol = new SelectList(db.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
             return View(account);
         }
 
@@ -117,11 +126,10 @@ namespace Festispec.WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Account.Find(id);
+            Account account = _context.Account.Find(id);
             if (account == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(account);
         }
 
@@ -130,18 +138,17 @@ namespace Festispec.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Account account = db.Account.Find(id);
-            db.Account.Remove(account);
-            db.SaveChanges();
+            Account account = _context.Account.Find(id);
+            _context.Account.Remove(account);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
-                db.Dispose();
-            }
+                _context.Dispose();
+
             base.Dispose(disposing);
         }
     }
