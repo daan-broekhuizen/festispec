@@ -14,7 +14,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
     public class QuestionViewModel : ViewModelBase
     {
         private Vraag _question;
-        private int _CurrentInspectionFormID;
+        private int _InspectionFormID;
         public bool Changed;
         public bool Created;
         public int BottomValue;
@@ -24,20 +24,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public QuestionViewModel(Vraag v, Inspectieformulier inspec)
         {
             _question = v;
-            _CurrentInspectionFormID = inspec.InspectieformulierID;
-            List<InspectieformulierVragenlijstCombinatie> vicList = new List<InspectieformulierVragenlijstCombinatie>();
-            VIC = vicList;
+            InspectionFormID = inspec.InspectieformulierID;
             Changed = false;
-            InspectieformulierVragenlijstCombinatie vic = new InspectieformulierVragenlijstCombinatie
-            {
-                VraagID = v.VraagID,
-                InspectieformulierID = inspec.InspectieformulierID
-            };
-            VIC.Add(vic);
             AddPossibleAnwsers();
         }
 
-        
+
 
         public int QuestionID
         {
@@ -47,6 +39,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _question.VraagID = value;
                 Changed = true;
                 RaisePropertyChanged("QuestionID");
+            }
+        }
+
+        public int InspectionFormID
+        {
+            get => _question.InspectieFormulierID;
+            set
+            {
+                _question.InspectieFormulierID = value;
             }
         }
 
@@ -71,7 +72,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             get => _question.Vraagtype;
             set
             {
-                _question.Vraagtype= value;
+                _question.Vraagtype = value;
                 Changed = true;
                 RaisePropertyChanged("QuestionType");
             }
@@ -90,23 +91,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public int OrderNumber
         {
-            get => VIC.Where(i => i.InspectieformulierID == _CurrentInspectionFormID).FirstOrDefault().VraagVolgordeNummer;
+            get => _question.VolgordeNummer;
             set
             {
-                VIC.Where(i => i.InspectieformulierID == _CurrentInspectionFormID).FirstOrDefault().VraagVolgordeNummer = value;
+                _question.VolgordeNummer = value;
                 Changed = true;
                 RaisePropertyChanged("OrderNumber");
-            }
-        }
-
-        public ICollection<InspectieformulierVragenlijstCombinatie> VIC
-        {
-            get => _question.InspectieformulierVragenlijstCombinatie;
-            set
-            {
-                _question.InspectieformulierVragenlijstCombinatie = value;
-                Changed = true;
-                RaisePropertyChanged("VIC");
             }
         }
 
@@ -129,19 +119,32 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             if (_question.Vraagtype == "sv")
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 1; i < 6; i++)
                 {
                     _question.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
                     {
                         VraagID = _question.VraagID,
-                        AntwoordNummer = i + 1,
-                        AntwoordText = (i + 1).ToString()
+                        AntwoordNummer = i,
+                        AntwoordText = (i).ToString()
                     });
                 }
 
                 BottomValue = 0;
                 TopValue = 5;
                 ScaleSize = 5;
+            }
+
+            if(_question.Vraagtype == "mv")
+            {
+                for (int i = 1; i < 5; i++)
+                {
+                    _question.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
+                    {
+                        VraagID = _question.VraagID,
+                        AntwoordNummer = i,
+                        AntwoordText = (i).ToString()
+                    });
+                }
             }
         }
     }

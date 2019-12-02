@@ -156,6 +156,10 @@
     <Compile Include="Migrations\201911291253325_RemovedQustionTime.designer.cs">
       <DependentUpon>201911291253325_RemovedQustionTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912021133214_ReworkedInspectionformQuestion.cs" />
+    <Compile Include="Migrations\201912021133214_ReworkedInspectionformQuestion.designer.cs">
+      <DependentUpon>201912021133214_ReworkedInspectionformQuestion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -164,7 +168,6 @@
     <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
-    <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
     <Compile Include="Model\Klant.cs" />
     <Compile Include="Model\Offerte.cs" />
     <Compile Include="Model\Opdracht.cs" />
@@ -364,6 +367,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911291253325_RemovedQustionTime.resx">
       <DependentUpon>201911291253325_RemovedQustionTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912021133214_ReworkedInspectionformQuestion.resx">
+      <DependentUpon>201912021133214_ReworkedInspectionformQuestion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

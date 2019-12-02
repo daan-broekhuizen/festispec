@@ -249,15 +249,19 @@
             Vraag[] vragen = new Vraag[2];
             vragen[0] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Open vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 1
                 
             };
 
             vragen[1] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Meerkeuze vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
+                VolgordeNummer = 2
                 
             };
 

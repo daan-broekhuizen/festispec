@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,11 +38,12 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void RemoveQuestionFromInspectionForm(InspectieformulierVragenlijstCombinatie voc)
+        public void RemoveQuestionFromInspectionForm(Vraag question)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.InspectieformulierVragenlijstCombinatie.Remove(voc);
+                Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
+                context.Vraag.Remove(target);
                 context.SaveChanges();
             }
         }
@@ -50,8 +52,8 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Inspectieformulier Target = context.Inspectieformulier.Include("InspectieFormulierVragenLijstCombinatie").Single(i => i.InspectieformulierID == inspec.InspectieformulierID);
-                context.Entry(Target).CurrentValues.SetValues(inspec);
+                Inspectieformulier target = context.Inspectieformulier.Include("Vraag").SingleOrDefault(i => i.InspectieformulierID == inspec.InspectieformulierID);
+                context.Entry(target).CurrentValues.SetValues(inspec);
 
                 context.SaveChanges();
             }
@@ -59,22 +61,22 @@ namespace Festispec.Model.Repositories
 
         
 
-        public void AddQuestionToInspectionForm(InspectieformulierVragenlijstCombinatie voc)
+        public void AddQuestionToInspectionForm(Vraag question)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.InspectieformulierVragenlijstCombinatie.Add(voc);
+                context.Vraag.Add(question);
                 context.SaveChanges();
             }
         }
 
-        public void UpdateQuestionOrderInspectionForm(List<InspectieformulierVragenlijstCombinatie> newOrder)
+       public void UpdateQuestionOrderInspectionForm(List<Vraag> newOrder)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                foreach(InspectieformulierVragenlijstCombinatie change in newOrder)
+                foreach(Vraag change in newOrder)
                 {
-                    InspectieformulierVragenlijstCombinatie target = context.InspectieformulierVragenlijstCombinatie.Where(i => i.InspectieformulierID == change.InspectieformulierID && i.VraagID == change.VraagID).FirstOrDefault();
+                    Vraag target = context.Vraag.Where(i => i.VraagID == change.VraagID).FirstOrDefault();
                     context.Entry(target).CurrentValues.SetValues(change);
                 }
 
@@ -82,12 +84,14 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void UpdateQuestion(Vraag question)
+        public int UpdateQuestion(Vraag question)
         {
             using (FestispecContext context = new FestispecContext())
             {
                 Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
                 context.Entry(target).CurrentValues.SetValues(question);
+                context.SaveChanges();
+                return 1;
             }
         }
 

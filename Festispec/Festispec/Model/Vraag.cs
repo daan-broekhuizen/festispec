@@ -12,10 +12,11 @@ namespace Festispec.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vraag()
         {
-            InspectieformulierVragenlijstCombinatie = new HashSet<InspectieformulierVragenlijstCombinatie>();
             VraagMogelijkAntwoord = new HashSet<VraagMogelijkAntwoord>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VraagID { get; set; }
 
         [Column(TypeName = "text")]
@@ -23,14 +24,17 @@ namespace Festispec.Model
         public string Vraagstelling { get; set; }
 
         [Required]
+        public int VolgordeNummer { get; set; }
+
+        [Required]
+        public int InspectieFormulierID { get; set; }
+
+        [Required]
         [StringLength(2)]
         public string Vraagtype { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] Bijlage { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InspectieformulierVragenlijstCombinatie> InspectieformulierVragenlijstCombinatie { get; set; }
 
         public virtual VraagType VraagtypeLookup { get; set; }
 

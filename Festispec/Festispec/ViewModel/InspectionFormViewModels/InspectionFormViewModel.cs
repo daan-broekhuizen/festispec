@@ -143,9 +143,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if (_questions == null)
                 {
                     _questions = new ObservableCollection<QuestionViewModel>();
-                    foreach (var voc in _inspectionForm.InspectieformulierVragenlijstCombinatie)
+                    foreach (var question in _inspectionForm.Vraag)
                     {
-                        _questions.Add(new QuestionViewModel(voc.Vraag, _inspectionForm)); ;
+                        _questions.Add(new QuestionViewModel(question, _inspectionForm)); ;
                     }
                 }
   
@@ -339,7 +339,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 return;
             }
-            int SelectedIndex = SelectedQuestion.OrderNumber;
+            int SelectedIndex = (SelectedQuestion.OrderNumber - 1);
             if (!(SelectedIndex == Questions.Count()))
             {
                 for (int i = SelectedIndex; i < Questions.Count(); i++)
@@ -349,6 +349,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
             _removedQuestions.Add(SelectedQuestion);
             Questions.Remove(SelectedQuestion);
+            if (SelectedIndex == Questions.Count())
+            {
+                SelectedIndex = Questions.Count() - 1;
+            }
             if (Questions.Count() > 0)
             {
                 SelectedQuestion = Questions[SelectedIndex];
@@ -384,29 +388,26 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
                 foreach (QuestionViewModel question in _removedQuestions)
                 {
-                    _repo.RemoveQuestionFromInspectionForm(question.VIC.Single(i => i.InspectieformulierID == _inspectionForm.InspectieformulierID));
+                    _repo.RemoveQuestionFromInspectionForm(question.Question);
                 }
 
-                List<InspectieformulierVragenlijstCombinatie> order = new List<InspectieformulierVragenlijstCombinatie>();
+                _removedQuestions.Clear();   
+            }
 
-                foreach (QuestionViewModel question in _questions)
+            foreach (QuestionViewModel question in _questions)
+            {
+
+                if (question.Created)
                 {
-                   
-                    if (question.Created)
-                    {
-                        question.Created = false;
-                        question.QuestionID = _repo.AddQuestion(question.Question);
-                        _repo.AddQuestionToInspectionForm(question.VIC.FirstOrDefault());
-                    }
-                    else if(question.Changed)
-                    {
-                        _repo.UpdateQuestion(question.Question);
-                        order.Add(question.VIC.Where(v => v.InspectieformulierID == _inspectionForm.InspectieformulierID).FirstOrDefault());
-                    }
-                   
-                    
+                    question.Created = false;
+                    question.QuestionID = _repo.AddQuestion(question.Question);
                 }
-                _repo.UpdateQuestionOrderInspectionForm(order);
+                else if (question.Changed)
+                {
+                    _repo.UpdateQuestion(question.Question);
+                    question.Changed = false;
+                }
+
             }
         }
         #endregion
@@ -421,7 +422,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             Questions[index2].OrderNumber = index2 + 1;
         }
         
-        public void AddNewVIC(QuestionViewModel q)
+        /*public void AddNewVIC(QuestionViewModel q)
         {
             q.VIC.Add(new InspectieformulierVragenlijstCombinatie
             {
@@ -433,14 +434,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
                 );
             q.Changed = true;
-        }
+        }*/
 
         public void AddQuestion(Vraag v)
         {
             QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm);
-            _inspectionForm.InspectieformulierVragenlijstCombinatie.Add(v.InspectieformulierVragenlijstCombinatie.FirstOrDefault());
-            _inspectionForm.InspectieformulierVragenlijstCombinatie.LastOrDefault().VraagVolgordeNummer = _questions.Count() + 1;
             Questions.Add(newQ);
+            _inspectionForm.Vraag.Add(v);
+            v.VolgordeNummer = _questions.Count();
+            
             SelectedQuestion = newQ;
             Changed = true;
             newQ.Created = true;

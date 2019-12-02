@@ -12,10 +12,10 @@ namespace Festispec.Model.Repositories
         void UpdateInspectieFormulier(Inspectieformulier inspec);
         int CreateInspectieFormulier(Inspectieformulier inspec);
         void DeleteInspectieFormulier(Inspectieformulier inspec);
-        void AddQuestionToInspectionForm(InspectieformulierVragenlijstCombinatie voc);
-        void RemoveQuestionFromInspectionForm(InspectieformulierVragenlijstCombinatie voc);
-        void UpdateQuestionOrderInspectionForm(List<InspectieformulierVragenlijstCombinatie> newOrder);
-        void UpdateQuestion(Vraag question);
+        void AddQuestionToInspectionForm(Vraag Question);
+        void RemoveQuestionFromInspectionForm(Vraag question);
+        void UpdateQuestionOrderInspectionForm(List<Vraag> newOrder);
+        int UpdateQuestion(Vraag question);
         void DeleteQuestion(Vraag question);
         int AddQuestion(Vraag question);
         void DeletePossibleAnwser(VraagMogelijkAntwoord pos);
