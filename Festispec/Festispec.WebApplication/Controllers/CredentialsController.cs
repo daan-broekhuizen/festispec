@@ -27,9 +27,14 @@ namespace Festispec.WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([Bind(Include = "Gebruikersnaam, Wachtwoord")] Account account)
+        public ActionResult Login(Account account)
         {
-            return View();
+                Account user = db.Account.Where(a => a.Gebruikersnaam.Equals(account.Gebruikersnaam) && a.Wachtwoord.Equals(account.Wachtwoord)).FirstOrDefault();
+            if (user != null)
+                return RedirectToAction("Index");
+            else
+                ModelState.AddModelError("Error", "Uw gegevens zijn niet correct.");
+            return View(account);
         }
 
 
