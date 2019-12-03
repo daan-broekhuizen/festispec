@@ -38,6 +38,7 @@ namespace Festispec.ViewModel
         public ICommand ShowRapportageTemplatesView { get; set; }
         public ICommand ShowInspectionFormTemplatesView { get; set; }
         public ICommand LogoutCommand { get; set; }
+        public ICommand ShowManagementReportView { get; set; }
 
         private AccountViewModel _accountVM;
         public AccountViewModel AccountVM
@@ -60,6 +61,7 @@ namespace Festispec.ViewModel
             ShowRapportageTemplatesView = new RelayCommand(ShowRapportageTemplates);
             ShowInspectionFormTemplatesView = new RelayCommand(ShowInspectionFormTemplates);
             ShowJobsView = new RelayCommand(ShowJobs);
+            ShowManagementReportView = new RelayCommand(ShowManagementReport);
 
             LogoutCommand = new RelayCommand(Logout);
 
@@ -74,6 +76,7 @@ namespace Festispec.ViewModel
         private void ShowJobs() => _navigationService.NavigateTo("Jobs");
         private void ShowRapportageTemplates() => _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
         private void ShowInspectionFormTemplates() => _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);
+        private void ShowManagementReport() => _navigationService.NavigateTo("ManagementReport");
     }
 
 

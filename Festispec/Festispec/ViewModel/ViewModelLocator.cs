@@ -71,6 +71,8 @@ namespace Festispec.ViewModel
             navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
             navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
             navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
+            navigationService.Configure("ManagementReport", new Uri("../View/ManagementReport.xaml", UriKind.Relative));
+
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
