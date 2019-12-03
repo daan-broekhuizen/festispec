@@ -17,6 +17,25 @@ namespace Festispec.ViewModel
         private JobRepository _jrepo;
         private QuotationRepository _qrepo;
 
+        private DateTime _startDate;
+
+        public DateTime StartDate
+        {
+            get { return _startDate; }
+            set { _startDate = value; }
+        }
+
+        private DateTime _endDate;
+
+        public DateTime EndDate
+        {
+            get { return _endDate; }
+            set { _endDate = ; }
+        }
+
+
+        public string SelectedItem { get; set; }
+
         public SeriesCollection OffertesCollection { get; set; }
 
         public OfferteGraphViewModel(JobRepository Jrepo, QuotationRepository Qrepo )
@@ -54,7 +73,7 @@ namespace Festispec.ViewModel
             int amountOfOffertes = _qrepo.GetQuotations().Count();
             int amountOfJobs = _qrepo.GetQuotations().Select(e => e.OpdrachtID).Distinct().Count();
 
-            int amountOfRejectedOffertes = _jrepo.GetOpdrachten().Where(e => e.Status.Equals("Offerte geweigerd")).Count();
+            int amountOfRejectedOffertes = _jrepo.GetOpdrachtenWithQuotations().Where(e => e.Status.Equals("Offerte geweigerd") && e.Offerte.Where(e=> e.Aanmaakdatum >= StartDate && e.Aanmaakdatum < EndDate).Count();
 
             return (amountOfOffertes - amountOfJobs) + amountOfRejectedOffertes;
         }

@@ -7,7 +7,8 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ManagementReport">
+      Title="ManagementReport"
+      DataContext="{Binding OfferteGraph, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +26,31 @@
             <Image Source="/Images/festispec_logo.png"></Image>
         </Viewbox>
 
-        <Grid Grid.Column="0" Grid.Row="1" DataContext="{Binding OfferteGraph, Source={StaticResource Locator}}">
+        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+            <DatePicker SelectedDate="{Binding StartDate, Source={StaticResource Locator}}">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+        </Viewbox>
+
+        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
+            <ComboBox SelectedValue="{Binding SelectedItem}">
+                <ComboBoxItem>Week</ComboBoxItem>
+                <ComboBoxItem>Maand</ComboBoxItem>
+                <ComboBoxItem>Jaar</ComboBoxItem>
+            </ComboBox>
+        </Viewbox>
+
+        <Grid Grid.Column="0" Grid.Row="1">
             <lvc:PieChart Series="{Binding OffertesCollection}" LegendLocation="Right" InnerRadius="100" Margin="0 15">
 
             </lvc:PieChart>
