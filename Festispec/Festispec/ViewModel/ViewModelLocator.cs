@@ -53,7 +53,6 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<QuotationRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
-            SimpleIoc.Default.Register<RapportageRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -125,7 +124,6 @@ namespace Festispec.ViewModel
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), RapportageRepo);
-        public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 
         #region CustomerVM's
