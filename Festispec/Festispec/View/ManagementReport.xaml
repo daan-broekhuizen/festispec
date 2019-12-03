@@ -26,8 +26,8 @@
             <Image Source="/Images/festispec_logo.png"></Image>
         </Viewbox>
 
-        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
-            <DatePicker SelectedDate="{Binding StartDate, Source={StaticResource Locator}}">
+        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Width="50">
+            <DatePicker SelectedDate="{Binding StartDate}">
                 <DatePicker.Resources>
                     <Style TargetType="DatePickerTextBox">
                         <Setter Property="Template">
@@ -42,11 +42,11 @@
             </DatePicker>
         </Viewbox>
 
-        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right">
-            <ComboBox SelectedValue="{Binding SelectedItem}">
-                <ComboBoxItem>Week</ComboBoxItem>
-                <ComboBoxItem>Maand</ComboBoxItem>
-                <ComboBoxItem>Jaar</ComboBoxItem>
+        <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="50">
+            <ComboBox SelectedItem="{Binding SelectedItem}" SelectedIndex="1">
+                <ComboBoxItem Content="Week"/>
+                <ComboBoxItem Content="Maand"/>
+                <ComboBoxItem Content="Jaar"/>
             </ComboBox>
         </Viewbox>
 
