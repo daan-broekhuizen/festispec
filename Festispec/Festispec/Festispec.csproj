@@ -171,6 +171,7 @@
     <Compile Include="Migrations\201912030949168_QuestionImageUpdate.cs" />
     <Compile Include="Migrations\201912030949168_QuestionImageUpdate.designer.cs">
       <DependentUpon>201912030949168_QuestionImageUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201911281952327_main3.cs" />
     <Compile Include="Migrations\201911281952327_main3.designer.cs">
       <DependentUpon>201911281952327_main3.cs</DependentUpon>
@@ -449,6 +450,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912030949168_QuestionImageUpdate.resx">
       <DependentUpon>201912030949168_QuestionImageUpdate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911281952327_main3.resx">
       <DependentUpon>201911281952327_main3.cs</DependentUpon>
     </EmbeddedResource>
