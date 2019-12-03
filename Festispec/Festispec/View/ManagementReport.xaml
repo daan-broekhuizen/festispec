@@ -9,14 +9,6 @@
       Title="ManagementReport">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
-            <ColumnDefinition Width="0.4*"/>
-            <ColumnDefinition Width="0.2*"/>
-        </Grid.ColumnDefinitions>
-
-        <Viewbox Grid.Column="0" Grid.Row="0">
-            <Image Source="/Images/festispec_logo.png"></Image>
-        </Viewbox>
+        
     </Grid>
 </Page>
