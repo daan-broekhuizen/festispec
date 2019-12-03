@@ -53,6 +53,8 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<StatusRepository>();
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
+            SimpleIoc.Default.Register<QuotationRepository>();
+
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -106,7 +108,7 @@ namespace Festispec.ViewModel
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
         public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
         public StatusRepository StatusRepo => ServiceLocator.Current.GetInstance<StatusRepository>();
-
+        public QuotationRepository QuotationRepo => ServiceLocator.Current.GetInstance<QuotationRepository>();
 
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
@@ -140,7 +142,7 @@ namespace Festispec.ViewModel
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
-        public OfferteGraphViewModel OfferteGraph => new OfferteGraphViewModel();
+        public OfferteGraphViewModel OfferteGraph => new OfferteGraphViewModel(JobRepo, QuotationRepo);
 
         //Clean when logging out?
         public static void Cleanup()
