@@ -70,7 +70,7 @@
             </StackPanel>
 
             <!-- Type -->
-            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Lettertype" FontWeight="Bold" FontSize="16" />
 
                 <ComboBox Name="controlType" Style="{StaticResource ComboBoxFlatStyle }">
@@ -93,7 +93,7 @@
             </StackPanel>
 
             <!-- Grootte -->
-            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Lettergrootte" FontWeight="Bold" FontSize="16" />
                 <TextBox Name="controlSize" Text="" BorderBrush="#c8c8c8">
                     <i:Interaction.Triggers>
@@ -112,7 +112,7 @@
             </StackPanel>
 
             <!-- Styling -->
-            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Styling" FontWeight="Bold" FontSize="16" />
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -156,7 +156,7 @@
             </StackPanel>
 
             <!-- Kleur -->
-            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Letterkleur" FontWeight="Bold" FontSize="16" />
                 <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
                     <i:Interaction.Triggers>
@@ -175,7 +175,7 @@
             </StackPanel>
 
             <!-- Afbeelding Invoegen -->
-            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Afbeelding Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
                     <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Background="Transparent" BorderBrush="Transparent">
@@ -185,7 +185,7 @@
             </StackPanel>
 
             <!-- Grafiek Invoegen -->
-            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
                     <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
@@ -230,19 +230,19 @@
             </StackPanel>
 
             <!-- Invoegen Resultaten -->
-            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
             </StackPanel>
 
             <!-- Extra Opties -->
-            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptionsCommand}">Extra Opties</Hyperlink>
                 </TextBlock>
             </StackPanel>
 
             <!-- Ander Template -->
-            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
                 </TextBlock>
@@ -274,7 +274,7 @@
             </Grid.RowDefinitions>
 
             <!-- Alignment -->
-            <StackPanel Margin="5" Grid.Row="0" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="0" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Positie" FontWeight="Bold" FontSize="16" />
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -317,12 +317,12 @@
             </StackPanel>
 
             <!-- Unlock -->
-            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
             </StackPanel>
 
             <!-- Width -->
-            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable}">
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -345,7 +345,7 @@
             </Grid>
 
             <!-- Height -->
-            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable}">
+            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />

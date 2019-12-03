@@ -75,9 +75,9 @@ namespace Festispec.ViewModel.RapportageViewModels
             }
         }
 
-        private Visibility _isEditable;
+        private bool _isEditable;
 
-        public Visibility IsEditable
+        public bool IsEditable
         {
             get => _isEditable;
             set
@@ -120,7 +120,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             SaveCommand = new RelayCommand<DocumentDesigner>((designer) => Save(designer.ViewModel));
             DownloadCommand = new RelayCommand<DocumentDesigner>((designer) => Download(designer.ViewModel));
 
-            IsEditable = Visibility.Visible;
+            IsEditable = false;
             DisplayExtraOptions = false;
 
             if (_navigationService.Parameter is RapportTemplate)
@@ -136,9 +136,9 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             designer.ViewModel.ChangeMode(selectedMode);
             if (selectedMode == 1)
-                IsEditable = Visibility.Visible;
+                IsEditable = true;
             else
-                IsEditable = Visibility.Collapsed;
+                IsEditable = false;
         }
 
         public void AddImage(DocumentDesignerViewModel designer)
