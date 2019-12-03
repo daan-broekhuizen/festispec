@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.InspectionFormView"
       xmlns:data="clr-namespace:Festispec.Model"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="QuestionnaireView"
@@ -121,10 +123,10 @@
             <Border BorderBrush="Black" BorderThickness="2">
                 <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.2*"/>
-                        <ColumnDefinition Width="1.25*"/>
-                        <ColumnDefinition Width="0.1*"/>
+                       <ColumnDefinition Width="0.5*"/>
+                       <ColumnDefinition Width="3.2*"/>
+                       <ColumnDefinition Width="1.25*"/>
+                       <ColumnDefinition Width="0.1*"/>
                         <ColumnDefinition Width="1.3*"/>
                         <ColumnDefinition Width="0.1*"/>
                     </Grid.ColumnDefinitions>
@@ -148,13 +150,26 @@
                             <Image Source="{Binding Image}"/>
                         </Button>
                     </Viewbox>
-                </Grid>
+                    <Viewbox x:Name="PossibleAnwserBox"  Grid.Row="4">
+                        <ListBox Width="{Binding ActualWidth, ElementName=PossibleAnwserBox}" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Label Content="{Binding AnwserNumber}"/>
+                                        <TextBlock Text="{Binding AnwserTextString}"/>
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        </Viewbox>
+                    </Grid>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="ScaleQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid x:Name="StandardView"  Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid x:Name="StandardView"  Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -170,9 +185,10 @@
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
                     </Grid.RowDefinitions>
                     <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -182,31 +198,52 @@
                             <Image Source="{Binding Image}"/>
                         </Button>
                     </Viewbox>
-                    <Viewbox Grid.Row="6">
-                    <Grid Grid.Row="6" Width="{Binding Path=ActualWidth, ElementName=StandardView}" MinWidth="50">
+                    <Viewbox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
+                    <Grid MinWidth="{Binding Path=ActualWidth, ElementName=StandardView}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="9*"/>
                         </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1" MinWidth="100" MinHeight="100">
-                            <ComboBox>
-                                
-                            </ComboBox>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                            <Viewbox Grid.Row="2" Grid.Column="1" >
+                                <Label Content="Minimale waarde" FontSize="20"/>
+                            </Viewbox>
+                            <Viewbox x:Name="MinValueKey" Grid.Column="1" Grid.Row ="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <xctk:IntegerUpDown  Value="{Binding Path=BottomValue}" MinWidth="{Binding Path = ActualWidth, ElementName=MinValueKey}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Watermark="Minimale waarde" Minimum="1" Maximum="995" ClipValueToMinMax="True" FormatString="G" Increment="5" FontSize="20"/>
+                            </Viewbox>
+                            <Viewbox Grid.Row="2" Grid.Column="3">
+                                <Label Content="Maximale waarde" FontSize="20"/>
+                            </Viewbox>
+                            <Viewbox x:Name="MaxValueKey" Grid.Column="3" Grid.Row ="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <xctk:IntegerUpDown   Value="{Binding Path=TopValue}" MinWidth="{Binding Path = ActualWidth, ElementName=MaxValueKey}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Watermark="Maximale waarde" Minimum="5" Maximum="1000" ClipValueToMinMax="True" FormatString="G" Increment="5" FontSize="20"/>
                         </Viewbox>
-                        <Viewbox Grid.Column="3">
-                            <ComboBox>
-
-                            </ComboBox>
-                        </Viewbox>
-                        <Viewbox Grid.Column="5">
-                            <ComboBox>
-
-                            </ComboBox>
+                            <Viewbox Grid.Row="2" Grid.Column="5">
+                                <Label Content="Aantal mogelijkheden" FontSize="20"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="5" Grid.Row ="3">
+                                <ComboBox SelectedValue="{Binding Path=ScaleSize, Mode=TwoWay}" FontSize="20">
+                                    <ComboBox.ItemsSource>
+                                        <x:Array Type="{x:Type sys:Int32}">
+                                            <sys:Int32>5</sys:Int32>
+                                            <sys:Int32>6</sys:Int32>
+                                            <sys:Int32>7</sys:Int32>
+                                            <sys:Int32>8</sys:Int32>
+                                            <sys:Int32>9</sys:Int32>
+                                            <sys:Int32>10</sys:Int32>
+                                        </x:Array>
+                                    </ComboBox.ItemsSource>
+                                </ComboBox>
                         </Viewbox>
                     </Grid>
                     </Viewbox>

@@ -132,12 +132,16 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void updatePossibleAnswer(VraagMogelijkAntwoord pos)
+        public void updatePossibleAnswers(List<VraagMogelijkAntwoord> possisbleAnwsers)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                VraagMogelijkAntwoord target = context.VraagMogelijkAntwoord.Where(v => v.VraagID == pos.VraagID).Where(v => v.AntwoordNummer == pos.AntwoordNummer).FirstOrDefault();
-                context.Entry(target).CurrentValues.SetValues(pos);
+                int questionID = possisbleAnwsers[0].VraagID;
+                List<VraagMogelijkAntwoord> deleteTargets = context.VraagMogelijkAntwoord.Where(i => i.VraagID == questionID).ToList();
+                context.VraagMogelijkAntwoord.RemoveRange(deleteTargets);
+
+                context.VraagMogelijkAntwoord.AddRange(possisbleAnwsers);
+                context.SaveChanges();
             }
         }
     }

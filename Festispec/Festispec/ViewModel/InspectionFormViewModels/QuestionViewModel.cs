@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,9 +24,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         private Vraag _question;
         public bool Changed;
         public bool Created;
-        public int BottomValue;
-        public int TopValue;
-        public int ScaleSize;
+        
 
         public ICommand ImageButton { get; set; }
 
@@ -39,8 +38,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             
         }
 
-
-
         public int QuestionID
         {
             get => _question.VraagID;
@@ -49,6 +46,44 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _question.VraagID = value;
                 Changed = true;
                 RaisePropertyChanged("QuestionID");
+            }
+        }
+
+        public ObservableCollection<PossibleAnwserViewModel> PossibleAnwsers { get; set; }
+
+        private int _bottomValue;
+        public int BottomValue
+        {
+            get => _bottomValue;
+            set
+            {
+                _bottomValue = value;
+                RaisePropertyChanged("BottomValue");
+                UpdateScalePosAnwsers();
+            }
+        }
+
+        private int _topValue;
+        public int TopValue
+        {
+            get => _topValue;
+            set
+            {
+                _topValue = value;
+                RaisePropertyChanged("TopValue");
+                UpdateScalePosAnwsers();
+            }
+        }
+
+        private int _scaleSize;
+        public int ScaleSize
+        {
+            get => _scaleSize;
+            set
+            {
+                _scaleSize = value;
+                RaisePropertyChanged("ScaleSize");
+                UpdateScalePosAnwsers();
             }
         }
 
@@ -99,52 +134,75 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-       /* public ImageSource Bijlage
-        {
-            get => ImageByteConverter.BytesToImage(_question.Bijlage);
-            set
-            {
-                byte[] image = ImageByteConverter.PngImageToBytes(value);
-                if (image != null)
-                    _question.Bijlage = image;
-                else
-                    new BitmapImage(new Uri(@"pack://application:,,,/Images/addImageIcon"));
-                RaisePropertyChanged("Bijlage");
-
-            }
-        }*/
-
         public void AddPossibleAnwsers()
         {
             if (_question.Vraagtype == "sv")
             {
-                for (int i = 1; i < 6; i++)
-                {
-                    _question.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
-                    {
-                        VraagID = _question.VraagID,
-                        AntwoordNummer = i,
-                        AntwoordText = (i).ToString()
-                    });
-                }
-
                 BottomValue = 0;
                 TopValue = 5;
                 ScaleSize = 5;
+                UpdateScalePosAnwsers();
             }
 
             if(_question.Vraagtype == "mv")
             {
+                List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
+                bool updateModelDirect = false;
+                if (_question.VraagMogelijkAntwoord.Count != 0)
+                    {
+                    _question.VraagMogelijkAntwoord.Clear();
+                    updateModelDirect = true;
+                    }
                 for (int i = 1; i < 5; i++)
                 {
-                    _question.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
+                    PossibleAnwserViewModel answerModelnew = new PossibleAnwserViewModel(new VraagMogelijkAntwoord
                     {
                         VraagID = _question.VraagID,
                         AntwoordNummer = i,
                         AntwoordText = (i).ToString()
                     });
+                    if (updateModelDirect)
+                    {
+                        _question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);
+                    }
+                    newPosAnwsers.Add(answerModelnew);
+                }
+                PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
+                Changed = true;
+            }
+        }
+
+        public void UpdateScalePosAnwsers()
+        {
+            if(ScaleSize == 0)
+            {
+                return;
+            }
+            List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
+            int scalePart = (TopValue - BottomValue) / ScaleSize;
+            bool directUpdate = false;
+            if (_question.VraagMogelijkAntwoord.Count() != 0)
+            {
+                _question.VraagMogelijkAntwoord.Clear();
+                directUpdate = true;
+            }
+            
+            for (int i = 0; i < ScaleSize; i++)
+            {
+                newPosAnwsers.Add(new PossibleAnwserViewModel(new VraagMogelijkAntwoord
+                {
+                    VraagID = _question.VraagID,
+                    AntwoordNummer = i + 1,
+                    AntwoordText = (BottomValue + (i * scalePart) + 1).ToString()
+                }));
+
+                if (directUpdate)
+                {
+                    _question.VraagMogelijkAntwoord.Add(newPosAnwsers[i].PossibleAnwser);
                 }
             }
+            PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
+            Changed = true;
         }
 
         private BitmapImage _image;

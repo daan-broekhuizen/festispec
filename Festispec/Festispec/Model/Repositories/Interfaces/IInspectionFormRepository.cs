@@ -20,6 +20,6 @@ namespace Festispec.Model.Repositories
         int AddQuestion(Vraag question);
         void DeletePossibleAnwser(VraagMogelijkAntwoord pos);
         void AddPossibleAnwser(VraagMogelijkAntwoord pos);
-        void updatePossibleAnswer(VraagMogelijkAntwoord pos);
+        void updatePossibleAnswers(List<VraagMogelijkAntwoord> possisbleAnwsers);
     }
 }

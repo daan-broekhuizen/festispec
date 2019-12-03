@@ -1,5 +1,5 @@
 ﻿{
-  "debugMode": false,
+  "debugMode": true,
   "startupPage": "InspectionFormEditView",
   "account": {
     "username": "HansKlok",

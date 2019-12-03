@@ -1,9 +1,13 @@
 ﻿using Festispec.Model;
 using Festispec.Model.Repositories;
 using Festispec.Service;
+using Festispec.Utility.Validators;
+using Festispec.Validators;
 using Festispec.ViewModel.InspectionFormViewModels.Interfaces;
+using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -382,6 +386,16 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
             if (Changed)
             {
+                foreach(QuestionViewModel question in Questions)
+                {
+                    ValidationResult result = new QuestionValidator().Validate(question);
+                    if (!result.IsValid)
+                    {
+                        Messenger.Default.Send(result.ToString(), this.GetHashCode());
+                        return;
+                    }
+                }
+
                 Changed = false;
                 LastChangeDate = DateTime.Now;
                 _repo.UpdateInspectieFormulier(_inspectionForm);
@@ -401,11 +415,29 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     question.Created = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
+                    /*if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    {
+                        foreach(var posAnwser in question.PossibleAnwsers)
+                        {
+                            _repo.AddPossibleAnwser(posAnwser.PossibleAnwser);
+                            question.Question.VraagMogelijkAntwoord.Add(posAnwser.PossibleAnwser);
+                        }
+                    }*/
                 }
                 else if (question.Changed)
                 {
                     _repo.UpdateQuestion(question.Question);
                     question.Changed = false;
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    {
+                        List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
+                        foreach(PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
+                        {
+                            newPosAnswers.Add(posAnwser.PossibleAnwser);
+                        }
+                        _repo.updatePossibleAnswers(newPosAnswers);
+                    }
+
                 }
 
             }
