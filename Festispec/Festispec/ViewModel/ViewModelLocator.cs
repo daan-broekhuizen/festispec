@@ -53,6 +53,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<QuotationRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
+            SimpleIoc.Default.Register<InspectionFormRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -104,6 +105,10 @@ namespace Festispec.ViewModel
             navigationService.Configure("InspectionFormTemplateOverview", new Uri("../View/TemplateView/InspectionFormTemplateOverviewView.xaml", UriKind.Relative));
             #endregion
 
+            #region InspectionFormsViews
+            navigationService.Configure("InspectionFormEditView", new Uri("../View/InspectionFormView/InspectionFormEditView.xaml", UriKind.Relative));
+            #endregion
+
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
 
         }
@@ -115,6 +120,7 @@ namespace Festispec.ViewModel
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
         public QuotationRepository QuotationRepo => ServiceLocator.Current.GetInstance<QuotationRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
+        public InspectionFormRepository InspectionFormRepo => ServiceLocator.Current.GetInstance<InspectionFormRepository>();
 
         // Viewmodels used for datacontext
         #region Singleton VM's
@@ -150,6 +156,11 @@ namespace Festispec.ViewModel
         #region Template VM's
         public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
+        #endregion
+
+        #region InspectionFormVM's
+        public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
+       
         #endregion
 
         //Clean when logging out?

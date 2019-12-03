@@ -12,7 +12,7 @@ namespace Festispec.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspectieformulier()
         {
-            InspectieformulierVragenlijstCombinatie = new HashSet<InspectieformulierVragenlijstCombinatie>();
+            Vraag = new HashSet<Vraag>();
         }
 
         public int InspectieformulierID { get; set; }
@@ -42,7 +42,7 @@ namespace Festispec.Model
         public DateTime LaatsteWijziging { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InspectieformulierVragenlijstCombinatie> InspectieformulierVragenlijstCombinatie { get; set; }
+        public virtual ICollection<Vraag> Vraag { get; set; }
 
         public virtual Opdracht Opdracht { get; set; }
     }
