@@ -77,12 +77,10 @@
             Dictionary<string, string> statuses = new Dictionary<string, string>()
             {
                 { "av", "Afbeelding vraag" },
+                { "lv", "Lijst vraag" },
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
-                { "t2", "Tabel vraag X2"},
-                { "t3", "Tabel vraag X3"  },
-                { "tx", "Pure text" }
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
@@ -251,20 +249,16 @@
             Vraag[] vragen = new Vraag[2];
             vragen[0] = new Vraag()
             {
-                InspectieFormulierID = 1,
                 Vraagstelling = "Open vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
-                VolgordeNummer = 1
-                
+                LaatsteWijziging = DateTime.Now
             };
 
             vragen[1] = new Vraag()
             {
-                InspectieFormulierID = 1,
                 Vraagstelling = "Meerkeuze vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
-                VolgordeNummer = 2
-                
+                LaatsteWijziging = DateTime.Now
             };
 
             context.Vraag.AddOrUpdate(vragen);
