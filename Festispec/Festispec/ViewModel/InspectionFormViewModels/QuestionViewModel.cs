@@ -161,10 +161,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                         AntwoordNummer = i,
                         AntwoordText = (i).ToString()
                     });
-                    if (updateModelDirect)
-                    {
-                        _question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);
-                    }
+                    if (updateModelDirect){_question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);}
                     newPosAnwsers.Add(answerModelnew);
                 }
                 PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
@@ -174,10 +171,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void UpdateScalePosAnwsers()
         {
-            if(ScaleSize == 0)
-            {
-                return;
-            }
+            if(ScaleSize == 0){return;}
             List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
             int scalePart = (TopValue - BottomValue) / ScaleSize;
             bool directUpdate = false;
@@ -196,10 +190,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     AntwoordText = (BottomValue + (i * scalePart) + 1).ToString()
                 }));
 
-                if (directUpdate)
-                {
-                    _question.VraagMogelijkAntwoord.Add(newPosAnwsers[i].PossibleAnwser);
-                }
+                if (directUpdate){_question.VraagMogelijkAntwoord.Add(newPosAnwsers[i].PossibleAnwser);}
             }
             PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
             Changed = true;
@@ -209,7 +200,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public BitmapImage Image
         {
             get
-            { if (_image == null)
+            {
+                if (_image == null)
                 {
                     BitmapImage bm = new BitmapImage();
                     bm.BeginInit();
@@ -217,10 +209,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     bm.EndInit();
                     return bm;
                 }
-                else
-                {
-                    return _image;
-                }
+                else{return _image;}
             }
             set
             {
@@ -233,10 +222,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             ImageSelectService selectionService = new ImageSelectService();
             BitmapImage image = selectionService.SelectPngImage();
-            if(image.UriSource == null)
-            {
-                return;
-            }
+            if(image.UriSource == null){return;}
 
             Image = image;
             string fileLocation = Image.UriSource.AbsolutePath;
