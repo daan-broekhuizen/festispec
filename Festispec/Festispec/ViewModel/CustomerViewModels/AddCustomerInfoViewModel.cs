@@ -1,6 +1,7 @@
 ﻿using Festispec.Service;
 using Festispec.Validators;
 using Festispec.ViewModel.CustomerViewModels;
+using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -38,11 +39,13 @@ namespace Festispec.ViewModel
                 _adresError = value;
                 RaisePropertyChanged("AdresError");
             }
-        } 
+        }
         #endregion
 
-        public AddCustomerInfoViewModel(NavigationService service) : base(service)
+        private CustomerValidator _customerValidator;
+        public AddCustomerInfoViewModel(NavigationService service, CustomerRepository repo) : base(service)
         {
+            _customerValidator = new CustomerValidator(repo);
             if (CustomerVM == null) CustomerVM = new CustomerViewModel();
             NextPageCommand = new RelayCommand(NextPage);
         }
@@ -50,7 +53,7 @@ namespace Festispec.ViewModel
         private void NextPage()
         {
             //Validate input and show relevant input errors
-            List<ValidationFailure> errors =  new CustomerValidator().Validate(CustomerVM).Errors.ToList();
+            List<ValidationFailure> errors =  _customerValidator.Validate(CustomerVM).Errors.ToList();
             ValidationFailure customerError = errors.Where(e => e.PropertyName.Equals("Name") ||
                                                                 e.PropertyName.Equals("KvK")).FirstOrDefault();
             ValidationFailure adresError = errors.Where(e => e.PropertyName.Equals("PostalCode") ||

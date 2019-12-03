@@ -15,14 +15,13 @@
 using CommonServiceLocator;
 using Festispec.Model.Repositories;
 using Festispec.Service;
-using Festispec.ViewModel;
-using Festispec.ViewModel.InspectionFormViewModels;
+using Festispec.ViewModel.QuotationViewModels;
 using Festispec.ViewModel.RapportageViewModels;
 using Festispec.ViewModel.TemplateViewModels;
 using FestiSpec.Domain.Repositories;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using System;
+using Festispec.ViewModel.InspectionFormViewModels;
 
 namespace Festispec.ViewModel
 {
@@ -52,6 +51,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<JobRepository>();
             SimpleIoc.Default.Register<StatusRepository>();
             SimpleIoc.Default.Register<UserRepository>();
+            SimpleIoc.Default.Register<QuotationRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
         }
         //Register singeltonviews here
@@ -82,6 +82,16 @@ namespace Festispec.ViewModel
             navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
             #endregion
 
+            #region QuotationViews
+            navigationService.Configure("QuotationList", new Uri("../View/QuotationView/QuotationListView.xaml", UriKind.Relative));
+            navigationService.Configure("AddQuotation", new Uri("../View/QuotationView/AddQuotationView.xaml", UriKind.Relative));
+            navigationService.Configure("ShowQuotation", new Uri("../View/QuotationView/ShowQuotationView.xaml", UriKind.Relative));
+            #endregion
+
+            #region TemplateViews
+            navigationService.Configure("TemplateOverview", new Uri("../View/TemplateView/TemplateOverviewView.xaml", UriKind.Relative));
+            #endregion
+
             #region JobViews
             navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
             navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
@@ -89,8 +99,6 @@ namespace Festispec.ViewModel
             #endregion
 
 
-
-            navigationService.Configure("ContactPersons", new Uri("../View/CustomerView/ContactPersonListView.xaml", UriKind.Relative));
             #region TemplateViews
             navigationService.Configure("RapportageTemplateOverview", new Uri("../View/TemplateView/RapportageTemplateOverviewView.xaml", UriKind.Relative));
             navigationService.Configure("InspectionFormTemplateOverview", new Uri("../View/TemplateView/InspectionFormTemplateOverviewView.xaml", UriKind.Relative));
@@ -104,9 +112,8 @@ namespace Festispec.ViewModel
         public CustomerRepository CustomerRepo => ServiceLocator.Current.GetInstance<CustomerRepository>();
         public JobRepository JobRepo => ServiceLocator.Current.GetInstance<JobRepository>();
         public StatusRepository StatusRepo => ServiceLocator.Current.GetInstance<StatusRepository>();
-
-
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
+        public QuotationRepository QuotationRepo => ServiceLocator.Current.GetInstance<QuotationRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
 
         // Viewmodels used for datacontext
@@ -121,18 +128,25 @@ namespace Festispec.ViewModel
 
         #region CustomerVM's
         public CustomerListViewModel CustomerList => new CustomerListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
-        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public AddContactInfoViewModel AddContactInfo => new AddContactInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public AddContactPersonViewModel AddContactPerson => new AddContactPersonViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
-        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public AddCustomerInfoViewModel AddCustomerInfo => new AddCustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public ContactPersonListViewModel ContactPersons => new ContactPersonListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         public CustomerInfoViewModel CustomerInfo => new CustomerInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), CustomerRepo);
         #endregion
 
+        #region QuotationsVM's
+        public AddQuotationViewModel AddQuotation => new AddQuotationViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), QuotationRepo);
+        public QuotationListViewModel QuotationList => new QuotationListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), QuotationRepo);
+        public ShowQuotationViewModel ShowQuotation => new ShowQuotationViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), QuotationRepo);
+        #endregion
+
         #region JobsVM's
         public JobListViewModel JobList => new JobListViewModel(SimpleIoc.Default.GetInstance<NavigationService>());
-        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, StatusRepo);
+        public JobInfoViewModel JobInfo => new JobInfoViewModel(SimpleIoc.Default.GetInstance<NavigationService>(), JobRepo, StatusRepo,  QuotationRepo);
         public AddJobViewModel AddJob => new AddJobViewModel(SimpleIoc.Default.GetInstance<NavigationService>(),JobRepo, CustomerRepo, StatusRepo);
         #endregion
+
         #region Template VM's
         public RapportageTemplateOverviewViewModel RapportageTemplateOverview => new RapportageTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
@@ -144,4 +158,4 @@ namespace Festispec.ViewModel
             // TODO Clear the ViewModels
         }
     }
-}
+} 
