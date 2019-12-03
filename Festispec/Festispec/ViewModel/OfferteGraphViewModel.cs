@@ -22,7 +22,9 @@ namespace Festispec.ViewModel
         public DateTime StartDate
         {
             get { return _startDate; }
-            set { _startDate = value; }
+            set { _startDate = value;
+                setEndDate();
+            }
         }
 
         private DateTime _endDate;
@@ -30,7 +32,7 @@ namespace Festispec.ViewModel
         public DateTime EndDate
         {
             get { return _endDate; }
-            set { _endDate = ; }
+            set { _endDate = setEndDate(); }
         }
 
 
@@ -67,6 +69,11 @@ namespace Festispec.ViewModel
                 }
         };
             }
+
+        private DateTime setEndDate()
+        {
+
+        }
 
         public int GetOffertesRejected()
         {
