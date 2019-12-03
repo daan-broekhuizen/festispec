@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.Enumerable
+namespace Festispec.Model.Repositories
 {
-    class EnumOfferteStatus
+    class GraphRepository
     {
     }
 }

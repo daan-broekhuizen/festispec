@@ -136,6 +136,7 @@
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
+    <Compile Include="Enumerable\EnumOfferteStatus.cs" />
     <Compile Include="Migrations\201911182213494_Main.cs" />
     <Compile Include="Migrations\201911182213494_Main.designer.cs">
       <DependentUpon>201911182213494_Main.cs</DependentUpon>
