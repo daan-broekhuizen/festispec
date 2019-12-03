@@ -39,7 +39,7 @@ namespace Festispec.ViewModel
         private void SaveCustomer()
         {
             //Get validation errors, exclude kvk error
-            ValidationResult result =  new CustomerValidator().Validate(CustomerVM);
+            ValidationResult result =  new CustomerValidator(_customerRepository).Validate(CustomerVM);
             if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
             {
                 //if validated update customer
@@ -71,7 +71,7 @@ namespace Festispec.ViewModel
                 Messenger.Default.Send(message, this.GetHashCode());
             }
         }
-        private void ShowAddJob() { }
+        private void ShowAddJob() => _navigationService.NavigateTo("AddJob");
         private void ShowContactPeople() => _navigationService.NavigateTo("ContactPersons", CustomerVM);
         private void ShowCustomerInfo() => _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         private void ShowContactInfo() => _navigationService.NavigateTo("ContactInfo", CustomerVM);
