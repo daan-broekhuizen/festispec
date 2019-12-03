@@ -188,6 +188,8 @@
     <Compile Include="Service\WebService.cs" />
     <Compile Include="Utility\AppSettings.cs" />
     <Compile Include="Utility\Builders\SettingsBuilder.cs" />
+    <Compile Include="Utility\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utility\Converters\BoolToBoldConverter.cs" />
     <Compile Include="Utility\Converters\GridVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Converters\MultiConverter.cs" />
@@ -196,6 +198,11 @@
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
+    <Compile Include="ViewModel\Components\ChartDialogViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\BaseChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\IChart.cs" />
+    <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
@@ -244,6 +251,9 @@
       <DependentUpon>DocumentDesigner.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Components\DocumentDesignerViewModel.cs" />
+    <Compile Include="View\Components\ChartDialogBox.xaml.cs">
+      <DependentUpon>ChartDialogBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Components\OverviewHeader.xaml.cs">
       <DependentUpon>OverviewHeader.xaml</DependentUpon>
     </Compile>
@@ -314,6 +324,10 @@
     <Page Include="View\Components\DocumentDesigner.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Components\ChartDialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Components\OverviewHeader.xaml">
       <SubType>Designer</SubType>
@@ -496,6 +510,7 @@
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

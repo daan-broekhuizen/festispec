@@ -1,17 +1,24 @@
-﻿using Festispec.Model;
+﻿using Festispec.API.ImageShack;
+using Festispec.Model;
+using Festispec.Model.Enums;
 using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
+using Festispec.ViewModel.Components;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel.RapportageViewModels
 {
@@ -23,7 +30,8 @@ namespace Festispec.ViewModel.RapportageViewModels
         private RapportTemplate _template;
 
         private bool _displayExtraOptions;
-        public bool DisplayExtraOptions {
+        public bool DisplayExtraOptions
+        {
             get => _displayExtraOptions;
             set
             {
@@ -45,6 +53,8 @@ namespace Festispec.ViewModel.RapportageViewModels
         public ICommand AddImageCommand { get; set; }
         public ICommand ExtraOptionsCommand { get; set; }
         public ICommand UnlockCommand { get; set; }
+        public ICommand WidthChangedCommand { get; set; }
+        public ICommand HeightChangedCommand { get; set; }
 
         // Properties
         private string _content;
@@ -85,11 +95,14 @@ namespace Festispec.ViewModel.RapportageViewModels
             FontSizeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontSize((string)parameters[1]));
             FontColorChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontColor((Color)parameters[1]));
             SwitchTemplateCommand = new RelayCommand(() => { throw new NotImplementedException(); });
-            AddImageCommand = new RelayCommand(AddImage);
-            CreateChartCommand = new RelayCommand(CreateChart);
-            ExtraOptionsCommand = new RelayCommand(ShowExtraOptions);
+            AddImageCommand = new RelayCommand<DocumentDesigner>((designer) => AddImage(designer.ViewModel));
+            CreateChartCommand = new RelayCommand<object[]>((parameters) => CreateChart(((DocumentDesigner)parameters[0]).ViewModel, (string)parameters[1]));
+            ExtraOptionsCommand = new RelayCommand(() => DisplayExtraOptions = !DisplayExtraOptions);
             UnlockCommand = new RelayCommand<DocumentDesigner>((designer) => designer.ViewModel.EnableMovement());
             ApplyAlignmentCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyAlignment((string)parameters[1]));
+            WidthChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("width", $"{(string)parameters[1]}px", true));
+            HeightChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("height", $"{(string)parameters[1]}px", true));
+
             IsEditable = Visibility.Visible;
             DisplayExtraOptions = false;
 
@@ -111,19 +124,32 @@ namespace Festispec.ViewModel.RapportageViewModels
                 IsEditable = Visibility.Collapsed;
         }
 
-        public void AddImage()
+        public void AddImage(DocumentDesignerViewModel designer)
         {
-            // TODO: Open File Dialog
+            BitmapImage bmp = new ImageSelectService().SelectPngImage();
+
+            if (bmp.UriSource == null)
+                return;
+
+            UploadModel response = new ImageShackClient().UploadImage(new ImageContainer(bmp.UriSource.AbsolutePath));
+
+            if (response.Images.Length > 0)
+                designer.AddImage(response.Images.First().HttpLink);
         }
 
-        public void CreateChart()
+        public void CreateChart(DocumentDesignerViewModel designer, string mode)
         {
-            // TODO: Open Grafiek Create Scherm
+            ChartDialogBox chartDialog = new ChartDialogBox();
+            chartDialog.ViewModel.AddRequested += AddChartRequested;
+            chartDialog.ViewModel.Create(designer, mode);
+
+            chartDialog.ShowDialog();
         }
 
-        public void ShowExtraOptions()
+        private void AddChartRequested(DocumentDesignerViewModel designer, UploadModel uploaded)
         {
-            DisplayExtraOptions = !DisplayExtraOptions;
+            if (uploaded != null)
+                designer.AddImage(uploaded.Images.First().HttpLink);
         }
     }
 }

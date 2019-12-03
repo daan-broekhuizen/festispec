@@ -26,7 +26,7 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="{Binding DisplayExtraOptions, Converter={StaticResource GridVisibilityConverter}}" />
         </Grid.ColumnDefinitions>
-        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}" />
+        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}"  />
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -158,7 +158,7 @@
                 <Label Content="Letterkleur" FontWeight="Bold" FontSize="16" />
                 <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Closed">
+                        <i:EventTrigger EventName="SelectedColorChanged">
                             <i:InvokeCommandAction Command="{Binding FontColorChangedCommand}">
                                 <i:InvokeCommandAction.CommandParameter>
                                     <MultiBinding Converter="{StaticResource MultiConverter}">
@@ -176,7 +176,7 @@
             <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable}">
                 <Label Content="Afbeelding Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" Background="Transparent" BorderBrush="Transparent">
+                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Background="Transparent" BorderBrush="Transparent">
                         <Image Source="/Images/Image.png" Stretch="Uniform" Width="25" Height="25"  />
                     </Button>
                 </StackPanel>
@@ -186,19 +186,43 @@
             <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable}">
                 <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlLineChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Line" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlLineChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
-                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Bar" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Bar" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Bar_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlBarChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Extra" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Extra" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlExtraChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
-                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Pie" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Pie" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPieChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
                 </StackPanel>
             </StackPanel>
@@ -241,9 +265,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!-- Alignment -->
             <StackPanel Margin="5" Grid.Row="0" Visibility="{Binding IsEditable}">
                 <Label Content="Positie" FontWeight="Bold" FontSize="16" />
@@ -292,6 +319,51 @@
                 <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
             </StackPanel>
 
+            <!-- Width -->
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Breedte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlWidth" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding WidthChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlWidth" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+
+            <!-- Height -->
+            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Hoogte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlHeight" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding HeightChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlHeight" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
