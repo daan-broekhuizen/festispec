@@ -227,15 +227,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 Vraagtype = "mv",
             };
 
-            for (int i = 0; i < 4; i++)
-            {
-                v.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
-                {
-                    AntwoordNummer = i + 1,
-                    Vraag = v
-                }) ;
-            }
-
             AddQuestion(v);
         }
 
@@ -265,16 +256,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 Vraagtype = "sv",
             };
-
-            for (int i = 0; i < 5; i++)
-            {
-                v.VraagMogelijkAntwoord.Add(new VraagMogelijkAntwoord
-                {
-                    AntwoordNummer = i + 1,
-                    Vraag = v,
-                    AntwoordText = (i + 1).ToString()
-                });
-            }
 
             AddQuestion(v);
         }
@@ -415,14 +396,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     question.Created = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
-                    /*if (question.QuestionType == "sv" || question.QuestionType == "mv")
-                    {
-                        foreach(var posAnwser in question.PossibleAnwsers)
-                        {
-                            _repo.AddPossibleAnwser(posAnwser.PossibleAnwser);
-                            question.Question.VraagMogelijkAntwoord.Add(posAnwser.PossibleAnwser);
-                        }
-                    }*/
                 }
                 else if (question.Changed)
                 {
@@ -437,9 +410,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                         }
                         _repo.updatePossibleAnswers(newPosAnswers);
                     }
-
                 }
-
             }
         }
         #endregion
