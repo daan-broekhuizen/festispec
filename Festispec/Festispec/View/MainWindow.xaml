@@ -54,6 +54,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
 
                     <Button Margin="5" Grid.Row="0" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
@@ -108,6 +110,20 @@
                             <TextBlock VerticalAlignment="Center" Text="Meldingen" />
                         </WrapPanel>
                     </Button>
+
+                    <Button Margin="5" Grid.Row="7" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowRapportageTemplatesView}">
+                        <WrapPanel Orientation="Horizontal">
+                            <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
+                            <TextBlock VerticalAlignment="Center" Text="Rapportage Templates"/>
+                        </WrapPanel>
+                    </Button>
+
+                    <Button Margin="5" Grid.Row="8" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowInspectionFormTemplatesView}">
+                        <WrapPanel Orientation="Horizontal">
+                            <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
+                            <TextBlock VerticalAlignment="Center" Text="Inspectieformulier templates"/>
+                        </WrapPanel>
+                    </Button>
                 </Grid>
             </Viewbox>
 
@@ -122,6 +138,6 @@
 
 
         </Grid>
-        <Frame Grid.Column="1" x:Name="MainFrame"/>
+        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Visible"/>
     </Grid>
 </Page>

@@ -108,6 +108,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.6.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -125,11 +140,20 @@
     <Compile Include="Migrations\201911182213494_Main.designer.cs">
       <DependentUpon>201911182213494_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911252011031_Template_Update.cs" />
+    <Compile Include="Migrations\201911252011031_Template_Update.designer.cs">
+      <DependentUpon>201911252011031_Template_Update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911252059182_Template_Update1.cs" />
+    <Compile Include="Migrations\201911252059182_Template_Update1.designer.cs">
+      <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
     <Compile Include="Model\InspectieformulierVragenlijstCombinatie.cs" />
@@ -138,6 +162,8 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
@@ -145,12 +171,24 @@
     <Compile Include="Service\NavigationService.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Service\WebService.cs" />
+    <Compile Include="Utility\AppSettings.cs" />
+    <Compile Include="Utility\Builders\SettingsBuilder.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
+    <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
-    <Compile Include="ViewModel\AccountViewModel.cs" />
-    <Compile Include="ViewModel\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IAddContactPersonViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactPersonViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddCustomerInfoViewModel.cs" />
@@ -159,10 +197,11 @@
     <Compile Include="ViewModel\CustomerViewModels\CustomerInfoViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModel.cs" />
-    <Compile Include="ViewModel\DashboardViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModel\ApplicationViewModels\NavigatableViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -173,6 +212,16 @@
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
     <Compile Include="View\ApplicationWindow.xaml.cs">
       <DependentUpon>ApplicationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\DocumentDesigner.xaml.cs">
+      <DependentUpon>DocumentDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Components\DocumentDesignerViewModel.cs" />
+    <Compile Include="View\Components\OverviewHeader.xaml.cs">
+      <DependentUpon>OverviewHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\OverviewSearchBar.xaml.cs">
+      <DependentUpon>OverviewSearchBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
@@ -198,10 +247,38 @@
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
+      <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\RapportageView\RapportageView.xaml.cs">
+      <DependentUpon>RapportageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateView\InspectionFormTemplateOverviewView.xaml.cs">
+      <DependentUpon>InspectionFormTemplateOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
+      <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ApplicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\DocumentDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Components\OverviewHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\OverviewSearchBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InspectionFormView\CreateInspectionFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -209,7 +286,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\RapportageView\RapportageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Styling\ComboBoxFlatStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\TemplateView\InspectionFormTemplateOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TemplateView\RapportageTemplateOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -231,6 +324,12 @@
     <EmbeddedResource Include="Migrations\201911182213494_Main.resx">
       <DependentUpon>201911182213494_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252011031_Template_Update.resx">
+      <DependentUpon>201911252011031_Template_Update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911252059182_Template_Update1.resx">
+      <DependentUpon>201911252059182_Template_Update1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -239,6 +338,9 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +416,13 @@
     <Resource Include="Images\festispec_logo.png" />
     <Resource Include="Images\Plus_icon.png" />
     <Resource Include="Images\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Bar_Chart.png" />
+    <Resource Include="Images\Extra_Chart.png" />
+    <Resource Include="Images\Image.png" />
+    <Resource Include="Images\Line_Chart.png" />
+    <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

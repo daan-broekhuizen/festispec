@@ -29,6 +29,8 @@
             SeedVraagMogelijkAntwoord(context);
             SeedBeschikbaarheidInspecteurs(context);
             SeedIngepladeInspecteurs(context);
+            SeedRapportTemplates(context);
+            SeedInspectionFormTemplates(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -291,43 +293,80 @@
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
         {
-            BeschikbaarheidInspecteurs[] beschikbaarheiden = new BeschikbaarheidInspecteurs[4];
-            beschikbaarheiden[0] = new BeschikbaarheidInspecteurs()
+            if (context.BeschikbaarheidInspecteurs.Count() > 0)
+                return;
+
+            BeschikbaarheidInspecteurs[] beschikbaarheid = new BeschikbaarheidInspecteurs[4];
+            beschikbaarheid[0] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now
             };
 
-            beschikbaarheiden[1] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[1] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(1)
             };
 
-            beschikbaarheiden[2] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[2] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(2)
             };
 
-            beschikbaarheiden[3] = new BeschikbaarheidInspecteurs()
+            beschikbaarheid[3] = new BeschikbaarheidInspecteurs()
             {
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
                 Datum = DateTime.Now.AddDays(3)
             };
 
-            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => x.Datum, beschikbaarheiden);
+            context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheid);
             context.SaveChanges();
         }
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
             Opdracht opdracht = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop");
-            opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+
+            if(opdracht.Ingepland.Count == 0)
+                opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
-            account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
 
+            if(account.Ingepland.Count == 0)
+                account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
+
+            context.SaveChanges();
+        }
+
+        private void SeedRapportTemplates(FestispecContext context)
+        {
+            RapportTemplate[] templates = new RapportTemplate[1];
+
+            templates[0] = new RapportTemplate()
+            {
+                TemplateName = "Test",
+                TemplateText = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN"
+            };
+
+            context.RapportTemplate.AddOrUpdate(x => x.TemplateID, templates);
+            context.SaveChanges();
+        }
+
+        private void SeedInspectionFormTemplates(FestispecContext context)
+        {
+            Inspectieformulier[] templates = new Inspectieformulier[1];
+
+            templates[0] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Test",
+                Beschrijving = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN",
+                DatumInspectie = DateTime.Now,
+                LaatsteWijziging = DateTime.Now
+            };
+
+            context.Inspectieformulier.AddOrUpdate(x => x.InspectieformulierID, templates);
             context.SaveChanges();
         }
     }
