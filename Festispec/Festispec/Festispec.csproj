@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201912021133214_ReworkedInspectionformQuestion.designer.cs">
       <DependentUpon>201912021133214_ReworkedInspectionformQuestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912030949168_QuestionImageUpdate.cs" />
+    <Compile Include="Migrations\201912030949168_QuestionImageUpdate.designer.cs">
+      <DependentUpon>201912030949168_QuestionImageUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -370,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912021133214_ReworkedInspectionformQuestion.resx">
       <DependentUpon>201912021133214_ReworkedInspectionformQuestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912030949168_QuestionImageUpdate.resx">
+      <DependentUpon>201912030949168_QuestionImageUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

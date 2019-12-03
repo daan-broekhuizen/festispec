@@ -33,8 +33,8 @@ namespace Festispec.Model
         [StringLength(2)]
         public string Vraagtype { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] Bijlage { get; set; }
+        [StringLength(150)]
+        public string AfbeeldingURL { get; set; }
 
         public virtual VraagType VraagtypeLookup { get; set; }
 

@@ -1,11 +1,18 @@
-﻿using Festispec.Model;
+﻿using Festispec.API.ImageShack;
+using Festispec.Model;
+using Festispec.Service;
 using Festispec.Utility.Converters;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -14,12 +21,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
     public class QuestionViewModel : ViewModelBase
     {
         private Vraag _question;
-        private int _InspectionFormID;
         public bool Changed;
         public bool Created;
         public int BottomValue;
         public int TopValue;
         public int ScaleSize;
+
+        public ICommand ImageButton { get; set; }
 
         public QuestionViewModel(Vraag v, Inspectieformulier inspec)
         {
@@ -27,6 +35,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             InspectionFormID = inspec.InspectieformulierID;
             Changed = false;
             AddPossibleAnwsers();
+            ImageButton = new RelayCommand(SelectImage);
+            
         }
 
 
@@ -78,17 +88,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-        public byte[] Image
-        {
-            get => _question.Bijlage;
-            set
-            {
-                _question.Bijlage = value;
-                Changed = true;
-                RaisePropertyChanged("Image");
-            }
-        }
-
         public int OrderNumber
         {
             get => _question.VolgordeNummer;
@@ -100,7 +99,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-        public ImageSource Bijlage
+       /* public ImageSource Bijlage
         {
             get => ImageByteConverter.BytesToImage(_question.Bijlage);
             set
@@ -113,7 +112,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 RaisePropertyChanged("Bijlage");
 
             }
-        }
+        }*/
 
         public void AddPossibleAnwsers()
         {
@@ -146,6 +145,52 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     });
                 }
             }
+        }
+
+        private BitmapImage _image;
+        public BitmapImage Image
+        {
+            get
+            { if (_image == null)
+                {
+                    BitmapImage bm = new BitmapImage();
+                    bm.BeginInit();
+                    bm.UriSource = new Uri("/Images/addImageIcon.png", UriKind.Relative);
+                    bm.EndInit();
+                    return bm;
+                }
+                else
+                {
+                    return _image;
+                }
+            }
+            set
+            {
+                _image = value;
+                RaisePropertyChanged("Image");
+            }
+        }
+
+        public void SelectImage()
+        {
+            ImageSelectService selectionService = new ImageSelectService();
+            BitmapImage image = selectionService.SelectPngImage();
+            if(image.UriSource == null)
+            {
+                return;
+            }
+
+            Image = image;
+            string fileLocation = Image.UriSource.AbsolutePath;
+           
+            UploadModel response = new ImageShackClient().UploadImage(new ImageContainer[1]
+            {
+                new ImageContainer(fileLocation, "image/png")
+            });
+
+            _question.AfbeeldingURL = (response.Images.First().DirectLink).ToString();
+
+            Changed = true;
         }
     }
 }

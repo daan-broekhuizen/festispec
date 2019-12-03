@@ -143,7 +143,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if (_questions == null)
                 {
                     _questions = new ObservableCollection<QuestionViewModel>();
-                    foreach (var question in _inspectionForm.Vraag)
+                    foreach (Vraag question in _inspectionForm.Vraag)
                     {
                         _questions.Add(new QuestionViewModel(question, _inspectionForm)); ;
                     }
@@ -421,20 +421,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             Questions[index1].OrderNumber = index1 + 1;
             Questions[index2].OrderNumber = index2 + 1;
         }
-        
-        /*public void AddNewVIC(QuestionViewModel q)
-        {
-            q.VIC.Add(new InspectieformulierVragenlijstCombinatie
-            {
-                Inspectieformulier = _inspectionForm,
-                InspectieformulierID = _inspectionForm.InspectieformulierID,
-                Vraag = q.Question,
-                VraagID = q.QuestionID,
-                VraagVolgordeNummer = _questions.Count() + 1,
-            }
-                );
-            q.Changed = true;
-        }*/
 
         public void AddQuestion(Vraag v)
         {
