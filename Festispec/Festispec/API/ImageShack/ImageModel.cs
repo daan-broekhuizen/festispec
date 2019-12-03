@@ -30,10 +30,7 @@ namespace Festispec.API.ImageShack
 
         public string HttpLink
         {
-            get
-            {
-                return $"http://{DirectLink}";
-            }
+            get => $"http://{DirectLink}";
         }
 
         [JsonProperty("title")]
