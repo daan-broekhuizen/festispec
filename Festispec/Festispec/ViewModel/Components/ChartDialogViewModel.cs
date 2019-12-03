@@ -113,7 +113,7 @@ namespace Festispec.ViewModel.Components
         public ChartDialogViewModel()
         {
             SwitchAxisCommand = new RelayCommand<string>(SwitchAxis);
-            AddChartCommand = new RelayCommand<ContentControl>((x) => AddChart((Chart)x.Content));
+            AddChartCommand = new RelayCommand(AddChart);
             ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
             TitleChangedCommand = new RelayCommand<string>((title) => Title = title);
         }
@@ -155,7 +155,7 @@ namespace Festispec.ViewModel.Components
             }
         }
 
-        public void AddChart(Chart chart)
+        public void AddChart()
         {
             byte[] data = ChartViewModel.ToByteArray();
 

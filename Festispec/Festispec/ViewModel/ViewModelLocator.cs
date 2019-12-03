@@ -53,6 +53,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<UserRepository>();
             SimpleIoc.Default.Register<QuotationRepository>();
             SimpleIoc.Default.Register<TemplateRepository>();
+            SimpleIoc.Default.Register<RapportageRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -115,6 +116,7 @@ namespace Festispec.ViewModel
         public UserRepository UserRepo => ServiceLocator.Current.GetInstance<UserRepository>();
         public QuotationRepository QuotationRepo => ServiceLocator.Current.GetInstance<QuotationRepository>();
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
+        public RapportageRepository RapportageRepo => ServiceLocator.Current.GetInstance<RapportageRepository>();
 
         // Viewmodels used for datacontext
         #region Singleton VM's
@@ -122,7 +124,7 @@ namespace Festispec.ViewModel
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();
         public ApplicationViewModel Application => ServiceLocator.Current.GetInstance<ApplicationViewModel>();
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
-        public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), RapportageRepo);
         public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         #endregion
 

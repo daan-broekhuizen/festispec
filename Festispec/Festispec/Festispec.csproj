@@ -176,6 +176,7 @@
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
+    <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />

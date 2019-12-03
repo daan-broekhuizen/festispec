@@ -17,6 +17,7 @@
     <Page.Resources>
         <Converters:MultiConverter x:Key="MultiConverter" />
         <Converters:GridVisibilityConverter x:Key="GridVisibilityConverter" />
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <ViewModel:DocumentDesignerViewModel x:Key="ViewModel" />
     </Page.Resources>
 
@@ -133,20 +134,21 @@
                         </Button.CommandParameter>
                     </Button>
 
-                    <Button Name="controlItalic" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiConverter}">
-                                <Binding ElementName="documentDesigner" />
-                                <Binding ElementName="controlItalic" Path="Tag" />
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                        <TextBlock TextDecorations="Underline" Text="C" />
-                    </Button>
-                    <Button FontSize="14" Name="controlUnderline" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
+                    <Button Name="controlUnderline" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource MultiConverter}">
                                 <Binding ElementName="documentDesigner" />
                                 <Binding ElementName="controlUnderline" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                        <TextBlock TextDecorations="Underline" Text="C" />
+                    </Button>
+                    
+                    <Button FontSize="14" Name="controlItalic" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlItalic" Path="Tag" />
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>
@@ -248,14 +250,14 @@
 
             <!-- Opslaan -->
             <StackPanel Margin="5" Grid.Row="11">
-                <Button FontSize="16">
+                <Button FontSize="16" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Opslaan" />
                 </Button>
             </StackPanel>
 
             <!-- Downloaden -->
             <StackPanel Margin="5" Grid.Row="12">
-                <Button FontSize="16">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Download" />
                 </Button>
             </StackPanel>

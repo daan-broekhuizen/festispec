@@ -1,6 +1,7 @@
 ﻿using Festispec.API.ImageShack;
 using Festispec.Model;
 using Festispec.Model.Enums;
+using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
@@ -24,8 +25,11 @@ namespace Festispec.ViewModel.RapportageViewModels
 {
     public class RapportageViewModel : ViewModelBase
     {
+        // Repositories
+        private readonly RapportageRepository _repo;
+
         // Services
-        private NavigationService _navigationService;
+        private readonly NavigationService _navigationService;
 
         private RapportTemplate _template;
 
@@ -55,6 +59,8 @@ namespace Festispec.ViewModel.RapportageViewModels
         public ICommand UnlockCommand { get; set; }
         public ICommand WidthChangedCommand { get; set; }
         public ICommand HeightChangedCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public ICommand DownloadCommand { get; set; }
 
         // Properties
         private string _content;
@@ -84,9 +90,18 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         public bool ShouldAddResults { get; set; }
 
-        public RapportageViewModel(NavigationService navigationService)
+        private EnumTemplateMode _mode;
+
+        public RapportageViewModel(NavigationService navigationService, RapportageRepository repo)
         {
             _navigationService = navigationService;
+            _repo = repo;
+
+            if(navigationService.Parameter != null)
+            {
+                _mode = (EnumTemplateMode)((object[])navigationService.Parameter)[0];
+            }
+
             Content = "<html><body><h1>Header</h1><a href=\"http://www.google.nl\">Google</a><img src=\"https://www.perwez.be/actualites/images-actualites/test.png/@@images/image.png\" alt=\"test\" width=\"100\"/></body></html>";
 
             ModeChangedCommand = new RelayCommand<object[]>((parameters) => ChangeMode((DocumentDesigner)parameters[0], (int)parameters[1]));
@@ -102,6 +117,8 @@ namespace Festispec.ViewModel.RapportageViewModels
             ApplyAlignmentCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyAlignment((string)parameters[1]));
             WidthChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("width", $"{(string)parameters[1]}px", true));
             HeightChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("height", $"{(string)parameters[1]}px", true));
+            SaveCommand = new RelayCommand<DocumentDesigner>((designer) => Save(designer.ViewModel));
+            DownloadCommand = new RelayCommand<DocumentDesigner>((designer) => Download(designer.ViewModel));
 
             IsEditable = Visibility.Visible;
             DisplayExtraOptions = false;
@@ -150,6 +167,26 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             if (uploaded != null)
                 designer.AddImage(uploaded.Images.First().HttpLink);
+        }
+
+        private void Save(DocumentDesignerViewModel designer)
+        {
+            if(_mode == EnumTemplateMode.CREATE)
+            {
+                RapportTemplate template = new RapportTemplate()
+                {
+                    // TODO
+                    TemplateText = designer.DesignerContent,
+                    TemplateName = "Name",
+                    TemplateDescription = "Description"
+                };
+                _repo.CreateTemplate(template);
+            }
+        }
+
+        private void Download(DocumentDesignerViewModel designer)
+        {
+
         }
     }
 }

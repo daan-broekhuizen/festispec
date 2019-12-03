@@ -41,7 +41,10 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
+            <Grid Name="containerChart" Grid.Column="0" Grid.Row="1">
+                
+            </Grid>
             <ContentControl x:Name="controlChart" Grid.Column="0" Grid.Row="1" Content="{Binding Control}" />
             <!--
             <lvc:CartesianChart x:Name="controlChart" Grid.Column="0" Grid.Row="0" DataContext="{Binding Chart}" Series="{Binding Collection}">
@@ -124,7 +127,7 @@
                     <CheckBox Name="controlLabelsY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </Grid>
 
-                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" CommandParameter="{Binding ElementName=controlChart}" />
+                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" />
             </Grid>
         </Grid>
     </Grid>
