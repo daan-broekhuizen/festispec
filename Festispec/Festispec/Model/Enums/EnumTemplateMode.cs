@@ -8,6 +8,6 @@ namespace Festispec.Model.Enums
 {
     public enum EnumTemplateMode
     {
-        EDIT, SELECT
+        EDIT, SELECT, CREATE
     }
 }

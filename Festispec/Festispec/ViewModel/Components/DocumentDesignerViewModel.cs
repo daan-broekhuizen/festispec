@@ -136,7 +136,7 @@ namespace Festispec.ViewModel.Components
         /// <param name="color">De letterkleur</param>
         public void ApplyFontColor(Color color)
         {
-            ExecuteCommand("ForeColor", String.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B));
+            ExecuteCommand("ForeColor", string.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B));
         }
 
         /// <summary>
@@ -173,6 +173,23 @@ namespace Festispec.ViewModel.Components
             {
                 IHTMLElement element = GetSelectedElement();
                 element.style.fontSize = "12px";
+            }
+        }
+
+        public void ChangeAttribute(string name, string value, bool isStyle = false)
+        {
+            IHTMLDocument2 document = (IHTMLDocument2)WebBrowser.Document;
+            if (document != null)
+            {
+                IHTMLElement element = GetSelectedElement();
+
+                if (element != null)
+                {
+                    if (isStyle)
+                        element.style.setAttribute(name, value);
+                    else
+                        element.setAttribute(name, value);
+                }
             }
         }
 
