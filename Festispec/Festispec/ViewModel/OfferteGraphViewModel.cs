@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModel
 {
-    class OfferteGraphViewModel
+    public class OfferteGraphViewModel
     {
+
     }
 }
