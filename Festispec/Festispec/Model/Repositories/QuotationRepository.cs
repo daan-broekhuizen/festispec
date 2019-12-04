@@ -10,21 +10,21 @@ namespace Festispec.Model.Repositories
     {
         public List<Offerte> GetQuotations()
         {
-            using (FestispecContext context = new FestispecContext())
+            using(FestispecContext context = new FestispecContext())
             {
                 return context.Offerte.Include("Opdracht.Klant").ToList();
             }
         }
         public Opdracht GetJob(int jobId)
         {
-            using (FestispecContext context = new FestispecContext())
+            using(FestispecContext context = new FestispecContext())
             {
                 return context.Opdracht.Find(jobId);
             }
         }
         public void CreateQuotation(Offerte quotation)
         {
-            using (FestispecContext context = new FestispecContext())
+            using(FestispecContext context = new FestispecContext())
             {
                 Opdracht job = context.Opdracht.Where(j => j.OpdrachtID == quotation.OpdrachtID).FirstOrDefault();
                 job.Offerte.Add(quotation);
@@ -33,7 +33,7 @@ namespace Festispec.Model.Repositories
         }
         public void UpdateQuotation(Offerte quotation)
         {
-            using (FestispecContext context = new FestispecContext())
+            using(FestispecContext context = new FestispecContext())
             {
                 Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotation.OfferteID).FirstOrDefault();
                 context.Entry(toUpdate).CurrentValues.SetValues(quotation);

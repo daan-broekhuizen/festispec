@@ -33,6 +33,16 @@ namespace Festispec.API.ImageShack
         }
 
         /// <summary>
+        /// Upload een afbeelding
+        /// </summary>
+        /// <param name="file">De afbeelding</param>
+        /// <returns>Het resultaat van de geuploaden afbeelding.</returns>
+        public UploadModel UploadImage(FileData file)
+        {
+            return UploadImage(new FileData[] { file });
+        }
+
+        /// <summary>
         /// Upload afbeelding(en).
         /// </summary>
         /// <param name="files">De afbeelding(en).</param>
@@ -45,6 +55,16 @@ namespace Festispec.API.ImageShack
             };
 
             return RequestAsJsonObjectFromValue<UploadModel>("images", Method.POST, "result", null, parameters, null, files);
+        }
+
+        /// <summary>
+        /// Upload een afbeelding
+        /// </summary>
+        /// <param name="fileLocation">De afbeelding locatie</param>
+        /// <returns>Het resultaat van de geuploaden afbeelding.</returns>
+        public UploadModel UploadImage(ImageContainer fileLocation)
+        {
+            return UploadImage(new ImageContainer[] { fileLocation });
         }
 
         /// <summary>

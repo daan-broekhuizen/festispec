@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.CustomerView"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:components="clr-namespace:Festispec.View.Components"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
         DataContext="{Binding CustomerList, Source={StaticResource Locator}}">
@@ -38,25 +40,8 @@
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBox Padding="10,0" Text="{Binding FilterCustomer}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
-            <Button  HorizontalAlignment="Right" Command="{Binding SearchCustomer}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
-                <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddCustomerCommand}">
-                    Klant aanmaken
-                </Button>
-            </Viewbox>
-        </Grid>
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonActionCommand="{Binding ShowAddCustomerCommand}" ButtonText="Nieuwe klant" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
+
 
 
         <Viewbox Grid.Row="1" HorizontalAlignment="Right">
@@ -69,12 +54,21 @@
 
         <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
             <WrapPanel Margin="0,0,20,0">
-                <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
-                <ComboBox Margin="10" Width="120" Height="20" Background="Yellow" SelectedItem="{Binding SelectedBox}">
-                    <ComboBoxItem Content="Naam oplopend"/>
-                    <ComboBoxItem Content="Naam aflopend"/>
-                    <ComboBoxItem Content="KvK oplopend"/>
-                    <ComboBoxItem Content="KvK aflopend"/>
+                <TextBlock Margin="10" VerticalAlignment="Center" Text="Sorteren op:"  Foreground="Black"/>
+                <ComboBox Name="controlMode" SelectedIndex="0" Margin="10"  Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SortChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <Binding ElementName="controlMode" Path="SelectedIndex" />
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="Naam (oplopend)"/>
+                    <ComboBoxItem Content="Naam (aflopend)"/>
+                    <ComboBoxItem Content="KvK nummer (oplopend)"/>
+                    <ComboBoxItem Content="KvK nummer (aflopend)"/>
                 </ComboBox>
             </WrapPanel>
         </Viewbox>

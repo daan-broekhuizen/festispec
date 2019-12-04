@@ -58,6 +58,7 @@ namespace Festispec.ViewModel
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
+            ShowQuotationsView = new RelayCommand(ShowQuotations);
             ShowRapportageTemplatesView = new RelayCommand(ShowRapportageTemplates);
             ShowInspectionFormTemplatesView = new RelayCommand(ShowInspectionFormTemplates);
             ShowJobsView = new RelayCommand(ShowJobs);
@@ -73,6 +74,7 @@ namespace Festispec.ViewModel
 
         private void ShowDashboard() => _navigationService.NavigateTo("Dashboard");
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");
+        private void ShowQuotations() => _navigationService.NavigateTo("QuotationList");
         private void ShowJobs() => _navigationService.NavigateTo("Jobs");
         private void ShowRapportageTemplates() => _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
         private void ShowInspectionFormTemplates() => _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);

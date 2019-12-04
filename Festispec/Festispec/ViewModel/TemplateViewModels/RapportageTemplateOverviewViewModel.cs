@@ -38,7 +38,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void CreateButtonClick()
         {
-            throw new NotImplementedException();
+            _navigationService.NavigateTo("Rapportage", new object[] { EnumTemplateMode.CREATE });
         }
 
         protected override void SearchButtonClick(string content)
