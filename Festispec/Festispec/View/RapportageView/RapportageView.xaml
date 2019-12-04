@@ -16,16 +16,19 @@
         DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
     <Page.Resources>
         <Converters:MultiConverter x:Key="MultiConverter" />
+        <Converters:GridVisibilityConverter x:Key="GridVisibilityConverter" />
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <ViewModel:DocumentDesignerViewModel x:Key="ViewModel" />
     </Page.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="{Binding DisplayExtraOptions, Converter={StaticResource GridVisibilityConverter}}" />
         </Grid.ColumnDefinitions>
-        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}" />
-        
+        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}"  />
+
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -42,7 +45,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <!-- Mode -->
             <StackPanel Margin="5" Grid.Row="0">
                 <Label Content="Mode" FontWeight="Bold" FontSize="16" />
@@ -67,7 +70,7 @@
             </StackPanel>
 
             <!-- Type -->
-            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Lettertype" FontWeight="Bold" FontSize="16" />
 
                 <ComboBox Name="controlType" Style="{StaticResource ComboBoxFlatStyle }">
@@ -90,7 +93,7 @@
             </StackPanel>
 
             <!-- Grootte -->
-            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Lettergrootte" FontWeight="Bold" FontSize="16" />
                 <TextBox Name="controlSize" Text="" BorderBrush="#c8c8c8">
                     <i:Interaction.Triggers>
@@ -107,9 +110,9 @@
                     </i:Interaction.Triggers>
                 </TextBox>
             </StackPanel>
-            
+
             <!-- Styling -->
-            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Styling" FontWeight="Bold" FontSize="16" />
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
@@ -131,20 +134,21 @@
                         </Button.CommandParameter>
                     </Button>
 
-                    <Button Name="controlItalic" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiConverter}">
-                                <Binding ElementName="documentDesigner" />
-                                <Binding ElementName="controlItalic" Path="Tag" />
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                        <TextBlock TextDecorations="Underline" Text="C" />
-                    </Button>
-                    <Button FontSize="14" Name="controlUnderline" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
+                    <Button Name="controlUnderline" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource MultiConverter}">
                                 <Binding ElementName="documentDesigner" />
                                 <Binding ElementName="controlUnderline" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                        <TextBlock TextDecorations="Underline" Text="C" />
+                    </Button>
+                    
+                    <Button FontSize="14" Name="controlItalic" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlItalic" Path="Tag" />
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>
@@ -152,11 +156,11 @@
             </StackPanel>
 
             <!-- Kleur -->
-            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Letterkleur" FontWeight="Bold" FontSize="16" />
                 <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Closed">
+                        <i:EventTrigger EventName="SelectedColorChanged">
                             <i:InvokeCommandAction Command="{Binding FontColorChangedCommand}">
                                 <i:InvokeCommandAction.CommandParameter>
                                     <MultiBinding Converter="{StaticResource MultiConverter}">
@@ -169,50 +173,76 @@
                     </i:Interaction.Triggers>
                 </xctk:ColorPicker>
             </StackPanel>
-            
+
             <!-- Afbeelding Invoegen -->
-            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Afbeelding Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" Background="Transparent" BorderBrush="Transparent">
+                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Background="Transparent" BorderBrush="Transparent">
                         <Image Source="/Images/Image.png" Stretch="Uniform" Width="25" Height="25"  />
                     </Button>
                 </StackPanel>
             </StackPanel>
 
             <!-- Grafiek Invoegen -->
-            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlLineChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Line" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlLineChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
-                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Bar" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Bar" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Bar_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlBarChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
-                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Extra" BorderBrush="Transparent" Background="Transparent">
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Extra" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlExtraChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
-                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" CommandParameter="Pie" BorderBrush="Transparent" Background="Transparent">
+                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Pie" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPieChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
                 </StackPanel>
             </StackPanel>
 
             <!-- Invoegen Resultaten -->
-            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
             </StackPanel>
-            
+
             <!-- Extra Opties -->
-            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptionsCommand}">Extra Opties</Hyperlink>
                 </TextBlock>
             </StackPanel>
-            
+
             <!-- Ander Template -->
-            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable}">
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
                 </TextBlock>
@@ -220,263 +250,122 @@
 
             <!-- Opslaan -->
             <StackPanel Margin="5" Grid.Row="11">
-                <Button FontSize="16">
+                <Button FontSize="16" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Opslaan" />
                 </Button>
             </StackPanel>
-            
+
             <!-- Downloaden -->
             <StackPanel Margin="5" Grid.Row="12">
-                <Button FontSize="16">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Download" />
                 </Button>
             </StackPanel>
         </Grid>
-    </Grid>
-    <!--
-    <Grid Height="auto" Width="auto">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.4*"/>
-        </Grid.RowDefinitions>
 
-        <Border Background="#ffffffff" BorderBrush="#ff707070"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
-
-            <TextBox TextWrapping="Wrap" Text="Adviesrapport voorbeeldtext" TextChanged="TextBox_TextChanged" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
-
-        </Border>
-        <Grid  Width="auto" Height="auto" Margin="0,0,0,20" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="2" Grid.Row="2"/>
-
-        <Grid Grid.Column="2" Grid.Row="0">
-            <Grid Width="auto" Height="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".25*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height=".3*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".05*"/>
-                    <RowDefinition Height=".05*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".08*"/>
-                    <RowDefinition Height=".3*"/>
-                </Grid.RowDefinitions>
-
-                <Border  Background="#ffffffff" BorderBrush="#ff707070" Margin="0,43,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" Grid.Column="0"/>
-                <TextBlock  Text="Segoe UI" TextAlignment="left" FontFamily="Segoe UI"  TextWrapping="Wrap" Foreground="#ff707070" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Grid Grid.Row="1" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Path Stretch="uniform" Data="M 18 20.67890548706055 L 26.9296875 11.7421875 C 27.59062576293945 11.08125019073486 28.65937423706055 11.08125019073486 29.31328201293945 11.7421875 C 29.96718978881836 12.40312480926514 29.96718788146973 13.47187519073486 29.31328201293945 14.1328125 L 19.1953125 24.2578125 C 18.55546951293945 24.89765548706055 17.52890586853027 24.91171836853027 16.86796951293945 24.30703163146973 L 6.6796875 14.13984394073486 C 6.349218845367432 13.80937480926514 6.1875 13.37343788146973 6.1875 12.94453144073486 C 6.1875 12.515625 6.349218845367432 12.07968807220459 6.6796875 11.74921894073486 C 7.340624809265137 11.08828163146973 8.409375190734863 11.08828163146973 9.063281059265137 11.74921894073486 L 18 20.67890548706055 Z" Fill="#ff000000" Stroke="#ff000000" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0"/>
-                    <Path  Stretch="uniform" Data="M 14.45473575592041 16.80865669250488 L 20.70437240600586 11.53879451751709 C 21.16694450378418 11.14904880523682 21.91493225097656 11.14904880523682 22.37258338928223 11.53879451751709 C 22.83023452758789 11.92854022979736 22.83023262023926 12.55876731872559 22.37258338928223 12.94851398468018 L 15.29130077362061 18.91909027099609 C 14.84349250793457 19.29639625549316 14.12502956390381 19.30468940734863 13.66245937347412 18.94811248779297 L 6.531968116760254 12.95266056060791 C 6.30068302154541 12.75778675079346 6.1875 12.5007209777832 6.1875 12.24780082702637 C 6.1875 11.99488067626953 6.30068302154541 11.73781394958496 6.531968116760254 11.54294109344482 C 6.994539260864258 11.15319442749023 7.742527961730957 11.15319442749023 8.200178146362305 11.54294109344482 L 14.45473575592041 16.80865669250488 Z" Fill="#ff000000" Stroke="#ff000000"  Grid.Column="1" Grid.Row="1" VerticalAlignment="Top"/>
-
-                </Grid>
-
-                <Border Background="#ffffffff" BorderBrush="#ff707070" Grid.Row="3"/>
-                <Viewbox Grid.Row="2" Grid.Column="0">
-                    <Label Content="Lettergrootte" FontFamily="Segoe UI"  Foreground="#ff000000" HorizontalAlignment="Center" FontSize="60"/>
-                </Viewbox>
-                
-                <TextBlock  Text="12" TextAlignment="left" FontFamily="Segoe UI" TextWrapping="Wrap" Foreground="#ff707070" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"/>
-                <Grid Grid.Row="3" Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-                    <Path  Stretch="uniform" Data="M 14.45473575592041 16.80865669250488 L 20.70437240600586 11.53879451751709 C 21.16694450378418 11.14904880523682 21.91493225097656 11.14904880523682 22.37258338928223 11.53879451751709 C 22.83023452758789 11.92854022979736 22.83023262023926 12.55876731872559 22.37258338928223 12.94851398468018 L 15.29130077362061 18.91909027099609 C 14.84349250793457 19.29639625549316 14.12502956390381 19.30468940734863 13.66245937347412 18.94811248779297 L 6.531968116760254 12.95266056060791 C 6.30068302154541 12.75778675079346 6.1875 12.5007209777832 6.1875 12.24780082702637 C 6.1875 11.99488067626953 6.30068302154541 11.73781394958496 6.531968116760254 11.54294109344482 C 6.994539260864258 11.15319442749023 7.742527961730957 11.15319442749023 8.200178146362305 11.54294109344482 L 14.45473575592041 16.80865669250488 Z" Fill="#ff000000" Stroke="#ff000000" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-
-                </Grid>
-                <Border  Width="37" Height="32" Background="#ffffffff" BorderBrush="#ff707070" Margin="42,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <Viewbox  HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0">
-                    <Label  Content="B" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>                    
-                </Viewbox>
-                <Viewbox  HorizontalAlignment="Right" Grid.Row="6" Grid.Column="0">
-                    <Label Content="u" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>
-                </Viewbox>
-                <Viewbox HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1">
-                    <Label  Content="I" FontFamily="Segoe UI"  Foreground="#ff707070" FontSize="60"/>
-                </Viewbox>
-                <Border Background="#ffffffff" BorderBrush="#ff707070" Margin="242,195,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                
-                <Viewbox Grid.Row="7" Grid.Column="0" HorizontalAlignment="Center">
-                    <Label  Content="Letterkleur" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="60"/>
-                </Viewbox>
-                
-
-                
-                <Border Background="#ffffffff" BorderBrush="#ff707070"/>
-                <Viewbox Grid.Row="8" HorizontalAlignment="Center">
-                    <WrapPanel>
-                        <Label  Content="A" FontFamily="Segoe UI" Foreground="#ff707070" FontSize="60" />
-                    </WrapPanel>
-                </Viewbox>
-                
-                <Grid Grid.Row="9" Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border Background="#ff000000" BorderBrush="#ff707070" Grid.Row="0" Grid.Column="1"/>
-                    
-                    
-                    <Path Stretch="uniform" Data="M 18 20.67890548706055 L 26.9296875 11.7421875 C 27.59062576293945 11.08125019073486 28.65937423706055 11.08125019073486 29.31328201293945 11.7421875 C 29.96718978881836 12.40312480926514 29.96718788146973 13.47187519073486 29.31328201293945 14.1328125 L 19.1953125 24.2578125 C 18.55546951293945 24.89765548706055 17.52890586853027 24.91171836853027 16.86796951293945 24.30703163146973 L 6.6796875 14.13984394073486 C 6.349218845367432 13.80937480926514 6.1875 13.37343788146973 6.1875 12.94453144073486 C 6.1875 12.515625 6.349218845367432 12.07968807220459 6.6796875 11.74921894073486 C 7.340624809265137 11.08828163146973 8.409375190734863 11.08828163146973 9.063281059265137 11.74921894073486 L 18 20.67890548706055 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Row="0" Grid.Column="2"/>
-
-                </Grid>
-                    
-                
-            </Grid>
-        </Grid>
-       
-            <Grid Grid.Row="2" Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width=".4*"/>
-            </Grid.ColumnDefinitions>
-                <Border Background="#fff2f2f2" BorderBrush="#ff707070" Grid.Column="1" Grid.Row="1" />
-                <TextBlock  Text="Opslaan" TextAlignment="Center" FontFamily="Segoe UI"  Foreground="#ff000000" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-            
-            <Border Background="#fff2f2f2" BorderBrush="#ff707070" Grid.Column="1" Grid.Row="3"/>
-            <TextBlock  Text="Download" TextAlignment="center" FontFamily="Segoe UI" Foreground="#ff000000"  Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-
-        </Grid>
-        
-        <Grid Grid.Column="2" Grid.Row="1" Height="auto" Width="auto">            
-                <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width=".1*"/>
-            </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1.2*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height=".8*"/>
-                    <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-            <Grid Grid.Row="4" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="4*"/>
-                </Grid.ColumnDefinitions>
-                <Path  Stretch="uniform" Data="M 27.63513565063477 28.92050170898438 L 8.354801177978516 28.92050170898438 L 8.354801177978516 25.0644359588623 L 14.13890171051025 15.42426872253418 L 22.06191444396973 25.0644359588623 L 27.63513565063477 21.2083683013916 L 27.63513565063477 28.92050170898438 Z M 27.63513565063477 16.38828277587891 C 27.63513565063477 17.98553848266602 26.34033966064453 19.28033256530762 24.74308586120605 19.28033256530762 C 23.14577102661133 19.28033256530762 21.85103607177734 17.98553848266602 21.85103607177734 16.38828277587891 C 21.85103607177734 14.7910270690918 23.14577102661133 13.4962329864502 24.74308586120605 13.4962329864502 C 26.34034156799316 13.4962329864502 27.63513565063477 14.79102802276611 27.63513565063477 16.38828277587891 Z M 30.2200870513916 8.829066276550293 C 29.55093955993652 7.91650390625 28.61819267272949 6.849819183349609 27.59380340576172 5.825430870056152 C 26.56941413879395 4.801042556762695 25.50273132324219 3.868356227874756 24.59016799926758 3.199147939682007 C 23.03647613525391 2.059802532196045 22.28279495239258 1.928033471107483 21.85103607177734 1.928033471107483 L 6.90877628326416 1.928033471107483 C 5.579879283905029 1.928033471107483 4.498734474182129 3.009178161621094 4.498734474182129 4.338075160980225 L 4.498734474182129 30.36652755737305 C 4.498734474182129 31.69542503356934 5.579879283905029 32.77656936645508 6.90877628326416 32.77656936645508 L 29.08116149902344 32.77656936645508 C 30.41005897521973 32.77656936645508 31.49120330810547 31.69542503356934 31.49120330810547 30.36652755737305 L 31.49120330810547 11.56820106506348 C 31.49120330810547 11.13644218444824 31.35949516296387 10.38276195526123 30.2200870513916 8.829068183898926 Z M 26.23050308227539 7.188731670379639 C 27.15535736083984 8.113585472106934 27.88138198852539 8.948001861572266 28.41701316833496 9.640166282653809 L 23.7790699005127 9.640166282653809 L 23.7790699005127 5.002463817596436 C 24.47147560119629 5.538095474243164 25.30577087402344 6.264060497283936 26.23050498962402 7.188733100891113 Z M 29.56316947937012 30.36652755737305 C 29.56316947937012 30.62777519226074 29.34240913391113 30.84853553771973 29.08116149902344 30.84853553771973 L 6.908777236938477 30.84853553771973 C 6.647528648376465 30.84853553771973 6.426768779754639 30.62777519226074 6.426768779754639 30.36652755737305 L 6.426768779754639 4.338075160980225 C 6.426768779754639 4.076826572418213 6.647528648376465 3.856066703796387 6.908777236938477 3.856066703796387 C 6.908777236938477 3.856066703796387 21.84971237182617 3.856006383895874 21.85103607177734 3.856066703796387 L 21.85103607177734 10.60418319702148 C 21.85103607177734 11.13656139373779 22.28261375427246 11.56820011138916 22.8150520324707 11.56820011138916 L 29.56316947937012 11.56820011138916 L 29.56316947937012 30.36652755737305 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="1"/>
-                <Path  Stretch="uniform" Data="M 16.875 0 C 12.79746055603027 0 9.4921875 3.305273532867432 9.4921875 7.3828125 C 9.4921875 10.67929649353027 14.3173828125 16.6875 16.166015625 18.86835861206055 C 16.54043006896973 19.31015586853027 17.21015548706055 19.31015586853027 17.583984375 18.86835861206055 C 19.4326171875 16.6875 24.2578125 10.67929649353027 24.2578125 7.3828125 C 24.2578125 3.305273532867432 20.95253944396973 0 16.875 0 Z M 16.875 9.84375 C 15.515625 9.84375 14.4140625 8.7421875 14.4140625 7.3828125 C 14.4140625 6.0234375 15.515625 4.921875 16.875 4.921875 C 18.234375 4.921875 19.3359375 6.0234375 19.3359375 7.3828125 C 19.3359375 8.7421875 18.234375 9.84375 16.875 9.84375 Z M 1.178906202316284 12.6533203125 C 0.4670318365097046 12.93804931640625 0.0001704692840576172 13.6274356842041 0 14.39414024353027 L 0 29.06132888793945 C 0 29.724609375 0.669726550579071 30.17812538146973 1.285546898841858 29.93203163146973 L 9.375 26.25 L 9.375 12.59296894073486 C 8.857030868530273 11.65664100646973 8.433398246765137 10.74492168426514 8.1298828125 9.873046875 L 1.178906202316284 12.6533203125 Z M 16.875 21.07441329956055 C 16.05058670043945 21.07441329956055 15.27070331573486 20.71230316162109 14.73574256896973 20.08066368103027 C 13.58378982543945 18.72128868103027 12.35859394073486 17.17324256896973 11.25 15.58535099029541 L 11.25 26.24941253662109 L 22.5 29.99941253662109 L 22.5 15.5859375 C 21.39140701293945 17.17324256896973 20.16679763793945 18.72187423706055 19.01425743103027 20.08124923706055 C 18.47929573059082 20.71230316162109 17.69941329956055 21.07441329956055 16.875 21.07441329956055 Z M 32.46445465087891 9.442968368530273 L 24.375 13.125 L 24.375 30 L 32.57109451293945 26.7216796875 C 33.28307342529297 26.43708229064941 33.74999237060547 25.74761390686035 33.75 24.98085975646973 L 33.75 10.31367206573486 C 33.75 9.650390625 33.08027267456055 9.19687557220459 32.46445465087891 9.44296932220459 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="3"/>
-
-            </Grid>
-
-            
-
-
-
-
-
-            
-            <Grid Grid.Row="6" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".05*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width=".5*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="4*"/>
-                </Grid.ColumnDefinitions>
-                <Path  Width="auto" Height="auto" Stretch="uniform" Data="M 29.296875 22.5 C 29.68359375 22.5 30 22.81640625 30 23.203125 L 30 25.546875 C 30 25.93359375 29.68359375 26.25 29.296875 26.25 L 0.703125 26.25 C 0.31640625 26.25 0 25.93359375 0 25.546875 L 0 4.453125 C 0 4.06640625 0.31640625 3.75 0.703125 3.75 L 3.046875 3.75 C 3.43359375 3.75 3.75 4.06640625 3.75 4.453125 L 3.75 22.5 L 29.296875 22.5 Z M 21.837890625 9.345703125 L 16.875 12.65625 L 11.876953125 5.994140625 C 11.578125 5.595703125 10.96875 5.625 10.7109375 6.052734375 L 5.625 14.53125 L 5.625 20.625 L 28.125 20.625 L 22.857421875 9.62109375 C 22.669921875 9.240234375 22.189453125 9.111328125 21.837890625 9.345703125 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="1"/>
-                <Path  Width="auto" Height="auto" Stretch="uniform" Data="M 19.5 18.75 L 21.75 18.75 C 22.125 18.75 22.5 18.375 22.5 18 L 22.5 10.125 C 22.5 9.75 22.125 9.375 21.75 9.375 L 19.5 9.375 C 19.125 9.375 18.75 9.75 18.75 10.125 L 18.75 18 C 18.75 18.375 19.125 18.75 19.5 18.75 Z M 25.125 18.75 L 27.375 18.75 C 27.75 18.75 28.125 18.375 28.125 18 L 28.125 4.5 C 28.125 4.125 27.75 3.75 27.375 3.75 L 25.125 3.75 C 24.75 3.75 24.375 4.125 24.375 4.5 L 24.375 18 C 24.375 18.375 24.75 18.75 25.125 18.75 Z M 8.25 18.75 L 10.5 18.75 C 10.875 18.75 11.25 18.375 11.25 18 L 11.25 13.875 C 11.25 13.5 10.875 13.125 10.5 13.125 L 8.25 13.125 C 7.875 13.125 7.5 13.5 7.5 13.875 L 7.5 18 C 7.5 18.375 7.875 18.75 8.25 18.75 Z M 13.875 18.75 L 16.125 18.75 C 16.5 18.75 16.875 18.375 16.875 18 L 16.875 6.375 C 16.875 6 16.5 5.625 16.125 5.625 L 13.875 5.625 C 13.5 5.625 13.125 6 13.125 6.375 L 13.125 18 C 13.125 18.375 13.5 18.75 13.875 18.75 Z M 29.0625 22.5 L 3.75 22.5 L 3.75 4.6875 C 3.75 4.169531345367432 3.330468654632568 3.75 2.8125 3.75 L 0.9375 3.75 C 0.4195312559604645 3.75 0 4.169531345367432 0 4.6875 L 0 24.375 C 0 25.41035079956055 0.839648425579071 26.25 1.875 26.25 L 29.0625 26.25 C 29.58046913146973 26.25 30 25.83046913146973 30 25.3125 L 30 23.4375 C 30 22.91953086853027 29.58046913146973 22.5 29.0625 22.5 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="3"/>
-                <Path  Width="auto" Height="auto" Stretch="uniform" Data="M 29.0625 22.5 L 3.75 22.5 L 3.75 4.6875 C 3.75 4.169531345367432 3.330468654632568 3.75 2.8125 3.75 L 0.9375 3.75 C 0.4195312559604645 3.75 0 4.169531345367432 0 4.6875 L 0 24.375 C 0 25.41035079956055 0.839648425579071 26.25 1.875 26.25 L 29.0625 26.25 C 29.58046913146973 26.25 30 25.83046913146973 30 25.3125 L 30 23.4375 C 30 22.91953086853027 29.58046913146973 22.5 29.0625 22.5 Z M 27.1875 5.625 L 20.26992225646973 5.625 C 19.01718711853027 5.625 18.3896484375 7.1396484375 19.27558708190918 8.025586128234863 L 21.17402458190918 9.924023628234863 L 16.875 14.2236328125 L 12.57597637176514 9.924609184265137 C 11.84355449676514 9.192187309265137 10.65644550323486 9.192187309265137 9.924609184265137 9.924609184265137 L 5.899804592132568 13.94941329956055 C 5.533593654632568 14.31562423706055 5.533593654632568 14.90917873382568 5.899804592132568 15.27538967132568 L 7.225194931030273 16.60078048706055 C 7.591405868530273 16.96699142456055 8.18496036529541 16.96699142456055 8.55117130279541 16.60078048706055 L 11.25 13.9013671875 L 15.54902362823486 18.20038986206055 C 16.28144454956055 18.93281173706055 17.46855545043945 18.93281173706055 18.20038986206055 18.20038986206055 L 23.82538986206055 12.57538986206055 L 25.72382736206055 14.47382736206055 C 26.60976409912109 15.35976505279541 28.12441253662109 14.73222541809082 28.12441253662109 13.47949123382568 L 28.12441253662109 6.5625 C 28.12499809265137 6.044531345367432 27.70546722412109 5.625 27.18749809265137 5.625 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="5" />
-                <Path  Width="auto" Height="auto" Stretch="uniform" Data="M 30.92519569396973 16.875 L 17.021484375 16.875 L 26.28105545043945 26.13457107543945 C 26.63496208190918 26.48847770690918 27.21738433837891 26.51718902587891 27.58125114440918 26.17441558837891 C 29.84882926940918 24.03808784484863 31.40859413146973 21.15820503234863 31.8662109375 17.92090034484863 C 31.94472694396973 17.36660385131836 31.48476600646973 16.87500190734863 30.92519569396973 16.87500190734863 Z M 29.99765586853027 13.078125 C 29.51484298706055 6.078515529632568 23.92148399353027 0.485156238079071 16.921875 0.002343750093132257 C 16.38750076293945 -0.03457031399011612 15.9375 0.416015625 15.9375 0.9515625238418579 L 15.9375 14.0625 L 29.04902267456055 14.0625 C 29.58456993103027 14.0625 30.03456878662109 13.61250019073486 29.99765586853027 13.078125 Z M 13.125 16.875 L 13.125 2.971289157867432 C 13.125 2.411718845367432 12.63339805603027 1.951757907867432 12.07968711853027 2.0302734375 C 5.097070217132568 3.016992092132568 -0.240234375 9.1171875 0.00820312462747097 16.42792892456055 C 0.263671875 23.93613243103027 6.728320121765137 30.09316444396973 14.24003887176514 29.99882888793945 C 17.19316482543945 29.9619140625 19.921875 29.01035308837891 22.16543006896973 27.4189453125 C 22.62832069396973 27.0908203125 22.65878868103027 26.40937423706055 22.25742149353027 26.00800704956055 L 13.125 16.875 Z" Fill="#ff000000" Stroke="#ff000000" Grid.Column="7"/>
-
-            </Grid>
-            <Viewbox  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
-                <Label  Content="Invoegen resultaten" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
-            </Viewbox>
-            <Viewbox  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
-                <Label  Content="Ander template" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
-            </Viewbox>
-            <Viewbox  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left">
-                <Label Content="Afbeelding invoegen" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
-            </Viewbox>
-            <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <Label  Content="Grafiek invoegen" FontFamily="Segoe UI" Foreground="#ff000000" FontSize="24"/>
-            </Viewbox>
-            <Viewbox Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left">
-                <Label  Content="Grafiek bewerken" FontFamily="Segoe UI"  Foreground="#ff000000" FontSize="24"/>
-            </Viewbox>
-            
-           
-            
-            </Grid>
-        
-        <Grid Background="DimGray" HorizontalAlignment="Left" Margin="0,0,0,0" Width="auto" Grid.RowSpan="3">
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="6*"/>
-                <RowDefinition Height="2.5*"/>
-                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-           
 
-            
+            <!-- Alignment -->
+            <StackPanel Margin="5" Grid.Row="0" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Positie" FontWeight="Bold" FontSize="16" />
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
 
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" Name="controlPositionLeft" FontSize="14" Padding="10, 5" Grid.Column="1" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyLeft">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionLeft" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
 
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE740;" Name="controlPositionCenter" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyCenter">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionCenter" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
 
-           
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72A;" FontSize="14" Name="controlPositionRight" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyRight">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionRight" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
 
+            <!-- Unlock -->
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
+            </StackPanel>
 
+            <!-- Width -->
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Breedte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlWidth" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding WidthChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlWidth" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+
+            <!-- Height -->
+            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Hoogte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlHeight" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding HeightChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlHeight" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
         </Grid>
-        
-        <Grid Margin="0,0,0.2,0" >
-        </Grid>
-
     </Grid>
-    -->
 </Page>

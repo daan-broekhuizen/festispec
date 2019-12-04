@@ -18,16 +18,7 @@ namespace Festispec.ViewModel
     public class CustomerListViewModel : CustomerViewModelBase, ICustomerListViewModel
     {
         #region BindingProperties
-        private List<CustomerViewModel> _customers;
-        public List<CustomerViewModel> Customers
-        {
-            get => _customers;
-            set
-            {
-                _customers = value;
-                RaisePropertyChanged("Customers");
-            }
-        }
+        public ObservableCollection<CustomerViewModel> Customers { get; set; }
         private List<CustomerViewModel> filteredcustomers;
         public List<CustomerViewModel> FilteredCustomers
         {
@@ -38,6 +29,8 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("FilteredCustomers");
             }
         }
+
+        private CustomerViewModel _selectedCustomer;
         public CustomerViewModel SelectedCustomer
         {
             get => _selectedCustomer;
@@ -48,39 +41,24 @@ namespace Festispec.ViewModel
                 ShowCustomerInfo();
             }
         }
-        private CustomerViewModel _selectedCustomer;
-        private string _filterCustomer;
-        public string FilterCustomer
-        {
-            get => _filterCustomer;
-            set
-            {
-                _filterCustomer = value.ToLower();
-                RaisePropertyChanged("FilterCustomer");
-            }
-        }
-        private ComboBoxItem _selectedBox;
-        public ComboBoxItem SelectedBox
-        {
-            get => _selectedBox;
-            set
-            {
-                _selectedBox = value;
-                SortCustomers();
-            }
-        } 
         #endregion
 
-        public ICommand SearchCustomer { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
+        public ICommand SortChangedCommand { get; set; }
+        public ICommand SearchButtonClickCommand { get; set; }
+        public ICommand SearchTextChangedCommand { get; set; }
+
         public CustomerListViewModel(NavigationService service, CustomerRepository repo) : base(service, repo)
         {
-            Customers = _customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList();
-            FilteredCustomers = Customers;
-            FilterCustomer = "";
+            Customers =  new ObservableCollection<CustomerViewModel> (_customerRepository.GetCustomers().Select(c => new CustomerViewModel(c)).ToList());
+            FilteredCustomers = Customers.ToList();
 
-            SearchCustomer = new RelayCommand(FilterCustomers);
+
+            SearchButtonClickCommand = new RelayCommand<string>(FilterCustomers);
+            SearchTextChangedCommand = new RelayCommand<string>(FilterCustomers);
             ShowAddCustomerCommand = new RelayCommand(ShowAddCustomer);
+            SortChangedCommand = new RelayCommand<int>(ChangeSort);
+
         }
 
         private void ShowCustomerInfo()
@@ -89,31 +67,29 @@ namespace Festispec.ViewModel
                 _navigationService.NavigateTo("CustomerInfo", SelectedCustomer);
         }
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo", new CustomerViewModel());
-        private void FilterCustomers()
+        private void FilterCustomers(string searchText)
         {
-            FilteredCustomers = Customers.Where(e => e.Name.ToLower().Contains(FilterCustomer)).ToList();
-            SortCustomers();
+            FilteredCustomers = Customers.Where(e => e.Name.ToLower().Contains(searchText) || e.KvK.Contains(searchText)).ToList();
         }
-        private void SortCustomers()
+        private void ChangeSort(int sortMode)
         {
-            if (SelectedBox != null)
+            
+            switch (sortMode)
             {
-                switch (SelectedBox.Content)
-                {
-                    case "Naam oplopend":
-                        FilteredCustomers = FilteredCustomers.OrderBy(e => e.Name).ToList();
-                        break;
-                    case "Naam aflopend":
-                        FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.Name).ToList();
-                        break;
-                    case "KvK oplopend":
-                        FilteredCustomers = FilteredCustomers.OrderBy(e => e.KvK).ToList();
-                        break;
-                    case "KvK aflopend":
-                        FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.KvK).ToList();
-                        break;
-                }
+                case 0:
+                    FilteredCustomers = FilteredCustomers.OrderBy(e => e.Name).ToList();
+                    break;
+                case 1:
+                    FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.Name).ToList();
+                    break;
+                case 2:
+                    FilteredCustomers = FilteredCustomers.OrderBy(e => e.KvK).ToList();
+                    break;
+                case 3:
+                    FilteredCustomers = FilteredCustomers.OrderByDescending(e => e.KvK).ToList();
+                    break;
             }
+            
         }
     }
 }

@@ -53,7 +53,7 @@ namespace Festispec.Service
             }
 
             // Maakt alle attributes lower case
-            output = Regex.Replace(output, @"<(.|\n)*?>", match => match.ToString().ToLower());
+            //output = Regex.Replace(output, @"<(.|\n)*?>", match => match.ToString().ToLower());
 
             return output;
         }

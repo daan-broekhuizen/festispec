@@ -17,7 +17,6 @@ namespace Festispec.Model
         public virtual DbSet<BeschikbaarheidInspecteurs> BeschikbaarheidInspecteurs { get; set; }
         public virtual DbSet<Contactpersoon> Contactpersoon { get; set; }
         public virtual DbSet<Inspectieformulier> Inspectieformulier { get; set; }
-        public virtual DbSet<InspectieformulierVragenlijstCombinatie> InspectieformulierVragenlijstCombinatie { get; set; }
         public virtual DbSet<Klant> Klant { get; set; }
         public virtual DbSet<Offerte> Offerte { get; set; }
         public virtual DbSet<Opdracht> Opdracht { get; set; }

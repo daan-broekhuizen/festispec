@@ -67,7 +67,7 @@
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
-                context.Status.AddOrUpdate(x => x.Afkorting, new Status() { Afkorting = status.Key, Betekenis = status.Value });
+                context.Status.AddOrUpdate(x => x.Betekenis, new Status() { Betekenis = status.Value });
 
             context.SaveChanges();
         }
@@ -77,10 +77,12 @@
             Dictionary<string, string> statuses = new Dictionary<string, string>()
             {
                 { "av", "Afbeelding vraag" },
-                { "lv", "Lijst vraag" },
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
+                { "t2", "Tabel vraag X2"},
+                { "t3", "Tabel vraag X3"  },
+                { "tx", "Pure text" }
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
@@ -194,8 +196,10 @@
             opdrachten[0] = new Opdracht()
             {
                 OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
+                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
                 CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now,
+                EindDatum = DateTime.Now.AddDays(2),
                 KlantID = "293871",
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
@@ -247,16 +251,20 @@
             Vraag[] vragen = new Vraag[2];
             vragen[0] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Open vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                VolgordeNummer = 1
+                
             };
 
             vragen[1] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Meerkeuze vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                VolgordeNummer = 2
+                
             };
 
             context.Vraag.AddOrUpdate(vragen);
