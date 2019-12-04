@@ -16,7 +16,7 @@ namespace Festispec.Model
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AntwoordNummer { get; set; }
 
         [Key]
