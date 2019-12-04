@@ -1,6 +1,7 @@
 ﻿using Festispec.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +43,10 @@ namespace Festispec.Model.Repositories
             
             using(FestispecContext context = new FestispecContext())
             {
-                opdracht = context.Opdracht.Where(x => x.OpdrachtID == job.JobID).FirstOrDefault();
+                opdracht = context.Opdracht
+                    .Include(o => o.Inspectieformulier.Select(i => i.Vraag.Select(v => v.Antwoorden)))
+                    .Where(o => o.OpdrachtID == job.JobID)
+                    .FirstOrDefault();
             }
 
             return opdracht;

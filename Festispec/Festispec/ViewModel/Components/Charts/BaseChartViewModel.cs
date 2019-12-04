@@ -5,6 +5,7 @@ using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,28 +46,25 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
-        private Chart _control;
+        protected Chart _control;
 
         public BaseChartViewModel() { }
 
         public BaseChartViewModel(GeneralChartData chartData)
         {
             ChartData = chartData;
+            ChartData.Values.CollectionChanged += ChartValuesChanged;
         }
 
-        public virtual Chart BuildControl()
+        protected virtual void ChartValuesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            CartesianChart cc = new CartesianChart
-            {
-                Series = Collection
-            };
-
-            _control = cc;
-
-            return cc;
+            // TODO: Multiple
+            Collection[0].Values.Clear();
+            foreach (int i in ChartData.Values)
+                Collection[0].Values.Add(i);
         }
 
-        public abstract void ApplyColor();
+        public abstract Chart BuildControl();
 
         public byte[] ToByteArray()
         {
@@ -87,5 +85,7 @@ namespace Festispec.ViewModel.Components.Charts
 
             return data;
         }
+
+        public abstract void ApplyColor();
     }
 }

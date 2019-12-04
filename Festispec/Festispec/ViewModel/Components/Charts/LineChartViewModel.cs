@@ -1,6 +1,7 @@
 ﻿using Festispec.ViewModel.Components.Charts.Data;
 using GalaSoft.MvvmLight;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -12,30 +13,8 @@ using System.Windows.Media;
 
 namespace Festispec.ViewModel.Components.Charts
 {
-    public class LineChartViewModel : BaseChartViewModel
+    public class LineChartViewModel : CartesianChartViewModel
     {
-        private string _xAxis;
-        public string XAxis
-        {
-            get => _xAxis;
-            set
-            {
-                _xAxis = value;
-                RaisePropertyChanged("XAxis");
-            }
-        }
-
-        private string _yAxis;
-        public string YAxis
-        {
-            get => _yAxis;
-            set
-            {
-                _yAxis = value;
-                RaisePropertyChanged("YAxis");
-            }
-        }
-
         public LineChartViewModel(string title, GeneralChartData chartData) : base(chartData)
         {
             Collection = new SeriesCollection()
@@ -43,7 +22,7 @@ namespace Festispec.ViewModel.Components.Charts
                 new LineSeries()
                 {
                     Title = title,
-                    Values = new ChartValues<double>(ChartData.Values)
+                    Values = new ChartValues<int>(ChartData.Values)
                 }
             };
 
@@ -53,8 +32,6 @@ namespace Festispec.ViewModel.Components.Charts
             for (int i = 0; i < labels.Count(); i++)
                 Labels[i] = labels.ElementAt(i);
             */
-            XAxis = "XAXIS";
-            YAxis = "YAXIS";
             Title = "TITLE";
             ForegroundColor = Colors.Black;
         }

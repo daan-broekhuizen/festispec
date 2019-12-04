@@ -4,12 +4,16 @@ using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.ViewModel.Components.Charts;
 using Festispec.ViewModel.Components.Charts.Data;
+using Festispec.ViewModel.InspectionFormViewModels;
+using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,6 +38,7 @@ namespace Festispec.ViewModel.Components
         public ICommand AddChartCommand { get; set; }
         public ICommand ForegroundColorChangedCommand { get; set; }
         public ICommand TitleChangedCommand { get; set; }
+        public ICommand QuestionChangedCommand { get; set; }
 
         // Properties
         private bool _isXAxis;
@@ -96,6 +101,8 @@ namespace Festispec.ViewModel.Components
             }
         }
 
+        public ObservableCollection<VraagViewModel> Questions { get; set; }
+
         private Chart _control;
         public Chart Control
         {
@@ -108,27 +115,49 @@ namespace Festispec.ViewModel.Components
             }
         }
 
+        private VraagViewModel _selectedQuestion;
+        public VraagViewModel SelectedQuestion
+        {
+            get => _selectedQuestion;
+            set
+            {
+                _selectedQuestion = value;
+
+                RaisePropertyChanged("SelectedQuestion");
+            }
+        }
+
         public DocumentDesignerViewModel Designer { get; set; }
 
         public IChart ChartViewModel { get; set; }
 
+        private Opdracht _opdracht;
+        private string _mode;
+
         public ChartDialogViewModel()
         {
+            Questions = new ObservableCollection<VraagViewModel>();
             SwitchAxisCommand = new RelayCommand<string>(SwitchAxis);
             AddChartCommand = new RelayCommand(AddChart);
             ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
             TitleChangedCommand = new RelayCommand<string>((title) => Title = title);
+            QuestionChangedCommand = new RelayCommand<VraagViewModel>(QuestionChanged);
         }
 
         public void Create(DocumentDesignerViewModel designer, string mode, Opdracht opdracht)
         {
+            _opdracht = opdracht;
+            _mode = mode;
             Designer = designer;
             IsXAxis = true;
 
-            GeneralChartData chartData = new GeneralChartData();
-            chartData.Values = new List<double>() { 0, 10 };
+            foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv"))
+                Questions.Add(new VraagViewModel(vraag));
 
-            switch (mode)
+            GeneralChartData chartData = new GeneralChartData();
+            chartData.UpdateValues(new List<double>() { 0, 0 });
+
+            switch (_mode)
             {
                 case "Bar":
                     ChartViewModel = new BarChartViewModel("Test", chartData);
@@ -142,7 +171,7 @@ namespace Festispec.ViewModel.Components
                     break;
             }
 
-            if(ChartViewModel != null)
+            if (ChartViewModel != null)
                 Control = ChartViewModel.BuildControl();
         }
 
@@ -160,11 +189,19 @@ namespace Festispec.ViewModel.Components
             }
         }
 
+        private void QuestionChanged(VraagViewModel question)
+        {
+            Title = question.Question;
+
+            if(ChartViewModel != null)
+                ChartViewModel.ChartData.Update(question);
+        }
+
         public void AddChart()
         {
             byte[] data = ChartViewModel.ToByteArray();
 
-            UploadModel result = (new ImageShackClient()).UploadImage(new FileData(data, "image/png"));
+            UploadModel result = (new ImageShackClient()).UploadImage(new FileData(data));
 
             if (AddRequested != null)
                 AddRequested.Invoke(Designer, result);

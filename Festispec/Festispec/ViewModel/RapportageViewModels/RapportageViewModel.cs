@@ -261,9 +261,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (Stream dataStream = saveFileDialog.OpenFile())
-                {
                     dataStream.Write(data, 0, data.Length);
-                }
             }
         }
     }
