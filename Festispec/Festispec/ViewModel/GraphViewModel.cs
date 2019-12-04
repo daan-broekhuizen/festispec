@@ -15,8 +15,10 @@ using LiveCharts.Wpf;
 
 namespace Festispec.ViewModel
 {
-    public class OfferteGraphViewModel : ViewModelBase
+    public class GraphViewModel : ViewModelBase
     {
+
+        #region properties
         private JobRepository _jrepo;
         private QuotationRepository _qrepo;
 
@@ -87,9 +89,11 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("OffertesSent");
             }
         }
+        #endregion
 
-        public OfferteGraphViewModel(JobRepository Jrepo, QuotationRepository Qrepo )
+        public GraphViewModel(JobRepository Jrepo, QuotationRepository Qrepo )
         {
+            // Offerte Graph
             OffertesRejected = new ObservableValue();
             OffertesSent = new ObservableValue();
             OffertesAccepted = new ObservableValue();
@@ -98,7 +102,6 @@ namespace Festispec.ViewModel
             StartDate = new DateTime(2019, 11,11);
             setEndDate();
             EndDate = _startDate.AddMonths(1);
-            // SelectedItem = "Week";
             OffertesRejected.Value = GetOffertesRejected();
             OffertesSent.Value = GetOffertesSent();
             OffertesAccepted.Value = GetOffertesAccepted();
@@ -126,6 +129,7 @@ namespace Festispec.ViewModel
                     Fill = Brushes.Green
                 }
         };
+            //End offerte graph
             }
 
         private void setGraph()
@@ -178,12 +182,32 @@ namespace Festispec.ViewModel
 
         public int GetOffertesAccepted()
         {
-            return _jrepo.GetOpdrachten().Where(e => e.Status.Equals("Offerte geaccepteerd")).Count();
+            int counter = 0;
+            List<Opdracht> JobsWithStatus = _jrepo.GetOpdrachten().Where(e => e.Status.Equals("Offerte geaccepteerd")).ToList();
+
+            JobsWithStatus.Select(e => e.Offerte).ToList().ForEach(e =>
+            {
+                if (e.FirstOrDefault().Aanmaakdatum > StartDate && e.FirstOrDefault().Aanmaakdatum < EndDate)
+                {
+                    counter++;
+                }
+            });
+            return counter;
         }
 
         public int GetOffertesSent()
         {
-            return _jrepo.GetOpdrachten().Where(e => e.Status.Equals("Offerte verstuurt")).Count();
+            int counter = 0;
+            List<Opdracht> JobsWithStatus = _jrepo.GetOpdrachten().Where(e => e.Status.Equals("Offerte verstuurt")).ToList();
+
+            JobsWithStatus.Select(e => e.Offerte).ToList().ForEach(e =>
+            {
+                if (e.FirstOrDefault().Aanmaakdatum > StartDate && e.FirstOrDefault().Aanmaakdatum < EndDate)
+                {
+                    counter++;
+                }
+            });
+            return counter;
         }
     }
 }

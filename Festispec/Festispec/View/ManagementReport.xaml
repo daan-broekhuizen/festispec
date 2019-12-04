@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagementReport"
-      DataContext="{Binding OfferteGraph, Source={StaticResource Locator}}">
+      DataContext="{Binding Graph, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>

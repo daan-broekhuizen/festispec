@@ -142,7 +142,7 @@ namespace Festispec.ViewModel
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
-        public OfferteGraphViewModel OfferteGraph => new OfferteGraphViewModel(JobRepo, QuotationRepo);
+        public GraphViewModel Graph => new GraphViewModel(JobRepo, QuotationRepo);
 
         //Clean when logging out?
         public static void Cleanup()
