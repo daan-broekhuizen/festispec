@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +172,7 @@
     <Content Include="Views\Credentials\Edit.cshtml" />
     <Content Include="Views\Credentials\Index.cshtml" />
     <Content Include="Views\Credentials\Login.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
