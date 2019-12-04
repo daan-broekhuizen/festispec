@@ -1,8 +1,11 @@
 ﻿using Festispec.Service;
 using GalaSoft.MvvmLight;
 using mshtml;
+using OpenHtmlToPdf;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -294,6 +297,16 @@ namespace Festispec.ViewModel.Components
             HTMLDocument document = (HTMLDocument)WebBrowser.Document;
             if (document != null)
                 document.execCommand(command, false, value);
+        }
+
+        /// <summary>
+        /// Zet HTML om naar een PDF document.
+        /// </summary>
+        public byte[] ExportToPdf()
+        {
+            byte[] data = Pdf.From(DesignerContent).Content();
+
+            return data;
         }
     }
 }

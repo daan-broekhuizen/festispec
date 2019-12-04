@@ -1,7 +1,6 @@
 ﻿
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System.IO;
 using System.Diagnostics;
 using System.Windows.Forms;
 namespace Festispec.Utility.Converters

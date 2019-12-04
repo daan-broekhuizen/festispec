@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -207,7 +208,20 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         private void Download(DocumentDesignerViewModel designer)
         {
+            designer.UpdateContent();
 
+            byte[] data = designer.ExportToPdf();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "pdf files (*.pdf)|*.pdf";
+
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (Stream dataStream = saveFileDialog.OpenFile())
+                {
+                    dataStream.Write(data, 0, data.Length);
+                }
+            }
         }
     }
 }
