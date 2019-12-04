@@ -1,7 +1,9 @@
 ﻿using Festispec.API;
 using Festispec.API.ImageShack;
+using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.ViewModel.Components.Charts;
+using Festispec.ViewModel.Components.Charts.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LiveCharts.Wpf;
@@ -118,19 +120,22 @@ namespace Festispec.ViewModel.Components
             TitleChangedCommand = new RelayCommand<string>((title) => Title = title);
         }
 
-        public void Create(DocumentDesignerViewModel designer, string mode)
+        public void Create(DocumentDesignerViewModel designer, string mode, Opdracht opdracht)
         {
-            this.Designer = designer;
+            Designer = designer;
             IsXAxis = true;
+
+            GeneralChartData chartData = new GeneralChartData();
+            chartData.Values = new List<double>() { 0, 10 };
 
             switch (mode)
             {
                 case "Bar":
-                    ChartViewModel = new BarChartViewModel("Test", new List<double>() { 10, 20, 30 }, new List<string>() { "A", "B", "C" });
+                    ChartViewModel = new BarChartViewModel("Test", chartData);
 
                     break;
                 case "Line":
-                    ChartViewModel = new LineChartViewModel("Test", new List<double>() { 10, 20, 30 }, new List<string>() { "A", "B", "C" });
+                    ChartViewModel = new LineChartViewModel("Test", chartData);
 
                     break;
                 case "Pie":

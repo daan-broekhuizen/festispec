@@ -6,6 +6,7 @@ using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
+using Festispec.ViewModel.Components.Charts.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -72,7 +73,18 @@ namespace Festispec.ViewModel.RapportageViewModels
                 _isEditable = value;
 
                 RaisePropertyChanged("IsEditable");
+                RaisePropertyChanged("IsChartVisible");
             }
+        }
+        
+        public bool IsChartVisible
+        {
+            get => IsEditable && _mode == EnumTemplateMode.SELECT;
+        }
+
+        public bool IsSelectMode
+        {
+            get => _mode == EnumTemplateMode.SELECT;
         }
 
         private bool _displayExtraOptions;
@@ -183,7 +195,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             ChartDialogBox chartDialog = new ChartDialogBox();
             chartDialog.ViewModel.AddRequested += AddChartRequested;
-            chartDialog.ViewModel.Create(designer, mode);
+            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job));
 
             chartDialog.ShowDialog();
         }

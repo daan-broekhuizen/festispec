@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using Festispec.ViewModel.Components.Charts.Data;
+using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -34,22 +35,23 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
-        public BarChartViewModel(string title, IEnumerable<double> values, IEnumerable<string> labels)
+        public BarChartViewModel(string title, GeneralChartData chartData) : base(chartData)
         {
             Collection = new SeriesCollection()
             {
                 new ColumnSeries()
                 {
                     Title = title,
-                    Values = new ChartValues<double>(values)
+                    Values = new ChartValues<double>(ChartData.Values),
                 }
             };
 
+            /*
             Labels = new string[labels.Count()];
 
             for (int i = 0; i < labels.Count(); i++)
                 Labels[i] = labels.ElementAt(i);
-
+                */
             XAxis = "XAXIS";
             YAxis = "YAXIS";
             Title = "TITLE";

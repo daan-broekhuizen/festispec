@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.ViewModel.Components.Charts.Data;
+using GalaSoft.MvvmLight;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -29,7 +30,7 @@ namespace Festispec.ViewModel.Components.Charts
 
         public SeriesCollection Collection { get; set; }
 
-        public string[] Labels { get; set; }
+        public GeneralChartData ChartData { get; set; }
 
         private Color _foregroundColor;
         public Color ForegroundColor
@@ -45,6 +46,13 @@ namespace Festispec.ViewModel.Components.Charts
         }
 
         private Chart _control;
+
+        public BaseChartViewModel() { }
+
+        public BaseChartViewModel(GeneralChartData chartData)
+        {
+            ChartData = chartData;
+        }
 
         public virtual Chart BuildControl()
         {

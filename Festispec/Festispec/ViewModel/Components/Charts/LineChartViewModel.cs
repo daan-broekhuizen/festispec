@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.ViewModel.Components.Charts.Data;
+using GalaSoft.MvvmLight;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -35,22 +36,23 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
-        public LineChartViewModel(string title, IEnumerable<double> values, IEnumerable<string> labels)
+        public LineChartViewModel(string title, GeneralChartData chartData) : base(chartData)
         {
             Collection = new SeriesCollection()
             {
                 new LineSeries()
                 {
                     Title = title,
-                    Values = new ChartValues<double>(values)
+                    Values = new ChartValues<double>(ChartData.Values)
                 }
             };
 
+            /*
             Labels = new string[labels.Count()];
 
             for (int i = 0; i < labels.Count(); i++)
                 Labels[i] = labels.ElementAt(i);
-
+            */
             XAxis = "XAXIS";
             YAxis = "YAXIS";
             Title = "TITLE";

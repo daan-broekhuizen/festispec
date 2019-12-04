@@ -35,5 +35,17 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
+
+        public Opdracht GetOpdracht(JobViewModel job)
+        {
+            Opdracht opdracht = null;
+            
+            using(FestispecContext context = new FestispecContext())
+            {
+                opdracht = context.Opdracht.Where(x => x.OpdrachtID == job.JobID).FirstOrDefault();
+            }
+
+            return opdracht;
+        }
     }
 }
