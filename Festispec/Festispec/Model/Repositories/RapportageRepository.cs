@@ -16,5 +16,14 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
+
+        public void UpdateTemplate(RapportTemplate template)
+        {
+            using(FestispecContext context = new FestispecContext())
+            {
+                context.RapportTemplate.Where(x => x.TemplateID == template.TemplateID).FirstOrDefault().TemplateText = template.TemplateText;
+                context.SaveChanges();
+            }
+        }
     }
 }

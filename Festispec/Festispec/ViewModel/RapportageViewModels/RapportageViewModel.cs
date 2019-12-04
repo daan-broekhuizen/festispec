@@ -31,20 +31,6 @@ namespace Festispec.ViewModel.RapportageViewModels
         // Services
         private readonly NavigationService _navigationService;
 
-        private RapportTemplate _template;
-
-        private bool _displayExtraOptions;
-        public bool DisplayExtraOptions
-        {
-            get => _displayExtraOptions;
-            set
-            {
-                _displayExtraOptions = value;
-
-                RaisePropertyChanged("DisplayExtraOptions");
-            }
-        }
-
         // Commands
         public ICommand ModeChangedCommand { get; set; }
         public ICommand ApplyStyleCommand { get; set; }
@@ -88,10 +74,23 @@ namespace Festispec.ViewModel.RapportageViewModels
             }
         }
 
+        private bool _displayExtraOptions;
+        public bool DisplayExtraOptions
+        {
+            get => _displayExtraOptions;
+            set
+            {
+                _displayExtraOptions = value;
+
+                RaisePropertyChanged("DisplayExtraOptions");
+            }
+        }
+
         public bool ShouldAddResults { get; set; }
 
         private EnumTemplateMode _mode;
-
+        private RapportTemplate _template;
+        
         public RapportageViewModel(NavigationService navigationService, RapportageRepository repo)
         {
             _navigationService = navigationService;
@@ -99,10 +98,15 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             if(navigationService.Parameter != null)
             {
-                _mode = (EnumTemplateMode)((object[])navigationService.Parameter)[0];
-            }
+                object[] parameters = (object[])navigationService.Parameter;
 
-            Content = "<html><body><h1>Header</h1><a href=\"http://www.google.nl\">Google</a><img src=\"https://www.perwez.be/actualites/images-actualites/test.png/@@images/image.png\" alt=\"test\" width=\"100\"/></body></html>";
+                _mode = (EnumTemplateMode)parameters[0];
+                if (parameters[1] is RapportTemplate)
+                {
+                    _template = (RapportTemplate)parameters[1];
+                    Content = _template.TemplateText;
+                }
+            }
 
             ModeChangedCommand = new RelayCommand<object[]>((parameters) => ChangeMode((DocumentDesigner)parameters[0], (int)parameters[1]));
             ApplyStyleCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyStyle((string)parameters[1]));
@@ -122,9 +126,6 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             IsEditable = false;
             DisplayExtraOptions = false;
-
-            if (_navigationService.Parameter is RapportTemplate)
-                _template = (RapportTemplate)_navigationService.Parameter;
         }
 
         public void Init(RapportTemplate template)
@@ -173,14 +174,34 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             if(_mode == EnumTemplateMode.CREATE)
             {
-                RapportTemplate template = new RapportTemplate()
+                SaveDialogBox saveDialog = new SaveDialogBox();
+                if(saveDialog.ShowDialog() == false)
                 {
-                    // TODO
-                    TemplateText = designer.DesignerContent,
-                    TemplateName = "Name",
-                    TemplateDescription = "Description"
-                };
-                _repo.CreateTemplate(template);
+                    RapportTemplate template = new RapportTemplate()
+                    {
+                        TemplateText = designer.DesignerContent,
+                        TemplateName = saveDialog.ViewModel.Name,
+                        TemplateDescription = saveDialog.ViewModel.Description
+                    };
+                    _repo.CreateTemplate(template);
+
+                    _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
+                }
+            }
+            else if(_mode == EnumTemplateMode.EDIT)
+            {
+                designer.UpdateContent();
+                if(_template != null)
+                {
+                    _template.TemplateText = designer.DesignerContent;
+
+                    _repo.UpdateTemplate(_template);
+                    _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
+                }
+            }
+            else if(_mode == EnumTemplateMode.SELECT)
+            {
+
             }
         }
 

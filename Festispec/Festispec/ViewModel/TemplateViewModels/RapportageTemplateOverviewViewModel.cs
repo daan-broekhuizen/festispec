@@ -38,7 +38,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void CreateButtonClick()
         {
-            _navigationService.NavigateTo("Rapportage", new object[] { EnumTemplateMode.CREATE });
+            _navigationService.NavigateTo("Rapportage", new object[1] { EnumTemplateMode.CREATE });
         }
 
         protected override void SearchButtonClick(string content)
@@ -53,12 +53,14 @@ namespace Festispec.ViewModel.TemplateViewModels
         {
             RapportTemplate rapportTemplate = template;
 
-            _navigationService.NavigateTo("Rapportage", rapportTemplate);
+            _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.SELECT, rapportTemplate });
         }
 
         protected override void EditTemplate(dynamic template)
         {
-            throw new NotImplementedException();
+            RapportTemplate rapportTemplate = template;
+
+            _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.EDIT, rapportTemplate });
         }
     }
 }

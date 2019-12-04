@@ -189,11 +189,13 @@
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
+    <Compile Include="Utility\Validators\SaveDialogValidator.cs" />
     <Compile Include="ViewModel\Components\ChartDialogViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BaseChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\IChart.cs" />
     <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
@@ -254,6 +256,9 @@
     </Compile>
     <Compile Include="View\Components\OverviewSearchBar.xaml.cs">
       <DependentUpon>OverviewSearchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\SaveDialogBox.xaml.cs">
+      <DependentUpon>SaveDialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
@@ -336,6 +341,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Components\OverviewSearchBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Components\SaveDialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

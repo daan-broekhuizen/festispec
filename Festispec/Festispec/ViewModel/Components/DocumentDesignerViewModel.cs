@@ -62,6 +62,16 @@ namespace Festispec.ViewModel.Components
         }
 
         /// <summary>
+        /// Update de huidige content (de content van de editor wordt naar de DesignerContent variable geschreven).
+        /// </summary>
+        public void UpdateContent()
+        {
+            HTMLDocument document = (HTMLDocument)WebBrowser.Document;
+            if (document != null)
+                this.DesignerContent = WebService.CleanHTML(document.documentElement.outerHTML, true);
+        }
+
+        /// <summary>
         /// Veranderd de mode van de editor
         /// </summary>
         /// <param name="selectedMode">De nieuwe mode</param>
