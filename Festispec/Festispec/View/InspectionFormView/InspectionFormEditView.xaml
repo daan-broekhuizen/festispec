@@ -121,7 +121,7 @@
 
         <DataTemplate x:Key="MultipleChoiceQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
+                <Grid x:Name="QuestionBox" Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                        <ColumnDefinition Width="0.5*"/>
                        <ColumnDefinition Width="3.2*"/>
@@ -150,19 +150,23 @@
                             <Image Source="{Binding Image}"/>
                         </Button>
                     </Viewbox>
-                    <Viewbox x:Name="PossibleAnwserBox"  Grid.Row="4">
-                        <ListBox Width="{Binding ActualWidth, ElementName=PossibleAnwserBox}" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    
+                        <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
                             <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Label Content="{Binding AnwserNumber}"/>
-                                        <TextBlock Text="{Binding AnwserTextString}"/>
-                                    </Grid>
+                            <DataTemplate>
+                                <Grid Background="#d3d3d3" VerticalAlignment="Stretch" Margin="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="13*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
+                                    <TextBox Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" AcceptsReturn="False" MaxLength="150"/>
 
-                                </DataTemplate>
+                                </Grid>
+                            </DataTemplate>
                             </ListBox.ItemTemplate>
-                        </ListBox>
-                        </Viewbox>
+                    </ListBox>
+                        
                     </Grid>
             </Border>
         </DataTemplate>

@@ -144,5 +144,14 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
+
+        internal void AddPossibleAnswers(List<VraagMogelijkAntwoord> newPosAnswers)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                context.VraagMogelijkAntwoord.AddRange(newPosAnswers);
+                context.SaveChanges();
+            }
+        }
     }
 }

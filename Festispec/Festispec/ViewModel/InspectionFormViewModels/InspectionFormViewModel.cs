@@ -396,6 +396,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     question.Created = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    {
+                        List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
+                        foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
+                        {
+                            newPosAnswers.Add(posAnwser.PossibleAnwser);
+                        }
+                        _repo.AddPossibleAnswers(newPosAnswers);
+                    }
                 }
                 else if (question.Changed)
                 {
@@ -404,13 +413,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     if (question.QuestionType == "sv" || question.QuestionType == "mv")
                     {
                         List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
-                        foreach(PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
+                        foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
                         {
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.updatePossibleAnswers(newPosAnswers);
                     }
                 }
+                
             }
         }
         #endregion

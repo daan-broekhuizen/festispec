@@ -45,6 +45,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 _question.VraagID = value;
                 Changed = true;
+                foreach(var anwser in PossibleAnwsers)
+                {
+                    anwser.QuestionNumber = _question.VraagID;
+                }
                 RaisePropertyChanged("QuestionID");
             }
         }
@@ -138,7 +142,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             if (_question.Vraagtype == "sv")
             {
-                BottomValue = 0;
+                BottomValue = 1;
                 TopValue = 5;
                 ScaleSize = 5;
                 UpdateScalePosAnwsers();
@@ -173,12 +177,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             if(ScaleSize == 0){return;}
             List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
-            int scalePart = (TopValue - BottomValue) / ScaleSize;
-            bool directUpdate = false;
             if (_question.VraagMogelijkAntwoord.Count() != 0)
             {
                 _question.VraagMogelijkAntwoord.Clear();
-                directUpdate = true;
             }
             
             for (int i = 0; i < ScaleSize; i++)
@@ -187,13 +188,24 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     VraagID = _question.VraagID,
                     AntwoordNummer = i + 1,
-                    AntwoordText = (BottomValue + (i * scalePart) + 1).ToString()
+                    AntwoordText = GetScalePart(i).ToString()
                 }));
 
-                if (directUpdate){_question.VraagMogelijkAntwoord.Add(newPosAnwsers[i].PossibleAnwser);}
+                _question.VraagMogelijkAntwoord.Add(newPosAnwsers[i].PossibleAnwser);
             }
             PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
             Changed = true;
+        }
+
+        private int GetScalePart(int number)
+        {
+            if(number == 0){ return BottomValue;}
+            else if(number == ScaleSize){ return TopValue; }
+            else
+            {
+                return (BottomValue + (number * ((TopValue - BottomValue) / (ScaleSize - 1))));
+            }
+            
         }
 
         private BitmapImage _image;
