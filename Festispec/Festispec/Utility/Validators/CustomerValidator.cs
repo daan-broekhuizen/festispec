@@ -14,9 +14,9 @@ namespace Festispec.Validators
     public class CustomerValidator : AbstractValidator<CustomerViewModel>
     {
         private CustomerRepository _customerRepository;
-        public CustomerValidator()
+        public CustomerValidator(CustomerRepository repo)
         {
-            _customerRepository = new CustomerRepository();
+            _customerRepository = repo;
             RuleFor(x => x.Name).NotEmpty().WithMessage("Voer een naam in.");
             RuleFor(x => x.KvK).NotEmpty().WithMessage("Voer een KvK nummer in.");
             RuleFor(x => x.KvK).Length(8).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
