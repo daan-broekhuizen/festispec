@@ -90,8 +90,10 @@ namespace Festispec.ViewModel.RapportageViewModels
         public bool ShouldAddResults { get; set; }
 
         private EnumTemplateMode _mode;
+
         private RapportTemplate _template;
-        
+        private JobViewModel _job;
+
         public RapportageViewModel(NavigationService navigationService, RapportageRepository repo)
         {
             _navigationService = navigationService;
@@ -102,11 +104,31 @@ namespace Festispec.ViewModel.RapportageViewModels
                 object[] parameters = (object[])navigationService.Parameter;
 
                 _mode = (EnumTemplateMode)parameters[0];
-                if (parameters[1] is RapportTemplate)
+                if (parameters.Length > 1)
                 {
-                    _template = (RapportTemplate)parameters[1];
-                    Content = _template.TemplateText;
+                    if (parameters[1] is RapportTemplate)
+                    {
+                        _template = (RapportTemplate)parameters[1];
+                        Content = _template.TemplateText;
+                    }
+                    else if(parameters[1] is JobViewModel)
+                    {
+                        _job = (JobViewModel)parameters[1];
+                        Content = _job.Report;
+                    }
                 }
+
+                if(parameters.Length > 2)
+                {
+                    if(parameters[2] is JobViewModel)
+                    {
+                        _job = (JobViewModel)parameters[2];
+                        Content = _job.Report;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(Content))
+                    Content = "<html><body></body></html>";
             }
 
             ModeChangedCommand = new RelayCommand<object[]>((parameters) => ChangeMode((DocumentDesigner)parameters[0], (int)parameters[1]));
@@ -174,7 +196,9 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         private void Save(DocumentDesignerViewModel designer)
         {
-            if(_mode == EnumTemplateMode.CREATE)
+            designer.UpdateContent();
+
+            if (_mode == EnumTemplateMode.CREATE)
             {
                 SaveDialogBox saveDialog = new SaveDialogBox();
                 if(saveDialog.ShowDialog() == false)
@@ -192,7 +216,6 @@ namespace Festispec.ViewModel.RapportageViewModels
             }
             else if(_mode == EnumTemplateMode.EDIT)
             {
-                designer.UpdateContent();
                 if(_template != null)
                 {
                     _template.TemplateText = designer.DesignerContent;
@@ -203,7 +226,12 @@ namespace Festispec.ViewModel.RapportageViewModels
             }
             else if(_mode == EnumTemplateMode.SELECT)
             {
+                if(_job != null)
+                {
+                    _job.Report = designer.DesignerContent;
 
+                    _repo.UpdateRapportage(_job);
+                }
             }
         }
 

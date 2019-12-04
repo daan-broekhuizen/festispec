@@ -33,6 +33,23 @@ namespace Festispec.ViewModel.TemplateViewModels
             get => Mode == EnumTemplateMode.SELECT ? Visibility.Visible : Visibility.Collapsed;
         }
 
+        protected List<TemplateViewModel> _unfilteredTemplates;
+
+        private List<TemplateViewModel> _templates;
+
+        public List<TemplateViewModel> Templates
+        {
+            get
+            {
+                return _templates;
+            }
+            set
+            {
+                _templates = value;
+                RaisePropertyChanged("Templates");
+            }
+        }
+
         public TemplateOverviewViewModel(NavigationService service) : base(service)
         {
             this.CreateButtonClickCommand = new RelayCommand(CreateButtonClick);
@@ -42,12 +59,22 @@ namespace Festispec.ViewModel.TemplateViewModels
 
             if (service.Parameter is EnumTemplateMode)
                 Mode = (EnumTemplateMode)service.Parameter;
+            else if (service.Parameter is object[])
+                Mode = (EnumTemplateMode)((object[])service.Parameter)[0];
             else
                 Mode = EnumTemplateMode.EDIT;
         }
 
         protected abstract void CreateButtonClick();
-        protected abstract void SearchButtonClick(string content);
+
+        protected virtual void SearchButtonClick(string content)
+        {
+            if (string.IsNullOrEmpty(content))
+                Templates = _unfilteredTemplates;
+            else
+                Templates = _unfilteredTemplates.Where(x => x.Title.IndexOf(content, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+        }
+
         protected abstract void SelectTemplate(dynamic template);
         protected abstract void EditTemplate(dynamic template);
     }

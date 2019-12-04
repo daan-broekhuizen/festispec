@@ -13,27 +13,18 @@ namespace Festispec.ViewModel.TemplateViewModels
 {
     public class RapportageTemplateOverviewViewModel : TemplateOverviewViewModel
     {
-        private List<RapportTemplate> _unfilteredTemplates;
-
-        private List<RapportTemplate> _templates;
-
-        public List<RapportTemplate> Templates
-        {
-            get
-            {
-                return _templates;
-            }
-            set
-            {
-                _templates = value;
-                RaisePropertyChanged("Templates");
-            }
-        }
+        private JobViewModel _job;
+        private TemplateRepository _repo;
 
         public RapportageTemplateOverviewViewModel(NavigationService service, TemplateRepository templateRepository) : base(service)
         {
-            _unfilteredTemplates = templateRepository.GetRapportTemplates();
+            _repo = templateRepository;
+            _unfilteredTemplates = new List<TemplateViewModel>(_repo.GetRapportTemplates());
             Templates = _unfilteredTemplates;
+
+            if (service.Parameter is object[] parameters)
+                if (parameters.Length > 1 && parameters[1] != null && parameters[1] is JobViewModel)
+                    _job = (JobViewModel)parameters[1];
         }
 
         protected override void CreateButtonClick()
@@ -41,26 +32,18 @@ namespace Festispec.ViewModel.TemplateViewModels
             _navigationService.NavigateTo("Rapportage", new object[1] { EnumTemplateMode.CREATE });
         }
 
-        protected override void SearchButtonClick(string content)
-        {
-            if (string.IsNullOrEmpty(content))
-                Templates = _unfilteredTemplates;
-            else
-                Templates = _unfilteredTemplates.Where(x => x.TemplateName.IndexOf(content, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-        }
-
         protected override void SelectTemplate(dynamic template)
         {
-            RapportTemplate rapportTemplate = template;
+            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(template);
 
-            _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.SELECT, rapportTemplate });
+            _navigationService.NavigateTo("Rapportage", new object[3] { EnumTemplateMode.SELECT, rapportTemplate, _job });
         }
 
         protected override void EditTemplate(dynamic template)
         {
-            RapportTemplate rapportTemplate = template;
+            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(template);
 
-            _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.EDIT, rapportTemplate });
+            _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.EDIT, template });
         }
     }
 }

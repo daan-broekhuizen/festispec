@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,15 @@ namespace Festispec.Model.Repositories
             using(FestispecContext context = new FestispecContext())
             {
                 context.RapportTemplate.Where(x => x.TemplateID == template.TemplateID).FirstOrDefault().TemplateText = template.TemplateText;
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateRapportage(JobViewModel job)
+        {
+            using(FestispecContext context = new FestispecContext())
+            {
+                context.Opdracht.Where(x => x.OpdrachtID == job.JobID).FirstOrDefault().Rapportage = job.Report;
                 context.SaveChanges();
             }
         }
