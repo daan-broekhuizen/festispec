@@ -127,6 +127,7 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             IsEditable = false;
             DisplayExtraOptions = false;
+            ShouldAddResults = true;
         }
 
         public void Init(RapportTemplate template)
@@ -212,10 +213,12 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             byte[] data = designer.ExportToPdf();
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "pdf files (*.pdf)|*.pdf";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "pdf files (*.pdf)|*.pdf"
+            };
 
-            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (Stream dataStream = saveFileDialog.OpenFile())
                 {

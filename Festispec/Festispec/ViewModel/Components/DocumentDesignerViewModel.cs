@@ -1,8 +1,10 @@
 ﻿using Festispec.Service;
+using Festispec.Utility.Converters;
 using GalaSoft.MvvmLight;
 using mshtml;
 using OpenHtmlToPdf;
 using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -302,9 +304,35 @@ namespace Festispec.ViewModel.Components
         /// <summary>
         /// Zet HTML om naar een PDF document.
         /// </summary>
-        public byte[] ExportToPdf()
+        public byte[] ExportToPdf(PdfPage[] pages = null)
         {
-            byte[] data = Pdf.From(DesignerContent).Content();
+            byte[] data;
+
+            // Genereer een pagina vanuit de HTML
+            byte[] baseData = Pdf.From(DesignerContent).Content();
+
+            PdfDocument response = new PdfDocument();
+
+            using (MemoryStream ms = new MemoryStream(baseData))
+            {
+                PdfDocument report = PdfReader.Open(ms, PdfDocumentOpenMode.Import);
+                PdfPage page = report.Pages[0];
+
+                response.Pages.Add(page);
+            }
+
+            // Voeg ingevulde vragenlijsten toe.
+            if(pages != null)
+                foreach(PdfPage page in pages)
+                    response.AddPage(page);
+
+            // Omzetten naar byte array
+            using (MemoryStream ms = new MemoryStream())
+            {
+                response.Save(ms);
+
+                data = ms.ToArray();
+            }
 
             return data;
         }

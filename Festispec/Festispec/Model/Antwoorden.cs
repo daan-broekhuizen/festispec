@@ -32,6 +32,6 @@ namespace Festispec.Model
 
         public virtual Account Account { get; set; }
 
-        
+        public virtual Vraag Vraag { get; set; }
     }
 }
