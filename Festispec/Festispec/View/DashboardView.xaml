@@ -39,10 +39,10 @@
             <Button Command="{Binding ShowCustomersCommand}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="1">
                 <Image Source="/Images/Dashboard_customers.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="1">
+            <Button Command="{Binding ShowJobsCommand}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="1">
                 <Image Source="/Images/Dashboard_jobs.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="1">
+            <Button Command="{Binding ShowQuotationsCommand}" BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="1">
                 <Image Source="/Images/Dashboard_quotations.png"/>
             </Button>
             <Button Command="{Binding ShowAddCustomerCommand}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="3">
