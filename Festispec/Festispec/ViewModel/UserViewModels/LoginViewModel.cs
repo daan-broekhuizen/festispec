@@ -12,6 +12,7 @@ using FestiSpec.Domain.Repositories;
 using FestiSpec.Domain;
 using Festispec.Service;
 using Festispec.Model;
+using Festispec.Model.Repositories;
 
 namespace Festispec.ViewModel
 {
@@ -77,6 +78,8 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
+            Temp t = new Temp();
+            t.Test("Test");
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _username,

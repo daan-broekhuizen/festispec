@@ -168,6 +168,7 @@
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\Temp.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
