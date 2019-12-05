@@ -138,13 +138,6 @@ namespace Festispec.ViewModel
             }
         }
 
-        private string _province;
-
-        public string Province
-        {
-            get { return _province; }
-            set { _province = value; }
-        }
 
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
         public CustomerViewModel(Klant klant)
@@ -164,8 +157,7 @@ namespace Festispec.ViewModel
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
             PostalCode = address.PostalCode;
-            Province = address.AdminDistrict;
-            string provinces = Province;
+
         }
 
     }

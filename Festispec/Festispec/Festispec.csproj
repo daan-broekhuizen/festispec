@@ -204,6 +204,8 @@
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\ManagementViewModel.cs" />
+    <Compile Include="ViewModel\OfferteGraphViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\AddJobViewModel.cs" />

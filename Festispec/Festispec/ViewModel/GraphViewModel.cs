@@ -164,7 +164,6 @@ namespace Festispec.ViewModel
             SalesValues = new ChartValues<ObservableValue> { };
             InspectorValues = new ChartValues<ObservableValue> { };
             ProvinceValues = new ChartValues<ObservableValue> { };
-            Random r = new Random();
 
             Customers = Crepo.GetCustomers();
 
@@ -182,7 +181,6 @@ namespace Festispec.ViewModel
             SetInspectorValues();
             SetProvinceLabels();
             SetProvinceValues();
-            setValues();
 
             OffertesCollection = new SeriesCollection
             {
@@ -310,18 +308,15 @@ namespace Festispec.ViewModel
             Array provinces = Enum.GetValues(typeof(EnumProvince));
             string CustomerProvince;
 
-            _crepo.GetCustomers().Select(c => new CustomerViewModel(c)).ToList().ForEach(e =>
-            {
-                if (e.Province != null)
-                {
-                    CustomerProvince = e.Province;
-                }
-                else
-                {
-                    CustomerProvince = "";
-                }
+            LocationService locationService = new LocationService();
 
-                int o = 0;
+            _crepo.GetCustomers().Select(c => new CustomerViewModel(c)).ToList().ForEach(async e =>
+            {
+                string query = $"{e.Streetname} {e.HouseNumber}{e.Addition} {e.City}";
+                Task<Address> address = locationService.GetFullAdress(query);
+                await Task.Delay(1000);
+                CustomerProvince = address.Result.AdminDistrict;
+
                 for (int i = 0; i < provinces.Length; i++)
                 {
                     EnumProvince province = (EnumProvince)provinces.GetValue(i);
@@ -333,17 +328,16 @@ namespace Festispec.ViewModel
                     }
                 }
             });
-            /*            _provinceValues[4] = 1;
-                        _provinceValues[8] = 1;
-                        _provinceValues[9] = 2;*/
-        }
-        private void setValues()
-        {
+/*            _Values[4] = 1;
+            _Values[8] = 1;
+            _Values[9] = 2;*/
+
             for (int i = 0; i < _Values.Length; i++)
             {
                 ProvinceValues.Add(new ObservableValue(_Values[i]));
             }
         }
+
 
         private void SetGraph()
         {
