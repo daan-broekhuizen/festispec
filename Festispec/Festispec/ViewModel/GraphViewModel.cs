@@ -69,7 +69,7 @@ namespace Festispec.ViewModel
         {
             get { return _offertesCollection; }
             set { _offertesCollection = value;
-            RaisePropertyChanged("OffertesCollection"); }
+                RaisePropertyChanged("OffertesCollection"); }
         }
 
         private ObservableValue _offertesRejected;
@@ -146,13 +146,7 @@ namespace Festispec.ViewModel
         int[] _Values { get; set; }
         public SeriesCollection ProvinceCollection { get; set; }
 
-        private ChartValues<ObservableValue> _provinceValues;
-
-        public ChartValues<ObservableValue> ProvinceValues
-        {
-            get { return _provinceValues; }
-            set { _provinceValues = value; }
-        }
+        public ChartValues<ObservableValue> ProvinceValues {get; set;}
 
 
         public GraphViewModel(JobRepository Jrepo, QuotationRepository Qrepo, UserRepository Urepo, CustomerRepository Crepo)
@@ -167,6 +161,9 @@ namespace Festispec.ViewModel
 
             Customers = Crepo.GetCustomers();
 
+            for (int j = 0; j < 12; j++)
+                ProvinceValues.Add(new ObservableValue(0));
+
             _jrepo = Jrepo;
             _qrepo = Qrepo;
             _urepo = Urepo;
@@ -180,7 +177,7 @@ namespace Festispec.ViewModel
             SetSalesValues();
             SetInspectorValues();
             SetProvinceLabels();
-            SetProvinceValues();
+            GetProvinceValues();
 
             OffertesCollection = new SeriesCollection
             {
@@ -300,22 +297,19 @@ namespace Festispec.ViewModel
             }
         }
 
-        private void SetProvinceValues()
+        private void GetProvinceValues()
         {
             ProvinceValues.ToList().ForEach(e => ProvinceValues.Remove(e));
-           _Values = new int[12];
-
             Array provinces = Enum.GetValues(typeof(EnumProvince));
             string CustomerProvince;
 
             LocationService locationService = new LocationService();
 
-            _crepo.GetCustomers().Select(c => new CustomerViewModel(c)).ToList().ForEach(async e =>
+            _crepo.GetCustomers().ForEach(async e =>
             {
-                string query = $"{e.Streetname} {e.HouseNumber}{e.Addition} {e.City}";
-                Task<Address> address = locationService.GetFullAdress(query);
-                await Task.Delay(1000);
-                CustomerProvince = address.Result.AdminDistrict;
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                Address address = await locationService.GetFullAdress(query);
+                CustomerProvince = address.AdminDistrict;
 
                 for (int i = 0; i < provinces.Length; i++)
                 {
@@ -323,19 +317,16 @@ namespace Festispec.ViewModel
                     string EnumProvince = char.ToUpper(province.ToString()[0]) + province.ToString().Substring(1).ToLower();
 
                     if (CustomerProvince.Equals(EnumProvince))
-                    {
-                        _Values[i] += 1;
+                    { 
                     }
                 }
             });
-/*            _Values[4] = 1;
-            _Values[8] = 1;
-            _Values[9] = 2;*/
 
-            for (int i = 0; i < _Values.Length; i++)
-            {
-                ProvinceValues.Add(new ObservableValue(_Values[i]));
-            }
+            
+
+            /*            _Values[4] = 1;
+                        _Values[8] = 1;
+                        _Values[9] = 2;*/
         }
 
 
