@@ -511,9 +511,19 @@
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\DeleteQuestionLogo.png" />
+    <Resource Include="Images\QuestionDownLogo.png" />
+    <Resource Include="Images\QuestionUpLogo.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddQuestionBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseEditMode.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

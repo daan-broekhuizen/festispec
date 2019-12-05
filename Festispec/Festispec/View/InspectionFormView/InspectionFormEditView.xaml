@@ -15,10 +15,12 @@
       >
     
     <Page.Resources>
-        
+
+        <SolidColorBrush x:Key="ButtonHover" Color="Gray" Opacity="0.8"/>
+
         <DataTemplate x:Key="OpenQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -39,7 +41,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="10" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
@@ -53,7 +55,7 @@
 
         <DataTemplate x:Key="PictureQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -74,7 +76,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -87,7 +89,7 @@
 
         <DataTemplate x:Key="TextEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -108,7 +110,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -121,7 +123,7 @@
 
         <DataTemplate x:Key="MultipleChoiceQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid x:Name="QuestionBox" Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
+                <Grid x:Name="QuestionBox" Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                        <ColumnDefinition Width="0.5*"/>
                        <ColumnDefinition Width="3.2*"/>
@@ -143,28 +145,49 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
                             <Image Source="{Binding Image}"/>
                         </Button>
                     </Viewbox>
+
+
+                    <Viewbox Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Aantal vragen:" HorizontalAlignment="Left" Grid.Column="0" FontSize="40"/>
+                            <ComboBox SelectedValue="{Binding Path=MultipleChoiceOptionsAmount, Mode=TwoWay}" FontSize="40" HorizontalAlignment="Right" Grid.Column="1">
+                                <ComboBox.ItemsSource>
+                                    <x:Array Type="{x:Type sys:Int32}">
+                                        <sys:Int32>2</sys:Int32>
+                                        <sys:Int32>3</sys:Int32>
+                                        <sys:Int32>4</sys:Int32>
+                                        <sys:Int32>5</sys:Int32>
+                                        <sys:Int32>6</sys:Int32>
+                                    </x:Array>
+                                </ComboBox.ItemsSource>
+                            </ComboBox>
+                        </Grid>
+                    </Viewbox>
                     
-                        <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
-                            <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Background="#d3d3d3" VerticalAlignment="Stretch" Margin="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="13*"/>
-                                    </Grid.ColumnDefinitions>
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
+                        <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Background="#d3d3d3" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="13*"/>
+                                </Grid.ColumnDefinitions>
                                     <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
                                     <TextBox Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" AcceptsReturn="False" MaxLength="150"/>
-
                                 </Grid>
-                            </DataTemplate>
-                            </ListBox.ItemTemplate>
+                        </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
                         
                     </Grid>
@@ -173,7 +196,7 @@
 
         <DataTemplate x:Key="ScaleQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid x:Name="StandardView"  Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="316">
+                <Grid x:Name="StandardView"  Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -195,7 +218,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -258,7 +281,7 @@
 
         <DataTemplate x:Key="Table2QuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -279,7 +302,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -292,7 +315,7 @@
 
         <DataTemplate x:Key="Table3QuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="Gray" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="2" MaxHeight="250">
+                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -313,7 +336,7 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" FontSize="50" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -337,7 +360,13 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid Background="Orange" Grid.Column="1">
+        <Viewbox Stretch="UniformToFill" Grid.ColumnSpan="2">
+            <Image Source="/Images/Dashboard_background.png"/>
+        </Viewbox>
+        <Grid Grid.Column="1">
+            <Grid.Background>
+                <SolidColorBrush Color="Gray" Opacity="0.6" />
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="3*"/>
@@ -352,7 +381,6 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="3*"/>
-                
             </Grid.RowDefinitions>
 
 
@@ -367,25 +395,308 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Viewbox Grid.Column="0">
-                    <Button Command="{Binding QuestionUpCommand}" Content="Up"/>
+                    <Button Command="{Binding QuestionUpCommand}" Background="{x:Null}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Image Source="/Images/QuestionUpLogo.png"/>
+                    </Button>
                 </Viewbox>
                 <Viewbox Grid.Column="2">
-                    <Button Command="{Binding QuestionDownCommand}" Content="Down"/>
+                    <Button Command="{Binding QuestionDownCommand}" Background="{x:Null}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Image Source="/Images/QuestionDownLogo.png"/>
+                    </Button>
                 </Viewbox>
                 <Viewbox Grid.Column="4">
-                    <Button Command="{Binding DeleteQuestionCommand}" Content="Delete"/>
+                    <Button Command="{Binding DeleteQuestionCommand}" Background="{x:Null}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Image Source="/Images/DeleteQuestionLogo.png"/>
+                    </Button>
                 </Viewbox>
             </Grid>
-            <Label Content="Element invoegen" Grid.Row="3" HorizontalAlignment="Center"/>
-            <Button Grid.Row="4" Content="Tekst toevoegen" Command="{Binding AddTextCommand}"/>
-            <Button Grid.Row="5" Content="Open vraag" Command="{Binding AddOpenQuestionCommand}"/>
-            <Button Grid.Row="6" Content="Foto vraag" Command="{Binding AddPictureQuestionCommand}"/>
-            <Button Grid.Row="7" Content="Schaal vraag" Command="{Binding AddScaleQuestionCommand}"/>
-            <Button Grid.Row="8" Content="Multiple choice" Command="{Binding AddMultipleChoiceQuestionCommand}"/>
-            <Button Grid.Row="9" Content="Table X 2" Command="{Binding AddTable2QuestionCommand}"/>
-            <Button Grid.Row="10" Content="Table X 3" Command="{Binding AddTable3QuestionCommand}"/>
-            
-            <Button Content="Opslaan" Command="{Binding SaveCommand}" Grid.Row="12"/>
+            <Label Content="Element invoegen" FontWeight="Bold" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="17"/>
+            <Button Grid.Row="4" Command="{Binding AddTextCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Tekst toevoegen" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="5" Command="{Binding AddOpenQuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Open vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="6" Command="{Binding AddPictureQuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Foto vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="7" Command="{Binding AddScaleQuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Schaal vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="12.5"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="8" Command="{Binding AddMultipleChoiceQuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Meerkeuze vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="9"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="9" Command="{Binding AddTable2QuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Tabel X2 vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="10" Command="{Binding AddTable3QuestionCommand}" Margin="1">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="1" Content="Tabel X3 vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
+                </Grid>
+            </Button>
+
+            <Button Command="{Binding SaveCommand}" Grid.Row="12">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Label Content="Opslaan" FontWeight="Bold" FontSize="20"/>
+                </Grid>
+            </Button>
+
 
         </Grid>
 
@@ -399,14 +710,43 @@
                 <Border BorderBrush="Black" BorderThickness="1">
                     <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.15*"/>
                         <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="0.15*"/>
                         <ColumnDefinition Width="7*"/>
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="2.5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Content="Terug naar Opdracht" Grid.Column="1"/>
+                    <Button Grid.Column="0" Command="{Binding ToShowModeCommand}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1.4*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/Images/CloseEditMode.png" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1"/>
+                            <Label Grid.Column="1" Content="Editor afsluiten" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="10" Grid.Row="2"/>
+                        </Grid>
+                    </Button>
                     <Grid Grid.Column="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -416,7 +756,7 @@
                         <TextBox Text="{Binding Path=Description}" Grid.Row="1" FontSize="10"/>
                     </Grid>
                     
-                    <Grid Grid.Column="3">
+                    <Grid Grid.Column="3" Background="White">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -432,9 +772,7 @@
                 </Grid>
                 </Border>
 
-            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
-
-
+            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}"/>
         </Grid>
         
     </Grid>

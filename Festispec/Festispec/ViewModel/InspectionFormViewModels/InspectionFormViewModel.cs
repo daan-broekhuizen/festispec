@@ -353,7 +353,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void ToShowCommand()
         {
-            //todo
+            _navigationService.NavigateTo("InspectionFormShowView", this);
         }
 
         public void Save()

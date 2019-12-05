@@ -108,6 +108,7 @@ namespace Festispec.ViewModel
 
             #region InspectionFormsViews
             navigationService.Configure("InspectionFormEditView", new Uri("../View/InspectionFormView/InspectionFormEditView.xaml", UriKind.Relative));
+            navigationService.Configure("InspectionFormShowView", new Uri("../View/InspectionFormView/InspectionFormShowView.xaml", UriKind.Relative));
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);

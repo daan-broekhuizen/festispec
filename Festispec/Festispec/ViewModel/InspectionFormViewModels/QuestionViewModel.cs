@@ -45,9 +45,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 _question.VraagID = value;
                 Changed = true;
-                foreach(var anwser in PossibleAnwsers)
+                if (PossibleAnwsers != null)
                 {
-                    anwser.QuestionNumber = _question.VraagID;
+                    foreach(var anwser in PossibleAnwsers)
+                    {
+                        anwser.QuestionNumber = _question.VraagID;
+                    }
                 }
                 RaisePropertyChanged("QuestionID");
             }
@@ -138,6 +141,52 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        private int _multipleChoiceOptionsAmount;
+        public int MultipleChoiceOptionsAmount
+        {
+            get => _multipleChoiceOptionsAmount;
+            set
+            {
+                _multipleChoiceOptionsAmount = value;
+                UpdateMulipleChoiceAnwsers();
+                RaisePropertyChanged("MultipleChoiceOptionAmount");
+                Changed = true;
+            }
+        }
+
+        private void UpdateMulipleChoiceAnwsers()
+        {
+            if(MultipleChoiceOptionsAmount < PossibleAnwsers.Count())
+            {
+                bool updateModel = false;
+                if (_question.VraagMogelijkAntwoord.Count() != 0)
+                {
+                    updateModel = true;
+                    _question.VraagMogelijkAntwoord.Clear();
+                }
+                int oldSize = PossibleAnwsers.Count();
+                for (int i = MultipleChoiceOptionsAmount; i < oldSize; i++)
+                {
+                    if (updateModel){_question.VraagMogelijkAntwoord.Remove(PossibleAnwsers[MultipleChoiceOptionsAmount].PossibleAnwser);}
+                    PossibleAnwsers.RemoveAt(MultipleChoiceOptionsAmount);
+                } 
+            }else if(MultipleChoiceOptionsAmount > PossibleAnwsers.Count())
+            {
+                int oldSize = PossibleAnwsers.Count();
+                for (int i = oldSize; i < MultipleChoiceOptionsAmount; i++)
+                {
+                    PossibleAnwserViewModel answerModelnew = new PossibleAnwserViewModel(new VraagMogelijkAntwoord
+                    {
+                        VraagID = _question.VraagID,
+                        AntwoordNummer = i + 1,
+                        AntwoordText = (i + 1).ToString()
+                    });
+                    PossibleAnwsers.Add(answerModelnew);
+                    if (_question.VraagMogelijkAntwoord.Count() != 0){_question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);}
+                }
+            }
+        }
+
         public void AddPossibleAnwsers()
         {
             if (_question.Vraagtype == "sv")
@@ -170,6 +219,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 }
                 PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
                 Changed = true;
+                MultipleChoiceOptionsAmount = 4;
             }
         }
 
