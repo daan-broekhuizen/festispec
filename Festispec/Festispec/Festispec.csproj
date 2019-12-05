@@ -153,6 +153,8 @@
     <Compile Include="Model\Antwoorden.cs" />
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\Enums\EnumMonth.cs" />
+    <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
@@ -305,7 +307,7 @@
     </Compile>
     <Compile Include="View\ManagementReport.xaml.cs">
       <DependentUpon>ManagementReport.xaml</DependentUpon>
-      </Compile>
+    </Compile>
     <Compile Include="View\QuotationView\AddQuotationView.xaml.cs">
       <DependentUpon>AddQuotationView.xaml</DependentUpon>
     </Compile>
@@ -361,7 +363,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagementReport.xaml">
-          <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuotationView\AddQuotationView.xaml">
@@ -521,10 +523,13 @@
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Enumerable\" />
-  <ItemGroup />
-  <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Netherlands.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="World.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

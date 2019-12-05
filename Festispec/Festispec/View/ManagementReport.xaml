@@ -52,8 +52,40 @@
 
         <Grid Grid.Column="0" Grid.Row="1">
             <lvc:PieChart Series="{Binding OffertesCollection}" LegendLocation="Right" InnerRadius="100" Margin="0 15">
-
             </lvc:PieChart>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <lvc:CartesianChart Series="{Binding SalesCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Maanden" Labels="{Binding Labels}"/>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sales"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <lvc:CartesianChart Series="{Binding InspectorCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Maanden" Labels="{Binding Labels}" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Sales"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+        </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1">
+            <lvc:CartesianChart Series="{Binding ProvinceCollection}">
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Provincies" Labels="{Binding ProvinceLabels}" ShowLabels="False" />
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Aantal"/>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
         </Grid>
     </Grid>
 </Page>

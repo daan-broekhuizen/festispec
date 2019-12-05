@@ -100,7 +100,7 @@ namespace Festispec.ViewModel
 
         private void ShowQuotation()
         {
-            Offerte latest = _quotationRepo.GetQuotations().Where(q => q.OpdrachtID == JobVM.JobID).OrderByDescending(q => q.OfferteID).FirstOrDefault();
+            Offerte latest = _quotationRepo.GetQuotations().Where(q => q.OpdrachtID == JobVM.JobID).OrderByDescending(q => q.OfferteID).FirstOrDefault(); //TODO: ERROR
             if (latest != null)
                 _navigationService.NavigateTo("ShowQuotation", new QuotationViewModel(latest, _quotationRepo));
             else
