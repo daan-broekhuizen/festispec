@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight;
-using System.Security.Cryptography;
-using Festispec.Utility;
-using FestiSpec.Domain.Repositories;
-using FestiSpec.Domain;
+﻿using Festispec.Model;
 using Festispec.Service;
-using Festispec.Model;
-using Festispec.Model.Repositories;
+using FestiSpec.Domain.Repositories;
+using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows.Input;
 
 namespace Festispec.ViewModel
 {
@@ -78,8 +68,8 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
-            Temp t = new Temp();
-            t.Test("Test");
+            PlanningViewModel pv = new PlanningViewModel();
+            pv.GetInspectorAsync(1, "Groningen", 1);
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _username,

@@ -148,6 +148,18 @@
     <Compile Include="Migrations\201912032313271_Main.designer.cs">
       <DependentUpon>201912032313271_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912051507381_badjas.cs" />
+    <Compile Include="Migrations\201912051507381_badjas.designer.cs">
+      <DependentUpon>201912051507381_badjas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912051859562_curry.cs" />
+    <Compile Include="Migrations\201912051859562_curry.designer.cs">
+      <DependentUpon>201912051859562_curry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912051902236_bob.cs" />
+    <Compile Include="Migrations\201912051902236_bob.designer.cs">
+      <DependentUpon>201912051902236_bob.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -163,6 +175,7 @@
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
@@ -201,6 +214,7 @@
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\AddJobViewModel.cs" />
@@ -405,6 +419,15 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201912032313271_Main.resx">
       <DependentUpon>201912032313271_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051507381_badjas.resx">
+      <DependentUpon>201912051507381_badjas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051859562_curry.resx">
+      <DependentUpon>201912051859562_curry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912051902236_bob.resx">
+      <DependentUpon>201912051902236_bob.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
