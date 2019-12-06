@@ -44,12 +44,19 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
             if (_question.AfbeeldingURL != null)//FIX THIS
             {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(_question.AfbeeldingURL, UriKind.Relative);
-                bitmap.EndInit();
+                WebRequest webRequest = WebRequest.CreateDefault(new Uri("http://" + _question.AfbeeldingURL, UriKind.Absolute));
+                webRequest.ContentType = "image/jpeg";
+                WebResponse webResponse = webRequest.GetResponse();
 
-                Image = bitmap;
+                var image = new BitmapImage();
+                image.CreateOptions = BitmapCreateOptions.None;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.BeginInit();
+
+                image.StreamSource = webResponse.GetResponseStream();
+                image.EndInit();
+
+                Image = image;
             }
             ImageButton = new RelayCommand(SelectImage);
             
