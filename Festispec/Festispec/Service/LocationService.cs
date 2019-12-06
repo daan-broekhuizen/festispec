@@ -24,18 +24,18 @@ namespace Festispec.Service
             return location.Address;
         }
 
-        public async Task<double> CalculateDistance()
+        public async Task<double> CalculateDistance(string origin, string destination)
         {
             DistanceMatrixRequest req = new DistanceMatrixRequest()
             {
                 BingMapsKey = _bingApiKey,
                 Origins = new List<SimpleWaypoint>()
                 {
-                    new SimpleWaypoint("Efteling, 5171 SL Kaatsheuvel")
+                    new SimpleWaypoint(origin)
                 },
                 Destinations = new List<SimpleWaypoint>()
                 {
-                    new SimpleWaypoint("Griekenland")
+                    new SimpleWaypoint(destination)
                 },
                 DistanceUnits = DistanceUnitType.Kilometers,
                 TravelMode = TravelModeType.Driving
