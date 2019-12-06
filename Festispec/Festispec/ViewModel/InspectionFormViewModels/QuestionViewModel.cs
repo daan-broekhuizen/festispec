@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +34,23 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             _question = v;
             InspectionFormID = inspec.InspectieformulierID;
             Changed = false;
-            AddPossibleAnwsers();
+            if (_question.VraagMogelijkAntwoord.Count() > 0)
+            {
+                AddPossibleAnwsersCreate();
+            }
+            else
+            {
+                AddPossibleAnwsers();
+            }
+            if (_question.AfbeeldingURL != null)//FIX THIS
+            {
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(_question.AfbeeldingURL, UriKind.Relative);
+                bitmap.EndInit();
+
+                Image = bitmap;
+            }
             ImageButton = new RelayCommand(SelectImage);
             
         }
@@ -187,8 +204,38 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        public void AddPossibleAnwsersCreate()
+        {
+            if (_question.Vraagtype == "sv")
+            {
+                BottomValue = Int32.Parse(_question.VraagMogelijkAntwoord.First().AntwoordText);
+                TopValue = Int32.Parse(_question.VraagMogelijkAntwoord.Last().AntwoordText);
+                ScaleSize = _question.VraagMogelijkAntwoord.Count();
+                UpdateScalePosAnwsers();
+            }
+            if (_question.Vraagtype == "mv")
+            {
+                List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
+                foreach (var answer in _question.VraagMogelijkAntwoord)
+                {
+                    PossibleAnwserViewModel answerModelnew = new PossibleAnwserViewModel(new VraagMogelijkAntwoord
+                    {
+                        VraagID = _question.VraagID,
+                        AntwoordNummer = answer.AntwoordNummer,
+                        AntwoordText = answer.AntwoordText
+
+                    });
+                    newPosAnwsers.Add(answerModelnew);
+                }
+                PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
+                Changed = true;
+                MultipleChoiceOptionsAmount = _question.VraagMogelijkAntwoord.Count();
+            }
+        }
+
         public void AddPossibleAnwsers()
         {
+
             if (_question.Vraagtype == "sv")
             {
                 BottomValue = 1;

@@ -140,6 +140,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         #endregion
 
         private ObservableCollection<QuestionViewModel> _questions;
+
         public ObservableCollection<QuestionViewModel> Questions
         {
             get
@@ -158,26 +159,34 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
 
         public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo)
-        {
+        {//deze constructor wordt gebruikt om het vm te maken voor de vragenlijst
             _navigationService = nav;
-                //navragen
-            if (nav.Parameter is Inspectieformulier)
+            _repo = repo;
+            if (nav.Parameter is Inspectieformulier)//als er een al bestaande inspectieformulier wordt meegegeven
             {
-                _inspectionForm = (Inspectieformulier)nav.Parameter;
+                InspectionForm = (Inspectieformulier)nav.Parameter;
             }
-            else{//test
+            else if(nav.Parameter is int){//als er geen inspectieformulier wordt meegegeven en een nieuwe moet worden aangemaakt.
                 InspectionForm = new Inspectieformulier();
                 Titel = "Nieuw formulier";
                 Description = "Formulier beschrijving";
-                _inspectionForm.OpdrachtID = 1;
+                _inspectionForm.OpdrachtID = (int)nav.Parameter;
                 LastChangeDate = DateTime.Now;
                 NewInspectionForm = true;
+                Save();
             }
-  
-            _repo = repo;
+            
             _removedQuestions = new List<QuestionViewModel>();
             CreateCommands();
-            Save();
+        }
+
+        public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo, Inspectieformulier form)
+        {//deze constructor wordt gebruikt om de vms te maken die de vragenlijsten showen in de list
+            _navigationService = nav;
+            _repo = repo;
+            InspectionForm = form;
+            _removedQuestions = new List<QuestionViewModel>();
+            CreateCommands();
         }
 
         private void CreateCommands()
@@ -209,6 +218,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 EditMode = true;
             }
+            _navigationService.NavigateTo("InspectionFormEditView", this);
         }
 
         public void AddOpenQuestion()
@@ -353,7 +363,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void ToShowCommand()
         {
-            _navigationService.NavigateTo("InspectionFormShowView", this);
+            _navigationService.NavigateTo("InspectionFormShowView", InspectionForm.OpdrachtID);
         }
 
         public void Save()
@@ -440,7 +450,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm);
             Questions.Add(newQ);
             _inspectionForm.Vraag.Add(v);
-            v.VolgordeNummer = _questions.Count();
+            v.VolgordeNummer = Questions.Count();
             
             SelectedQuestion = newQ;
             Changed = true;

@@ -34,7 +34,7 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                return context.Inspectieformulier.Include("InspectieformulierVragenlijstCombinatie").Include("Vraag").Include("VraagMogelijkAntwoord").Where(i => i.OpdrachtID == OpdrachtID).ToList();
+                return context.Inspectieformulier.Include("Vraag").Include("Vraag.VraagMogelijkAntwoord").Where(i => i.OpdrachtID == OpdrachtID).ToList();
             }
         }
 

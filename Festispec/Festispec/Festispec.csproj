@@ -196,6 +196,7 @@
     <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormListViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />

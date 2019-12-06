@@ -761,7 +761,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Content="Laatste weiziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
+                        <Label Content="Laatste wijziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
                         <Label Content="{Binding LastChangeDate}" Grid.Row="1" VerticalAlignment="Center" ContentStringFormat="d" FontSize="15"/>
                     </Grid>
                     

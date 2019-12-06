@@ -6,8 +6,8 @@
       xmlns:local="clr-namespace:Festispec.View.InspectionFormView"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      DataContext="{Binding InspectionForm, Source={StaticResource Locator}}"
-      Title="QuestionnaireShowView">
+      DataContext="{Binding InspectionFormList, Source={StaticResource Locator}}"
+      Title="InspectionFormListView">
 
     <Page.Resources>
 
@@ -40,9 +40,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -74,9 +72,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -108,9 +104,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -143,9 +137,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
 
                     <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
@@ -194,9 +186,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                     <Viewbox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
                         <Grid MinWidth="{Binding Path=ActualWidth, ElementName=StandardView}">
@@ -250,9 +240,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -284,9 +272,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding Image}"/>
-                        </Button>
+                        <Image Source="{Binding Image}"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -305,6 +291,19 @@
         <Viewbox Stretch="UniformToFill" Grid.ColumnSpan="2">
             <Image Source="/Images/Dashboard_background.png"/>
         </Viewbox>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="1.3*"/>
+            </Grid.RowDefinitions>
+            <ComboBox x:Name="SelectForm" ItemsSource="{Binding InspectionFormsList}" DisplayMemberPath="Titel" SelectedValuePath="Titel" SelectedItem="{Binding SelectedInspectionForm, Mode=TwoWay}" Grid.Row="1"/>
+            <Button Content="Nieuw inspectieformulier" Grid.Row="2" Command="{Binding Path=CreateNewInspectionFormCommand}"/>
+            <TextBox Text="Details" Grid.Row="3"/>
+            <Button Grid.Row="4" Command="{Binding Path = ToEditCommand}">Edit</Button>
+        </Grid>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.4*"/>
@@ -365,7 +364,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <Label Content="Laatste weiziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
+                        <Label Content="Laatste wijziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
                         <Label Content="{Binding LastChangeDate}" Grid.Row="1" VerticalAlignment="Center" ContentStringFormat="d" FontSize="15"/>
                     </Grid>
 
@@ -379,6 +378,7 @@
             <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}"/>
         </Grid>
 
+        
     </Grid>
 
 </Page>

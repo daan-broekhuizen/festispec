@@ -22,6 +22,7 @@ using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.ViewModel.InspectionFormViewModels;
+using Festispec.Model;
 
 namespace Festispec.ViewModel
 {
@@ -163,7 +164,8 @@ namespace Festispec.ViewModel
 
         #region InspectionFormVM's
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
-       
+        public InspectionFormListViewModel InspectionFormList => new InspectionFormListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
+
         #endregion
 
         //Clean when logging out?
