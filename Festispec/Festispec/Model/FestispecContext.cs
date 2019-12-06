@@ -39,11 +39,11 @@ namespace Festispec.Model
                 .WithRequired(e => e.Account)
                 .HasForeignKey(e => e.MedewerkerID);
 
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht)
-                .WithRequired(e => e.Account)
-                .HasForeignKey(e => e.MedewerkerID)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Account>()
+            //    .HasMany(e => e.Opdracht)
+            //    .WithRequired(e => e.Account)
+            //    .HasForeignKey(e => e.MedewerkerID)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.Ingepland)

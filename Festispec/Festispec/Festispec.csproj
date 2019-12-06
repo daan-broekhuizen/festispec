@@ -166,11 +166,13 @@
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\Temp.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\AddJobViewModel.cs" />
