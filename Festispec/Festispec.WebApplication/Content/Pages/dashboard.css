@@ -1,40 +1,48 @@
-﻿body {
-    background: lightblue url("Images/Dashboard_background.png");
+﻿body 
+{
+    background: lightblue url("../Images/Dashboard_background.png");
 }
 
 img {
     width: 100%;
 }
 
-#logo img {
+#logo img 
+{
     max-width: 80%;
     margin-top: 10px;
 }
 
-.task {
+.task 
+{
     background-color: yellow;
     text-align: center;
 }
 
-.task img {
+.task img 
+{
     max-width: 50%;
 }
 
-.col-md-6 .row {
+.col-md-6 .row 
+{
     margin: 10px;
     padding: 10px; 
     background-color: lightgrey;
 }
 
-.upcoming-tasks {
+.upcoming-tasks 
+{
     background-color: white;
 }
 
-.all-tasks {
+.all-tasks 
+{
     padding: 10px 0 10px 0;
     font-size: 2em;
 }
 
-.big-buttons {
+.big-buttons 
+{
     margin-top: 20px;
 }

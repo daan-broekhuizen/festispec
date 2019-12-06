@@ -1,4 +1,4 @@
-﻿<link href="~/Content/dashboard.css" rel="stylesheet" />
+﻿<link href="~/Content/Pages/dashboard.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Dashboard";
@@ -7,7 +7,10 @@
 <div class="container">
     <div class="row">
         <div id="logo" class=" col-sm-4 text-center">
-            <img src="~/Content/Images/festispec_logo.png" />
+            <a href='@Url.Action("Dashboard", "Dashboard")'>
+                <img src="~/Content/Images/festispec_logo.png" />
+            </a>
+            
         </div>
     </div>
     <div class="row">
@@ -67,7 +70,7 @@
             @*End opdracht*@
   
                 <div class="col-md-12 text-center all-tasks">
-                    <p>Alle opdrachten <i class="fa fa-arrow-right"></i></p>
+                    <a href='@Url.Action("Search", "Assignment")'>Alle opdrachten <i class="fa fa-arrow-right"></i></a>
                 </div>
 
 
@@ -83,7 +86,7 @@
         </div>
         <div class="col-md-2">
             <a href='@Url.Action("AvailabilityView", "Availability")'>
-                <img src='@Url.Content("~/Content/Images/Dashboard_planning.png")' />
+                <img src=~/Content/Images/Dashboard_planning.png     />
             </a>
         </div>
          

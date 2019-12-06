@@ -149,7 +149,8 @@
     <Resource Include="Content\Images\Profile.png" />
     <Resource Include="Content\Images\Search.png" />
     <Resource Include="Content\Images\User.png" />
-    <Content Include="Content\dashboard.css" />
+    <Content Include="Content\Pages\assignment_search.css" />
+    <Content Include="Content\Pages\dashboard.css" />
     <Content Include="Content\fontawesome\font-awesome.css" />
     <Content Include="Content\fontawesome\font-awesome.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -179,6 +180,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FontAwesomeBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AssignmentController.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -227,6 +229,7 @@
     <Content Include="Views\Credentials\Index.cshtml" />
     <Content Include="Views\Credentials\Login.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Assignment\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
