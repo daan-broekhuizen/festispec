@@ -31,6 +31,7 @@
             SeedIngepladeInspecteurs(context);
             SeedRapportTemplates(context);
             SeedInspectionFormTemplates(context);
+            SeedVraagAntwoorden(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -297,6 +298,25 @@
 
             context.VraagMogelijkAntwoord.AddOrUpdate(x => x.AntwoordNummer, antwoorden);
             context.SaveChanges();
+        }
+
+        private void SeedVraagAntwoorden(FestispecContext context)
+        {
+            Inspectieformulier inspectieformulier = context.Inspectieformulier.Where(x => x.InspectieFormulierTitel == "Inspectie Bospop festival").FirstOrDefault();
+
+            foreach(Vraag vraag in inspectieformulier.Vraag)
+            {
+                Antwoorden antwoord = new Antwoorden()
+                {
+                    VraagID = vraag.VraagID,
+                    InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
+                    AntwoordNummer = 1,
+                    AntwoordText = "0"
+                };
+
+                context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoord);
+                context.SaveChanges();
+            }
         }
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)

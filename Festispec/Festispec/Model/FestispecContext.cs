@@ -127,6 +127,11 @@ namespace Festispec.Model
                 .WithRequired(e => e.Vraag)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Vraag>()
+                .HasMany(e => e.Antwoorden)
+                .WithRequired(e => e.Vraag)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<VraagMogelijkAntwoord>()
                 .Property(e => e.AntwoordText)
                 .IsUnicode(false);
