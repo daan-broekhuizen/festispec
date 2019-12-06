@@ -1,5 +1,4 @@
-﻿using Festispec.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -28,16 +27,16 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void UpdateRapportage(JobViewModel job)
+        public void UpdateRapportage(int jobID, string report)
         {
             using(FestispecContext context = new FestispecContext())
             {
-                context.Opdracht.Where(x => x.OpdrachtID == job.JobID).FirstOrDefault().Rapportage = job.Report;
+                context.Opdracht.Where(x => x.OpdrachtID == jobID).FirstOrDefault().Rapportage = report;
                 context.SaveChanges();
             }
         }
 
-        public Opdracht GetOpdracht(JobViewModel job)
+        public Opdracht GetOpdracht(int jobID)
         {
             Opdracht opdracht = null;
             
@@ -45,7 +44,7 @@ namespace Festispec.Model.Repositories
             {
                 opdracht = context.Opdracht
                     .Include(o => o.Inspectieformulier.Select(i => i.Vraag.Select(v => v.Antwoorden)))
-                    .Where(o => o.OpdrachtID == job.JobID)
+                    .Where(o => o.OpdrachtID == jobID)
                     .FirstOrDefault();
             }
 

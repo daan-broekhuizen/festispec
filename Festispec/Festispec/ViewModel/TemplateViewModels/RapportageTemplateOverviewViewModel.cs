@@ -34,14 +34,14 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void SelectTemplate(dynamic template)
         {
-            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(template);
+            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(((TemplateViewModel)template).RapportTemplateID);
 
             _navigationService.NavigateTo("Rapportage", new object[3] { EnumTemplateMode.SELECT, rapportTemplate, _job });
         }
 
         protected override void EditTemplate(dynamic template)
         {
-            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(template);
+            RapportTemplate rapportTemplate = _repo.GetRapportTemplate(((TemplateViewModel)template).RapportTemplateID);
 
             _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.EDIT, template });
         }

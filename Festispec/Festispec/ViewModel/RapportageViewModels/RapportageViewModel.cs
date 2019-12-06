@@ -195,7 +195,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             ChartDialogBox chartDialog = new ChartDialogBox();
             chartDialog.ViewModel.AddRequested += AddChartRequested;
-            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job));
+            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID));
 
             chartDialog.ShowDialog();
         }
@@ -242,7 +242,7 @@ namespace Festispec.ViewModel.RapportageViewModels
                 {
                     _job.Report = designer.DesignerContent;
 
-                    _repo.UpdateRapportage(_job);
+                    _repo.UpdateRapportage(_job.JobID, _job.Report);
                 }
             }
         }

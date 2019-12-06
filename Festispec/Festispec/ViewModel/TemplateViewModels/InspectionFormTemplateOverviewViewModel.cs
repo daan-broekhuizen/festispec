@@ -36,7 +36,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void SelectTemplate(dynamic template)
         {
-            Inspectieformulier inspectionTemplate = _repo.GetInspectionFormTemplate(template);
+            Inspectieformulier inspectionTemplate = _repo.GetInspectionFormTemplate(((TemplateViewModel)template).InspectionFormTemplateID);
 
             _navigationService.NavigateTo("CreateInspectionForm", inspectionTemplate);
         }

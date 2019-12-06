@@ -24,13 +24,13 @@ namespace Festispec.Model.Repositories
             return templates;
         }
 
-        public RapportTemplate GetRapportTemplate(TemplateViewModel viewModel)
+        public RapportTemplate GetRapportTemplate(int templateID)
         {
             RapportTemplate template = null;
 
             using(FestispecContext context = new FestispecContext())
             {
-                template = context.RapportTemplate.Where(x => x.TemplateID == viewModel.RapportTemplateID).FirstOrDefault();
+                template = context.RapportTemplate.Where(x => x.TemplateID == templateID).FirstOrDefault();
             }
 
             return template;
@@ -51,13 +51,13 @@ namespace Festispec.Model.Repositories
             return templates;
         }
 
-        public Inspectieformulier GetInspectionFormTemplate(TemplateViewModel viewModel)
+        public Inspectieformulier GetInspectionFormTemplate(int templateID)
         {
             Inspectieformulier template = null;
 
             using (FestispecContext context = new FestispecContext())
             {
-                template = context.Inspectieformulier.Where(x => x.InspectieformulierID == viewModel.RapportTemplateID).FirstOrDefault();
+                template = context.Inspectieformulier.Where(x => x.InspectieformulierID == templateID).FirstOrDefault();
             }
 
             return template;
