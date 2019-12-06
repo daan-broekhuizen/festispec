@@ -1,8 +1,40 @@
 ﻿body {
-    background-color: red;
+    background: lightblue url("Images/Dashboard_background.png");
+}
+
+img {
+    width: 100%;
 }
 
 #logo img {
     max-width: 80%;
     margin-top: 10px;
+}
+
+.task {
+    background-color: yellow;
+    text-align: center;
+}
+
+.task img {
+    max-width: 50%;
+}
+
+.col-md-6 .row {
+    margin: 10px;
+    padding: 10px; 
+    background-color: lightgrey;
+}
+
+.upcoming-tasks {
+    background-color: white;
+}
+
+.all-tasks {
+    padding: 10px 0 10px 0;
+    font-size: 2em;
+}
+
+.big-buttons {
+    margin-top: 20px;
 }
