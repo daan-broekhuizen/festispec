@@ -27,11 +27,6 @@ namespace Festispec.Model.Repositories
             };
             using (FestispecContext context = new FestispecContext())
             {
-                var target = context.Inspectieformulier.Include("Ingepland").Where(i => i.InspectieformulierID == 2).FirstOrDefault();
-                var copy = target;
-                var targetAccount = context.Account.Where(i => i.AccountID == 1).FirstOrDefault();
-                copy.Ingepland.Add(targetAccount);
-                context.Entry(target).CurrentValues.SetValues(copy);
 
 
                 var formulier = context.Inspectieformulier.Find(1);
