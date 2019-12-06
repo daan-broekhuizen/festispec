@@ -39,7 +39,11 @@ namespace Festispec.WebApplication.Controllers
                 .FirstOrDefault();
 
             if (user != null)
+            {
+                Session.Add("user", user.AccountID);
+
                 return RedirectToAction("Index");
+            }
             else
                 ModelState.AddModelError("Error", "Uw gegevens zijn niet correct.");
             return View(account);

@@ -1,5 +1,6 @@
 ﻿body 
 {
+    background-color: red;
 }
 
 #logo 
@@ -11,4 +12,9 @@
 #zoekbalk 
 {
     min-width: 100%;
+}
+
+.col-md-12 
+{
+    background-color: blue;
 }

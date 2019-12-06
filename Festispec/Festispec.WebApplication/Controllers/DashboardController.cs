@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.WebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,17 @@ namespace Festispec.WebApplication.Controllers
         // GET: Dashboard
         public ActionResult Dashboard()
         {
+            int? userId = (int?) Session["user"];
+            Account account = null;
+            if(userId.HasValue)
+            {
+                using(var context = new FestiSpecContext())
+                {
+                    account = context.Account.Find(userId);
+                }
+            }
+
+            ViewBag.User = account;
             return View();
         }
     }

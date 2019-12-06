@@ -11,6 +11,10 @@ namespace Festispec.WebApplication.Controllers
         // GET: Assignment
         public ActionResult Search()
         {
+            //User.Identity.i
+
+
+            //context.Sessions.Find(Session['inspectie'])
             return View();
         }
     }
