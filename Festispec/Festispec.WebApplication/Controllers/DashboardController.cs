@@ -10,7 +10,7 @@ namespace Festispec.WebApplication.Controllers
     public class DashboardController : Controller
     {
         // GET: Dashboard
-        public ActionResult Dashboard()
+        public ActionResult Index()
         {
             int? userId = (int?) Session["user"];
             Account account = null;

@@ -228,7 +228,7 @@
     <Content Include="Views\Credentials\Edit.cshtml" />
     <Content Include="Views\Credentials\Index.cshtml" />
     <Content Include="Views\Credentials\Login.cshtml" />
-    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Assignment\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

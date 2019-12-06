@@ -42,7 +42,7 @@ namespace Festispec.WebApplication.Controllers
             {
                 Session.Add("user", user.AccountID);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard", new { area = "" });
             }
             else
                 ModelState.AddModelError("Error", "Uw gegevens zijn niet correct.");
