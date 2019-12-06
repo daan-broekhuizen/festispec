@@ -1,18 +1,15 @@
-﻿
-@{
-    ViewBag.Title = "AvailabilityView";
-}
+﻿@model List<Festispec.WebApplication.Models.Beschikbaarheid_inspecteurs>
 
 @section Scripts{
     <script src="~/Scripts/Calendar/baseCalendar.js" type="text/javascript"></script>
 }
 
 @section Style{
-    <link href="~/Content/CSS Views/Availability.css" rel="stylesheet" />    
+    <link href="~/Content/CSS Views/Availability.css" rel="stylesheet" />
 }
 
 <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-    <div class="card">
+    <div class="card col-sm-2 col-md-4 col-lg-2">
         <h3 class="card-header" id="monthAndYear"></h3>
         <table class="table table-bordered table-responsive-sm" id="calendar">
             <thead>
@@ -62,4 +59,6 @@
         </form>
     </div>
 </div>
+
+
 

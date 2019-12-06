@@ -3,11 +3,14 @@ currentMonth = today.getMonth();
 currentYear = today.getFullYear();
 selectedYear = document.getElementById("year");
 selectedMonth = document.getElementById("month");
+list = document.getElementById("date-list");
+
 
 months = ["Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
 monthAndYear = document.getElementById("monthAndYear");
 showCalendar(currentMonth, currentYear);
+
 
 // Functie voor het maken van de kalender
 function showCalendar(month, year)
@@ -49,6 +52,8 @@ function showCalendar(month, year)
             {
                 cell = document.createElement("td");
                 cellText = document.createTextNode(date);
+                cell.classList.add("valid-date");
+                cell.addEventListener("click", addAvailability);
                 // De dag van vandaag een andere kleur geven
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth())
                     cell.classList.add("bg-info");
@@ -93,4 +98,27 @@ function daysInMonth(iMonth, iYear)
 {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
+
+function addAvailability()
+{
+    var d = new Date(selectedYear, (selectedMonth+1), this.innerHTML);
+    $.ajax({
+        type: "POST",
+        url: "Availability/AddDate",
+        data: '{date:  }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert("success!")
+        },
+        failure: function (response) {
+            alert("failed!")
+        },
+        error: function (response) {
+            alert("error!")
+        }
+
+    });
+}
+
 
