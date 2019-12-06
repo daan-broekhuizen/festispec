@@ -39,10 +39,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         public List<TemplateViewModel> Templates
         {
-            get
-            {
-                return _templates;
-            }
+            get => _templates;
             set
             {
                 _templates = value;
