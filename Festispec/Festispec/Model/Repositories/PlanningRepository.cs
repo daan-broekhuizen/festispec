@@ -18,9 +18,27 @@ namespace Festispec.Model.Repositories
 
         public void Test()
         {
+            Inspectieformulier inspec = new Inspectieformulier()
+            {
+                InspectieformulierID = 2,
+                InspectieFormulierTitel = "testje"
+
+                
+            };
             using (FestispecContext context = new FestispecContext())
             {
-                context.Account.
+                var target = context.Inspectieformulier.Include("Ingepland").Where(i => i.InspectieformulierID == 2).FirstOrDefault();
+                var copy = target;
+                var targetAccount = context.Account.Where(i => i.AccountID == 1).FirstOrDefault();
+                copy.Ingepland.Add(targetAccount);
+                context.Entry(target).CurrentValues.SetValues(copy);
+
+
+                var formulier = context.Inspectieformulier.Find(1);
+
+                var account = context.Account.Find(3);
+
+                formulier.Ingepland.Add(account);
             }
         }
     }

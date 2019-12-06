@@ -25,7 +25,6 @@ namespace Festispec.Model.Repositories
                     Console.WriteLine(r.Gebruikersnaam);
                 }
 
-
             }
         }
     }

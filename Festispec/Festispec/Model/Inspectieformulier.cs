@@ -13,6 +13,7 @@ namespace Festispec.Model
         public Inspectieformulier()
         {
             Vraag = new HashSet<Vraag>();
+            Ingepland = new HashSet<Account>();
         }
 
         public int InspectieformulierID { get; set; }
@@ -52,5 +53,8 @@ namespace Festispec.Model
         public virtual ICollection<Vraag> Vraag { get; set; }
 
         public virtual Opdracht Opdracht { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Ingepland { get; set; }
     }
 }

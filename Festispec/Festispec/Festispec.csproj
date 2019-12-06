@@ -144,22 +144,6 @@
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
-    <Compile Include="Migrations\201912032313271_Main.cs" />
-    <Compile Include="Migrations\201912032313271_Main.designer.cs">
-      <DependentUpon>201912032313271_Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912051507381_badjas.cs" />
-    <Compile Include="Migrations\201912051507381_badjas.designer.cs">
-      <DependentUpon>201912051507381_badjas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912051859562_curry.cs" />
-    <Compile Include="Migrations\201912051859562_curry.designer.cs">
-      <DependentUpon>201912051859562_curry.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912051902236_bob.cs" />
-    <Compile Include="Migrations\201912051902236_bob.designer.cs">
-      <DependentUpon>201912051902236_bob.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -417,18 +401,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201912032313271_Main.resx">
-      <DependentUpon>201912032313271_Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912051507381_badjas.resx">
-      <DependentUpon>201912051507381_badjas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912051859562_curry.resx">
-      <DependentUpon>201912051859562_curry.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912051902236_bob.resx">
-      <DependentUpon>201912051902236_bob.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
