@@ -147,9 +147,9 @@
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
-    <Compile Include="Migrations\201912041457288_Main.cs" />
-    <Compile Include="Migrations\201912041457288_Main.designer.cs">
-      <DependentUpon>201912041457288_Main.cs</DependentUpon>
+    <Compile Include="Migrations\201912061310436_Main.cs" />
+    <Compile Include="Migrations\201912061310436_Main.designer.cs">
+      <DependentUpon>201912061310436_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -421,8 +421,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201912041457288_Main.resx">
-      <DependentUpon>201912041457288_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912061310436_Main.resx">
+      <DependentUpon>201912061310436_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
