@@ -78,6 +78,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OpenHtmlToPdf, Version=1.12.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenHtmlToPdf.1.12.0.0\lib\net45\OpenHtmlToPdf.dll</HintPath>
+    </Reference>
     <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
@@ -144,9 +147,9 @@
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
-    <Compile Include="Migrations\201912032313271_Main.cs" />
-    <Compile Include="Migrations\201912032313271_Main.designer.cs">
-      <DependentUpon>201912032313271_Main.cs</DependentUpon>
+    <Compile Include="Migrations\201912061310436_Main.cs" />
+    <Compile Include="Migrations\201912061310436_Main.designer.cs">
+      <DependentUpon>201912061310436_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
@@ -163,11 +166,13 @@
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\Temp.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -189,11 +194,15 @@
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
+    <Compile Include="Utility\Validators\SaveDialogValidator.cs" />
     <Compile Include="ViewModel\Components\ChartDialogViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BaseChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\CartesianChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\Data\GeneralChartData.cs" />
     <Compile Include="ViewModel\Components\Charts\IChart.cs" />
     <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormListViewModel.cs" />
@@ -201,13 +210,16 @@
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\AddJobViewModel.cs" />
+    <Compile Include="ViewModel\RapportageViewModels\VraagViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
+    <Compile Include="ViewModel\TemplateViewModels\TemplateViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
@@ -255,6 +267,9 @@
     </Compile>
     <Compile Include="View\Components\OverviewSearchBar.xaml.cs">
       <DependentUpon>OverviewSearchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Components\SaveDialogBox.xaml.cs">
+      <DependentUpon>SaveDialogBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomerView\AddContactInfoView.xaml.cs">
       <DependentUpon>AddContactInfoView.xaml</DependentUpon>
@@ -340,6 +355,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Components\SaveDialogBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\InspectionFormView\CreateInspectionFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -403,8 +422,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201912032313271_Main.resx">
-      <DependentUpon>201912032313271_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912061310436_Main.resx">
+      <DependentUpon>201912061310436_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
