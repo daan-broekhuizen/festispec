@@ -42,7 +42,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 AddPossibleAnwsers();
             }
-            if (_question.AfbeeldingURL != null)//FIX THIS
+            if (_question.AfbeeldingURL != null)
             {
                 WebRequest webRequest = WebRequest.CreateDefault(new Uri("http://" + _question.AfbeeldingURL, UriKind.Absolute));
                 webRequest.ContentType = "image/jpeg";
