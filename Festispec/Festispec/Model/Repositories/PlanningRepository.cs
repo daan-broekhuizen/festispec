@@ -12,7 +12,7 @@ namespace Festispec.Model.Repositories
             {
                 SqlParameter param = new SqlParameter("@ID", id);
 
-                return context.Database.SqlQuery<Account>("GetInspectors @ID", param).ToList();
+                return context.Database.SqlQuery<Account>("sp_GetInspectors @ID", param).ToList();
             }
         }
 
