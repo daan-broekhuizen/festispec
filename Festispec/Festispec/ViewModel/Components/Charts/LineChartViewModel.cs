@@ -37,10 +37,5 @@ namespace Festispec.ViewModel.Components.Charts
                 }
             };
         }
-
-        public override void ApplyColor()
-        {
-            ((LineSeries)Collection[0]).Stroke = new SolidColorBrush(ForegroundColor);
-        }
     }
 }

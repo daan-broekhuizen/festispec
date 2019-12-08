@@ -47,6 +47,19 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
+        private Color _backgroundColor;
+        public Color BackgroundColor
+        {
+            get => _backgroundColor;
+            set
+            {
+                _backgroundColor = value;
+
+                RaisePropertyChanged("BackgroundColor");
+                ApplyColor();
+            }
+        }
+
         protected Chart _control;
 
         public ObservableCollection<string> Labels { get; set; }
@@ -142,7 +155,6 @@ namespace Festispec.ViewModel.Components.Charts
 
             return values;
         }
-
 
         public abstract void ApplyColor();
 

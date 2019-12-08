@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Festispec.ViewModel.Components.Charts
 {
     public class CartesianChartViewModel : BaseChartViewModel
     {
-        public override void ApplyColor(){}
-
         public Axis XAxis { get; set; }
         public Axis YAxis { get; set; }
 
@@ -44,5 +43,11 @@ namespace Festispec.ViewModel.Components.Charts
         }
 
         public override void CreateCollection() { }
+
+        public override void ApplyColor()
+        {
+            ((Series)Collection[0]).Stroke = new SolidColorBrush(ForegroundColor);
+            ((Series)Collection[0]).Fill = new SolidColorBrush(BackgroundColor);
+        }
     }
 }

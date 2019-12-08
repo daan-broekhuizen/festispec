@@ -195,6 +195,7 @@
     <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Converters\PDFConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
+    <Compile Include="Utility\Extensions\FrameworkExtension.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />

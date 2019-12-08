@@ -25,6 +25,7 @@ namespace Festispec.ViewModel.Components.Charts
         ObservableCollection<string> Labels { get; set; }
 
         Color ForegroundColor { get; set; }
+        Color BackgroundColor { get; set; }
 
         void CreateCollection();
 

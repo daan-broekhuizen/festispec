@@ -3,6 +3,7 @@ using Festispec.API.ImageShack;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
+using Festispec.Utility.Extensions;
 using Festispec.ViewModel.Components.Charts;
 using Festispec.ViewModel.InspectionFormViewModels;
 using Festispec.ViewModel.RapportageViewModels;
@@ -19,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -40,6 +42,7 @@ namespace Festispec.ViewModel.Components
         public ICommand SwitchAxisCommand { get; set; }
         public ICommand AddChartCommand { get; set; }
         public ICommand ForegroundColorChangedCommand { get; set; }
+        public ICommand BackgroundColorChangedCommand { get; set; }
         public ICommand TitleChangedCommand { get; set; }
         public ICommand QuestionChangedCommand { get; set; }
 
@@ -104,6 +107,26 @@ namespace Festispec.ViewModel.Components
             }
         }
 
+
+        public System.Windows.Media.Color BackgroundColor
+        {
+            get
+            {
+                if (ChartViewModel != null)
+                    return ChartViewModel.BackgroundColor;
+
+                return Colors.Black;
+            }
+            set
+            {
+                if (ChartViewModel != null)
+                    ChartViewModel.BackgroundColor = value;
+                    
+
+                RaisePropertyChanged("BackgroundColor");
+            }
+        }
+
         public ObservableCollection<VraagViewModel> Questions { get; set; }
 
         private Chart _control;
@@ -141,9 +164,10 @@ namespace Festispec.ViewModel.Components
         {
             Questions = new ObservableCollection<VraagViewModel>();
             SwitchAxisCommand = new RelayCommand<string>(SwitchAxis);
-            AddChartCommand = new RelayCommand(AddChart);
-            ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
+            AddChartCommand = new RelayCommand<Grid>(AddChart);
             TitleChangedCommand = new RelayCommand<string>((title) => Title = title);
+            ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
+            BackgroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => BackgroundColor = color);
             QuestionChangedCommand = new RelayCommand<VraagViewModel>(QuestionChanged);
         }
 
@@ -182,6 +206,9 @@ namespace Festispec.ViewModel.Components
 
             if (ChartViewModel != null)
                 Control = ChartViewModel.BuildControl();
+
+            ForegroundColor = Colors.Black;
+            BackgroundColor = Colors.Gray;
         }
 
         public void SwitchAxis(string axis)
@@ -206,10 +233,10 @@ namespace Festispec.ViewModel.Components
                 ChartViewModel.Update(_rapportageRepository.GetChartData(question.ID));
         }
 
-        public void AddChart()
+        public void AddChart(Grid grid)
         {
-            byte[] data = ChartViewModel.ToByteArray();
-
+            //byte[] data = ChartViewModel.ToByteArray();
+            byte[] data = grid.ToByteArray();
             UploadModel result = (new ImageShackClient()).UploadImage(new FileData(data));
 
             if (AddRequested != null)

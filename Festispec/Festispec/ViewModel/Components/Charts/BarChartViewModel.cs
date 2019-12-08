@@ -25,11 +25,6 @@ namespace Festispec.ViewModel.Components.Charts
 
         }
 
-        public override void ApplyColor()
-        {
-            ((ColumnSeries)Collection[0]).Stroke = new SolidColorBrush(ForegroundColor);
-        }
-
         public override void CreateCollection()
         {
             Collection = new SeriesCollection()
