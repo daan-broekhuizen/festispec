@@ -132,6 +132,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,7 +149,6 @@
     <Compile Include="Models\Opdracht.cs" />
     <Compile Include="Models\Rapport_template.cs" />
     <Compile Include="Models\Repositories\AvailabilityRepository.cs" />
-    <Compile Include="Models\Repositories\WebAPIEvent.cs" />
     <Compile Include="Models\Rol_lookup.cs" />
     <Compile Include="Models\Status_lookup.cs" />
     <Compile Include="Models\Vraag.cs" />
@@ -172,7 +172,6 @@
     <Content Include="Views\Availability\AvailabilityView.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Views\Availability\AvailabilityViewTest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -101,11 +101,16 @@ function daysInMonth(iMonth, iYear)
 
 function addAvailability()
 {
-    var d = new Date(selectedYear, (selectedMonth+1), this.innerHTML);
+    this.classList.toggle("added-date");
+    this.removeEventListener("click", addAvailability);
+    this.addEventListener("click", removeAvailability);
+
+    var d = new Date(selectedYear, (selectedMonth + 1), this.innerHTML);
+
     $.ajax({
         type: "POST",
         url: "Availability/AddDate",
-        data: '{date:  }',
+        data: '{date: "2019/12/15" }',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -119,6 +124,11 @@ function addAvailability()
         }
 
     });
+}
+
+function removeAvailability()
+{
+    
 }
 
 

@@ -7,6 +7,7 @@ namespace Festispec.WebApplication.Models.Repositories
 {
     public class AvailabilityRepository
     {
+        private List<Beschikbaarheid_inspecteurs> list = new List<Beschikbaarheid_inspecteurs>();
         public List<Beschikbaarheid_inspecteurs> GetAvailability()
         {
             using(FestiSpecContext context = new FestiSpecContext())
@@ -23,5 +24,23 @@ namespace Festispec.WebApplication.Models.Repositories
                 context.SaveChanges();
             }
         }
+
+
+        public List<Beschikbaarheid_inspecteurs> GetTest()
+        {
+            
+            Beschikbaarheid_inspecteurs test = new Beschikbaarheid_inspecteurs();
+            test.MedewerkerID = 1;
+            test.Datum = new DateTime(2019, 12, 10);
+            list.Add(test);
+
+            return list;
+        }
+
+        public void CreateTest(Beschikbaarheid_inspecteurs beschikbaarheid)
+        {
+            list.Add(beschikbaarheid);
+        }
+
     }
 }

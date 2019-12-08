@@ -9,7 +9,7 @@ namespace Festispec.WebApplication.Controllers
     {
         private AvailabilityRepository _repo;
         // GET: Availability
-        public ActionResult AvailabilityViewTest()
+        public ActionResult AvailabilityView()
         {
             return View();
         }
@@ -20,7 +20,7 @@ namespace Festispec.WebApplication.Controllers
             Beschikbaarheid_inspecteurs bi = new Beschikbaarheid_inspecteurs();
             bi.MedewerkerID = 1;
             bi.Datum = date;
-            _repo.CreateAvailability(bi);
+            _repo.CreateTest(bi);
 
             return Json(true);
         }
