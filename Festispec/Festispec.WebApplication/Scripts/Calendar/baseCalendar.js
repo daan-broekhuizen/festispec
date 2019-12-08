@@ -105,12 +105,12 @@ function addAvailability()
     this.removeEventListener("click", addAvailability);
     this.addEventListener("click", removeAvailability);
 
-    var d = new Date(selectedYear, (selectedMonth + 1), this.innerHTML);
+    var dateString = currentYear + "/" + (currentMonth + 1) + "/" + this.innerHTML;
 
     $.ajax({
-        type: "POST",
-        url: "Availability/AddDate",
-        data: '{date: "2019/12/15" }',
+        method: "POST",
+        url: "Availability/CreateAvailability",
+        data: '{ datestring:"' + dateString + '" }',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (response) {
@@ -128,7 +128,30 @@ function addAvailability()
 
 function removeAvailability()
 {
-    
+    this.classList.toggle("valid-date");
+    this.removeEventListener("click", removeAvailability);
+    this.addEventListener("click", addAvailability);
+
+    var dateString = currentYear + "/" + (currentMonth + 1) + "/" + this.innerHTML;
+
+    $.ajax({
+        method: "DELETE",
+        url: "Availability/DeleteAvailability",
+        data: '{ datestring:"' + dateString + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert("success!")
+        },
+        failure: function (response) {
+            alert("failed!")
+        },
+        error: function (response) {
+            alert("error!")
+        }
+
+    });
+
 }
 
 

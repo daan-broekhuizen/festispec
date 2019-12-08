@@ -25,21 +25,13 @@ namespace Festispec.WebApplication.Models.Repositories
             }
         }
 
-
-        public List<Beschikbaarheid_inspecteurs> GetTest()
+        public void DeleteAvailability(Beschikbaarheid_inspecteurs beschikbaarheid)
         {
-            
-            Beschikbaarheid_inspecteurs test = new Beschikbaarheid_inspecteurs();
-            test.MedewerkerID = 1;
-            test.Datum = new DateTime(2019, 12, 10);
-            list.Add(test);
-
-            return list;
-        }
-
-        public void CreateTest(Beschikbaarheid_inspecteurs beschikbaarheid)
-        {
-            list.Add(beschikbaarheid);
+            using (FestiSpecContext context = new FestiSpecContext())
+            {
+                context.Beschikbaarheid_inspecteurs.Remove(beschikbaarheid);
+                context.SaveChanges();
+            }
         }
 
     }

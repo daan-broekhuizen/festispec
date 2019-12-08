@@ -1,4 +1,5 @@
 ﻿using Festispec.WebApplication.Models;
+using Festispec.WebApplication.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,43 +10,39 @@ namespace Festispec.WebApplication.Controllers
 {
     public class CalendarController : ApiController
     {
-        public IEnumerable<Beschikbaarheid_inspecteurs> Get()
-        {
-            using(FestiSpecContext context = new FestiSpecContext())
-            {
-                
-                        
-            }
-        }
-
-        public Beschikbaarheid_inspecteurs Get(int id, DateTime date)
-        {
-            using (FestiSpecContext context = new FestiSpecContext())
-            {
-                return context.Beschikbaarheid_inspecteurs.Find(id, date);
-            }
-        }
+        private AvailabilityRepository _repo;
 
         [HttpPost]
-        public IHttpActionResult CreateAvailability(Beschikbaarheid_inspecteurs availability)
+        public IHttpActionResult CreateAvailability(string datestring)
         {
-            using (FestiSpecContext context = new FestiSpecContext())
-            {
-                context.Beschikbaarheid_inspecteurs.Add(availability);
-                context.SaveChanges();
-            }
+            DateTime date = Convert.ToDateTime(datestring);
+            _repo = new AvailabilityRepository();
+            Beschikbaarheid_inspecteurs bi = new Beschikbaarheid_inspecteurs();
+            bi.MedewerkerID = 1;
+            bi.Datum = date;
+            _repo.CreateAvailability(bi);
 
             return Ok(new
                 { 
-                tid = availability.MedewerkerID,
+                tid = bi.MedewerkerID,
                 action = "inserted"
             });
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteAvailability(int id, DateTime date)
+        public IHttpActionResult DeleteAvailability(string datestring)
         {
-            
+            DateTime date = Convert.ToDateTime(datestring);
+            _repo = new AvailabilityRepository();
+            Beschikbaarheid_inspecteurs bi = new Beschikbaarheid_inspecteurs();
+            bi.MedewerkerID = 1;
+            bi.Datum = date;
+            _repo.DeleteAvailability(bi);
+
+            return Ok(new
+            {
+                action = "deleted"
+            });
         }
     }
 }
