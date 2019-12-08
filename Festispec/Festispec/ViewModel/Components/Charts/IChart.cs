@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using Festispec.ViewModel.Components.Charts.Data;
+using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -16,7 +17,7 @@ namespace Festispec.ViewModel.Components.Charts
 
         SeriesCollection Collection { get; set; }
 
-        string[] Labels { get; set; }
+        GeneralChartData ChartData { get; set; }
 
         Color ForegroundColor { get; set; }
 

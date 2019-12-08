@@ -1,9 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.ViewModel.Components.Charts.Data;
+using GalaSoft.MvvmLight;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,7 +31,7 @@ namespace Festispec.ViewModel.Components.Charts
 
         public SeriesCollection Collection { get; set; }
 
-        public string[] Labels { get; set; }
+        public GeneralChartData ChartData { get; set; }
 
         private Color _foregroundColor;
         public Color ForegroundColor
@@ -44,21 +46,25 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
-        private Chart _control;
+        protected Chart _control;
 
-        public virtual Chart BuildControl()
+        public BaseChartViewModel() { }
+
+        public BaseChartViewModel(GeneralChartData chartData)
         {
-            CartesianChart cc = new CartesianChart
-            {
-                Series = Collection
-            };
-
-            _control = cc;
-
-            return cc;
+            ChartData = chartData;
+            ChartData.Values.CollectionChanged += ChartValuesChanged;
         }
 
-        public abstract void ApplyColor();
+        protected virtual void ChartValuesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // TODO: Multiple
+            Collection[0].Values.Clear();
+            foreach (int i in ChartData.Values)
+                Collection[0].Values.Add(i);
+        }
+
+        public abstract Chart BuildControl();
 
         public byte[] ToByteArray()
         {
@@ -79,5 +85,7 @@ namespace Festispec.ViewModel.Components.Charts
 
             return data;
         }
+
+        public abstract void ApplyColor();
     }
 }

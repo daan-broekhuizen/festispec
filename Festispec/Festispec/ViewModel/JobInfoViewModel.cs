@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model;
+using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
@@ -26,6 +27,8 @@ namespace Festispec.ViewModel
         private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
         public ICommand ShowQuotationCommand { get; set; }
+        public ICommand ShowRapportageCommand { get; set; }
+
         public List<string> Status { get; set; }
 
         #region ErrorProperties
@@ -89,6 +92,7 @@ namespace Festispec.ViewModel
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
             ShowQuotationCommand = new RelayCommand(ShowQuotation);
+            ShowRapportageCommand = new RelayCommand(ShowRapportage);
             _navigationService = service;
             _quotationRepo = quotationRepo;
             this.Jrepo = Jrepo;
@@ -112,7 +116,19 @@ namespace Festispec.ViewModel
                     OpdrachtID = JobVM.JobID
                 }, _quotationRepo));
             }
+        }
 
+        private void ShowRapportage()
+        {
+            if (JobVM != null)
+            {
+                JobViewModel updateViewModel = new JobViewModel(_quotationRepo.GetJob(JobVM.JobID));
+
+                if (updateViewModel != null && !string.IsNullOrEmpty(updateViewModel.Report))
+                    _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.SELECT, updateViewModel });
+                else if (updateViewModel != null)
+                    _navigationService.NavigateTo("RapportageTemplateOverview", new object[2] { EnumTemplateMode.SELECT,  updateViewModel });
+            }
         }
 
         public void SaveJob()
@@ -131,8 +147,6 @@ namespace Festispec.ViewModel
             });
             Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
         }
-
-
 
         private void CanSaveJob()
         {

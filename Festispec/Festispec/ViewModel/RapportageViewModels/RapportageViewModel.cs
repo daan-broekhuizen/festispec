@@ -6,6 +6,7 @@ using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
+using Festispec.ViewModel.Components.Charts.Data;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -17,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -30,20 +32,6 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         // Services
         private readonly NavigationService _navigationService;
-
-        private RapportTemplate _template;
-
-        private bool _displayExtraOptions;
-        public bool DisplayExtraOptions
-        {
-            get => _displayExtraOptions;
-            set
-            {
-                _displayExtraOptions = value;
-
-                RaisePropertyChanged("DisplayExtraOptions");
-            }
-        }
 
         // Commands
         public ICommand ModeChangedCommand { get; set; }
@@ -85,12 +73,38 @@ namespace Festispec.ViewModel.RapportageViewModels
                 _isEditable = value;
 
                 RaisePropertyChanged("IsEditable");
+                RaisePropertyChanged("IsChartVisible");
+            }
+        }
+        
+        public bool IsChartVisible
+        {
+            get => IsEditable && _mode == EnumTemplateMode.SELECT;
+        }
+
+        public bool IsSelectMode
+        {
+            get => _mode == EnumTemplateMode.SELECT;
+        }
+
+        private bool _displayExtraOptions;
+        public bool DisplayExtraOptions
+        {
+            get => _displayExtraOptions;
+            set
+            {
+                _displayExtraOptions = value;
+
+                RaisePropertyChanged("DisplayExtraOptions");
             }
         }
 
         public bool ShouldAddResults { get; set; }
 
         private EnumTemplateMode _mode;
+
+        private RapportTemplate _template;
+        private JobViewModel _job;
 
         public RapportageViewModel(NavigationService navigationService, RapportageRepository repo)
         {
@@ -99,10 +113,35 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             if(navigationService.Parameter != null)
             {
-                _mode = (EnumTemplateMode)((object[])navigationService.Parameter)[0];
-            }
+                object[] parameters = (object[])navigationService.Parameter;
 
-            Content = "<html><body><h1>Header</h1><a href=\"http://www.google.nl\">Google</a><img src=\"https://www.perwez.be/actualites/images-actualites/test.png/@@images/image.png\" alt=\"test\" width=\"100\"/></body></html>";
+                _mode = (EnumTemplateMode)parameters[0];
+                if (parameters.Length > 1)
+                {
+                    if (parameters[1] is RapportTemplate)
+                    {
+                        _template = (RapportTemplate)parameters[1];
+                        Content = _template.TemplateText;
+                    }
+                    else if(parameters[1] is JobViewModel)
+                    {
+                        _job = (JobViewModel)parameters[1];
+                        Content = _job.Report;
+                    }
+                }
+
+                if(parameters.Length > 2)
+                {
+                    if(parameters[2] is JobViewModel)
+                    {
+                        _job = (JobViewModel)parameters[2];
+                        Content = _job.Report;
+                    }
+                }
+
+                if (string.IsNullOrEmpty(Content))
+                    Content = "<html><body></body></html>";
+            }
 
             ModeChangedCommand = new RelayCommand<object[]>((parameters) => ChangeMode((DocumentDesigner)parameters[0], (int)parameters[1]));
             ApplyStyleCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyStyle((string)parameters[1]));
@@ -122,9 +161,7 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             IsEditable = false;
             DisplayExtraOptions = false;
-
-            if (_navigationService.Parameter is RapportTemplate)
-                _template = (RapportTemplate)_navigationService.Parameter;
+            ShouldAddResults = true;
         }
 
         public void Init(RapportTemplate template)
@@ -158,7 +195,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             ChartDialogBox chartDialog = new ChartDialogBox();
             chartDialog.ViewModel.AddRequested += AddChartRequested;
-            chartDialog.ViewModel.Create(designer, mode);
+            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID));
 
             chartDialog.ShowDialog();
         }
@@ -171,22 +208,61 @@ namespace Festispec.ViewModel.RapportageViewModels
 
         private void Save(DocumentDesignerViewModel designer)
         {
-            if(_mode == EnumTemplateMode.CREATE)
+            designer.UpdateContent();
+
+            if (_mode == EnumTemplateMode.CREATE)
             {
-                RapportTemplate template = new RapportTemplate()
+                SaveDialogBox saveDialog = new SaveDialogBox();
+                if(saveDialog.ShowDialog() == false)
                 {
-                    // TODO
-                    TemplateText = designer.DesignerContent,
-                    TemplateName = "Name",
-                    TemplateDescription = "Description"
-                };
-                _repo.CreateTemplate(template);
+                    RapportTemplate template = new RapportTemplate()
+                    {
+                        TemplateText = designer.DesignerContent,
+                        TemplateName = saveDialog.ViewModel.Name,
+                        TemplateDescription = saveDialog.ViewModel.Description
+                    };
+                    _repo.CreateTemplate(template);
+
+                    _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
+                }
+            }
+            else if(_mode == EnumTemplateMode.EDIT)
+            {
+                if(_template != null)
+                {
+                    _template.TemplateText = designer.DesignerContent;
+
+                    _repo.UpdateTemplate(_template);
+                    _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
+                }
+            }
+            else if(_mode == EnumTemplateMode.SELECT)
+            {
+                if(_job != null)
+                {
+                    _job.Report = designer.DesignerContent;
+
+                    _repo.UpdateRapportage(_job.JobID, _job.Report);
+                }
             }
         }
 
         private void Download(DocumentDesignerViewModel designer)
         {
+            designer.UpdateContent();
 
+            byte[] data = designer.ExportToPdf();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "pdf files (*.pdf)|*.pdf"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (Stream dataStream = saveFileDialog.OpenFile())
+                    dataStream.Write(data, 0, data.Length);
+            }
         }
     }
 }

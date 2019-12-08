@@ -70,7 +70,13 @@
                 <!-- Vraag -->
                 <StackPanel Margin="5" Grid.Row="0">
                     <Label Content="Vraag" FontWeight="Bold" FontSize="16" />
-                    <ComboBox Name="controlVraag" Style="{StaticResource ComboBoxFlatStyle}" />
+                    <ComboBox Name="controlVraag" Style="{StaticResource ComboBoxFlatStyle}" ItemsSource="{Binding Questions, Mode=TwoWay}" DisplayMemberPath="Question" SelectedItem="{Binding SelectedQuestion, Mode=OneWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding QuestionChangedCommand }" CommandParameter="{Binding ElementName=controlVraag, Path=SelectedItem}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
                 </StackPanel>
 
                 <!-- Titel -->
