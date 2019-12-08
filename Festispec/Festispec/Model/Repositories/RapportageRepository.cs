@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.SqlServer;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,18 @@ namespace Festispec.Model.Repositories
             }
         }
 
+        public RapportTemplate GetTemplate(int id)
+        {
+            RapportTemplate template = null;
+
+            using (FestispecContext context = new FestispecContext())
+            {
+                template = context.RapportTemplate.Where(x => x.TemplateID == id).FirstOrDefault();
+            }
+
+            return template;
+        }
+
         public void UpdateRapportage(int jobID, string report)
         {
             using(FestispecContext context = new FestispecContext())
@@ -49,6 +63,30 @@ namespace Festispec.Model.Repositories
             }
 
             return opdracht;
+        }
+
+        public VraagType GetQuestionType(string id)
+        {
+            VraagType type = null;
+
+            using(FestispecContext context = new FestispecContext())
+            {
+                type = context.VraagType.Where(x => x.Afkorting == id).FirstOrDefault();
+            }
+
+            return type;
+        }
+
+        public List<ChartData> GetChartData(int questionID)
+        {
+            List<ChartData> chartData = new List<ChartData>();
+
+            using(FestispecContext context = new FestispecContext())
+            {
+                chartData = context.Database.SqlQuery<ChartData>("exec sp_GetChartData @VraagID ", new SqlParameter("VraagID", questionID)).ToList();
+            }
+
+            return chartData;
         }
     }
 }

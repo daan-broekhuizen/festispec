@@ -6,7 +6,7 @@ using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
-using Festispec.ViewModel.Components.Charts.Data;
+using Festispec.ViewModel.TemplateViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -115,27 +115,25 @@ namespace Festispec.ViewModel.RapportageViewModels
             {
                 object[] parameters = (object[])navigationService.Parameter;
 
+                // TODO: Rewrite 
                 _mode = (EnumTemplateMode)parameters[0];
+
+
                 if (parameters.Length > 1)
                 {
-                    if (parameters[1] is RapportTemplate)
+                    for (int i = 1; i < parameters.Length; i++)
                     {
-                        _template = (RapportTemplate)parameters[1];
-                        Content = _template.TemplateText;
-                    }
-                    else if(parameters[1] is JobViewModel)
-                    {
-                        _job = (JobViewModel)parameters[1];
-                        Content = _job.Report;
-                    }
-                }
+                        if(parameters[i] is TemplateViewModel)
+                        {
+                            _template = _repo.GetTemplate(((TemplateViewModel)parameters[i]).RapportTemplateID);
 
-                if(parameters.Length > 2)
-                {
-                    if(parameters[2] is JobViewModel)
-                    {
-                        _job = (JobViewModel)parameters[2];
-                        Content = _job.Report;
+                            Content = _template.TemplateText;
+                        }
+                        else if(parameters[i] is JobViewModel)
+                        {
+                            _job = (JobViewModel)parameters[i];
+                            Content = _job.Report;
+                        }
                     }
                 }
 
@@ -195,7 +193,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             ChartDialogBox chartDialog = new ChartDialogBox();
             chartDialog.ViewModel.AddRequested += AddChartRequested;
-            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID));
+            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID), _repo);
 
             chartDialog.ShowDialog();
         }

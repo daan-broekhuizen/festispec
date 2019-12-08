@@ -1,10 +1,13 @@
-﻿using Festispec.ViewModel.Components.Charts.Data;
+﻿using Festispec.Model;
+using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using LiveCharts;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -31,8 +34,6 @@ namespace Festispec.ViewModel.Components.Charts
 
         public SeriesCollection Collection { get; set; }
 
-        public GeneralChartData ChartData { get; set; }
-
         private Color _foregroundColor;
         public Color ForegroundColor
         {
@@ -48,20 +49,35 @@ namespace Festispec.ViewModel.Components.Charts
 
         protected Chart _control;
 
-        public BaseChartViewModel() { }
+        public ObservableCollection<string> Labels { get; set; }
+        public ObservableCollection<double> Values { get; set; }
 
-        public BaseChartViewModel(GeneralChartData chartData)
+
+        public BaseChartViewModel()
         {
-            ChartData = chartData;
-            ChartData.Values.CollectionChanged += ChartValuesChanged;
+            Labels = new ObservableCollection<string>();
+            Values = new ObservableCollection<double>();
+
+            Values.CollectionChanged += ChartValuesChanged;
+
+            CreateCollection();
+        }
+
+        public BaseChartViewModel(List<string> labels, List<double> values) : this()
+        {
+            foreach (string label in labels)
+                Labels.Add(label);
+
+            foreach (double val in values)
+                Values.Add(val);
         }
 
         protected virtual void ChartValuesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             // TODO: Multiple
             Collection[0].Values.Clear();
-            foreach (int i in ChartData.Values)
-                Collection[0].Values.Add(i);
+            foreach (double val in Values)
+                Collection[0].Values.Add(val);
         }
 
         public abstract Chart BuildControl();
@@ -86,6 +102,50 @@ namespace Festispec.ViewModel.Components.Charts
             return data;
         }
 
+        public virtual void UpdateLabels(List<string> labels)
+        {
+            Labels.Clear();
+            foreach (string label in labels)
+                Labels.Add(label);
+        }
+
+        public virtual void UpdateValues(List<double> values)
+        {
+            Values.Clear();
+
+            foreach (double val in values)
+                Values.Add(val);
+        }
+
+        public virtual void Update(List<ChartData> chartData)
+        {
+            UpdateLabels(GetLabelsFromChartData(chartData));
+            UpdateValues(GetValuesFromChartData(chartData));
+        }
+
+        protected List<string> GetLabelsFromChartData(List<ChartData> chartData)
+        {
+            List<string> labels = new List<string>();
+
+            foreach (ChartData data in chartData)
+                labels.Add(data.Answer);
+
+            return labels;
+        }
+
+        protected List<double> GetValuesFromChartData(List<ChartData> chartData)
+        {
+            List<double> values = new List<double>();
+
+            foreach (ChartData data in chartData)
+                values.Add(data.Amount);
+
+            return values;
+        }
+
+
         public abstract void ApplyColor();
+
+        public abstract void CreateCollection();
     }
 }

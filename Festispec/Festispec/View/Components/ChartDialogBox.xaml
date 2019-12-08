@@ -22,15 +22,18 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
+        <StackPanel Grid.Row="0" DataContext="{Binding SelectedQuestion}">
             <Label FontWeight="Bold" Content="Preview grafiek" />
 
             <StackPanel Orientation="Horizontal">
                 <Label FontStyle="Italic" Content="Vraag: " />
-                <Label Content="{Binding Title}" />
+                <TextBlock Text="{Binding Question}" />
             </StackPanel>
-            
-            <Label Content="Type: " />
+
+            <StackPanel Orientation="Horizontal">
+                <Label FontStyle="Italic" Content="Type: " />
+                <TextBlock Text="{Binding TypeDescription}" />
+            </StackPanel>
         </StackPanel>
 
         <Grid x:Name="controlOptions" Grid.Row="1">

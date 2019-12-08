@@ -1,4 +1,4 @@
-﻿using Festispec.ViewModel.Components.Charts.Data;
+﻿using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -15,25 +15,27 @@ namespace Festispec.ViewModel.Components.Charts
 {
     public class LineChartViewModel : CartesianChartViewModel
     {
-        public LineChartViewModel(string title, GeneralChartData chartData) : base(chartData)
+        public LineChartViewModel(string title, List<string> labels, List<double> values) : base(labels, values)
+        {
+            Title = "TITLE";
+            ForegroundColor = Colors.Black;
+        }
+
+        public LineChartViewModel(string title) : base()
+        {
+
+        }
+
+        public override void CreateCollection()
         {
             Collection = new SeriesCollection()
             {
                 new LineSeries()
                 {
-                    Title = title,
-                    Values = new ChartValues<int>(ChartData.Values)
+                    Title = Title,
+                    Values = new ChartValues<double>(Values)
                 }
             };
-
-            /*
-            Labels = new string[labels.Count()];
-
-            for (int i = 0; i < labels.Count(); i++)
-                Labels[i] = labels.ElementAt(i);
-            */
-            Title = "TITLE";
-            ForegroundColor = Colors.Black;
         }
 
         public override void ApplyColor()

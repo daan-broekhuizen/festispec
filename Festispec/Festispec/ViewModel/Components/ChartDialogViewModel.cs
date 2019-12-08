@@ -2,8 +2,8 @@
 using Festispec.API.ImageShack;
 using Festispec.Model;
 using Festispec.Model.Enums;
+using Festispec.Model.Repositories;
 using Festispec.ViewModel.Components.Charts;
-using Festispec.ViewModel.Components.Charts.Data;
 using Festispec.ViewModel.InspectionFormViewModels;
 using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
@@ -28,6 +28,9 @@ namespace Festispec.ViewModel.Components
 {
     public class ChartDialogViewModel : ViewModelBase
     {
+        // Repository
+        private RapportageRepository _rapportageRepository;
+
         // Events
         public delegate void AddRequestedEventHandler(DocumentDesignerViewModel designer, UploadModel uploaded);
 
@@ -144,27 +147,33 @@ namespace Festispec.ViewModel.Components
             QuestionChangedCommand = new RelayCommand<VraagViewModel>(QuestionChanged);
         }
 
-        public void Create(DocumentDesignerViewModel designer, string mode, Opdracht opdracht)
+        public void Create(DocumentDesignerViewModel designer, string mode, Opdracht opdracht, RapportageRepository rapportageRepository)
         {
             _opdracht = opdracht;
             _mode = mode;
             Designer = designer;
+            _rapportageRepository = rapportageRepository;
             IsXAxis = true;
 
             foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv"))
-                Questions.Add(new VraagViewModel(vraag));
+            {
+                if (vraag.Antwoorden.Count > 0)
+                {
+                    VraagViewModel questionViewModel = new VraagViewModel(vraag);
+                    questionViewModel.TypeDescription = _rapportageRepository.GetQuestionType(questionViewModel.Type).Beschrijving;
 
-            GeneralChartData chartData = new GeneralChartData();
-            chartData.UpdateValues(new List<double>() { 0, 0 });
+                    Questions.Add(questionViewModel);
+                }
+            }
 
             switch (_mode)
             {
                 case "Bar":
-                    ChartViewModel = new BarChartViewModel("Test", chartData);
+                    ChartViewModel = new BarChartViewModel("Test");
 
                     break;
                 case "Line":
-                    ChartViewModel = new LineChartViewModel("Test", chartData);
+                    ChartViewModel = new LineChartViewModel("Test");
 
                     break;
                 case "Pie":
@@ -191,10 +200,10 @@ namespace Festispec.ViewModel.Components
 
         private void QuestionChanged(VraagViewModel question)
         {
-            Title = question.Question;
+            SelectedQuestion = question;
 
             if(ChartViewModel != null)
-                ChartViewModel.ChartData.Update(question);
+                ChartViewModel.Update(_rapportageRepository.GetChartData(question.ID));
         }
 
         public void AddChart()
@@ -206,6 +215,5 @@ namespace Festispec.ViewModel.Components
             if (AddRequested != null)
                 AddRequested.Invoke(Designer, result);
         }
-
     }
 }

@@ -1,4 +1,4 @@
-﻿using Festispec.ViewModel.Components.Charts.Data;
+﻿using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -16,8 +16,17 @@ namespace Festispec.ViewModel.Components.Charts
         public Axis XAxis { get; set; }
         public Axis YAxis { get; set; }
 
-        public CartesianChartViewModel(GeneralChartData data) : base(data)
+        public CartesianChartViewModel(List<string> labels, List<double> values) : base(labels, values)
         {
+        }
+
+        public CartesianChartViewModel() : base()
+        {
+            Labels.Add("Test1");
+            Labels.Add("Test2");
+
+            Values.Add(10);
+            Values.Add(20);
         }
 
         public override Chart BuildControl()
@@ -33,5 +42,7 @@ namespace Festispec.ViewModel.Components.Charts
 
             return cc;
         }
+
+        public override void CreateCollection() { }
     }
 }
