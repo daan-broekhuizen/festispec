@@ -16,24 +16,15 @@ namespace Festispec.Model.Repositories
             }
         }
 
-        public void Test()
+        public void AddToPlanning(int accountId, int formulierId)
         {
-            Inspectieformulier inspec = new Inspectieformulier()
-            {
-                InspectieformulierID = 2,
-                InspectieFormulierTitel = "testje"
-
-                
-            };
             using (FestispecContext context = new FestispecContext())
             {
-
-
-                var formulier = context.Inspectieformulier.Find(1);
-
-                var account = context.Account.Find(3);
+                Inspectieformulier formulier = context.Inspectieformulier.Find(formulierId);
+                Account account = context.Account.Find(accountId);
 
                 formulier.Ingepland.Add(account);
+                context.SaveChanges();
             }
         }
     }

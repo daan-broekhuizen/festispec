@@ -172,7 +172,6 @@
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
-    <Compile Include="Model\Repositories\Temp.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -530,7 +529,9 @@
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\SQL Scripts\Script.sql" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
   </ItemGroup>

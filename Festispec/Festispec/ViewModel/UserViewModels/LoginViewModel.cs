@@ -68,8 +68,6 @@ namespace Festispec.ViewModel
 
         private void Login()
         {
-            PlanningViewModel pv = new PlanningViewModel();
-            pv.GetInspectorAsync(1, "Groningen", 1);
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _username,
