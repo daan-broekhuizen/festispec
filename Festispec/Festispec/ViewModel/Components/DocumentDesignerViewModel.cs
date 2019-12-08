@@ -1,8 +1,13 @@
 ﻿using Festispec.Service;
+using Festispec.Utility.Converters;
 using GalaSoft.MvvmLight;
 using mshtml;
+using OpenHtmlToPdf;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +64,16 @@ namespace Festispec.ViewModel.Components
         {
             this.WebBrowser = webBrowser;
             this.HtmlEditor = htmlEditor;
+        }
+
+        /// <summary>
+        /// Update de huidige content (de content van de editor wordt naar de DesignerContent variable geschreven).
+        /// </summary>
+        public void UpdateContent()
+        {
+            HTMLDocument document = (HTMLDocument)WebBrowser.Document;
+            if (document != null)
+                this.DesignerContent = WebService.CleanHTML(document.documentElement.outerHTML, true);
         }
 
         /// <summary>
@@ -136,7 +151,7 @@ namespace Festispec.ViewModel.Components
         /// <param name="color">De letterkleur</param>
         public void ApplyFontColor(Color color)
         {
-            ExecuteCommand("ForeColor", String.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B));
+            ExecuteCommand("ForeColor", string.Format("{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B));
         }
 
         /// <summary>
@@ -173,6 +188,23 @@ namespace Festispec.ViewModel.Components
             {
                 IHTMLElement element = GetSelectedElement();
                 element.style.fontSize = "12px";
+            }
+        }
+
+        public void ChangeAttribute(string name, string value, bool isStyle = false)
+        {
+            IHTMLDocument2 document = (IHTMLDocument2)WebBrowser.Document;
+            if (document != null)
+            {
+                IHTMLElement element = GetSelectedElement();
+
+                if (element != null)
+                {
+                    if (isStyle)
+                        element.style.setAttribute(name, value);
+                    else
+                        element.setAttribute(name, value);
+                }
             }
         }
 
@@ -267,6 +299,42 @@ namespace Festispec.ViewModel.Components
             HTMLDocument document = (HTMLDocument)WebBrowser.Document;
             if (document != null)
                 document.execCommand(command, false, value);
+        }
+
+        /// <summary>
+        /// Zet HTML om naar een PDF document.
+        /// </summary>
+        public byte[] ExportToPdf(PdfPage[] pages = null)
+        {
+            byte[] data;
+
+            // Genereer een pagina vanuit de HTML
+            byte[] baseData = Pdf.From(DesignerContent).Content();
+
+            PdfDocument response = new PdfDocument();
+
+            using (MemoryStream ms = new MemoryStream(baseData))
+            {
+                PdfDocument report = PdfReader.Open(ms, PdfDocumentOpenMode.Import);
+                PdfPage page = report.Pages[0];
+
+                response.Pages.Add(page);
+            }
+
+            // Voeg ingevulde vragenlijsten toe.
+            if(pages != null)
+                foreach(PdfPage page in pages)
+                    response.AddPage(page);
+
+            // Omzetten naar byte array
+            using (MemoryStream ms = new MemoryStream())
+            {
+                response.Save(ms);
+
+                data = ms.ToArray();
+            }
+
+            return data;
         }
     }
 }

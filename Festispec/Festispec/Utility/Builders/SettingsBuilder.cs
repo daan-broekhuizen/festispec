@@ -13,8 +13,7 @@ namespace Festispec.Utility.Builders
     {
         public AppSettings Build()
         {
-            string settingsJson = "";
-
+            string settingsJson;
             if (File.Exists("settings.local.json"))
                 settingsJson = Regex.Replace(File.ReadAllText("settings.local.json"), @"(\/\*)(.{1,})(\*\/)", "");
             else if (File.Exists("settings.json"))

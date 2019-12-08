@@ -28,6 +28,11 @@ namespace Festispec.API.ImageShack
         [JsonProperty("direct_link")]
         public string DirectLink { get; set; }
 
+        public string HttpLink
+        {
+            get => $"http://{DirectLink}";
+        }
+
         [JsonProperty("title")]
         public string Title { get; set; }
 

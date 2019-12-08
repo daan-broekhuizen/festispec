@@ -7,13 +7,13 @@ namespace Festispec.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class Template_Update : IMigrationMetadata
+    public sealed partial class Main : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Template_Update));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Main));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911252011031_Template_Update"; }
+            get { return "201912061310436_Main"; }
         }
         
         string IMigrationMetadata.Source
