@@ -16,7 +16,7 @@ namespace Festispec.API
 
         public string ContentType { get; set; }
 
-        public FileData(byte[] data, string contentType, string name = "file", string fileName = null)
+        public FileData(byte[] data, string contentType = "image/png", string name = "file", string fileName = null)
         {
             this.Data = data;
             this.ContentType = contentType;

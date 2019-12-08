@@ -185,7 +185,7 @@
             </StackPanel>
 
             <!-- Grafiek Invoegen -->
-            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsChartVisible, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
                     <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
@@ -230,7 +230,7 @@
             </StackPanel>
 
             <!-- Invoegen Resultaten -->
-            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
                 <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
             </StackPanel>
 
@@ -242,7 +242,7 @@
             </StackPanel>
 
             <!-- Ander Template -->
-            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
                 </TextBlock>
