@@ -38,6 +38,7 @@ namespace Festispec.ViewModel
                 setEndDate();
                 SetGraph();
                 SetSalesLabels();
+                SetSalesValues();
                 RaisePropertyChanged("StartDate");
             }
         }
@@ -110,7 +111,17 @@ namespace Festispec.ViewModel
 
         #region propertiesSales
         public SeriesCollection SalesCollection { get; set; }
-        public string[] Labels { get; set; }
+
+        private string[] _labels;
+
+        public string[] Labels
+        {
+            get { return _labels; }
+            set { _labels = value;
+                RaisePropertyChanged("Labels");
+            }
+        }
+
 
         private ChartValues<ObservableValue> _salesValues;
 
@@ -158,6 +169,14 @@ namespace Festispec.ViewModel
             SalesValues = new ChartValues<ObservableValue> { };
             InspectorValues = new ChartValues<ObservableValue> { };
             ProvinceValues = new ChartValues<ObservableValue> { };
+
+            Labels = new string[12];
+            Array months = Enum.GetValues(typeof(EnumMonth));
+            for (int i = 0; i < months.Length; i++)
+            {
+                EnumMonth month = (EnumMonth)months.GetValue(i);
+                this.Labels[i] = char.ToUpper(month.ToString()[0]) + month.ToString().Substring(1).ToLower();
+            }
 
             Customers = Crepo.GetCustomers();
 
@@ -239,12 +258,34 @@ namespace Festispec.ViewModel
 
         private void SetSalesLabels()
         {
-            Labels = new string[12];
-            Array months = Enum.GetValues(typeof(EnumMonth));
-            for (int i = 0; i < months.Length; i++)
+            if (SelectedItem != null)
             {
-                EnumMonth month = (EnumMonth)months.GetValue(i);
-                this.Labels[i] = char.ToUpper(month.ToString()[0]) + month.ToString().Substring(1).ToLower();
+                switch (SelectedItem.Content)
+                {
+                    case "Week":
+                        Labels = new string[7];
+                        for (int i = 0; i < 7; i++)
+                        {
+                            Labels[i] = StartDate.AddDays(i).ToShortDateString();
+                        }
+                        break;
+                    case "Maand":
+                        Labels = new string[30];
+                        for (int i = 0; i < 30; i++)
+                        {
+                            Labels[i] = StartDate.AddDays(i).ToShortDateString();
+                        }
+                        break;
+                    case "Jaar":
+                        Labels = new string[12];
+                        Array months = Enum.GetValues(typeof(EnumMonth));
+                        for (int i = 0; i < months.Length; i++)
+                        {
+                            EnumMonth month = (EnumMonth)months.GetValue(i);
+                            this.Labels[i] = char.ToUpper(month.ToString()[0]) + month.ToString().Substring(1).ToLower();
+                        }
+                        break;
+                }
             }
         }
 
@@ -262,17 +303,57 @@ namespace Festispec.ViewModel
 
         private void SetSalesValues()
         {
-            SalesValues.ToList().ForEach(e => SalesValues.Remove(e));   
+            SalesValues.ToList().ForEach(e => SalesValues.Remove(e));
             double[] _salesValues = new double[12];
 
-
-            _qrepo.GetQuotations().Where(e => e.Aanmaakdatum.Year == StartDate.Year).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+            if (SelectedItem != null)
             {
-                if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                switch (SelectedItem.Content)
                 {
-                    _salesValues[e.FirstOrDefault().Aanmaakdatum.Month - 1] += (double)e.FirstOrDefault().Totaalbedrag;
+                    case "Week":
+                        _salesValues = new double[7];
+                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                         {
+                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                             {
+                                 for (int i = 0; i < Labels.Length; i++)
+                                 {
+                                     if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
+                                     {
+                                         _salesValues[i] += 1;
+                                     }
+                                 }
+                             }
+                         });
+                        break;
+                    case "Maand":
+                        _salesValues = new double[30];
+                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                         {
+                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                             {
+                                 for (int i = 0; i < Labels.Length; i++)
+                                 {
+                                     if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
+                                     {
+                                         _salesValues[i] += 1;
+                                     }
+                                 }
+                             }
+                         });
+                        break;
+                    case "Jaar":
+                        _salesValues = new double[12];
+                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum.Year == StartDate.Year).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                        {
+                            if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                            {
+                                _salesValues[e.FirstOrDefault().Aanmaakdatum.Month - 1] += (double)e.FirstOrDefault().Totaalbedrag;
+                            }
+                        });
+                        break;
                 }
-            });
+            }
 
             for(int i = 0; i < _salesValues.Length; i++)
             {
@@ -282,19 +363,60 @@ namespace Festispec.ViewModel
 
         private void SetInspectorValues()
         {
-            InspectorValues.ToList().ForEach(e => InspectorValues.Remove(e));
             int[] _inspectorValues = new int[12];
             List<Account> accounts = _urepo.GetUsers();
 
-            _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Year == StartDate.Year).ToList().ForEach(e =>
+            if (SelectedItem != null)
             {
-                _inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
-            });
-
-            for(int i = 0; i < _inspectorValues.Length; i++)
-            {
-                InspectorValues.Add(new ObservableValue(_inspectorValues[i]));
+                switch (SelectedItem.Content)
+                {
+                    case "Week":
+                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                        {
+                            if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                            {
+                                for (int i = 0; i < Labels.Length; i++)
+                                {
+                                    if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
+                                    {
+                                        Labels[i] += 1;
+                                    }
+                                }
+                            }
+                        });
+                        break;
+                    case "Maand":
+                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                        {
+                            if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                            {
+                                for (int i = 0; i < Labels.Length; i++)
+                                {
+                                    if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
+                                    {
+                                        Labels[i] += 1;
+                                    }
+                                }
+                            }
+                        });
+                        _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Date > StartDate && e.DatumCertificering.Value.Date < EndDate).ToList().ForEach(e =>
+                        {
+                            _inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
+                        });
+                        break;
+                    case "Jaar":
+                        _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Year == StartDate.Year).ToList().ForEach(e =>
+                        {
+                            _inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
+                        });
+                        break;
+                }
             }
+                for (int i = 0; i < _inspectorValues.Length; i++)
+                {
+                    InspectorValues.Add(new ObservableValue(_inspectorValues[i]));
+                }
+            
         }
 
         private void GetProvinceValues()
@@ -321,12 +443,6 @@ namespace Festispec.ViewModel
                     }
                 }
             });
-
-            
-
-            /*            _Values[4] = 1;
-                        _Values[8] = 1;
-                        _Values[9] = 2;*/
         }
 
 

@@ -43,7 +43,7 @@
         </Viewbox>
 
         <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="50">
-            <ComboBox SelectedItem="{Binding SelectedItem}" SelectedIndex="1">
+            <ComboBox SelectedItem="{Binding SelectedItem}" SelectedIndex="2">
                 <ComboBoxItem Content="Week"/>
                 <ComboBoxItem Content="Maand"/>
                 <ComboBoxItem Content="Jaar"/>
