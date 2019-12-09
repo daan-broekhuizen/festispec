@@ -2,39 +2,18 @@
 using Festispec.Model.Enums;
 using Festispec.Utility;
 using Festispec.Utility.Extensions;
-using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace Festispec.ViewModel.Components.Charts
 {
     public abstract class BaseChartViewModel : ViewModelBase, IChart
     {
-        private string _title;
-        public string Title
-        {
-            get => _title;
-            set
-            {
-                _title = value;
-
-                RaisePropertyChanged("Title");
-            }
-        }
-
         public ObservableDictionary<EnumChartConfiguration, object> Configuration { get; set; }
 
         public SeriesCollection Collection { get; set; }
@@ -126,10 +105,7 @@ namespace Festispec.ViewModel.Components.Charts
             Configuration.Updated += OnConfigurationOptionChanged;
         }
 
-        public virtual void OnLoaded()
-        {
-
-        }
+        public virtual void OnLoaded() { }
 
         public virtual void OnConfigurationOptionChanged(EnumChartConfiguration key, object value) { }
 

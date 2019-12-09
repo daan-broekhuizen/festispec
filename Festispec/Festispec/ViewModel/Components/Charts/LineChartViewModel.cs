@@ -41,9 +41,9 @@ namespace Festispec.ViewModel.Components.Charts
 
         }
 
-        public LineChartViewModel(string title, List<string> labels, List<double> values) : base(labels, values)
+        public LineChartViewModel(List<string> labels, List<double> values) : base(labels, values)
         {
-            Title = "TITLE";
+
         }
 
         public override void CreateCollection()
@@ -52,7 +52,6 @@ namespace Festispec.ViewModel.Components.Charts
             {
                 new LineSeries()
                 {
-                    Title = Title,
                     Values = new ChartValues<double>(Values)
                 }
             };

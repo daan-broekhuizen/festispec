@@ -18,8 +18,6 @@ namespace Festispec.ViewModel.Components.Charts
 {
     public interface IChart
     {
-        string Title { get; set; }
-
         SeriesCollection Collection { get; set; }
 
         ObservableCollection<double> Values { get; set; }

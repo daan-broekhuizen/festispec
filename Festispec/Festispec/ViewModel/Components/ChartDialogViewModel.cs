@@ -74,19 +74,13 @@ namespace Festispec.ViewModel.Components
             }
         }
 
+        private string _title;
         public string Title
         {
-            get
-            {
-                if(ChartViewModel != null)
-                    return ChartViewModel.Title;
-
-                return "";
-            }
+            get => _title;
             set
             {
-                if (ChartViewModel != null)
-                    ChartViewModel.Title = value;
+                _title = value;
 
                 RaisePropertyChanged("Title");
             }

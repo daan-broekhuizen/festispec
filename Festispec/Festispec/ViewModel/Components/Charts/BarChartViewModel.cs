@@ -30,9 +30,9 @@ namespace Festispec.ViewModel.Components.Charts
 
         }
 
-        public BarChartViewModel(string title, List<string> labels, List<double> values) : base(labels, values)
+        public BarChartViewModel(List<string> labels, List<double> values) : base(labels, values)
         {
-            Title = title;
+
         }
 
         public override void CreateCollection()
@@ -41,7 +41,6 @@ namespace Festispec.ViewModel.Components.Charts
             {
                 new ColumnSeries()
                 {
-                    Title = Title,
                     Values = new ChartValues<double>(Values),
                 }
             };
