@@ -412,8 +412,8 @@
 
             templates[0] = new RapportTemplate()
             {
-                TemplateName = "Test",
-                TemplateText = "&lt;html&gt;&lt;head&gt;&lt;title&gt;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;&lt;font size="6"&gt;Opdrachtnaam &lt;strong&gt;rapportage ...-...-...&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;&lt;p align="right"&gt;&lt;img style="HEIGHT: 64px; WIDTH: 64px; POSITION: absolute; LEFT: 589px; TOP: 30px" src="http://imagizer.imageshack.com/img924/5389/UoQcuY.png" width="31" height="23"&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;font size="4"&gt;Klant gegevens&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;....&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;&lt;font size="4"&gt;Opdrachtgegevens&lt;/font&gt;&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;...&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;- Introductie&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;- Omschrijving&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;- Advies&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;- Resultaten Inspectie&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"
+                TemplateName = "Basis",
+                TemplateText = "<html><head><title></title></head><body><p><font size=\"6\">Opdrachtnaam <strong>rapportage ...-...-...</strong></font></p><p align=\"right\"><img style=\"HEIGHT: 64px; WIDTH: 64px; POSITION: absolute; LEFT: 589px; TOP: 30px\" src=\"http://imagizer.imageshack.com/img924/5389/UoQcuY.png\" width=\"31\" height=\"23\"></p><p><strong><font size=\"4\">Klant gegevens</font></strong></p><p><strong>....</strong></p><p>&nbsp;</p><p><strong><font size=\"4\">Opdrachtgegevens</font></strong></p><p><strong>...</strong></p><p>&nbsp;</p><p>- Introductie</p><p>&nbsp;</p><p>- Omschrijving</p><p>&nbsp;</p><p>- Advies</p><p>&nbsp;</p><p>- Resultaten Inspectie</p></body></html>"
             };
 
             context.RapportTemplate.AddOrUpdate(x => x.TemplateID, templates);
