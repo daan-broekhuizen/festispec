@@ -13,6 +13,8 @@ namespace Festispec.Model.Enums
         // Template aanpassen
         SELECT,
         // Template aanmaken
-        CREATE
+        CREATE,
+        // Template wisselen
+        SWITCH
     }
 }

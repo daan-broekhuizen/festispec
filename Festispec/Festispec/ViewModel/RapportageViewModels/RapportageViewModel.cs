@@ -79,12 +79,12 @@ namespace Festispec.ViewModel.RapportageViewModels
         
         public bool IsChartVisible
         {
-            get => IsEditable && _mode == EnumTemplateMode.SELECT;
+            get => IsEditable && (_mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH);
         }
 
         public bool IsSelectMode
         {
-            get => _mode == EnumTemplateMode.SELECT;
+            get => _mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH;
         }
 
         private bool _displayExtraOptions;
@@ -121,16 +121,18 @@ namespace Festispec.ViewModel.RapportageViewModels
                 {
                     for (int i = 1; i < parameters.Length; i++)
                     {
-                        if(parameters[i] is TemplateViewModel)
+                        if(parameters[i] is RapportTemplate)
                         {
-                            _template = _repo.GetTemplate(((TemplateViewModel)parameters[i]).RapportTemplateID);
+                            _template = (RapportTemplate)parameters[i];
 
                             Content = _template.TemplateText;
                         }
                         else if(parameters[i] is JobViewModel)
                         {
                             _job = (JobViewModel)parameters[i];
-                            Content = _job.Report;
+
+                            if(_mode != EnumTemplateMode.SWITCH && !string.IsNullOrEmpty(_job.Report))
+                                Content = _job.Report;
                         }
                     }
                 }
@@ -144,7 +146,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             FontTypeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontType((string)parameters[1]));
             FontSizeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontSize((string)parameters[1]));
             FontColorChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontColor((Color)parameters[1]));
-            SwitchTemplateCommand = new RelayCommand(() => { throw new NotImplementedException(); });
+            SwitchTemplateCommand = new RelayCommand(() => { _navigationService.NavigateTo("RapportageTemplateOverview", new object[2] { EnumTemplateMode.SWITCH, _job }); });
             AddImageCommand = new RelayCommand<DocumentDesigner>((designer) => AddImage(designer.ViewModel));
             CreateChartCommand = new RelayCommand<object[]>((parameters) => CreateChart(((DocumentDesigner)parameters[0]).ViewModel, (string)parameters[1]));
             ExtraOptionsCommand = new RelayCommand(() => DisplayExtraOptions = !DisplayExtraOptions);
@@ -232,7 +234,7 @@ namespace Festispec.ViewModel.RapportageViewModels
                     _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
                 }
             }
-            else if(_mode == EnumTemplateMode.SELECT)
+            else if(_mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH)
             {
                 if(_job != null)
                 {

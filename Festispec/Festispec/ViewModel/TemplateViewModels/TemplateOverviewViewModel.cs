@@ -30,7 +30,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         public Visibility IsSelectMode
         {
-            get => Mode == EnumTemplateMode.SELECT ? Visibility.Visible : Visibility.Collapsed;
+            get => Mode == EnumTemplateMode.SELECT || Mode == EnumTemplateMode.SWITCH ? Visibility.Visible : Visibility.Collapsed;
         }
 
         protected List<TemplateViewModel> _unfilteredTemplates;
