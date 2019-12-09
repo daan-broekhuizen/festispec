@@ -8,6 +8,11 @@ namespace Festispec.Model.Enums
 {
     public enum EnumTemplateMode
     {
-        EDIT, SELECT, CREATE
+        // Rapportage aanmaken / bewerken
+        EDIT,
+        // Template aanpassen
+        SELECT,
+        // Template aanmaken
+        CREATE
     }
 }

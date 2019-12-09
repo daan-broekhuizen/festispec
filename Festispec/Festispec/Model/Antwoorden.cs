@@ -16,7 +16,7 @@ namespace Festispec.Model
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AntwoordNummer { get; set; }
 
         [Key]
@@ -32,6 +32,6 @@ namespace Festispec.Model
 
         public virtual Account Account { get; set; }
 
-        
+        public virtual Vraag Vraag { get; set; }
     }
 }

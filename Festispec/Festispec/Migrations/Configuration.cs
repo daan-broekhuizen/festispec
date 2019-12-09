@@ -31,6 +31,7 @@
             SeedIngepladeInspecteurs(context);
             SeedRapportTemplates(context);
             SeedInspectionFormTemplates(context);
+            SeedVraagAntwoorden(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -299,6 +300,25 @@
             context.SaveChanges();
         }
 
+        private void SeedVraagAntwoorden(FestispecContext context)
+        {
+            Inspectieformulier inspectieformulier = context.Inspectieformulier.Where(x => x.InspectieFormulierTitel == "Inspectie Bospop festival").FirstOrDefault();
+
+            foreach(Vraag vraag in inspectieformulier.Vraag)
+            {
+                Antwoorden antwoord = new Antwoorden()
+                {
+                    VraagID = vraag.VraagID,
+                    InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
+                    AntwoordNummer = 1,
+                    AntwoordText = "0"
+                };
+
+                context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoord);
+                context.SaveChanges();
+            }
+        }
+
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
         {
             if (context.BeschikbaarheidInspecteurs.Count() > 0)
@@ -335,15 +355,15 @@
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
-            Opdracht opdracht = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop");
+            Inspectieformulier Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival");
 
-            if(opdracht.Ingepland.Count == 0)
-                opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+            if(Inspectieformulier.Ingepland.Count == 0)
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
 
             if(account.Ingepland.Count == 0)
-                account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival"));
 
             context.SaveChanges();
         }

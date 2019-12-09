@@ -13,6 +13,7 @@ namespace Festispec.Model
         public Vraag()
         {
             VraagMogelijkAntwoord = new HashSet<VraagMogelijkAntwoord>();
+            Antwoorden = new HashSet<Antwoorden>();
         }
 
         [Key]
@@ -40,5 +41,8 @@ namespace Festispec.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VraagMogelijkAntwoord> VraagMogelijkAntwoord { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Antwoorden> Antwoorden { get; set; }
     }
 }

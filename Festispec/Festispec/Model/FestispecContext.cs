@@ -39,11 +39,11 @@ namespace Festispec.Model
                 .WithRequired(e => e.Account)
                 .HasForeignKey(e => e.MedewerkerID);
 
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht)
-                .WithRequired(e => e.Account)
-                .HasForeignKey(e => e.MedewerkerID)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Account>()
+            //    .HasMany(e => e.Opdracht)
+            //    .WithRequired(e => e.Account)
+            //    .HasForeignKey(e => e.MedewerkerID)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Account>()
                 .HasMany(e => e.Ingepland)
@@ -124,6 +124,11 @@ namespace Festispec.Model
 
             modelBuilder.Entity<Vraag>()
                 .HasMany(e => e.VraagMogelijkAntwoord)
+                .WithRequired(e => e.Vraag)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vraag>()
+                .HasMany(e => e.Antwoorden)
                 .WithRequired(e => e.Vraag)
                 .WillCascadeOnDelete(false);
 
