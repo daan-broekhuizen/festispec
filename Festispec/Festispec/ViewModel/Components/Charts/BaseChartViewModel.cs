@@ -1,4 +1,7 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Enums;
+using Festispec.Utility;
+using Festispec.Utility.Extensions;
 using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using LiveCharts;
@@ -32,42 +35,23 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
+        public ObservableDictionary<EnumChartConfiguration, object> Configuration { get; set; }
+
         public SeriesCollection Collection { get; set; }
-
-        private Color _foregroundColor;
-        public Color ForegroundColor
-        {
-            get => _foregroundColor;
-            set
-            {
-                _foregroundColor = value;
-
-                RaisePropertyChanged("ForegroundColor");
-                ApplyColor();
-            }
-        }
-
-        private Color _backgroundColor;
-        public Color BackgroundColor
-        {
-            get => _backgroundColor;
-            set
-            {
-                _backgroundColor = value;
-
-                RaisePropertyChanged("BackgroundColor");
-                ApplyColor();
-            }
-        }
 
         protected Chart _control;
 
         public ObservableCollection<string> Labels { get; set; }
         public ObservableCollection<double> Values { get; set; }
 
-
         public BaseChartViewModel()
         {
+            Configuration = new ObservableDictionary<EnumChartConfiguration, object>();
+            foreach (EnumChartConfiguration option in Enum.GetValues(typeof(EnumChartConfiguration)))
+                Configuration.Add(option, null);
+
+            Configure();
+
             Labels = new ObservableCollection<string>();
             Values = new ObservableCollection<double>();
 
@@ -87,32 +71,14 @@ namespace Festispec.ViewModel.Components.Charts
 
         protected virtual void ChartValuesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // TODO: Multiple
             Collection[0].Values.Clear();
             foreach (double val in Values)
                 Collection[0].Values.Add(val);
         }
 
-        public abstract Chart BuildControl();
-
         public byte[] ToByteArray()
         {
-            byte[] data;
-
-            RenderTargetBitmap rtb = new RenderTargetBitmap((int)_control.ActualWidth, (int)_control.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            rtb.Render(_control);
-
-            PngBitmapEncoder png = new PngBitmapEncoder();
-            png.Frames.Add(BitmapFrame.Create(rtb));
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                png.Save(ms);
-
-                data = ms.ToArray();
-            }
-
-            return data;
+            return _control.ToByteArray();
         }
 
         public virtual void UpdateLabels(List<string> labels)
@@ -125,7 +91,6 @@ namespace Festispec.ViewModel.Components.Charts
         public virtual void UpdateValues(List<double> values)
         {
             Values.Clear();
-
             foreach (double val in values)
                 Values.Add(val);
         }
@@ -156,8 +121,20 @@ namespace Festispec.ViewModel.Components.Charts
             return values;
         }
 
-        public abstract void ApplyColor();
+        public virtual void Configure()
+        {
+            Configuration.Updated += OnConfigurationOptionChanged;
+        }
+
+        public virtual void OnLoaded()
+        {
+
+        }
+
+        public virtual void OnConfigurationOptionChanged(EnumChartConfiguration key, object value) { }
 
         public abstract void CreateCollection();
+
+        public abstract Chart BuildControl();
     }
 }

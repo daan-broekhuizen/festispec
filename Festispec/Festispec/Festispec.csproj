@@ -161,6 +161,7 @@
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
     <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
@@ -190,12 +191,14 @@
     <Compile Include="Utility\Builders\SettingsBuilder.cs" />
     <Compile Include="Utility\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\BoolToBoldConverter.cs" />
+    <Compile Include="Utility\Converters\ConfigurationToVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\GridVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Converters\PDFConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Extensions\FrameworkExtension.cs" />
+    <Compile Include="Utility\ObservableDictionary.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
@@ -207,6 +210,7 @@
     <Compile Include="ViewModel\Components\Charts\CartesianChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\IChart.cs" />
     <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\PieChartViewModel.cs" />
     <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
@@ -444,6 +448,7 @@
     <None Include="settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="ViewModel\Components\Charts\ChartsClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

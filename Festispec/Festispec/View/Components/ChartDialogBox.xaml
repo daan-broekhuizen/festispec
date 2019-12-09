@@ -14,6 +14,7 @@
     <Window.Resources>
         <ViewModel:ChartDialogViewModel x:Key="ViewModel" />
         <converters:BoolToBoldConverter x:Key="BoolToBoldConverter" />
+        <converters:ConfigurationToVisibilityConverter x:Key="ConfigurationToVisibilityConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
@@ -26,12 +27,12 @@
             <Label FontWeight="Bold" Content="Preview grafiek" FontSize="24" />
 
             <StackPanel Orientation="Horizontal">
-                <Label Content="Vraag: " FontSize="16" />
+                <TextBlock Text="Vraag: " FontSize="16" />
                 <TextBlock Text="{Binding Question}" FontSize="16" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Label Content="Type: " FontSize="16" />
+                <TextBlock Text="Type: " FontSize="16" />
                 <TextBlock Text="{Binding TypeDescription}" FontSize="16" />
             </StackPanel>
         </StackPanel>
@@ -99,7 +100,7 @@
                 </StackPanel>
 
                 <!-- Line -->
-                <StackPanel Margin="5" Grid.Row="2">
+                <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=0}">
                     <Label Content="Lijn Kleur" FontWeight="Bold" FontSize="16" />
                     <xctk:ColorPicker x:Name="controlForegroundColor" ColorMode="ColorCanvas" SelectedColor="{Binding ForegroundColor, Mode=OneWay}">
                         <i:Interaction.Triggers>
@@ -111,7 +112,7 @@
                 </StackPanel>
 
                 <!-- Background -->
-                <StackPanel Margin="5" Grid.Row="3">
+                <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=1}">
                     <Label Content="Achtergrondkleur" FontWeight="Bold" FontSize="16" />
                     <xctk:ColorPicker x:Name="controlBackgroundColor" ColorMode="ColorCanvas" SelectedColor="{Binding BackgroundColor, Mode=OneWay}">
                         <i:Interaction.Triggers>
@@ -122,7 +123,8 @@
                     </xctk:ColorPicker>
                 </StackPanel>
 
-                <StackPanel Margin="5" Grid.Row="4" Orientation="Horizontal">
+                <!-- Axis-->
+                <StackPanel Margin="5" Grid.Row="4" Orientation="Horizontal" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=2}">
                     <Button Content="X-as" Command="{Binding SwitchAxisCommand}" CommandParameter="X" FontWeight="{Binding IsXAxis, Converter={StaticResource BoolToBoldConverter}}" FontSize="16" Background="Transparent" BorderBrush="Transparent" />
 
                     <Label Content="/" FontWeight="Bold" FontSize="16" />
@@ -131,14 +133,27 @@
                 </StackPanel>
 
                 <!-- Grootte -->
-                <Grid Margin="5" Grid.Row="5">
+                <Grid Margin="5" Grid.Row="5" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Content="Tekst" FontWeight="Bold" FontSize="16" Grid.Column="0" Padding="0 0 10 0" />
-                    <TextBox Name="controlTextX" Grid.Column="1" Visibility="{Binding IsXAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    <TextBox Name="controlTextY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <TextBox Name="controlTextX" Grid.Column="1" Visibility="{Binding IsXAxis, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding XAxisTextChangedCommand }" CommandParameter="{Binding ElementName=controlTextX, Path=Text}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                    <TextBox Name="controlTextY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding YAxisTextChangedCommand }" CommandParameter="{Binding ElementName=controlTextY, Path=Text}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
 
                 <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" CommandParameter="{Binding ElementName=controlGridChart}" />

@@ -3,6 +3,7 @@ using Festispec.API.ImageShack;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
+using Festispec.Utility;
 using Festispec.Utility.Extensions;
 using Festispec.ViewModel.Components.Charts;
 using Festispec.ViewModel.InspectionFormViewModels;
@@ -45,6 +46,8 @@ namespace Festispec.ViewModel.Components
         public ICommand BackgroundColorChangedCommand { get; set; }
         public ICommand TitleChangedCommand { get; set; }
         public ICommand QuestionChangedCommand { get; set; }
+        public ICommand XAxisTextChangedCommand { get; set; }
+        public ICommand YAxisTextChangedCommand { get; set; }
 
         // Properties
         private bool _isXAxis;
@@ -89,19 +92,55 @@ namespace Festispec.ViewModel.Components
             }
         }
 
-        public System.Windows.Media.Color ForegroundColor
+        public string XAxisTitle
         {
             get
             {
                 if (ChartViewModel != null)
-                    return ChartViewModel.ForegroundColor;
+                    return (string)ChartViewModel.Configuration[EnumChartConfiguration.XAXISTITLE];
+
+                return "";
+            }
+            set
+            {
+                if (ChartViewModel != null)
+                    ChartViewModel.Configuration.Update(EnumChartConfiguration.XAXISTITLE, value);
+
+                RaisePropertyChanged("XAxisTitle");
+            }
+        }
+
+        public string YAxisTitle
+        {
+            get
+            {
+                if (ChartViewModel != null)
+                    return (string)ChartViewModel.Configuration[EnumChartConfiguration.YAXISTITLE];
+
+                return "";
+            }
+            set
+            {
+                if (ChartViewModel != null)
+                    ChartViewModel.Configuration.Update(EnumChartConfiguration.YAXISTITLE, value);
+
+                RaisePropertyChanged("YAxisTitle");
+            }
+        }
+
+        public System.Windows.Media.Color ForegroundColor
+        {
+            get
+            {
+                if (ChartViewModel != null && ChartViewModel.Configuration[EnumChartConfiguration.FOREGROUNDCOLOR] != null)
+                    return (System.Windows.Media.Color)ChartViewModel.Configuration[EnumChartConfiguration.FOREGROUNDCOLOR];
 
                 return Colors.Black;
             }
             set
             {
                 if (ChartViewModel != null)
-                    ChartViewModel.ForegroundColor = value;
+                    ChartViewModel.Configuration.Update(EnumChartConfiguration.FOREGROUNDCOLOR, value);
 
                 RaisePropertyChanged("ForegroundColor");
             }
@@ -112,18 +151,28 @@ namespace Festispec.ViewModel.Components
         {
             get
             {
-                if (ChartViewModel != null)
-                    return ChartViewModel.BackgroundColor;
+                if (ChartViewModel != null && ChartViewModel.Configuration[EnumChartConfiguration.BACKGROUNDCOLOR] != null)
+                    return (System.Windows.Media.Color)ChartViewModel.Configuration[EnumChartConfiguration.BACKGROUNDCOLOR];
 
                 return Colors.Black;
             }
             set
             {
                 if (ChartViewModel != null)
-                    ChartViewModel.BackgroundColor = value;
-                    
+                    ChartViewModel.Configuration.Update(EnumChartConfiguration.BACKGROUNDCOLOR, value);
 
                 RaisePropertyChanged("BackgroundColor");
+            }
+        }
+
+        public ObservableDictionary<EnumChartConfiguration, object> Configuration
+        {
+            get
+            {
+                if (ChartViewModel != null)
+                    return ChartViewModel.Configuration;
+
+                return null;
             }
         }
 
@@ -169,6 +218,8 @@ namespace Festispec.ViewModel.Components
             ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
             BackgroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => BackgroundColor = color);
             QuestionChangedCommand = new RelayCommand<VraagViewModel>(QuestionChanged);
+            XAxisTextChangedCommand = new RelayCommand<string>(x => XAxisTitle = x);
+            YAxisTextChangedCommand = new RelayCommand<string>(x => YAxisTitle = x);
         }
 
         public void Create(DocumentDesignerViewModel designer, string mode, Opdracht opdracht, RapportageRepository rapportageRepository)
@@ -193,22 +244,28 @@ namespace Festispec.ViewModel.Components
             switch (_mode)
             {
                 case "Bar":
-                    ChartViewModel = new BarChartViewModel("Test");
+                    ChartViewModel = new BarChartViewModel();
 
                     break;
                 case "Line":
-                    ChartViewModel = new LineChartViewModel("Test");
+                    ChartViewModel = new LineChartViewModel();
 
                     break;
                 case "Pie":
+                    ChartViewModel = new PieChartViewModel()
+                    {
+                        ShowLabels = true
+                    };
                     break;
             }
 
             if (ChartViewModel != null)
                 Control = ChartViewModel.BuildControl();
 
-            ForegroundColor = Colors.Black;
-            BackgroundColor = Colors.Gray;
+            ChartViewModel.OnLoaded();
+            RaisePropertyChanged("Configuration");
+            RaisePropertyChanged("ForegroundColor");
+            RaisePropertyChanged("BackgroundColor");
         }
 
         public void SwitchAxis(string axis)
@@ -235,7 +292,6 @@ namespace Festispec.ViewModel.Components
 
         public void AddChart(Grid grid)
         {
-            //byte[] data = ChartViewModel.ToByteArray();
             byte[] data = grid.ToByteArray();
             UploadModel result = (new ImageShackClient()).UploadImage(new FileData(data));
 

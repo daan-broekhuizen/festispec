@@ -250,11 +250,6 @@ namespace Festispec.ViewModel.Components
                     }
                     catch (Exception) { }
                 }
-                else
-                {
-                    // TODO: Weghalen, kan misschien gevaarlijk zijn
-                    element = document.body;
-                }
             }
 
             return element;

@@ -1,4 +1,5 @@
-﻿using LiveCharts.Defaults;
+﻿using Festispec.Model.Enums;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -15,8 +16,24 @@ namespace Festispec.ViewModel.Components.Charts
         public Axis XAxis { get; set; }
         public Axis YAxis { get; set; }
 
-        public CartesianChartViewModel(List<string> labels, List<double> values) : base(labels, values)
+        public string XAxisTitle
         {
+            get => XAxis != null ? XAxis.Title : "";
+            set
+            {
+                if (XAxis != null)
+                    XAxis.Title = value;
+            }
+        }
+
+        public string YAxisTitle
+        {
+            get => YAxis != null ? YAxis.Title : "";
+            set
+            {
+                if (YAxis != null)
+                    YAxis.Title = value;
+            }
         }
 
         public CartesianChartViewModel() : base()
@@ -28,6 +45,10 @@ namespace Festispec.ViewModel.Components.Charts
             Values.Add(20);
         }
 
+        public CartesianChartViewModel(List<string> labels, List<double> values) : base(labels, values)
+        {
+        }
+
         public override Chart BuildControl()
         {
             CartesianChart cc = new CartesianChart
@@ -37,6 +58,15 @@ namespace Festispec.ViewModel.Components.Charts
                 AxisY = new AxesCollection()
             };
 
+            XAxis = new Axis();
+            YAxis = new Axis();
+
+            cc.AxisX.Clear();
+            cc.AxisX.Add(XAxis);
+
+            cc.AxisY.Clear();
+            cc.AxisY.Add(YAxis);
+
             _control = cc;
 
             return cc;
@@ -44,10 +74,26 @@ namespace Festispec.ViewModel.Components.Charts
 
         public override void CreateCollection() { }
 
-        public override void ApplyColor()
+        public override void Configure()
         {
-            ((Series)Collection[0]).Stroke = new SolidColorBrush(ForegroundColor);
-            ((Series)Collection[0]).Fill = new SolidColorBrush(BackgroundColor);
+            base.Configure();
+
+            Configuration.Update(EnumChartConfiguration.AXIS, true);
+        }
+
+        public override void OnConfigurationOptionChanged(EnumChartConfiguration key, object value)
+        {
+            switch(key)
+            {
+                case EnumChartConfiguration.XAXISTITLE:
+                    XAxisTitle = (string)value;
+
+                    break;
+                case EnumChartConfiguration.YAXISTITLE:
+                    YAxisTitle = (string)value;
+
+                    break;
+            }
         }
     }
 }

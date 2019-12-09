@@ -115,9 +115,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             {
                 object[] parameters = (object[])navigationService.Parameter;
 
-                // TODO: Rewrite 
                 _mode = (EnumTemplateMode)parameters[0];
-
 
                 if (parameters.Length > 1)
                 {

@@ -1,4 +1,6 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Enums;
+using Festispec.Utility;
 using Festispec.ViewModel.RapportageViewModels;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -24,23 +26,41 @@ namespace Festispec.ViewModel.Components.Charts
 
         ObservableCollection<string> Labels { get; set; }
 
-        Color ForegroundColor { get; set; }
-        Color BackgroundColor { get; set; }
+        /// <summary>
+        /// Customization options.
+        /// </summary>
+        ObservableDictionary<EnumChartConfiguration, object> Configuration { get; set; }
 
+        /// <summary>
+        /// Creates the SeriesCollection.
+        /// </summary>
         void CreateCollection();
 
+        /// <summary>
+        /// Builds the Chart Control.
+        /// </summary>
+        /// <returns>The Control.</returns>
         Chart BuildControl();
 
         /// <summary>
         /// Zet de grafiek om naar een byte array.
         /// </summary>
-        /// <returns>De grafiek als byte array</returns>
+        /// <returns>De grafiek als byte array.</returns>
         byte[] ToByteArray();
+
+        /// <summary>
+        /// Configure the customization here.
+        /// </summary>
+        void Configure();
+
+        void OnLoaded();
 
         void UpdateLabels(List<string> labels);
 
         void UpdateValues(List<double> values);
 
         void Update(List<ChartData> chartData);
+
+        void OnConfigurationOptionChanged(EnumChartConfiguration key, object value);
     }
 }

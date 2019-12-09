@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using Festispec.Model.Enums;
+using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -14,15 +15,24 @@ namespace Festispec.ViewModel.Components.Charts
 {
     public class BarChartViewModel : CartesianChartViewModel
     {
+        public Brush BackgroundColor
+        {
+            get => ((Series)Collection[0]).Fill;
+            set
+            {
+                if (Collection != null)
+                    ((Series)Collection[0]).Fill = value;
+            }
+        }
+
+        public BarChartViewModel() : base()
+        {
+
+        }
+
         public BarChartViewModel(string title, List<string> labels, List<double> values) : base(labels, values)
         {
             Title = title;
-            ForegroundColor = Colors.Black;
-        }
-
-        public BarChartViewModel(string title) : base()
-        {
-
         }
 
         public override void CreateCollection()
@@ -36,5 +46,32 @@ namespace Festispec.ViewModel.Components.Charts
                 }
             };
         }
+
+        public override void Configure()
+        {
+            base.Configure();
+
+            Configuration.Update(EnumChartConfiguration.BACKGROUNDCOLOR, Colors.Black);
+        }
+
+        public override void OnConfigurationOptionChanged(EnumChartConfiguration key, object value)
+        {
+
+            base.OnConfigurationOptionChanged(key, value);
+            switch (key)
+            {
+                case EnumChartConfiguration.BACKGROUNDCOLOR:
+                    BackgroundColor = new SolidColorBrush((Color)value);
+
+                    break;
+
+            }
+        }
+
+        public override void OnLoaded()
+        {
+            BackgroundColor = new SolidColorBrush((Color)Configuration[EnumChartConfiguration.BACKGROUNDCOLOR]);
+        }
+
     }
 }
