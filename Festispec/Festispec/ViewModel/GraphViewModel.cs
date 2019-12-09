@@ -39,6 +39,7 @@ namespace Festispec.ViewModel
                 SetGraph();
                 SetSalesLabels();
                 SetSalesValues();
+                SetInspectorValues();
                 RaisePropertyChanged("StartDate");
             }
         }
@@ -58,6 +59,7 @@ namespace Festispec.ViewModel
                 SetGraph();
                 SetSalesLabels();
                 SetSalesValues();
+                SetInspectorValues();
                 RaisePropertyChanged("SelectedItem");
             }
         }
@@ -312,38 +314,35 @@ namespace Festispec.ViewModel
                 {
                     case "Week":
                         _salesValues = new double[7];
-                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
-                         {
-                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
-                             {
-                                 for (int i = 0; i < Labels.Length; i++)
-                                 {
-                                     if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
-                                     {
-                                         _salesValues[i] += 1;
-                                     }
-                                 }
-                             }
-                         });
+                        foreach (Offerte quotation in _qrepo.GetLatestQuotationForEachJob(StartDate, EndDate))
+                        {
+                            if (quotation != null)
+                            {
+                                for (int i = 0; i < Labels.Length; i++)
+                                {
+                                    if (quotation.Aanmaakdatum.Equals(DateTime.Parse(Labels[i])))
+                                        _salesValues[i] += (double)quotation.Totaalbedrag;
+                                }
+                            }
+                        }
+
                         break;
                     case "Maand":
                         _salesValues = new double[30];
-                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
-                         {
-                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
-                             {
-                                 for (int i = 0; i < Labels.Length; i++)
-                                 {
-                                     if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
-                                     {
-                                         _salesValues[i] += 1;
-                                     }
-                                 }
-                             }
-                         });
+                        foreach(Offerte quotation in _qrepo.GetLatestQuotationForEachJob(StartDate, EndDate))
+                        {
+                            if (quotation != null)
+                            {
+                                for (int i = 0; i < Labels.Length; i++)
+                                {
+                                    if (quotation.Aanmaakdatum.Equals(DateTime.Parse(Labels[i])))
+                                        _salesValues[i] += (double)quotation.Totaalbedrag;
+                                }
+                            }
+                        }
+
                         break;
                     case "Jaar":
-                        _salesValues = new double[12];
                         _qrepo.GetQuotations().Where(e => e.Aanmaakdatum.Year == StartDate.Year).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
                         {
                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
@@ -363,60 +362,51 @@ namespace Festispec.ViewModel
 
         private void SetInspectorValues()
         {
+            InspectorValues.ToList().ForEach(e => InspectorValues.Remove(e));
+
             int[] _inspectorValues = new int[12];
-            List<Account> accounts = _urepo.GetUsers();
 
             if (SelectedItem != null)
             {
                 switch (SelectedItem.Content)
                 {
                     case "Week":
-                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                        _inspectorValues = new int[7];
+                        _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Date >= StartDate && e.DatumCertificering.Value.Date <= EndDate).ToList().ForEach(e =>
                         {
-                            if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                            for (int i = 0; i < Labels.Length; i++)
                             {
-                                for (int i = 0; i < Labels.Length; i++)
-                                {
-                                    if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
-                                    {
-                                        Labels[i] += 1;
-                                    }
-                                }
+                                if (e.DatumCertificering.Equals(DateTime.Parse(Labels[i])))
+                                    _inspectorValues[i] += 100;
                             }
                         });
                         break;
                     case "Maand":
-                        _qrepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
+                        _inspectorValues = new int[30];
+                        _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Date >= StartDate && e.DatumCertificering.Value.Date <= EndDate).ToList().ForEach(e =>
                         {
-                            if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
+                            for (int i = 0; i < Labels.Length; i++)
                             {
-                                for (int i = 0; i < Labels.Length; i++)
-                                {
-                                    if (e.FirstOrDefault().Opdracht.Offerte.FirstOrDefault().Aanmaakdatum.Equals(Labels[i]))
-                                    {
-                                        Labels[i] += 1;
-                                    }
-                                }
+                                if (e.DatumCertificering.Equals(DateTime.Parse(Labels[i])))
+                                    _inspectorValues[i] += 100;
                             }
-                        });
-                        _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Date > StartDate && e.DatumCertificering.Value.Date < EndDate).ToList().ForEach(e =>
-                        {
-                            _inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
                         });
                         break;
                     case "Jaar":
+                        _inspectorValues = new int[12];
                         _urepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Year == StartDate.Year).ToList().ForEach(e =>
                         {
-                            _inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
+                            _inspectorValues[e.DatumCertificering.Value.Month - 1] += 100;
                         });
                         break;
                 }
             }
-                for (int i = 0; i < _inspectorValues.Length; i++)
+
+            for (int i = 0; i < _inspectorValues.Length; i++)
                 {
-                    InspectorValues.Add(new ObservableValue(_inspectorValues[i]));
+                InspectorValues.Add(new ObservableValue(_inspectorValues[i]));
                 }
-            
+
         }
 
         private void GetProvinceValues()
@@ -451,8 +441,6 @@ namespace Festispec.ViewModel
             OffertesRejected.Value = GetOffertesRejected();
             OffertesAccepted.Value = GetOffertesAccepted();
             OffertesSent.Value = GetOffertesSent();
-            SetSalesValues();
-            SetInspectorValues();
         }
 
         private void setEndDate()

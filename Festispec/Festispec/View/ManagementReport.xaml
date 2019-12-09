@@ -56,23 +56,23 @@
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="1">
-            <lvc:CartesianChart Series="{Binding SalesCollection}">
+            <lvc:CartesianChart Series="{Binding InspectorCollection}">
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Maanden" Labels="{Binding Labels}"/>
+                    <lvc:Axis Title="Tijd" Labels="{Binding Labels}"/>
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Sales"/>
+                    <lvc:Axis Title="Aantal"/>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="0">
-            <lvc:CartesianChart Series="{Binding InspectorCollection}">
+            <lvc:CartesianChart Series="{Binding SalesCollection}">
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Title="Maanden" Labels="{Binding Labels}" />
+                    <lvc:Axis Title="Tijd" Labels="{Binding Labels}" />
                 </lvc:CartesianChart.AxisX>
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Sales"/>
+                    <lvc:Axis Title="Aantal"/>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
