@@ -7,13 +7,13 @@ namespace Festispec.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class Main : IMigrationMetadata
+    public sealed partial class spGetChartData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Main));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(spGetChartData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912061310436_Main"; }
+            get { return "201912081356098_sp-GetChartData"; }
         }
         
         string IMigrationMetadata.Source
