@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h1>Jouw opdrachten</h1>
+            <h1>Opdrachten</h1>
         </div>
         <div class="col-md-6 text-right">
             <a href='@Url.Action("Dashboard", "Dashboard")'>
@@ -19,19 +19,13 @@
     </div>
     <hr />
     <div class="row">
-        <div class="col-md-12">
-            <form>
-                <div class="form-group">
-                    <input id="zoekbalk" type="text" placeholder="Zoek opdracht..." class="form-control" />
-                </div>
-            </form>
-        </div>
+        <form>
+            <div class="form-group col-md-12">
+                <input id="zoekbalk" type="text" placeholder="Zoek opdracht..." class="form-control" />
+            </div>
+        </form>
     </div>
-    <hr />
     <div class="row">
-        <div class="col-md-6">
-            <h2>Zoek resultaten</h2>
-        </div>
         <div class="col-md-6">
             <h2>Sorteren op: Datum</h2>
         </div>
@@ -51,9 +45,28 @@
             <h3><b>Datum:</b> Pinkpop</h3>
         </div>
         <div class="col-md-1">
-            <h3>Meer info</h3>
+            <button class="btn-info">Meer info</button>
         </div>
-        @*End Assignment*@
     </div>
+    <hr />
+    @*End Assignment*@
+    <div class="row assignment">
+        <div class="col-md-3">
+            <img src="~/Content/Images/Dashboard_planning.png" />
+        </div>
+        <div class="col-md-3">
+            <h3><b>Klantnaam:</b> Pinkpop</h3>
+        </div>
+        <div class="col-md-3">
+            <h3><b>Locatie:</b> Landgraaf</h3>
+        </div>
+        <div class="col-md-2">
+            <h3><b>Datum:</b> Pinkpop</h3>
+        </div>
+        <div class="col-md-1">
+            <button class="btn-info">Meer info</button>
+        </div>
+    </div>
+    <hr />
 </div>
 

@@ -1,9 +1,4 @@
-﻿body 
-{
-    background-color: red;
-}
-
-#logo 
+﻿#logo 
 {
     max-width: 50%;
     margin-top: 10px;
@@ -14,7 +9,7 @@
     min-width: 100%;
 }
 
-.col-md-12 
+.assignment img 
 {
-    background-color: blue;
+    width: 150px;
 }

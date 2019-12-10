@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @Html.ActionLink("Dashboard", "Dashboard", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Planning", "AvailabilityView", "Availability", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Beschikbaarheid", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Opdrachten", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
@@ -33,7 +33,6 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
