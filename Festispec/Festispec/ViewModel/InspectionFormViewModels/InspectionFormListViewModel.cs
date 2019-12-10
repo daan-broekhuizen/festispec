@@ -18,8 +18,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ObservableCollection<InspectionFormViewModel> InspectionFormsList { get; set; }
 
         public ICommand ToEditCommand { get; set; }
-
         public ICommand CreateNewInspectionFormCommand { get; set; }
+        public ICommand SaveDetailsCommand { get; set; }
 
         private NavigationService _navigationService;
 
@@ -38,6 +38,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 RaisePropertyChanged("Description");
                 RaisePropertyChanged("LastChangeDate");
                 RaisePropertyChanged("Questions");
+                RaisePropertyChanged("InspectionDate");
+                RaisePropertyChanged("InspectionStartTime");
+                RaisePropertyChanged("InspectionEndTime");
+                RaisePropertyChanged("City");
+                RaisePropertyChanged("Street");
+                RaisePropertyChanged("HouseNumber");
+                RaisePropertyChanged("RequiredInspectors");
             }
         }
 
@@ -55,6 +62,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
             CreateNewInspectionFormCommand = new RelayCommand(CreateNewInspectionForm);
             ToEditCommand = new RelayCommand(ToEditView);
+            SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetails);
         }
 
         private void GetInspectionForms()
@@ -81,6 +89,111 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if(_selectedInspectionForm != null){return _selectedInspectionForm.Titel;}
                 else{return null;}
             }
+        }
+
+        public DateTime? InspectionDate
+        {
+            get => _selectedInspectionForm.InspectionForm.DatumInspectie;
+            set
+            {
+                _selectedInspectionForm.InspectionForm.DatumInspectie = value;
+                RaisePropertyChanged("InspectionDate");
+            }
+        }
+
+        public DateTime InspectionStartTime
+        {
+            get
+            {
+                TimeSpan t = _selectedInspectionForm.InspectionForm.StartTijd ?? new TimeSpan(0,0,0);
+                DateTime dt = new DateTime() + t;
+                return dt;
+            }
+            set
+            {
+                _selectedInspectionForm.InspectionForm.StartTijd = value.TimeOfDay;
+                RaisePropertyChanged("InspectionStartTime");
+                RaisePropertyChanged("MinimumTime");
+            }
+        }
+
+        public DateTime InspectionEndTime
+        {
+            get
+            {
+                TimeSpan t = _selectedInspectionForm.InspectionForm.EindTijd ?? new TimeSpan(23, 0, 0);
+                DateTime dt = new DateTime() + t;
+                return dt;
+            }
+            set
+            {
+                _selectedInspectionForm.InspectionForm.EindTijd = value.TimeOfDay;
+                RaisePropertyChanged("InspectionEndTime");
+                RaisePropertyChanged("MaximumTime");
+            }
+        }
+
+        public DateTime MinimumTime
+        {
+            get => InspectionStartTime.AddHours(1);      
+        }
+
+        public DateTime MaximumTime
+        {
+            get => InspectionEndTime.AddHours(-1);
+        }
+
+        public string City
+        {
+            get => _selectedInspectionForm.InspectionForm.Stad;
+            set
+            {
+                _selectedInspectionForm.InspectionForm.Stad = value;
+                RaisePropertyChanged("City");
+            }
+        }
+
+        public string Street
+        {
+            get => _selectedInspectionForm.InspectionForm.Straatnaam;
+            set
+            {
+                _selectedInspectionForm.InspectionForm.Straatnaam = value;
+                RaisePropertyChanged("Street");
+            }
+        }
+
+        public string HouseNumber
+        {
+            get => _selectedInspectionForm.InspectionForm.Huisnummer;
+            set
+            {
+                _selectedInspectionForm.InspectionForm.Huisnummer = value;
+                RaisePropertyChanged("HouseNumber");
+            }
+        }
+
+        public int? RequiredInspectors
+        {
+            get => _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs;
+            set
+            {
+                _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs = value;
+                RaisePropertyChanged("RequiredInspectors");
+            }
+        }
+
+        public DateTime MinimalDate
+        {
+            get => DateTime.Today.AddDays(2);
+            set
+            { return; }
+        }
+
+        public DateTime MaximumDate
+        {
+            get => DateTime.Today.AddYears(1).AddMonths(6);
+            set{ return; }
         }
 
         public string Description
@@ -120,6 +233,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void ToEditView()
         {
             _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
+        }
+
+        public void SaveInspectionFormDetails()
+        {
+            if(_selectedInspectionForm != null)
+            {
+                _selectedInspectionForm.SaveInspectionformDetails();
+            }
         }
     }
 }

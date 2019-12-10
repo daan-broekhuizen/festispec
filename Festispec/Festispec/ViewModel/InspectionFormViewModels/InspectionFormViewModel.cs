@@ -42,8 +42,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         private NavigationService _navigationService;
 
-        private bool _editMode;
-
         private QuestionViewModel _selectedVraag;
 
         public bool Changed;
@@ -67,16 +65,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _selectedVraag = value;
                 Changed = true;
                 RaisePropertyChanged("SelectedVraag");
-            }
-        }
-
-        public bool EditMode
-        {
-            get => _editMode;
-            set
-            {
-                _editMode = value;
-                RaisePropertyChanged("EditMode");
             }
         }
 
@@ -133,9 +121,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 RaisePropertyChanged("LastChangeDate");
             }
         }
-
-
-        
 
         #endregion
 
@@ -210,14 +195,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         #region Commands
         public void ToEdit()
         {
-            if (EditMode == true)
-            {
-                EditMode = false;
-            }
-            else
-            {
-                EditMode = true;
-            }
             _navigationService.NavigateTo("InspectionFormEditView", this);
         }
 
@@ -432,6 +409,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 }
                 
             }
+        }
+
+        public void SaveInspectionformDetails()
+        {
+            _repo.UpdateInspectieFormulier(InspectionForm);
         }
         #endregion
 

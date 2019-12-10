@@ -20,7 +20,7 @@
 
         <DataTemplate x:Key="OpenQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -55,7 +55,7 @@
 
         <DataTemplate x:Key="PictureQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -89,7 +89,7 @@
 
         <DataTemplate x:Key="TextEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -123,7 +123,7 @@
 
         <DataTemplate x:Key="MultipleChoiceQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid x:Name="QuestionBox" Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
+                <Grid x:Name="QuestionBox" Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                        <ColumnDefinition Width="0.5*"/>
                        <ColumnDefinition Width="3.2*"/>
@@ -178,12 +178,12 @@
                     <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
                         <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Grid Background="#d3d3d3" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="13*"/>
                                 </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
+                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray" VerticalAlignment="Center"/>
                                     <TextBox Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" AcceptsReturn="False" MaxLength="150"/>
                                 </Grid>
                         </DataTemplate>
@@ -196,7 +196,7 @@
 
         <DataTemplate x:Key="ScaleQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid x:Name="StandardView"  Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
+                <Grid x:Name="StandardView"  Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -281,7 +281,7 @@
 
         <DataTemplate x:Key="Table2QuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -315,7 +315,7 @@
 
         <DataTemplate x:Key="Table3QuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#d9d9d9" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -360,9 +360,6 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Viewbox Stretch="UniformToFill" Grid.ColumnSpan="2">
-            <Image Source="/Images/Dashboard_background.png"/>
-        </Viewbox>
         <Grid Grid.Column="1">
             <Grid.Background>
                 <SolidColorBrush Color="Gray" Opacity="0.6" />
