@@ -772,7 +772,10 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Text="{Binding Path=Titel}" Grid.Row="0" FontSize="30"/>
+                        <Viewbox Grid.Row="0" HorizontalAlignment="Left">
+                            <Label  Content="{Binding Path=TitelError}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
+                        </Viewbox> 
+                        <TextBox Text="{Binding Path=Titel ,UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" FontSize="30" Background="{x:Null}"/>
                         <TextBox Text="{Binding Path=Description}" Grid.Row="1" FontSize="10"/>
                     </Grid>
                     

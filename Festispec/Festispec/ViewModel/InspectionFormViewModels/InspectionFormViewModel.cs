@@ -86,7 +86,19 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _titel = value;
                 _inspectionForm.InspectieFormulierTitel = _titel;
                 Changed = true;
+                TitelError = null;
                 RaisePropertyChanged("Titel");
+            }
+        }
+
+        private string _titelError;
+        public string TitelError
+        {
+            get => _titelError;
+            set
+            {
+                _titelError = value;
+                RaisePropertyChanged("TitelError");
             }
         }
 
@@ -361,6 +373,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     valid = false;
                 }
+            }
+            TitelError = null;
+            ValidationResult result = new InspectionFormValidator().Validate(this);
+            if (!result.IsValid)
+            {
+                TitelError = result.Errors.FirstOrDefault().ErrorMessage;
+                valid = false;
             }
 
             if (!valid) { return; }

@@ -192,6 +192,7 @@
     <Compile Include="Utility\Encryptor.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="Utility\Validators\InspectionFormValidator.cs" />
     <Compile Include="Utility\Validators\PossibleAnwserValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
