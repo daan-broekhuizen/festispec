@@ -3,11 +3,14 @@ currentMonth = today.getMonth();
 currentYear = today.getFullYear();
 selectedYear = document.getElementById("year");
 selectedMonth = document.getElementById("month");
+list = document.getElementById("date-list");
+
 
 months = ["Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
 
 monthAndYear = document.getElementById("monthAndYear");
 showCalendar(currentMonth, currentYear);
+
 
 // Functie voor het maken van de kalender
 function showCalendar(month, year)
@@ -28,6 +31,7 @@ function showCalendar(month, year)
 
     // Alle 42 vakjes maken
     let date = 1;
+    let datavalue = currentYear + "/" + (currentMonth + 1) + "/" + date;
     for (let x = 0; x < 6; x++)
     {
         // voegt een rij toe
@@ -49,6 +53,9 @@ function showCalendar(month, year)
             {
                 cell = document.createElement("td");
                 cellText = document.createTextNode(date);
+                cell.setAttribute("date", datavalue);
+                cell.classList.add("valid-date");
+                cell.addEventListener("click", addAvailability);
                 // De dag van vandaag een andere kleur geven
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth())
                     cell.classList.add("bg-info");
@@ -93,4 +100,60 @@ function daysInMonth(iMonth, iYear)
 {
     return 32 - new Date(iYear, iMonth, 32).getDate();
 }
+
+function addAvailability()
+{
+    this.classList.toggle("added-date");
+    this.removeEventListener("click", addAvailability);
+    this.addEventListener("click", removeAvailability);
+
+    var dateString = currentYear + "/" + (currentMonth + 1) + "/" + this.innerHTML;
+
+    $.ajax({
+        method: "POST",
+        url: "Availability/CreateAvailability",
+        data: '{ datestring:"' + dateString + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert("success!")
+        },
+        failure: function (response) {
+            alert("failed!")
+        },
+        error: function (response) {
+            alert("error!")
+        }
+
+    });
+}
+
+function removeAvailability()
+{
+    this.classList.toggle("valid-date");
+    this.removeEventListener("click", removeAvailability);
+    this.addEventListener("click", addAvailability);
+
+    var dateString = currentYear + "/" + (currentMonth + 1) + "/" + this.innerHTML;
+
+    $.ajax({
+        method: "DELETE",
+        url: "Availability/DeleteAvailability",
+        data: '{ datestring:"' + dateString + '" }',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            alert("success!")
+        },
+        failure: function (response) {
+            alert("failed!")
+        },
+        error: function (response) {
+            alert("error!")
+        }
+
+    });
+
+}
+
 

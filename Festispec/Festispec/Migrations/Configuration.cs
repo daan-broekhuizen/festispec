@@ -31,6 +31,7 @@
             SeedIngepladeInspecteurs(context);
             SeedRapportTemplates(context);
             SeedInspectionFormTemplates(context);
+            SeedVraagAntwoorden(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -67,7 +68,7 @@
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
-                context.Status.AddOrUpdate(x => x.Afkorting, new Status() { Afkorting = status.Key, Betekenis = status.Value });
+                context.Status.AddOrUpdate(x => x.Betekenis, new Status() { Betekenis = status.Value });
 
             context.SaveChanges();
         }
@@ -77,10 +78,12 @@
             Dictionary<string, string> statuses = new Dictionary<string, string>()
             {
                 { "av", "Afbeelding vraag" },
-                { "lv", "Lijst vraag" },
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
+                { "t2", "Tabel vraag X2"},
+                { "t3", "Tabel vraag X3"  },
+                { "tx", "Pure text" }
             };
 
             foreach (KeyValuePair<string, string> status in statuses)
@@ -194,8 +197,10 @@
             opdrachten[0] = new Opdracht()
             {
                 OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Afkorting == "rv").Afkorting,
+                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
                 CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now,
+                EindDatum = DateTime.Now.AddDays(2),
                 KlantID = "293871",
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
@@ -247,16 +252,20 @@
             Vraag[] vragen = new Vraag[2];
             vragen[0] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Open vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                VolgordeNummer = 1
+                
             };
 
             vragen[1] = new Vraag()
             {
+                InspectieFormulierID = 1,
                 Vraagstelling = "Meerkeuze vraag",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
-                LaatsteWijziging = DateTime.Now
+                VolgordeNummer = 2
+                
             };
 
             context.Vraag.AddOrUpdate(vragen);
@@ -289,6 +298,25 @@
 
             context.VraagMogelijkAntwoord.AddOrUpdate(x => x.AntwoordNummer, antwoorden);
             context.SaveChanges();
+        }
+
+        private void SeedVraagAntwoorden(FestispecContext context)
+        {
+            Inspectieformulier inspectieformulier = context.Inspectieformulier.Where(x => x.InspectieFormulierTitel == "Inspectie Bospop festival").FirstOrDefault();
+
+            foreach(Vraag vraag in inspectieformulier.Vraag)
+            {
+                Antwoorden antwoord = new Antwoorden()
+                {
+                    VraagID = vraag.VraagID,
+                    InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
+                    AntwoordNummer = 1,
+                    AntwoordText = "0"
+                };
+
+                context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoord);
+                context.SaveChanges();
+            }
         }
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
@@ -327,15 +355,15 @@
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
-            Opdracht opdracht = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop");
+            Inspectieformulier Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival");
 
-            if(opdracht.Ingepland.Count == 0)
-                opdracht.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+            if(Inspectieformulier.Ingepland.Count == 0)
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
 
             if(account.Ingepland.Count == 0)
-                account.Ingepland.Add(context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival"));
 
             context.SaveChanges();
         }

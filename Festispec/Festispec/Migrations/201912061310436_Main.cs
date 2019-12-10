@@ -36,31 +36,66 @@
                 "dbo.Antwoorden",
                 c => new
                     {
-                        VIC_ID = c.Int(nullable: false),
+                        VraagID = c.Int(nullable: false),
+                        AntwoordNummer = c.Int(nullable: false),
                         InspecteurID = c.Int(nullable: false),
                         Antwoord_text = c.String(unicode: false, storeType: "text"),
                         Antwoord_image = c.Binary(storeType: "image"),
-                        Laatste_wijziging = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.VIC_ID, t.InspecteurID })
-                .ForeignKey("dbo.Inspectieformulier_vragenlijst_combinatie", t => t.VIC_ID, cascadeDelete: true)
+                .PrimaryKey(t => new { t.VraagID, t.AntwoordNummer, t.InspecteurID })
+                .ForeignKey("dbo.Vraag", t => t.VraagID)
                 .ForeignKey("dbo.Account", t => t.InspecteurID, cascadeDelete: true)
-                .Index(t => t.VIC_ID)
+                .Index(t => t.VraagID)
                 .Index(t => t.InspecteurID);
             
             CreateTable(
-                "dbo.Inspectieformulier_vragenlijst_combinatie",
+                "dbo.Vraag",
                 c => new
                     {
-                        VIC_ID = c.Int(nullable: false, identity: true),
-                        InspectieformulierID = c.Int(nullable: false),
-                        VraagID = c.Int(nullable: false),
+                        VraagID = c.Int(nullable: false, identity: true),
+                        Vraagstelling = c.String(nullable: false, unicode: false, storeType: "text"),
+                        VolgordeNummer = c.Int(nullable: false),
+                        InspectieFormulierID = c.Int(nullable: false),
+                        Vraagtype = c.String(nullable: false, maxLength: 2),
+                        AfbeeldingURL = c.String(maxLength: 150),
                     })
-                .PrimaryKey(t => t.VIC_ID)
-                .ForeignKey("dbo.Inspectieformulier", t => t.InspectieformulierID, cascadeDelete: true)
-                .ForeignKey("dbo.Vraag", t => t.VraagID, cascadeDelete: true)
-                .Index(t => t.InspectieformulierID)
+                .PrimaryKey(t => t.VraagID)
+                .ForeignKey("dbo.Vraagtype_lookup", t => t.Vraagtype)
+                .ForeignKey("dbo.Inspectieformulier", t => t.InspectieFormulierID, cascadeDelete: true)
+                .Index(t => t.InspectieFormulierID)
+                .Index(t => t.Vraagtype);
+            
+            CreateTable(
+                "dbo.Vraag_mogelijk_antwoord",
+                c => new
+                    {
+                        VraagID = c.Int(nullable: false),
+                        Antwoord_nummer = c.Int(nullable: false),
+                        Antwoord_text = c.String(nullable: false, unicode: false, storeType: "text"),
+                    })
+                .PrimaryKey(t => new { t.VraagID, t.Antwoord_nummer })
+                .ForeignKey("dbo.Vraag", t => t.VraagID)
                 .Index(t => t.VraagID);
+            
+            CreateTable(
+                "dbo.Vraagtype_lookup",
+                c => new
+                    {
+                        Afkorting = c.String(nullable: false, maxLength: 2),
+                        Beschrijving = c.String(nullable: false, maxLength: 30),
+                    })
+                .PrimaryKey(t => t.Afkorting);
+            
+            CreateTable(
+                "dbo.Beschikbaarheid_inspecteurs",
+                c => new
+                    {
+                        MedewerkerID = c.Int(nullable: false),
+                        Datum = c.DateTime(nullable: false, storeType: "date"),
+                    })
+                .PrimaryKey(t => new { t.MedewerkerID, t.Datum })
+                .ForeignKey("dbo.Account", t => t.MedewerkerID, cascadeDelete: true)
+                .Index(t => t.MedewerkerID);
             
             CreateTable(
                 "dbo.Inspectieformulier",
@@ -69,12 +104,15 @@
                         InspectieformulierID = c.Int(nullable: false, identity: true),
                         InspectieFormulierTitel = c.String(nullable: false, maxLength: 45),
                         Datum_inspectie = c.DateTime(storeType: "date"),
+                        StartTijd = c.Time(precision: 7),
+                        EindTijd = c.Time(precision: 7),
                         Stad = c.String(maxLength: 50),
                         Straatnaam = c.String(maxLength: 50),
                         Huisnummer = c.String(maxLength: 4),
                         OpdrachtID = c.Int(),
                         Beschrijving = c.String(unicode: false, storeType: "text"),
                         Laatste_wijziging = c.DateTime(nullable: false),
+                        Benodigde_Inspecteurs = c.Int(),
                     })
                 .PrimaryKey(t => t.InspectieformulierID)
                 .ForeignKey("dbo.Opdracht", t => t.OpdrachtID)
@@ -86,8 +124,10 @@
                     {
                         OpdrachtID = c.Int(nullable: false, identity: true),
                         Opdracht_naam = c.String(nullable: false, maxLength: 45),
-                        Status = c.String(nullable: false, maxLength: 2),
+                        Status = c.String(nullable: false, maxLength: 30),
                         Creatie_datum = c.DateTime(nullable: false, storeType: "date"),
+                        Start_datum = c.DateTime(nullable: false, storeType: "date"),
+                        Eind_datum = c.DateTime(nullable: false, storeType: "date"),
                         KlantID = c.String(nullable: false, maxLength: 8),
                         MedewerkerID = c.Int(nullable: false),
                         Klantwensen = c.String(nullable: false, unicode: false, storeType: "text"),
@@ -100,10 +140,8 @@
                 .ForeignKey("dbo.Klant", t => t.KlantID)
                 .ForeignKey("dbo.Rapport_template", t => t.Rapportage_uses_template)
                 .ForeignKey("dbo.Status_lookup", t => t.Status)
-                .ForeignKey("dbo.Account", t => t.MedewerkerID)
                 .Index(t => t.Status)
                 .Index(t => t.KlantID)
-                .Index(t => t.MedewerkerID)
                 .Index(t => t.Rapportage_uses_template);
             
             CreateTable(
@@ -163,6 +201,8 @@
                     {
                         TemplateID = c.Int(nullable: false, identity: true),
                         TemplateText = c.String(unicode: false, storeType: "text"),
+                        TemplateName = c.String(maxLength: 50),
+                        TemplateDescription = c.String(maxLength: 400),
                     })
                 .PrimaryKey(t => t.TemplateID);
             
@@ -170,56 +210,9 @@
                 "dbo.Status_lookup",
                 c => new
                     {
-                        Afkorting = c.String(nullable: false, maxLength: 2),
                         Betekenis = c.String(nullable: false, maxLength: 30),
                     })
-                .PrimaryKey(t => t.Afkorting);
-            
-            CreateTable(
-                "dbo.Vraag",
-                c => new
-                    {
-                        VraagID = c.Int(nullable: false, identity: true),
-                        Vraagstelling = c.String(nullable: false, unicode: false, storeType: "text"),
-                        Vraagtype = c.String(nullable: false, maxLength: 2),
-                        Bijlage = c.Binary(storeType: "image"),
-                        Laatste_wijziging = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.VraagID)
-                .ForeignKey("dbo.Vraagtype_lookup", t => t.Vraagtype)
-                .Index(t => t.Vraagtype);
-            
-            CreateTable(
-                "dbo.Vraag_mogelijk_antwoord",
-                c => new
-                    {
-                        VraagID = c.Int(nullable: false),
-                        Antwoord_nummer = c.Int(nullable: false),
-                        Antwoord_text = c.String(nullable: false, unicode: false, storeType: "text"),
-                    })
-                .PrimaryKey(t => new { t.VraagID, t.Antwoord_nummer })
-                .ForeignKey("dbo.Vraag", t => t.VraagID)
-                .Index(t => t.VraagID);
-            
-            CreateTable(
-                "dbo.Vraagtype_lookup",
-                c => new
-                    {
-                        Afkorting = c.String(nullable: false, maxLength: 2),
-                        Beschrijving = c.String(nullable: false, maxLength: 30),
-                    })
-                .PrimaryKey(t => t.Afkorting);
-            
-            CreateTable(
-                "dbo.Beschikbaarheid_inspecteurs",
-                c => new
-                    {
-                        MedewerkerID = c.Int(nullable: false),
-                        Datum = c.DateTime(nullable: false, storeType: "date"),
-                    })
-                .PrimaryKey(t => new { t.MedewerkerID, t.Datum })
-                .ForeignKey("dbo.Account", t => t.MedewerkerID, cascadeDelete: true)
-                .Index(t => t.MedewerkerID);
+                .PrimaryKey(t => t.Betekenis);
             
             CreateTable(
                 "dbo.Rol_lookup",
@@ -239,7 +232,7 @@
                     })
                 .PrimaryKey(t => new { t.InspecteurID, t.OpdrachtID })
                 .ForeignKey("dbo.Account", t => t.InspecteurID, cascadeDelete: true)
-                .ForeignKey("dbo.Opdracht", t => t.OpdrachtID, cascadeDelete: true)
+                .ForeignKey("dbo.Inspectieformulier", t => t.OpdrachtID, cascadeDelete: true)
                 .Index(t => t.InspecteurID)
                 .Index(t => t.OpdrachtID);
             
@@ -248,45 +241,37 @@
         public override void Down()
         {
             DropForeignKey("dbo.Account", "Rol", "dbo.Rol_lookup");
-            DropForeignKey("dbo.Opdracht", "MedewerkerID", "dbo.Account");
-            DropForeignKey("dbo.Ingeplande_inspecteurs", "OpdrachtID", "dbo.Opdracht");
+            DropForeignKey("dbo.Ingeplande_inspecteurs", "OpdrachtID", "dbo.Inspectieformulier");
             DropForeignKey("dbo.Ingeplande_inspecteurs", "InspecteurID", "dbo.Account");
-            DropForeignKey("dbo.Beschikbaarheid_inspecteurs", "MedewerkerID", "dbo.Account");
-            DropForeignKey("dbo.Antwoorden", "InspecteurID", "dbo.Account");
-            DropForeignKey("dbo.Vraag", "Vraagtype", "dbo.Vraagtype_lookup");
-            DropForeignKey("dbo.Vraag_mogelijk_antwoord", "VraagID", "dbo.Vraag");
-            DropForeignKey("dbo.Inspectieformulier_vragenlijst_combinatie", "VraagID", "dbo.Vraag");
+            DropForeignKey("dbo.Vraag", "InspectieFormulierID", "dbo.Inspectieformulier");
             DropForeignKey("dbo.Opdracht", "Status", "dbo.Status_lookup");
             DropForeignKey("dbo.Opdracht", "Rapportage_uses_template", "dbo.Rapport_template");
             DropForeignKey("dbo.Offerte", "OpdrachtID", "dbo.Opdracht");
             DropForeignKey("dbo.Opdracht", "KlantID", "dbo.Klant");
             DropForeignKey("dbo.Contactpersoon", "KlantID", "dbo.Klant");
             DropForeignKey("dbo.Inspectieformulier", "OpdrachtID", "dbo.Opdracht");
-            DropForeignKey("dbo.Inspectieformulier_vragenlijst_combinatie", "InspectieformulierID", "dbo.Inspectieformulier");
-            DropForeignKey("dbo.Antwoorden", "VIC_ID", "dbo.Inspectieformulier_vragenlijst_combinatie");
+            DropForeignKey("dbo.Beschikbaarheid_inspecteurs", "MedewerkerID", "dbo.Account");
+            DropForeignKey("dbo.Antwoorden", "InspecteurID", "dbo.Account");
+            DropForeignKey("dbo.Vraag", "Vraagtype", "dbo.Vraagtype_lookup");
+            DropForeignKey("dbo.Vraag_mogelijk_antwoord", "VraagID", "dbo.Vraag");
+            DropForeignKey("dbo.Antwoorden", "VraagID", "dbo.Vraag");
             DropIndex("dbo.Ingeplande_inspecteurs", new[] { "OpdrachtID" });
             DropIndex("dbo.Ingeplande_inspecteurs", new[] { "InspecteurID" });
-            DropIndex("dbo.Beschikbaarheid_inspecteurs", new[] { "MedewerkerID" });
-            DropIndex("dbo.Vraag_mogelijk_antwoord", new[] { "VraagID" });
-            DropIndex("dbo.Vraag", new[] { "Vraagtype" });
             DropIndex("dbo.Offerte", new[] { "OpdrachtID" });
             DropIndex("dbo.Contactpersoon", new[] { "KlantID" });
             DropIndex("dbo.Opdracht", new[] { "Rapportage_uses_template" });
-            DropIndex("dbo.Opdracht", new[] { "MedewerkerID" });
             DropIndex("dbo.Opdracht", new[] { "KlantID" });
             DropIndex("dbo.Opdracht", new[] { "Status" });
             DropIndex("dbo.Inspectieformulier", new[] { "OpdrachtID" });
-            DropIndex("dbo.Inspectieformulier_vragenlijst_combinatie", new[] { "VraagID" });
-            DropIndex("dbo.Inspectieformulier_vragenlijst_combinatie", new[] { "InspectieformulierID" });
+            DropIndex("dbo.Beschikbaarheid_inspecteurs", new[] { "MedewerkerID" });
+            DropIndex("dbo.Vraag_mogelijk_antwoord", new[] { "VraagID" });
+            DropIndex("dbo.Vraag", new[] { "Vraagtype" });
+            DropIndex("dbo.Vraag", new[] { "InspectieFormulierID" });
             DropIndex("dbo.Antwoorden", new[] { "InspecteurID" });
-            DropIndex("dbo.Antwoorden", new[] { "VIC_ID" });
+            DropIndex("dbo.Antwoorden", new[] { "VraagID" });
             DropIndex("dbo.Account", new[] { "Rol" });
             DropTable("dbo.Ingeplande_inspecteurs");
             DropTable("dbo.Rol_lookup");
-            DropTable("dbo.Beschikbaarheid_inspecteurs");
-            DropTable("dbo.Vraagtype_lookup");
-            DropTable("dbo.Vraag_mogelijk_antwoord");
-            DropTable("dbo.Vraag");
             DropTable("dbo.Status_lookup");
             DropTable("dbo.Rapport_template");
             DropTable("dbo.Offerte");
@@ -294,7 +279,10 @@
             DropTable("dbo.Klant");
             DropTable("dbo.Opdracht");
             DropTable("dbo.Inspectieformulier");
-            DropTable("dbo.Inspectieformulier_vragenlijst_combinatie");
+            DropTable("dbo.Beschikbaarheid_inspecteurs");
+            DropTable("dbo.Vraagtype_lookup");
+            DropTable("dbo.Vraag_mogelijk_antwoord");
+            DropTable("dbo.Vraag");
             DropTable("dbo.Antwoorden");
             DropTable("dbo.Account");
         }

@@ -56,6 +56,5 @@ namespace FestiSpec.Domain.Repositories
                 context.SaveChanges();
             }
         }
-
     }
 }
