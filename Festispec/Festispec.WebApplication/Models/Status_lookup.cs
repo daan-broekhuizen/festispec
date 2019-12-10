@@ -15,10 +15,6 @@ namespace Festispec.WebApplication.Models
         }
 
         [Key]
-        [StringLength(2)]
-        public string Afkorting { get; set; }
-
-        [Required]
         [StringLength(30)]
         public string Betekenis { get; set; }
 

@@ -14,7 +14,6 @@ namespace Festispec.WebApplication.Models
         {
             Inspectieformulier = new HashSet<Inspectieformulier>();
             Offerte = new HashSet<Offerte>();
-            Account1 = new HashSet<Account>();
         }
 
         public int OpdrachtID { get; set; }
@@ -24,11 +23,17 @@ namespace Festispec.WebApplication.Models
         public string Opdracht_naam { get; set; }
 
         [Required]
-        [StringLength(2)]
+        [StringLength(30)]
         public string Status { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime Creatie_datum { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime Start_datum { get; set; }
+
+        [Column(TypeName = "date")]
+        public DateTime Eind_datum { get; set; }
 
         [Required]
         [StringLength(8)]
@@ -50,8 +55,6 @@ namespace Festispec.WebApplication.Models
 
         public DateTime Laatste_wijziging { get; set; }
 
-        public virtual Account Account { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectieformulier> Inspectieformulier { get; set; }
 
@@ -63,8 +66,5 @@ namespace Festispec.WebApplication.Models
         public virtual Rapport_template Rapport_template { get; set; }
 
         public virtual Status_lookup Status_lookup { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Account1 { get; set; }
     }
 }

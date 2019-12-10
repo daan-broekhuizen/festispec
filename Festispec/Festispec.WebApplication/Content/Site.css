@@ -15,8 +15,3 @@ select,
 textarea {
     max-width: 280px;
 }
-
-#test {
-    background-color: black;
-    color: red;
-}

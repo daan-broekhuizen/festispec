@@ -33,5 +33,15 @@ namespace Festispec.WebApplication.Models.Repository
                 return context.Account.ToList();
             }
         }
+
+        //public List<Inspectieformulier> GetMyAssignments(int InspectorID)
+        //{
+        //    using (FestiSpecContext context = new FestiSpecContext())
+        //    {
+        //        Account a = context.Account.Where(i => i.AccountID == InspectorID).FirstOrDefault();
+        //        List<Inspectieformulier> assigments = context.Inspectieformulier.Include("Account").Where(i => i.Account.Contains(a) && i.Datum_inspectie >= DateTime.Now.Date).ToList();
+        //        return assigments;
+        //    }
+        //}
     }
 }

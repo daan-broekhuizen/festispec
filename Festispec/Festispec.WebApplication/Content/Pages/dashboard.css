@@ -13,15 +13,9 @@ img {
     margin-top: 10px;
 }
 
-.task 
-{
-    background-color: yellow;
-    text-align: center;
-}
-
 .task img 
 {
-    max-width: 50%;
+    max-width: 50px;
 }
 
 .col-md-6 .row 
@@ -45,4 +39,9 @@ img {
 .big-buttons 
 {
     margin-top: 20px;
+}
+
+.big-buttons img
+{
+    width: 150px;
 }

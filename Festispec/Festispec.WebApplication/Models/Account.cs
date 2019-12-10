@@ -14,8 +14,7 @@ namespace Festispec.WebApplication.Models
         {
             Antwoorden = new HashSet<Antwoorden>();
             Beschikbaarheid_inspecteurs = new HashSet<Beschikbaarheid_inspecteurs>();
-            Opdracht = new HashSet<Opdracht>();
-            Opdracht1 = new HashSet<Opdracht>();
+            Inspectieformulier = new HashSet<Inspectieformulier>();
         }
 
         public int AccountID { get; set; }
@@ -78,9 +77,6 @@ namespace Festispec.WebApplication.Models
         public virtual ICollection<Beschikbaarheid_inspecteurs> Beschikbaarheid_inspecteurs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opdracht> Opdracht { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opdracht> Opdracht1 { get; set; }
+        public virtual ICollection<Inspectieformulier> Inspectieformulier { get; set; }
     }
 }

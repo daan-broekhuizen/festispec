@@ -1,4 +1,6 @@
-﻿<link href="~/Content/Pages/dashboard.css" rel="stylesheet" />
+﻿@*@model Festispec.WebApplication.ViewModels.DashBoardVM*@
+
+.<link href="~/Content/Pages/dashboard.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Dashboard";
@@ -6,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <div id="logo" class=" col-sm-4 text-center">
+        <div id="logo" class=" col-md-4 text-center">
             <a href='@Url.Action("Index", "Dashboard")'>
                 <img src="~/Content/Images/festispec_logo.png" />
             </a>
@@ -85,16 +87,16 @@
         <div class="col-md-6">
 
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 text-center">
             <img src="~/Content/Images/Dashboard_schedule.png" />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12 text-center">
             <a href='@Url.Action("AvailabilityView", "Availability")'>
                 <img src=~/Content/Images/Dashboard_planning.png     />
             </a>
         </div>
          
-        <div class="col-md-2">
+        <div class="col-md-2 col-sm-12 text-center">
             <img src="~/Content/Images/Dashboard_messages.png" />
         </div>
     </div>

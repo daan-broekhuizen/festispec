@@ -12,7 +12,8 @@ namespace Festispec.WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspectieformulier()
         {
-            Inspectieformulier_vragenlijst_combinatie = new HashSet<Inspectieformulier_vragenlijst_combinatie>();
+            Vraag = new HashSet<Vraag>();
+            Account = new HashSet<Account>();
         }
 
         public int InspectieformulierID { get; set; }
@@ -23,6 +24,10 @@ namespace Festispec.WebApplication.Models
 
         [Column(TypeName = "date")]
         public DateTime? Datum_inspectie { get; set; }
+
+        public TimeSpan? StartTijd { get; set; }
+
+        public TimeSpan? EindTijd { get; set; }
 
         [StringLength(50)]
         public string Stad { get; set; }
@@ -40,9 +45,14 @@ namespace Festispec.WebApplication.Models
 
         public DateTime Laatste_wijziging { get; set; }
 
+        public int? Benodigde_Inspecteurs { get; set; }
+
         public virtual Opdracht Opdracht { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
+        public virtual ICollection<Vraag> Vraag { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

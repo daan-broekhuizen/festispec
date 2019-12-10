@@ -17,7 +17,6 @@ namespace Festispec.WebApplication.Models
         public virtual DbSet<Beschikbaarheid_inspecteurs> Beschikbaarheid_inspecteurs { get; set; }
         public virtual DbSet<Contactpersoon> Contactpersoon { get; set; }
         public virtual DbSet<Inspectieformulier> Inspectieformulier { get; set; }
-        public virtual DbSet<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
         public virtual DbSet<Klant> Klant { get; set; }
         public virtual DbSet<Offerte> Offerte { get; set; }
         public virtual DbSet<Opdracht> Opdracht { get; set; }
@@ -41,14 +40,8 @@ namespace Festispec.WebApplication.Models
                 .HasForeignKey(e => e.MedewerkerID);
 
             modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht)
-                .WithRequired(e => e.Account)
-                .HasForeignKey(e => e.MedewerkerID)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht1)
-                .WithMany(e => e.Account1)
+                .HasMany(e => e.Inspectieformulier)
+                .WithMany(e => e.Account)
                 .Map(m => m.ToTable("Ingeplande_inspecteurs").MapLeftKey("InspecteurID").MapRightKey("OpdrachtID"));
 
             modelBuilder.Entity<Antwoorden>()
@@ -122,6 +115,11 @@ namespace Festispec.WebApplication.Models
             modelBuilder.Entity<Vraag>()
                 .Property(e => e.Vraagstelling)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Vraag>()
+                .HasMany(e => e.Antwoorden)
+                .WithRequired(e => e.Vraag)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Vraag>()
                 .HasMany(e => e.Vraag_mogelijk_antwoord)

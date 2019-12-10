@@ -193,7 +193,6 @@
     <Compile Include="Models\Contactpersoon.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
     <Compile Include="Models\Inspectieformulier.cs" />
-    <Compile Include="Models\Inspectieformulier_vragenlijst_combinatie.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />

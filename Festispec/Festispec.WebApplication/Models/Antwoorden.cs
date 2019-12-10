@@ -12,10 +12,15 @@ namespace Festispec.WebApplication.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int VIC_ID { get; set; }
+        public int VraagID { get; set; }
 
         [Key]
         [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int AntwoordNummer { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int InspecteurID { get; set; }
 
@@ -25,10 +30,8 @@ namespace Festispec.WebApplication.Models
         [Column(TypeName = "image")]
         public byte[] Antwoord_image { get; set; }
 
-        public DateTime Laatste_wijziging { get; set; }
-
         public virtual Account Account { get; set; }
 
-        public virtual Inspectieformulier_vragenlijst_combinatie Inspectieformulier_vragenlijst_combinatie { get; set; }
+        public virtual Vraag Vraag { get; set; }
     }
 }
