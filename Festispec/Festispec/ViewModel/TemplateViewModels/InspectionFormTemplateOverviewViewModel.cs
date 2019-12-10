@@ -13,10 +13,14 @@ namespace Festispec.ViewModel.TemplateViewModels
     public class InspectionFormTemplateOverviewViewModel : TemplateOverviewViewModel
     {
         private TemplateRepository _repo;
+        private int _jobId;
 
         public InspectionFormTemplateOverviewViewModel(NavigationService service, TemplateRepository templateRepository) : base(service)
         {
             _repo = templateRepository;
+            if (service.Parameter is object[] parameters)
+                if (parameters.Length > 1 && parameters[1] != null && parameters[1] is int)
+                    _jobId = (int)parameters[1];
             _unfilteredTemplates = templateRepository.GetInspectieformulierTemplates();
             Templates = _unfilteredTemplates;
         }
@@ -37,8 +41,21 @@ namespace Festispec.ViewModel.TemplateViewModels
         protected override void SelectTemplate(dynamic template)
         {
             Inspectieformulier inspectionTemplate = _repo.GetInspectionFormTemplate(((TemplateViewModel)template).InspectionFormTemplateID);
+            inspectionTemplate.OpdrachtID = _jobId;
+            inspectionTemplate.InspectieformulierID = 0;
+            inspectionTemplate.Beschrijving = null;
+            inspectionTemplate.InspectieFormulierTitel = "Nieuw inspectieformulier";
+            foreach(Vraag question in inspectionTemplate.Vraag)
+            {
+                question.InspectieFormulierID = 0;
+                question.VraagID = 0;
+                foreach(VraagMogelijkAntwoord vma in question.VraagMogelijkAntwoord)
+                {
+                    vma.VraagID = 0;
+                }
+            }
 
-            _navigationService.NavigateTo("CreateInspectionForm", inspectionTemplate);
+            _navigationService.NavigateTo("InspectionFormEditView", inspectionTemplate);
         }
 
         protected override void EditTemplate(dynamic template)

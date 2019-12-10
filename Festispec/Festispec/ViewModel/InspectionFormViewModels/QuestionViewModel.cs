@@ -316,7 +316,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
 
         private BitmapImage _image;
-        public BitmapImage Image
+        public BitmapImage EditImage
         {
             get
             {
@@ -334,6 +334,22 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 _image = value;
                 RaisePropertyChanged("Image");
+                RaisePropertyChanged("EditImage");
+            }
+        }
+
+        public BitmapImage Image
+        {
+            get
+            {
+                if(_image == null) { return null; }
+                else { return _image; }
+            }
+            set
+            {
+                _image = value;
+                RaisePropertyChanged("Image");
+                RaisePropertyChanged("EditImage");
             }
         }
 

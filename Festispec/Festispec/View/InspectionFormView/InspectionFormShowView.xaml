@@ -292,14 +292,45 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="8*"/>
                 <RowDefinition Height="1.3*"/>
             </Grid.RowDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Color="Gray" Opacity="0.6" />
+            </Grid.Background>
             <ComboBox x:Name="SelectForm" ItemsSource="{Binding InspectionFormsList}" DisplayMemberPath="Titel" SelectedValuePath="Titel" SelectedItem="{Binding SelectedInspectionForm, Mode=TwoWay}" Grid.Row="1"/>
-            <Button Content="Nieuw inspectieformulier" Grid.Row="2" Command="{Binding Path=CreateNewInspectionFormCommand}"/>
+            <Button Grid.Row="2" Command="{Binding Path=CreateNewInspectionFormCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Nieuw inspectieformulier" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -320,37 +351,85 @@
                     <RowDefinition Height="1.5*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Inspectie datum" Grid.Row="0"/>
-                <DatePicker SelectedDate="{Binding InspectionDate}" IsTodayHighlighted="True" DisplayDateStart="{Binding MinimalDate}" DisplayDateEnd="{Binding MaximumDate}" Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+                <DatePicker SelectedDate="{Binding InspectionDate}" IsTodayHighlighted="True" DisplayDateStart="{Binding MinimalDate}" DisplayDateEnd="{Binding MaximumDate}" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="WHite">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}" FontSize="12"/>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
                     </DatePicker.Resources>
                 </DatePicker>
-                <Label Content="Starttijd" Grid.Row="2"/>
-                <xctk:TimePicker Value="{Binding InspectionStartTime, Mode=TwoWay}" FormatString="HH:mm" Maximum="{Binding MaximumTime}" Grid.Row="3"/>
-                <Label Content="Eindtijd" Grid.Row="4"/>
-                <xctk:TimePicker Value="{Binding InspectionEndTime, Mode=TwoWay}" FormatString="HH:mm" Minimum="{Binding MinimumTime}" Grid.Row="5"/>
-                <Label Content="Locatie:" FontWeight="Bold" Grid.Row="6"/>
-                <Label Content="Stad"  Grid.Row="7"/>
+                <Label Content="Starttijd" Grid.Row="2" VerticalAlignment="Bottom"/>
+                <xctk:TimePicker Value="{Binding InspectionStartTime, Mode=TwoWay}" FormatString="HH:mm" Maximum="{Binding MaximumTime}" Grid.Row="3" FontSize="20"/>
+                <Label Content="Eindtijd" Grid.Row="4" VerticalAlignment="Bottom"/>
+                <xctk:TimePicker Value="{Binding InspectionEndTime, Mode=TwoWay}" FormatString="HH:mm" Minimum="{Binding MinimumTime}" Grid.Row="5" FontSize="20"/>
+                <Label Content="Locatie:" FontWeight="Bold" Grid.Row="6" VerticalAlignment="Bottom"/>
+                <Label Content="Stad"  Grid.Row="7" VerticalAlignment="Bottom"/>
                 <TextBox MaxLength="50" Text="{Binding City}"  Grid.Row="8"/>
-                <Label Content="Straat"  Grid.Row="9"/>
+                <Label Content="Straat"  Grid.Row="9"  VerticalAlignment="Bottom"/>
                 <TextBox MaxLength="50" Text="{Binding Street}" Grid.Row="10"/>
-                <Label Content="Huisnummer" Grid.Row="11"/>
+                <Label Content="Huisnummer" Grid.Row="11" VerticalAlignment="Bottom"/>
                 <TextBox MaxLength="4" Text="{Binding HouseNumber}"  Grid.Row="12"/>
-                <Label Content="Aantal benodigde inspecteurs" Grid.Row="13"/>
+                <Label Content="Aantal benodigde inspecteurs" Grid.Row="13"  VerticalAlignment="Bottom"/>
                 <Viewbox x:Name="InspectorAmount" Grid.Column="3" Grid.Row ="14" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <xctk:IntegerUpDown Value="{Binding Path=RequiredInspectors}" MinWidth="{Binding Path = ActualWidth, ElementName=InspectorAmount}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Watermark="Aantal inspecteurs" Minimum="1" Maximum="100" ClipValueToMinMax="True" FormatString="G" Increment="1"/>
+                    <xctk:IntegerUpDown Value="{Binding Path=RequiredInspectors}" MinWidth="{Binding Path = ActualWidth, ElementName=InspectorAmount}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Watermark="Aantal inspecteurs" Minimum="1" Maximum="100" ClipValueToMinMax="True" FontSize="20" FormatString="G" Increment="1"/>
                 </Viewbox>
-                <Button Content="Save" Command="{Binding SaveDetailsCommand}" Grid.Row="15"/>
+                <Button Command="{Binding SaveDetailsCommand}" Grid.Row="15">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style><Label Content="Opslaan" FontWeight="Bold" FontSize="20"/>
+                </Button>
             </Grid>
-            <Button Grid.Row="4" Command="{Binding Path = ToEditCommand}">Edit</Button>
+            <Button Grid.Row="4" Command="{Binding Path = ToEditCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/EditIcon.png" Margin="3,3,3,3" Grid.Column="0"/>
+                    <TextBlock Text="Inspectieformulier aanpassen" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
         </Grid>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>

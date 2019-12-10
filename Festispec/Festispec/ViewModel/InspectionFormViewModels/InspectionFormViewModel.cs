@@ -102,6 +102,17 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        private string _saveError;
+        public string SaveError
+        {
+            get => _saveError;
+            set
+            {
+                _saveError = value;
+                RaisePropertyChanged("SaveError");
+            }
+        }
+
         private string _description;
 
         public string Description
@@ -162,6 +173,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if (nav.Parameter is Inspectieformulier)//als er een al bestaande inspectieformulier wordt meegegeven
             {
                 InspectionForm = (Inspectieformulier)nav.Parameter;
+                if (InspectionForm.InspectieformulierID == 0)
+                {
+                    LastChangeDate = DateTime.Now;
+                    NewInspectionForm = true;
+                    Save();
+                }
             }
             else if(nav.Parameter is int){//als er geen inspectieformulier wordt meegegeven en een nieuwe moet worden aangemaakt.
                 InspectionForm = new Inspectieformulier();
@@ -357,6 +374,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void Save()
         {
+            SaveError = null;
             if (NewInspectionForm)
             {
                 NewInspectionForm = false;
@@ -382,7 +400,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 valid = false;
             }
 
-            if (!valid) { return; }
+            if (!valid)
+            {
+                SaveError = "Opslaan niet gelukt.";
+                return;
+            }
 
             if (Changed)
             {

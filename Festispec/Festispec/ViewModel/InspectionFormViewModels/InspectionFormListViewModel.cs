@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Service;
+using Festispec.Model.Enums;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -234,7 +235,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
         #endregion
 
-        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", _jobID);
+        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", new Object[2] { EnumTemplateMode.SELECT, _jobID });
 
         public void ToEditView() => _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
 
