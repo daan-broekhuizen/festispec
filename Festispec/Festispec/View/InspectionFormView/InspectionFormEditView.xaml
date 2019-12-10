@@ -37,8 +37,8 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -72,8 +72,8 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -106,8 +106,8 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -141,8 +141,8 @@
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                         <RowDefinition Height="2*" MinHeight="100"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="80" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -214,7 +214,7 @@
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                         <RowDefinition Height="2*" MinHeight="100"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
@@ -298,8 +298,8 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -332,8 +332,8 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="100" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -769,7 +769,7 @@
                 </Grid>
                 </Border>
 
-            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}"/>
+            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" ScrollViewer.CanContentScroll="False" ScrollViewer.PanningRatio="2"/>
         </Grid>
         
     </Grid>
