@@ -411,10 +411,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-        public void SaveInspectionformDetails()
-        {
-            _repo.UpdateInspectieFormulier(InspectionForm);
-        }
+        public void SaveInspectionformDetails() => _repo.UpdateInspectieFormulier(InspectionForm);
         #endregion
 
         public void Swap(int index1, int index2)
