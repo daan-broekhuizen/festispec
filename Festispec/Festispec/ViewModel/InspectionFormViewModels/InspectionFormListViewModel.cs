@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Festispec.Service;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -62,7 +63,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
             CreateNewInspectionFormCommand = new RelayCommand(CreateNewInspectionForm);
             ToEditCommand = new RelayCommand(ToEditView);
-            SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetails);
+            SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetailsAsync);
         }
 
         private void GetInspectionForms()
@@ -79,6 +80,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 }
                 SelectedInspectionForm = InspectionFormsList.FirstOrDefault();
             }
+        }
+
+        private async Task<bool> ValidateAdressAsync(string addres)
+        {
+            LocationService service = new LocationService();
+            return await service.CalculateDistance(addres, "Griekenland") != 0.0;
         }
 
         #region inspectionFormVariables
@@ -225,21 +232,17 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
         #endregion
 
-        public void CreateNewInspectionForm()
-        {
-            _navigationService.NavigateTo("InspectionFormEditView", _jobID);
-        }
+        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormEditView", _jobID);
 
-        public void ToEditView()
-        {
-            _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
-        }
+        public void ToEditView() => _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
 
-        public void SaveInspectionFormDetails()
+        public async void SaveInspectionFormDetailsAsync()
         {
-            if(_selectedInspectionForm != null)
+            string address = Street + " " + HouseNumber + " " + City;
+            if (await ValidateAdressAsync(address))
             {
-                _selectedInspectionForm.SaveInspectionformDetails();
+                if (_selectedInspectionForm != null)
+                    _selectedInspectionForm.SaveInspectionformDetails();
             }
         }
     }
