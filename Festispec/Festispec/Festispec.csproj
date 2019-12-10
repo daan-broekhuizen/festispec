@@ -147,17 +147,23 @@
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
-    <Compile Include="Migrations\201912061310436_Main.cs" />
-    <Compile Include="Migrations\201912061310436_Main.designer.cs">
-      <DependentUpon>201912061310436_Main.cs</DependentUpon>
+    <Compile Include="Migrations\201912081315103_Main.cs" />
+    <Compile Include="Migrations\201912081315103_Main.designer.cs">
+      <DependentUpon>201912081315103_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912081356098_sp-GetChartData.cs" />
+    <Compile Include="Migrations\201912081356098_sp-GetChartData.designer.cs">
+      <DependentUpon>201912081356098_sp-GetChartData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
+    <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
     <Compile Include="Model\Enums\EnumMonth.cs" />
     <Compile Include="Model\Enums\EnumProvince.cs" />
+    <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
     <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
     <Compile Include="Model\Inspectieformulier.cs" />
@@ -188,11 +194,14 @@
     <Compile Include="Utility\Builders\SettingsBuilder.cs" />
     <Compile Include="Utility\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\BoolToBoldConverter.cs" />
+    <Compile Include="Utility\Converters\ConfigurationToVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\GridVisibilityConverter.cs" />
     <Compile Include="Utility\Converters\ImageByteConverter.cs" />
     <Compile Include="Utility\Converters\MultiConverter.cs" />
     <Compile Include="Utility\Converters\PDFConverter.cs" />
     <Compile Include="Utility\Encryptor.cs" />
+    <Compile Include="Utility\Extensions\FrameworkExtension.cs" />
+    <Compile Include="Utility\ObservableDictionary.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
@@ -202,9 +211,9 @@
     <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BaseChartViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\CartesianChartViewModel.cs" />
-    <Compile Include="ViewModel\Components\Charts\Data\GeneralChartData.cs" />
     <Compile Include="ViewModel\Components\Charts\IChart.cs" />
     <Compile Include="ViewModel\Components\Charts\LineChartViewModel.cs" />
+    <Compile Include="ViewModel\Components\Charts\PieChartViewModel.cs" />
     <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
@@ -434,8 +443,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201912061310436_Main.resx">
-      <DependentUpon>201912061310436_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912081315103_Main.resx">
+      <DependentUpon>201912081315103_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912081356098_sp-GetChartData.resx">
+      <DependentUpon>201912081356098_sp-GetChartData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -449,6 +461,7 @@
     <None Include="settings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="ViewModel\Components\Charts\ChartsClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
