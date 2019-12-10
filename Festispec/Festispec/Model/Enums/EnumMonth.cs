@@ -8,16 +8,16 @@ namespace Festispec.Model.Enums
 {
     public enum EnumMonth
     {
-        JANUARY,
-        FEBRUARY,
-        MARCH,
-        April,
-        MAY,
-        JUNE,
-        JULY,
-        AUGUST,
+        JANUARI,
+        FEBRUARI,
+        MAART,
+        APRIL,
+        MEI,
+        JUNI,
+        JULI,
+        AUGUSTUS,
         SEPTEMBER,
-        OCTOBER,
+        OKTOBER,
         NOVEMBER,
         DECEMBER
     }

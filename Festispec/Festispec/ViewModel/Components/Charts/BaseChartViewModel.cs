@@ -74,10 +74,15 @@ namespace Festispec.ViewModel.Components.Charts
                 Values.Add(val);
         }
 
+        public virtual void Update(List<string> labels, List<double> values)
+        {
+            UpdateLabels(labels);
+            UpdateValues(values);
+        }
+
         public virtual void Update(List<ChartData> chartData)
         {
-            UpdateLabels(GetLabelsFromChartData(chartData));
-            UpdateValues(GetValuesFromChartData(chartData));
+            Update(GetLabelsFromChartData(chartData), GetValuesFromChartData(chartData));
         }
 
         protected List<string> GetLabelsFromChartData(List<ChartData> chartData)

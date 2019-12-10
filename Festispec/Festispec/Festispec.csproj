@@ -223,7 +223,6 @@
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ManagementViewModel.cs" />
-    <Compile Include="ViewModel\OfferteGraphViewModel.cs" />
     <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
@@ -558,12 +557,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Netherlands.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="World.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
