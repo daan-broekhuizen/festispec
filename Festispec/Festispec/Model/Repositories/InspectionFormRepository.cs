@@ -153,5 +153,13 @@ namespace Festispec.Model.Repositories
                 context.SaveChanges();
             }
         }
+
+        public Opdracht GetJob(int jobID)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Opdracht.Include("Klant").Where(i => i.OpdrachtID == jobID).FirstOrDefault();
+            }
+        }
     }
 }

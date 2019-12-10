@@ -13,10 +13,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FluentValidation.Results;
+using Festispec.Utility.Validators;
+using Festispec.Validators;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -332,6 +335,56 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _image = value;
                 RaisePropertyChanged("Image");
             }
+        }
+
+        private string _firstErrorMessage;
+
+        public string FirstErrorMessage
+        {
+            get => _firstErrorMessage;
+            set
+            {
+                _firstErrorMessage = value;
+                RaisePropertyChanged("FirstErrorMessage");
+            }
+        }
+
+        private string _secondErrorMessage;
+
+        public string SecondErrorMessage
+        {
+            get => _secondErrorMessage;
+            set
+            {
+                _secondErrorMessage = value;
+                RaisePropertyChanged("SecondErrorMessage");
+            }
+        }
+
+        public bool Validate()
+        {
+            FirstErrorMessage = null;
+            SecondErrorMessage = null;
+            bool returnValue = true;
+            ValidationResult result1 = new QuestionValidator().Validate(this);
+            if (!result1.IsValid)
+            {
+                FirstErrorMessage = result1.Errors.FirstOrDefault().ErrorMessage;
+                returnValue = false;
+            }
+            if(QuestionType == "mv" || QuestionType == "sv")
+            {
+                foreach (PossibleAnwserViewModel posAnwser in PossibleAnwsers)
+                {
+                    ValidationResult result2 = new PossibleAnwserValidator().Validate(posAnwser);
+                    if (!result2.IsValid)
+                    {
+                        SecondErrorMessage = result2.Errors.FirstOrDefault().ErrorMessage;
+                        returnValue = false;
+                    }
+                }
+            }
+            return returnValue;
         }
 
         public void SelectImage()

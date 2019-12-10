@@ -352,18 +352,21 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 return;
             }
 
+            bool valid = true;
+
+            foreach (QuestionViewModel question in Questions)
+            {
+                question.Validate();
+                if (!question.Validate())
+                {
+                    valid = false;
+                }
+            }
+
+            if (!valid) { return; }
+
             if (Changed)
             {
-                foreach(QuestionViewModel question in Questions)
-                {
-                    ValidationResult result = new QuestionValidator().Validate(question);
-                    if (!result.IsValid)
-                    {
-                        Messenger.Default.Send(result.ToString(), this.GetHashCode());
-                        return;
-                    }
-                }
-
                 Changed = false;
                 LastChangeDate = DateTime.Now;
                 _repo.UpdateInspectieFormulier(_inspectionForm);

@@ -368,7 +368,7 @@
                         <ColumnDefinition Width="2.5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0">
+                    <Button Grid.Column="0" Command="{Binding ToJobCommand}">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Background" Value="{x:Null}" />

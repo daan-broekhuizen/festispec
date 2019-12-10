@@ -21,6 +21,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ICommand ToEditCommand { get; set; }
         public ICommand CreateNewInspectionFormCommand { get; set; }
         public ICommand SaveDetailsCommand { get; set; }
+        public ICommand ToJobCommand { get; set; }
 
         private NavigationService _navigationService;
 
@@ -64,6 +65,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             CreateNewInspectionFormCommand = new RelayCommand(CreateNewInspectionForm);
             ToEditCommand = new RelayCommand(ToEditView);
             SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetailsAsync);
+            ToJobCommand = new RelayCommand(ToJobView);
         }
 
         private void GetInspectionForms()
@@ -232,18 +234,32 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
         #endregion
 
-        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormEditView", _jobID);
+        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", _jobID);
 
         public void ToEditView() => _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
 
+        public void ToJobView()
+        {
+            JobViewModel jvm = new JobViewModel(_repo.GetJob(_jobID));
+            _navigationService.NavigateTo("JobInfo", jvm);
+        }
         public async void SaveInspectionFormDetailsAsync()
         {
-            string address = Street + " " + HouseNumber + " " + City;
-            if (await ValidateAdressAsync(address))
+            if(Street == null || HouseNumber == null || City == null)
             {
-                if (_selectedInspectionForm != null)
+                if(_selectedInspectionForm != null)
                     _selectedInspectionForm.SaveInspectionformDetails();
             }
+            else
+            {
+                string address = Street + " " + HouseNumber + " " + City;
+                if (await ValidateAdressAsync(address))//als adres niet klopt crasht dit. Navragen aan Mike
+                {
+                if (_selectedInspectionForm != null)
+                    _selectedInspectionForm.SaveInspectionformDetails();
+                }
+            }
+            
         }
     }
 }
