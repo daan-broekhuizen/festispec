@@ -31,6 +31,7 @@ function showCalendar(month, year)
 
     // Alle 42 vakjes maken
     let date = 1;
+    let datavalue = currentYear + "/" + (currentMonth + 1) + "/" + date;
     for (let x = 0; x < 6; x++)
     {
         // voegt een rij toe
@@ -52,6 +53,7 @@ function showCalendar(month, year)
             {
                 cell = document.createElement("td");
                 cellText = document.createTextNode(date);
+                cell.setAttribute("date", datavalue);
                 cell.classList.add("valid-date");
                 cell.addEventListener("click", addAvailability);
                 // De dag van vandaag een andere kleur geven

@@ -11,8 +11,6 @@ namespace Festispec.WebApplication.Controllers
         // GET: Availability
         public ActionResult AvailabilityView()
         {
-            //_repo = new AvailabilityRepository();
-            //ViewBag.Availability = _repo.GetAvailability();
             return View();
         }
 

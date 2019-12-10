@@ -7,12 +7,11 @@ namespace Festispec.WebApplication.Models.Repositories
 {
     public class AvailabilityRepository
     {
-        private List<Beschikbaarheid_inspecteurs> list = new List<Beschikbaarheid_inspecteurs>();
-        public List<Beschikbaarheid_inspecteurs> GetAvailability()
+        public List<Beschikbaarheid_inspecteurs> GetAvailability(int id)
         {
             using(FestiSpecContext context = new FestiSpecContext())
             {
-                return context.Beschikbaarheid_inspecteurs.ToList();
+                return context.Beschikbaarheid_inspecteurs.Where(c => c.MedewerkerID == id).ToList();
             }
         }
 

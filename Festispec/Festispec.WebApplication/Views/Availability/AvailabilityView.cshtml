@@ -1,9 +1,6 @@
-﻿@model List<Festispec.WebApplication.Models.Beschikbaarheid_inspecteurs>
-
-
+﻿
 @section Scripts{
     <script src="~/Scripts/Calendar/baseCalendar.js" type="text/javascript"></script>
-    <script></script>
 }
 
 @section Style{
@@ -11,7 +8,7 @@
 }
 
 <div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-    <div class="card col-sm-2 col-md-4 col-lg-2">
+    <div class="card">
         <h3 class="card-header" id="monthAndYear"></h3>
         <table class="table table-bordered table-responsive-sm" id="calendar">
             <thead>
@@ -38,7 +35,7 @@
         </div>
         <br />
         <form class="form-inline">
-            <select class="form-control col-md-4" name="month" id="month" onchange="jump()">
+            <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
                 <option value=0>Jan</option>
                 <option value=1>Feb</option>
                 <option value=2>Mrt</option>
@@ -54,7 +51,7 @@
             </select>
 
 
-            <label for="year"></label><select class="form-control col-md-4" name="year" id="year" onchange="jump()">
+            <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
                 <option value=2019>2019</option>
                 <option value=2020>2020</option>
             </select>
