@@ -133,26 +133,27 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\InspectionFormController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Antwoorden.cs" />
-    <Compile Include="Models\Beschikbaarheid_inspecteurs.cs" />
+    <Compile Include="Models\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Models\Contactpersoon.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
     <Compile Include="Models\Inspectieformulier.cs" />
-    <Compile Include="Models\Inspectieformulier_vragenlijst_combinatie.cs" />
+    <Compile Include="Models\InspectionFormViewModel.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />
-    <Compile Include="Models\Rapport_template.cs" />
+    <Compile Include="Models\RapportTemplate.cs" />
     <Compile Include="Models\Repositories\AvailabilityRepository.cs" />
-    <Compile Include="Models\Rol_lookup.cs" />
-    <Compile Include="Models\Status_lookup.cs" />
+    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Vraag.cs" />
-    <Compile Include="Models\Vraagtype_lookup.cs" />
-    <Compile Include="Models\Vraag_mogelijk_antwoord.cs" />
+    <Compile Include="Models\VraagType.cs" />
+    <Compile Include="Models\VraagMogelijkAntwoord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\InspectionForm\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

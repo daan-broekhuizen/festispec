@@ -8,25 +8,24 @@ namespace Festispec.WebApplication.Models
     public partial class FestiSpecContext : DbContext
     {
         public FestiSpecContext()
-            : base("name=FestiSpecContext")
+            : base("name=FestiSpecEntities")
         {
         }
 
         public virtual DbSet<Account> Account { get; set; }
         public virtual DbSet<Antwoorden> Antwoorden { get; set; }
-        public virtual DbSet<Beschikbaarheid_inspecteurs> Beschikbaarheid_inspecteurs { get; set; }
+        public virtual DbSet<BeschikbaarheidInspecteurs> BeschikbaarheidInspecteurs { get; set; }
         public virtual DbSet<Contactpersoon> Contactpersoon { get; set; }
         public virtual DbSet<Inspectieformulier> Inspectieformulier { get; set; }
-        public virtual DbSet<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
         public virtual DbSet<Klant> Klant { get; set; }
         public virtual DbSet<Offerte> Offerte { get; set; }
         public virtual DbSet<Opdracht> Opdracht { get; set; }
-        public virtual DbSet<Rapport_template> Rapport_template { get; set; }
-        public virtual DbSet<Rol_lookup> Rol_lookup { get; set; }
-        public virtual DbSet<Status_lookup> Status_lookup { get; set; }
+        public virtual DbSet<RapportTemplate> RapportTemplate { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Vraag> Vraag { get; set; }
-        public virtual DbSet<Vraag_mogelijk_antwoord> Vraag_mogelijk_antwoord { get; set; }
-        public virtual DbSet<Vraagtype_lookup> Vraagtype_lookup { get; set; }
+        public virtual DbSet<VraagMogelijkAntwoord> VraagMogelijkAntwoord { get; set; }
+        public virtual DbSet<VraagType> VraagType { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,23 +35,23 @@ namespace Festispec.WebApplication.Models
                 .HasForeignKey(e => e.InspecteurID);
 
             modelBuilder.Entity<Account>()
-                .HasMany(e => e.Beschikbaarheid_inspecteurs)
+                .HasMany(e => e.BeschikbaarheidInspecteurs)
                 .WithRequired(e => e.Account)
                 .HasForeignKey(e => e.MedewerkerID);
 
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht)
-                .WithRequired(e => e.Account)
-                .HasForeignKey(e => e.MedewerkerID)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Account>()
+            //    .HasMany(e => e.Opdracht)
+            //    .WithRequired(e => e.Account)
+            //    .HasForeignKey(e => e.MedewerkerID)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Account>()
-                .HasMany(e => e.Opdracht1)
-                .WithMany(e => e.Account1)
+                .HasMany(e => e.Ingepland)
+                .WithMany(e => e.Ingepland)
                 .Map(m => m.ToTable("Ingeplande_inspecteurs").MapLeftKey("InspecteurID").MapRightKey("OpdrachtID"));
 
             modelBuilder.Entity<Antwoorden>()
-                .Property(e => e.Antwoord_text)
+                .Property(e => e.AntwoordText)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Contactpersoon>()
@@ -83,7 +82,7 @@ namespace Festispec.WebApplication.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Offerte>()
-                .Property(e => e.Klantbeslissing_reden)
+                .Property(e => e.KlantbeslissingReden)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Opdracht>()
@@ -91,31 +90,31 @@ namespace Festispec.WebApplication.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Opdracht>()
-                .Property(e => e.Gebruikte_rechtsgebieden)
+                .Property(e => e.GebruikteRechtsgebieden)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Opdracht>()
                 .Property(e => e.Rapportage)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Rapport_template>()
+            modelBuilder.Entity<RapportTemplate>()
                 .Property(e => e.TemplateText)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Rapport_template>()
+            modelBuilder.Entity<RapportTemplate>()
                 .HasMany(e => e.Opdracht)
-                .WithOptional(e => e.Rapport_template)
-                .HasForeignKey(e => e.Rapportage_uses_template);
+                .WithOptional(e => e.RapportTemplate)
+                .HasForeignKey(e => e.RapportageUsesTemplate);
 
-            modelBuilder.Entity<Rol_lookup>()
+            modelBuilder.Entity<Rol>()
                 .HasMany(e => e.Account)
-                .WithRequired(e => e.Rol_lookup)
+                .WithRequired(e => e.RolType)
                 .HasForeignKey(e => e.Rol)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Status_lookup>()
+            modelBuilder.Entity<Status>()
                 .HasMany(e => e.Opdracht)
-                .WithRequired(e => e.Status_lookup)
+                .WithRequired(e => e.StatusLookup)
                 .HasForeignKey(e => e.Status)
                 .WillCascadeOnDelete(false);
 
@@ -124,17 +123,22 @@ namespace Festispec.WebApplication.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Vraag>()
-                .HasMany(e => e.Vraag_mogelijk_antwoord)
+                .HasMany(e => e.VraagMogelijkAntwoord)
                 .WithRequired(e => e.Vraag)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Vraag_mogelijk_antwoord>()
-                .Property(e => e.Antwoord_text)
+            modelBuilder.Entity<Vraag>()
+                .HasMany(e => e.Antwoorden)
+                .WithRequired(e => e.Vraag)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<VraagMogelijkAntwoord>()
+                .Property(e => e.AntwoordText)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Vraagtype_lookup>()
+            modelBuilder.Entity<VraagType>()
                 .HasMany(e => e.Vraag)
-                .WithRequired(e => e.Vraagtype_lookup)
+                .WithRequired(e => e.VraagtypeLookup)
                 .HasForeignKey(e => e.Vraagtype)
                 .WillCascadeOnDelete(false);
         }

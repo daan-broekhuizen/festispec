@@ -6,12 +6,13 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Status_lookup
+    [Table("Vraagtype_lookup")]
+    public partial class VraagType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Status_lookup()
+        public VraagType()
         {
-            Opdracht = new HashSet<Opdracht>();
+            Vraag = new HashSet<Vraag>();
         }
 
         [Key]
@@ -20,9 +21,9 @@ namespace Festispec.WebApplication.Models
 
         [Required]
         [StringLength(30)]
-        public string Betekenis { get; set; }
+        public string Beschrijving { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Opdracht> Opdracht { get; set; }
+        public virtual ICollection<Vraag> Vraag { get; set; }
     }
 }

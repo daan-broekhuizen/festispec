@@ -12,10 +12,12 @@ namespace Festispec.WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Vraag()
         {
-            Inspectieformulier_vragenlijst_combinatie = new HashSet<Inspectieformulier_vragenlijst_combinatie>();
-            Vraag_mogelijk_antwoord = new HashSet<Vraag_mogelijk_antwoord>();
+            VraagMogelijkAntwoord = new HashSet<VraagMogelijkAntwoord>();
+            Antwoorden = new HashSet<Antwoorden>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VraagID { get; set; }
 
         [Column(TypeName = "text")]
@@ -23,20 +25,24 @@ namespace Festispec.WebApplication.Models
         public string Vraagstelling { get; set; }
 
         [Required]
+        public int VolgordeNummer { get; set; }
+
+        [Required]
+        public int InspectieFormulierID { get; set; }
+
+        [Required]
         [StringLength(2)]
         public string Vraagtype { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] Bijlage { get; set; }
+        [StringLength(150)]
+        public string AfbeeldingURL { get; set; }
 
-        public DateTime Laatste_wijziging { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inspectieformulier_vragenlijst_combinatie> Inspectieformulier_vragenlijst_combinatie { get; set; }
-
-        public virtual Vraagtype_lookup Vraagtype_lookup { get; set; }
+        public virtual VraagType VraagtypeLookup { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vraag_mogelijk_antwoord> Vraag_mogelijk_antwoord { get; set; }
+        public virtual ICollection<VraagMogelijkAntwoord> VraagMogelijkAntwoord { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Antwoorden> Antwoorden { get; set; }
     }
 }

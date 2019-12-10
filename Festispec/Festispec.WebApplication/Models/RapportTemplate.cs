@@ -6,10 +6,11 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Rapport_template
+    [Table("Rapport_template")]
+    public partial class RapportTemplate
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rapport_template()
+        public RapportTemplate()
         {
             Opdracht = new HashSet<Opdracht>();
         }
@@ -20,10 +21,10 @@ namespace Festispec.WebApplication.Models
         [Column(TypeName = "text")]
         public string TemplateText { get; set; }
 
-        [StringLength(50)]
+        [MaxLength(50)]
         public string TemplateName { get; set; }
 
-        [StringLength(400)]
+        [MaxLength(400)]
         public string TemplateDescription { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

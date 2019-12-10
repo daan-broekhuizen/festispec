@@ -6,7 +6,8 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Vraag_mogelijk_antwoord
+    [Table("Vraag_mogelijk_antwoord")]
+    public partial class VraagMogelijkAntwoord
     {
         [Key]
         [Column(Order = 0)]
@@ -14,13 +15,13 @@ namespace Festispec.WebApplication.Models
         public int VraagID { get; set; }
 
         [Key]
-        [Column(Order = 1)]
+        [Column("Antwoord_nummer", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Antwoord_nummer { get; set; }
+        public int AntwoordNummer { get; set; }
 
-        [Column(TypeName = "text")]
+        [Column("Antwoord_text", TypeName = "text")]
         [Required]
-        public string Antwoord_text { get; set; }
+        public string AntwoordText { get; set; }
 
         public virtual Vraag Vraag { get; set; }
     }

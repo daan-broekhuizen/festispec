@@ -7,28 +7,28 @@ namespace Festispec.WebApplication.Models.Repositories
 {
     public class AvailabilityRepository
     {
-        public List<Beschikbaarheid_inspecteurs> GetAvailability(int id)
+        public List<BeschikbaarheidInspecteurs> GetAvailability(int id)
         {
             using(FestiSpecContext context = new FestiSpecContext())
             {
-                return context.Beschikbaarheid_inspecteurs.Where(c => c.MedewerkerID == id).ToList();
+                return context.BeschikbaarheidInspecteurs.Where(c => c.MedewerkerID == id).ToList();
             }
         }
 
-        public void CreateAvailability(Beschikbaarheid_inspecteurs beschikbaarheid)
+        public void CreateAvailability(BeschikbaarheidInspecteurs beschikbaarheid)
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                context.Beschikbaarheid_inspecteurs.Add(beschikbaarheid);
+                context.BeschikbaarheidInspecteurs.Add(beschikbaarheid);
                 context.SaveChanges();
             }
         }
 
-        public void DeleteAvailability(Beschikbaarheid_inspecteurs beschikbaarheid)
+        public void DeleteAvailability(BeschikbaarheidInspecteurs beschikbaarheid)
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                context.Beschikbaarheid_inspecteurs.Remove(beschikbaarheid);
+                context.BeschikbaarheidInspecteurs.Remove(beschikbaarheid);
                 context.SaveChanges();
             }
         }
