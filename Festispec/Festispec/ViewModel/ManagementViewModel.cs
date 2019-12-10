@@ -125,7 +125,7 @@ namespace Festispec.ViewModel
             // Pie Chart
             PieChartViewModel.Update(
                 new List<string>() { "Afgewezen", "Verzonden", "Goedgekeurd" },
-                new List<double>() { GetOffertesRejected(), GetOffertesSent(), GetOffertesAccepted() }
+                new List<double>() { GetOffertesRejected(), GetAmountOfOffertes("Offerte verstuurt"), GetAmountOfOffertes("Offerte geaccepteerd") }
             );
 
             // Inspection
@@ -304,7 +304,6 @@ namespace Festispec.ViewModel
 
         }
 
-        // TODO: Rewrite
         public int GetOffertesRejected()
         {
             int amountOfOffertes = _qRepo.GetQuotations().Where(e => e.Aanmaakdatum > StartDate && e.Aanmaakdatum < EndDate).Count();
@@ -324,23 +323,10 @@ namespace Festispec.ViewModel
             return (amountOfOffertes - amountOfJobs) + counter;
         }
 
-        public int GetOffertesAccepted()
+        public int GetAmountOfOffertes(string status)
         {
             int counter = 0;
-            List<Opdracht> jobsWithStatus = _jRepo.GetOpdrachtenWithQuotations().Where(e => e.Status.Equals("Offerte geaccepteerd")).ToList();
-
-            jobsWithStatus.Select(e => e.Offerte).ToList().ForEach(e =>
-            {
-                if (e.FirstOrDefault().Aanmaakdatum > StartDate && e.FirstOrDefault().Aanmaakdatum < EndDate)
-                    counter++;
-            });
-            return counter;
-        }
-
-        public int GetOffertesSent()
-        {
-            int counter = 0;
-            List<Opdracht> jobsWithStatus = _jRepo.GetOpdrachtenWithQuotations().Where(e => e.Status.Equals("Offerte verstuurt")).ToList();
+            List<Opdracht> jobsWithStatus = _jRepo.GetOpdrachtenWithQuotations().Where(e => e.Status.Equals(status)).ToList();
 
             jobsWithStatus.Select(e => e.Offerte).ToList().ForEach(e =>
             {

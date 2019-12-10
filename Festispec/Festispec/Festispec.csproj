@@ -217,7 +217,6 @@
     <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
-    <Compile Include="ViewModel\GraphViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
