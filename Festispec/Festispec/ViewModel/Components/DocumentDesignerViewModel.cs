@@ -299,7 +299,7 @@ namespace Festispec.ViewModel.Components
         /// <summary>
         /// Zet HTML om naar een PDF document.
         /// </summary>
-        public byte[] ExportToPdf(PdfPage[] pages = null)
+        public byte[] ExportToPdf(Action<PdfDocument> AddPages)
         {
             byte[] data;
 
@@ -316,10 +316,8 @@ namespace Festispec.ViewModel.Components
                 response.Pages.Add(page);
             }
 
-            // Voeg ingevulde vragenlijsten toe.
-            if(pages != null)
-                foreach(PdfPage page in pages)
-                    response.AddPage(page);
+            if (AddPages != null)
+                AddPages.Invoke(response);
 
             // Omzetten naar byte array
             using (MemoryStream ms = new MemoryStream())

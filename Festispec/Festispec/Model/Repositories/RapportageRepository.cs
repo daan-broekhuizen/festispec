@@ -88,5 +88,43 @@ namespace Festispec.Model.Repositories
 
             return chartData;
         }
+
+        public List<Account> GetInspectorsWithFilledAnswers()
+        {
+            List<Account> accounts = new List<Account>();
+
+            using (FestispecContext context = new FestispecContext())
+            {
+                accounts = context.Antwoorden.Select(x => x.Account).Distinct().ToList();
+            }
+
+            return accounts;
+        }
+
+        public List<Vraag> GetQuestionsFromInspector(int inspectorID, int jobID)
+        {
+            List<Vraag> filteredQuestions = new List<Vraag>();
+
+            List<Vraag> unfilteredQuestions = new List<Vraag>();
+
+            using(FestispecContext context = new FestispecContext())
+            {
+                unfilteredQuestions = context.Antwoorden.Where(x => x.InspecteurID == inspectorID).Select(x => x.Vraag).Include(x => x.Antwoorden).ToList();
+            }
+
+            foreach (Vraag vraag in unfilteredQuestions)
+            {
+                if (filteredQuestions.Count(x => x.VraagID == vraag.VraagID) == 0)
+                {
+                    using(FestispecContext context = new FestispecContext())
+                    {
+                        if (context.Inspectieformulier.Where(x => x.InspectieformulierID == vraag.InspectieFormulierID && x.OpdrachtID == jobID).Count() > 0)
+                            filteredQuestions.Add(vraag);
+                    }
+                }
+            }
+
+            return filteredQuestions;
+        }
     }
 }

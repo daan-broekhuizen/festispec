@@ -318,37 +318,9 @@
                     new Antwoorden()
                     {
                         VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 2,
+                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                        AntwoordNummer = 1,
                         AntwoordText = "0"
-                    },
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 3,
-                        AntwoordText = "0"
-                    },
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 4,
-                        AntwoordText = "1"
-                    },
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 5,
-                        AntwoordText = "1"
-                    },
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 6,
-                        AntwoordText = "2"
                     }
                 };
 

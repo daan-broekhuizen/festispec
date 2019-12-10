@@ -9,8 +9,11 @@ using Festispec.ViewModel.Components;
 using Festispec.ViewModel.TemplateViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -249,17 +252,59 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             designer.UpdateContent();
 
-            byte[] data = designer.ExportToPdf();
+            byte[] data = designer.ExportToPdf(document => GenerateInspectionForm(document));
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "pdf files (*.pdf)|*.pdf" })
             {
-                Filter = "pdf files (*.pdf)|*.pdf"
-            };
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Stream dataStream = saveFileDialog.OpenFile())
+                        dataStream.Write(data, 0, data.Length);
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    Process.Start(saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void GenerateInspectionForm(PdfDocument document)
+        {
+            if (!ShouldAddResults)
+                return;
+
+            foreach(Account account in _repo.GetInspectorsWithFilledAnswers())
             {
-                using (Stream dataStream = saveFileDialog.OpenFile())
-                    dataStream.Write(data, 0, data.Length);
+                PdfPage page = document.AddPage();
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+
+                // Fonts
+                XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
+                XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
+                XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
+
+                // Inspecteur
+                gfx.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
+
+                // Vragen
+                int currentY = 60;
+                List<Vraag> questions = _repo.GetQuestionsFromInspector(account.AccountID, _job.JobID);
+
+                for(int i = 0; i < questions.Count; i++)
+                {
+                    Vraag question = questions[i];
+
+                    gfx.DrawString($"Vraag {i + 1}: {question.Vraagstelling}", normalFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                    currentY += 20;
+
+                    List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
+
+                    for (int j = 0; j < answers.Count; j++)
+                    {
+                        Antwoorden answer = answers[j];
+                        gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                        currentY += 40;
+                    }
+
+                }
             }
         }
     }
