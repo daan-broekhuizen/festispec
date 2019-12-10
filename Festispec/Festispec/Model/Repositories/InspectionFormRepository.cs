@@ -25,7 +25,8 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.Inspectieformulier.Remove(inspec);
+                Inspectieformulier target = context.Inspectieformulier.Include("Vraag").Include("Vraag.VraagMogelijkAntwoord").Include("Vraag.Antwoorden").Where(x => x.InspectieformulierID == inspec.InspectieformulierID).FirstOrDefault();
+                context.Inspectieformulier.Remove(target);
                 context.SaveChanges();
             }
         }

@@ -292,16 +292,45 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="0.75*"/>
                 <RowDefinition Height="8*"/>
                 <RowDefinition Height="1.3*"/>
             </Grid.RowDefinitions>
             <Grid.Background>
                 <SolidColorBrush Color="Gray" Opacity="0.6" />
             </Grid.Background>
-            <ComboBox x:Name="SelectForm" ItemsSource="{Binding InspectionFormsList}" DisplayMemberPath="Titel" SelectedValuePath="Titel" SelectedItem="{Binding SelectedInspectionForm, Mode=TwoWay}" Grid.Row="1"/>
+            <ComboBox x:Name="SelectForm" ItemsSource="{Binding InspectionFormsList}" DisplayMemberPath="Titel" SelectedValuePath="Titel" SelectedItem="{Binding SelectedInspectionForm, Mode=TwoWay}" Grid.Row="0"/>
+            <Button Grid.Row="1" Command="{Binding DeleteInspectionFormCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/DeleteQuestionLogo.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Verwijder inspectieformulier" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
             <Button Grid.Row="2" Command="{Binding Path=CreateNewInspectionFormCommand}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">

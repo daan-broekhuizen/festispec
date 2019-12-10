@@ -23,6 +23,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ICommand CreateNewInspectionFormCommand { get; set; }
         public ICommand SaveDetailsCommand { get; set; }
         public ICommand ToJobCommand { get; set; }
+        public ICommand DeleteInspectionFormCommand { get; set; }
 
         private NavigationService _navigationService;
 
@@ -67,6 +68,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             ToEditCommand = new RelayCommand(ToEditView);
             SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetailsAsync);
             ToJobCommand = new RelayCommand(ToJobView);
+            DeleteInspectionFormCommand = new RelayCommand(DeleteInspectionForm);
         }
 
         private void GetInspectionForms()
@@ -82,6 +84,23 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     InspectionFormsList.Add(formVM);
                 }
                 SelectedInspectionForm = InspectionFormsList.FirstOrDefault();
+            }
+        }
+
+        public void DeleteInspectionForm()
+        {
+            if(SelectedInspectionForm != null)
+            {
+                _repo.DeleteInspectieFormulier(_selectedInspectionForm.InspectionForm);
+                InspectionFormsList.Remove(_selectedInspectionForm);
+                if(InspectionFormsList.Count() > 0)
+                {
+                    _selectedInspectionForm = InspectionFormsList.FirstOrDefault();
+                }
+                else
+                {
+                    _selectedInspectionForm = null;
+                }
             }
         }
 
@@ -103,9 +122,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public DateTime? InspectionDate
         {
-            get => _selectedInspectionForm.InspectionForm.DatumInspectie;
+            get
+            {
+                if (_selectedInspectionForm != null) { return _selectedInspectionForm.InspectionForm.DatumInspectie; }
+                else { return null; }
+            }
             set
             {
+                if (_selectedInspectionForm == null){return;}
                 _selectedInspectionForm.InspectionForm.DatumInspectie = value;
                 RaisePropertyChanged("InspectionDate");
             }
@@ -115,12 +139,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
+                if (_selectedInspectionForm == null) { return new DateTime() + new TimeSpan(0,0,0); }
                 TimeSpan t = _selectedInspectionForm.InspectionForm.StartTijd ?? new TimeSpan(0,0,0);
                 DateTime dt = new DateTime() + t;
                 return dt;
             }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.StartTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionStartTime");
                 RaisePropertyChanged("MinimumTime");
@@ -131,12 +157,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
+                if (_selectedInspectionForm == null) { return new DateTime() + new TimeSpan(23,0,0); }
                 TimeSpan t = _selectedInspectionForm.InspectionForm.EindTijd ?? new TimeSpan(23, 0, 0);
                 DateTime dt = new DateTime() + t;
                 return dt;
             }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.EindTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionEndTime");
                 RaisePropertyChanged("MaximumTime");
@@ -155,9 +183,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public string City
         {
-            get => _selectedInspectionForm.InspectionForm.Stad;
+            get
+            {
+                if(_selectedInspectionForm == null) { return null; }
+                return _selectedInspectionForm.InspectionForm.Stad;
+            }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.Stad = value;
                 RaisePropertyChanged("City");
             }
@@ -165,9 +198,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public string Street
         {
-            get => _selectedInspectionForm.InspectionForm.Straatnaam;
+            get
+            {
+                if (_selectedInspectionForm == null) { return null; }
+                return _selectedInspectionForm.InspectionForm.Straatnaam;
+            }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.Straatnaam = value;
                 RaisePropertyChanged("Street");
             }
@@ -175,9 +213,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public string HouseNumber
         {
-            get => _selectedInspectionForm.InspectionForm.Huisnummer;
+            get
+            {
+                if (_selectedInspectionForm == null) { return null; }
+                return _selectedInspectionForm.InspectionForm.Huisnummer;
+            }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.Huisnummer = value;
                 RaisePropertyChanged("HouseNumber");
             }
@@ -185,9 +228,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public int? RequiredInspectors
         {
-            get => _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs;
+            get
+            {
+                if (_selectedInspectionForm == null) { return null; }
+                return _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs;
+            }
             set
             {
+                if (_selectedInspectionForm == null) { return; }
                 _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs = value;
                 RaisePropertyChanged("RequiredInspectors");
             }
