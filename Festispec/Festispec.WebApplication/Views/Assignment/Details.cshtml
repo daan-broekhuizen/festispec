@@ -1,0 +1,106 @@
+﻿@model Festispec.WebApplication.Models.Inspectieformulier
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inspectieformulier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Opdracht.Opdracht_naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opdracht.Opdracht_naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InspectieFormulierTitel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InspectieFormulierTitel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Datum_inspectie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Datum_inspectie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTijd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTijd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EindTijd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EindTijd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Straatnaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Straatnaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Huisnummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Huisnummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Beschrijving)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Laatste_wijziging)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Laatste_wijziging)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Benodigde_Inspecteurs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Benodigde_Inspecteurs)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InspectieformulierID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

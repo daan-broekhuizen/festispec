@@ -1,5 +1,6 @@
 ﻿using Festispec.WebApplication.Models;
 using Festispec.WebApplication.Models.Repository;
+using Festispec.WebApplication.ViewModels.Dashboard;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,17 +17,20 @@ namespace Festispec.WebApplication.Controllers
             int? userId = (int?) Session["user"];
             Account account = null;
             UserRepository repo = new UserRepository();
-            if(userId.HasValue)
+            List<Inspectieformulier> assignmentList;
+            if (userId.HasValue)
             {
-                using(FestiSpecContext context = new FestiSpecContext())
+                using (FestiSpecContext context = new FestiSpecContext())
                 {
                     account = context.Account.Find(userId);
                 }
                 int userIdInt = userId.Value;
                 //assignmentList = repo.GetMyAssignments(userIdInt);
             }
+            else
+                assignmentList = new List<Inspectieformulier>();
 
-            
+            DashboardViewModel dashboardViewModel = new DashboardViewModel();
             //DashboardVM viewData = new DashBoardVM();
             //dashboard.user 
             //dashboard.UpCommingINspections = assignments
@@ -35,7 +39,7 @@ namespace Festispec.WebApplication.Controllers
             
 
             ViewBag.User = account;
-            return View(/*viewData*/);
+            return View();
         }
     }
 }
