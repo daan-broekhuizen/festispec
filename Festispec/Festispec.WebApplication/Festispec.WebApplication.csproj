@@ -197,6 +197,7 @@
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />
     <Compile Include="Models\Rapport_template.cs" />
+    <Compile Include="Models\Repository\AssignmentRepository.cs" />
     <Compile Include="Models\Repository\UserRepository.cs" />
     <Compile Include="Models\Rol_lookup.cs" />
     <Compile Include="Models\Status_lookup.cs" />

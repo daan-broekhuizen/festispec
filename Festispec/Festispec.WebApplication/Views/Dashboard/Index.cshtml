@@ -1,4 +1,4 @@
-﻿@*@model Festispec.WebApplication.ViewModels.DashBoardVM*@
+﻿@model Festispec.WebApplication.ViewModels.Dashboard.DashboardViewModel
 
 .<link href="~/Content/Pages/dashboard.css" rel="stylesheet" />
 
@@ -18,9 +18,23 @@
     <div class="row">
         <div class="col-md-6">
             <h1>Welkom bij FestiSpec</h1>
-            @if(ViewBag.User != null)
+
+            @if (Model.Account != null)
             {
-                <h2>@ViewBag.User.Gebruikersnaam</h2>
+                <h2>@Model.Account.Gebruikersnaam</h2>
+                <h2>@Model.Account.Wachtwoord</h2>
+                <h3>@Model.Account.Voornaam</h3>
+                int counter = 0;
+                foreach (var item in Model.Inspectionform)
+                {
+                    counter++;
+                    <h4>@item.InspectieformulierID</h4>
+                    <h4>@item.InspectieFormulierTitel</h4>
+                    if (counter == 3)
+                    {
+                        break;
+                    }
+                }
             }
             <h3 class="text-center">Dit is het applicatie dashboard, hier kun je makkelijk navigeren naar andere pagina's van de website.</h3>
             <div class="text-center">
@@ -30,57 +44,37 @@
         <div class="col-md-6 upcoming-tasks">
             <h1 class="text-center">Aankomende opdrachten</h1>
             @*Start opdracht*@
-            <div class="row">
-                <div class="task">
-                    <div class="col-md-4">
-                        <img class="img-circle" src="~/Content/Images/Dashboard_background.png" />
+            @if (Model.Account != null)
+            {
+                int counter = 0;
+                foreach (var item in Model.Inspectionform)
+                {
+                    counter++;
+                    <div class="row">
+                        <div class="task">
+                            <div class="col-md-4">
+                                <img class="img-circle" src="~/Content/Images/Dashboard_background.png" />
+                            </div>
+                            <div class="col-md-4">
+                                <p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.Datum_inspectie)</p>
+                            </div>
+                            <div class="col-md-4">
+                                <button>
+                                    Inspectieformulier bekijken
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <p><b>Datum:</b> 23-9-2019</p>
-                    </div>
-                    <div class="col-md-4">
-                        <a>Inspectieformulier bekijken</a>
-                    </div>
-                </div>
-            </div>
-            @*End opdracht*@
-            @*Start opdracht*@
-            <div class="row">
-                <div class="task">
-                    <div class="col-md-4">
-                        <img class="img-circle" src="~/Content/Images/Dashboard_background.png" />
-                    </div>
-                    <div class="col-md-4">
-                        <p><b>Datum:</b> 23-9-2019</p>
-                    </div>
-                    <div class="col-md-4">
-                        <a>Inspectieformulier bekijken</a>
-                    </div>
-                </div>
-            </div>
-            @*End opdracht*@
-            @*Start opdracht*@
-            <div class="row">
-                <div class="task">
-                    <div class="col-md-4">
-                        <img class="img-circle" src="~/Content/Images/Dashboard_background.png" />
-                    </div>
-                    <div class="col-md-4">
-                        <p><b>Datum:</b> 23-9-2019</p>
-                    </div>
-                    <div class="col-md-4">
-                        <a>Inspectieformulier bekijken</a>
-                    </div>
-                </div>
-            </div>
-            @*End opdracht*@
-  
-                <div class="col-md-12 text-center all-tasks">
-                    <a href='@Url.Action("Search", "Assignment")'>Alle opdrachten <i class="fa fa-arrow-right"></i></a>
-                </div>
+                    if (counter == 3)
+                    {
+                        break;
+                    }
+                }
+            }
 
-
-
+            <div class="col-md-12 text-center all-tasks">
+                <a href='@Url.Action("Search", "Assignment", Model.Inspectionform)'>Alle opdrachten <i class="fa fa-arrow-right"></i></a>
+            </div>
         </div>
     </div>
     <div class="row big-buttons">

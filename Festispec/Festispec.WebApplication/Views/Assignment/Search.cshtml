@@ -20,7 +20,7 @@
             Klant
         </th>
         <th>
-            Locatie
+            Stad
         </th>
         <th>
             Datum
@@ -34,8 +34,7 @@
             @Html.DisplayFor(modelItem => item.Opdracht.Opdracht_naam)
         </td>
         <td>
-            @*BING API GEBRUIKEN*@
-            Locatie
+            @Html.DisplayFor(modelItem => item.Stad)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Datum_inspectie)

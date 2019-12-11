@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace Festispec.WebApplication.Models.Repository
 {
@@ -34,14 +35,22 @@ namespace Festispec.WebApplication.Models.Repository
             }
         }
 
-        //public List<Inspectieformulier> GetMyAssignments(int InspectorID)
-        //{
-        //    using (FestiSpecContext context = new FestiSpecContext())
-        //    {
-        //        Account a = context.Account.Where(i => i.AccountID == InspectorID).FirstOrDefault();
-        //        List<Inspectieformulier> assignments = context.Inspectieformulier.Where(i => i.Account.Equals(a) && i.Datum_inspectie >= DateTime.Now.Date).ToList();
-        //        return assignments;
-        //    }
-        //}
+        public List<Inspectieformulier> GetMyAssignments(int InspectorID)
+        {
+            using (FestiSpecContext context = new FestiSpecContext())
+            {
+                Account account = context.Account
+                    .Include(a => a.Inspectieformulier)
+                    .Where(i => i.AccountID == InspectorID)
+                    .FirstOrDefault();
+
+                //List<Inspectieformulier> assignments = context.Inspectieformulier
+                //    .Include(i => i.Account)
+                //    .Where(i => i.Account.Any(a => a.AccountID == account.AccountID) && i.Datum_inspectie >= DateTime.Now.AddDays(1))
+                //    .ToList();
+
+                return account.Inspectieformulier.ToList();
+            }
+        }
     }
 }

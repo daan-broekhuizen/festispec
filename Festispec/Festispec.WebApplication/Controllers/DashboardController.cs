@@ -25,7 +25,7 @@ namespace Festispec.WebApplication.Controllers
                     account = context.Account.Find(userId);
                 }
                 int userIdInt = userId.Value;
-                //assignmentList = repo.GetMyAssignments(userIdInt);
+                assignmentList = repo.GetMyAssignments(userIdInt);
             }
             else
                 assignmentList = new List<Inspectieformulier>();
@@ -35,11 +35,12 @@ namespace Festispec.WebApplication.Controllers
             //dashboard.user 
             //dashboard.UpCommingINspections = assignments
             //dashboard 
-
+            dashboardViewModel.Account = account;
+            dashboardViewModel.Inspectionform = assignmentList;
             
 
-            ViewBag.User = account;
-            return View();
+           // ViewBag.User = account;
+            return View(dashboardViewModel);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Festispec.WebApplication.Controllers
         }
 
         // GET: Assignment
-        public ActionResult Search()
+        public ActionResult Search(List<Inspectieformulier> forms)
         {
             IQueryable<Inspectieformulier> inspectieformulier = _context.Inspectieformulier.Include(i => i.Opdracht);
             return View(inspectieformulier.ToList());
