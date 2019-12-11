@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201912081356098_sp-GetChartData.designer.cs">
       <DependentUpon>201912081356098_sp-GetChartData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912081751483_addSP.cs" />
+    <Compile Include="Migrations\201912081751483_addSP.designer.cs">
+      <DependentUpon>201912081751483_addSP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -178,7 +182,6 @@
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
     <Compile Include="Model\Repositories\ICustomerRepository.cs" />
-    <Compile Include="Model\Repositories\Temp.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -436,6 +439,9 @@
     <EmbeddedResource Include="Migrations\201912081356098_sp-GetChartData.resx">
       <DependentUpon>201912081356098_sp-GetChartData.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912081751483_addSP.resx">
+      <DependentUpon>201912081751483_addSP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -543,7 +549,6 @@
     <Resource Include="Images\Line_Chart.png" />
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
   </ItemGroup>
