@@ -69,6 +69,7 @@
             <ContentControl x:Name="controlPieChart" Content="{Binding PieChartControl}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
             <ContentControl x:Name="controlInspectionChart" Content="{Binding InspectionChartControl}" Grid.Row="0" Grid.Column="2" />
             <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  />
+
         </Grid>
     </Grid>
 </Page>
