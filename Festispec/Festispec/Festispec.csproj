@@ -165,6 +165,8 @@
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\Enums\EnumMonth.cs" />
+    <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
     <Compile Include="Model\Enums\EnumTemplateMode.cs" />
     <Compile Include="Model\FestispecContext.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Model\Opdracht.cs" />
     <Compile Include="Model\RapportTemplate.cs" />
     <Compile Include="Model\Repositories\CustomerRepository.cs" />
+    <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\PlanningRepository.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\ManagementViewModel.cs" />
     <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
@@ -328,6 +332,9 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManagementReport.xaml.cs">
+      <DependentUpon>ManagementReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuotationView\AddQuotationView.xaml.cs">
       <DependentUpon>AddQuotationView.xaml</DependentUpon>
     </Compile>
@@ -383,6 +390,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagementReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -57,6 +57,8 @@ namespace Festispec.ViewModel.Components.Charts
 
         void UpdateValues(List<double> values);
 
+        void Update(List<string> labels, List<double> values);
+
         void Update(List<ChartData> chartData);
 
         void OnConfigurationOptionChanged(EnumChartConfiguration key, object value);

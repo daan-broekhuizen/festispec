@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
@@ -58,10 +59,10 @@ namespace Festispec.ViewModel.Components.Charts
 
         protected override void ChartValuesChanged(object sender, NotifyCollectionChangedEventArgs e) {}
 
-        public override void Update(List<ChartData> chartData)
+        public override void Update(List<string> labels, List<double> values)
         {
-            UpdateLabels(GetLabelsFromChartData(chartData));
-            UpdateValues(GetValuesFromChartData(chartData));
+            Labels = new ObservableCollection<string>(labels);
+            Values = new ObservableCollection<double>(values);
 
             Collection.Clear();
 
