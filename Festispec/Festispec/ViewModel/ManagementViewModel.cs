@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -13,12 +14,14 @@ using System.Xml;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
+using Festispec.Service;
 using Festispec.Utility.Extensions;
 using Festispec.ViewModel.Components.Charts;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LiveCharts.Wpf.Charts.Base;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.ViewModel
 {
@@ -87,7 +90,7 @@ namespace Festispec.ViewModel
             }
         }
 
-
+        public ObservableCollection<Pushpin> PushpinList { get; set; }
         public IChart PieChartViewModel { get; set; }
 
         public IChart InspectionChartViewModel { get; set; }
@@ -101,6 +104,14 @@ namespace Festispec.ViewModel
             _qRepo = qRepo;
             _uRepo = uRepo;
             _cRepo = cRepo;
+
+            PushpinList = new ObservableCollection<Pushpin>();
+            /*
+                        Pushpin pushpin = new Pushpin();
+                        pushpin.Location = new BingMapsRESTToolkit.Location().Point.Coordinates 
+
+                        PushpinList.Add(pushpin);*/
+            SetPushPinsAsync();
 
             ExportCommand = new RelayCommand<FrameworkElement>(Export);
 
@@ -334,6 +345,20 @@ namespace Festispec.ViewModel
                     counter++;
             });
             return counter;
+        }
+
+        public async Task SetPushPinsAsync()
+        {
+            LocationService locationService = new LocationService();
+            _uRepo.GetUsers().ForEach(async e =>
+            {
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                Pushpin pushpin = new Pushpin();
+                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
+                PushpinList.Add(pushpin);
+            });
+
         }
     }
 }
