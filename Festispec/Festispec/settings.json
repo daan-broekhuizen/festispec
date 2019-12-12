@@ -1,8 +1,8 @@
 ﻿{
-    "debugMode": false,
-    "startupPage": "",
-    "account": {
-        "username": "HansKlok",
-        "password": "ab123"
-    }
+  "debugMode": true,
+  "startupPage": "UserRights",
+  "account": {
+    "username": "HansKlok",
+    "password": "ab123"
+  }
 }

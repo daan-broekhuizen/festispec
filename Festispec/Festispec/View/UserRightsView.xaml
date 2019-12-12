@@ -7,7 +7,7 @@
       xmlns:components="clr-namespace:Festispec.View.Components"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
-        DataContext="{Binding UserRightList, Source={StaticResource Locator}}">
+        DataContext="{Binding UserRights, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -87,16 +87,21 @@
                                 <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Grid.Column="1">
-                                <Label Margin="10" HorizontalContentAlignment="Right" Content="Klantnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
+                                <Label Margin="10" HorizontalContentAlignment="Right" Content="Gebruikersnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
                             </Viewbox>
                             <Viewbox Margin="10" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Left">
-                                <Label HorizontalContentAlignment="Left" Content="{Binding Name}" VerticalAlignment="Center" />
+                                <Label HorizontalContentAlignment="Left" Content="{Binding Username}" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="3">
-                                <Label Margin="10" Content="Kvk-nummer:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Margin="0" Content="Rol:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="4" HorizontalAlignment="Left">
-                                <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding KvK}" VerticalAlignment="Center"/>
+                                <Label  HorizontalContentAlignment="Left" Content="{Binding Role}" VerticalAlignment="Center"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="5" HorizontalAlignment="Left">
+                                <ComboBox  SelectedIndex="0" ItemsSource="{Binding Rollen, Mode=TwoWay}">
+    
+                                </ComboBox>
                             </Viewbox>
                         </Grid>
                     </DataTemplate>

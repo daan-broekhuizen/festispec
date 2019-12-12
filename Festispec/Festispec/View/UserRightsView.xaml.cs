@@ -24,5 +24,10 @@ namespace Festispec.View
         {
             InitializeComponent();
         }
+
+        private void SearchBar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

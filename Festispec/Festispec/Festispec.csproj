@@ -231,6 +231,7 @@
     <Compile Include="ViewModel\AddJobViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\VraagViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\RollenViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />

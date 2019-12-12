@@ -28,6 +28,14 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
+        public List<Rol> GetRols()
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Rol.ToList();
+            }
+        }
+
         public List<Account> GetUsers()
         {
             using (FestispecContext context = new FestispecContext())
