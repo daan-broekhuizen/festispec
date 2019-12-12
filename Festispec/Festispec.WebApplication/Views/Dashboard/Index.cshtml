@@ -43,16 +43,7 @@
                             </div>
                             <div class="col-md-4">
                                 <button>
-                                    @Html.ActionLink(
-                                    linkText: "Meer info",
-                                    actionName: "Details",
-                                    controllerName: "Assignment",
-                                    routeValues: new 
-                                {
-                                        id = item.InspectieformulierID
-                                    },
-                                    htmlAttributes: null
-)
+                                    @Html.ActionLink("Inspectieformulier bekijken", "Details", "Assignment", new { id = item.InspectieformulierID }, htmlAttributes: null)
                                 </button>
                             </div>
                         </div>
