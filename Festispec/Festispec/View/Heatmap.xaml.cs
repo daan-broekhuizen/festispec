@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.View
 {
@@ -23,6 +24,15 @@ namespace Festispec.View
         public Heatmap()
         {
             InitializeComponent();
+        }
+
+
+        private void MapItemsControl_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var TappedPin = (MapItemsControl)sender;
+            Pushpin pushpin = (Pushpin)TappedPin.Items.CurrentItem;
+            string test = pushpin.Content.ToString();
+            TextBlock.Text = test;
         }
     }
 }

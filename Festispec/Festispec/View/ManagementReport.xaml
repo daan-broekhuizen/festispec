@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Festispec.View"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:components="clr-namespace:Festispec.View.Components"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ManagementReport"
@@ -70,6 +71,14 @@
             <ContentControl x:Name="controlInspectionChart" Content="{Binding InspectionChartControl}" Grid.Row="0" Grid.Column="2" />
             <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  />
 
+            <Grid x:Name="LayoutRoot" Background="White" Grid.Row="1" Grid.Column="2">
+                <m:Map CredentialsProvider="AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU" 
+               Center="52.147540, 5.258791" ZoomLevel="6" Margin="0,0,0,-0.4">
+                    <m:Map.Children>
+                        <m:MapItemsControl ItemsSource="{Binding PushpinList}"/>
+                    </m:Map.Children>
+                </m:Map>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

@@ -10,13 +10,27 @@
       Title="Heatmap"
       DataContext="{Binding Management, Source={StaticResource Locator}}">
 
-    <Grid x:Name="LayoutRoot" Background="White">
-        <m:Map CredentialsProvider="AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="0.1*"/>
+
+        </Grid.RowDefinitions>
+        <Grid x:Name="LayoutRoot" Background="White" Grid.Row="0">
+            <m:Map CredentialsProvider="AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU" 
                Center="52.147540, 5.258791" ZoomLevel="7" Margin="0,0,0,-0.4">
-            <m:Map.Children>
-                <m:MapItemsControl ItemsSource="{Binding PushpinList}" >
-                </m:MapItemsControl>
-            </m:Map.Children>
-        </m:Map>
+                <m:Map.Children>
+                    <m:MapItemsControl ItemsSource="{Binding PushpinList}" MouseEnter="MapItemsControl_MouseEnter">
+
+                    </m:MapItemsControl>
+                </m:Map.Children>
+            </m:Map>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBox x:Name="TextBlock"/>
+        </Grid>
     </Grid>
+
+
 </Page>

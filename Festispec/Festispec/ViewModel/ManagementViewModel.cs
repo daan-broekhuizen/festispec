@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Xml;
 using Festispec.Model;
 using Festispec.Model.Enums;
@@ -34,6 +35,7 @@ namespace Festispec.ViewModel
         private QuotationRepository _qRepo;
         private UserRepository _uRepo;
         private CustomerRepository _cRepo;
+        private InspectionFormRepository _iRepo;
 
         private DateTime _startDate;
 
@@ -98,12 +100,13 @@ namespace Festispec.ViewModel
         public IChart SalesChartViewModel { get; set; }
         #endregion
 
-        public ManagementViewModel(JobRepository jRepo, QuotationRepository qRepo, UserRepository uRepo, CustomerRepository cRepo)
+        public ManagementViewModel(JobRepository jRepo, QuotationRepository qRepo, UserRepository uRepo, CustomerRepository cRepo, InspectionFormRepository iRepo)
         {
             _jRepo = jRepo;
             _qRepo = qRepo;
             _uRepo = uRepo;
             _cRepo = cRepo;
+            _iRepo = iRepo;
 
             PushpinList = new ObservableCollection<Pushpin>();
             /*
@@ -352,9 +355,45 @@ namespace Festispec.ViewModel
             LocationService locationService = new LocationService();
             _uRepo.GetUsers().ForEach(async e =>
             {
+                if (e.Stad == null)
+                {
+                    return;
+                }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
                 Pushpin pushpin = new Pushpin();
+                pushpin.Content = query;
+                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
+                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
+                PushpinList.Add(pushpin);
+            });
+
+            _cRepo.GetCustomers().ForEach(async e =>
+            {
+                if (e.Stad == null)
+                {
+                    return;
+                }
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                Pushpin pushpin = new Pushpin();
+                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 0, 255, 0));
+                pushpin.Content = query;
+                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
+                PushpinList.Add(pushpin);
+            });
+
+            _iRepo.GetAllInspectieFormulieren().ForEach(async e =>
+            {
+                if(e.Stad == null)
+                {
+                    return;
+                }
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                Pushpin pushpin = new Pushpin();
+                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
+                pushpin.Content = query;
                 pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
                 PushpinList.Add(pushpin);
             });

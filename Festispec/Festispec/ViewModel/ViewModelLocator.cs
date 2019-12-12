@@ -73,7 +73,7 @@ namespace Festispec.ViewModel
             navigationService.Configure("Login", new Uri("../View/LoginView.xaml", UriKind.Relative));
             navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
             navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
-            navigationService.Configure("ManagementReport", new Uri("../View/Heatmap.xaml", UriKind.Relative));
+            navigationService.Configure("ManagementReport", new Uri("../View/ManagementReport.xaml", UriKind.Relative));
 
 
             #region CustomerViews
@@ -162,7 +162,7 @@ namespace Festispec.ViewModel
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
-        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo);
+        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo, InspectionFormRepo);
 
         #region InspectionFormVM's
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
