@@ -19,23 +19,6 @@
         <div class="col-md-6">
             <h1>Welkom bij FestiSpec</h1>
 
-            @if (Model.Account != null)
-            {
-                <h2>@Model.Account.Gebruikersnaam</h2>
-                <h2>@Model.Account.Wachtwoord</h2>
-                <h3>@Model.Account.Voornaam</h3>
-                int counter = 0;
-                foreach (var item in Model.Inspectionform)
-                {
-                    counter++;
-                    <h4>@item.InspectieformulierID</h4>
-                    <h4>@item.InspectieFormulierTitel</h4>
-                    if (counter == 3)
-                    {
-                        break;
-                    }
-                }
-            }
             <h3 class="text-center">Dit is het applicatie dashboard, hier kun je makkelijk navigeren naar andere pagina's van de website.</h3>
             <div class="text-center">
                 <h1 class="fa fa-home fa-5x"></h1>
@@ -60,7 +43,16 @@
                             </div>
                             <div class="col-md-4">
                                 <button>
-                                    Inspectieformulier bekijken
+                                    @Html.ActionLink(
+                                    linkText: "Meer info",
+                                    actionName: "Details",
+                                    controllerName: "Assignment",
+                                    routeValues: new 
+                                {
+                                        id = item.InspectieformulierID
+                                    },
+                                    htmlAttributes: null
+)
                                 </button>
                             </div>
                         </div>
