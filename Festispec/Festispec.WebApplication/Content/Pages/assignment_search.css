@@ -13,3 +13,10 @@
 {
     width: 150px;
 }
+
+.result {
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
