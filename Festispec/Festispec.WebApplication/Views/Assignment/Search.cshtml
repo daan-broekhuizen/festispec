@@ -39,7 +39,8 @@
                 Stad: @Html.DisplayFor(modelItem => item.Stad)
             </div>
             <div class="col-md-3">
-                Datum: @Html.DisplayFor(modelItem => item.Datum_inspectie)
+                Datum: @String.Format("{0:d/MM/yyyy}", @item.Datum_inspectie)
+
             </div>
             <div class="col-md-3">
                 <button>
