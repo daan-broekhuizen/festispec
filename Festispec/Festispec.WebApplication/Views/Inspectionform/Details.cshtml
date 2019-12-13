@@ -1,0 +1,97 @@
+﻿@model Festispec.WebApplication.Models.InspectionformViewModel
+
+@{
+	ViewBag.Title = "Inspectieformulier";
+}
+
+
+
+
+@section Style{
+	<link href="~/Content/CSS Views/Inspectionform.css" rel="stylesheet" />
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Details</title>
+</head>
+<body>
+	<div class="col-md-12">
+		<br />
+		<div class="inspection-info">
+			<div class="inspection-data">
+				<h3>Vragenlijst @Model.Inspectionform.Opdracht.OpdrachtNaam</h3>
+				<p>Datum inspectie: @Model.Inspectionform.DatumInspectie</p>
+				<p>
+					Festival locatie:
+					@Model.Inspectionform.Straatnaam
+					@Model.Inspectionform.Huisnummer in
+					@Model.Inspectionform.Stad
+				</p>
+			</div>
+
+			<div class="description-container">
+				<button type="button" class="collapsible">
+					Instructies vragenlijst
+				</button>
+				<div class="content">
+					<p>@Model.Inspectionform.Beschrijving</p>
+				</div>
+				<br />
+			</div>
+		</div>
+		<br />				
+
+
+	</div>
+			<div>
+				@foreach (var questionVM in Model.Questions)
+				{
+					<div class="col-lg-12">
+						<div class="question-container">
+							<button type="button" class="collapsible">
+								#@questionVM.Question.VraagID @questionVM.Question.Vraagstelling
+							</button>
+							<div class="content">
+								@using (Html.BeginForm("Details", "Inspectionform", questionVM))
+								{
+									@Html.HiddenFor(model => questionVM.Answer.InspecteurID)
+									@Html.HiddenFor(model => questionVM.Answer.VraagID)
+									@Html.HiddenFor(model => questionVM.Answer.AntwoordNummer)
+
+									switch (questionVM.Question.Vraagtype)
+									{
+										case "ov":
+											@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new {style="width: 85%; max-width: 90%; min-height: 150px;"})
+											break;
+									}
+									<input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />
+								}
+								<br />
+							</div>
+						</div>
+					</div>
+					<br />
+				}
+			</div>
+
+			<script>
+				var coll = document.getElementsByClassName("collapsible");
+				for (var i = 0; i < coll.length; i++) {
+				  coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.display === "block") {
+					  content.style.display = "none";
+					} else {
+					  content.style.display = "block";
+					}
+				  });
+				}
+			</script>
+</body>
+</html>
+

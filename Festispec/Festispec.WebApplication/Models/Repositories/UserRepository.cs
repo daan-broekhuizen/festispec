@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Festispec.WebApplication.Models.Repository
+namespace Festispec.WebApplication.Models.Repositories
 {
     public class UserRepository
     {

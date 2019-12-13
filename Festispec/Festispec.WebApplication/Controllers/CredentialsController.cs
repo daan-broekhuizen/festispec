@@ -22,7 +22,7 @@ namespace Festispec.WebApplication.Controllers
         // GET: Credentials
         public ActionResult Index()
         {
-            IQueryable<Account> account = _context.Account.Include(a => a.Rol_lookup);
+            IQueryable<Account> account = _context.Account.Include(a => a.Rol);
             return View(account.ToList());
         }
 
@@ -62,7 +62,7 @@ namespace Festispec.WebApplication.Controllers
         // GET: Credentials/Create
         public ActionResult Create()
         {
-            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis");
+            ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis");
             return View();
         }
 
@@ -78,7 +78,7 @@ namespace Festispec.WebApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+            ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis", account.Rol);
 
             return View(account);
         }
@@ -94,7 +94,7 @@ namespace Festispec.WebApplication.Controllers
             if (account == null)
                 return HttpNotFound();
 
-            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+            ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis", account.Rol);
 
             return View(account);
         }
@@ -112,7 +112,7 @@ namespace Festispec.WebApplication.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Rol = new SelectList(_context.Rol_lookup, "Afkorting", "Betekenis", account.Rol);
+            ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis", account.Rol);
             return View(account);
         }
 

@@ -115,6 +115,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS Views\Availability.css" />
+    <Resource Include="Content\CSS Views\Dashboard_background.png" />
+    <Content Include="Content\CSS Views\Inspectionform.css" />
+    <Content Include="Content\CSS Views\Save-icon.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -122,6 +125,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Calendar\baseCalendar.js" />
+    <Content Include="Scripts\collapsible.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -133,7 +137,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
-    <Compile Include="Controllers\InspectionFormController.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\InspectionformController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -143,12 +148,15 @@
     <Compile Include="Models\Contactpersoon.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
     <Compile Include="Models\Inspectieformulier.cs" />
-    <Compile Include="Models\InspectionFormViewModel.cs" />
+    <Compile Include="Models\InspectionformViewModel.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />
+    <Compile Include="Models\QuestionViewModel.cs" />
     <Compile Include="Models\RapportTemplate.cs" />
     <Compile Include="Models\Repositories\AvailabilityRepository.cs" />
+    <Compile Include="Models\Repositories\InspectionformRepository.cs" />
+    <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Vraag.cs" />
@@ -172,6 +180,14 @@
     <Content Include="Views\Availability\AvailabilityView.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Credentials\Create.cshtml" />
+    <Content Include="Views\Credentials\Delete.cshtml" />
+    <Content Include="Views\Credentials\Details.cshtml" />
+    <Content Include="Views\Credentials\Edit.cshtml" />
+    <Content Include="Views\Credentials\Index.cshtml" />
+    <Content Include="Views\Credentials\Login.cshtml" />
+    <Content Include="Views\Inspectionform\Index.cshtml" />
+    <Content Include="Views\Inspectionform\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,7 +197,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\InspectionForm\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

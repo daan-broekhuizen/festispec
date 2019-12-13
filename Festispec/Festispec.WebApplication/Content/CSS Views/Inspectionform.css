@@ -1,0 +1,80 @@
+﻿body {
+	background-image: url('Dashboard_background.png');
+	background-clip: border-box;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.collapsible {
+	background-color: white;
+	color: black;
+	cursor: pointer;
+	padding: 10px 20px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 18px;
+	border-radius: 25px;
+}
+
+
+.question-container:hover {
+	border-color: lightblue;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.description-container {
+	background-color: white;
+	border-radius: 25px;
+}
+
+.inspection-info {
+	background-color: white;
+	border-radius: 10px;
+	stroke-opacity: 0.2;
+}
+
+.inspection-data {
+	padding: 5px 20px;
+}
+
+.collapsible:after {
+	content: '\002B';
+	color: black;
+	font-weight: bold;
+	float: right;
+	background-color: white;
+}
+
+.active:after {
+	content: "\2212";
+	background-color: white;
+}
+
+.question-container {
+	background-color: white;
+	border-radius: 25px;
+	width: 100%;
+}
+
+.content {
+	display: none;
+	padding: 0 18px;
+	overflow: hidden;
+	background-color: white;
+	border-radius: 25px;
+}
+
+
+
+.answersave {
+	position: absolute;
+	padding: 20px;
+	bottom: 0;
+	right: 15px;
+}
+
+

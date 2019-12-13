@@ -5,7 +5,9 @@ using System.Web;
 
 namespace Festispec.WebApplication.Models
 {
-    public class InspectionFormViewModel
+    public class InspectionformViewModel
     {
+        public Inspectieformulier Inspectionform { get; set; }
+        public List<QuestionViewModel> Questions { get; set; }
     }
 }
