@@ -87,6 +87,9 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.112.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -166,6 +169,7 @@
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
+    <Compile Include="Model\SQLite\OfflineDatabaseAcces.cs" />
     <Compile Include="Service\ImageSelectService.cs" />
     <Compile Include="Service\LocationService.cs" />
     <Compile Include="Service\NavigationService.cs" />
@@ -183,6 +187,7 @@
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\IContactPersonListViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\Interfaces\ICustomerListViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModel\OfflineDashboardViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
@@ -432,7 +437,9 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
   <Import Project="..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets" Condition="Exists('..\packages\TidyHtml5Managed.1.1.0\build\TidyHtml5Managed.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>
