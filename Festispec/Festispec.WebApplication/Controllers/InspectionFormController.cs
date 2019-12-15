@@ -99,8 +99,11 @@ namespace Festispec.WebApplication.Controllers
                 else
                 {
                     q.AnswerText = q.Answer.AntwoordText;
-                    formVM.CompletedQuestions += 1;
-                    q.IsAnswered = true;
+                    if(q.AnswerText != null || q.Answer.AntwoordImage != null)
+                    {
+                        formVM.CompletedQuestions += 1;
+                        q.IsAnswered = true;
+                    }
                 }
             });
 

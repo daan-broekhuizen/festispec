@@ -6,11 +6,27 @@
 	background-size: cover;
 }
 
+.content {
+	display: none;
+	padding: 10px 10px 10px 10px;
+	background-color: white;
+	border-radius: 25px;
+	font-size: 16px;
+	margin: 0 10px;
+
+}
+
+.question-container:hover {
+	border-color: lightblue;
+	border-style: solid;
+	border-width: 1px;
+}
+
 .collapsible {
 	background-color: white;
 	color: black;
 	cursor: pointer;
-	padding: 10px 20px;
+	margin: 8px 10px;
 	width: 100%;
 	border: none;
 	text-align: left;
@@ -31,7 +47,7 @@
 	background-color: lightgreen;
 	color: black;
 	cursor: pointer;
-	padding: 10px 20px;
+	padding: 8px 20px;
 	width: 100%;
 	border: none;
 	text-align: left;
@@ -89,19 +105,10 @@ progress::-webkit-progress-value {
 	box-shadow: 0px 0px 6px #777 inset;
 }
 
-
-
-
-
-.question-container:hover {
-	border-color: lightblue;
-	border-style: solid;
-	border-width: 1px;
-}
-
 .description-container {
-	background-color: white;
+	background-color: none;
 	border-radius: 25px;
+	padding: 10px;
 }
 
 .inspection-data img {
@@ -115,6 +122,7 @@ progress::-webkit-progress-value {
 	background-color: white;
 	border-radius: 10px;
 	stroke-opacity: 0.2;
+	box-shadow:  0 0 20px #ccc;
 }
 
 .inspection-data {
@@ -122,23 +130,16 @@ progress::-webkit-progress-value {
 }
 
 .question-container {
+	box-shadow: 0px 0px 6px #777 unset;
 	background-color: white;
 	border-radius: 25px;
 	width: 100%;
 	margin: 0 0 10px 0;
+	box-shadow: 0 0 20px #ccc;
 }
 
 .question-container img{
-	width: 80%;
-}
-
-.content {
-	display: none;
-	padding: 0 20px 15px 20px;
-	overflow: hidden;
-	background-color: white;
-	border-radius: 25px;
-	font-size: 16px;
+	width: 100%;
 }
 
 .scale-question {
