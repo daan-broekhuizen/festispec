@@ -30,8 +30,7 @@
 				<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
 				<h3>Vragenlijst @Model.Inspectionform.Opdracht.OpdrachtNaam</h3>
 				<p>Datum inspectie: @Model.Inspectionform.DatumInspectie</p>
-				<p>
-					Festival locatie:
+				<p> Festival locatie:
 					@Model.Inspectionform.Straatnaam
 					@Model.Inspectionform.Huisnummer in
 					@Model.Inspectionform.Stad
@@ -98,7 +97,10 @@
 									</div>
 									break;
 							}
-							<input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />
+							if (Model.IsEditable)
+							{
+								<input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />
+							}
 						}
 					</div>
 				</div>
