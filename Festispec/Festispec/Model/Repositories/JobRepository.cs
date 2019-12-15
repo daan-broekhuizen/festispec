@@ -17,6 +17,14 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
+        public List<Opdracht> GetOpdrachtenWithQuotations()
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Opdracht.Include("Offerte").ToList();
+            }
+        }
+
         public void CreateJob(Opdracht opdracht)
         {
             using (FestispecContext context = new FestispecContext())

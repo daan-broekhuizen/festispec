@@ -137,6 +137,8 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("PostalCode");
             }
         }
+
+
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
         public CustomerViewModel(Klant klant)
         {
@@ -155,6 +157,8 @@ namespace Festispec.ViewModel
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
             PostalCode = address.PostalCode;
+
         }
+
     }
 }
