@@ -19,18 +19,20 @@
 <body>
 	<div class="col-md-12">
 		<br />
-		<div class="progress-container">
-			<img src="~/Content/CSS Views/festispec_logo.png" />
-			<progress value="@Model.CompletedQuestions" max="@Model.Questions.Count()"></progress>
-		</div>
-		<br />
+			<div class="progress-container">
+				<img src="~/Content/CSS Views/festispec_logo.png" />
+				<progress value="@Model.CompletedQuestions" max="@Model.Questions.Count()"></progress>
+			</div>		
+		<br />		
+
 
 		<div class="inspection-info">
 			<div class="inspection-data">
 				<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
-				<h3>@Model.Inspectionform.Opdracht.OpdrachtNaam</h3>
+				<h2>@Model.Inspectionform.Opdracht.OpdrachtNaam</h2>
 				<p>Datum inspectie: @Model.Inspectionform.DatumInspectie</p>
-				<p> Festival locatie:
+				<p>
+					Festival locatie:
 					@Model.Inspectionform.Straatnaam
 					@Model.Inspectionform.Huisnummer in
 					@Model.Inspectionform.Stad
