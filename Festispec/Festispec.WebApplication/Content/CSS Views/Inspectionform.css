@@ -19,6 +19,39 @@
 	border-radius: 25px;
 }
 
+.collapsible:after {
+	content: '\002B';
+	color: black;
+	font-weight: bold;
+	float: right;
+	background-color: white;
+}
+
+.collapsible-answered {
+	background-color: lightgreen;
+	color: black;
+	cursor: pointer;
+	padding: 10px 20px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 20px;
+	border-radius: 25px;
+}
+
+.collapsible-answered:after {
+	content: '\002B';
+	color: black;
+	font-weight: bold;
+	float: right;
+	background-color: lightgreen;
+}
+
+.active:after {
+	content: "\2212";
+}
+
 .progress-container {
 	margin: 20px;
 }
@@ -84,23 +117,8 @@ progress::-webkit-progress-value {
 	stroke-opacity: 0.2;
 }
 
-
-
 .inspection-data {
 	padding: 5px 20px;
-}
-
-.collapsible:after {
-	content: '\002B';
-	color: black;
-	font-weight: bold;
-	float: right;
-	background-color: white;
-}
-
-.active:after {
-	content: "\2212";
-	background-color: white;
 }
 
 .question-container {

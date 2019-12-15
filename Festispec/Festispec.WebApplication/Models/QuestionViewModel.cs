@@ -12,6 +12,7 @@ namespace Festispec.WebApplication.Models
         public Antwoorden Answer { get; set; }
         public string AnswerText { get; set; }  
         public HttpPostedFileBase ImageFile { get; set; }
+        public bool IsAnswered { get; set; }
 
         public IEnumerable<SelectListItem> PossibleAnswers
         {

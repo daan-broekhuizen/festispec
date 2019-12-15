@@ -100,6 +100,7 @@ namespace Festispec.WebApplication.Controllers
                 {
                     q.AnswerText = q.Answer.AntwoordText;
                     formVM.CompletedQuestions += 1;
+                    q.IsAnswered = true;
                 }
             });
 

@@ -55,7 +55,7 @@
 		{
 			<div class="col-md-12">
 				<div class="question-container">
-					<button type="button" class="collapsible">
+					<button type="button" class="@(questionVM.IsAnswered ? "collapsible-answered" : "collapsible")">
 						#@questionVM.Question.VraagID @questionVM.Question.Vraagstelling
 					</button>
 					<div class="content">
@@ -64,7 +64,7 @@
 							@Html.HiddenFor(model => questionVM.Answer.InspecteurID)
 							@Html.HiddenFor(model => questionVM.Answer.VraagID)
 							@Html.HiddenFor(model => questionVM.Answer.AntwoordNummer)
-
+							<br/>
 							switch (questionVM.Question.Vraagtype)
 							{
 								case "ov":
@@ -108,6 +108,19 @@
 	</div>
 	<script>
 		var coll = document.getElementsByClassName("collapsible");
+		for (var i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.display === "block") {
+						content.style.display = "none";
+					} else {
+						content.style.display = "block";
+					}
+				});
+		}
+
+		var coll = document.getElementsByClassName("collapsible-answered");
 		for (var i = 0; i < coll.length; i++) {
 			coll[i].addEventListener("click", function() {
 					this.classList.toggle("active");
