@@ -2,6 +2,7 @@
 using Festispec.WebApplication.Models.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,7 @@ namespace Festispec.WebApplication.Controllers
         }
 
         // GET: InspectionForm/Details/5
+
         public ActionResult Details(int i = 1, int j = 1)
         {
             Inspectieformulier form = _formRepo.GetInspectionform(1);
@@ -29,19 +31,44 @@ namespace Festispec.WebApplication.Controllers
         [HttpPost, ActionName("Details")]
         public ActionResult AddOrUpdateAnswer(QuestionViewModel questionVM)
         {
+            ModelState.Clear();
             Antwoorden toUpdate = _formRepo.GetAnswer(questionVM.Answer);
-            toUpdate.AntwoordText = questionVM.AnswerText;
+            UploadImage(questionVM);
+            
             if (toUpdate != null)
+            {
+                toUpdate.AntwoordText = questionVM.AnswerText;
+                toUpdate.AntwoordImage = questionVM.Answer.AntwoordImage;
                 _formRepo.UpdateAnswer(toUpdate);
+            }
             else
             {
                 questionVM.Answer.AntwoordText = questionVM.AnswerText;
-                _formRepo.CreateAnswer(questionVM.Answer);
+                toUpdate = _formRepo.CreateAnswer(questionVM.Answer);
             }
-            ModelState.Clear();
             Inspectieformulier form = _formRepo.GetInspectionform(toUpdate.Vraag.InspectieFormulierID);
             return View(GetViewModel(form, questionVM.Answer.InspecteurID));
         }
+
+        private void UploadImage(QuestionViewModel model)
+        {
+            string[] validImageTypes = new string[]
+            {
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png"
+            };
+
+            if(model.ImageFile != null && model.ImageFile.ContentLength > 0 && validImageTypes.Contains(model.ImageFile.ContentType))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    model.ImageFile.InputStream.CopyTo(ms);
+                    model.Answer.AntwoordImage = ms.GetBuffer();
+                }
+            }
+        }        
 
         private InspectionformViewModel GetViewModel(Inspectieformulier form, int userId)
         {
@@ -52,7 +79,14 @@ namespace Festispec.WebApplication.Controllers
                 Answer = q.Antwoorden.FirstOrDefault(a => a.Account.AccountID == userId)
             }).ToList();
 
-            questions.ForEach(q => 
+            InspectionformViewModel formVM = new InspectionformViewModel()
+            {
+                Inspectionform = form,
+                Questions = questions,
+                CompletedQuestions = 0
+            };
+
+            formVM.Questions.ForEach(q => 
             {
                 if (q.Answer == null)
                     q.Answer = new Antwoorden()
@@ -65,15 +99,9 @@ namespace Festispec.WebApplication.Controllers
                 else
                 {
                     q.AnswerText = q.Answer.AntwoordText;
-                    q.AnswerImage = q.Answer.AntwoordImage;
+                    formVM.CompletedQuestions += 1;
                 }
             });
-
-            InspectionformViewModel formVM = new InspectionformViewModel()
-            {
-                Inspectionform = form,
-                Questions = questions
-            };
 
             return formVM;
         }

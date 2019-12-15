@@ -18,8 +18,8 @@
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44340</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -116,6 +116,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSS Views\Availability.css" />
     <Resource Include="Content\CSS Views\Dashboard_background.png" />
+    <Resource Include="Content\CSS Views\festispec_logo.png" />
     <Content Include="Content\CSS Views\Inspectionform.css" />
     <Content Include="Content\CSS Views\Save-icon.png" />
     <Content Include="Content\Site.css" />

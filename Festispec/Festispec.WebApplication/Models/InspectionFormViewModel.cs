@@ -9,5 +9,8 @@ namespace Festispec.WebApplication.Models
     {
         public Inspectieformulier Inspectionform { get; set; }
         public List<QuestionViewModel> Questions { get; set; }
+        public string LogoString => Convert.ToBase64String(Inspectionform.Opdracht.Klant.Klant_logo);
+        public int CompletedQuestions { get; set; }
+        
     }
 }

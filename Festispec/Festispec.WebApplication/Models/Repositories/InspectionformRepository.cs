@@ -15,7 +15,8 @@ namespace Festispec.WebApplication.Models.Repositories
             {
                 Inspectieformulier form = context.Inspectieformulier
                     .Include(i => i.Vraag.Select(q => q.Antwoorden.Select(a => a.Account)))
-                    .Include(i => i.Opdracht)
+                    .Include(i => i.Vraag.Select(q => q.VraagMogelijkAntwoord))
+                    .Include(i => i.Opdracht.Klant)
                     .FirstOrDefault(i => i.InspectieformulierID == id);
                 return form;
             }
