@@ -58,7 +58,9 @@ namespace Festispec.WebApplication.Models.Repositories
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                Antwoorden toUpdate = context.Antwoorden.Find(answer.VraagID, answer.InspecteurID, answer.AntwoordNummer);
+                Antwoorden toUpdate = context.Antwoorden.FirstOrDefault(a => a.VraagID == answer.VraagID &&
+                                                         a.InspecteurID == answer.InspecteurID &&
+                                                         a.AntwoordNummer == answer.AntwoordNummer);
                 context.Entry(toUpdate).CurrentValues.SetValues(answer);
                 context.SaveChanges();
                 return toUpdate;

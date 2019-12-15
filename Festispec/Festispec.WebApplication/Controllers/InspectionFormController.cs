@@ -22,10 +22,10 @@ namespace Festispec.WebApplication.Controllers
 
         // GET: InspectionForm/Details/5
 
-        public ActionResult Details(int i = 1, int j = 1)
+        public ActionResult Details(int i = 1, int j = 2)
         {
-            Inspectieformulier form = _formRepo.GetInspectionform(1);
-            return View(GetViewModel(form, 1));
+            Inspectieformulier form = _formRepo.GetInspectionform(i);
+            return View(GetViewModel(form, j));
         }
 
         [HttpPost, ActionName("Details")]
