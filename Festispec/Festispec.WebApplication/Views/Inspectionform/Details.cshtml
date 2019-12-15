@@ -28,7 +28,7 @@
 		<div class="inspection-info">
 			<div class="inspection-data">
 				<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
-				<h3>Vragenlijst @Model.Inspectionform.Opdracht.OpdrachtNaam</h3>
+				<h3>@Model.Inspectionform.Opdracht.OpdrachtNaam</h3>
 				<p>Datum inspectie: @Model.Inspectionform.DatumInspectie</p>
 				<p> Festival locatie:
 					@Model.Inspectionform.Straatnaam
@@ -84,7 +84,7 @@
 									{
 										<img src="data:image;base64,@System.Convert.ToBase64String(questionVM.Answer.AntwoordImage)" />
 									}
-									@Html.TextBoxFor(model => questionVM.ImageFile, new { type = "file", accept = ".jpg, .jpeg, .gif, .png", style = "padding: 10px 0; border:none; box-shadow: unset;" })
+									@Html.TextBoxFor(model => questionVM.ImageFile, new { type = "file", accept = ".jpg, .jpeg, .gif, .png"})
 									break;
 								case "sv":
 									<div class="scale-question">

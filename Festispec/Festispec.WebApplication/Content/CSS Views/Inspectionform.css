@@ -115,7 +115,7 @@ progress::-webkit-progress-value {
 	position: absolute;
 	right: 40px;
 	top: 90px;
-	width: 15%;
+	width: 20%;
 }
 
 .inspection-info {
@@ -141,25 +141,26 @@ progress::-webkit-progress-value {
 }
 
 .scale-question {
-	width: 88%;
+	width: 60%;
 	display: inline-flex;
 	position: relative;
-	left: 5%;
+	left: 5px;
+	max-width: 80%;
 }
 
 .scale-option {
 	font-size: 20px;
 	display: inline;
 	padding-right: 5%;
-	margin-bottom: 15px;
 }
 
 
 .answersave {
 	position: absolute;
-	padding: 20px;
-	bottom: 0;
-	right: 15px;
+	margin: 20px;
+	bottom: -5px;
+	right: 10px;
+	width: 25px;
 }
 
 
