@@ -70,6 +70,9 @@
 								case "ov":
 									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "padding: 5px; font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
 									break;
+								case "tx":
+									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "padding: 5px; font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
+									break;
 								case "mv":
 									if (questionVM.AnswerText != null)
 									{
