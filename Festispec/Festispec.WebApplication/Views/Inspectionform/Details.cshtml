@@ -87,10 +87,10 @@
 									break;
 								case "sv":
 									<div class="scale-question">
-										@for (int i = 0; i < questionVM.Question.VraagMogelijkAntwoord.Count(); i++)
+										@foreach (var option in questionVM.Question.VraagMogelijkAntwoord)
 										{
 											<div class="scale-option">
-												@Html.RadioButtonFor(model => questionVM.AnswerText, i + 1) @(i + 1)
+												@Html.RadioButtonFor(model => questionVM.AnswerText, option.AntwoordText) @(option.AntwoordText)
 											</div>
 										}
 									</div>
