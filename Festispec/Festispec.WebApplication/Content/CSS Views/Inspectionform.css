@@ -141,7 +141,7 @@ progress::-webkit-progress-value {
 }
 
 .scale-question {
-	width: 60%;
+	width: 80%;
 	display: inline-flex;
 	position: relative;
 	left: 5px;

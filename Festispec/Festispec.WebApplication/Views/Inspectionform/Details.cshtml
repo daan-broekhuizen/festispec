@@ -52,6 +52,7 @@
 	<div>
 		@foreach (var questionVM in Model.Questions)
 		{
+			
 			<div class="col-md-12">
 				<div class="question-container">
 					<button type="button" class="@(questionVM.IsAnswered ? "collapsible-answered" : "collapsible")">
@@ -63,12 +64,19 @@
 							@Html.HiddenFor(model => questionVM.Answer.InspecteurID)
 							@Html.HiddenFor(model => questionVM.Answer.VraagID)
 							@Html.HiddenFor(model => questionVM.Answer.AntwoordNummer)
+							if (questionVM.Question.AfbeeldingURL != null)
+							{
+								<p><b>Bijgevoegde afbeelding:</b></p>
+								<img src="https://@questionVM.Question.AfbeeldingURL" style="padding: 10px;" />
+							}
 							switch (questionVM.Question.Vraagtype)
 							{
 								case "ov":
+									<p><b>Jouw antwoord:</b></p>
 									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
 									break;
 								case "tx":
+									<p><b>Jouw antwoord:</b></p>
 									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
 									break;
 								case "mv":
@@ -77,16 +85,23 @@
 										<p><b>Gekozen antwoord:</b></p>
 										<p><i>@questionVM.AnswerText</i></p>
 									}
+									else
+									{
+										<p><b>Selecteer een antwoord:</b></p>
+									}
 									@Html.DropDownListFor(model => questionVM.AnswerText, questionVM.PossibleAnswers, htmlAttributes: new { style = "padding: 5px; font-size: 18px; width: 85%; max-width: 85%;" })
 									break;
 								case "av":
 									if (questionVM.Answer.AntwoordImage != null)
 									{
-										<img src="data:image;base64,@System.Convert.ToBase64String(questionVM.Answer.AntwoordImage)" />
+										<p><b>Gekozen afbeelding:</b></p>
+										<img src="data:image;base64,@System.Convert.ToBase64String(questionVM.Answer.AntwoordImage)" style="padding: 10px"/>
 									}
-									@Html.TextBoxFor(model => questionVM.ImageFile, new { type = "file", accept = ".jpg, .jpeg, .gif, .png"})
+									<p><b>Selecteer een afbeelding:</b></p>
+									@Html.TextBoxFor(model => questionVM.ImageFile, new { type = "file", accept = ".jpg, .jpeg, .gif, .png" })
 									break;
 								case "sv":
+									<p><b>Selecteer een optie:</b></p>
 									<div class="scale-question">
 										@foreach (var option in questionVM.Question.VraagMogelijkAntwoord)
 										{
