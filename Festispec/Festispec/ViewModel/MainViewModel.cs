@@ -31,6 +31,9 @@ namespace Festispec.ViewModel
 
         public ICommand ExecuteApiCommand { get; set; }
 
+        public ICommand OpenOfflineViewCommand { get; set; }
+        private OfflineView _offlineView;
+
         public MainViewModel()
         {
             this.OpenGraphCommand = new RelayCommand(() => {
@@ -69,6 +72,12 @@ namespace Festispec.ViewModel
             });
 
             this.ExecuteApiCommand = new RelayCommand(ExecuteApiRequest);
+
+            this.OpenOfflineViewCommand = new RelayCommand(() =>
+            {
+                this._offlineView = new OfflineView();
+                this._offlineView.Show();
+            });
         }
 
         private void ExecuteApiRequest()

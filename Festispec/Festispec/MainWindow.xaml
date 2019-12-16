@@ -12,6 +12,7 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -25,5 +26,6 @@
 
         <Button Grid.Column="0" Grid.Row="2" Content="Text Editor" FontSize="20" Command="{Binding OpenTextEditorCommand}" />
         <Button Grid.Column="1" Grid.Row="2" Content="API" FontSize="20" Command="{Binding ExecuteApiCommand}" />
+        <Button Grid.Column="0" Grid.Row="3" Content="Offline" FontSize="20" Command="{Binding OpenOfflineViewCommand}" />
     </Grid>
 </Window>

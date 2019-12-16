@@ -118,6 +118,7 @@
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
     <Compile Include="Model\AvailabilityModel.cs" />
+    <Compile Include="Model\InspectionModel.cs" />
     <Compile Include="Model\InspectorModel.cs" />
     <Compile Include="Model\Misc\DateTimeExtension.cs" />
     <Compile Include="Model\Misc\EnumMonth.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Model\Question.cs" />
     <Compile Include="Model\Repositories\AvailabilityRepository.cs" />
     <Compile Include="Model\Repositories\GraphRepository.cs" />
+    <Compile Include="Model\Repositories\InspectionRepository.cs" />
     <Compile Include="Model\SaleModel.cs" />
     <Compile Include="ViewModel\AvailabilityViewModel.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />
@@ -139,6 +141,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MultipleChoiceQuestionEditViewModel.cs" />
     <Compile Include="ViewModel\MultipleChoiceQuestionViewModel.cs" />
+    <Compile Include="ViewModel\OfflineInspectionViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModel.cs" />
     <Compile Include="ViewModel\QuestionEditVM.cs" />
     <Compile Include="ViewModel\QuestionListViewModel.cs" />
     <Compile Include="ViewModel\QuestionMultipleChoiceVM.cs" />
@@ -152,6 +156,12 @@
     </Compile>
     <Compile Include="View\GraphView.xaml.cs">
       <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Offline\OfflineInspectionView.xaml.cs">
+      <DependentUpon>OfflineInspectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Offline\OfflineView.xaml.cs">
+      <DependentUpon>OfflineView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuestionEditView.xaml.cs">
       <DependentUpon>QuestionEditView.xaml</DependentUpon>
@@ -185,6 +195,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\GraphView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Offline\OfflineInspectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Offline\OfflineView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -139,6 +139,22 @@ namespace Festispec.ViewModel
             get => new RichTextEditorViewModel();
         }
 
+        public OfflineViewModel Offline
+        {
+            get
+            {
+                return new OfflineViewModel();
+            }
+        }
+
+        public OfflineInspectionViewModel OfflineInspections
+        {
+            get
+            {
+                return new OfflineInspectionViewModel();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
