@@ -52,9 +52,11 @@ namespace Festispec.WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Vraag> Vraag { get; set; }
 
+
         public virtual Opdracht Opdracht { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Ingepland { get; set; }
+
     }
 }

@@ -22,7 +22,7 @@ namespace Festispec.WebApplication.Controllers
         // GET: Credentials
         public ActionResult Index()
         {
-            IQueryable<Account> account = _context.Account.Include(a => a.Rol);
+            IQueryable<Account> account = _context.Account;
             return View(account.ToList());
         }
 
@@ -39,7 +39,11 @@ namespace Festispec.WebApplication.Controllers
                 .FirstOrDefault();
 
             if (user != null)
-                return RedirectToAction("Index");
+            {
+                Session.Add("user", user.AccountID);
+
+                return RedirectToAction("Index", "Dashboard", new { area = "" });
+            }
             else
                 ModelState.AddModelError("Error", "Uw gegevens zijn niet correct.");
             return View(account);
@@ -68,7 +72,7 @@ namespace Festispec.WebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccountID,Gebruikersnaam,Wachtwoord,Rol,Voornaam,Tussenvoegsel,Achternaam,Stad,Straatnaam,Huisnummer,Email,Telefoonnummer,Datum_certificering,Einddatum_certificering,IBAN,Laatste_wijziging")] Account account)
+        public ActionResult Create([Bind(Include = "AccountID,Gebruikersnaam,Wachtwoord,Rol,Voornaam,Tussenvoegsel,Achternaam,Stad,Straatnaam,Huisnummer,Email,Telefoonnummer,DatumCertificering,EinddatumCertificering,IBAN,LaatsteWijziging")] Account account)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +108,7 @@ namespace Festispec.WebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AccountID,Gebruikersnaam,Wachtwoord,Rol,Voornaam,Tussenvoegsel,Achternaam,Stad,Straatnaam,Huisnummer,Email,Telefoonnummer,Datum_certificering,Einddatum_certificering,IBAN,Laatste_wijziging")] Account account)
+        public ActionResult Edit([Bind(Include = "AccountID,Gebruikersnaam,Wachtwoord,Rol,Voornaam,Tussenvoegsel,Achternaam,Stad,Straatnaam,Huisnummer,Email,Telefoonnummer,DatumCertificering,EinddatumCertificering,IBAN,LaatsteWijziging")] Account account)
         {
             if (ModelState.IsValid)
             {

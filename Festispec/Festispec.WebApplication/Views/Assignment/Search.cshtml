@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Festispec.WebApplication.Models.Inspectieformulier>
+
+<link href="~/Content/Pages/assignment_search.css" rel="stylesheet" />
+
+<h2>Jouw opdrachten</h2>
+
+<hr />
+
+<div class="row">
+    <form>
+        <input id="zoekbalk" class="form-control" type="text" placeholder="Zoek opdrachtnaam" />
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Zoekresultaten</h2>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="sort">Sorteren op:</label>
+            <select class="form-control" id="sort">
+                <option>Datum</option>
+                <option>Stad</option>
+                <option>Klantnaam</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row result">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                Klant: @Html.DisplayFor(modelItem => item.Opdracht.OpdrachtNaam)
+            </div>
+            <div class="col-md-3">
+                Stad: @Html.DisplayFor(modelItem => item.Stad)
+            </div>
+            <div class="col-md-3">
+                Datum: @String.Format("{0:d/MM/yyyy}", @item.DatumInspectie)
+
+            </div>
+            <div class="col-md-3">
+                <button>
+                    @Html.ActionLink("Meer Info", "Details", new { id = item.InspectieformulierID })
+                </button>
+            </div>
+        </div>
+    </div>
+}

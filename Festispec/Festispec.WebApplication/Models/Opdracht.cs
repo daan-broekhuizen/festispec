@@ -58,6 +58,7 @@ namespace Festispec.WebApplication.Models
         [Column("Laatste_wijziging")]
         public DateTime LaatsteWijziging { get; set; }
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectieformulier> Inspectieformulier { get; set; }
 
@@ -69,5 +70,6 @@ namespace Festispec.WebApplication.Models
         public virtual RapportTemplate RapportTemplate { get; set; }
 
         public virtual Status StatusLookup { get; set; }
+
     }
 }

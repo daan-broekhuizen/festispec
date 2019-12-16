@@ -27,7 +27,11 @@
 
 		<div class="inspection-info">
 			<div class="inspection-data">
-				<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
+				@if (Model.LogoString != null)
+				{
+					<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
+
+				}
 				<h3><b>@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
 				<p><b>Datum inspectie:</b> @Model.Inspectionform.DatumInspectie</p>
 				<p>

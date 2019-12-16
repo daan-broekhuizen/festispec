@@ -8,7 +8,7 @@ namespace Festispec.WebApplication.Models
     public partial class FestiSpecContext : DbContext
     {
         public FestiSpecContext()
-            : base("name=FestiSpecEntities")
+           : base("name=FestiSpecEntities")
         {
         }
 
@@ -144,3 +144,4 @@ namespace Festispec.WebApplication.Models
         }
     }
 }
+

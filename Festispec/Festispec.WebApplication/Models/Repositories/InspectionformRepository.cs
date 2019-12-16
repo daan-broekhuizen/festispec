@@ -52,8 +52,6 @@ namespace Festispec.WebApplication.Models.Repositories
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                //Vraag question = context.Vraag.Include(q => q.Antwoorden)
-                //    .FirstOrDefault(q => q.VraagID == answer.VraagID);
                 context.Antwoorden.Add(answer);
                 context.SaveChanges();
                 return answer;
