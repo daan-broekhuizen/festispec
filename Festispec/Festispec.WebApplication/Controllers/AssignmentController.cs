@@ -30,14 +30,12 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+
             Inspectieformulier inspectieformulier = _context.Inspectieformulier.Find(id);
             if (inspectieformulier == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(inspectieformulier);
         }
     }
