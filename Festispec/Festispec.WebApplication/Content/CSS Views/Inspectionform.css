@@ -81,7 +81,7 @@
 
 progress {
 	position: absolute;
-	width: 50%;
+	width: 40%;
 	top: 20px;
 	height: 20px;
 	background: none;
@@ -115,7 +115,7 @@ progress::-webkit-progress-value {
 	position: absolute;
 	right: 40px;
 	top: 90px;
-	width: 20%;
+	width: 15%;
 }
 
 .inspection-info {

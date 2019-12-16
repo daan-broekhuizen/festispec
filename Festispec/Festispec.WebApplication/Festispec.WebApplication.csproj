@@ -160,6 +160,7 @@
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\TableAnswerViewModel.cs" />
     <Compile Include="Models\Vraag.cs" />
     <Compile Include="Models\VraagType.cs" />
     <Compile Include="Models\VraagMogelijkAntwoord.cs" />

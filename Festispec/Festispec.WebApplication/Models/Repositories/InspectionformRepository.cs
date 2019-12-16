@@ -30,7 +30,13 @@ namespace Festispec.WebApplication.Models.Repositories
                     .FirstOrDefault(a => a.AccountID == userId).Ingepland.ToList();
             }
         }
-
+        public Vraag GetQuestion(int questionId)
+        {
+            using (FestiSpecContext context = new FestiSpecContext())
+            {
+                return context.Vraag.Find(questionId);
+            }
+        }
         public Antwoorden GetAnswer(Antwoorden answer)
         {
             using(FestiSpecContext context = new FestiSpecContext())
@@ -46,9 +52,9 @@ namespace Festispec.WebApplication.Models.Repositories
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                Vraag question = context.Vraag.Include(q => q.Antwoorden)
-                    .FirstOrDefault(q => q.VraagID == answer.VraagID);
-                question.Antwoorden.Add(answer);
+                //Vraag question = context.Vraag.Include(q => q.Antwoorden)
+                //    .FirstOrDefault(q => q.VraagID == answer.VraagID);
+                context.Antwoorden.Add(answer);
                 context.SaveChanges();
                 return answer;
             }
