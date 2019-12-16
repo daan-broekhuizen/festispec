@@ -31,15 +31,9 @@ namespace Festispec.WebApplication.Controllers
                 assignmentList = new List<Inspectieformulier>();
 
             DashboardViewModel dashboardViewModel = new DashboardViewModel();
-            //DashboardVM viewData = new DashBoardVM();
-            //dashboard.user 
-            //dashboard.UpCommingINspections = assignments
-            //dashboard 
             dashboardViewModel.Account = account;
             dashboardViewModel.Inspectionform = assignmentList;
             
-
-           // ViewBag.User = account;
             return View(dashboardViewModel);
         }
     }
