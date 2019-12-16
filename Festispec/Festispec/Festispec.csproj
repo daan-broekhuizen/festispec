@@ -563,6 +563,15 @@
   <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\report_template.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Management rapportage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\inspectionform_templates.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
