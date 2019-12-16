@@ -423,6 +423,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
             Image = image;
             string fileLocation = Image.UriSource.AbsolutePath;
+
+            if (fileLocation.Contains("%20"))
+            {
+                fileLocation = fileLocation.Replace("%20", " ");
+            }
            
             UploadModel response = new ImageShackClient().UploadImage(new ImageContainer[1]
             {

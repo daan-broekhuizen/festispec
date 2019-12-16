@@ -1,4 +1,5 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
@@ -186,6 +187,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 NewInspectionForm = true;
                 Save();
             }
+            else if(nav.Parameter is null)//dit is het geval bij het aanmaken van een template
+            {
+                InspectionForm = new Inspectieformulier();
+                Titel = "Nieuw formulier template";
+                Description = "Template beschrijving";
+                LastChangeDate = DateTime.Now;
+                NewInspectionForm = true;
+                Save();
+            }
             
             _removedQuestions = new List<QuestionViewModel>();
             CreateCommands();
@@ -341,7 +351,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void ToShowCommand()
         {
-            _navigationService.NavigateTo("InspectionFormShowView", InspectionForm.OpdrachtID);
+            if (_inspectionForm.OpdrachtID == null)
+                _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);
+            else
+                _navigationService.NavigateTo("InspectionFormShowView", InspectionForm.OpdrachtID);
         }
 
         public void Save()

@@ -40,11 +40,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Image Source="{Binding Image}"/>
@@ -80,11 +80,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -117,11 +117,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -155,11 +155,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="80" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Right">
                         <Label  Content="{Binding Path=SecondErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
@@ -171,7 +171,7 @@
                     </Viewbox>
 
 
-                    <Viewbox Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
+                    <Viewbox Grid.Row="3" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
@@ -234,11 +234,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -322,11 +322,11 @@
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left">
+                    <Viewbox Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
                         <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBox Background="{x:Null}" Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Button Command="{Binding ImageButton}">
@@ -334,7 +334,7 @@
                         </Button>
                     </Viewbox>
 
-                    <Viewbox Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
+                    <Viewbox Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="3*"/>
@@ -513,13 +513,14 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=mvButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Tekst toevoegen" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="2" Content="Tekst toevoegen" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
             <Button Grid.Row="5" Command="{Binding AddOpenQuestionCommand}" Margin="1">
@@ -542,13 +543,14 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=mvButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Open vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="2" Content="Open vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
             <Button Grid.Row="6" Command="{Binding AddPictureQuestionCommand}" Margin="1">
@@ -571,13 +573,14 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=mvButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Foto vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="15"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="2" Content="Foto vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
             <Button Grid.Row="7" Command="{Binding AddScaleQuestionCommand}" Margin="1">
@@ -600,16 +603,17 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=mvButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Schaal vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="12.5"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="2" Content="Schaal vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
-            <Button Grid.Row="8" Command="{Binding AddMultipleChoiceQuestionCommand}" Margin="1">
+            <Button Grid.Row="8" Command="{Binding AddMultipleChoiceQuestionCommand}" Margin="1" x:Name="mvButton">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="{x:Null}" />
@@ -629,16 +633,17 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=mvButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Meerkeuze vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="9"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/>
+                    <Label Grid.Column="2" Content="Meerkeuze vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
-            <Button Grid.Row="9" Command="{Binding AddTableQuestionCommand}" Margin="1">
+            <Button Grid.Row="9" Command="{Binding AddTableQuestionCommand}" Margin="1" x:Name="tButton">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="{x:Null}" />
@@ -658,13 +663,14 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                <Grid>
+                <Grid Width="{Binding ActualWidth, ElementName=tButton}">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Tabel vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
+                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="1" HorizontalAlignment="Left"/> 
+                    <Label Grid.Column="2" Content="Tabel vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10"/>
                 </Grid>
             </Button>
             <Viewbox Grid.Row="11" HorizontalAlignment="Center">

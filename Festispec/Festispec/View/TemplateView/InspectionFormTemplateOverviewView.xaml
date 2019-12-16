@@ -21,16 +21,21 @@
         <ListView Grid.Row="3" ItemsSource="{Binding Templates}" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="4" />
+                    <WrapPanel IsItemsHost="True"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="40" FontWeight="Bold" TextAlignment="Center" />
-                        <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" MaxHeight="200" Margin="0, 20" />
+                    <StackPanel Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="30" FontWeight="Bold" TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center" />
+                        <TextBlock Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" MaxHeight="200" Margin="0, 20" HorizontalAlignment="Center"/>
                         <Button Content="Aanmaken" Padding="5" Command="{Binding DataContext.SelectTemplateCommand, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" Visibility="{Binding DataContext.IsSelectMode, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" />
-                        <Button Content="Aanpassen" Padding="5" Command="{Binding DataContext.EditTemplateCommand, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" Visibility="{Binding DataContext.IsEditMode, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" />
+                        <Button Content="Aanpassen" Padding="5" Width="150" HorizontalAlignment="Center" Command="{Binding DataContext.EditTemplateCommand, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" Visibility="{Binding DataContext.IsEditMode, RelativeSource={RelativeSource AncestorType={x:Type local:InspectionFormTemplateOverviewView}}}" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

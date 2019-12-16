@@ -144,7 +144,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     return;
                 _selectedInspectionForm.InspectionForm.StartTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionStartTime");
-                RaisePropertyChanged("MinimumTime");
             }
         }
 
@@ -164,18 +163,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     return;
                 _selectedInspectionForm.InspectionForm.EindTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionEndTime");
-                RaisePropertyChanged("MaximumTime");
             }
-        }
-
-        public DateTime MinimumTime
-        {
-            get => InspectionStartTime.AddHours(1);      
-        }
-
-        public DateTime MaximumTime
-        {
-            get => InspectionEndTime.AddHours(-1);
         }
 
         public string City

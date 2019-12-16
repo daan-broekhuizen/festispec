@@ -27,7 +27,7 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void CreateButtonClick()
         {
-            throw new NotImplementedException();
+            _navigationService.NavigateTo("InspectionFormEditView", null);
         }
 
         protected override void SearchButtonClick(string content)
@@ -60,7 +60,8 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected override void EditTemplate(dynamic template)
         {
-            throw new NotImplementedException();
+            Inspectieformulier inspectionTemplate = _repo.GetInspectionFormTemplate(((TemplateViewModel)template).InspectionFormTemplateID);
+            _navigationService.NavigateTo("InspectionFormEditView", inspectionTemplate);
         }
     }
 }

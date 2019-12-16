@@ -142,17 +142,19 @@
                         <Image Source="{Binding Image}"/>
                     </Viewbox>
 
-                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="13*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
-                                    <TextBlock Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap"/>
-                                </Grid>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="13*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
+                                        <TextBlock Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -218,7 +220,7 @@
 
         <DataTemplate x:Key="TableQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid x:Name="QuestionBox" Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -234,9 +236,10 @@
                         <RowDefinition Height="0.5*" MinHeight="10"/>
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
                     </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                        <Label Margin="1" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
                         <TextBlock Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
@@ -244,6 +247,28 @@
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
                         <Image Source="{Binding Image}"/>
                     </Viewbox>
+
+                    <ListBox Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="13*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Left" Background="White" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+                                </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -364,9 +389,9 @@
                     </DatePicker.Resources>
                 </DatePicker>
                 <Label Content="Starttijd" Grid.Row="2" VerticalAlignment="Bottom"/>
-                <xctk:TimePicker Value="{Binding InspectionStartTime, Mode=TwoWay}" FormatString="HH:mm" Maximum="{Binding MaximumTime}" Grid.Row="3" FontSize="20" Margin="5,0,5,0"/>
+                <xctk:TimePicker Value="{Binding InspectionStartTime, Mode=TwoWay}" FormatString="HH:mm" Grid.Row="3" FontSize="20" Margin="5,0,5,0"/>
                 <Label Content="Eindtijd" Grid.Row="4" VerticalAlignment="Bottom"/>
-                <xctk:TimePicker Value="{Binding InspectionEndTime, Mode=TwoWay}" FormatString="HH:mm" Minimum="{Binding MinimumTime}" Grid.Row="5" FontSize="20" Margin="5,0,5,0"/>
+                <xctk:TimePicker Value="{Binding InspectionEndTime, Mode=TwoWay}" FormatString="HH:mm" Grid.Row="5" FontSize="20" Margin="5,0,5,0"/>
                 <Label Content="Locatie:" FontWeight="Bold" Grid.Row="6" VerticalAlignment="Bottom"/>
                 <Label Content="Stad"  Grid.Row="7" VerticalAlignment="Bottom"/>
                 <TextBox MaxLength="50" Text="{Binding City}"  Grid.Row="8" Margin="5,0,5,0"/>
