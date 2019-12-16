@@ -178,7 +178,7 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Aantal vragen:" HorizontalAlignment="Left" Grid.Column="0" FontSize="40"/>
-                            <ComboBox SelectedValue="{Binding Path=MultipleChoiceOptionsAmount, Mode=TwoWay}" FontSize="40" HorizontalAlignment="Right" Grid.Column="1">
+                            <ComboBox SelectedValue="{Binding Path=MultipleAnwsersAmount, Mode=TwoWay}" FontSize="40" HorizontalAlignment="Right" Grid.Column="1">
                                 <ComboBox.ItemsSource>
                                     <x:Array Type="{x:Type sys:Int32}">
                                         <sys:Int32>2</sys:Int32>
@@ -192,7 +192,7 @@
                         </Grid>
                     </Viewbox>
                     
-                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="Beige">
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="wHITE">
                         <ListBox.ItemTemplate>
                         <DataTemplate>
                                 <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
@@ -299,9 +299,9 @@
             </Border>
         </DataTemplate>
 
-        <DataTemplate x:Key="Table2QuestionEdit">
+        <DataTemplate x:Key="TableQuestionEdit">
             <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
                         <ColumnDefinition Width="3.2*"/>
@@ -315,8 +315,9 @@
                         <RowDefinition Height="1*" MinHeight="20"/>
                         <RowDefinition Height="4*" MinHeight="150"/>
                         <RowDefinition Height="0.5*" MinHeight="10"/>
-                        <RowDefinition Height="1*" MinHeight="20"/>
-                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="0.7*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="5"/>
+                        <RowDefinition Height="1*" MinHeight="50"/>
                     </Grid.RowDefinitions>
                     <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
@@ -332,43 +333,44 @@
                             <Image Source="{Binding EditImage}"/>
                         </Button>
                     </Viewbox>
-                </Grid>
-            </Border>
-        </DataTemplate>
 
-        <DataTemplate x:Key="Table3QuestionEdit">
-            <Border BorderBrush="Black" BorderThickness="2">
-                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="3.2*"/>
-                        <ColumnDefinition Width="1.25*"/>
-                        <ColumnDefinition Width="0.1*"/>
-                        <ColumnDefinition Width="1.3*"/>
-                        <ColumnDefinition Width="0.1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*" MinHeight="10"/>
-                        <RowDefinition Height="1*" MinHeight="20"/>
-                        <RowDefinition Height="4*" MinHeight="150"/>
-                        <RowDefinition Height="0.5*" MinHeight="10"/>
-                        <RowDefinition Height="1*" MinHeight="20"/>
-                        <RowDefinition Height="0.5*" MinHeight="10"/>
-                    </Grid.RowDefinitions>
-                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
+                    <Viewbox Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Aantal kolomen:" HorizontalAlignment="Left" Grid.Column="0" FontSize="40"/>
+                            <ComboBox SelectedValue="{Binding Path=MultipleAnwsersAmount, Mode=TwoWay}" FontSize="40" HorizontalAlignment="Right" Grid.Column="1">
+                                <ComboBox.ItemsSource>
+                                    <x:Array Type="{x:Type sys:Int32}">
+                                        <sys:Int32>2</sys:Int32>
+                                        <sys:Int32>3</sys:Int32>
+                                    </x:Array>
+                                </ComboBox.ItemsSource>
+                            </ComboBox>
+                        </Grid>
                     </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBox Text="{Binding Path=QuestionText}" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
-                    </Viewbox>
-                    <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left">
-                        <Label  Content="{Binding Path=FirstErrorMessage}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
-                    </Viewbox>
-                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Button Command="{Binding ImageButton}">
-                            <Image Source="{Binding EditImage}"/>
-                        </Button>
-                    </Viewbox>
+
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="400" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="13*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray" VerticalAlignment="Center"/>
+                                    <TextBox Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" AcceptsReturn="False" MaxLength="50"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -388,7 +390,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1">
             <Grid.Background>
-                <SolidColorBrush Color="Gray" Opacity="0.6" />
+                <SolidColorBrush Color="White" Opacity="0.6" />
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
@@ -636,7 +638,7 @@
                     <Label Grid.Column="1" Content="Meerkeuze vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="9"/>
                 </Grid>
             </Button>
-            <Button Grid.Row="9" Command="{Binding AddTable2QuestionCommand}" Margin="1">
+            <Button Grid.Row="9" Command="{Binding AddTableQuestionCommand}" Margin="1">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="{x:Null}" />
@@ -662,39 +664,9 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
                     <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Tabel X2 vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
+                    <Label Grid.Column="1" Content="Tabel vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
                 </Grid>
             </Button>
-            <Button Grid.Row="10" Command="{Binding AddTable3QuestionCommand}" Margin="1">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{x:Null}" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Source="/Images/AddQuestionBox.png" Grid.Column="0" HorizontalAlignment="Left"/>
-                    <Label Grid.Column="1" Content="Tabel X3 vraag" VerticalAlignment="Center" FontWeight="Bold" FontSize="10.3"/>
-                </Grid>
-            </Button>
-
             <Viewbox Grid.Row="11" HorizontalAlignment="Center">
                 <Label  Content="{Binding Path=SaveError}" Foreground="Red"  FontSize="30"  VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
             </Viewbox>

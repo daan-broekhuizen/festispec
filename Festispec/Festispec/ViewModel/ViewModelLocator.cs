@@ -96,9 +96,9 @@ namespace Festispec.ViewModel
             #endregion
 
             #region JobViews
-            navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
-            navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
-            navigationService.Configure("AddJob", new Uri("../View/AddJobView.xaml", UriKind.Relative));
+            navigationService.Configure("Jobs", new Uri("../View/JobView/JobsWindow.xaml", UriKind.Relative));
+            navigationService.Configure("JobInfo", new Uri("../View/JobView/JobInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddJob", new Uri("../View/JobView/AddJobView.xaml", UriKind.Relative));
             #endregion
 
 

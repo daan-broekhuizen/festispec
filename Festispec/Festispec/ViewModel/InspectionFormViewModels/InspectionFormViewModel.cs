@@ -27,8 +27,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ICommand AddTextCommand { get; set; }
         public ICommand AddPictureQuestionCommand { get; set; }
         public ICommand AddScaleQuestionCommand { get; set; }
-        public ICommand AddTable2QuestionCommand { get; set; }
-        public ICommand AddTable3QuestionCommand { get; set; }
+        public ICommand AddTableQuestionCommand { get; set; }
         public ICommand ToShowModeCommand { get; set; }
         public ICommand QuestionUpCommand { get; set; }
         public ICommand QuestionDownCommand { get; set; }
@@ -52,8 +51,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public Inspectieformulier InspectionForm {
             get => _inspectionForm;
-            set {
+            set
+            {
                 _inspectionForm = value;
+                RaisePropertyChanged("InspectionForm");
             }
         }
 
@@ -75,9 +76,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get {
                 if (_titel == null)
-                {
                     _titel = _inspectionForm.InspectieFormulierTitel;
-                }
 
                 return _titel;
             }
@@ -120,9 +119,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             get
             {
                 if (_description == null)
-                {
                     _description = _inspectionForm.Beschrijving;
-                }
 
                 return _description;
             }
@@ -211,8 +208,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             AddTextCommand = new RelayCommand(AddText);
             AddPictureQuestionCommand = new RelayCommand(AddPictureQuestion);
             AddScaleQuestionCommand = new RelayCommand(AddScaleQuestion);
-            AddTable2QuestionCommand = new RelayCommand(AddTable2Question);
-            AddTable3QuestionCommand = new RelayCommand(AddTable3Question);
+            AddTableQuestionCommand = new RelayCommand(AddTableQuestion);
             ToShowModeCommand = new RelayCommand(ToShowCommand);
             SaveCommand = new RelayCommand(Save);
             QuestionUpCommand = new RelayCommand(QuestionUp);
@@ -276,21 +272,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             AddQuestion(v);
         }
 
-        public void AddTable2Question()
+        public void AddTableQuestion()
         {
             Vraag v = new Vraag
             {
-                Vraagtype = "t2",
-            };
-
-            AddQuestion(v);
-        }
-
-        public void AddTable3Question()
-        {
-            Vraag v = new Vraag
-            {
-                Vraagtype = "t3",
+                Vraagtype = "tv",
             };
 
             AddQuestion(v);
@@ -318,14 +304,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void QuestionDown()
         {
             if(SelectedQuestion == null)
-            {
                 return;
-            }
             int index = Questions.IndexOf(SelectedQuestion);
             if (index == Questions.Count() - 1)
-            {
                 return;
-            }
             else
             {
                 Swap(index, index + 1);
@@ -337,31 +319,21 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void RemoveQuestion()
         {
             if (SelectedQuestion == null)
-            {
                 return;
-            }
             int SelectedIndex = (SelectedQuestion.OrderNumber - 1);
             if (!(SelectedIndex == Questions.Count()))
-            {
                 for (int i = SelectedIndex; i < Questions.Count(); i++)
                 {
                     Questions[i].OrderNumber = Questions[i].OrderNumber - 1;
                 }
-            }
             _removedQuestions.Add(SelectedQuestion);
             Questions.Remove(SelectedQuestion);
             if (SelectedIndex == Questions.Count())
-            {
                 SelectedIndex = Questions.Count() - 1;
-            }
             if (Questions.Count() > 0)
-            {
                 SelectedQuestion = Questions[SelectedIndex];
-            }
             else
-            {
                 SelectedQuestion = null;
-            }
             
             Changed = true;
             RaisePropertyChanged("Questions");
@@ -427,7 +399,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     question.Created = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
-                    if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv" || question.QuestionType == "tv")
                     {
                         List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
                         foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
@@ -441,7 +413,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     _repo.UpdateQuestion(question.Question);
                     question.Changed = false;
-                    if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv" || question.QuestionType == "tv")
                     {
                         List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
                         foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)

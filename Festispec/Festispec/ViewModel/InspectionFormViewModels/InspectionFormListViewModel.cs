@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Festispec.Service;
 using Festispec.Model.Enums;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
@@ -38,7 +37,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 _selectedInspectionForm = value;
                 RaisePropertyChanged("SelectedInspectionForm");
-                RaisePropertyChanged("Titel");
+                RaisePropertyChanged("Title");
                 RaisePropertyChanged("Description");
                 RaisePropertyChanged("LastChangeDate");
                 RaisePropertyChanged("Questions");
@@ -80,7 +79,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 foreach(Inspectieformulier form in inspectionForms)
                 {
                     InspectionFormViewModel formVM = new InspectionFormViewModel(_navigationService, _repo, form);
-
                     InspectionFormsList.Add(formVM);
                 }
                 SelectedInspectionForm = InspectionFormsList.FirstOrDefault();
@@ -94,29 +92,21 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _repo.DeleteInspectieFormulier(_selectedInspectionForm.InspectionForm);
                 InspectionFormsList.Remove(_selectedInspectionForm);
                 if(InspectionFormsList.Count() > 0)
-                {
                     _selectedInspectionForm = InspectionFormsList.FirstOrDefault();
-                }
                 else
-                {
                     _selectedInspectionForm = null;
-                }
             }
         }
 
-        private async Task<bool> ValidateAdressAsync(string addres)
-        {
-            LocationService service = new LocationService();
-            return await service.CalculateDistance(addres, "Griekenland") != 0.0;
-        }
-
         #region inspectionFormVariables
-        public string Titel
+        public string Title
         {
             get
             {
-                if(_selectedInspectionForm != null){return _selectedInspectionForm.Titel;}
-                else{return null;}
+                if(_selectedInspectionForm != null)
+                    return _selectedInspectionForm.Titel;
+                else
+                    return null;
             }
         }
 
@@ -124,12 +114,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm != null) { return _selectedInspectionForm.InspectionForm.DatumInspectie; }
-                else { return null; }
+                if (_selectedInspectionForm != null)
+                    return _selectedInspectionForm.InspectionForm.DatumInspectie;
+                else
+                    return null;
             }
             set
             {
-                if (_selectedInspectionForm == null){return;}
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.DatumInspectie = value;
                 RaisePropertyChanged("InspectionDate");
             }
@@ -139,14 +132,16 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm == null) { return new DateTime() + new TimeSpan(0,0,0); }
+                if (_selectedInspectionForm == null)
+                    return new DateTime() + new TimeSpan(0,0,0); 
                 TimeSpan t = _selectedInspectionForm.InspectionForm.StartTijd ?? new TimeSpan(0,0,0);
                 DateTime dt = new DateTime() + t;
                 return dt;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.StartTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionStartTime");
                 RaisePropertyChanged("MinimumTime");
@@ -157,14 +152,16 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm == null) { return new DateTime() + new TimeSpan(23,0,0); }
+                if (_selectedInspectionForm == null)
+                    return new DateTime() + new TimeSpan(23,0,0);
                 TimeSpan t = _selectedInspectionForm.InspectionForm.EindTijd ?? new TimeSpan(23, 0, 0);
                 DateTime dt = new DateTime() + t;
                 return dt;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.EindTijd = value.TimeOfDay;
                 RaisePropertyChanged("InspectionEndTime");
                 RaisePropertyChanged("MaximumTime");
@@ -185,12 +182,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if(_selectedInspectionForm == null) { return null; }
+                if(_selectedInspectionForm == null)
+                    return null;
                 return _selectedInspectionForm.InspectionForm.Stad;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.Stad = value;
                 RaisePropertyChanged("City");
             }
@@ -200,12 +199,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm == null) { return null; }
+                if (_selectedInspectionForm == null)
+                    return null;
                 return _selectedInspectionForm.InspectionForm.Straatnaam;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.Straatnaam = value;
                 RaisePropertyChanged("Street");
             }
@@ -215,12 +216,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm == null) { return null; }
+                if (_selectedInspectionForm == null)
+                    return null;
                 return _selectedInspectionForm.InspectionForm.Huisnummer;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return;
                 _selectedInspectionForm.InspectionForm.Huisnummer = value;
                 RaisePropertyChanged("HouseNumber");
             }
@@ -230,12 +233,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm == null) { return null; }
+                if (_selectedInspectionForm == null)
+                    return null;
                 return _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs;
             }
             set
             {
-                if (_selectedInspectionForm == null) { return; }
+                if (_selectedInspectionForm == null)
+                    return; 
                 _selectedInspectionForm.InspectionForm.BenodigdeInspecteurs = value;
                 RaisePropertyChanged("RequiredInspectors");
             }
@@ -251,7 +256,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public DateTime MaximumDate
         {
             get => DateTime.Today.AddYears(1).AddMonths(6);
-            set{ return; }
+            set
+            { return; }
         }
 
         public string Description
@@ -259,8 +265,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             get
             {
                 if (_selectedInspectionForm != null)
-                { return _selectedInspectionForm.Description; }
-                else { return null; }
+                    return _selectedInspectionForm.Description;
+                else
+                    return null;
             }
         }
 
@@ -268,8 +275,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm != null){ return _selectedInspectionForm.LastChangeDate; }
-                else { return DateTime.Now; }
+                if (_selectedInspectionForm != null)
+                    return _selectedInspectionForm.LastChangeDate;
+                else
+                    return DateTime.Now;
             }
         }
 
@@ -277,13 +286,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if (_selectedInspectionForm != null){ return _selectedInspectionForm.Questions; }
-                else { return null; }
+                if (_selectedInspectionForm != null)
+                    return _selectedInspectionForm.Questions;
+                else
+                    return null;
             }
         }
         #endregion
 
-        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", new Object[2] { EnumTemplateMode.SELECT, _jobID });
+        public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", new object[2] { EnumTemplateMode.SELECT, _jobID });
 
         public void ToEditView() => _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
 
@@ -292,23 +303,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             JobViewModel jvm = new JobViewModel(_repo.GetJob(_jobID));
             _navigationService.NavigateTo("JobInfo", jvm);
         }
-        public async void SaveInspectionFormDetailsAsync()
+        public void SaveInspectionFormDetailsAsync()
         {
             if(Street == null || HouseNumber == null || City == null)
-            {
                 if(_selectedInspectionForm != null)
                     _selectedInspectionForm.SaveInspectionformDetails();
-            }
             else
-            {
-                string address = Street + " " + HouseNumber + " " + City;
-                if (await ValidateAdressAsync(address))//als adres niet klopt crasht dit. Navragen aan Mike
-                {
-                if (_selectedInspectionForm != null)
-                    _selectedInspectionForm.SaveInspectionformDetails();
-                }
-            }
-            
+               if (_selectedInspectionForm != null)
+                _selectedInspectionForm.SaveInspectionformDetails();
         }
     }
 }

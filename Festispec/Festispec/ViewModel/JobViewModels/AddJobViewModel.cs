@@ -1,37 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model;
-using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
-using Festispec.ViewModel.QuotationViewModels;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Festispec.ViewModel
 {
-    public class JobInfoViewModel : ViewModelBase
+    public class AddJobViewModel : ViewModelBase
     {
-        public JobViewModel JobVM { get; set; }
-
         private NavigationService _navigationService;
-        private JobRepository Jrepo;
-        private QuotationRepository _quotationRepo;
+        private JobRepository _jobRepo;
+        public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
-        public ICommand ShowQuotationCommand { get; set; }
-        public ICommand ShowInspectionFormsCommand { get; set; }
-        public ICommand ShowRapportageCommand { get; set; }
-
+        public List<string> Customers { get; set; }
         public List<string> Status { get; set; }
+        public DateTime MinimalDate
+        {
+            get => DateTime.Today;
+            set
+            { return; }
+        }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -42,6 +39,17 @@ namespace Festispec.ViewModel
             {
                 _jobnameError = value;
                 RaisePropertyChanged("JobNameError");
+            }
+        }
+
+        private string _customernameError;
+        public string CustomerNameError
+        {
+            get => _customernameError;
+            set
+            {
+                _customernameError = value;
+                RaisePropertyChanged("CustomerNameError");
             }
         }
 
@@ -89,84 +97,59 @@ namespace Festispec.ViewModel
             }
         }
         #endregion
-
-        public JobInfoViewModel(NavigationService service, JobRepository Jrepo, StatusRepository Srepo, QuotationRepository quotationRepo)
+        public AddJobViewModel(NavigationService service, JobRepository repo, CustomerRepository Crepo, StatusRepository Srepo)
         {
-            SaveJobCommand = new RelayCommand(CanSaveJob);
-            ShowQuotationCommand = new RelayCommand(ShowQuotation);
-            ShowInspectionFormsCommand = new RelayCommand(ShowInspectionForms);
-            ShowRapportageCommand = new RelayCommand(ShowRapportage);
             _navigationService = service;
-            _quotationRepo = quotationRepo;
-            this.Jrepo = Jrepo;
+            _jobRepo = repo;
+
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
-            Status = new List<string>();
-            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
-        }
-
-        private void ShowQuotation()
-        {
-            Offerte latest = _quotationRepo.GetQuotations().Where(q => q.OpdrachtID == JobVM.JobID).OrderByDescending(q => q.OfferteID).FirstOrDefault();
-            if (latest != null)
-                _navigationService.NavigateTo("ShowQuotation", new QuotationViewModel(latest, _quotationRepo));
             else
-            {
-                _navigationService.NavigateTo("AddQuotation", new QuotationViewModel(
-                new Offerte()
-                {
-                    Opdracht = _quotationRepo.GetJob(JobVM.JobID),
-                    OpdrachtID = JobVM.JobID
-                }, _quotationRepo));
-            }
+                JobVM = new JobViewModel();
+
+            SaveJobCommand = new RelayCommand(CanSaveJob);
+            Customers = new List<string>();
+            Status = new List<string>();
+            Crepo.GetCustomers().ForEach(e => Customers.Add(e.Naam));
+            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+            JobVM.StartDatum = DateTime.Today;
+            JobVM.EindDatum = DateTime.Today;
+
         }
 
-        private void ShowRapportage()
+        private void SaveJob()
         {
-            if (JobVM != null)
-            {
-                JobViewModel updateViewModel = new JobViewModel(_quotationRepo.GetJob(JobVM.JobID));
-
-                if (updateViewModel != null && !string.IsNullOrEmpty(updateViewModel.Report))
-                    _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.SELECT, updateViewModel });
-                else if (updateViewModel != null)
-                    _navigationService.NavigateTo("RapportageTemplateOverview", new object[2] { EnumTemplateMode.SELECT,  updateViewModel });
-            }
-        }
-
-        public void SaveJob()
-        {
-            Jrepo.UpdateJob(new Opdracht()
+            string name = JobVM.CustomerName;
+            StatusRepository repo = new StatusRepository();
+            Opdracht opdracht = new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,
                 KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KvKNummer,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,
+                CreatieDatum = DateTime.Now,
                 MedewerkerID = 2,
-                OpdrachtID = JobVM.JobID,
                 StartDatum = JobVM.StartDatum,
                 EindDatum = JobVM.EindDatum
-            });
-            Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
-        }
 
-        public void ShowInspectionForms()
-        {
-            _navigationService.NavigateTo("InspectionFormShowView", JobVM.JobID);
+            };
+            _jobRepo.CreateJob(opdracht);
+            
         }
 
         private void CanSaveJob()
         {
             List<ValidationFailure> errors = new JobValidator().Validate(JobVM).Errors.ToList();
             ValidationFailure jobnameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
+            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerName")).FirstOrDefault();
             ValidationFailure begindateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
             ValidationFailure enddateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
             ValidationFailure statusError = errors.Where(e => e.PropertyName.Equals("Status")).FirstOrDefault();
             ValidationFailure customerwishesError = errors.Where(e => e.PropertyName.Equals("CustomerWishes")).FirstOrDefault();
 
 
-            if (jobnameError == null && begindateError == null && enddateError == null && statusError == null && customerwishesError == null)
+            if (jobnameError == null && customernameError == null && begindateError == null && enddateError == null && statusError == null && customerwishesError == null)
             {
                 SaveJob();
                 _navigationService.NavigateTo("Jobs");
@@ -178,6 +161,11 @@ namespace Festispec.ViewModel
                 JobNameError = jobnameError.ErrorMessage;
             }
             else JobNameError = "";
+            if (customernameError != null)
+            {
+                CustomerNameError = customernameError.ErrorMessage;
+            }
+            else CustomerNameError = "";
             if (begindateError != null)
             {
                 BeginDateError = begindateError.ErrorMessage;
@@ -193,8 +181,7 @@ namespace Festispec.ViewModel
                 StatusError = statusError.ErrorMessage;
             }
             else StatusError = "";
-            if (customerwishesError != null)
-            {
+            if(customerwishesError != null) {
                 CustomerWishesError = customerwishesError.ErrorMessage;
             }
             else CustomerWishesError = "";

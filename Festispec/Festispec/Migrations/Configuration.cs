@@ -81,8 +81,7 @@
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
-                { "t2", "Tabel vraag X2"},
-                { "t3", "Tabel vraag X3"  },
+                { "tv", "Tabel vraag"  },
                 { "tx", "Pure text" }
             };
 
