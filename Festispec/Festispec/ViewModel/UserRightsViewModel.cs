@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -12,8 +13,15 @@ namespace Festispec.ViewModel
     public class UserRightsViewModel : ViewModelBase
     {
         public ObservableCollection<AccountViewModel> Accounts;
-        public ObservableCollection<RollenViewModel> Rollen;
+        public ObservableCollection<RollenViewModel> Roles { get; set; }
+        public ObservableCollection<string> RolItems { get; set; }
         private List<AccountViewModel> filteredAccounts;
+        private List<RollenViewModel> currentRollen;
+        public List<string> RolsString;
+
+
+        public UserRightsViewModel()
+        { }
 
         public List<AccountViewModel> FilteredAccounts
         {
@@ -21,6 +29,16 @@ namespace Festispec.ViewModel
             set
             {
                 filteredAccounts = value;
+                RaisePropertyChanged("FilteredAccounts");
+            }
+        }
+
+        public List<RollenViewModel> CurrentRoles
+        {
+            get => currentRollen;
+            set
+            {
+                currentRollen = value;
                 RaisePropertyChanged("FilteredAccounts");
             }
         }
@@ -44,8 +62,10 @@ namespace Festispec.ViewModel
         public UserRightsViewModel(NavigationService service, UserRepository repo) 
         {
             Accounts = new ObservableCollection<AccountViewModel>(repo.GetUsers().Select(c => new AccountViewModel(c)).ToList());
-            Rollen = new ObservableCollection<RollenViewModel>(repo.GetRols().Select(c => new RollenViewModel(c)).ToList());
+            Roles = new ObservableCollection<RollenViewModel>(repo.GetRols().Select(c => new RollenViewModel(c)).ToList());
+
             FilteredAccounts = Accounts.ToList();
+            CurrentRoles = Roles.ToList();
 
 
             SearchButtonClickCommand = new RelayCommand<string>(FilterAccounts);
