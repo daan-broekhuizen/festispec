@@ -6,11 +6,14 @@ using Festispec.Service;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
-using Festispec.ViewModel.Components.Charts.Data;
+using Festispec.ViewModel.TemplateViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -79,12 +82,12 @@ namespace Festispec.ViewModel.RapportageViewModels
         
         public bool IsChartVisible
         {
-            get => IsEditable && _mode == EnumTemplateMode.SELECT;
+            get => IsEditable && (_mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH);
         }
 
         public bool IsSelectMode
         {
-            get => _mode == EnumTemplateMode.SELECT;
+            get => _mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH;
         }
 
         private bool _displayExtraOptions;
@@ -116,26 +119,24 @@ namespace Festispec.ViewModel.RapportageViewModels
                 object[] parameters = (object[])navigationService.Parameter;
 
                 _mode = (EnumTemplateMode)parameters[0];
+
                 if (parameters.Length > 1)
                 {
-                    if (parameters[1] is RapportTemplate)
+                    for (int i = 1; i < parameters.Length; i++)
                     {
-                        _template = (RapportTemplate)parameters[1];
-                        Content = _template.TemplateText;
-                    }
-                    else if(parameters[1] is JobViewModel)
-                    {
-                        _job = (JobViewModel)parameters[1];
-                        Content = _job.Report;
-                    }
-                }
+                        if(parameters[i] is RapportTemplate)
+                        {
+                            _template = (RapportTemplate)parameters[i];
 
-                if(parameters.Length > 2)
-                {
-                    if(parameters[2] is JobViewModel)
-                    {
-                        _job = (JobViewModel)parameters[2];
-                        Content = _job.Report;
+                            Content = _template.TemplateText;
+                        }
+                        else if(parameters[i] is JobViewModel)
+                        {
+                            _job = (JobViewModel)parameters[i];
+
+                            if(_mode != EnumTemplateMode.SWITCH && !string.IsNullOrEmpty(_job.Report))
+                                Content = _job.Report;
+                        }
                     }
                 }
 
@@ -148,7 +149,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             FontTypeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontType((string)parameters[1]));
             FontSizeChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontSize((string)parameters[1]));
             FontColorChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ApplyFontColor((Color)parameters[1]));
-            SwitchTemplateCommand = new RelayCommand(() => { throw new NotImplementedException(); });
+            SwitchTemplateCommand = new RelayCommand(() => { _navigationService.NavigateTo("RapportageTemplateOverview", new object[2] { EnumTemplateMode.SWITCH, _job }); });
             AddImageCommand = new RelayCommand<DocumentDesigner>((designer) => AddImage(designer.ViewModel));
             CreateChartCommand = new RelayCommand<object[]>((parameters) => CreateChart(((DocumentDesigner)parameters[0]).ViewModel, (string)parameters[1]));
             ExtraOptionsCommand = new RelayCommand(() => DisplayExtraOptions = !DisplayExtraOptions);
@@ -195,7 +196,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             ChartDialogBox chartDialog = new ChartDialogBox();
             chartDialog.ViewModel.AddRequested += AddChartRequested;
-            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID));
+            chartDialog.ViewModel.Create(designer, mode, _repo.GetOpdracht(_job.JobID), _repo);
 
             chartDialog.ShowDialog();
         }
@@ -236,7 +237,7 @@ namespace Festispec.ViewModel.RapportageViewModels
                     _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
                 }
             }
-            else if(_mode == EnumTemplateMode.SELECT)
+            else if(_mode == EnumTemplateMode.SELECT || _mode == EnumTemplateMode.SWITCH)
             {
                 if(_job != null)
                 {
@@ -251,17 +252,59 @@ namespace Festispec.ViewModel.RapportageViewModels
         {
             designer.UpdateContent();
 
-            byte[] data = designer.ExportToPdf();
+            byte[] data = designer.ExportToPdf(document => GenerateInspectionForm(document));
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "pdf files (*.pdf)|*.pdf" })
             {
-                Filter = "pdf files (*.pdf)|*.pdf"
-            };
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Stream dataStream = saveFileDialog.OpenFile())
+                        dataStream.Write(data, 0, data.Length);
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    Process.Start(saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void GenerateInspectionForm(PdfDocument document)
+        {
+            if (!ShouldAddResults)
+                return;
+
+            foreach(Account account in _repo.GetInspectorsWithFilledAnswers())
             {
-                using (Stream dataStream = saveFileDialog.OpenFile())
-                    dataStream.Write(data, 0, data.Length);
+                PdfPage page = document.AddPage();
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+
+                // Fonts
+                XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
+                XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
+                XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
+
+                // Inspecteur
+                gfx.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
+
+                // Vragen
+                int currentY = 60;
+                List<Vraag> questions = _repo.GetQuestionsFromInspector(account.AccountID, _job.JobID);
+
+                for(int i = 0; i < questions.Count; i++)
+                {
+                    Vraag question = questions[i];
+
+                    gfx.DrawString($"Vraag {i + 1}: {question.Vraagstelling}", normalFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                    currentY += 20;
+
+                    List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
+
+                    for (int j = 0; j < answers.Count; j++)
+                    {
+                        Antwoorden answer = answers[j];
+                        gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                        currentY += 40;
+                    }
+
+                }
             }
         }
     }

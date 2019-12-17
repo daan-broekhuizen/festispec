@@ -19,7 +19,7 @@ namespace Festispec.WebApplication.Controllers
         {
             DateTime date = DateTime.Parse(datestring);
             _repo = new AvailabilityRepository();
-            Beschikbaarheid_inspecteurs bi = new Beschikbaarheid_inspecteurs();
+            BeschikbaarheidInspecteurs bi = new BeschikbaarheidInspecteurs();
             bi.MedewerkerID = 1;
             bi.Datum = date;
             _repo.CreateAvailability(bi);
@@ -32,7 +32,7 @@ namespace Festispec.WebApplication.Controllers
         {
             DateTime date = Convert.ToDateTime(datestring);
             _repo = new AvailabilityRepository();
-            Beschikbaarheid_inspecteurs bi = new Beschikbaarheid_inspecteurs();
+            BeschikbaarheidInspecteurs bi = new BeschikbaarheidInspecteurs();
             bi.MedewerkerID = 1;
             bi.Datum = date;
             _repo.DeleteAvailability(bi);

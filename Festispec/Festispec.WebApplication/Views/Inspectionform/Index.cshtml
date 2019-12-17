@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Festispec.WebApplication.Models.Inspectieformulier>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Opdracht.OpdrachtNaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InspectieFormulierTitel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumInspectie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EindTijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Straatnaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Huisnummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Beschrijving)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaatsteWijziging)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BenodigdeInspecteurs)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opdracht.OpdrachtNaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InspectieFormulierTitel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumInspectie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EindTijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Straatnaam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Huisnummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Beschrijving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LaatsteWijziging)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BenodigdeInspecteurs)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id=item.InspectieformulierID }) 
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

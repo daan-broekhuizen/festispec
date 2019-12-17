@@ -1,0 +1,175 @@
+﻿@model Festispec.WebApplication.Models.InspectionformViewModel
+
+@{
+	ViewBag.Title = "Inspectieformulier";
+}
+
+
+@section Style{
+	<link href="~/Content/CSS Views/Inspectionform.css" rel="stylesheet" />
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<title>Details</title>
+</head>
+<body>
+	<div class="col-md-12">
+		<br />
+			<div class="progress-container">
+				<img src="~/Content/CSS Views/festispec_logo.png" />
+				<progress value="@Model.CompletedQuestions" max="@Model.Questions.Count()"></progress>
+			</div>		
+		<br />		
+
+		<div class="inspection-info">
+			<div class="inspection-data">
+				@if (Model.LogoString != null)
+				{
+					<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
+
+				}
+				<h3><b>@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
+				<p><b>Datum inspectie:</b> @Model.Inspectionform.DatumInspectie</p>
+				<p>
+					<b>Festival locatie:</b>
+					@Model.Inspectionform.Straatnaam
+					@Model.Inspectionform.Huisnummer in
+					@Model.Inspectionform.Stad
+				</p>
+			</div>
+
+			<div class="description-container">
+				<button type="button" class="collapsible">
+					Instructies vragenlijst
+				</button>
+				<div class="content">
+					<p>@Model.Inspectionform.Beschrijving</p>
+				</div>
+			</div>
+		</div>
+		<br />
+
+	</div>
+	<div>
+		@foreach (var questionVM in Model.Questions)
+		{
+			<div class="col-md-12">
+				<div class="question-container">
+					<button type="button" class="@(questionVM.IsAnswered ? "collapsible-answered" : "collapsible")">
+						#@questionVM.Question.VraagID @questionVM.Question.Vraagstelling
+					</button>
+					<div class="content">
+						@using (Html.BeginForm("Details", "Inspectionform", questionVM, FormMethod.Post, new { enctype = "multipart/form-data" }))
+						{
+							@Html.HiddenFor(model => questionVM.Answer.InspecteurID)
+							@Html.HiddenFor(model => questionVM.Answer.VraagID)
+							@Html.HiddenFor(model => questionVM.Answer.AntwoordNummer)
+							@Html.HiddenFor(model => questionVM.QuestionId)
+
+							if (questionVM.Question.AfbeeldingURL != null)
+							{
+								<p><b>Bijgevoegde afbeelding:</b></p>
+								<img src="https://@questionVM.Question.AfbeeldingURL" style="padding: 10px;" />
+							}
+							switch (questionVM.Question.Vraagtype)
+							{
+								case "ov":
+									<p><b>Jouw antwoord:</b></p>
+									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
+									break;
+								case "mv":
+									if (questionVM.AnswerText != null)
+									{
+										<p><b>Gekozen antwoord:</b></p>
+										<p><i>@questionVM.AnswerText</i></p>
+									}
+									else
+									{ <p><b>Selecteer een antwoord:</b></p> }
+									@Html.DropDownListFor(model => questionVM.AnswerText, questionVM.PossibleAnswers, htmlAttributes: new { style = "padding: 5px; font-size: 18px; width: 85%; max-width: 85%;" })
+									break;
+								case "av":
+									if (questionVM.Answer.AntwoordImage != null)
+									{
+										<p><b>Gekozen afbeelding:</b></p>
+										<img src="data:image;base64,@System.Convert.ToBase64String(questionVM.Answer.AntwoordImage)" style="padding: 10px" />
+									}
+									<p><b>Selecteer een afbeelding:</b></p>
+									@Html.TextBoxFor(model => questionVM.ImageFile, new { type = "file", accept = ".jpg, .jpeg, .gif, .png" })
+									break;
+								case "sv":
+									<p><b>Selecteer een optie:</b></p>
+									<div class="scale-question">
+										@foreach (var option in questionVM.Question.VraagMogelijkAntwoord)
+										{
+											<div class="scale-option">
+												@Html.RadioButtonFor(model => questionVM.AnswerText, option.AntwoordText) @(option.AntwoordText)
+											</div>
+										}
+									</div>
+									break;
+								case "tv":
+									<table class="table table-hover">
+										<tr>
+											@foreach (var header in questionVM.Question.VraagMogelijkAntwoord)
+											{
+												<th style="width:33%;">
+													@header.AntwoordText
+												</th>
+											}
+										</tr>
+										@for (int i = 0; i < questionVM.TableAnswers.Count(); i += questionVM.Question.VraagMogelijkAntwoord.Count())
+										{
+											<tr>
+												@for(int j = 0; j < questionVM.Question.VraagMogelijkAntwoord.Count(); j++)
+												{
+													<td>
+														@Html.HiddenFor(model => questionVM.TableAnswers[i + j].Id)
+														@Html.TextAreaFor(model => questionVM.TableAnswers[i + j].Text, new { style = "width:100%;" })
+													</td>
+												}
+											</tr>
+										}
+									</table>
+									break;
+							}
+							if (Model.IsEditable && questionVM.Question.Vraagtype != "tx") { <input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />}
+						}
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		for (var i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+							this.classList.toggle("active");
+							var content = this.nextElementSibling;
+							if (content.style.display === "block") {
+								content.style.display = "none";
+							} else {
+								content.style.display = "block";
+							}
+						});
+		}
+
+		var coll = document.getElementsByClassName("collapsible-answered");
+		for (var i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+							this.classList.toggle("active");
+							var content = this.nextElementSibling;
+							if (content.style.display === "block") {
+								content.style.display = "none";
+							} else {
+								content.style.display = "block";
+							}
+						});
+		}
+	</script>
+</body>
+</html>
+
