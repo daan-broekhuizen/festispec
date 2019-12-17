@@ -23,6 +23,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ICommand SaveDetailsCommand { get; set; }
         public ICommand ToJobCommand { get; set; }
         public ICommand DeleteInspectionFormCommand { get; set; }
+        public ICommand GenerateScheduleCommand { get; set; }
 
         private NavigationService _navigationService;
 
@@ -68,8 +69,19 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetailsAsync);
             ToJobCommand = new RelayCommand(ToJobView);
             DeleteInspectionFormCommand = new RelayCommand(DeleteInspectionForm);
+            GenerateScheduleCommand = new RelayCommand(GenerateSchedule);
         }
 
+        public void GenerateSchedule()
+        {
+            if (City != null && Street != null && HouseNumber != null && RequiredInspectors != null)
+            {
+                PlanningViewModel pvm = new PlanningViewModel();
+                int ri = RequiredInspectors ?? default(int);
+                pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri);
+            }
+            
+        }
         private void GetInspectionForms()
         {
             List<Inspectieformulier> inspectionForms = new List<Inspectieformulier>(_repo.GetInspectieformulier(_jobID));

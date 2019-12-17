@@ -550,6 +550,9 @@
   <ItemGroup>
     <Resource Include="Images\EditIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calendar_black.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -257,14 +257,9 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Black" BorderThickness="1">
-                                    <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Visible">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"/>
-                                        <ColumnDefinition Width="13*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray" VerticalAlignment="Center"/>
-                                    <TextBlock Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Left" Background="White" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
-                                </Grid>
+                                    <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="200" Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                        <TextBlock Text="{Binding AnwserTextString}" Grid.Column="0" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -286,6 +281,7 @@
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.75*"/>
                 <RowDefinition Height="0.75*"/>
                 <RowDefinition Height="0.75*"/>
                 <RowDefinition Height="8.3*"/>
@@ -354,7 +350,36 @@
                     <TextBlock Text="Nieuw inspectieformulier" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
                 </Grid>
             </Button>
-            <Grid Grid.Row="3">
+            <Button Grid.Row="3" Command="{Binding GenerateScheduleCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/Calendar_black.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Planning genereren" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
+            <Grid Grid.Row="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
@@ -425,7 +450,7 @@
                     </Button.Style><Label Content="Opslaan" FontWeight="Bold" FontSize="20"/>
                 </Button>
             </Grid>
-            <Button Grid.Row="4" Command="{Binding Path = ToEditCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10.4,-0.4,-0.4">
+            <Button Grid.Row="5" Command="{Binding Path = ToEditCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10.4,-0.4,-0.4">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="{x:Null}" />
