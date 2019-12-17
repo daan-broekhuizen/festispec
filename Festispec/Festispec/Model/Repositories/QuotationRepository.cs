@@ -15,6 +15,40 @@ namespace Festispec.Model.Repositories
                 return context.Offerte.Include("Opdracht.Klant").ToList();
             }
         }
+
+        public List<Offerte> GetLatestQuotationForEachJob(DateTime startDate, DateTime endDate)
+        {
+            List<Offerte> offertes = new List<Offerte>();
+
+            List<Opdracht> quotations = new List<Opdracht>();
+            using(FestispecContext context = new FestispecContext())
+            {
+                quotations = context.Opdracht.Where(x => x.Status == "Offerte geaccepteerd").ToList();
+            }
+
+
+            foreach (Opdracht job in quotations)
+            {
+                using (FestispecContext context = new FestispecContext())
+                {
+                    offertes.Add(context.Offerte.Where(x => x.OpdrachtID == job.OpdrachtID && x.Aanmaakdatum >= startDate && x.Aanmaakdatum <= endDate).OrderByDescending(x => x.Aanmaakdatum).Take(1).FirstOrDefault());
+                }
+            }
+
+            return offertes;
+        }
+
+        public Offerte GetOpdracht(DateTime startDate, DateTime endDate)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Offerte.Include("Opdracht")
+                    .Where(e => e.Aanmaakdatum > startDate && e.Aanmaakdatum < endDate)
+                    .OrderByDescending(x => x.Aanmaakdatum)
+                    .Take(1).FirstOrDefault();
+            }
+        }
+
         public Opdracht GetJob(int jobId)
         {
             using(FestispecContext context = new FestispecContext())

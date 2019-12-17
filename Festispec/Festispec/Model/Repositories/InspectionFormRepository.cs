@@ -9,7 +9,13 @@ namespace Festispec.Model.Repositories
 {
     public class InspectionFormRepository : IInspectionFormRepository
     {
-        
+        public List<Inspectieformulier> GetAllInspectieFormulieren()
+        {
+            using(FestispecContext context = new FestispecContext())
+            {
+                return context.Inspectieformulier.ToList();
+            }
+        }
 
         public int CreateInspectieFormulier(Inspectieformulier inspec)
         {

@@ -9,6 +9,13 @@ namespace Festispec.ViewModel
 {
     public class PlanningViewModel
     {
+        /// <summary>
+        /// Maakt een planning aan voor alle beschikbare inspecteurs
+        /// </summary>
+        /// <param name="id">Het ID van het festival</param>
+        /// <param name="destination">De bestemming van het festival</param>
+        /// <param name="inspectorNeeded">Hoeveelheid benodigde inspectoren</param>
+        /// <returns></returns>
         public async Task<List<Account>> GetInspectorAsync(int id, string destination, int inspectorNeeded)
         {
             PlanningRepository repo = new PlanningRepository();
@@ -51,6 +58,11 @@ namespace Festispec.ViewModel
                         inspectors.Add(accounts[i]);
                 }
             }
+
+            // Alles toevoegen aan de ingeplande inspecteurs YA GET MEE
+            foreach (Account result in inspectors)
+                repo.AddToPlanning(result.AccountID, id);
+            
 
             return inspectors;
         }

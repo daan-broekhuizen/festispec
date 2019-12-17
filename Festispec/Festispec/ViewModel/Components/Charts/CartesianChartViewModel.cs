@@ -1,4 +1,5 @@
-﻿using Festispec.ViewModel.Components.Charts.Data;
+﻿using Festispec.Model.Enums;
+using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using System;
@@ -6,17 +7,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Festispec.ViewModel.Components.Charts
 {
     public class CartesianChartViewModel : BaseChartViewModel
     {
-        public override void ApplyColor(){}
-
         public Axis XAxis { get; set; }
         public Axis YAxis { get; set; }
 
-        public CartesianChartViewModel(GeneralChartData data) : base(data)
+        public string XAxisTitle
+        {
+            get => XAxis != null ? XAxis.Title : "";
+            set
+            {
+                if (XAxis != null)
+                    XAxis.Title = value;
+            }
+        }
+
+        public string YAxisTitle
+        {
+            get => YAxis != null ? YAxis.Title : "";
+            set
+            {
+                if (YAxis != null)
+                    YAxis.Title = value;
+            }
+        }
+
+        public IList<string> XAxisLabels
+        {
+            get => XAxis != null ? XAxis.Labels : new List<string>();
+            set
+            {
+                if (XAxis != null)
+                    XAxis.Labels = value;
+            }
+        }
+
+        public IList<string> YAxisLabels
+        {
+            get => YAxis != null ? YAxis.Labels : new List<string>();
+            set
+            {
+                if (YAxis != null)
+                    YAxis.Labels = value;
+            }
+        }
+
+        public CartesianChartViewModel() : base()
+        {
+            Labels.Add("Test1");
+            Labels.Add("Test2");
+
+            Values.Add(10);
+            Values.Add(20);
+        }
+
+        public CartesianChartViewModel(List<string> labels, List<double> values) : base(labels, values)
         {
         }
 
@@ -29,9 +78,49 @@ namespace Festispec.ViewModel.Components.Charts
                 AxisY = new AxesCollection()
             };
 
+            XAxis = new Axis();
+            YAxis = new Axis();
+
+            cc.AxisX.Clear();
+            cc.AxisX.Add(XAxis);
+
+            cc.AxisY.Clear();
+            cc.AxisY.Add(YAxis);
+
             _control = cc;
 
             return cc;
+        }
+
+        public override void CreateCollection() { }
+
+        public override void Configure()
+        {
+            base.Configure();
+
+            Configuration.Update(EnumChartConfiguration.AXIS, true);
+        }
+
+        public override void OnConfigurationOptionChanged(EnumChartConfiguration key, object value)
+        {
+            switch(key)
+            {
+                case EnumChartConfiguration.XAXISTITLE:
+                    XAxisTitle = (string)value;
+
+                    break;
+                case EnumChartConfiguration.YAXISTITLE:
+                    YAxisTitle = (string)value;
+
+                    break;
+                case EnumChartConfiguration.XAXISLABELS:
+                    XAxisLabels = (List<string>)value;
+
+                    break;
+                case EnumChartConfiguration.YAXISLABELS:
+                    YAxisLabels = (List<string>)value;
+                    break;
+            }
         }
     }
 }

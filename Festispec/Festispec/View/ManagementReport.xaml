@@ -1,0 +1,84 @@
+﻿<Page x:Class="Festispec.View.ManagementReport"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:components="clr-namespace:Festispec.View.Components"
+      xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManagementReport"
+      DataContext="{Binding Management, Source={StaticResource Locator}}">
+
+    <Grid Name="controlContainer" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <components:OverviewHeader x:Name="header" PageName="Management Rapport" Grid.Row="0" />
+
+        <Grid Background="#f0f0f0" Grid.Row="1">
+            <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="5" />
+                </Grid.ColumnDefinitions>
+
+                <DatePicker Grid.Column="1" SelectedDate="{Binding StartDate}" Padding="5 10" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+
+                <ComboBox Grid.Column="3" SelectedItem="{Binding SelectedItem}" SelectedIndex="2" Padding="5" VerticalAlignment="Center" Style="{StaticResource ComboBoxFlatStyle}">
+                    <ComboBoxItem Content="Week"/>
+                    <ComboBoxItem Content="Maand"/>
+                    <ComboBoxItem Content="Jaar"/>
+                </ComboBox>
+
+                <Button Name="controlExport" Grid.Column="5" Padding="5" VerticalAlignment="Center" Background="White" Content="Export" Command="{Binding ExportCommand}" CommandParameter="{Binding ElementName=controlContainer}" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="31*" />
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="40*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <ContentControl x:Name="controlPieChart" Content="{Binding PieChartControl}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+            <ContentControl x:Name="controlInspectionChart" Content="{Binding InspectionChartControl}" Grid.Row="0" Grid.Column="2" />
+            <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  />
+
+            <Grid x:Name="LayoutRoot" Background="White" Grid.Row="1" Grid.Column="2">
+                <m:Map CredentialsProvider="AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU" 
+               Center="52.147540, 5.258791" ZoomLevel="6" Margin="0,0,0,-0.4">
+                    <m:Map.Children>
+                        <m:MapItemsControl ItemsSource="{Binding PushpinList}"/>
+                    </m:Map.Children>
+                </m:Map>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

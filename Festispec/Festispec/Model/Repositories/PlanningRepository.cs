@@ -12,28 +12,19 @@ namespace Festispec.Model.Repositories
             {
                 SqlParameter param = new SqlParameter("@ID", id);
 
-                return context.Database.SqlQuery<Account>("GetInspectors @ID", param).ToList();
+                return context.Database.SqlQuery<Account>("sp_GetInspectors @ID", param).ToList();
             }
         }
 
-        public void Test()
+        public void AddToPlanning(int accountId, int formulierId)
         {
-            Inspectieformulier inspec = new Inspectieformulier()
-            {
-                InspectieformulierID = 2,
-                InspectieFormulierTitel = "testje"
-
-                
-            };
             using (FestispecContext context = new FestispecContext())
             {
-
-
-                var formulier = context.Inspectieformulier.Find(1);
-
-                var account = context.Account.Find(3);
+                Inspectieformulier formulier = context.Inspectieformulier.Find(formulierId);
+                Account account = context.Account.Find(accountId);
 
                 formulier.Ingepland.Add(account);
+                context.SaveChanges();
             }
         }
     }
