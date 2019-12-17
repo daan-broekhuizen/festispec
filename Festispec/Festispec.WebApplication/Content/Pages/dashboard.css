@@ -9,39 +9,62 @@ img {
 
 #logo img 
 {
-    max-width: 80%;
-    margin-top: 10px;
+    width: 100%;
+	margin: 20px 0;
+	left: 0;
+}
+
+.task
+{
+
 }
 
 .task img 
 {
-    max-width: 50px;
+    max-height: 20px;
 }
 
 .col-md-6 .row 
 {
-    margin: 10px;
-    padding: 10px; 
     background-color: lightgrey;
+	margin: 20px 20px 10px 20px;
+	padding: 10px;
+	max-height: 45px;
 }
+
+
+
+	button {
+		margin-right: 10px;
+		border:none;
+		background:none;
+	}
 
 .upcoming-tasks 
 {
+	text-align:left;
+	padding: 10px;
+	margin-bottom: 10px;
     background-color: white;
+	width: 100%;
+	height: 280px;
 }
 
 .all-tasks 
 {
-    padding: 10px 0 10px 0;
-    font-size: 2em;
+    font-size: 1.4em;
+	position: absolute;
+	padding: 10px;
+	bottom: 5px;
 }
 
 .big-buttons 
 {
-    margin-top: 20px;
+	height: 20%;
+	bottom: 0;
 }
 
 .big-buttons img
 {
-    width: 150px;
+    width: 100%;
 }

@@ -41,7 +41,7 @@ namespace Festispec.WebApplication.Controllers
             ModelState.Clear();
 
             Vraag question = _formRepo.GetQuestion(questionVM.QuestionId);
-            if (question.Vraagtype != "t2")
+            if (question.Vraagtype != "tv")
                 AddOrUpdateSingleAnswer(questionVM);
             else
                 AddOrUpdateTableAnswers(questionVM, question);
@@ -133,9 +133,9 @@ namespace Festispec.WebApplication.Controllers
                     
                 else
                 {
-                    if(q.Question.Vraagtype == "t2") InitTableAnswers(q, userId);
+                    if(q.Question.Vraagtype == "tv") InitTableAnswers(q, userId);
                     q.AnswerText = q.Answer.AntwoordText;
-                    if (q.AnswerText != null || q.Answer.AntwoordImage != null)
+                    if (q.AnswerText != null || q.Answer.AntwoordImage != null || q.Question.Vraagtype == "tx")
                     {
                         formVM.CompletedQuestions += 1;
                         q.IsAnswered = true;    

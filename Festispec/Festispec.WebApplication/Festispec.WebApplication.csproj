@@ -161,6 +161,7 @@
     <Resource Include="Content\Images\Profile.png" />
     <Resource Include="Content\Images\Search.png" />
     <Resource Include="Content\Images\User.png" />
+    <Content Include="Content\Images\dashboard image.png" />
     <Content Include="Content\Pages\assignment_search.css" />
     <Content Include="Content\Pages\dashboard.css" />
     <Content Include="Content\fontawesome\font-awesome.css" />

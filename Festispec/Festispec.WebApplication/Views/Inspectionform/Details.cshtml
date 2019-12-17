@@ -81,9 +81,6 @@
 									<p><b>Jouw antwoord:</b></p>
 									@Html.TextAreaFor(model => questionVM.AnswerText, htmlAttributes: new { style = "font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
 									break;
-								case "tx":
-									@Html.LabelFor(model => questionVM.AnswerText, htmlAttributes: new { style = "font-size: 18px; width: 85%; max-width: 85%; min-height: 150px;" })
-									break;
 								case "mv":
 									if (questionVM.AnswerText != null)
 									{
@@ -114,7 +111,7 @@
 										}
 									</div>
 									break;
-								case "t2":
+								case "tv":
 									<table class="table table-hover">
 										<tr>
 											@foreach (var header in questionVM.Question.VraagMogelijkAntwoord)
@@ -139,7 +136,7 @@
 									</table>
 									break;
 							}
-							if (Model.IsEditable) { <input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />}
+							if (Model.IsEditable && questionVM.Question.Vraagtype != "tx") { <input type="image" class="answersave" src="~/Content/CSS Views/Save-icon.png" />}
 						}
 					</div>
 				</div>
