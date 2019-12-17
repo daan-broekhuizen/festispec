@@ -114,7 +114,7 @@ namespace Festispec.WebApplication.Controllers
                 q.QuestionId = q.Question.VraagID;
                 q.TableAnswers = new List<TableAnswerViewModel>();
 
-                if (q.Answer == null)
+                if (q.Answer == null && q.Question.Vraagtype != "tx")
                 {
                     q.Answer = new Antwoorden()
                     {
@@ -134,8 +134,8 @@ namespace Festispec.WebApplication.Controllers
                 else
                 {
                     if(q.Question.Vraagtype == "tv") InitTableAnswers(q, userId);
-                    q.AnswerText = q.Answer.AntwoordText;
-                    if (q.AnswerText != null || q.Answer.AntwoordImage != null || q.Question.Vraagtype == "tx")
+                    if(q.Question.Vraagtype != "tx") q.AnswerText = q.Answer.AntwoordText;
+                    if (q.Question.Vraagtype == "tx" || q.AnswerText != null || q.Answer.AntwoordImage != null)
                     {
                         formVM.CompletedQuestions += 1;
                         q.IsAnswered = true;    
