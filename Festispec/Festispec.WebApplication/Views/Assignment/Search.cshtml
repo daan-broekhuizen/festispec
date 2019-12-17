@@ -43,9 +43,9 @@
 
             </div>
             <div class="col-md-3">
-                <button>
-                    @Html.ActionLink("Meer Info", "Details", new { id = item.InspectieformulierID })
-                </button>
+				<button>
+					@Html.ActionLink("Meer info", "Details", "Inspectionform", new { inspectionId = item.InspectieformulierID, userId = (int?) Session["user"] }, null)
+				</button>
             </div>
         </div>
     </div>
