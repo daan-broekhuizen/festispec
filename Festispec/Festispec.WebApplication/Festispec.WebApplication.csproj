@@ -176,6 +176,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\FestiSpec2019q - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Calendar\baseCalendar.js" />
     <Content Include="Scripts\collapsible.js" />
