@@ -351,9 +351,7 @@ namespace Festispec.ViewModel
             _uRepo.GetUsers().ForEach(async e =>
             {
                 if (e.Stad == null)
-                {
                     return;
-                }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
                 AddPushPin(new SolidColorBrush(Color.FromArgb(100, 255, 0, 0)), address);
@@ -363,9 +361,7 @@ namespace Festispec.ViewModel
             _cRepo.GetCustomers().ForEach(async e =>
             {
                 if (e.Stad == null)
-                {
                     return;
-                }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
                 AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 255, 0)), address);
@@ -374,10 +370,8 @@ namespace Festispec.ViewModel
 
             _iRepo.GetAllInspectieFormulieren().ForEach(async e =>
             {
-                if(e.Stad == null)
-                {
+                if (e.Stad == null)
                     return;
-                }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
                 AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 0, 255)), address);

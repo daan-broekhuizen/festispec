@@ -313,9 +313,6 @@
     <Compile Include="ViewModel\JobInfoViewModel.cs" />
     <Compile Include="ViewModel\JobListViewModel.cs" />
     <Compile Include="ViewModel\JobViewModel.cs" />
-    <Compile Include="View\Heatmap.xaml.cs">
-      <DependentUpon>Heatmap.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\JobInfoView.xaml.cs">
       <DependentUpon>JobInfoView.xaml</DependentUpon>
     </Compile>
@@ -377,10 +374,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Components\SaveDialogBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\Heatmap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
