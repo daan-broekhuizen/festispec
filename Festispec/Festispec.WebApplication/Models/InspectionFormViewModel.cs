@@ -9,16 +9,7 @@ namespace Festispec.WebApplication.Models
     {
         public Inspectieformulier Inspectionform { get; set; }
         public List<QuestionViewModel> Questions { get; set; }
-        public string LogoString
-        {
-            get
-            {
-                if (Inspectionform.Opdracht.Klant.Klant_logo != null)
-                    return Convert.ToBase64String(Inspectionform.Opdracht.Klant.Klant_logo);
-                else
-                    return null;
-            }
-        }
+        public string LogoString => Inspectionform.Opdracht.Klant.Klant_logo != null ? Convert.ToBase64String(Inspectionform.Opdracht.Klant.Klant_logo) : null;
         public int CompletedQuestions { get; set; }
         public bool IsEditable => DateTime.Now.Date == Inspectionform.DatumInspectie;
         

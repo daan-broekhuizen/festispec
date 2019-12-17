@@ -32,13 +32,13 @@
 						counter++;
 						<div class="row">
 							<div class="task">
-								<div class="col-md-2 col-sm-2">
+								<div class="col-md-2 col-sm-1">
 									<img src="~/Content/Images/Dashboard_background.png" />
 								</div>
-								<div class="col-md-5 col-sm-5">
+								<div class="col-md-5 col-sm-1">
 									<p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.DatumInspectie)</p>
 								</div>
-								<div class="col-md-5 col-sm-5">
+								<div class="col-md-5 col-sm-1">
 									<button>
 										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.InspectieformulierID, userId = @Model.Account.AccountID }, null)
 									</button>

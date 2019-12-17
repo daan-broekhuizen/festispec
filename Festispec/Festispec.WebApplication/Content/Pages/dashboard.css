@@ -22,6 +22,7 @@ img {
 .task img 
 {
     max-height: 20px;
+	max-width:40px;
 }
 
 .col-md-6 .row 
