@@ -10,27 +10,31 @@
         xmlns:converters="clr-namespace:Festispec.Utility.Converters"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ChartDialogBox" Height="500" Width="800">
+        Title="ChartDialogBox" Height="640" Width="800">
     <Window.Resources>
         <ViewModel:ChartDialogViewModel x:Key="ViewModel" />
         <converters:BoolToBoldConverter x:Key="BoolToBoldConverter" />
+        <converters:ConfigurationToVisibilityConverter x:Key="ConfigurationToVisibilityConverter" />
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Label FontWeight="Bold" Content="Preview grafiek" />
+        <StackPanel Grid.Row="0" DataContext="{Binding SelectedQuestion}">
+            <Label FontWeight="Bold" Content="Preview grafiek" FontSize="24" />
 
             <StackPanel Orientation="Horizontal">
-                <Label FontStyle="Italic" Content="Vraag: " />
-                <Label Content="{Binding Title}" />
+                <TextBlock Text="Vraag: " FontSize="16" />
+                <TextBlock Text="{Binding Question}" FontSize="16" />
             </StackPanel>
-            
-            <Label Content="Type: " />
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Type: " FontSize="16" />
+                <TextBlock Text="{Binding TypeDescription}" FontSize="16" />
+            </StackPanel>
         </StackPanel>
 
         <Grid x:Name="controlOptions" Grid.Row="1">
@@ -42,10 +46,14 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid Name="containerChart" Grid.Column="0" Grid.Row="1">
-                
+            <Grid Name="controlGridChart" Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Title}" Grid.Row="0" FontSize="24" />
+                <ContentControl x:Name="controlChart" Grid.Row="1" Content="{Binding Control}" />
             </Grid>
-            <ContentControl x:Name="controlChart" Grid.Column="0" Grid.Row="1" Content="{Binding Control}" />
             <!--
             <lvc:CartesianChart x:Name="controlChart" Grid.Column="0" Grid.Row="0" DataContext="{Binding Chart}" Series="{Binding Collection}">
                 <lvc:CartesianChart.AxisX>
@@ -91,19 +99,32 @@
                     </TextBox>
                 </StackPanel>
 
-                <!-- Kleur -->
-                <StackPanel Margin="5" Grid.Row="2">
-                    <Label Content="Kleur" FontWeight="Bold" FontSize="16" />
-                    <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
+                <!-- Line -->
+                <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=0}">
+                    <Label Content="Lijn Kleur" FontWeight="Bold" FontSize="16" />
+                    <xctk:ColorPicker x:Name="controlForegroundColor" ColorMode="ColorCanvas" SelectedColor="{Binding ForegroundColor, Mode=OneWay}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectedColorChanged">
-                                <i:InvokeCommandAction Command="{Binding ForegroundColorChangedCommand }" CommandParameter="{Binding ElementName=controlColor, Path=SelectedColor}" />
+                                <i:InvokeCommandAction Command="{Binding ForegroundColorChangedCommand }" CommandParameter="{Binding ElementName=controlForegroundColor, Path=SelectedColor}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </xctk:ColorPicker>
                 </StackPanel>
 
-                <StackPanel Margin="5" Grid.Row="3" Orientation="Horizontal">
+                <!-- Background -->
+                <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=1}">
+                    <Label Content="Achtergrondkleur" FontWeight="Bold" FontSize="16" />
+                    <xctk:ColorPicker x:Name="controlBackgroundColor" ColorMode="ColorCanvas" SelectedColor="{Binding BackgroundColor, Mode=OneWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedColorChanged">
+                                <i:InvokeCommandAction Command="{Binding BackgroundColorChangedCommand }" CommandParameter="{Binding ElementName=controlBackgroundColor, Path=SelectedColor}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </xctk:ColorPicker>
+                </StackPanel>
+
+                <!-- Axis-->
+                <StackPanel Margin="5" Grid.Row="4" Orientation="Horizontal" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=2}">
                     <Button Content="X-as" Command="{Binding SwitchAxisCommand}" CommandParameter="X" FontWeight="{Binding IsXAxis, Converter={StaticResource BoolToBoldConverter}}" FontSize="16" Background="Transparent" BorderBrush="Transparent" />
 
                     <Label Content="/" FontWeight="Bold" FontSize="16" />
@@ -112,28 +133,30 @@
                 </StackPanel>
 
                 <!-- Grootte -->
-                <Grid Margin="5" Grid.Row="4">
+                <Grid Margin="5" Grid.Row="5" Visibility="{Binding Configuration, Converter={StaticResource ConfigurationToVisibilityConverter}, ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Content="Grootte" FontWeight="Bold" FontSize="16" Grid.Column="0" Padding="0 0 10 0" />
-                    <TextBox Name="controlSizeX" Grid.Column="1" Visibility="{Binding IsXAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    <TextBox Name="controlSizeY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <Label Content="Tekst" FontWeight="Bold" FontSize="16" Grid.Column="0" Padding="0 0 10 0" />
+                    <TextBox Name="controlTextX" Grid.Column="1" Visibility="{Binding IsXAxis, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding XAxisTextChangedCommand }" CommandParameter="{Binding ElementName=controlTextX, Path=Text}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                    <TextBox Name="controlTextY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding YAxisTextChangedCommand }" CommandParameter="{Binding ElementName=controlTextY, Path=Text}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
                 </Grid>
 
-                <!-- Labels -->
-                <Grid Margin="5" Grid.Row="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Labels" FontWeight="Bold" FontSize="16" Grid.Column="0" Padding="0 0 10 0" />
-                    <CheckBox Name="controlLabelsX" Grid.Column="1" Visibility="{Binding IsXAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    <CheckBox Name="controlLabelsY" Grid.Column="1" Visibility="{Binding IsYAxis, Converter={StaticResource BoolToVisibilityConverter}}" />
-                </Grid>
-
-                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" />
+                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" CommandParameter="{Binding ElementName=controlGridChart}" />
             </Grid>
         </Grid>
     </Grid>
