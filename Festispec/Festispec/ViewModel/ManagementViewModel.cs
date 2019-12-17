@@ -109,11 +109,6 @@ namespace Festispec.ViewModel
             _iRepo = iRepo;
 
             PushpinList = new ObservableCollection<Pushpin>();
-            /*
-                        Pushpin pushpin = new Pushpin();
-                        pushpin.Location = new BingMapsRESTToolkit.Location().Point.Coordinates 
-
-                        PushpinList.Add(pushpin);*/
             SetPushPinsAsync();
 
             ExportCommand = new RelayCommand<FrameworkElement>(Export);
@@ -361,11 +356,8 @@ namespace Festispec.ViewModel
                 }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
-                Pushpin pushpin = new Pushpin();
-                pushpin.Content = query;
-                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
-                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 255, 0, 0));
-                PushpinList.Add(pushpin);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 255, 0, 0)), address);
+
             });
 
             _cRepo.GetCustomers().ForEach(async e =>
@@ -376,11 +368,8 @@ namespace Festispec.ViewModel
                 }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
-                Pushpin pushpin = new Pushpin();
-                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 0, 255, 0));
-                pushpin.Content = query;
-                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
-                PushpinList.Add(pushpin);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 255, 0)), address);
+
             });
 
             _iRepo.GetAllInspectieFormulieren().ForEach(async e =>
@@ -391,13 +380,17 @@ namespace Festispec.ViewModel
                 }
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
-                Pushpin pushpin = new Pushpin();
-                pushpin.Background = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
-                pushpin.Content = query;
-                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
-                PushpinList.Add(pushpin);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 0, 255)), address);
             });
 
+        }
+
+        private void AddPushPin(SolidColorBrush color, BingMapsRESTToolkit.Location address)
+        {
+                Pushpin pushpin = new Pushpin();
+                pushpin.Background = color;
+                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
+                PushpinList.Add(pushpin);
         }
     }
 }
