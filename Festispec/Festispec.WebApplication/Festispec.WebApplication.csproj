@@ -133,35 +133,93 @@
     <Resource Include="Content\CSS Views\festispec_logo.png" />
     <Content Include="Content\CSS Views\Inspectionform.css" />
     <Content Include="Content\CSS Views\Save-icon.png" />
-    <Resource Include="Content\Images\add_customer_logo.png" />
-    <Resource Include="Content\Images\addImageIcon.png" />
-    <Resource Include="Content\Images\Bar_Chart.png" />
-    <Resource Include="Content\Images\Calendar.png" />
-    <Resource Include="Content\Images\Customers.png" />
-    <Resource Include="Content\Images\Dashboard.png" />
-    <Resource Include="Content\Images\Dashboard_background.png" />
-    <Resource Include="Content\Images\Dashboard_customers.png" />
-    <Resource Include="Content\Images\Dashboard_intro.png" />
-    <Resource Include="Content\Images\Dashboard_jobs.png" />
-    <Resource Include="Content\Images\Dashboard_messages.png" />
-    <Resource Include="Content\Images\Dashboard_new_customer.png" />
-    <Resource Include="Content\Images\Dashboard_new_job.png" />
-    <Resource Include="Content\Images\Dashboard_new_quotation.png" />
-    <Resource Include="Content\Images\Dashboard_planning.png" />
-    <Resource Include="Content\Images\Dashboard_quotations.png" />
-    <Resource Include="Content\Images\Dashboard_schedule.png" />
-    <Resource Include="Content\Images\Extra_Chart.png" />
-    <Resource Include="Content\Images\festispec_logo.png" />
-    <Resource Include="Content\Images\Image.png" />
-    <Resource Include="Content\Images\Jobs.png" />
-    <Resource Include="Content\Images\Line_Chart.png" />
-    <Resource Include="Content\Images\Messages.png" />
-    <Resource Include="Content\Images\Pie_Chart.png" />
-    <Resource Include="Content\Images\Plus_icon.png" />
-    <Resource Include="Content\Images\Profile.png" />
-    <Resource Include="Content\Images\Search.png" />
-    <Resource Include="Content\Images\User.png" />
-    <Content Include="Content\Images\dashboard image.png" />
+    <Content Include="Content\Images\add_customer_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\addImageIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Bar_Chart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Calendar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Customers.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_customers.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_intro.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_jobs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_messages.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_new_customer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_new_job.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_new_quotation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_planning.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_quotations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Dashboard_schedule.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Extra_Chart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\festispec logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Jobs.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Line_Chart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Messages.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Pie_Chart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Plus_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Profile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\User.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\dashboard image.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Pages\assignment_search.css" />
     <Content Include="Content\Pages\dashboard.css" />
     <Content Include="Content\fontawesome\font-awesome.css" />
@@ -177,6 +235,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\FestiSpec2019q - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\Calendar\baseCalendar.js" />
     <Content Include="Scripts\collapsible.js" />
