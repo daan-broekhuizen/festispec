@@ -3,6 +3,7 @@ using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
+using Festispec.Utility;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
@@ -271,54 +272,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             if (!ShouldAddResults)
                 return;
 
-            foreach(Account account in _repo.GetInspectorsWithFilledAnswers())
-            {
-                PdfPage page = document.AddPage();
-                XGraphics gfx = XGraphics.FromPdfPage(page);
-
-                // Fonts
-                XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
-                XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
-                XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
-
-                // Inspecteur
-                gfx.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
-
-                // Vragen
-                int currentY = 60;
-                List<Vraag> questions = _repo.GetQuestionsFromInspector(account.AccountID, _job.JobID);
-
-                for(int i = 0; i < questions.Count; i++)
-                {
-                    Vraag question = questions[i];
-
-                    gfx.DrawString($"Vraag {i + 1}: {question.Vraagstelling}", normalFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                    currentY += 20;
-
-                    List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
-
-                    for (int j = 0; j < answers.Count; j++)
-                    {
-                        Antwoorden answer = answers[j];
-
-                        if (answer.AntwoordImage != null)
-                        {
-                            using (MemoryStream ms = new MemoryStream(answer.AntwoordImage))
-                            {
-                                XImage xImage = XImage.FromStream(ms);
-                                gfx.DrawImage(xImage, new XRect(20, currentY, xImage.Width, xImage.Height));
-
-                            }
-
-                        }
-                        else
-                            gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                        currentY += 20;
-                    }
-                    currentY += 20;
-
-                }
-            }
+            new InspectionFormPdf().ExportQuestion(document, _repo, _job.JobID);
         }
     }
 }
