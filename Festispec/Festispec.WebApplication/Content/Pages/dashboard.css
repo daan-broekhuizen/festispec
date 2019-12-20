@@ -1,11 +1,15 @@
 ﻿body 
 {
     background: lightblue url("../Images/Dashboard_background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
-img {
+img 
+{
     width: 100%;
 }
+
 
 #logo img 
 {
@@ -35,11 +39,12 @@ img {
 
 
 
-	button {
-		margin-right: 10px;
-		border:none;
-		background:none;
-	}
+button 
+{
+	margin-right: 10px;
+	border:none;
+	background:none;
+}
 
 .upcoming-tasks 
 {
