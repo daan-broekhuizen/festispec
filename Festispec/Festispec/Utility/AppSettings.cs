@@ -22,6 +22,9 @@ namespace Festispec.Utility
         [JsonProperty("imageShackApiKey")]
         public string ImageShackApiKey { get; set; }
 
+        [JsonProperty("bingApiKey")]
+        public string BingApiKey { get; set; }
+
         [JsonObject]
         public struct User
         {
