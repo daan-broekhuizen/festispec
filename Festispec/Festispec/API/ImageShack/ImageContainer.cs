@@ -14,8 +14,8 @@ namespace Festispec.API.ImageShack
 
         public ImageContainer(string imageLocation, string contentType = "image/png")
         {
-            this.ImageLocation = imageLocation;
-            this.ContentType = contentType;
+            ImageLocation = imageLocation;
+            ContentType = contentType;
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿{
-    "debugMode": false,
-    "startupPage": "",
-    "account": {
-        "username": "HansKlok",
-        "password": "ab123"
-    }
+  "debugMode": false,
+  "startupPage": "",
+  "account": {
+    "username": "HansKlok",
+    "password": "ab123"
+  },
+  "imageShackApiKey": "X6E8H0ZYe639b3a2f1bfaa23a53d87a08c1d006f"
 }

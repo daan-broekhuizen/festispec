@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Festispec.Utility.Builders;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace Festispec.API.ImageShack
 
         public ImageShackClient() : base("https://api.imageshack.com/v2/")
         {
-            this._apiKey = "278AIKMYa765f20c41351c88486f896bff42fe24";
+            _apiKey = (new SettingsBuilder()).Build().ImageShackApiKey;
         }
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace Festispec.API.ImageShack
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>
             {
-                { "api_key", this._apiKey }
+                { "api_key", _apiKey }
             };
 
             return RequestAsJsonObjectFromValue<UploadModel>("images", Method.POST, "result", null, parameters, null, files);
@@ -76,7 +77,7 @@ namespace Festispec.API.ImageShack
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>
             {
-                { "api_key", this._apiKey }
+                { "api_key", _apiKey }
             };
 
             FileData[] fileData = new FileData[fileLocations.Length];
@@ -85,7 +86,8 @@ namespace Festispec.API.ImageShack
             {
                 ImageContainer file = fileLocations[i];
 
-                fileData[i] = new FileData(File.ReadAllBytes(file.ImageLocation), file.ContentType);
+                string filePath = file.ImageLocation.Replace("%20", " ");
+                fileData[i] = new FileData(File.ReadAllBytes(filePath), file.ContentType);
             }
 
             return RequestAsJsonObjectFromValue<UploadModel>("images", Method.POST, "result", null, parameters, null, fileData);
