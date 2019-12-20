@@ -151,7 +151,7 @@
     <Content Include="Content\Images\Dashboard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Dashboard background.png">
+    <Content Include="Content\Images\Dashboard_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Dashboard_customers.png">
@@ -217,7 +217,7 @@
     <Content Include="Content\Images\User.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\dashboard image.png">
+    <Content Include="Content\Images\dashboard_image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Pages\assignment_search.css" />
