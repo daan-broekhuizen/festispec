@@ -23,7 +23,12 @@ namespace Festispec.ViewModel
         public ICommand SaveJobCommand { get; set; }
         public List<string> Customers { get; set; }
         public List<string> Status { get; set; }
-
+        public DateTime MinimalDate
+        {
+            get => DateTime.Today;
+            set
+            { return; }
+        }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -107,6 +112,8 @@ namespace Festispec.ViewModel
             Status = new List<string>();
             Crepo.GetCustomers().ForEach(e => Customers.Add(e.Naam));
             Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+            JobVM.StartDatum = DateTime.Today;
+            JobVM.EindDatum = DateTime.Today;
 
         }
 

@@ -75,7 +75,7 @@
             </Viewbox>
 
             <Viewbox Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left">
-                <DatePicker SelectedDate="{Binding JobVM.StartDatum}">
+                <DatePicker SelectedDate="{Binding JobVM.StartDatum}" DisplayDateStart="{Binding MinimumDate}">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
@@ -91,7 +91,7 @@
             </Viewbox>
 
             <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <DatePicker SelectedDate="{Binding JobVM.EindDatum}">
+                <DatePicker SelectedDate="{Binding JobVM.EindDatum}" DisplayDateStart="{Binding MinimumDate}">
                     <DatePicker.Resources >
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
@@ -159,7 +159,7 @@
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="2" HorizontalAlignment="Right">
-                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
+                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding ShowInspectionFormsCommand}">
                     Inspectieformulier
                 </Button>
             </Viewbox>
