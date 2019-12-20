@@ -302,7 +302,7 @@
 
         private void SeedOpdracht(FestispecContext context)
         {
-            Opdracht[] opdrachten = new Opdracht[1];
+                Opdracht[] opdrachten = new Opdracht[1];
 
                 opdrachten[0] = new Opdracht()
                 {
@@ -318,21 +318,21 @@
                     Klantwensen = "Grondigeinspectievandecateringtenten"
                 };
 
-               /* opdrachten[1] = new Opdracht()
-                {
-                    OpdrachtNaam = "Inspectie Pinkpop",
-                    Status = context.Status.First(x => x.Betekenis == "Inspectieformulier aangemaakt").Betekenis,
-                    CreatieDatum = DateTime.Now,
-                    StartDatum = DateTime.Now.AddMonths(1),
-                    EindDatum = DateTime.Now.AddMonths(1).AddDays(2),
-                    KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == 3216).KlantID,
-                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
-                    GebruikteRechtsgebieden = "Drank en horeca wet",
-                    LaatsteWijziging = DateTime.Now,
-                    Klantwensen = "Totale inspectie van het festival"
-                };*/
+            opdrachten[1] = new Opdracht()
+             {
+                 OpdrachtNaam = "Inspectie Pinkpop",
+                 Status = context.Status.First(x => x.Betekenis == "Inspectieformulier aangemaakt").Betekenis,
+                 CreatieDatum = DateTime.Now,
+                 StartDatum = DateTime.Now.AddMonths(1),
+                 EindDatum = DateTime.Now.AddMonths(1).AddDays(2),
+                 KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == 3216).KlantID,
+                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                 GebruikteRechtsgebieden = "Drank en horeca wet",
+                 LaatsteWijziging = DateTime.Now,
+                 Klantwensen = "Totale inspectie van het festival"
+             };
 
-                context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
+            context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
                 context.SaveChanges();
 
         }
@@ -423,7 +423,7 @@
 
         private void SeedVraag(FestispecContext context)
         {
-            Vraag[] vragen = new Vraag[2];
+            Vraag[] vragen = new Vraag[5];
             vragen[0] = new Vraag()
             {
                 InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
@@ -460,13 +460,121 @@
 
             };
 
+            vragen[4] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Hoe zou jij het het typen mensen die rondlopen op het festival beschrijven?",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 5
+
+            };
+
+            vragen[5] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
+                Vraagstelling = "Op schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden. *1- er is niemand, 5*- Het is redelijk druk, *10- er is geen doorkomen aan",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "sv").Afkorting,
+                VolgordeNummer = 1
+
+            };
+
+            vragen[6] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
+                Vraagstelling = "Geef een indruk van de sfeer impressie bij de eetgelegenheden",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 2
+
+            };
+
+            vragen[7] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Maak een foto van opvallende situaties",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
+                VolgordeNummer = 3
+
+            };
+
+            vragen[8] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Meet de afstand tussen de verschillende food trucks",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 4
+
+            };
+
+            vragen[9] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Teken de algemene stroom van mensen op een kaart, maak hier een foto van",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
+                VolgordeNummer = 5
+
+            };
+
+            vragen[10] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Tel het aantal tafels en zitplaatsen bij de foodtrucks",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 6
+
+            };
+
+            vragen[11] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
+                VolgordeNummer = 7
+
+            };
+
+            vragen[12] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
+                VolgordeNummer = 8
+
+            };
+
+            vragen[13] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
+                VolgordeNummer = 9
+
+            };
+
+            vragen[14] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
+                VolgordeNummer = 10
+
+            };
+
+            vragen[15] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
+                VolgordeNummer = 11
+
+            };
+
             context.Vraag.AddOrUpdate(vragen);
             context.SaveChanges();
         }
 
         private void SeedVraagMogelijkAntwoord(FestispecContext context)
         {
-            VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[4];
+            VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[35];
             antwoorden[0] = new VraagMogelijkAntwoord()
             {
                 VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
@@ -505,8 +613,86 @@
                 };
             }
 
-            
-            
+            for (int i = 0; i < 10; i++)
+            {
+                antwoorden[i + 14] = new VraagMogelijkAntwoord()
+                {
+                    VraagID = context.Vraag.First(x => x.Vraagstelling == "Op schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden. *1- er is niemand, 5*- Het is redelijk druk, *10- er is geen doorkomen aan").VraagID,
+                    AntwoordNummer = i + 1,
+                    AntwoordText = (i + 1).ToString()
+                };
+            }
+
+            antwoorden[25] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos").VraagID,
+                AntwoordNummer = 1,
+                AntwoordText = "act"
+            };
+
+            antwoorden[26] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos").VraagID,
+                AntwoordNummer = 2,
+                AntwoordText = "sfeer"
+            };
+
+            antwoorden[27] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.").VraagID,
+                AntwoordNummer = 1,
+                AntwoordText = "Show"
+            };
+
+            antwoorden[28] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.").VraagID,
+                AntwoordNummer = 2,
+                AntwoordText = "Aantal mensen in rij"
+            };
+
+            antwoorden[29] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)").VraagID,
+                AntwoordNummer = 1,
+                AntwoordText = "Tijd"
+            };
+
+            antwoorden[30] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)").VraagID,
+                AntwoordNummer = 2,
+                AntwoordText = "Drukte"
+            };
+
+            antwoorden[31] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting").VraagID,
+                AntwoordNummer = 1,
+                AntwoordText = "Tijd"
+            };
+
+            antwoorden[32] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting").VraagID,
+                AntwoordNummer = 2,
+                AntwoordText = "Drukte"
+            };
+
+            antwoorden[33] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting").VraagID,
+                AntwoordNummer = 1,
+                AntwoordText = "Tijd"
+            };
+
+            antwoorden[34] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting").VraagID,
+                AntwoordNummer = 2,
+                AntwoordText = "Drukte"
+            };
+
             context.VraagMogelijkAntwoord.AddOrUpdate(x => x.AntwoordNummer, antwoorden);
             context.SaveChanges();
         }
