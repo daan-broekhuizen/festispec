@@ -50,9 +50,7 @@ namespace Festispec.ViewModel.TemplateViewModels
                 question.InspectieFormulierID = 0;
                 question.VraagID = 0;
                 foreach(VraagMogelijkAntwoord vma in question.VraagMogelijkAntwoord)
-                {
                     vma.VraagID = 0;
-                }
             }
 
             _navigationService.NavigateTo("InspectionFormEditView", inspectionTemplate);

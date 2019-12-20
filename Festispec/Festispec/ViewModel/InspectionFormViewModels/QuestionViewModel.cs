@@ -73,12 +73,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _question.VraagID = value;
                 Changed = true;
                 if (PossibleAnwsers != null)
-                {
                     foreach(var anwser in PossibleAnwsers)
                     {
                         anwser.QuestionNumber = _question.VraagID;
                     }
-                }
+                
                 RaisePropertyChanged("QuestionID");
             }
         }
@@ -318,12 +317,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         private int GetScalePart(int number)
         {
-            if(number == 0){ return BottomValue;}
-            else if(number == ScaleSize){ return TopValue; }
+            if(number == 0)
+                return BottomValue;
+            else if(number == ScaleSize)
+                return TopValue;
             else
-            {
                 return (BottomValue + (number * ((TopValue - BottomValue) / (ScaleSize - 1))));
-            }
             
         }
 
@@ -354,8 +353,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get
             {
-                if(_image == null) { return null; }
-                else { return _image; }
+                if(_image == null)
+                    return null;
+                else
+                    return _image;
             }
             set
             {
@@ -425,10 +426,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             string fileLocation = Image.UriSource.AbsolutePath;
 
             if (fileLocation.Contains("%20"))
-            {
                 fileLocation = fileLocation.Replace("%20", " ");
-            }
-           
+          
             UploadModel response = new ImageShackClient().UploadImage(new ImageContainer[1]
             {
                 new ImageContainer(fileLocation, "image/png")

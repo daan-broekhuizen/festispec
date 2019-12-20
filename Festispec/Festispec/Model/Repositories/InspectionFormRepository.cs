@@ -50,7 +50,8 @@ namespace Festispec.Model.Repositories
             using (FestispecContext context = new FestispecContext())
             {
                 Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
-                if (target != null) { context.Vraag.Remove(target); }
+                if (target != null)
+                    context.Vraag.Remove(target);
                 context.SaveChanges();
             }
         }
