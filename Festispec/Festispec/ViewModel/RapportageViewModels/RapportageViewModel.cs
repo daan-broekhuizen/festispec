@@ -300,9 +300,22 @@ namespace Festispec.ViewModel.RapportageViewModels
                     for (int j = 0; j < answers.Count; j++)
                     {
                         Antwoorden answer = answers[j];
-                        gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                        currentY += 40;
+
+                        if (answer.AntwoordImage != null)
+                        {
+                            using (MemoryStream ms = new MemoryStream(answer.AntwoordImage))
+                            {
+                                XImage xImage = XImage.FromStream(ms);
+                                gfx.DrawImage(xImage, new XRect(20, currentY, xImage.Width, xImage.Height));
+
+                            }
+
+                        }
+                        else
+                            gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                        currentY += 20;
                     }
+                    currentY += 20;
 
                 }
             }
