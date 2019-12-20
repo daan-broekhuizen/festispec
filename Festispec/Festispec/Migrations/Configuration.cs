@@ -81,8 +81,7 @@
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
-                { "t2", "Tabel vraag X2"},
-                { "t3", "Tabel vraag X3"  },
+                { "tv", "Tabel vraag"  },
                 { "tx", "Pure text" }
             };
 
@@ -394,9 +393,17 @@
 
         private void SeedInspectionFormTemplates(FestispecContext context)
         {
-            Inspectieformulier[] templates = new Inspectieformulier[1];
+            Inspectieformulier[] templates = new Inspectieformulier[2];
 
             templates[0] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Leeg formulier",
+                Beschrijving = "Nieuw leeg formulier",
+                DatumInspectie = DateTime.Now,
+                LaatsteWijziging = DateTime.Now
+            };
+
+            templates[1] = new Inspectieformulier()
             {
                 InspectieFormulierTitel = "Test",
                 Beschrijving = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN",

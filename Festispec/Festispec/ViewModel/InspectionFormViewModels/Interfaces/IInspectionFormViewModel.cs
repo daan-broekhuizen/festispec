@@ -13,5 +13,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels.Interfaces
     {
         Inspectieformulier InspectionForm { get; set; }
         ObservableCollection<QuestionViewModel> Questions { get; }
+
+        void SaveInspectionformDetails();
     }
 }

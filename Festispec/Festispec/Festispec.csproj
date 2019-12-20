@@ -210,6 +210,8 @@
     <Compile Include="Utility\ObservableDictionary.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
+    <Compile Include="Utility\Validators\InspectionFormValidator.cs" />
+    <Compile Include="Utility\Validators\PossibleAnwserValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
     <Compile Include="Utility\Validators\SaveDialogValidator.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="ViewModel\Components\SaveDialogViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\CustomerViewModelBase.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\CreateInspectionFormViewModel.cs" />
+    <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormListViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\InspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\Interfaces\IInspectionFormViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
@@ -231,7 +234,7 @@
     <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
-    <Compile Include="ViewModel\AddJobViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModels\AddJobViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\VraagViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
@@ -267,7 +270,10 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
-    <Compile Include="View\AddJobView.xaml.cs">
+    <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
+      <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\JobView\AddJobView.xaml.cs">
       <DependentUpon>AddJobView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ApplicationWindow.xaml.cs">
@@ -313,17 +319,14 @@
     <Compile Include="View\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\JobInfoViewModel.cs" />
-    <Compile Include="ViewModel\JobListViewModel.cs" />
-    <Compile Include="ViewModel\JobViewModel.cs" />
-    <Compile Include="View\JobInfoView.xaml.cs">
+    <Compile Include="ViewModel\JobViewModels\JobInfoViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModels\JobListViewModel.cs" />
+    <Compile Include="ViewModel\JobViewModels\JobViewModel.cs" />
+    <Compile Include="View\JobView\JobInfoView.xaml.cs">
       <DependentUpon>JobInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\JobsWindow.xaml.cs">
+    <Compile Include="View\JobView\JobsWindow.xaml.cs">
       <DependentUpon>JobsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
-      <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InspectionFormView\InspectionFormShowView.xaml.cs">
       <DependentUpon>InspectionFormShowView.xaml</DependentUpon>
@@ -490,7 +493,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\AddJobView.xaml">
+    <Page Include="View\JobView\AddJobView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,11 +529,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\JobInfoView.xaml">
+    <Page Include="View\JobView\JobInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\JobsWindow.xaml">
+    <Page Include="View\JobView\JobsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -564,6 +567,11 @@
     <Resource Include="Images\Pie_Chart.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\DeleteQuestionLogo.png" />
+    <Resource Include="Images\QuestionDownLogo.png" />
+    <Resource Include="Images\QuestionUpLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Images\addImageIcon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -574,6 +582,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\inspectionform_templates.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AddQuestionBox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CloseEditMode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EditIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calendar_black.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
