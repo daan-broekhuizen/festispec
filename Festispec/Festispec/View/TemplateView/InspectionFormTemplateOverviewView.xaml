@@ -15,7 +15,7 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <components:OverviewHeader x:Name="header" PageName="Templates" Grid.Row="0" />
+        <components:OverviewHeader x:Name="header" PageName="Inspectie Templates" Grid.Row="0" />
         <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonText="Template Aanmaken" ButtonActionCommand="{Binding CreateButtonClickCommand}"  SearchTextChangedCommand="{Binding SearchButtonClickCommand}" SearchActionCommand="{Binding SearchButtonClickCommand}" />
 
         <ListView Grid.Row="3" ItemsSource="{Binding Templates}" HorizontalAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single">
