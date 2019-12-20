@@ -162,7 +162,8 @@ namespace Festispec.ViewModel
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
-        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo);
+        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo, InspectionFormRepo);
+
         #region InspectionFormVM's
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
        
