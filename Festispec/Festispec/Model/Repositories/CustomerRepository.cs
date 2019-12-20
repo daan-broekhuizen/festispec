@@ -22,7 +22,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                Klant toUpdate = context.Klant.Where(c => c.KvKNummer == klant.KvKNummer).FirstOrDefault();
+                Klant toUpdate = context.Klant.Where(c => c.KlantID == klant.KlantID).FirstOrDefault();
                 context.Entry(toUpdate).CurrentValues.SetValues(klant);
                 context.SaveChanges();
             }

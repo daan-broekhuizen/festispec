@@ -5,7 +5,9 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
     internal sealed class Configuration : DbMigrationsConfiguration<FestispecContext>
     {
@@ -149,10 +151,10 @@
 
         private void SeedKlant(FestispecContext context)
         {
-            Klant[] klanten = new Klant[1];
+            Klant[] klanten = new Klant[5];
             klanten[0] = new Klant()
             {
-                KvKNummer = "293871",
+                KvKNummer = "29387132",
                 Vestigingnummer = 1,
                 Naam = "Bospop",
                 Stad = "s-Hertogenbosch",
@@ -164,18 +166,74 @@
                 LaatsteWijziging = DateTime.Now
             };
 
-            context.Klant.AddOrUpdate(x => x.KvKNummer, klanten);
+            klanten[1] = new Klant()
+            {
+                KvKNummer = "12345678",
+                Vestigingnummer = 3216,
+                Naam = "Pinkpop",
+                Stad = "Utrecht",
+                Straatnaam = "Amsterdamweg",
+                Huisnummer = "23",
+                Telefoonnummer = "0900616172",
+                Email = "info@pinkpop.nl",
+                Website = "www.pinkpop.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            klanten[2] = new Klant()
+            {
+                KvKNummer = "03810391",
+                Vestigingnummer = 12,
+                Naam = "Appelpop",
+                Stad = "Tilburg",
+                Straatnaam = "Wolvenweg",
+                Huisnummer = "10",
+                Telefoonnummer = "0495204233",
+                Email = "business@appelpop.nl",
+                Website = "www.appelpop.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            klanten[3] = new Klant()
+            {
+                KvKNummer = "29183110",
+                Vestigingnummer = 3,
+                Naam = "American day",
+                Stad = "Amsterdam",
+                Straatnaam = "Noordhollandstraat",
+                Huisnummer = "2A",
+                Telefoonnummer = "0495129102",
+                Email = "AmericanDay@gmail.com",
+                Website = "www.americanDay.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            klanten[4] = new Klant()
+            {
+                KvKNummer = "29387132",
+                Vestigingnummer = 2,
+                Naam = "Bospop",
+                Stad = "Weert",
+                Straatnaam = "Pylsstraatje",
+                Huisnummer = "2",
+                Telefoonnummer = "0621235663",
+                Email = "bospop@hotmail.com",
+                Website = "www.bospop.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            context.Klant.AddOrUpdate(x => new { x.KvKNummer, x.Vestigingnummer }, klanten);
 
             context.SaveChanges();
         }
 
         private void SeedContactpersoon(FestispecContext context)
         {
-            Contactpersoon[] contacts = new Contactpersoon[1];
+            Contactpersoon[] contacts = new Contactpersoon[5];
 
             contacts[0] = new Contactpersoon()
             {
-                KlantID = 1,
+                KlantID = context.Klant.First(x => x.Naam == "Bospop").KlantID,
                 Voornaam = "Dave",
                 Tussenvoegsel = null,
                 Achternaam = "Davidson",
@@ -184,6 +242,58 @@
                 Notities = "Klaagt veel.",
                 LaatsteWijziging = DateTime.Now
             };
+
+            contacts[1] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Appelpop").KlantID,
+                Voornaam = "Maarten",
+                Tussenvoegsel = "Den",
+                Achternaam = "Boer",
+                Email = "Maarten@DenBoer.nl",
+                Telefoon = "0698123572",
+                Notities = "Laatste contact in Januari",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            contacts[2] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Pinkpop").KlantID,
+                Voornaam = "Micheal",
+                Tussenvoegsel = "de",
+                Achternaam = "Vries",
+                Email = "mdevries@pinkpop.nl",
+                Rol = "Sales manager",
+                Telefoon = "3137328131",
+                Notities = "Eerste contact in Maart 2016, Extra contract omtrent factuur, Koffie afspraak verzet",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            contacts[3] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Pinkpop").KlantID,
+                Voornaam = "Peter",
+                Tussenvoegsel = null,
+                Achternaam = "Smulders",
+                Email = "psmulde@pinkpop.nl",
+                Rol = "Quality manager",
+                Telefoon = "31695734859",
+                Notities = "Rapportage besproken",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            contacts[4] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
+                Voornaam = "Randy",
+                Tussenvoegsel = null,
+                Achternaam = "Marsh",
+                Email = "rmarsh@bospop.nl",
+                Telefoon = "0622935323",
+                Rol = "Catering manager",
+                Notities = "Offerte besproken",
+                LaatsteWijziging = DateTime.Now
+            };
+
 
             context.Contactpersoon.AddOrUpdate(x => x.Email, contacts);
 
@@ -194,27 +304,44 @@
         {
             Opdracht[] opdrachten = new Opdracht[1];
 
-            opdrachten[0] = new Opdracht()
-            {
-                OpdrachtNaam = "Inspectie Bospop",
-                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
-                CreatieDatum = DateTime.Now,
-                StartDatum = DateTime.Now,
-                EindDatum = DateTime.Now.AddDays(2),
-                KlantID = 1,
-                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
-                GebruikteRechtsgebieden = null,
-                LaatsteWijziging = DateTime.Now,
-                Klantwensen = "Wensen"
-            };
+                opdrachten[0] = new Opdracht()
+                {
+                    OpdrachtNaam = "Inspectie Bospop",
+                    Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
+                    CreatieDatum = DateTime.Now,
+                    StartDatum = DateTime.Now,
+                    EindDatum = DateTime.Now.AddDays(2),
+                    KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                    GebruikteRechtsgebieden = null,
+                    LaatsteWijziging = DateTime.Now,
+                    Klantwensen = "Grondigeinspectievandecateringtenten"
+                };
 
-            context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
-            context.SaveChanges();
+               /* opdrachten[1] = new Opdracht()
+                {
+                    OpdrachtNaam = "Inspectie Pinkpop",
+                    Status = context.Status.First(x => x.Betekenis == "Inspectieformulier aangemaakt").Betekenis,
+                    CreatieDatum = DateTime.Now,
+                    StartDatum = DateTime.Now.AddMonths(1),
+                    EindDatum = DateTime.Now.AddMonths(1).AddDays(2),
+                    KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == 3216).KlantID,
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                    GebruikteRechtsgebieden = "Drank en horeca wet",
+                    LaatsteWijziging = DateTime.Now,
+                    Klantwensen = "Totale inspectie van het festival"
+                };*/
+
+                context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
+                context.SaveChanges();
+
         }
+    
+
 
         private void SeedOfferte(FestispecContext context)
         {
-            Offerte[] offertes = new Offerte[1];
+            Offerte[] offertes = new Offerte[3];
 
             offertes[0] = new Offerte()
             {
@@ -226,20 +353,67 @@
                 LaatsteWijziging = DateTime.Now
             };
 
+            offertes[1] = new Offerte()
+            {
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                Totaalbedrag = (decimal)2530,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Inspectie horeca gelegenheden",
+                KlantbeslissingReden = "afgewezen, de prijs was te hoog",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[2] = new Offerte()
+            {
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                Totaalbedrag = (decimal)1500.75,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Inspectie horeca gelegenheden",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
             context.Offerte.AddOrUpdate(x => x.OpdrachtID, offertes);
             context.SaveChanges();
         }
 
         private void SeedInspectieFormulier(FestispecContext context)
         {
-            Inspectieformulier[] formulieren = new Inspectieformulier[1];
+            Inspectieformulier[] formulieren = new Inspectieformulier[4];
 
             formulieren[0] = new Inspectieformulier()
             {
-                InspectieFormulierTitel = "Inspectie Bospop festival",
+                InspectieFormulierTitel = "Inspectie Bospop algemeen",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop").OpdrachtID,
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            formulieren[1] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Inspectie Bospop catering",
+                DatumInspectie = DateTime.Now,
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,
+                Beschrijving = "Vul dit formulier in voor Bospop inspectie catering",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            formulieren[2] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Inspectie Pinkpop muziek",
+                DatumInspectie = DateTime.Now,
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                Beschrijving = "Vul dit formulier in voor Pinkpop inspectie muziek",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            formulieren[3] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Inspectie Pinkpop sanitair",
+                DatumInspectie = DateTime.Now,
+                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                Beschrijving = "Vul dit formulier in voor Pinkpop inspectie sanitair",
                 LaatsteWijziging = DateTime.Now
             };
 
@@ -252,8 +426,8 @@
             Vraag[] vragen = new Vraag[2];
             vragen[0] = new Vraag()
             {
-                InspectieFormulierID = 1,
-                Vraagstelling = "Open vraag",
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Bij binnenkomst, welk onderdeel van het festival valt het meest op.",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
                 VolgordeNummer = 1
                 
@@ -261,11 +435,29 @@
 
             vragen[1] = new Vraag()
             {
-                InspectieFormulierID = 1,
-                Vraagstelling = "Meerkeuze vraag",
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Hoe is de sfeer op het festival",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "mv").Afkorting,
                 VolgordeNummer = 2
-                
+
+            };
+
+            vragen[2] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Wat is de sfeer bij de eetgelegenheden",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "sv").Afkorting,
+                VolgordeNummer = 3
+
+            };
+
+            vragen[3] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Maak een foto van het drukste gedeelte van het festival om 12:00",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
+                VolgordeNummer = 4
+
             };
 
             context.Vraag.AddOrUpdate(vragen);
@@ -274,28 +466,47 @@
 
         private void SeedVraagMogelijkAntwoord(FestispecContext context)
         {
-            VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[3];
+            VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[4];
             antwoorden[0] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagtype == "mv").VraagID,
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
                 AntwoordNummer = 1,
-                AntwoordText = "a"
+                AntwoordText = "Grimmig"
             };
 
             antwoorden[1] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagtype == "mv").VraagID,
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
                 AntwoordNummer = 2,
-                AntwoordText = "b"
+                AntwoordText = "Rustig"
             };
 
             antwoorden[2] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagtype == "mv").VraagID,
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
                 AntwoordNummer = 3,
-                AntwoordText = "c"
+                AntwoordText = "Gezellig"
             };
 
+            antwoorden[3] = new VraagMogelijkAntwoord()
+            {
+                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
+                AntwoordNummer = 4,
+                AntwoordText = "Druk"
+            };
+
+            for (int i = 0; i < 10; i++)
+            {
+                antwoorden[i + 4] = new VraagMogelijkAntwoord()
+                {
+                    VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat is de sfeer bij de eetgelegenheden").VraagID,
+                    AntwoordNummer = i + 1,
+                    AntwoordText = (i + 1).ToString()
+                };
+            }
+
+            
+            
             context.VraagMogelijkAntwoord.AddOrUpdate(x => x.AntwoordNummer, antwoorden);
             context.SaveChanges();
         }
