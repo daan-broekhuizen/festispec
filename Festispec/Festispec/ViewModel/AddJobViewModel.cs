@@ -118,7 +118,7 @@ namespace Festispec.ViewModel
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,
-                KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KvKNummer,
+                KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KlantID,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,
                 CreatieDatum = DateTime.Now,

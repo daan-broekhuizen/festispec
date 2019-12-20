@@ -81,8 +81,7 @@
                 { "mv", "Meerkeuze vraag" },
                 { "ov", "Open vraag" },
                 { "sv", "Schaal vraag" },
-                { "t2", "Tabel vraag X2"},
-                { "t3", "Tabel vraag X3"  },
+                { "tv", "Tabel vraag"},
                 { "tx", "Pure text" }
             };
 
@@ -154,6 +153,7 @@
             klanten[0] = new Klant()
             {
                 KvKNummer = "293871",
+                Vestigingnummer = 1,
                 Naam = "Bospop",
                 Stad = "s-Hertogenbosch",
                 Straatnaam = "Van Voornestraat",
@@ -175,7 +175,7 @@
 
             contacts[0] = new Contactpersoon()
             {
-                KlantID = "293871",
+                KlantID = 1,
                 Voornaam = "Dave",
                 Tussenvoegsel = null,
                 Achternaam = "Davidson",
@@ -201,7 +201,7 @@
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now,
                 EindDatum = DateTime.Now.AddDays(2),
-                KlantID = "293871",
+                KlantID = 1,
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,

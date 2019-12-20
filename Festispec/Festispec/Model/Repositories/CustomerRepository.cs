@@ -51,7 +51,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Klant klant = context.Klant.Where(k => k.KvKNummer == contactpersoon.KlantID).FirstOrDefault();
+                Klant klant = context.Klant.Where(k => k.KlantID == contactpersoon.KlantID).FirstOrDefault();
                 klant.Contactpersoon.Add(contactpersoon);
                 context.SaveChanges();
             }

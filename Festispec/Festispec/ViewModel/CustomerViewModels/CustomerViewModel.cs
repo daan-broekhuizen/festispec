@@ -86,6 +86,10 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("KvK");
             }
         }
+        public int KlantID
+        {
+            get => _klant.KlantID;
+        }
         public string Telephone
         {
             get => _klant.Telefoonnummer;

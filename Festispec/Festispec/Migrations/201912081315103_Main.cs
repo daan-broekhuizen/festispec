@@ -128,7 +128,7 @@
                         Creatie_datum = c.DateTime(nullable: false, storeType: "date"),
                         Start_datum = c.DateTime(nullable: false, storeType: "date"),
                         Eind_datum = c.DateTime(nullable: false, storeType: "date"),
-                        KlantID = c.String(nullable: false, maxLength: 8),
+                        KlantID = c.Int(nullable: false),
                         MedewerkerID = c.Int(nullable: false),
                         Klantwensen = c.String(nullable: false, unicode: false, storeType: "text"),
                         Gebruikte_rechtsgebieden = c.String(unicode: false, storeType: "text"),
@@ -148,7 +148,9 @@
                 "dbo.Klant",
                 c => new
                     {
+                        KlantID = c.Int(identity: true, nullable: false),
                         KvK_nummer = c.String(nullable: false, maxLength: 8),
+                        Vestigingnummer = c.Int(nullable: true),
                         Naam = c.String(nullable: false, maxLength: 45),
                         Stad = c.String(nullable: false, maxLength: 50),
                         Straatnaam = c.String(nullable: false, maxLength: 50),
@@ -159,20 +161,22 @@
                         Klant_logo = c.Binary(storeType: "image"),
                         Laatste_wijziging = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.KvK_nummer);
+                .PrimaryKey(t => t.KlantID)
+                .Index(t => t.KlantID);
             
             CreateTable(
                 "dbo.Contactpersoon",
                 c => new
                     {
                         ContactpersoonID = c.Int(nullable: false, identity: true),
-                        KlantID = c.String(nullable: false, maxLength: 8),
+                        KlantID = c.Int(nullable: false),
                         Voornaam = c.String(nullable: false, maxLength: 30),
                         Tussenvoegsel = c.String(maxLength: 15),
                         Achternaam = c.String(nullable: false, maxLength: 30),
                         Email = c.String(nullable: false, maxLength: 130),
                         Telefoon = c.String(nullable: false, maxLength: 10),
                         Notities = c.String(unicode: false, storeType: "text"),
+                        Rol = c.String(nullable: true, maxLength: 50),
                         Laatste_wijziging = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ContactpersoonID)

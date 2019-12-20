@@ -83,7 +83,7 @@ namespace Festispec.ViewModel
             }
         }
 
-        public string CustomerID
+        public int CustomerID
         {
             get => _opdracht.KlantID;
             set
