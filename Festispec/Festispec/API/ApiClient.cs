@@ -15,7 +15,7 @@ namespace Festispec.API
 
         public ApiClient(string baseUrl)
         {
-            this.Client = new RestClient(baseUrl);
+            Client = new RestClient(baseUrl);
         }
 
         public string Request(string endpoint, Method method, Dictionary<string, string> urlSegments = null, Dictionary<string, string> parameters = null, Dictionary<string, string> headers = null, FileData[] files = null)

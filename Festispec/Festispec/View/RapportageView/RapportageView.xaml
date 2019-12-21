@@ -257,7 +257,7 @@
 
             <!-- Downloaden -->
             <StackPanel Margin="5" Grid.Row="12">
-                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
                     <TextBlock TextDecorations="Underline" Text="Download" />
                 </Button>
             </StackPanel>

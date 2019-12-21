@@ -19,6 +19,12 @@ namespace Festispec.Utility
         [JsonProperty("account")]
         public User Account { get; set; }
 
+        [JsonProperty("imageShackApiKey")]
+        public string ImageShackApiKey { get; set; }
+
+        [JsonProperty("bingApiKey")]
+        public string BingApiKey { get; set; }
+
         [JsonObject]
         public struct User
         {

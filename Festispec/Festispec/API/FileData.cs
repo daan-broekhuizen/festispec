@@ -18,12 +18,12 @@ namespace Festispec.API
 
         public FileData(byte[] data, string contentType = "image/png", string name = "file", string fileName = null)
         {
-            this.Data = data;
-            this.ContentType = contentType;
-            this.Name = name;
-            this.FileName = fileName;
+            Data = data;
+            ContentType = contentType;
+            Name = name;
+            FileName = fileName;
 
-            if (this.FileName == null)
+            if (FileName == null)
                 GenerateFileName(10);
         }
 
@@ -31,7 +31,7 @@ namespace Festispec.API
         {
             Random random = new Random();
 
-            this.FileName = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", length).Select(s => s[random.Next(s.Length)]).ToArray());
+            FileName = new string(Enumerable.Repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
