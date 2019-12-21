@@ -22,7 +22,7 @@
             CreateIndex("dbo.Opdracht", "KlantID");
             CreateIndex("dbo.Contactpersoon", "KlantID");
             AddForeignKey("dbo.Contactpersoon", "KlantID", "dbo.Klant", "KlantID", cascadeDelete: true);
-            AddForeignKey("dbo.Opdracht", "KlantID", "dbo.Klant", "KlantID");
+            AddForeignKey("dbo.Opdracht", "KlantID", "dbo.Klant", "KlantID", cascadeDelete: true);
         }
         
         public override void Down()
@@ -41,7 +41,7 @@
             AddPrimaryKey("dbo.Klant", "KvK_nummer");
             CreateIndex("dbo.Contactpersoon", "KlantID");
             CreateIndex("dbo.Opdracht", "KlantID");
-            AddForeignKey("dbo.Opdracht", "KlantID", "dbo.Klant", "KvK_nummer");
+            AddForeignKey("dbo.Opdracht", "KlantID", "dbo.Klant", "KvK_nummer", cascadeDelete: true);
             AddForeignKey("dbo.Contactpersoon", "KlantID", "dbo.Klant", "KvK_nummer", cascadeDelete: true);
         }
     }

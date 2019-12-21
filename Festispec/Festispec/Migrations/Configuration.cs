@@ -25,15 +25,15 @@
             SeedKlant(context);
             SeedContactpersoon(context);
             SeedOpdracht(context);
-            SeedOfferte(context);
-            SeedInspectieFormulier(context);
-            SeedVraag(context);
-            SeedVraagMogelijkAntwoord(context);
-            SeedBeschikbaarheidInspecteurs(context);
-            SeedIngepladeInspecteurs(context);
-            SeedRapportTemplates(context);
-            SeedInspectionFormTemplates(context);
-            SeedVraagAntwoorden(context);
+            //SeedOfferte(context);
+            //SeedInspectieFormulier(context);
+            //SeedVraag(context);
+            //SeedVraagMogelijkAntwoord(context);
+            //SeedBeschikbaarheidInspecteurs(context);
+            //SeedIngepladeInspecteurs(context);
+            //SeedRapportTemplates(context);
+            //SeedInspectionFormTemplates(context);
+            //SeedVraagAntwoorden(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -95,7 +95,7 @@
 
         private void SeedAccount(FestispecContext context)
         {
-            Account[] accounts = new Account[3];
+            Account[] accounts = new Account[7];
 
             accounts[0] = new Account()
             {
@@ -112,7 +112,7 @@
                 Telefoonnummer = "0495555555",
                 DatumCertificering = DateTime.Now,
                 EinddatumCertificering = DateTime.Now,
-                IBAN = "RABO001",
+                IBAN = "NLRABO913644750",
                 LaatsteWijziging = DateTime.Now,
             };
 
@@ -141,6 +141,82 @@
                 Stad = "Tilburg",
                 Straatnaam = "Nimrodstraat",
                 Huisnummer = "19",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[3] = new Account()
+            {
+                Gebruikersnaam = "FreddyJohnson",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Freddy",
+                Tussenvoegsel = null,
+                Achternaam = "Johnson",
+                Stad = "Hilversum",
+                Straatnaam = "Albertus Perkstraat",
+                Huisnummer = "65",
+                Email = "FJohnson@hotmail.nl",
+                Telefoonnummer = "0604621581",
+                DatumCertificering = DateTime.Now.AddMonths(-5),
+                EinddatumCertificering = DateTime.Now.AddMonths(6),
+                IBAN = "NLRABO91385350",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[4] = new Account()
+            {
+                Gebruikersnaam = "StijnSmulders",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Stijn",
+                Tussenvoegsel = null,
+                Achternaam = "Smulders",
+                Stad = "'s-Hertogenbosch",
+                Straatnaam = "Onderwijsboulevard",
+                Huisnummer = "215",
+                Email = "ssmulder@avans.nl",
+                Telefoonnummer = "049563121",
+                DatumCertificering = DateTime.Now.AddDays(-90),
+                EinddatumCertificering = DateTime.Now.AddYears(1),
+                IBAN = "NLRABO8863164",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[5] = new Account()
+            {
+                Gebruikersnaam = "AdrianaPitts",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Adriana",
+                Tussenvoegsel = null,
+                Achternaam = "Pitts",
+                Stad = "Zuidwolde",
+                Straatnaam = "Wethouder Klunderstraat",
+                Huisnummer = "13",
+                Email = "Pitts@ziggo.com",
+                Telefoonnummer = "0657554555",
+                DatumCertificering = DateTime.Now.AddDays(-10),
+                EinddatumCertificering = DateTime.Now.AddYears(1).AddMonths(1),
+                IBAN = "NLRABO8877103",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[6] = new Account()
+            {
+                Gebruikersnaam = "HarvieDeBakker",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Harvy",
+                Tussenvoegsel = "de",
+                Achternaam = "Bakker",
+                Stad = "Emmeloord",
+                Straatnaam = "Ijsselmeerlaan",
+                Huisnummer = "125",
+                Email = "HarveyDBakker@live.com",
+                Telefoonnummer = "0494725015",
+                DatumCertificering = DateTime.Now.AddMonths(-7).AddDays(13),
+                EinddatumCertificering = DateTime.Now.AddYears(2).AddMonths(-6),
+                IBAN = "NLRABO2442986",
                 LaatsteWijziging = DateTime.Now,
             };
 
@@ -302,21 +378,21 @@
 
         private void SeedOpdracht(FestispecContext context)
         {
-                Opdracht[] opdrachten = new Opdracht[1];
+            Opdracht[] opdrachten = new Opdracht[2];
 
-                opdrachten[0] = new Opdracht()
-                {
-                    OpdrachtNaam = "Inspectie Bospop",
-                    Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
-                    CreatieDatum = DateTime.Now,
-                    StartDatum = DateTime.Now,
-                    EindDatum = DateTime.Now.AddDays(2),
-                    KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
-                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
-                    GebruikteRechtsgebieden = null,
-                    LaatsteWijziging = DateTime.Now,
-                    Klantwensen = "Grondigeinspectievandecateringtenten"
-                };
+            opdrachten[0] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Bospop",
+                Status = context.Status.First(x => x.Betekenis == "Rekening verstuurt").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now,
+                EindDatum = DateTime.Now.AddDays(2),
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Grondigeinspectievandecateringtenten"
+            };
 
             opdrachten[1] = new Opdracht()
              {
@@ -324,7 +400,7 @@
                  Status = context.Status.First(x => x.Betekenis == "Inspectieformulier aangemaakt").Betekenis,
                  CreatieDatum = DateTime.Now,
                  StartDatum = DateTime.Now.AddMonths(1),
-                 EindDatum = DateTime.Now.AddMonths(1).AddDays(2),
+                 EindDatum = DateTime.Now.AddMonths(1).AddDays(3),
                  KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == 3216).KlantID,
                  MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                  GebruikteRechtsgebieden = "Drank en horeca wet",
@@ -385,7 +461,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Bospop algemeen",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,
+                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,*/,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie",
                 LaatsteWijziging = DateTime.Now
             };
@@ -394,7 +470,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Bospop catering",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,
+                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,*/,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie catering",
                 LaatsteWijziging = DateTime.Now
             };
@@ -403,7 +479,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Pinkpop muziek",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,*/,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie muziek",
                 LaatsteWijziging = DateTime.Now
             };
@@ -412,7 +488,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Pinkpop sanitair",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
+                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,*/,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie sanitair",
                 LaatsteWijziging = DateTime.Now
             };
@@ -423,7 +499,7 @@
 
         private void SeedVraag(FestispecContext context)
         {
-            Vraag[] vragen = new Vraag[5];
+            Vraag[] vragen = new Vraag[17];
             vragen[0] = new Vraag()
             {
                 InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
@@ -565,6 +641,15 @@
                 Vraagstelling = "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 11
+
+            };
+
+            vragen[16] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                Vraagstelling = "Plaats hier nog eventuele losse opmerkingen",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 12
 
             };
 
