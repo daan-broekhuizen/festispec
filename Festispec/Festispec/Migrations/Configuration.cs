@@ -25,15 +25,15 @@
             SeedKlant(context);
             SeedContactpersoon(context);
             SeedOpdracht(context);
-            //SeedOfferte(context);
-            //SeedInspectieFormulier(context);
-            //SeedVraag(context);
-            //SeedVraagMogelijkAntwoord(context);
-            //SeedBeschikbaarheidInspecteurs(context);
-            //SeedIngepladeInspecteurs(context);
-            //SeedRapportTemplates(context);
-            //SeedInspectionFormTemplates(context);
-            //SeedVraagAntwoorden(context);
+            SeedOfferte(context);
+            SeedInspectieFormulier(context);
+            SeedVraag(context);
+            SeedVraagMogelijkAntwoord(context);
+            SeedBeschikbaarheidInspecteurs(context);
+            SeedIngepladeInspecteurs(context);
+            SeedRapportTemplates(context);
+            SeedInspectionFormTemplates(context);
+            SeedVraagAntwoorden(context);
         }
 
         private void SeedRoles(FestispecContext context)
@@ -50,7 +50,7 @@
             foreach (KeyValuePair<string, string> role in roles)
                 context.Rol.AddOrUpdate(x => x.Afkorting, new Rol() { Afkorting = role.Key, Betekenis = role.Value });
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedStatus(FestispecContext context)
@@ -72,7 +72,7 @@
             foreach (KeyValuePair<string, string> status in statuses)
                 context.Status.AddOrUpdate(x => x.Betekenis, new Status() { Betekenis = status.Value });
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedQuestionType(FestispecContext context)
@@ -90,7 +90,7 @@
             foreach (KeyValuePair<string, string> status in statuses)
                 context.VraagType.AddOrUpdate(x => x.Afkorting, new VraagType() { Afkorting = status.Key, Beschrijving = status.Value });
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedAccount(FestispecContext context)
@@ -222,7 +222,7 @@
 
             context.Account.AddOrUpdate(x => x.Gebruikersnaam, accounts);
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedKlant(FestispecContext context)
@@ -300,7 +300,7 @@
 
             context.Klant.AddOrUpdate(x => new { x.KvKNummer, x.Vestigingnummer }, klanten);
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedContactpersoon(FestispecContext context)
@@ -352,7 +352,7 @@
                 Achternaam = "Smulders",
                 Email = "psmulde@pinkpop.nl",
                 Rol = "Quality manager",
-                Telefoon = "31695734859",
+                Telefoon = "3169573485",
                 Notities = "Rapportage besproken",
                 LaatsteWijziging = DateTime.Now
             };
@@ -373,7 +373,7 @@
 
             context.Contactpersoon.AddOrUpdate(x => x.Email, contacts);
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedOpdracht(FestispecContext context)
@@ -409,7 +409,8 @@
              };
 
             context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
-                context.SaveChanges();
+
+            SaveChanges(context);
 
         }
     
@@ -419,38 +420,39 @@
         {
             Offerte[] offertes = new Offerte[3];
 
-            offertes[0] = new Offerte()
+            offertes[0]=new Offerte()
             {
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Inspectie Bospop").OpdrachtID,
-                Totaalbedrag = (decimal)2000.50,
+                OpdrachtID = 1,
+                Totaalbedrag = 2000,
                 Aanmaakdatum = DateTime.Now,
                 Beschrijving = "We gaan een inspectie doen",
                 KlantbeslissingReden = "ze vonden het goed",
                 LaatsteWijziging = DateTime.Now
             };
 
-            offertes[1] = new Offerte()
+            offertes[1]=new Offerte()
             {
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
-                Totaalbedrag = (decimal)2530,
+                OpdrachtID = 2,
+                Totaalbedrag = 2530,
                 Aanmaakdatum = DateTime.Now,
                 Beschrijving = "Inspectie horeca gelegenheden",
                 KlantbeslissingReden = "afgewezen, de prijs was te hoog",
                 LaatsteWijziging = DateTime.Now
             };
 
-            offertes[2] = new Offerte()
+            offertes[2]=new Offerte()
             {
-                OpdrachtID = context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,
-                Totaalbedrag = (decimal)1500.75,
+                OpdrachtID = 2,
+                Totaalbedrag = 1500,
                 Aanmaakdatum = DateTime.Now,
                 Beschrijving = "Inspectie horeca gelegenheden",
                 KlantbeslissingReden = "Goedgekeurd",
                 LaatsteWijziging = DateTime.Now
             };
 
-            context.Offerte.AddOrUpdate(x => x.OpdrachtID, offertes);
-            context.SaveChanges();
+            context.Offerte.AddOrUpdate(x => x.Totaalbedrag, offertes);
+
+            SaveChanges(context);
         }
 
         private void SeedInspectieFormulier(FestispecContext context)
@@ -461,7 +463,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Bospop algemeen",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,*/,
+                OpdrachtID = 1,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie",
                 LaatsteWijziging = DateTime.Now
             };
@@ -470,7 +472,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Bospop catering",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Bospop inspectie").OpdrachtID,*/,
+                OpdrachtID = 1,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie catering",
                 LaatsteWijziging = DateTime.Now
             };
@@ -479,7 +481,7 @@
             {
                 InspectieFormulierTitel = "Inspectie Pinkpop muziek",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,*/,
+                OpdrachtID = 2,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie muziek",
                 LaatsteWijziging = DateTime.Now
             };
@@ -488,13 +490,13 @@
             {
                 InspectieFormulierTitel = "Inspectie Pinkpop sanitair",
                 DatumInspectie = DateTime.Now,
-                OpdrachtID = 0/*context.Opdracht.First(x => x.OpdrachtNaam == "Pinkpop inspectie").OpdrachtID,*/,
+                OpdrachtID = 2,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie sanitair",
                 LaatsteWijziging = DateTime.Now
             };
 
             context.Inspectieformulier.AddOrUpdate(x => x.InspectieFormulierTitel, formulieren);
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedVraag(FestispecContext context)
@@ -654,7 +656,7 @@
             };
 
             context.Vraag.AddOrUpdate(vragen);
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedVraagMogelijkAntwoord(FestispecContext context)
@@ -662,28 +664,28 @@
             VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[35];
             antwoorden[0] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
+                VraagID = 2,
                 AntwoordNummer = 1,
                 AntwoordText = "Grimmig"
             };
 
             antwoorden[1] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
+                VraagID = 2,
                 AntwoordNummer = 2,
                 AntwoordText = "Rustig"
             };
 
             antwoorden[2] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
+                VraagID = 2,
                 AntwoordNummer = 3,
                 AntwoordText = "Gezellig"
             };
 
             antwoorden[3] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe is de sfeer op het festival").VraagID,
+                VraagID = 2,
                 AntwoordNummer = 4,
                 AntwoordText = "Druk"
             };
@@ -692,7 +694,7 @@
             {
                 antwoorden[i + 4] = new VraagMogelijkAntwoord()
                 {
-                    VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat is de sfeer bij de eetgelegenheden").VraagID,
+                    VraagID = 3,
                     AntwoordNummer = i + 1,
                     AntwoordText = (i + 1).ToString()
                 };
@@ -702,7 +704,7 @@
             {
                 antwoorden[i + 14] = new VraagMogelijkAntwoord()
                 {
-                    VraagID = context.Vraag.First(x => x.Vraagstelling == "Op schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden. *1- er is niemand, 5*- Het is redelijk druk, *10- er is geen doorkomen aan").VraagID,
+                    VraagID = 6,
                     AntwoordNummer = i + 1,
                     AntwoordText = (i + 1).ToString()
                 };
@@ -710,76 +712,76 @@
 
             antwoorden[25] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos").VraagID,
+                VraagID = 12,
                 AntwoordNummer = 1,
                 AntwoordText = "act"
             };
 
             antwoorden[26] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos").VraagID,
+                VraagID = 12,
                 AntwoordNummer = 2,
                 AntwoordText = "sfeer"
             };
 
             antwoorden[27] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.").VraagID,
+                VraagID = 13,
                 AntwoordNummer = 1,
                 AntwoordText = "Show"
             };
 
             antwoorden[28] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.").VraagID,
+                VraagID = 13,
                 AntwoordNummer = 2,
                 AntwoordText = "Aantal mensen in rij"
             };
 
             antwoorden[29] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)").VraagID,
+                VraagID = 14,
                 AntwoordNummer = 1,
                 AntwoordText = "Tijd"
             };
 
             antwoorden[30] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)").VraagID,
+                VraagID = 14,
                 AntwoordNummer = 2,
                 AntwoordText = "Drukte"
             };
 
             antwoorden[31] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting").VraagID,
+                VraagID = 15,
                 AntwoordNummer = 1,
                 AntwoordText = "Tijd"
             };
 
             antwoorden[32] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting").VraagID,
+                VraagID = 15,
                 AntwoordNummer = 2,
                 AntwoordText = "Drukte"
             };
 
             antwoorden[33] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting").VraagID,
+                VraagID = 16,
                 AntwoordNummer = 1,
                 AntwoordText = "Tijd"
             };
 
             antwoorden[34] = new VraagMogelijkAntwoord()
             {
-                VraagID = context.Vraag.First(x => x.Vraagstelling == "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting").VraagID,
+                VraagID = 16,
                 AntwoordNummer = 2,
                 AntwoordText = "Drukte"
             };
 
-            context.VraagMogelijkAntwoord.AddOrUpdate(x => x.AntwoordNummer, antwoorden);
-            context.SaveChanges();
+            context.VraagMogelijkAntwoord.AddOrUpdate(x => new { x.AntwoordNummer, x.VraagID }, antwoorden);
+            SaveChanges(context);
         }
 
         private void SeedVraagAntwoorden(FestispecContext context)
@@ -807,7 +809,7 @@
                 };
 
                 context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoorden);
-                context.SaveChanges();
+                SaveChanges(context);
             }
         }
 
@@ -842,7 +844,7 @@
             };
 
             context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheid);
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
@@ -857,7 +859,7 @@
             if(account.Ingepland.Count == 0)
                 account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival"));
 
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedRapportTemplates(FestispecContext context)
@@ -871,7 +873,7 @@
             };
 
             context.RapportTemplate.AddOrUpdate(x => x.TemplateID, templates);
-            context.SaveChanges();
+            SaveChanges(context);
         }
 
         private void SeedInspectionFormTemplates(FestispecContext context)
@@ -887,7 +889,29 @@
             };
 
             context.Inspectieformulier.AddOrUpdate(x => x.InspectieformulierID, templates);
-            context.SaveChanges();
+            SaveChanges(context);
+        }
+
+        private void SaveChanges(FestispecContext context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
         }
     }
 }
