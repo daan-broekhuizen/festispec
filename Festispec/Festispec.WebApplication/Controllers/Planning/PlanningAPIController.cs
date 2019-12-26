@@ -11,18 +11,8 @@ namespace Festispec.WebApplication.Controllers.Planning
 {
     public class PlanningAPIController : ApiController
     {
-        private FestiSpecContext db = new FestiSpecContext();
+        private FestispecContext db = new FestispecContext();
 
-        public IEnumerable<WebAPIEvent> Get()
-        {
-            return db.Inspectieformulier
-                    .ToList()
-                    .Select(e => (WebAPIEvent)e);
-        }
-
-        public WebAPIEvent Get(int id)
-        {
-            return (WebAPIEvent)db.Inspectieformulier.Find(id);
-        }
+        
     }
 }

@@ -14,21 +14,27 @@ namespace Festispec.WebApplication.Models
         {
             Inspectieformulier = new HashSet<Inspectieformulier>();
             Offerte = new HashSet<Offerte>();
-            Account1 = new HashSet<Account>();
         }
 
         public int OpdrachtID { get; set; }
 
         [Required]
         [StringLength(45)]
-        public string Opdracht_naam { get; set; }
+        [Column("Opdracht_naam")]
+        public string OpdrachtNaam { get; set; }
 
         [Required]
-        [StringLength(2)]
+        [StringLength(30)]
         public string Status { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime Creatie_datum { get; set; }
+        [Column("Creatie_datum", TypeName = "date")]
+        public DateTime CreatieDatum { get; set; }
+
+        [Column("Start_datum", TypeName = "date")]
+        public DateTime StartDatum { get; set; }
+
+        [Column("Eind_datum", TypeName = "date")]
+        public DateTime EindDatum { get; set; }
 
         [Required]
         [StringLength(8)]
@@ -40,17 +46,17 @@ namespace Festispec.WebApplication.Models
         [Required]
         public string Klantwensen { get; set; }
 
-        [Column(TypeName = "text")]
-        public string Gebruikte_rechtsgebieden { get; set; }
+        [Column("Gebruikte_rechtsgebieden", TypeName = "text")]
+        public string GebruikteRechtsgebieden { get; set; }
 
         [Column(TypeName = "text")]
         public string Rapportage { get; set; }
 
-        public int? Rapportage_uses_template { get; set; }
+        [Column("Rapportage_uses_template")]
+        public int? RapportageUsesTemplate { get; set; }
 
-        public DateTime Laatste_wijziging { get; set; }
-
-        public virtual Account Account { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inspectieformulier> Inspectieformulier { get; set; }
@@ -60,11 +66,8 @@ namespace Festispec.WebApplication.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Offerte> Offerte { get; set; }
 
-        public virtual Rapport_template Rapport_template { get; set; }
+        public virtual RapportTemplate RapportTemplate { get; set; }
 
-        public virtual Status_lookup Status_lookup { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Account1 { get; set; }
+        public virtual Status StatusLookup { get; set; }
     }
 }

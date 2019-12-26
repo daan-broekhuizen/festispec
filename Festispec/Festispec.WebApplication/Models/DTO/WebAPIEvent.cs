@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,16 +13,16 @@ namespace Festispec.WebApplication.Models.DTO
         public string start_date { get; set; }
         public string end_date { get; set; }
 
-        public static explicit operator WebAPIEvent(Inspectieformulier inspectie)
+        public static explicit operator WebAPIEvent(Opdracht opdracht)
         {
-            if (inspectie.Datum_inspectie != null)
+            if (opdracht!= null)
             {
                 return new WebAPIEvent
                 {
-                    id = (int)inspectie.OpdrachtID,
-                    text = inspectie.InspectieFormulierTitel,
-                    start_date = inspectie.Datum_inspectie.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm"),
-                    end_date = inspectie.Datum_inspectie.GetValueOrDefault().ToString("yyyy-MM-dd HH:mm")
+                    id = opdracht.OpdrachtID,
+                    text = opdracht.OpdrachtNaam,
+                    start_date = opdracht.StartDatum.ToString("yyyy-MM-dd HH:mm"),
+                    end_date = opdracht.EindDatum.ToString("yyyy-MM-dd HH:mm")
                 };
             }
             else

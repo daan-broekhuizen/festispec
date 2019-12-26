@@ -6,12 +6,13 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Vraagtype_lookup
+    [Table("Rol_lookup")]
+    public partial class Rol
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Vraagtype_lookup()
+        public Rol()
         {
-            Vraag = new HashSet<Vraag>();
+            Account = new HashSet<Account>();
         }
 
         [Key]
@@ -19,10 +20,10 @@ namespace Festispec.WebApplication.Models
         public string Afkorting { get; set; }
 
         [Required]
-        [StringLength(30)]
-        public string Beschrijving { get; set; }
+        [StringLength(25)]
+        public string Betekenis { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vraag> Vraag { get; set; }
+        public virtual ICollection<Account> Account { get; set; }
     }
 }

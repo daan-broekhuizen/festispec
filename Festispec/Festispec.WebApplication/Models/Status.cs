@@ -1,4 +1,4 @@
-namespace Festispec.WebApplication.Models
+namespace Festispec.Model
 {
     using System;
     using System.Collections.Generic;
@@ -6,25 +6,19 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Rapport_template
+    [Table("Status_lookup")]
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rapport_template()
+        public Status()
         {
             Opdracht = new HashSet<Opdracht>();
         }
 
         [Key]
-        public int TemplateID { get; set; }
-
-        [Column(TypeName = "text")]
-        public string TemplateText { get; set; }
-
-        [StringLength(50)]
-        public string TemplateName { get; set; }
-
-        [StringLength(400)]
-        public string TemplateDescription { get; set; }
+        [Required]
+        [StringLength(30)]
+        public string Betekenis { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Opdracht> Opdracht { get; set; }
