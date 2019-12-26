@@ -133,6 +133,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AvailabilityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\Planning\PlanningAPIController.cs" />
+    <Compile Include="Controllers\Planning\PlanningController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +142,7 @@
     <Compile Include="Models\Antwoorden.cs" />
     <Compile Include="Models\Beschikbaarheid_inspecteurs.cs" />
     <Compile Include="Models\Contactpersoon.cs" />
+    <Compile Include="Models\DTO\WebAPIEvent.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
     <Compile Include="Models\Inspectieformulier.cs" />
     <Compile Include="Models\Inspectieformulier_vragenlijst_combinatie.cs" />
@@ -171,6 +174,7 @@
     <Content Include="Views\Availability\AvailabilityView.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Planning\PlanningView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
