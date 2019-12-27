@@ -168,6 +168,7 @@
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\DTO\JsonJob.cs" />
     <Compile Include="Model\Enums\EnumMonth.cs" />
     <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\OfflineJobRepository.cs" />
     <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
@@ -232,6 +234,10 @@
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ManagementViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobInfoViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobListViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineLoginViewModel.cs" />
     <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
@@ -342,6 +348,15 @@
     <Compile Include="View\ManagementReport.xaml.cs">
       <DependentUpon>ManagementReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OfflineView\OfflineJobInfoView.xaml.cs">
+      <DependentUpon>OfflineJobInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineView\OfflineJobsView.xaml.cs">
+      <DependentUpon>OfflineJobsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineView\OfflineLoginView.xaml.cs">
+      <DependentUpon>OfflineLoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuotationView\AddQuotationView.xaml.cs">
       <DependentUpon>AddQuotationView.xaml</DependentUpon>
     </Compile>
@@ -401,6 +416,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManagementReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OfflineView\OfflineJobInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OfflineView\OfflineJobsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OfflineView\OfflineLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -595,6 +622,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Calendar_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
