@@ -69,11 +69,11 @@ namespace Festispec.ViewModel
                 Email = SelectedContact.Email,
                 Telefoon = SelectedContact.Telephone,
                 Notities = SelectedContact.Note,
-                KlantID = CustomerVM.KvK,
+                KlantID = CustomerVM.KlantID,
                 LaatsteWijziging = DateTime.Now
             };
 
-            Klant klant = _customerRepository.GetCustomers().Where(c => c.KvKNummer == CustomerVM.KvK).FirstOrDefault();
+            Klant klant = _customerRepository.GetCustomers().Where(c => c.KlantID == CustomerVM.KlantID).FirstOrDefault();
             if (klant == null) return;
             if (klant.Contactpersoon.Where(c => c.ContactpersoonID == SelectedContact.Id).FirstOrDefault() == null)
                 _customerRepository.CreateContactPerson(newEntity);

@@ -162,6 +162,10 @@
     <Compile Include="Migrations\201912081751483_addSP.designer.cs">
       <DependentUpon>201912081751483_addSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912201601216_KlantRework.cs" />
+    <Compile Include="Migrations\201912201601216_KlantRework.designer.cs">
+      <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -459,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912081751483_addSP.resx">
       <DependentUpon>201912081751483_addSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912201601216_KlantRework.resx">
+      <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
