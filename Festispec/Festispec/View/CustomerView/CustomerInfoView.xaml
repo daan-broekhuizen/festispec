@@ -74,6 +74,8 @@
             <Viewbox Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left"/>
             <TextBox Text="{Binding CustomerVM.Name}" Grid.Row="2" FontSize="20" VerticalContentAlignment="Center"   VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
             <TextBox Text="{Binding CustomerVM.KvK}" IsReadOnly="True" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"   Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding CustomerVM.Branchnumber}" IsReadOnly="True" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center"   Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+
         </Grid>
 
         <Rectangle Grid.Row="3" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>

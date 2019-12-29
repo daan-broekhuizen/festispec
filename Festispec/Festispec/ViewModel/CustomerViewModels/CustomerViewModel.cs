@@ -86,6 +86,15 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("KvK");
             }
         }
+        public string Branchnumber
+        {
+            get => _klant.Vestigingnummer;
+            set 
+            {
+                _klant.Vestigingnummer = value;
+                RaisePropertyChanged("Branchnumber");
+            } 
+        }
         public int KlantID
         {
             get => _klant.KlantID;

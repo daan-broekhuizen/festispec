@@ -48,51 +48,64 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.7*"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.7*"/>
                 <RowDefinition/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.7*"/>
                 <RowDefinition/>
                 <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <Viewbox VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <TextBlock Height="15" Text="Naam"/>
+                <TextBlock Height="15" Text="Voornaam"/>
             </Viewbox>
-            <Viewbox Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <Viewbox VerticalAlignment="Bottom" Grid.Column="1"  HorizontalAlignment="Left" Margin="20,0">
+                <TextBlock Height="15" Text="Tussenvoegsel"/>
+            </Viewbox>
+            <Viewbox VerticalAlignment="Bottom" Grid.Column="2" HorizontalAlignment="Left">
+                <TextBlock Height="15" Text="Achternaam"/>
+            </Viewbox>
+            <Viewbox Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <TextBlock Height="15" Text="Notitie"/>
             </Viewbox>
-            <Viewbox VerticalAlignment="Bottom" Grid.Row="2" HorizontalAlignment="Left" >
+            <Viewbox VerticalAlignment="Bottom" Grid.Row="3" HorizontalAlignment="Left" >
                 <TextBlock VerticalAlignment="Bottom" Height="15" Text="Email"/>
             </Viewbox>
-            <Viewbox  Grid.Row="4" HorizontalAlignment="Left">
+            <Viewbox  Grid.Row="5" HorizontalAlignment="Left">
                 <TextBlock Height="15" VerticalAlignment="Bottom" Text="Telefoon" />
             </Viewbox>
-            <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="4" x:Name="Container">
+            <Viewbox  Grid.Row="7" HorizontalAlignment="Left">
+                <TextBlock Height="15" VerticalAlignment="Bottom" Text="Rol" />
+            </Viewbox>
+            <Grid Grid.Row="4" Grid.Column="2" Grid.RowSpan="5" x:Name="Container">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <TextBox TabIndex="3" MaxWidth="{Binding Path=ActualWidth, ElementName=Container}" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding ContactPersonViewModel.Note}" FontSize="20" Margin="0,5,0,0" />
                 </ScrollViewer>
             </Grid>
-
-
-
-            <TextBox TabIndex="0" Text="{Binding ContactPersonViewModel.Name}"  Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="Bart van de Ven..."/>
-            <TextBox TabIndex="1" Text="{Binding ContactPersonViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="20"  VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="3"/>
-            <TextBox TabIndex="2" Text="{Binding ContactPersonViewModel.Telephone}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="0612345678..."  Grid.Row="5"/>
-            <Viewbox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0">
-                <Label Content="{Binding NameError}" Foreground="Red"  FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
+            <TextBox TabIndex="0" Text="{Binding ContactPersonViewModel.FirstName}"  Grid.Row="1" Style="{StaticResource placeHolder}" FontSize="18" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="Bart..."/>
+            <TextBox TabIndex="1" Text="{Binding ContactPersonViewModel.Infix}"  Grid.Row="1" Grid.Column="1" Style="{StaticResource placeHolder}" FontSize="18" VerticalContentAlignment="Center"  VerticalAlignment="Center" Margin="20,0" HorizontalAlignment="Stretch"  Tag="Van..."/>
+            <TextBox TabIndex="2" Text="{Binding ContactPersonViewModel.LastName}"  Grid.Row="1" Grid.Column="2" Style="{StaticResource placeHolder}" FontSize="18" VerticalContentAlignment="Center"  VerticalAlignment="Center" HorizontalAlignment="Stretch"  Tag="Dalen..."/>
+            <TextBox TabIndex="3" Text="{Binding ContactPersonViewModel.Email}" Style="{StaticResource placeHolder}" FontSize="18"  VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Naam@Adres.nl..." Grid.Column="0" Grid.Row="4"/>
+            <TextBox TabIndex="4" Text="{Binding ContactPersonViewModel.Telephone}" Style="{StaticResource placeHolder}" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="0612345678..."  Grid.Row="6"/>
+            <TextBox TabIndex="5" Text="{Binding ContactPersonViewModel.Role}" Style="{StaticResource placeHolder}" FontSize="18" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Sales director..."  Grid.Row="8"/>
+            <Viewbox Grid.Row="2" HorizontalAlignment="Left">
+                <Label Content="{Binding FirstNameError}" Foreground="Red"  FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
             </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="20,0">
+            <Viewbox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
+                <Label Content="{Binding LastNameError}" Foreground="Red"  FontSize="20" VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="20,0">
                 <Label Content="{Binding EmailError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
             </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,0">
+            <Viewbox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,0">
                 <Label Content="{Binding TelephoneError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
             </Viewbox>
             
-            <Viewbox Grid.Row="8" Grid.Column="1">
-                <Button  Background="White" BorderThickness="0" Margin="0, 5, 0, 10" Padding="20, 0"  Command="{Binding SaveContactPersonCommand}">
+            <Viewbox Grid.Row="10" Grid.Column="1">
+                <Button  Background="White" BorderThickness="0"  Padding="20, 0"  Command="{Binding SaveContactPersonCommand}">
                     <WrapPanel>
                         <Image Height="10" Source="/Images/Plus_icon.png"/>
                         <Label Content="Contactpersoon toevoegen"/>

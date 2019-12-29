@@ -15,7 +15,9 @@ namespace Festispec.ViewModel.CustomerViewModels
         ICommand SaveCustomerCommand { get; set; }
         ICommand SaveContactPersonCommand { get; set; }
 
-        string NameError { get; set; }
+        string FirstNameError { get; set; }
+        string LastNameError { get; set; }
+
         string TelephoneError { get; set; }
         string EmailError { get; set; }
     }

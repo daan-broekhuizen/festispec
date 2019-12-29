@@ -63,9 +63,9 @@ namespace Festispec.ViewModel
 
             Contactpersoon newEntity = new Contactpersoon()
             {
-                Voornaam = SelectedContact.Name,
-                Tussenvoegsel = SelectedContact.Name,
-                Achternaam = SelectedContact.Name,
+                Voornaam = SelectedContact.FirstName,
+                Tussenvoegsel = SelectedContact.Infix,
+                Achternaam = SelectedContact.LastName,
                 Email = SelectedContact.Email,
                 Telefoon = SelectedContact.Telephone,
                 Notities = SelectedContact.Note,

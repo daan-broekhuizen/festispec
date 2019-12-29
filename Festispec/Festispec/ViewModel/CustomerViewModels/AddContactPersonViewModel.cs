@@ -35,14 +35,25 @@ namespace Festispec.ViewModel
             }
         }
 
-        private string _nameError;
-        public string NameError
+        private string _firstNameError;
+        public string FirstNameError
         {
-            get => _nameError;
+            get => _firstNameError;
             set
             {
-                _nameError = value;
-                RaisePropertyChanged("NameError");
+                _firstNameError = value;
+                RaisePropertyChanged("FirstNameError");
+            }
+        }
+
+        private string _lastNameError;
+        public string LastNameError
+        {
+            get => _lastNameError;
+            set
+            {
+                _lastNameError = value;
+                RaisePropertyChanged("LastNameError");
             }
         }
 
@@ -84,6 +95,7 @@ namespace Festispec.ViewModel
             {
                 Naam = CustomerVM.Name,
                 Email = CustomerVM.Email,
+                Vestigingnummer = CustomerVM.Branchnumber,
                 Huisnummer = CustomerVM.HouseNumber,
                 KvKNummer = CustomerVM.KvK,
                 Straatnaam = CustomerVM.Streetname,
@@ -99,12 +111,13 @@ namespace Festispec.ViewModel
             CustomerVM.Contacts.ToList().ForEach(c =>
             _customerRepository.CreateContactPerson(new Contactpersoon()
             {
-                Voornaam = c.Name,
-                Tussenvoegsel = c.Name,
-                Achternaam = c.Name,
+                Voornaam = c.FirstName,
+                Tussenvoegsel = c.Infix,
+                Achternaam = c.LastName,
                 Email = c.Email,
                 Telefoon = c.Telephone,
                 Notities = c.Note,
+                Rol = c.Role,
                 KlantID = klant.KlantID,
                 LaatsteWijziging = DateTime.Now
             }));
@@ -119,8 +132,8 @@ namespace Festispec.ViewModel
             List<ValidationFailure> errors = new ContactPersonValidator().Validate(ContactPersonViewModel).Errors.ToList();
             ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
             ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
-            ValidationFailure nameError = errors.Where(e => e.PropertyName.Equals("Name")).FirstOrDefault();
-
+            ValidationFailure firstNameError = errors.Where(e => e.PropertyName.Equals("FirstName")).FirstOrDefault();
+            ValidationFailure lastNameError = errors.Where(e => e.PropertyName.Equals("LastName")).FirstOrDefault();
 
             if (errors.Count == 0)
             {
@@ -140,10 +153,15 @@ namespace Festispec.ViewModel
             else
                 EmailError = "";
 
-            if (nameError != null)
-                NameError = nameError.ErrorMessage;
+            if (firstNameError != null)
+                FirstNameError = firstNameError.ErrorMessage;
             else
-                NameError = "";
+                FirstNameError = "";
+
+            if (lastNameError != null)
+                LastNameError = lastNameError.ErrorMessage;
+            else
+                LastNameError = "";
         }
 
     }

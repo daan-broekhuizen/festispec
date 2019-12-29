@@ -18,29 +18,16 @@ namespace Festispec.ViewModel
     {
         public ICommand NextPageCommand { get; set; }
 
-        #region ErrorProperties
-        private string _customerError;
-        public string CustomerError
+        private string _errorMessage;
+        public string ErrorMessage
         {
-            get => _customerError;
+            get => _errorMessage;
             set
             {
-                _customerError = value;
-                RaisePropertyChanged("CustomerError");
+                _errorMessage = value;
+                RaisePropertyChanged("ErrorMessage");
             }
         }
-
-        private string _adresError;
-        public string AdresError
-        {
-            get => _adresError;
-            set
-            {
-                _adresError = value;
-                RaisePropertyChanged("AdresError");
-            }
-        }
-        #endregion
 
         private CustomerValidator _customerValidator;
         public AddCustomerInfoViewModel(NavigationService service, CustomerRepository repo) : base(service)
@@ -54,26 +41,12 @@ namespace Festispec.ViewModel
         {
             //Validate input and show relevant input errors
             List<ValidationFailure> errors =  _customerValidator.Validate(CustomerVM).Errors.ToList();
-            ValidationFailure customerError = errors.Where(e => e.PropertyName.Equals("Name") ||
-                                                                e.PropertyName.Equals("KvK")).FirstOrDefault();
-            ValidationFailure adresError = errors.Where(e => e.PropertyName.Equals("PostalCode") ||
-                                                             e.PropertyName.Equals("HouseNumber") ||
-                                                             e.PropertyName.Equals("Streetname") ||
-                                                             e.PropertyName.Equals("City")).FirstOrDefault();
+
             //If succesfull navigate to next page else update error properties
-            if (customerError == null && adresError == null)
+            if (ErrorMessage == null)
                 _navigationService.NavigateTo("AddContactInfo", CustomerVM);
-            else
-            {
-                if (customerError != null)
-                    CustomerError = customerError.ErrorMessage;
-                else
-                    CustomerError = "";
-                if (adresError != null)
-                    AdresError = adresError.ErrorMessage;
-                else
-                    AdresError = "";
-            }
+            else 
+                ErrorMessage = errors[0].ErrorMessage;
         }
     }
 }

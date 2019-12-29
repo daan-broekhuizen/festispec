@@ -13,7 +13,7 @@ namespace Festispec.Validators
     {
         public ContactPersonValidator()
         {
-            RuleFor(x => x.Name).NotEmpty().WithMessage("Voer een naam in.");
+            RuleFor(x => x.FirstName).NotEmpty().WithMessage("Voer een voornaam in.");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Voer een email adres in");
             RuleFor(x => x.Telephone).Must(IsValidTelephone).WithMessage("Voer een geldig telefoonnummer in (0612345678).");
         }
