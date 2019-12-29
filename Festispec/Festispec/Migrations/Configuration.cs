@@ -661,7 +661,7 @@
 
         private void SeedVraagMogelijkAntwoord(FestispecContext context)
         {
-            VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[35];
+           VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[34];
             antwoorden[0] = new VraagMogelijkAntwoord()
             {
                 VraagID = 2,
@@ -710,70 +710,70 @@
                 };
             }
 
-            antwoorden[25] = new VraagMogelijkAntwoord()
+            antwoorden[24] = new VraagMogelijkAntwoord()
             {
                 VraagID = 12,
                 AntwoordNummer = 1,
                 AntwoordText = "act"
             };
 
-            antwoorden[26] = new VraagMogelijkAntwoord()
+            antwoorden[25] = new VraagMogelijkAntwoord()
             {
                 VraagID = 12,
                 AntwoordNummer = 2,
                 AntwoordText = "sfeer"
             };
 
-            antwoorden[27] = new VraagMogelijkAntwoord()
+            antwoorden[26] = new VraagMogelijkAntwoord()
             {
                 VraagID = 13,
                 AntwoordNummer = 1,
                 AntwoordText = "Show"
             };
 
-            antwoorden[28] = new VraagMogelijkAntwoord()
+            antwoorden[27] = new VraagMogelijkAntwoord()
             {
                 VraagID = 13,
                 AntwoordNummer = 2,
                 AntwoordText = "Aantal mensen in rij"
             };
 
-            antwoorden[29] = new VraagMogelijkAntwoord()
+            antwoorden[28] = new VraagMogelijkAntwoord()
             {
                 VraagID = 14,
                 AntwoordNummer = 1,
                 AntwoordText = "Tijd"
             };
 
-            antwoorden[30] = new VraagMogelijkAntwoord()
+            antwoorden[29] = new VraagMogelijkAntwoord()
             {
                 VraagID = 14,
                 AntwoordNummer = 2,
                 AntwoordText = "Drukte"
+            };
+
+            antwoorden[30] = new VraagMogelijkAntwoord()
+            {
+                VraagID = 15,
+                AntwoordNummer = 1,
+                AntwoordText = "Tijd"
             };
 
             antwoorden[31] = new VraagMogelijkAntwoord()
             {
                 VraagID = 15,
-                AntwoordNummer = 1,
-                AntwoordText = "Tijd"
-            };
-
-            antwoorden[32] = new VraagMogelijkAntwoord()
-            {
-                VraagID = 15,
                 AntwoordNummer = 2,
                 AntwoordText = "Drukte"
             };
 
-            antwoorden[33] = new VraagMogelijkAntwoord()
+            antwoorden[32] = new VraagMogelijkAntwoord()
             {
                 VraagID = 16,
                 AntwoordNummer = 1,
                 AntwoordText = "Tijd"
             };
 
-            antwoorden[34] = new VraagMogelijkAntwoord()
+            antwoorden[33] = new VraagMogelijkAntwoord()
             {
                 VraagID = 16,
                 AntwoordNummer = 2,
@@ -786,31 +786,29 @@
 
         private void SeedVraagAntwoorden(FestispecContext context)
         {
-            Inspectieformulier inspectieformulier = context.Inspectieformulier.Where(x => x.InspectieFormulierTitel == "Inspectie Bospop festival").FirstOrDefault();
+           Inspectieformulier inspectieformulier = context.Inspectieformulier.Where(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").FirstOrDefault();
 
-            foreach(Vraag vraag in inspectieformulier.Vraag)
-            {
-                Antwoorden[] antwoorden = new Antwoorden[]
-                {
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                        AntwoordNummer = 1,
-                        AntwoordText = "0"
-                    },
-                    new Antwoorden()
-                    {
-                        VraagID = vraag.VraagID,
-                        InspecteurID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
-                        AntwoordNummer = 1,
-                        AntwoordText = "0"
-                    }
-                };
 
-                context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoorden);
-                SaveChanges(context);
-            }
+            Antwoorden[] antwoorden = new Antwoorden[2];
+
+
+            antwoorden[0] = new Antwoorden {
+                VraagID = 1,
+                InspecteurID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
+                AntwoordNummer = 1,
+                AntwoordText = "0"
+            };
+            antwoorden[1] = new Antwoorden{
+                VraagID = 2,
+                InspecteurID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                AntwoordNummer = 1,
+                AntwoordText = "0"
+            };
+                
+
+            context.Antwoorden.AddOrUpdate(x => new { x.VraagID, x.AntwoordNummer }, antwoorden);
+            SaveChanges(context);
+            
         }
 
         private void SeedBeschikbaarheidInspecteurs(FestispecContext context)
@@ -849,7 +847,7 @@
 
         private void SeedIngepladeInspecteurs(FestispecContext context)
         {
-            Inspectieformulier Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival");
+            Inspectieformulier Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen");
 
             if(Inspectieformulier.Ingepland.Count == 0)
                 Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
@@ -857,7 +855,7 @@
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
 
             if(account.Ingepland.Count == 0)
-                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop festival"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen"));
 
             SaveChanges(context);
         }
@@ -882,13 +880,13 @@
 
             templates[0] = new Inspectieformulier()
             {
-                InspectieFormulierTitel = "Test",
-                Beschrijving = "prGbEM6flQ2YUckUEgO2Pdh4y9J8gRUbSEQw0boZCoIjgNhxoNGFVPQA7AzDUZowDkSLJ93WGHeeUKHZ1AKexT1a3wRjN5ONbhuExU8uig46QCW1UyzHwquDYu6fe6mwq8rnhiHFUXS21pOusA8OKm14p8asoFqyqdtGyLhTDtq8oENLP5Kazl6mjkgafspjfUFkjQYhortW23THikIuEm6DOesvRya6oki4VVLQDzDMTy3qaetESgV5n7IRR6SpScusPlPJG6kDUNiNJT4qxWFVK1wWhRDHXRjiMW9RP2VBjYJkbr7dDxpCq2gU6kKfrTMt5v4n4Lil2x6vsikTXwYyPeMO3HJUepBkUXEVLhthgee0v5L1gIl5yMCb2MRq4yVNzw35ZuAa0FXN",
+                InspectieFormulierTitel = "Leeg",
+                Beschrijving = "Leeg inspectieformulier",
                 DatumInspectie = DateTime.Now,
                 LaatsteWijziging = DateTime.Now
             };
 
-            context.Inspectieformulier.AddOrUpdate(x => x.InspectieformulierID, templates);
+            context.Inspectieformulier.AddOrUpdate(x => x.InspectieFormulierTitel, templates);
             SaveChanges(context);
         }
 
