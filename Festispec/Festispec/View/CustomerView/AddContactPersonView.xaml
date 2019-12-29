@@ -35,6 +35,11 @@
                     <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
                 </Button>
             </Viewbox>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Left" >
+                <Button Margin="20,0,0,0" Command="{Binding NavigateBackCommand}" BorderThickness="0" Background="Transparent">
+                    <Image Source="/Images/back_icon.png"/>
+                </Button>
+            </Viewbox>
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>

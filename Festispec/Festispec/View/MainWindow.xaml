@@ -117,6 +117,6 @@
 
 
         </Grid>
-        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Visible"/>
+        <Frame Grid.Column="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Page>
