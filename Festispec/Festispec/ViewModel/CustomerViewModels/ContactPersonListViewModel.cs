@@ -67,6 +67,7 @@ namespace Festispec.ViewModel
                 Tussenvoegsel = SelectedContact.Infix,
                 Achternaam = SelectedContact.LastName,
                 Email = SelectedContact.Email,
+                Rol = SelectedContact.Role,
                 Telefoon = SelectedContact.Telephone,
                 Notities = SelectedContact.Note,
                 KlantID = CustomerVM.KlantID,
