@@ -125,7 +125,7 @@ namespace Festispec.ViewModel
             //Navigate to created CustomerInfo
             _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         }
-        private bool CanSaveCustomer() => new CustomerValidator(_customerRepository).Validate(CustomerVM).IsValid;
+        private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerVM).IsValid;
         private void SaveContactPerson()
         {
             //Validate & get relevant errors

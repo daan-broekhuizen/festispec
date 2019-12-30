@@ -32,7 +32,7 @@ namespace Festispec.ViewModel
         private CustomerValidator _customerValidator;
         public AddCustomerInfoViewModel(NavigationService service, CustomerRepository repo) : base(service)
         {
-            _customerValidator = new CustomerValidator(repo);
+            _customerValidator = new CustomerValidator();
             if (CustomerVM == null) CustomerVM = new CustomerViewModel();
             NextPageCommand = new RelayCommand(NextPage);
         }
@@ -43,7 +43,7 @@ namespace Festispec.ViewModel
             List<ValidationFailure> errors =  _customerValidator.Validate(CustomerVM).Errors.ToList();
 
             //If succesfull navigate to next page else update error properties
-            if (ErrorMessage == null)
+            if (errors == null)
                 _navigationService.NavigateTo("AddContactInfo", CustomerVM);
             else 
                 ErrorMessage = errors[0].ErrorMessage;

@@ -128,14 +128,19 @@ namespace Festispec.ViewModel
         }
         public ImageSource Logo
         {
-            get => ImageByteConverter.BytesToImage(_klant.KlantLogo);
+            get
+            {
+                ImageSource image = ImageByteConverter.BytesToImage(_klant.KlantLogo);
+                if (image != null)
+                    return image;
+                else
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+            }
             set
             {
                 byte[] image = ImageByteConverter.PngImageToBytes(value);
                 if (image != null)
                     _klant.KlantLogo = image;
-                else
-                    new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
                 RaisePropertyChanged("Logo");
 
             }
@@ -162,7 +167,6 @@ namespace Festispec.ViewModel
         public CustomerViewModel()
         {
             _klant = new Klant();
-            Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
             Contacts = new ObservableCollection<ContactPersonViewModel>();
         }
         private async Task GetPostalCodeAsync()

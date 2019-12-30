@@ -13,15 +13,12 @@ namespace Festispec.Validators
 {
     public class CustomerValidator : AbstractValidator<CustomerViewModel>
     {
-        private CustomerRepository _customerRepository;
-        public CustomerValidator(CustomerRepository repo)
+        public CustomerValidator()
         {
-            _customerRepository = repo;
             RuleFor(x => x.Name).NotEmpty().WithMessage("Voer een naam in.");
             RuleFor(x => x.KvK).NotEmpty().WithMessage("Voer een KvK nummer in.");
-            RuleFor(x => x.KvK).Length(8).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
-            RuleFor(x => x.KvK).Must(IsNumericalSequence).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
-            RuleFor(x => x.KvK).Must(IsUniqueKvK).WithMessage("KvK bestaat al.");
+            RuleFor(x => x.KvK).Must(IsNumericalSequence).Length(8).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
+            RuleFor(x => x.Branchnumber).Must(IsNumericalSequence).Length(12).WithMessage("Voer een geldig vestigingsnummer in (12 cijfers).");
             RuleFor(x => x.Streetname).NotEmpty().WithMessage("Voer een straatnaam in.");
             RuleFor(x => x.HouseNumber).NotEmpty().WithMessage("Voer een huisnummer in.");
             RuleFor(x => x.HouseNumber).Must(IsValidHouseNumber).WithMessage("Huisnummer + toevoeging mag max. 4 lang zijn");
@@ -49,11 +46,5 @@ namespace Festispec.Validators
             return arg.Length == 7 && arg.Contains(" ");
         }
 
-        private bool IsUniqueKvK(string arg)
-        {
-            if (arg == null) return false;
-            Klant klant = _customerRepository.GetCustomers().Where(c => c.KvKNummer == arg).FirstOrDefault();
-            return arg.All(char.IsDigit) && klant == null;
-        }
     }
 }
