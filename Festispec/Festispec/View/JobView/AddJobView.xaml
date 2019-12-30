@@ -37,7 +37,7 @@
                 <Image Source="/Images/festispec_logo.png"></Image>
             </Viewbox>
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Left" >
-                <Button Margin="20,0,0,0" Command="{Binding NavigateBackCommand}" BorderThickness="0" Background="Transparent">
+                <Button Margin="20,0,0,0" Command="{Binding PreviousPageCommand}" BorderThickness="0" Background="Transparent">
                     <Image Source="/Images/back_icon.png"/>
                 </Button>
             </Viewbox>

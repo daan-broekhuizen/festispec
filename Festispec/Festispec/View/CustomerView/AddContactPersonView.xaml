@@ -36,8 +36,8 @@
                 </Button>
             </Viewbox>
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Left" >
-                <Button Margin="20,0,0,0" Command="{Binding NavigateBackCommand}" BorderThickness="0" Background="Transparent">
-                    <Image Source="/Images/back_icon.png"/>
+                <Button Margin="20,0,0,0" Command="{Binding PreviousPageCommand}" BorderThickness="0" Background="Transparent">
+                    <Image Margin="10" Source="/Images/back_icon.png"/>
                 </Button>
             </Viewbox>
         </Grid>

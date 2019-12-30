@@ -53,6 +53,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         public ICommand HeightChangedCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand DownloadCommand { get; set; }
+        public ICommand ShowJobCommand { get; set; }
 
         // Properties
         private string _content;
@@ -160,6 +161,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             HeightChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("height", $"{(string)parameters[1]}px", true));
             SaveCommand = new RelayCommand<DocumentDesigner>((designer) => Save(designer.ViewModel));
             DownloadCommand = new RelayCommand<DocumentDesigner>((designer) => Download(designer.ViewModel));
+            ShowJobCommand = new RelayCommand(ShowJob);
 
             IsEditable = false;
             DisplayExtraOptions = false;
@@ -274,5 +276,8 @@ namespace Festispec.ViewModel.RapportageViewModels
 
             new InspectionFormPdf().ExportQuestion(document, _repo, _job.JobID);
         }
+
+        private void ShowJob() => _navigationService.NavigateTo("JobInfo", _job);
+
     }
 }

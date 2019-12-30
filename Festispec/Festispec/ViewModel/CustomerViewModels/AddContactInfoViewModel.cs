@@ -17,6 +17,7 @@ namespace Festispec.ViewModel
     public class AddContactInfoViewModel : CustomerViewModelBase
     {
         public ICommand NextPageCommand { get; set; }
+        public ICommand PreviousPageCommand { get; set; }
 
         //Properties for errors
         #region ErrorMessages
@@ -48,7 +49,10 @@ namespace Festispec.ViewModel
         {
             _customerValidator = new CustomerValidator(repo);
             NextPageCommand = new RelayCommand(NextPage);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
         }
+
+        private void PreviousPage() => _navigationService.NavigateTo("AddCustomerInfo", CustomerVM);
 
         private void NextPage()
         {
