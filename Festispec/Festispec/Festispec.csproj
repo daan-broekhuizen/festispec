@@ -266,6 +266,9 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\AddGebruiker.xaml.cs">
+      <DependentUpon>AddGebruiker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddJobView.xaml.cs">
       <DependentUpon>AddJobView.xaml</DependentUpon>
     </Compile>
@@ -358,6 +361,10 @@
     <Compile Include="View\UserRightsView.xaml.cs">
       <DependentUpon>UserRightsView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddGebruiker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

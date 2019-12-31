@@ -58,6 +58,7 @@ namespace Festispec.ViewModel
         public ICommand SortChangedCommand { get; set; }
         public ICommand SearchButtonClickCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
+        public ICommand AddCustomer { get; set; }
 
         public UserRightsViewModel(NavigationService service, UserRepository repo) 
         {

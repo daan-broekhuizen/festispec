@@ -40,7 +40,7 @@
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1"  Visibility="Hidden" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1"  SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
 
 
 
@@ -66,7 +66,7 @@
         </Viewbox>
 
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}" SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}"  SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="70" Width="{Binding ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
