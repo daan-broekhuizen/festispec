@@ -231,7 +231,7 @@
             klanten[0] = new Klant()
             {
                 KvKNummer = "29387132",
-                Vestigingnummer = 1,
+                Vestigingnummer = "01156459",
                 Naam = "Bospop",
                 Stad = "s-Hertogenbosch",
                 Straatnaam = "Van Voornestraat",
@@ -245,7 +245,7 @@
             klanten[1] = new Klant()
             {
                 KvKNummer = "12345678",
-                Vestigingnummer = 3216,
+                Vestigingnummer = "3216",
                 Naam = "Pinkpop",
                 Stad = "Utrecht",
                 Straatnaam = "Amsterdamweg",
@@ -259,7 +259,7 @@
             klanten[2] = new Klant()
             {
                 KvKNummer = "03810391",
-                Vestigingnummer = 12,
+                Vestigingnummer = "12",
                 Naam = "Appelpop",
                 Stad = "Tilburg",
                 Straatnaam = "Wolvenweg",
@@ -273,7 +273,7 @@
             klanten[3] = new Klant()
             {
                 KvKNummer = "29183110",
-                Vestigingnummer = 3,
+                Vestigingnummer = "3",
                 Naam = "American day",
                 Stad = "Amsterdam",
                 Straatnaam = "Noordhollandstraat",
@@ -287,7 +287,7 @@
             klanten[4] = new Klant()
             {
                 KvKNummer = "29387132",
-                Vestigingnummer = 2,
+                Vestigingnummer = "2",
                 Naam = "Bospop",
                 Stad = "Weert",
                 Straatnaam = "Pylsstraatje",
@@ -359,7 +359,7 @@
 
             contacts[4] = new Contactpersoon()
             {
-                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == "2").KlantID,
                 Voornaam = "Randy",
                 Tussenvoegsel = null,
                 Achternaam = "Marsh",
@@ -387,7 +387,7 @@
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now,
                 EindDatum = DateTime.Now.AddDays(2),
-                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == 2).KlantID,
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == "2").KlantID,
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,
@@ -401,7 +401,7 @@
                  CreatieDatum = DateTime.Now,
                  StartDatum = DateTime.Now.AddMonths(1),
                  EindDatum = DateTime.Now.AddMonths(1).AddDays(3),
-                 KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == 3216).KlantID,
+                 KlantID = context.Klant.First(x => x.Naam == "Pinkpop" && x.Vestigingnummer == "3216").KlantID,
                  MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                  GebruikteRechtsgebieden = "Drank en horeca wet",
                  LaatsteWijziging = DateTime.Now,

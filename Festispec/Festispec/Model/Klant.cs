@@ -24,7 +24,8 @@ namespace Festispec.Model
         [Column("KvK_nummer")]
         public string KvKNummer { get; set; }
 
-        public int Vestigingnummer { get; set; }
+        [StringLength(8)]
+        public string Vestigingnummer { get; set; }
 
 
         [Required]
