@@ -11,7 +11,7 @@ namespace Festispec.Service
 {
     public class LocationService
     {
-        private static string _bingApiKey = (new SettingsBuilder()).Build().BingApiKey;
+        private static string _bingApiKey = (new SettingsBuilder()).Build().ApiKeys.BingApiKey;
 
         public async Task<Location> GetLocation(string address)
         {

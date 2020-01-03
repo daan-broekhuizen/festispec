@@ -1,5 +1,6 @@
 ﻿using Festispec.API;
 using Festispec.API.ImageShack;
+using Festispec.API.Uploading;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
@@ -287,7 +288,7 @@ namespace Festispec.ViewModel.Components
         public void AddChart(Grid grid)
         {
             byte[] data = grid.ToByteArray();
-            UploadModel result = (new ImageShackClient()).UploadImage(new FileData(data));
+            UploadModel result = (new UploadClient()).UploadImage(new FileData(data));
 
             if (AddRequested != null)
                 AddRequested.Invoke(Designer, result);

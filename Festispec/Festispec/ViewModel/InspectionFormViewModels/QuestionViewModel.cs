@@ -20,6 +20,7 @@ using FluentValidation.Results;
 using Festispec.Utility.Validators;
 using Festispec.Validators;
 using GalaSoft.MvvmLight.Messaging;
+using Festispec.API.Uploading;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -428,7 +429,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if (fileLocation.Contains("%20"))
                 fileLocation = fileLocation.Replace("%20", " ");
           
-            UploadModel response = new ImageShackClient().UploadImage(new ImageContainer[1]
+            UploadModel response = new UploadClient().UploadImage(new ImageContainer[1]
             {
                 new ImageContainer(fileLocation, "image/png")
             });
