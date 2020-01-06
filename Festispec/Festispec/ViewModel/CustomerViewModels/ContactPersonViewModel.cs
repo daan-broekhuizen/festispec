@@ -85,5 +85,10 @@ namespace Festispec.ViewModel
         {
             _contactPerson = new Contactpersoon();
         }
+
+        public void SetContactPerson(Contactpersoon contact)
+        {
+            _contactPerson = contact;
+        }
     }
 }

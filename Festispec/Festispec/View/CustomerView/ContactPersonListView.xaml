@@ -39,7 +39,13 @@
         </Grid>
 
         <Border BorderThickness="0" x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
-            <ListBox BorderThickness="0" x:Name="CustomerList" SelectedItem="{Binding SelectedContact}" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}"  VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox BorderThickness="0" 
+                     x:Name="CustomerList"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible"
+                     SelectedItem="{Binding SelectedContact}" 
+                     HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}"  
+                     VerticalAlignment="Top" 
+                     Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid  MaxHeight="250" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="#FFF4F4F5" Margin="5,5">
@@ -85,7 +91,6 @@
                             </Viewbox>
                             <DockPanel Grid.Row="4" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="2">
                                 <TextBox FontSize="18" Text="{Binding Note}" AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top" Margin="0,5,0,0" />
-
                             </DockPanel>
                             <TextBox FontSize="18" Text="{Binding FirstName}" Grid.Row="2" Margin="0,0,10,0" VerticalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
                             <TextBox FontSize="18" Text="{Binding Infix}" Grid.Row="2" Margin="0,0,10,0" VerticalContentAlignment="Center" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
@@ -93,14 +98,10 @@
                             <TextBox FontSize="18" Text="{Binding Role}" Margin="0,0,10,0" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1"  Grid.Row="8"/>
                             <TextBox FontSize="18" Text="{Binding Email}" Margin="0,0,10,0"  VerticalContentAlignment="Center" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="4"/>
                             <TextBox FontSize="18" Text="{Binding Telephone}" Margin="0,0,10,0" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="1"  Grid.Row="6"/>
-
                         </Grid>
-
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-
         </Border>
 
         

@@ -100,7 +100,7 @@
             <Viewbox Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Margin="20,0">
                 <Label Content="{Binding EmailError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
             </Viewbox>
-            <Viewbox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="20,0">
+            <Viewbox Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="20,0">
                 <Label Content="{Binding TelephoneError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
             </Viewbox>
             

@@ -45,7 +45,7 @@ namespace Festispec.ViewModel
                 //if validated update customer
                 _customerRepository.UpdateCustomer(new Klant()
                 {
-                    KlantID = CustomerVM.KlantID,
+                    KlantID = CustomerVM.Id,
                     Naam = CustomerVM.Name,
                     Email = CustomerVM.Email,
                     Huisnummer = CustomerVM.HouseNumber,
