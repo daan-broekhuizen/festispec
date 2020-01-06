@@ -95,7 +95,7 @@
 
         private void SeedAccount(FestispecContext context)
         {
-            Account[] accounts = new Account[7];
+            Account[] accounts = new Account[10];
 
             accounts[0] = new Account()
             {
@@ -217,6 +217,63 @@
                 DatumCertificering = DateTime.Now.AddMonths(-7).AddDays(13),
                 EinddatumCertificering = DateTime.Now.AddYears(2).AddMonths(-6),
                 IBAN = "NLRABO2442986",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[7] = new Account()
+            {
+                Gebruikersnaam = "MargotRowland",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Margot",
+                Tussenvoegsel = null,
+                Achternaam = "Rowland",
+                Stad = "Valkenswaard",
+                Straatnaam = "Waalresweg",
+                Huisnummer = "70",
+                Email = "MRowland@gmail.nl",
+                Telefoonnummer = "0494723100",
+                DatumCertificering = DateTime.Now.AddMonths(-8).AddDays(3),
+                EinddatumCertificering = DateTime.Now.AddYears(1),
+                IBAN = "NLRABO2331224",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[8] = new Account()
+            {
+                Gebruikersnaam = "SanjeevPike",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Sanjeev",
+                Tussenvoegsel = null,
+                Achternaam = "Pike",
+                Stad = "Dordrecht",
+                Straatnaam = "Poelwijckstraat",
+                Huisnummer = "3",
+                Email = "S.Pike@hotmail.com",
+                Telefoonnummer = "0648781812",
+                DatumCertificering = DateTime.Now.AddMonths(-13).AddDays(3),
+                EinddatumCertificering = DateTime.Now.AddMonths(4),
+                IBAN = "NLRABO1123941",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[9] = new Account()
+            {
+                Gebruikersnaam = "WillCollier",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
+                Voornaam = "Will",
+                Tussenvoegsel = null,
+                Achternaam = "Collier",
+                Stad = "Amsterdam",
+                Straatnaam = "Jan Puntstraat",
+                Huisnummer = "18",
+                Email = "willcollier@hotmail.nl",
+                Telefoonnummer = "0690099889",
+                DatumCertificering = DateTime.Now.AddMonths(-23).AddDays(3),
+                EinddatumCertificering = DateTime.Now.AddMonths(2),
+                IBAN = "NLRABO0098228",
                 LaatsteWijziging = DateTime.Now,
             };
 
