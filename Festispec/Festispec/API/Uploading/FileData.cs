@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.API
+namespace Festispec.API.Uploading
 {
     public class FileData
     {

@@ -1,4 +1,5 @@
 ﻿using Festispec.API.ImageShack;
+using Festispec.API.Uploading;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
@@ -189,7 +190,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             if (bmp.UriSource == null)
                 return;
 
-            UploadModel response = new ImageShackClient().UploadImage(new ImageContainer(bmp.UriSource.AbsolutePath));
+            UploadModel response = new UploadClient().UploadImage(new ImageContainer(bmp.UriSource.AbsolutePath));
 
             if (response.Images.Length > 0)
                 designer.AddImage(response.Images.First().HttpLink);
