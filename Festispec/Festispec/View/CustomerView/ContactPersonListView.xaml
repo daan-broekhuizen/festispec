@@ -38,17 +38,22 @@
             </Viewbox>
         </Grid>
 
-        <Border BorderThickness="0" x:Name="SizeHelperPanel" Grid.Row="2" Padding="20">
+        <Border BorderThickness="0" 
+                x:Name="SizeHelperPanel" 
+                Grid.Row="2" Padding="0"  
+                ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox BorderThickness="0" 
                      x:Name="CustomerList"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
                      SelectedItem="{Binding SelectedContact}" 
-                     HorizontalContentAlignment="Stretch" ItemsSource="{Binding CustomerVM.Contacts}"  
+                     HorizontalContentAlignment="Stretch" 
+                     ItemsSource="{Binding CustomerVM.Contacts}"  
                      VerticalAlignment="Top" 
-                     Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+                     Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}"
+                     Padding="20">
+                
                 <ListBox.ItemTemplate>
                     <DataTemplate >
-                        <Grid  MaxHeight="250" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}" HorizontalAlignment="Stretch" Background="#FFF4F4F5" Margin="5,5">
+                        <Grid  MaxHeight="250" MaxWidth="{Binding Path=ActualWidth, ElementName=CustomerList}"  Background="#FFF4F4F5" Margin="5,5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.1*" />
                                 <ColumnDefinition Width="0.3*" />
