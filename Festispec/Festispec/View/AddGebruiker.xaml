@@ -29,7 +29,7 @@
                 <TextBlock Text="Gebruiker Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
-                <Button Margin="50" Background="White" Click="Button_Click" BorderThickness="0" VerticalContentAlignment="Center">
+                <Button Margin="50" Background="White" BorderThickness="0" VerticalContentAlignment="Center">
                     <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
                 </Button>
             </Viewbox>

@@ -134,7 +134,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         private void DownloadQuotation()
         {
-            string title = "test";
+            string title = $"Offerte";
             new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price);
         }
 

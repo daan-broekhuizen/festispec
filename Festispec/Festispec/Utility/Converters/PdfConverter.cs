@@ -26,13 +26,16 @@ namespace Festispec.Utility.Converters
                 XFont fontTitle = new XFont("Arial", 20, XFontStyle.Bold);
                 // Text font
                 XFont fontText = new XFont("Arial", 14, XFontStyle.Regular);
+                XPen lineBlack = new XPen(XColors.Black, 1);
 
                 // Title
                 gfx.DrawString(title, fontTitle, XBrushes.Black, new XRect(0, 20, page.Width, page.Height), XStringFormats.TopCenter);
                 // Price
                 gfx.DrawString("Prijs: " + price + "€", fontText, XBrushes.Black, new XRect(20, -80, page.Width, page.Height), XStringFormats.BottomLeft);
+                gfx.DrawLine(lineBlack, 20, 765, 400, 765);
                 // Description
-                gfx.DrawString("Offerte omschrijving:  \n\n" + description, fontText, XBrushes.Black, new XRect(20, 80, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawString("    " + description, fontText, XBrushes.Black, new XRect(20, 80, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawLine(lineBlack, 30, 100, 400, 100);
                 // Logo
                 DrawImage(gfx, @"..\..\Images/festispec_logo.png", 20, 20, 100, 25);
                 // Info
@@ -47,7 +50,7 @@ namespace Festispec.Utility.Converters
                 
                 if (!documentName.Contains(".pdf"))
                     documentName += ".pdf";
-
+                
                 document.Save(documentName);
                 StartPDF(documentName);
             }
