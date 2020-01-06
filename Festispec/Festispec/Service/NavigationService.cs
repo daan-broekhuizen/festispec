@@ -48,7 +48,7 @@ namespace Festispec.Service
             if (_historic.Count > 1)
             {
                 _historic.RemoveAt(_historic.Count - 1);
-                NavigateTo(_historic.Last(), null);
+                NavigateTo(_historic.Last(), Parameter);
             }
         }
         public void NavigateTo(string pageKey)

@@ -17,6 +17,7 @@ namespace Festispec.ViewModel.QuotationViewModels
     {
         public QuotationViewModel QuotationVM { get; set; }
         public ICommand SaveQuotationCommand { get; set; }
+        public ICommand PreviousPageCommand { get; set; }
 
         private string _priceError;
         public string PriceError 
@@ -51,8 +52,14 @@ namespace Festispec.ViewModel.QuotationViewModels
                 QuotationVM = new QuotationViewModel();
 
             SaveQuotationCommand = new RelayCommand(SaveQuotation);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
         }
 
+        private void PreviousPage()
+        {
+            Opdracht job = _quotationRepository.GetJob(QuotationVM.JobId);
+            _navigationService.NavigateTo("JobInfo", new JobViewModel(job));
+        }
         private void SaveQuotation()
         {
             if (QuotationVM.JobId < 1) return;
