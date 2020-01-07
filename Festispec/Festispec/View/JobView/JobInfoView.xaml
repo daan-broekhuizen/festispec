@@ -33,7 +33,7 @@
                 <TextBlock Text="Opdracht"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="/Images/festispec_logo.png"></Image>
+                <Image Source="{Binding JobVM.Logo}"></Image>
             </Viewbox>
         </Grid>
 
