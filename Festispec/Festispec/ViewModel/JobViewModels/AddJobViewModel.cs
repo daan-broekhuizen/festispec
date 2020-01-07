@@ -148,7 +148,7 @@ namespace Festispec.ViewModel
         {
             List<ValidationFailure> errors = new JobValidator().Validate(JobVM).Errors.ToList();
             ValidationFailure jobnameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
-            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerName")).FirstOrDefault();
+            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerID")).FirstOrDefault();
             ValidationFailure begindateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
             ValidationFailure enddateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
             ValidationFailure statusError = errors.Where(e => e.PropertyName.Equals("Status")).FirstOrDefault();
