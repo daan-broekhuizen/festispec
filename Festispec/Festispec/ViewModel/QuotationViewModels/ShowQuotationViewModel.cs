@@ -64,7 +64,7 @@ namespace Festispec.ViewModel.QuotationViewModels
             _quotationRepository = repo;
             if (service.Parameter is QuotationViewModel)
                 QuotationVM = service.Parameter as QuotationViewModel;
-            Console.WriteLine(IsSendable);
+
             AcceptQuotationCommand = new RelayCommand(AcceptQuotation, CanRegisterDecision);
             CancelJobCommand = new RelayCommand(CancelJob, CanRegisterDecision);
             RejectQuotationCommand = new RelayCommand(RejectQuotation, CanRegisterDecision);
@@ -84,7 +84,6 @@ namespace Festispec.ViewModel.QuotationViewModels
                 DescriptionError = "";
                 PriceError = "";
                 DecisionError = "";
-
 
                 decimal price;
                 Decimal.TryParse(QuotationVM.Price.Trim('€'), out price);
@@ -151,7 +150,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         private void RegisterCustomerDecision(string status)
         {
-            if (QuotationVM.Decision != null)
+            if (QuotationVM.Decision.Length > 1)
             {
                 DecisionError = "";
                 _quotationRepository.UpdateDecision(QuotationVM.QuotationId, QuotationVM.Decision);
