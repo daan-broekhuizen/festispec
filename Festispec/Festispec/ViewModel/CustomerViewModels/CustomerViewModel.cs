@@ -173,7 +173,10 @@ namespace Festispec.ViewModel
         {
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
-            PostalCode = address.PostalCode;
+            if (address.Locality.Contains(City))
+                PostalCode = address.PostalCode;
+            else
+                PostalCode = "";
 
         }
         public void SetCustomer(Klant customer) => _customer = customer;
