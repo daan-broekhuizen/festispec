@@ -1,6 +1,9 @@
 ﻿using Festispec.Model;
-using FestiSpec.Domain;
+using Festispec.Service;
+using Festispec.Validators;
+using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain.Repositories;
+using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -15,6 +18,10 @@ namespace Festispec.ViewModel
     public class RegisterViewModel : ViewModelBase
     {
         private UserRepository _user;
+        private NavigationService navigationService;
+        private UserRepository userRepo;
+        public AccountViewModel AccountVM { get; set; }
+
         public ICommand RegisterCommand { get; set; }
 
 
@@ -22,30 +29,39 @@ namespace Festispec.ViewModel
         {
             _user = new UserRepository();
 
-           // RegisterCommand = new RelayCommand(Register, CanRegister);
+            RegisterCommand = new RelayCommand(Register);
         }
 
-        private bool CanRegister()
+        public RegisterViewModel(NavigationService navigationService, UserRepository userRepo)
         {
-            throw new NotImplementedException();
+            this.navigationService = navigationService;
+            this.userRepo = userRepo;
+
         }
 
-        public bool Register()
+        public void Register()
         {
-            //TODO 
-            // Hier een nieuw account maken en de waardes toekennen
-            // Deze is nog niet af aangezien de values nog nergens zijn 
             Account newAccount = new Account()
             {
-                Gebruikersnaam = "", 
-                Wachtwoord = "", // Encryptie toepassen
-                Rol = ""
+                Gebruikersnaam = AccountVM.Username,
+                Wachtwoord = AccountVM.Password,
+                Rol = "in",
+                Voornaam = AccountVM.FirstName,
+                Tussenvoegsel = AccountVM.Infix,
+                Achternaam = AccountVM.LastName,
+                Straatnaam = AccountVM.StreetName,
+                Huisnummer = AccountVM.HouseNumber,
+                Stad = AccountVM.City
             };
 
-            foreach (Account c in _user.GetUsers())
-                return c.Gebruikersnaam == newAccount.Gebruikersnaam ? false : _user.Register(newAccount);
+            _user.Register(newAccount);
 
-            return false;
+            navigationService.NavigateTo("UserRights", null);
+
+            //foreach (Account c in _user.GetUsers())
+            //    return c.Gebruikersnaam == newAccount.Gebruikersnaam ? false : _user.Register(newAccount);
+
+            //return false;
         }
     }
 }

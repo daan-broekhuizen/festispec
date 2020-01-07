@@ -18,10 +18,13 @@ namespace Festispec.ViewModel
         private List<AccountViewModel> filteredAccounts;
         private List<RollenViewModel> currentRollen;
         public List<string> RolsString;
+        private NavigationService navigationService;
+        public ICommand AddUser { get; set; }
 
 
         public UserRightsViewModel()
-        { }
+        { 
+        }
 
         public List<AccountViewModel> FilteredAccounts
         {
@@ -58,10 +61,10 @@ namespace Festispec.ViewModel
         public ICommand SortChangedCommand { get; set; }
         public ICommand SearchButtonClickCommand { get; set; }
         public ICommand SearchTextChangedCommand { get; set; }
-        public ICommand AddCustomer { get; set; }
 
         public UserRightsViewModel(NavigationService service, UserRepository repo) 
         {
+            navigationService = service;
             Accounts = new ObservableCollection<AccountViewModel>(repo.GetUsers().Select(c => new AccountViewModel(c)).ToList());
             Roles = new ObservableCollection<RollenViewModel>(repo.GetRols().Select(c => new RollenViewModel(c)).ToList());
 
@@ -72,10 +75,15 @@ namespace Festispec.ViewModel
             SearchButtonClickCommand = new RelayCommand<string>(FilterAccounts);
             SearchTextChangedCommand = new RelayCommand<string>(FilterAccounts);
             SortChangedCommand = new RelayCommand<int>(ChangeSort);
-
+            AddUser = new RelayCommand(OpenAddUser);
         }
 
         private void FilterAccounts(string searchText) => FilteredAccounts = Accounts.Where(e => e.Username.ToLower().Contains(searchText)).ToList();
+
+        private void OpenAddUser()
+        {
+            navigationService.NavigateTo("AddUser");
+        }
 
         private void ChangeSort(int sortMode)
         {

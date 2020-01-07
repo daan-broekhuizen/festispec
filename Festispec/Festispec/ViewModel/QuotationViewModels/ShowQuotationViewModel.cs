@@ -135,7 +135,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         private void DownloadQuotation()
         {
             string title = $"Offerte";
-            new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price);
+            new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price, QuotationVM.Decision);
         }
 
         private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");

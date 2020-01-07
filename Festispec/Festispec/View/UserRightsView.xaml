@@ -40,7 +40,8 @@
         </Grid>
 
         <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1"  SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
+
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonActionCommand="{Binding AddUser}" ButtonText="Nieuwe gebruiker" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
 
 
 

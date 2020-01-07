@@ -29,10 +29,7 @@ namespace Festispec.ViewModel
             ShowJobsCommand = new RelayCommand(ShowJobs);
         }
 
-        private void ShowJobs()
-        {
-            _navigationService.NavigateTo("Jobs");
-        }
+        private void ShowJobs() => _navigationService.NavigateTo("Jobs");
 
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo");
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");

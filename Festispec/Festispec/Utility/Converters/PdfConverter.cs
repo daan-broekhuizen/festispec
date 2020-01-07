@@ -14,7 +14,7 @@ namespace Festispec.Utility.Converters
         /// <param name="documentName">Name of the document when saved</param>
         /// <param name="description">Despription of the offerte</param>
         /// <param name="price"></param>
-        public void Export(string title, string description, string price)
+        public void Export(string title, string description, string price, string decission)
         {
             using (PdfDocument document = new PdfDocument())
             {
@@ -31,11 +31,14 @@ namespace Festispec.Utility.Converters
                 // Title
                 gfx.DrawString(title, fontTitle, XBrushes.Black, new XRect(0, 20, page.Width, page.Height), XStringFormats.TopCenter);
                 // Price
-                gfx.DrawString("Prijs: " + price + "€", fontText, XBrushes.Black, new XRect(20, -80, page.Width, page.Height), XStringFormats.BottomLeft);
-                gfx.DrawLine(lineBlack, 20, 765, 400, 765);
+                gfx.DrawString("Prijs: " + price + "€", fontText, XBrushes.Black, new XRect(20, -120, page.Width, page.Height), XStringFormats.BottomLeft);
+                gfx.DrawLine(lineBlack, 20, 700, 400, 700);
                 // Description
-                gfx.DrawString("    " + description, fontText, XBrushes.Black, new XRect(20, 80, page.Width, page.Height), XStringFormats.TopLeft);
-                gfx.DrawLine(lineBlack, 30, 100, 400, 100);
+                gfx.DrawString(" Omschrijving: " + description, fontText, XBrushes.Black, new XRect(20, 100, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawLine(lineBlack, 20, 120, 400, 120);
+                // Decission
+                gfx.DrawString(" Klant keuze: " + decission, fontText, XBrushes.Black, new XRect(20, 160, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawLine(lineBlack, 20, 180, 400, 180);
                 // Logo
                 DrawImage(gfx, @"..\..\Images/festispec_logo.png", 20, 20, 100, 25);
                 // Info

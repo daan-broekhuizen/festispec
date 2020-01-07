@@ -115,6 +115,26 @@ namespace Festispec.ViewModel
             }
         }
 
+        public string StreetName
+        {
+            get => _account.Huisnummer;
+            set
+            {
+                _account.Straatnaam = value;
+                RaisePropertyChanged("StreetName");
+            }
+        }
+
+        public string City
+        {
+            get => _account.Stad;
+            set
+            {
+                _account.Straatnaam = value;
+                RaisePropertyChanged("City");
+            }
+        }
+
         public string Email
         {
             get => _account.Email;
