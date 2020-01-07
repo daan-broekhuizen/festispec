@@ -52,14 +52,14 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                return context.Opdracht.Find(jobId);
+                return context.Opdracht.Include(o => o.Klant).FirstOrDefault(o => o.OpdrachtID == jobId);
             }
         }
         public void CreateQuotation(Offerte quotation)
         {
             using(FestispecContext context = new FestispecContext())
             {
-                Opdracht job = context.Opdracht.Where(j => j.OpdrachtID == quotation.OpdrachtID).FirstOrDefault();
+                Opdracht job = context.Opdracht.FirstOrDefault(j => j.OpdrachtID == quotation.OpdrachtID);
                 job.Offerte.Add(quotation);
                 context.SaveChanges();
             }
@@ -68,7 +68,7 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotation.OfferteID).FirstOrDefault();
+                Offerte toUpdate = context.Offerte.FirstOrDefault(q => q.OfferteID == quotation.OfferteID);
                 context.Entry(toUpdate).CurrentValues.SetValues(quotation);
                 context.SaveChanges();
             }
@@ -77,7 +77,7 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Offerte toUpdate = context.Offerte.Where(q => q.OfferteID == quotationId).FirstOrDefault();
+                Offerte toUpdate = context.Offerte.FirstOrDefault(q => q.OfferteID == quotationId);
                 toUpdate.KlantbeslissingReden = decision;
                 context.SaveChanges();
             }
@@ -86,7 +86,7 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Opdracht toUpdate = context.Opdracht.Where(j => j.OpdrachtID == jobId).FirstOrDefault();
+                Opdracht toUpdate = context.Opdracht.FirstOrDefault(j => j.OpdrachtID == jobId);
                 toUpdate.Status = context.Status.First(s => s.Betekenis == status).Betekenis;
                 context.SaveChanges();
             }

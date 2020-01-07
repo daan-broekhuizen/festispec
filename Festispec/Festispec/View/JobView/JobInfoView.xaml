@@ -116,9 +116,6 @@
             <Viewbox Grid.Row="6" Grid.Column="1">
                 <Label Content="{Binding EndDateError}" Foreground="Red" />
             </Viewbox>
-            <Viewbox Grid.Row="3" Grid.Column="0">
-                <Label Content="{Binding CustomerNameError}" Foreground="Red" />
-            </Viewbox>
             <Viewbox Grid.Row="3" Grid.Column="1">
                 <Label Content="{Binding JobNameError}" Foreground="Red" />
             </Viewbox>
@@ -149,7 +146,6 @@
                 <ColumnDefinition Width="0.20*"/>
                 <ColumnDefinition Width="0.20*"/>
                 <ColumnDefinition Width="0.20*"/>
-                <ColumnDefinition Width="0.20*" />
                 <ColumnDefinition Width="0.20*"/>
             </Grid.ColumnDefinitions>
 
@@ -164,16 +160,11 @@
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="3" HorizontalAlignment="Right">
-                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
-                    Inspectieresultaten
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="4" HorizontalAlignment="Right">
                 <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding ShowRapportageCommand}">
                     Rapportage
                 </Button>
             </Viewbox>
-            <Viewbox Grid.Column="5" HorizontalAlignment="Right">
+            <Viewbox Grid.Column="4" HorizontalAlignment="Right">
                 <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveJobCommand}">
                     Wijzigingen opslaan
                 </Button>

@@ -97,10 +97,10 @@
                                 <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
 
-                            <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="1" Text="Klant:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
                             <TextBlock Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,15"/>
 
-                            <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="2" Text="Opdracht:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
                             <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0"/>
 
                             <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" MinHeight="10" MinWidth="40"/>
