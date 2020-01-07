@@ -57,7 +57,7 @@ namespace Festispec.Model.Repositories
 
             using (FestispecContext context = new FestispecContext())
             {
-                template = context.Inspectieformulier.Where(x => x.InspectieformulierID == templateID).FirstOrDefault();
+                template = context.Inspectieformulier.Include("Vraag").Include("Vraag.VraagMogelijkAntwoord").Where(x => x.InspectieformulierID == templateID).FirstOrDefault();
             }
 
             return template;

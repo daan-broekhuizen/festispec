@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,13 @@ namespace Festispec.ViewModel
         private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
         public ICommand ShowQuotationCommand { get; set; }
+        public ICommand ShowInspectionFormsCommand { get; set; }
         public ICommand ShowRapportageCommand { get; set; }
+        public DateTime MinimumDate
+        {
+            get => DateTime.Today;
+            set { return; }
+        }
 
         public List<string> Status { get; set; }
 
@@ -92,6 +99,7 @@ namespace Festispec.ViewModel
         {
             SaveJobCommand = new RelayCommand(CanSaveJob);
             ShowQuotationCommand = new RelayCommand(ShowQuotation);
+            ShowInspectionFormsCommand = new RelayCommand(ShowInspectionForms);
             ShowRapportageCommand = new RelayCommand(ShowRapportage);
             _navigationService = service;
             _quotationRepo = quotationRepo;
@@ -146,6 +154,11 @@ namespace Festispec.ViewModel
                 EindDatum = JobVM.EindDatum
             });
             Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
+        }
+
+        public void ShowInspectionForms()
+        {
+            _navigationService.NavigateTo("InspectionFormShowView", JobVM.JobID);
         }
 
         private void CanSaveJob()

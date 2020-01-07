@@ -21,9 +21,15 @@ namespace Festispec.ViewModel
         private JobRepository _jobRepo;
         public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
+        public ICommand PreviousPageCommand { get; set; }
         public List<string> Customers { get; set; }
         public List<string> Status { get; set; }
-
+        public DateTime MinimalDate
+        {
+            get => DateTime.Today;
+            set
+            { return; }
+        }
 
         #region ErrorProperties
         private string _jobnameError;
@@ -103,11 +109,19 @@ namespace Festispec.ViewModel
                 JobVM = new JobViewModel();
 
             SaveJobCommand = new RelayCommand(CanSaveJob);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
             Customers = new List<string>();
             Status = new List<string>();
             Crepo.GetCustomers().ForEach(e => Customers.Add(e.Naam));
             Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+            JobVM.StartDatum = DateTime.Today;
+            JobVM.EindDatum = DateTime.Today;
 
+        }
+
+        private void PreviousPage()
+        {
+            _navigationService.GoBack();
         }
 
         private void SaveJob()

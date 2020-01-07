@@ -31,7 +31,8 @@ namespace Festispec.Model.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.Inspectieformulier.Remove(inspec);
+                Inspectieformulier target = context.Inspectieformulier.Include("Vraag").Include("Vraag.VraagMogelijkAntwoord").Include("Vraag.Antwoorden").Where(x => x.InspectieformulierID == inspec.InspectieformulierID).FirstOrDefault();
+                context.Inspectieformulier.Remove(target);
                 context.SaveChanges();
             }
         }
@@ -40,7 +41,7 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                return context.Inspectieformulier.Include("InspectieformulierVragenlijstCombinatie").Include("Vraag").Include("VraagMogelijkAntwoord").Where(i => i.OpdrachtID == OpdrachtID).ToList();
+                return context.Inspectieformulier.Include("Vraag").Include("Vraag.VraagMogelijkAntwoord").Where(i => i.OpdrachtID == OpdrachtID).ToList();
             }
         }
 
@@ -49,7 +50,8 @@ namespace Festispec.Model.Repositories
             using (FestispecContext context = new FestispecContext())
             {
                 Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
-                context.Vraag.Remove(target);
+                if (target != null)
+                    context.Vraag.Remove(target);
                 context.SaveChanges();
             }
         }
@@ -148,6 +150,23 @@ namespace Festispec.Model.Repositories
 
                 context.VraagMogelijkAntwoord.AddRange(possisbleAnwsers);
                 context.SaveChanges();
+            }
+        }
+
+        internal void AddPossibleAnswers(List<VraagMogelijkAntwoord> newPosAnswers)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                context.VraagMogelijkAntwoord.AddRange(newPosAnswers);
+                context.SaveChanges();
+            }
+        }
+
+        public Opdracht GetJob(int jobID)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Opdracht.Include("Klant").Where(i => i.OpdrachtID == jobID).FirstOrDefault();
             }
         }
     }

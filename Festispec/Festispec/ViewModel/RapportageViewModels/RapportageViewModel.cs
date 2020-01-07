@@ -1,8 +1,10 @@
 ﻿using Festispec.API.ImageShack;
+using Festispec.API.Uploading;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
+using Festispec.Utility;
 using Festispec.View.Components;
 using Festispec.View.RapportageView;
 using Festispec.ViewModel.Components;
@@ -52,6 +54,7 @@ namespace Festispec.ViewModel.RapportageViewModels
         public ICommand HeightChangedCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         public ICommand DownloadCommand { get; set; }
+        public ICommand ShowJobCommand { get; set; }
 
         // Properties
         private string _content;
@@ -159,6 +162,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             HeightChangedCommand = new RelayCommand<object[]>((parameters) => ((DocumentDesigner)parameters[0]).ViewModel.ChangeAttribute("height", $"{(string)parameters[1]}px", true));
             SaveCommand = new RelayCommand<DocumentDesigner>((designer) => Save(designer.ViewModel));
             DownloadCommand = new RelayCommand<DocumentDesigner>((designer) => Download(designer.ViewModel));
+            ShowJobCommand = new RelayCommand(ShowJob);
 
             IsEditable = false;
             DisplayExtraOptions = false;
@@ -186,7 +190,7 @@ namespace Festispec.ViewModel.RapportageViewModels
             if (bmp.UriSource == null)
                 return;
 
-            UploadModel response = new ImageShackClient().UploadImage(new ImageContainer(bmp.UriSource.AbsolutePath));
+            UploadModel response = new UploadClient().UploadImage(new ImageContainer(bmp.UriSource.AbsolutePath));
 
             if (response.Images.Length > 0)
                 designer.AddImage(response.Images.First().HttpLink);
@@ -271,41 +275,10 @@ namespace Festispec.ViewModel.RapportageViewModels
             if (!ShouldAddResults)
                 return;
 
-            foreach(Account account in _repo.GetInspectorsWithFilledAnswers())
-            {
-                PdfPage page = document.AddPage();
-                XGraphics gfx = XGraphics.FromPdfPage(page);
-
-                // Fonts
-                XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
-                XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
-                XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
-
-                // Inspecteur
-                gfx.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
-
-                // Vragen
-                int currentY = 60;
-                List<Vraag> questions = _repo.GetQuestionsFromInspector(account.AccountID, _job.JobID);
-
-                for(int i = 0; i < questions.Count; i++)
-                {
-                    Vraag question = questions[i];
-
-                    gfx.DrawString($"Vraag {i + 1}: {question.Vraagstelling}", normalFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                    currentY += 20;
-
-                    List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
-
-                    for (int j = 0; j < answers.Count; j++)
-                    {
-                        Antwoorden answer = answers[j];
-                        gfx.DrawString($"Antwoord: {answer.AntwoordText}", italicFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                        currentY += 40;
-                    }
-
-                }
-            }
+            new InspectionFormPdf().ExportQuestion(document, _repo, _job.JobID);
         }
+
+        private void ShowJob() => _navigationService.NavigateTo("JobInfo", _job);
+
     }
 }

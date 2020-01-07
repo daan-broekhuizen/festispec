@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Festispec.API.Uploading;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -15,7 +16,7 @@ namespace Festispec.API
 
         public ApiClient(string baseUrl)
         {
-            this.Client = new RestClient(baseUrl);
+            Client = new RestClient(baseUrl);
         }
 
         public string Request(string endpoint, Method method, Dictionary<string, string> urlSegments = null, Dictionary<string, string> parameters = null, Dictionary<string, string> headers = null, FileData[] files = null)
@@ -56,7 +57,7 @@ namespace Festispec.API
 
         public T RequestAsJsonObjectFromValue<T>(string endpoint, Method method, string key, Dictionary<string, string> urlSegments = null, Dictionary<string, string> parameters = null, Dictionary<string, string> headers = null, FileData[] files = null)
         {
-            return JsonConvert.DeserializeObject<T>(JObject.Parse(Request(endpoint, method, urlSegments, parameters, headers, files))["result"].ToString());
+            return JsonConvert.DeserializeObject<T>(JObject.Parse(Request(endpoint, method, urlSegments, parameters, headers, files))[key].ToString());
         }
     }
 }

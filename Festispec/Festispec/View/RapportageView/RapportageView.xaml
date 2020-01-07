@@ -44,6 +44,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!-- Mode -->
@@ -248,16 +249,23 @@
                 </TextBlock>
             </StackPanel>
 
-            <!-- Opslaan -->
+            <!-- Naar Opdracht -->
             <StackPanel Margin="5" Grid.Row="11">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ShowJobCommand}">Naar Opdracht</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Opslaan -->
+            <StackPanel Margin="5" Grid.Row="12">
                 <Button FontSize="16" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Opslaan" />
                 </Button>
             </StackPanel>
 
             <!-- Downloaden -->
-            <StackPanel Margin="5" Grid.Row="12">
-                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
+            <StackPanel Margin="5" Grid.Row="13">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
                     <TextBlock TextDecorations="Underline" Text="Download" />
                 </Button>
             </StackPanel>

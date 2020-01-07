@@ -56,5 +56,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 RaisePropertyChanged("AnwserNumber");
             }
         }
+
+        public int QuestionNumber
+        {
+            get => _possibleAnwser.VraagID;
+            set
+            {
+                _possibleAnwser.VraagID = value;
+                RaisePropertyChanged("QuestionNumber");
+            }
+        }
     }
 }

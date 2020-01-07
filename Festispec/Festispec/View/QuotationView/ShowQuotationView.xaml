@@ -42,6 +42,11 @@
             <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
                 <Image Margin="50" VerticalAlignment="Center" Source="{Binding QuotationVM.Logo}"></Image>
             </Viewbox>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Left" >
+                <Button Margin="20,0,0,0" Command="{Binding PreviousPageCommand}" BorderThickness="0" Background="Transparent">
+                    <Image Source="/Images/back_icon.png"/>
+                </Button>
+            </Viewbox>
         </Grid>
 
         <Rectangle Grid.Row="1" Grid.ColumnSpan="3" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
