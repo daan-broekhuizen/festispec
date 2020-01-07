@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Festispec.Model.Repositories
 {
@@ -12,7 +11,7 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                return context.Offerte.Include("Opdracht.Klant").ToList();
+                return context.Offerte.Include(o => o.Opdracht.Klant).ToList();
             }
         }
 

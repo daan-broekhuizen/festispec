@@ -24,7 +24,7 @@ namespace Festispec.ViewModel
         public JobViewModel JobVM { get; set; }
 
         private NavigationService _navigationService;
-        private JobRepository Jrepo;
+        private JobRepository _jobRepo;
         private QuotationRepository _quotationRepo;
         public ICommand SaveJobCommand { get; set; }
         public ICommand ShowQuotationCommand { get; set; }
@@ -103,16 +103,21 @@ namespace Festispec.ViewModel
             ShowRapportageCommand = new RelayCommand(ShowRapportage);
             _navigationService = service;
             _quotationRepo = quotationRepo;
-            this.Jrepo = Jrepo;
+            _jobRepo = Jrepo;
+
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
+
             Status = new List<string>();
             Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
         }
 
         private void ShowQuotation()
         {
-            Offerte latest = _quotationRepo.GetQuotations().Where(q => q.OpdrachtID == JobVM.JobID).OrderByDescending(q => q.OfferteID).FirstOrDefault(); //TODO: ERROR
+            if (JobVM == null) return;
+            Offerte latest = _quotationRepo.GetQuotations()
+                .Where(q => q.OpdrachtID == JobVM.JobID)
+                .OrderByDescending(q => q.OfferteID).FirstOrDefault(); //TODO: ERROR
             if (latest != null)
                 _navigationService.NavigateTo("ShowQuotation", new QuotationViewModel(latest, _quotationRepo));
             else
@@ -141,11 +146,11 @@ namespace Festispec.ViewModel
 
         public void SaveJob()
         {
-            Jrepo.UpdateJob(new Opdracht()
+            _jobRepo.UpdateJob(new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,
-                KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KlantID,
+                KlantID = JobVM.CustomerID,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,
                 MedewerkerID = 2,
