@@ -18,6 +18,7 @@ namespace Festispec.ViewModel
     {
         public ICommand SaveCustomerCommand { get; set; }
         public ICommand SaveContactPersonCommand { get; set; }
+        public ICommand PreviousPageCommand { get; set; }
 
         //ContactPersonVM and ErrorProperties
         #region BindingProperties
@@ -83,8 +84,10 @@ namespace Festispec.ViewModel
             ContactPersonViewModel = new ContactPersonViewModel();
             SaveCustomerCommand = new RelayCommand(SaveCustomer, CanSaveCustomer);
             SaveContactPersonCommand = new RelayCommand(AddContactPerson);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
         }
 
+        private void PreviousPage() => _navigationService.NavigateTo("AddContactInfo", CustomerVM);
         private void SaveCustomer()
         {
             //Create Customer && add to db

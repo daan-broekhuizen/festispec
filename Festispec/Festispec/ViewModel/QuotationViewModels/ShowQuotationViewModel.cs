@@ -23,6 +23,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         public ICommand DownloadQuotationCommand { get; set; }
         public ICommand NewQuotationCommand { get; set; }
         public ICommand SaveQuotationCommand { get; set; }
+        public ICommand PreviousPageCommand { get; set; }
 
         private string _descriptionError;
         public string DescriptionError 
@@ -71,8 +72,15 @@ namespace Festispec.ViewModel.QuotationViewModels
             DownloadQuotationCommand = new RelayCommand(DownloadQuotation);
             NewQuotationCommand = new RelayCommand(NewQuotation, CanCreate);
             SaveQuotationCommand = new RelayCommand(SaveQuotation, CanSave);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
+
         }
 
+        private void PreviousPage()
+        {
+            Opdracht job = _quotationRepository.GetJob(QuotationVM.JobId);
+            _navigationService.NavigateTo("JobInfo", new JobViewModel(job));
+        }
         private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd" && QuotationVM.IsLatestQuotation == true;
         private bool CanSave() => QuotationVM.Status == "Nieuwe opdracht";
         private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurt";
@@ -136,7 +144,6 @@ namespace Festispec.ViewModel.QuotationViewModels
             string title = "test";
             new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price);
         }
-
         private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");
         private void CancelJob() => RegisterCustomerDecision("Opdracht geannuleerd");
         private void AcceptQuotation()

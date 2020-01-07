@@ -144,12 +144,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="API\ApiClient.cs" />
-    <Compile Include="API\FileData.cs" />
+    <Compile Include="API\ImageBB\ImageBBClient.cs" />
+    <Compile Include="API\Uploading\FileData.cs" />
     <Compile Include="API\IClient.cs" />
-    <Compile Include="API\ImageShack\ImageContainer.cs" />
+    <Compile Include="API\Uploading\ImageContainer.cs" />
     <Compile Include="API\ImageShack\ImageModel.cs" />
     <Compile Include="API\ImageShack\ImageShackClient.cs" />
     <Compile Include="API\ImageShack\UploadModel.cs" />
+    <Compile Include="API\Uploading\IUploadClient.cs" />
+    <Compile Include="API\Uploading\UploadClient.cs" />
+    <Compile Include="API\Uploading\UploadServices.cs" />
     <Compile Include="Migrations\201912081315103_Main.cs" />
     <Compile Include="Migrations\201912081315103_Main.designer.cs">
       <DependentUpon>201912081315103_Main.cs</DependentUpon>
@@ -609,6 +613,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Calendar_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back_icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

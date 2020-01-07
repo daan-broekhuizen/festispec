@@ -24,6 +24,7 @@ namespace Festispec.ViewModel
         public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
         public Dictionary<int, string> Customers { get; private set; }
+        public ICommand PreviousPageCommand { get; set; }
         public List<string> Status { get; set; }
         public DateTime MinimalDate
         {
@@ -122,7 +123,14 @@ namespace Festispec.ViewModel
             JobVM.StartDatum = DateTime.Today;
             JobVM.EindDatum = DateTime.Today;
             SaveJobCommand = new RelayCommand(CanSaveJob);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
 
+
+        }
+
+        private void PreviousPage()
+        {
+            _navigationService.GoBack();
         }
 
         private void SaveJob()
