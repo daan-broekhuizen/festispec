@@ -232,7 +232,11 @@
 
             <!-- Invoegen Resultaten -->
             <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
-                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Inspectieresultaten Bijvoegen" />
+                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}">
+                    <TextBlock>
+                        <AccessText TextWrapping="Wrap" Text="Inspectieresultaten Bijvoegen" />
+                    </TextBlock>
+                </CheckBox>
             </StackPanel>
 
             <!-- Extra Opties -->
