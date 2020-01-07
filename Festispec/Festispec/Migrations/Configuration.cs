@@ -1541,8 +1541,6 @@
             {
                 InspectieFormulierTitel = "Leeg",
                 Beschrijving = "Leeg inspectieformulier",
-                InspectieFormulierTitel = "Leeg formulier",
-                Beschrijving = "Nieuw leeg formulier",
                 DatumInspectie = DateTime.Now,
                 LaatsteWijziging = DateTime.Now
             };
