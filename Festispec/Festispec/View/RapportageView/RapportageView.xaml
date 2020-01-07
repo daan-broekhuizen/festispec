@@ -319,14 +319,9 @@
                     </Button>
                 </Grid>
             </StackPanel>
-
-            <!-- Unlock -->
-            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
-                <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
-            </StackPanel>
-
+            
             <!-- Width -->
-            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <Grid Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -349,7 +344,7 @@
             </Grid>
 
             <!-- Height -->
-            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -370,6 +365,12 @@
                     </i:Interaction.Triggers>
                 </TextBox>
             </Grid>
+
+            <!-- Unlock -->
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Button Content="Vrij Bewegen Afbeelding" Name="controlUnlock" FontSize="10" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
+            </StackPanel>
+
         </Grid>
     </Grid>
 </Page>

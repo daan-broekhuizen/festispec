@@ -168,8 +168,14 @@ namespace Festispec.ViewModel.Components
         /// </summary>
         public void EnableMovement()
         {
-            ExecuteCommand("2D-Position", true);
-            ExecuteCommand("AbsolutePosition", true);
+            IHTMLElement selectedElement = GetSelectedElement();
+            if (selectedElement.tagName.ToLower() == "img")
+            {
+                ExecuteCommand("2D-Position", true);
+                ExecuteCommand("AbsolutePosition", true);
+            }
+            else
+                MessageBox.Show("Er is geen afbeelding geselecteerd");
         }
 
         /// <summary>
@@ -179,16 +185,6 @@ namespace Festispec.ViewModel.Components
         public void AddImage(string image)
         {
             ExecuteCommand("InsertImage", image);
-        }
-
-        public void Test()
-        {
-            IHTMLDocument2 document = (IHTMLDocument2)WebBrowser.Document;
-            if (document != null)
-            {
-                IHTMLElement element = GetSelectedElement();
-                element.style.fontSize = "12px";
-            }
         }
 
         public void ChangeAttribute(string name, string value, bool isStyle = false)
@@ -306,25 +302,29 @@ namespace Festispec.ViewModel.Components
             // Genereer een pagina vanuit de HTML
             byte[] baseData = Pdf.From(DesignerContent).Content();
 
-            PdfDocument response = new PdfDocument();
-
-            using (MemoryStream ms = new MemoryStream(baseData))
+            using (PdfDocument response = new PdfDocument())
             {
-                PdfDocument report = PdfReader.Open(ms, PdfDocumentOpenMode.Import);
-                PdfPage page = report.Pages[0];
 
-                response.Pages.Add(page);
-            }
+                using (MemoryStream ms = new MemoryStream(baseData))
+                {
+                    using (PdfDocument report = PdfReader.Open(ms, PdfDocumentOpenMode.Import))
+                    {
+                        PdfPage page = report.Pages[0];
 
-            if (AddPages != null)
-                AddPages.Invoke(response);
+                        response.Pages.Add(page);
+                    }
+                }
 
-            // Omzetten naar byte array
-            using (MemoryStream ms = new MemoryStream())
-            {
-                response.Save(ms);
+                if (AddPages != null)
+                    AddPages.Invoke(response);
 
-                data = ms.ToArray();
+                // Omzetten naar byte array
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    response.Save(ms);
+
+                    data = ms.ToArray();
+                }
             }
 
             return data;
