@@ -370,7 +370,6 @@
             <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Button Content="Vrij Bewegen Afbeelding" Name="controlUnlock" FontSize="10" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
             </StackPanel>
-
         </Grid>
     </Grid>
 </Page>
