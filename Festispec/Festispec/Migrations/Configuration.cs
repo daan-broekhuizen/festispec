@@ -206,7 +206,7 @@
                 Gebruikersnaam = "HarvieDeBakker",
                 Wachtwoord = "ab123",
                 Rol = context.Rol.First(x => x.Afkorting == "in").Afkorting,
-                Voornaam = "Harvy",
+                Voornaam = "Harvie",
                 Tussenvoegsel = "de",
                 Achternaam = "Bakker",
                 Stad = "Emmeloord",
@@ -284,7 +284,7 @@
 
         private void SeedKlant(FestispecContext context)
         {
-            Klant[] klanten = new Klant[5];
+            Klant[] klanten = new Klant[8];
             klanten[0] = new Klant()
             {
                 KvKNummer = "29387132",
@@ -355,6 +355,47 @@
                 LaatsteWijziging = DateTime.Now
             };
 
+            klanten[5] = new Klant()
+            {
+                KvKNummer = "11250321",
+                Vestigingnummer = "897573",
+                Naam = "Electric Jungle",
+                Stad = "Groningen",
+                Straatnaam = "Regentesstraat",
+                Huisnummer = "128",
+                Telefoonnummer = "0495034831",
+                Email = "electricjungle@hotmail.com",
+                Website = "www.electricjungle.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            klanten[6] = new Klant()
+            {
+                KvKNummer = "88937800",
+                Vestigingnummer = "8961531",
+                Naam = "Beerland",
+                Stad = "Hengelo",
+                Straatnaam = "Beckumerstraat",
+                Huisnummer = "16",
+                Telefoonnummer = "0495724951",
+                Email = "beerland@hotmail.com",
+                Website = "www.beerland.nl",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            klanten[7] = new Klant()
+            {
+                KvKNummer = "15344454",
+                Vestigingnummer = "985156",
+                Naam = "Skalar",
+                Stad = "Amsterdam",
+                Straatnaam = "Lederambachtstraat",
+                Huisnummer = "4",
+                Telefoonnummer = "0495898485",
+                Email = "skalar@hotmail.com",
+                Website = "www.skalar.nl",
+                LaatsteWijziging = DateTime.Now
+            };
             context.Klant.AddOrUpdate(x => new { x.KvKNummer, x.Vestigingnummer }, klanten);
 
             SaveChanges(context);
@@ -362,7 +403,7 @@
 
         private void SeedContactpersoon(FestispecContext context)
         {
-            Contactpersoon[] contacts = new Contactpersoon[5];
+            Contactpersoon[] contacts = new Contactpersoon[8];
 
             contacts[0] = new Contactpersoon()
             {
@@ -427,6 +468,44 @@
                 LaatsteWijziging = DateTime.Now
             };
 
+            contacts[5] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Electric Jungle").KlantID,
+                Voornaam = "Daniele",
+                Tussenvoegsel = null,
+                Achternaam = "Camacho",
+                Email = "dcamacho@hotmail.com",
+                Telefoon = "0622938763",
+                Rol = "Social relationships manager",
+                Notities = null,
+                LaatsteWijziging = DateTime.Now
+            };
+
+            contacts[6] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Electric Jungle").KlantID,
+                Voornaam = "Nida",
+                Tussenvoegsel = null,
+                Achternaam = "Pena",
+                Email = "nidapena@gmail.nl",
+                Telefoon = "0629353213",
+                Rol = "security manager",
+                Notities = null,
+                LaatsteWijziging = DateTime.Now
+            };
+
+            contacts[7] = new Contactpersoon()
+            {
+                KlantID = context.Klant.First(x => x.Naam == "Electric Jungle").KlantID,
+                Voornaam = "Lili",
+                Tussenvoegsel = null,
+                Achternaam = "Goff",
+                Email = "lili.goff@hotmail.com",
+                Telefoon = "0688455421",
+                Rol = "Financieel manager",
+                Notities = null,
+                LaatsteWijziging = DateTime.Now
+            };
 
             context.Contactpersoon.AddOrUpdate(x => x.Email, contacts);
 
@@ -435,7 +514,7 @@
 
         private void SeedOpdracht(FestispecContext context)
         {
-            Opdracht[] opdrachten = new Opdracht[2];
+            Opdracht[] opdrachten = new Opdracht[10];
 
             opdrachten[0] = new Opdracht()
             {
@@ -448,7 +527,7 @@
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,
-                Klantwensen = "Grondigeinspectievandecateringtenten"
+                Klantwensen = "Grondige inspectie van de cateringtenten"
             };
 
             opdrachten[1] = new Opdracht()
@@ -465,6 +544,118 @@
                  Klantwensen = "Totale inspectie van het festival"
              };
 
+            opdrachten[2] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Appelpop",
+                Status = context.Status.First(x => x.Betekenis == "Offerte geaccepteerd").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(2),
+                EindDatum = DateTime.Now.AddMonths(3).AddDays(3),
+                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "12").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Extra focus op de kwaliteit van de catering."
+            };
+
+            opdrachten[3] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie American Day",
+                Status = context.Status.First(x => x.Betekenis == "Opdracht geannuleerd").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(1).AddDays(-7),
+                EindDatum = DateTime.Now.AddMonths(1).AddDays(-4),
+                KlantID = context.Klant.First(x => x.Naam == "American day" && x.Vestigingnummer == "3").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Zou graag een gedetailleerd rapport van de drukte willen"
+            };
+
+            opdrachten[4] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Bospop s-Hertogenbosch 2020",
+                Status = context.Status.First(x => x.Betekenis == "Offerte geaccepteerd").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(3).AddDays(-7),
+                EindDatum = DateTime.Now.AddMonths(3).AddDays(-4),
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == "01156459").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "De inspectie moet zo snel mogelijk worden uitgevoerd"
+            };
+
+            opdrachten[5] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Bospop s-Hertogenbosch 2021",
+                Status = context.Status.First(x => x.Betekenis == "Nieuwe opdracht").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(3).AddDays(-7).AddYears(1),
+                EindDatum = DateTime.Now.AddMonths(3).AddDays(-4).AddYears(1),
+                KlantID = context.Klant.First(x => x.Naam == "Bospop" && x.Vestigingnummer == "01156459").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Jaarlijkse herhaling van de inpsectie"
+            };
+
+            opdrachten[6] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Beerland 2019",
+                Status = context.Status.First(x => x.Betekenis == "Opdracht beindingt").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(-3).AddDays(-7),
+                EindDatum = DateTime.Now.AddMonths(-3).AddDays(-4),
+                KlantID = context.Klant.First(x => x.Naam == "Beerland" && x.Vestigingnummer == "8961531").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "De klant wil weten hoe de sfeer is in de verschillende gebieden van het festival"
+            };
+
+            opdrachten[7] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Skalar 2020",
+                Status = context.Status.First(x => x.Betekenis == "Offerte verstuurt").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(8).AddDays(7),
+                EindDatum = DateTime.Now.AddMonths(8).AddDays(11),
+                KlantID = context.Klant.First(x => x.Naam == "Skalar" && x.Vestigingnummer == "985156").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "De klant wil weten waarom het bezoekersaantal minderd"
+            };
+
+            opdrachten[8] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Electric jungle voorjaar 2020",
+                Status = context.Status.First(x => x.Betekenis == "Offerte verstuurt").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(2).AddDays(12),
+                EindDatum = DateTime.Now.AddMonths(2).AddDays(15),
+                KlantID = context.Klant.First(x => x.Naam == "Electric Jungle" && x.Vestigingnummer == "897573").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Klant wil weten hoe de bezoekers het festival ervaren"
+            };
+
+            opdrachten[9] = new Opdracht()
+            {
+                OpdrachtNaam = "Inspectie Appelpop najaar 2019",
+                Status = context.Status.First(x => x.Betekenis == "Inspectie uitgevoerd").Betekenis,
+                CreatieDatum = DateTime.Now,
+                StartDatum = DateTime.Now.AddMonths(-1).AddDays(12),
+                EindDatum = DateTime.Now.AddMonths(-1).AddDays(15),
+                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "12").KlantID,
+                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
+                GebruikteRechtsgebieden = null,
+                LaatsteWijziging = DateTime.Now,
+                Klantwensen = "Wil een beter beeld krijgen van wat bezoekers echt leuk vinden."
+            };
+
             context.Opdracht.AddOrUpdate(x => x.OpdrachtNaam, opdrachten);
 
             SaveChanges(context);
@@ -475,7 +666,7 @@
 
         private void SeedOfferte(FestispecContext context)
         {
-            Offerte[] offertes = new Offerte[3];
+            Offerte[] offertes = new Offerte[9];
 
             offertes[0]=new Offerte()
             {
@@ -502,19 +693,89 @@
                 OpdrachtID = 2,
                 Totaalbedrag = 1500,
                 Aanmaakdatum = DateTime.Now,
-                Beschrijving = "Inspectie horeca gelegenheden",
+                Beschrijving = "Inspectie horeca gelegenheden, aangepast nadat de vorige te hoog was",
                 KlantbeslissingReden = "Goedgekeurd",
                 LaatsteWijziging = DateTime.Now
             };
 
-            context.Offerte.AddOrUpdate(x => x.Totaalbedrag, offertes);
+            offertes[3] = new Offerte()
+            {
+                OpdrachtID = 3,
+                Totaalbedrag = 1230,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "De inspectie zal bestaan uit 6 inspecteurs, deze zullen samen 2 inspectieformulieren invullen.",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[4] = new Offerte()
+            {
+                OpdrachtID = 5,
+                Totaalbedrag = 2050,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "De details over de inspectie zijn doorgesproken met het hoofd management van Bospop",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[5] = new Offerte()
+            {
+                OpdrachtID = 7,
+                Totaalbedrag = 2950,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Eerste schatting van kosten voor de inspectie",
+                KlantbeslissingReden = "Afgekeurd, te duur.",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[6] = new Offerte()
+            {
+                OpdrachtID = 7,
+                Totaalbedrag = 1860,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Aangepast nadat de vorige te duur was",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[7] = new Offerte()
+            {
+                OpdrachtID = 8,
+                Totaalbedrag = 1985,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "De prijs viel hoger uit aangezien er meer inspecteurs dan verwacht nodig waren",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[8] = new Offerte()
+            {
+                OpdrachtID = 9,
+                Totaalbedrag = 1890,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Deze offerte is goedkoper uitgevallen dan afgesproken wegens weizigingen in de wetgevingen die de inspectie makkelijker maken.",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            offertes[8] = new Offerte()
+            {
+                OpdrachtID = 10,
+                Totaalbedrag = 1540,
+                Aanmaakdatum = DateTime.Now,
+                Beschrijving = "Kosten zijn wat hoger aangezien deze inspectie in korte tijd voorbereid moet worden",
+                KlantbeslissingReden = "Goedgekeurd",
+                LaatsteWijziging = DateTime.Now
+            };
+
+            context.Offerte.AddOrUpdate(x => new { x.OpdrachtID, x.Totaalbedrag }, offertes);
 
             SaveChanges(context);
         }
 
         private void SeedInspectieFormulier(FestispecContext context)
         {
-            Inspectieformulier[] formulieren = new Inspectieformulier[4];
+            Inspectieformulier[] formulieren = new Inspectieformulier[6];
 
             formulieren[0] = new Inspectieformulier()
             {
@@ -522,7 +783,12 @@
                 DatumInspectie = DateTime.Now,
                 OpdrachtID = 1,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie",
-                LaatsteWijziging = DateTime.Now
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(14),
+                EindTijd = TimeSpan.FromHours(23),
+                Stad = "Weert",
+                Straatnaam = "Pylsstraatje",
+                Huisnummer = "2"
             };
 
             formulieren[1] = new Inspectieformulier()
@@ -531,7 +797,12 @@
                 DatumInspectie = DateTime.Now,
                 OpdrachtID = 1,
                 Beschrijving = "Vul dit formulier in voor Bospop inspectie catering",
-                LaatsteWijziging = DateTime.Now
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(10),
+                EindTijd = TimeSpan.FromHours(20),
+                Stad = "Weert",
+                Straatnaam = "Pylsstraatje",
+                Huisnummer = "2"
             };
 
             formulieren[2] = new Inspectieformulier()
@@ -540,16 +811,54 @@
                 DatumInspectie = DateTime.Now,
                 OpdrachtID = 2,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie muziek",
-                LaatsteWijziging = DateTime.Now
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(16),
+                EindTijd = TimeSpan.FromHours(19),
+                Stad = "Utrecht",
+                Straatnaam = "Amsterdamweg",
+                Huisnummer = "23"
             };
 
             formulieren[3] = new Inspectieformulier()
             {
                 InspectieFormulierTitel = "Inspectie Pinkpop sanitair",
-                DatumInspectie = DateTime.Now,
+                DatumInspectie = DateTime.Now.AddDays(1).AddMonths(1),
                 OpdrachtID = 2,
                 Beschrijving = "Vul dit formulier in voor Pinkpop inspectie sanitair",
-                LaatsteWijziging = DateTime.Now
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(12),
+                EindTijd = TimeSpan.FromHours(17),
+                Stad = "Utrecht",
+                Straatnaam = "Amsterdamweg",
+                Huisnummer = "23"
+            };
+
+            formulieren[4] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Inspectie Beerland 2019 sfeer",
+                DatumInspectie = DateTime.Now.AddMonths(-1).AddDays(-20),
+                OpdrachtID = 7,
+                Beschrijving = "Vul dit formulier in voor de Beerland inspectie, vergeet niet om rustig te drinken voordat dit compleet is ingevuld.",
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(19),
+                EindTijd = TimeSpan.FromHours(23),
+                Stad = "Hengelo",
+                Straatnaam = "Beckumerstraat",
+                Huisnummer = "16"
+            };
+
+            formulieren[5] = new Inspectieformulier()
+            {
+                InspectieFormulierTitel = "Inspectie Appelpop najaar 2019",
+                DatumInspectie = DateTime.Now.AddDays(-24),
+                OpdrachtID = 10,
+                Beschrijving = "Vul dit formulier in voor de Appelpop najaar inspectie",
+                LaatsteWijziging = DateTime.Now,
+                StartTijd = TimeSpan.FromHours(14),
+                EindTijd = TimeSpan.FromHours(23),
+                Stad = "Tilburg",
+                Straatnaam = "Wolvenweg",
+                Huisnummer = "10"
             };
 
             context.Inspectieformulier.AddOrUpdate(x => x.InspectieFormulierTitel, formulieren);
@@ -558,7 +867,7 @@
 
         private void SeedVraag(FestispecContext context)
         {
-            Vraag[] vragen = new Vraag[17];
+            Vraag[] vragen = new Vraag[29];
             vragen[0] = new Vraag()
             {
                 InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
@@ -624,7 +933,7 @@
 
             vragen[7] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Maak een foto van opvallende situaties",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
                 VolgordeNummer = 3
@@ -633,7 +942,7 @@
 
             vragen[8] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Meet de afstand tussen de verschillende food trucks",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
                 VolgordeNummer = 4
@@ -642,7 +951,7 @@
 
             vragen[9] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Teken de algemene stroom van mensen op een kaart, maak hier een foto van",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
                 VolgordeNummer = 5
@@ -651,7 +960,7 @@
 
             vragen[10] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Tel het aantal tafels en zitplaatsen bij de foodtrucks",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
                 VolgordeNummer = 6
@@ -660,7 +969,7 @@
 
             vragen[11] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage? A: De sfeer is grimmig, B: Het publiek is rustig , C: Het publiek is dronken/aangeschoten, D: Het is chaos",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 7
@@ -669,7 +978,7 @@
 
             vragen[12] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show.",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 8
@@ -678,7 +987,7 @@
 
             vragen[13] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Hoe druk was het bij de WC’s? Maak elk uur een schatting: * (Gebruik je inschattingstechniek geleerd op de training dag)",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 9
@@ -687,7 +996,7 @@
 
             vragen[14] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Hoe druk is het bij de Main Stage? Maak elk half uur een schatting",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 10
@@ -696,7 +1005,7 @@
 
             vragen[15] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Hoe druk was het bij de foodtrucks? Maak elk uur een schatting",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 11
@@ -705,20 +1014,128 @@
 
             vragen[16] = new Vraag()
             {
-                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen").InspectieformulierID,
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek").InspectieformulierID,
                 Vraagstelling = "Plaats hier nog eventuele losse opmerkingen",
                 Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
                 VolgordeNummer = 12
 
             };
 
-            context.Vraag.AddOrUpdate(vragen);
+            vragen[17] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Bij binnenkomst hoe zou je de sfeer beschrijven",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 1
+
+            };
+
+            vragen[18] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Wat is de sfeer rond de eettenten",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 2
+
+            };
+
+            vragen[19] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Rond welke tijd kun je zeggen dat het meerendeel van de bezoekers onder invloed zijn",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 3
+
+            };
+
+            vragen[20] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Wat voor effect heeft het onder invloed zijn van bezoekers op de sfeer",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 4
+
+            };
+
+            vragen[21] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Hoe is de sfeer laat op de avond vergeleken met op het begin",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 5
+
+            };
+
+            vragen[22] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer").InspectieformulierID,
+                Vraagstelling = "Plaats hier nog eventuele losse opmerkingen",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 6
+
+            };
+
+            vragen[23] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Waar lijken de meeste bezoekers zich te verzamelen?",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 1
+
+            };
+
+            vragen[24] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Vermaken de bezoekers zich ook op de delen van het festival waar geen optredens plaatsvinden, bijvoorbeeld rond de eettenten?",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 2
+
+            };
+
+            vragen[25] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Hoe druk bezocht zijn de veschillende optredens? Gebruik je schattings technieken.",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "sv").Afkorting,
+                VolgordeNummer = 3
+
+            };
+
+            vragen[26] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Is er iets waarover de bezoekers veel klagen?",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 4
+
+            };
+
+            vragen[27] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Maak een afbeelding van het gebied waar de meeste bezoekers staan.",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "av").Afkorting,
+                VolgordeNummer = 5
+
+            };
+
+            vragen[28] = new Vraag()
+            {
+                InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
+                Vraagstelling = "Plaats hier nog eventuele opmerkingen",
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "ov").Afkorting,
+                VolgordeNummer = 6
+
+            };
+
+            context.Vraag.AddOrUpdate(x => new { x.InspectieFormulierID, x.VolgordeNummer }, vragen);
             SaveChanges(context);
         }
 
         private void SeedVraagMogelijkAntwoord(FestispecContext context)
         {
-           VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[34];
+           VraagMogelijkAntwoord[] antwoorden = new VraagMogelijkAntwoord[36];
             antwoorden[0] = new VraagMogelijkAntwoord()
             {
                 VraagID = 2,
@@ -837,6 +1254,20 @@
                 AntwoordText = "Drukte"
             };
 
+            antwoorden[34] = new VraagMogelijkAntwoord()
+            {
+                VraagID = 26,
+                AntwoordNummer = 1,
+                AntwoordText = "Artiest"
+            };
+
+            antwoorden[35] = new VraagMogelijkAntwoord()
+            {
+                VraagID = 26,
+                AntwoordNummer = 2,
+                AntwoordText = "Geschatte drukte"
+            };
+
             context.VraagMogelijkAntwoord.AddOrUpdate(x => new { x.AntwoordNummer, x.VraagID }, antwoorden);
             SaveChanges(context);
         }
@@ -873,30 +1304,79 @@
             if (context.BeschikbaarheidInspecteurs.Count() > 0)
                 return;
 
-            BeschikbaarheidInspecteurs[] beschikbaarheid = new BeschikbaarheidInspecteurs[4];
-            beschikbaarheid[0] = new BeschikbaarheidInspecteurs()
-            {
-                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                Datum = DateTime.Now
-            };
+            BeschikbaarheidInspecteurs[] beschikbaarheid = new BeschikbaarheidInspecteurs[800];
 
-            beschikbaarheid[1] = new BeschikbaarheidInspecteurs()
+            for (int i = 0; i < 100; i++)
             {
-                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                Datum = DateTime.Now.AddDays(1)
-            };
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
 
-            beschikbaarheid[2] = new BeschikbaarheidInspecteurs()
+            for (int i = 100; i < 200; i++)
             {
-                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                Datum = DateTime.Now.AddDays(2)
-            };
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FreddyJohnson").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
 
-            beschikbaarheid[3] = new BeschikbaarheidInspecteurs()
+            for (int i = 200; i < 300; i++)
             {
-                MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HansKlok").AccountID,
-                Datum = DateTime.Now.AddDays(3)
-            };
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "StijnSmulders").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
+
+            for (int i = 300; i < 400; i++)
+            {
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "AdrianaPitts").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
+
+            for (int i = 400; i < 500; i++)
+            {
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
+
+            for (int i = 500; i < 600; i++)
+            {
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "MargotRowland").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
+
+            for (int i = 600; i < 700; i++)
+            {
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "SanjeevPike").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
+
+            for (int i = 700; i < 800; i++)
+            {
+                beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
+                {
+                    MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "WillCollier").AccountID,
+                    Datum = DateTime.Now.AddDays(i)
+                };
+            }
 
             context.BeschikbaarheidInspecteurs.AddOrUpdate(x => new { x.MedewerkerID, x.Datum}, beschikbaarheid);
             SaveChanges(context);
@@ -907,12 +1387,134 @@
             Inspectieformulier Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen");
 
             if(Inspectieformulier.Ingepland.Count == 0)
+            {
                 Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "FreddyJohnson"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "StijnSmulders"));
+            }
+
+            Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop catering");
+
+            if (Inspectieformulier.Ingepland.Count == 0)
+            {
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "AdrianaPitts"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "MargotRowland"));
+            }
+
+            Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek");
+
+            if (Inspectieformulier.Ingepland.Count == 0)
+            {
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "WillCollier"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HansKlok"));
+            }
+
+            Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop sanitair");
+
+            if (Inspectieformulier.Ingepland.Count == 0)
+            {
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "AdrianaPitts"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "SanjeevPike"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "MargotRowland"));
+            }
+
+            Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer");
+
+            if (Inspectieformulier.Ingepland.Count == 0)
+            {
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "JohnWong"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "WillCollier"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "FreddyJohnson"));
+            }
+
+            Inspectieformulier = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019");
+
+            if (Inspectieformulier.Ingepland.Count == 0)
+            {
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "SanjeevPike"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "JohnWong"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "MargotRowland"));
+                Inspectieformulier.Ingepland.Add(context.Account.First(x => x.Gebruikersnaam == "StijnSmulders"));
+            }
 
             Account account = context.Account.First(x => x.Gebruikersnaam == "HansKlok");
 
             if(account.Ingepland.Count == 0)
+            {
                 account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "FreddyJohnson");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "JohnWong");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "StijnSmulders");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "AdrianaPitts");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop catering"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop sanitair"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "MargotRowland");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop catering"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop sanitair"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop catering"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "SanjeevPike");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Bospop algemeen"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop sanitair"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019"));
+            }
+
+            account = context.Account.First(x => x.Gebruikersnaam == "WillCollier");
+
+            if (account.Ingepland.Count == 0)
+            {
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Pinkpop muziek"));
+                account.Ingepland.Add(context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Beerland 2019 sfeer"));
+            }
+
 
             SaveChanges(context);
         }
