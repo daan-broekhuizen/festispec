@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View.QuotationView"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1280"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="AddQuotationView"
       DataContext="{Binding AddQuotation, Source={StaticResource Locator}}">
 
@@ -31,11 +31,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="right" >
                 <TextBlock Text="Offerte Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
                 <Image Margin="50" VerticalAlignment="Center" Source="{Binding QuotationVM.Logo}"></Image>
+            </Viewbox>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Left" >
+                <Button Margin="20,0,0,0" Command="{Binding PreviousPageCommand}" BorderThickness="0" Background="Transparent">
+                    <Image Source="/Images/back_icon.png"/>
+                </Button>
             </Viewbox>
         </Grid>
 

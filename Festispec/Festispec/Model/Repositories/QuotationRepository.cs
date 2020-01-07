@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Festispec.Model.Repositories
 {
@@ -38,7 +39,7 @@ namespace Festispec.Model.Repositories
             return offertes;
         }
 
-        public Offerte GetOpdracht(DateTime startDate, DateTime endDate)
+        public Offerte GetQuotation(DateTime startDate, DateTime endDate)
         {
             using (FestispecContext context = new FestispecContext())
             {
@@ -53,7 +54,7 @@ namespace Festispec.Model.Repositories
         {
             using(FestispecContext context = new FestispecContext())
             {
-                return context.Opdracht.Find(jobId);
+                return context.Opdracht.Include(j => j.Klant).FirstOrDefault(j => j.OpdrachtID == jobId);
             }
         }
         public void CreateQuotation(Offerte quotation)
