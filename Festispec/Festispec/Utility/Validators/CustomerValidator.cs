@@ -19,8 +19,11 @@ namespace Festispec.Validators
             RuleFor(x => x.Name).NotEmpty().WithMessage("Voer een naam in.");
             RuleFor(x => x.Name).MaximumLength(45).WithMessage("Klantnaam te lang (max 45).");
             RuleFor(x => x.KvK).NotEmpty().WithMessage("Voer een KvK nummer in.");
-            RuleFor(x => x.KvK).Must(IsNumericalSequence).Length(8).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
-            RuleFor(x => x.Branchnumber).Must(IsNumericalSequence).Length(12).WithMessage("Voer een geldig vestigingsnummer in (12 cijfers).");
+            RuleFor(x => x.KvK).Must(IsNumericalSequence).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
+            RuleFor(x => x.KvK).Length(8).WithMessage("Voer een geldig KvK nummer in (8 cijfers).");
+            RuleFor(x => x.Branchnumber).NotEmpty().WithMessage("Voer een vestigingsnummer in.");
+            RuleFor(x => x.Branchnumber).Must(IsNumericalSequence).WithMessage("Voer een geldig vestigingsnummer in (12 cijfers).");
+            RuleFor(x => x.Branchnumber).Length(12).WithMessage("Voer een geldig vestigingsnummer in (12 cijfers).");
             RuleFor(x => x.Streetname).NotEmpty().WithMessage("Voer een straatnaam in.");
             RuleFor(x => x.Streetname).MaximumLength(50).WithMessage("Straatnaam te lang (max 50).");
             RuleFor(x => x.HouseNumber).NotEmpty().WithMessage("Voer een huisnummer in.");
@@ -32,7 +35,8 @@ namespace Festispec.Validators
             RuleFor(x => x.Email).Must(IsValidEmail).WithMessage("Ongeldig email adres (a@b.c)");
             RuleFor(x => x.Email).MaximumLength(130).WithMessage("Email te lang (max 130).");
             RuleFor(x => x.Website).MaximumLength(100).WithMessage("Website te lang (max 100).");
-            RuleFor(x => x.Telephone).NotEmpty().Length(10).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
+            RuleFor(x => x.Telephone).NotEmpty().WithMessage("Voer een telefoonnummer in.");
+            RuleFor(x => x.Telephone).Length(10).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
             RuleFor(x => x.Telephone).Must(IsNumericalSequence).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
         }
 

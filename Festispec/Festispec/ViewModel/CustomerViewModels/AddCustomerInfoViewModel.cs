@@ -1,4 +1,5 @@
 ﻿using Festispec.Service;
+using Festispec.Utility;
 using Festispec.Validators;
 using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain.Repositories;
@@ -18,14 +19,14 @@ namespace Festispec.ViewModel
     {
         public ICommand NextPageCommand { get; set; }
 
-        private string _errorMessage;
-        public string ErrorMessage
+        private ObservableDictionary<string, string> _errorMessages;
+        public ObservableDictionary<string, string> ErrorMessages
         {
-            get => _errorMessage;
+            get => _errorMessages;
             set
             {
-                _errorMessage = value;
-                RaisePropertyChanged("ErrorMessage");
+                _errorMessages = value;
+                RaisePropertyChanged(() => ErrorMessages);
             }
         }
 
@@ -37,20 +38,46 @@ namespace Festispec.ViewModel
             _customerValidator = new CustomerValidator();
 
             NextPageCommand = new RelayCommand(NextPage);
+            //Init error messages
+            ErrorMessages = new ObservableDictionary<string, string>()
+            {
+                ["Name"] = "",
+                ["KvK"] = "",
+                ["Branchnumber"] = "",
+                ["Streetname"] = "",
+                ["HouseNumber"] = "",
+                ["City"] = "",
+                ["PostalCode"] = ""
+            };
+
+        }
+
+        private bool CanNavigate()
+        {
+            //Validate input and show relevant input errors
+            List<ValidationFailure> errors = _customerValidator.Validate(CustomerVM).Errors
+                .Where(c => c.PropertyName != "Telephone" &&
+                            c.PropertyName != "Email" &&
+                            c.PropertyName != "Website").ToList();
+
+            for (int i = 0; i < ErrorMessages.Count; i++)
+            {
+                string property = ErrorMessages.ElementAt(i).Key;
+                ValidationFailure failure = errors.FirstOrDefault(e => e.PropertyName.Equals(property));
+                if (failure != null)
+                    ErrorMessages[property] = failure.ErrorMessage;
+                else
+                    ErrorMessages[property] = "";
+            }
+
+            RaisePropertyChanged(() => ErrorMessages);
+            return errors.Count == 0;
         }
 
         private void NextPage()
         {
-            //Validate input and show relevant input errors
-            List<ValidationFailure> errors = _customerValidator.Validate(CustomerVM).Errors
-                .Where(c => c.PropertyName != "Telephone" && 
-                            c.PropertyName != "Email" && 
-                            c.PropertyName != "Website").ToList();
-
-            //If succesfull navigate to next page else update error properties
-            if (errors.Count != 0)
-                ErrorMessage = errors[0].ErrorMessage;
-            else
+            //If valid navigate to next page else update error properties
+            if (CanNavigate())
                 _navigationService.NavigateTo("AddContactInfo", CustomerVM);
         }
     }

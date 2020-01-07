@@ -82,7 +82,9 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="0.6*"/>
                                 <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1.1*"/>
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
@@ -96,9 +98,15 @@
                                 <Label HorizontalContentAlignment="Left" Content="{Binding Name}" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="3">
-                                <Label Margin="10" Content="Vestigingsnummer:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Margin="10" Content="KvK:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="4" HorizontalAlignment="Left">
+                                <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding Branchnumber}" VerticalAlignment="Center"/>
+                            </Viewbox>
+                            <Viewbox Grid.Column="5">
+                                <Label Margin="10" Content="Vestigingnr:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                            </Viewbox>
+                            <Viewbox Grid.Column="6" HorizontalAlignment="Left">
                                 <Label Margin="10" HorizontalContentAlignment="Left" Content="{Binding Branchnumber}" VerticalAlignment="Center"/>
                             </Viewbox>
                         </Grid>

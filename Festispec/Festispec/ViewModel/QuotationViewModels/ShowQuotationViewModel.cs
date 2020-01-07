@@ -55,7 +55,7 @@ namespace Festispec.ViewModel.QuotationViewModels
                 RaisePropertyChanged("DecisionError");
             }
         }
-        public bool IsSendable { get => CanSave(); }
+        public bool IsSendable { get => QuotationVM.Status == "Nieuwe opdracht"; }
 
         public QuotationViewModel QuotationVM { get; set; }
         private QuotationRepository _quotationRepository;
@@ -71,7 +71,7 @@ namespace Festispec.ViewModel.QuotationViewModels
             RejectQuotationCommand = new RelayCommand(RejectQuotation, CanRegisterDecision);
             DownloadQuotationCommand = new RelayCommand(DownloadQuotation);
             NewQuotationCommand = new RelayCommand(NewQuotation, CanCreate);
-            SaveQuotationCommand = new RelayCommand(SaveQuotation, CanSave);
+            SaveQuotationCommand = new RelayCommand(SaveQuotation);
             PreviousPageCommand = new RelayCommand(PreviousPage);
 
         }
@@ -82,46 +82,37 @@ namespace Festispec.ViewModel.QuotationViewModels
             _navigationService.NavigateTo("JobInfo", new JobViewModel(job));
         }
         private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd" && QuotationVM.IsLatestQuotation == true;
-        private bool CanSave() => QuotationVM.Status == "Nieuwe opdracht";
+        private bool CanEdit()
+        {
+            if (IsSendable) return true;
+            else
+            {
+                Messenger.Default.Send("Een verstuurde offerte kan niet gewijzigd worden. " +
+                    "\n Als deze afgewezen is kun je een nieuwe aanmaken door op 'Nieuw' te klikken.", this.GetHashCode());
+                return false;
+            }
+        }
         private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurt";
         private void SaveQuotation()
         {
+            if (!CanEdit()) return;
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
             if(result.IsValid)
             {
                 DescriptionError = "";
                 PriceError = "";
                 DecisionError = "";
-
-                decimal price;
-                Decimal.TryParse(QuotationVM.Price.Trim('€'), out price);
-                _quotationRepository.UpdateQuotation(new Offerte()
-                {
-                    OfferteID = QuotationVM.QuotationId,
-                    OpdrachtID = QuotationVM.JobId,
-                    Beschrijving = QuotationVM.Description,
-                    Totaalbedrag = price,
-                    KlantbeslissingReden = QuotationVM.Decision,
-                    Aanmaakdatum = QuotationVM.CreationDate,
-                    LaatsteWijziging = DateTime.Now,
-                }) ;
-                if (QuotationVM.IsSent)
-                {
-                    _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte verstuurt");
-                    QuotationVM.Status = "Offerte verstuurt";
-                }
-                Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
-                _navigationService.NavigateTo("ShowQuotation", QuotationVM);
+                UpdateQuotation();
             } 
             else
             {
-                ValidationFailure descriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault();
+                ValidationFailure descriptionError = result.Errors.FirstOrDefault(e => e.PropertyName == "Description");
                 if (descriptionError != null)
                     DescriptionError = descriptionError.ToString();
                 else
                     DescriptionError = "";
 
-                ValidationFailure priceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault();
+                ValidationFailure priceError = result.Errors.FirstOrDefault(e => e.PropertyName == "Price");
                 if (priceError != null)
                     PriceError = priceError.ToString();
                 else
@@ -129,6 +120,28 @@ namespace Festispec.ViewModel.QuotationViewModels
             }
 
         }
+        private void UpdateQuotation()
+        {
+            Decimal.TryParse(QuotationVM.Price.Trim('€'), out decimal price);
+            _quotationRepository.UpdateQuotation(new Offerte()
+            {
+                OfferteID = QuotationVM.QuotationId,
+                OpdrachtID = QuotationVM.JobId,
+                Beschrijving = QuotationVM.Description,
+                Totaalbedrag = price,
+                KlantbeslissingReden = QuotationVM.Decision,
+                Aanmaakdatum = QuotationVM.CreationDate,
+                LaatsteWijziging = DateTime.Now,
+            });
+            if (QuotationVM.IsSent)
+            {
+                _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Offerte verstuurt");
+                QuotationVM.Status = "Offerte verstuurt";
+            }
+            Messenger.Default.Send("Wijzigingen opgeslagen", this.GetHashCode());
+            _navigationService.NavigateTo("ShowQuotation", QuotationVM);
+        }
+
         private void NewQuotation()
         {
             _quotationRepository.UpdateJobStatus(QuotationVM.JobId, "Nieuwe opdracht");
