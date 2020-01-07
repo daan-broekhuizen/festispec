@@ -209,15 +209,7 @@
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Extra" BorderBrush="Transparent" Background="Transparent">
-                        <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiConverter}">
-                                <Binding ElementName="documentDesigner" />
-                                <Binding ElementName="controlExtraChart" Path="Tag" />
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                    </Button>
+                    
                     <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Pie" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
                         <Button.CommandParameter>
