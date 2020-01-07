@@ -209,6 +209,7 @@
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
+    <Compile Include="Utility\Validators\RegisterValidator.cs" />
     <Compile Include="Utility\Validators\SaveDialogValidator.cs" />
     <Compile Include="ViewModel\Components\ChartDialogViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />

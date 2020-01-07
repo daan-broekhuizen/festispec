@@ -29,15 +29,11 @@
             <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
                 <TextBlock Text="Gebruiker Aanmaken"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
-            <Viewbox Grid.RowSpan="3" Grid.Column="3" Grid.Row="0" Stretch="Uniform" VerticalAlignment="Center"  HorizontalAlignment="Center" MaxWidth="200">
-                <Button Margin="50" Background="White" BorderThickness="0" VerticalContentAlignment="Center">
-                    <Image  x:Name="CustomerLogo" Source="{Binding CustomerVM.Logo, Mode=TwoWay}"></Image>
-                </Button>
-            </Viewbox>
+
         </Grid>
 
 
-        <Grid Margin="54,61,-14,39" Grid.RowSpan="3" >
+        <Grid Margin="40,66,0,34" Grid.RowSpan="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="99*"/>
@@ -57,22 +53,17 @@
             <Viewbox VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
             <Viewbox VerticalAlignment="Bottom"  Grid.Column="0"  Grid.Row="2" HorizontalAlignment="Left" Grid.ColumnSpan="2" />
             <Viewbox  Grid.Row="4" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
-            <TextBox TabIndex="2" Text="{Binding AccountVM.FirstName}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Gebruikersnaam"  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,48,0" Grid.Column="1"/>
             <TextBox TabIndex="5" Text="{Binding AccountVM.Password}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Wachtwoord"  Grid.Row="3" Grid.ColumnSpan="2" Margin="0,3,48,8" Grid.Column="1"/>
-            <Viewbox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0">
-                <Label  Content="{Binding TelephoneError}" Foreground="Red"  FontSize="20"  VerticalContentAlignment="Center"  VerticalAlignment="Center"  />
-            </Viewbox>
-            <Viewbox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Margin="20,0,0,0">
-                <Label  Content="{Binding EmailError}" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center"/>
-            </Viewbox>
-            <TextBlock Height="14" VerticalAlignment="Bottom" Text="Gebruikersnaam" Grid.Column="1" Margin="9,0,128,29" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+            <TextBlock Height="14" VerticalAlignment="Bottom" Text="Gebruikersnaam" Grid.Column="1" Margin="3,0,134,32" Grid.RowSpan="2" Grid.ColumnSpan="2" />
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Wachtwoord" Grid.Column="1" Margin="0,0,10,2" Grid.Row="2"/>
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Voornaam" Grid.Column="1" Margin="3,0,7,10" Grid.Row="3" Grid.RowSpan="2"/>
+            <TextBox TabIndex="2" Text="{Binding AccountVM.FirstName}" Style="{StaticResource placeHolder}" FontSize="20" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Gebruikersnaam"  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,48,0" Grid.Column="1"/>
+            <TextBlock VerticalAlignment="Bottom" Height="15" Text="{Binding ErrorMessage}" Grid.Column="3" Margin="57,0,105,118" Grid.Row="6"/>
             <TextBox TabIndex="4" Text="{Binding AccountVM.FirstName}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Voornaam " Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="3,10,48,19" Grid.RowSpan="2"/>
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Tussenvoegsel" Grid.Column="1" Margin="3,0,7,0" Grid.Row="5"/>
             <TextBox TabIndex="4" Text="{Binding AccountVM.Infix}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Tussenvoegsel " Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="3,0,48,89"/>
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Achternaam" Grid.Column="1" Margin="3,0,7,71" Grid.Row="6"/>
-            <TextBox TabIndex="4" Text="{Binding AccountVM.LastName}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Achternaam " Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="3,47,48,42"/>
+            <TextBox TabIndex="4" Text="{Binding AccountVM.LastName}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Achternaam " Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,62,51,43"/>
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Straatnaam" Grid.Column="3" Margin="47,0,114,26" Grid.RowSpan="2"/>
             <TextBox TabIndex="4" Text="{Binding AccountVM.StreetName}" Style="{StaticResource placeHolder}" FontSize="20" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Tag="Straatnaam" Grid.Column="3" Grid.Row="1" Margin="47,13,10,17" Grid.RowSpan="2"/>
             <TextBlock VerticalAlignment="Bottom" Height="15" Text="Huisnummer" Grid.Column="3" Margin="47,0,114,37" Grid.Row="2" Grid.RowSpan="2"/>

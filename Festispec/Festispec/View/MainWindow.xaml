@@ -87,16 +87,9 @@
                         </WrapPanel>
                     </Button>
 
+
+
                     <Button Margin="5" Grid.Row="4" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
-                        <WrapPanel Orientation="Horizontal">
-
-                            <Image Margin="0,0,10,0" Source="/Images/Calendar.png"  Height="10" Width="10"/>
-
-                            <TextBlock VerticalAlignment="Center" Text="Agenda" />
-                        </WrapPanel>
-                    </Button>
-
-                    <Button Margin="5" Grid.Row="5" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
                         <WrapPanel Orientation="Horizontal">
 
                             <Image Margin="0,0,10,0" Source="/Images/Calendar.png"   Height="10" Width="10"/>
@@ -104,32 +97,32 @@
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="6" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowDashboardView}">
-                        <WrapPanel Orientation="Horizontal">
 
-                            <Image Margin="0,0,10,0" Source="/Images/Messages.png"   Height="10" Width="10"/>
-                            <TextBlock VerticalAlignment="Center" Text="Meldingen" />
-                        </WrapPanel>
-                    </Button>
 
-                    <Button Margin="5" Grid.Row="7" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowRapportageTemplatesView}">
+                    <Button Margin="5" Grid.Row="5" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowRapportageTemplatesView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Rapportage Templates"/>
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="8" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowInspectionFormTemplatesView}">
+                    <Button Margin="5" Grid.Row="6" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowInspectionFormTemplatesView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Inspectieformulier templates"/>
                         </WrapPanel>
                     </Button>
 
-                    <Button Margin="5" Grid.Row="9" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowManagementReportView}">
+                    <Button Margin="5" Grid.Row="7" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowManagementReportView}">
                         <WrapPanel Orientation="Horizontal">
                             <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
                             <TextBlock VerticalAlignment="Center" Text="Management Rapportages"/>
+                        </WrapPanel>
+                    </Button>
+                    <Button Margin="5" Grid.Row="8" HorizontalAlignment="Left" Foreground="LightGray" Background="#5A5A5A" BorderThickness="0" Command="{Binding ShowUserRights}">
+                        <WrapPanel Orientation="Horizontal">
+                            <Image Margin="0,0,10,0" Source="/Images/Jobs.png"  Height="10" Width="10"/>
+                            <TextBlock VerticalAlignment="Center" Text="Gebruikers rechten"/>
                         </WrapPanel>
                     </Button>
                 </Grid>

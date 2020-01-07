@@ -60,9 +60,7 @@
             <Button BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="5">
                 <Image Source="/Images/Dashboard_schedule.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="5">
-                <Image Source="/Images/Dashboard_messages.png"/>
-            </Button>
+
 
 
         </Grid>

@@ -35,6 +35,7 @@ namespace Festispec.ViewModel
         public ICommand ShowAccountView { get; set; }
         public ICommand ShowPlanningView { get; set; }
         public ICommand ShowScheduleView { get; set; }
+        public ICommand ShowUserRights { get; set; }
         public ICommand ShowRapportageTemplatesView { get; set; }
         public ICommand ShowInspectionFormTemplatesView { get; set; }
         public ICommand LogoutCommand { get; set; }
@@ -63,7 +64,7 @@ namespace Festispec.ViewModel
             ShowInspectionFormTemplatesView = new RelayCommand(ShowInspectionFormTemplates);
             ShowJobsView = new RelayCommand(ShowJobs);
             ShowManagementReportView = new RelayCommand(ShowManagementReport);
-
+            ShowUserRights = new RelayCommand(ShowUserRightsView);
             LogoutCommand = new RelayCommand(Logout);
 
             if (navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
@@ -79,6 +80,7 @@ namespace Festispec.ViewModel
         private void ShowRapportageTemplates() => _navigationService.NavigateTo("RapportageTemplateOverview", EnumTemplateMode.EDIT);
         private void ShowInspectionFormTemplates() => _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);
         private void ShowManagementReport() => _navigationService.NavigateTo("ManagementReport");
+        private void ShowUserRightsView() => _navigationService.NavigateTo("UserRights");
     }
 
 
