@@ -57,7 +57,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="0.7*"/>
                 <RowDefinition/>
-                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Viewbox VerticalAlignment="Bottom" HorizontalAlignment="Left">
                 <TextBlock Height="15" Text="Voornaam"/>
@@ -105,10 +105,10 @@
             </Viewbox>
             
             <Viewbox Grid.Row="10" Grid.Column="1">
-                <Button  Background="White" BorderThickness="0"  Padding="20, 0"  Command="{Binding SaveContactPersonCommand}">
+                <Button  Background="White" BorderThickness="0"  Padding="10, 0"  Command="{Binding SaveContactPersonCommand}">
                     <WrapPanel>
                         <Image Height="10" Source="/Images/Plus_icon.png"/>
-                        <Label Content="Contactpersoon toevoegen"/>
+                        <Label Content="Contactpersoon opslaan"/>
                     </WrapPanel>
                 </Button>
             </Viewbox>

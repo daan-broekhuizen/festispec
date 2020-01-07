@@ -6,6 +6,7 @@ using Festispec.ViewModel.CustomerViewModels;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,8 +107,9 @@ namespace Festispec.ViewModel
             CustomerVM.SetCustomer(klant);
             SaveContacts();
 
-            //Navigate to created CustomerInfo
-            _navigationService.NavigateTo("CustomerInfo", CustomerVM);
+            //Notify & Navigate to customers
+            Messenger.Default.Send("Klantgegevens opgeslagen", this.GetHashCode());
+            _navigationService.NavigateTo("Customers");
         }
         private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerVM).IsValid;
         private void AddContactPerson()
@@ -123,6 +125,7 @@ namespace Festispec.ViewModel
             {
                 //Add contact to customervm and create new contact
                 CustomerVM.Contacts.Add(ContactPersonViewModel);
+                Messenger.Default.Send("Contactpersoon opgeslagen", this.GetHashCode());
                 ContactPersonViewModel = new ContactPersonViewModel();
             }
 
