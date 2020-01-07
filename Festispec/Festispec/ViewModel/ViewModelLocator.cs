@@ -135,7 +135,7 @@ namespace Festispec.ViewModel
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), RapportageRepo);
         public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
-        public  UserRightsViewModel UserRights => new UserRightsViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
+        public UserRightsViewModel UserRights => new UserRightsViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RegisterViewModel Register => new RegisterViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         #endregion
 

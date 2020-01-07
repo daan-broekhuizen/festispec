@@ -17,7 +17,7 @@ namespace Festispec.View
     /// <summary>
     /// Interaction logic for AddGebruiker.xaml
     /// </summary>
-    public partial class AddGebruiker : Window
+    public partial class AddGebruiker : Page
     {
         public AddGebruiker()
         {
