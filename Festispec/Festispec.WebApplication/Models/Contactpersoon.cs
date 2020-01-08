@@ -12,8 +12,7 @@ namespace Festispec.WebApplication.Models
         public int ContactpersoonID { get; set; }
 
         [Required]
-        [StringLength(8)]
-        public string KlantID { get; set; }
+        public int KlantID { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -33,6 +32,10 @@ namespace Festispec.WebApplication.Models
         [Required]
         [StringLength(10)]
         public string Telefoon { get; set; }
+
+        [StringLength(30)]
+        [Column("Rol")]
+        public string Rol { get; set; }
 
         [Column(TypeName = "text")]
         public string Notities { get; set; }

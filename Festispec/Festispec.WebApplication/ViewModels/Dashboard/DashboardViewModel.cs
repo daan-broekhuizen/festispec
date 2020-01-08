@@ -1,4 +1,5 @@
 ﻿using Festispec.WebApplication.Models;
+using Festispec.WebApplication.ViewModels.Inspection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Festispec.WebApplication.ViewModels.Dashboard
     {
         public Account Account { get; set; }
 
-        public List<Inspectieformulier> Inspectionform { get; set; }
+        public List<InspectionformViewModel> Inspectionform { get; set; }
     }
 }

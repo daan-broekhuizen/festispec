@@ -8,20 +8,13 @@
 
 <div class="container">
 	<div class="row">
-		<div id="logo" class="col-md-6 text-left">
-			<a href='@Url.Action("Index", "Dashboard")'>
-				<img src="~/Content/Images/festispec logo.png" />
-			</a>
-		</div>
-		
-	</div>
-	<div class="row">
-
-		<div class="col-md-6 image">
-			<img src="~/Content/Images/dashboard_image.png" />
+		<div class="col-md-6">
+			<div class="intro">
+				<img  src="~/Content/Images/dashboard_image.png" />
+			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="upcoming-tasks">
+			<div class="upcoming">
 				<h3 class="text-center">Aankomende opdrachten</h3>
 				@*Start opdracht*@
 				@if (Model.Account != null)
@@ -32,48 +25,24 @@
 						counter++;
 						<div class="row">
 							<div class="task">
-								<div class="col-md-2 col-sm-1">
-									<img src="~/Content/Images/Dashboard_background.png" />
+								<div class="col-xs-2 col-md-2">
+									<img id="logo" src="@String.Format("data:image/jpg;base64,{0}", item.LogoString)"/>
 								</div>
-								<div class="col-md-5 col-sm-1">
-									<p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.DatumInspectie)</p>
+								<div class="col-xs-5 col-md-5">
+									<p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.Inspectionform.DatumInspectie)</p>
 								</div>
-								<div class="col-md-5 col-sm-1">
+								<div class="col-xs-5 col-md-5">
 									<button>
-										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.InspectieformulierID, userId = @Model.Account.AccountID }, null)
+										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID })
 									</button>
 								</div>
 							</div>
 						</div>
-						if (counter == 3)
-						{
-							break;
-						}
+						if (counter == 4) { break; }
 					}
 				}
-
-				<div class="col-md-12 text-center all-tasks">
-					<a href='@Url.Action("Search", "Assignment", Model.Inspectionform)'>Alle opdrachten <i class="fa fa-arrow-right"></i></a>
-				</div>
 			</div>
 			
-		</div>
-		<div class="row big-buttons">
-			<div class="col-md-6">
-
-			</div>
-			<div class="col-md-2 text-center">
-				<img src="~/Content/Images/Dashboard_schedule.png" />
-			</div>
-			<div class="col-md-2 text-center">
-				<a href='@Url.Action("AvailabilityView", "Availability")'>
-					<img src=~/Content/Images/Dashboard_planning.png />
-				</a>
-			</div>
-
-			<div class="col-md-2 text-center">
-				<img src="~/Content/Images/Dashboard_messages.png" />
-			</div>
 		</div>
 	</div>
     

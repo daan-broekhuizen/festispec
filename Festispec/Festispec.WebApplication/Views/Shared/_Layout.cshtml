@@ -3,44 +3,43 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+	<title>@ViewBag.Title - Festispec web-portal</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/fontawesome")
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Planning", "AvailabilityView", "Availability", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Beschikbaarheid", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Opdrachten", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Meldingen", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
-                </ul>
-            </div>
-        </div>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<a class="navbar-brand">
+			<img src= "../Content/Images/festispec logo.png" height="25"/>
+		</a>
+	</div>
+	@if (Session["user"] != null)
+	{
+		<div class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container">
+					<ul class="nav navbar-nav" style="align-content:center">
+						@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-item" })
+						@Html.ActionLink("Planning", "AvailabilityView", "Availability", new { area = "" }, new { @class = "navbar-item" })
+						@Html.ActionLink("Beschikbaarheid", "Index", "Credentials", new { area = "" }, new { @class = "navbar-item" })
+						@Html.ActionLink("Opdrachten", "Index", "Inspectionform", new { userId = (int)Session["user"] }, new { @class = "navbar-item" })
+					</ul>
+				</div>
+		</div>
+	}
 
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    @RenderSection("Scripts", false)
-    @RenderSection("Style", false)
+	<div class="container body-content">
+		@RenderBody()
+		<footer>
+			<p>&copy; @DateTime.Now.Year - FestispecQ </p>
+		</footer>
+	</div>
+
+	<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	@RenderSection("Scripts", false)
+	@RenderSection("Style", false)
 </body>
 </html>

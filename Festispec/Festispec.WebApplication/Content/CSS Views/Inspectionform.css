@@ -1,5 +1,5 @@
 ﻿body {
-	background-image: url('Dashboard_background.png');
+	background-image: url("../Images/Dashboard_background.png");
 	background-clip: border-box;
 	background-attachment: fixed;
 	background-repeat: no-repeat;

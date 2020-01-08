@@ -1,5 +1,6 @@
 ﻿using Festispec.WebApplication.Models;
 using Festispec.WebApplication.Models.Repositories;
+using Festispec.WebApplication.ViewModels.Inspection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +50,7 @@ namespace Festispec.WebApplication.Controllers
             Inspectieformulier form = _formRepo.GetInspectionform(question.InspectieFormulierID);
             return View(GetViewModel(form, questionVM.Answer.InspecteurID));
         }
+
         private void AddOrUpdateTableAnswers(QuestionViewModel questionVM, Vraag question)
         {
             foreach (TableAnswerViewModel a in questionVM.TableAnswers)
@@ -102,9 +104,8 @@ namespace Festispec.WebApplication.Controllers
                 Answer = q.Antwoorden.FirstOrDefault(a => a.Account.AccountID == userId)
             }).ToList();
 
-            InspectionformViewModel formVM = new InspectionformViewModel()
+            InspectionformViewModel formVM = new InspectionformViewModel(form)
             {
-                Inspectionform = form,
                 Questions = questions,
                 CompletedQuestions = 0
             };

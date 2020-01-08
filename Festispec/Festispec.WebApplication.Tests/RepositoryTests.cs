@@ -1,5 +1,5 @@
 ﻿using System;
-using Festispec.WebApplication.Models.Repository;
+using Festispec.WebApplication.Models.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Festispec.WebApplication.Tests
