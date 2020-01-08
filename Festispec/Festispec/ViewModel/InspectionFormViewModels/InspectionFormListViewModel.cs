@@ -310,10 +310,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
         public void SaveInspectionFormDetailsAsync()
         {
-            if(Street == null || HouseNumber == null || City == null)
+            /*if(Street == null || HouseNumber == null || City == null)
                 if(_selectedInspectionForm != null)
                     _selectedInspectionForm.SaveInspectionformDetails();
-            else
+            else*/
                if (_selectedInspectionForm != null)
                 _selectedInspectionForm.SaveInspectionformDetails();
         }
