@@ -1,0 +1,379 @@
+﻿<Page x:Class="Festispec.View.RapportageView.RapportageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec"
+        xmlns:component="clr-namespace:Festispec.View.Components"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:ViewModel="clr-namespace:Festispec.ViewModel.Components"
+        xmlns:Converters="clr-namespace:Festispec.Utility.Converters"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="FestiSpec" d:DesignHeight="1080" d:DesignWidth="1920"
+        Background="White"
+        DataContext="{Binding Rapportage, Source={StaticResource Locator}}">
+    <Page.Resources>
+        <Converters:MultiConverter x:Key="MultiConverter" />
+        <Converters:GridVisibilityConverter x:Key="GridVisibilityConverter" />
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+        <ViewModel:DocumentDesignerViewModel x:Key="ViewModel" />
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="{Binding DisplayExtraOptions, Converter={StaticResource GridVisibilityConverter}}" />
+        </Grid.ColumnDefinitions>
+        <component:DocumentDesigner x:Name="documentDesigner" Grid.Column="0" DesignerContent="{Binding Content, Mode=TwoWay}"  />
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Mode -->
+            <StackPanel Margin="5" Grid.Row="0">
+                <Label Content="Mode" FontWeight="Bold" FontSize="16" />
+
+                <ComboBox Name="controlMode" SelectedIndex="0" Background="White" Style="{ StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ModeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlMode" Path="SelectedIndex" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBoxItem Content="Weergeven" />
+                    <ComboBoxItem Content="Design" />
+                    <ComboBoxItem Content="HTML" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Type -->
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Lettertype" FontWeight="Bold" FontSize="16" />
+
+                <ComboBox Name="controlType" Style="{StaticResource ComboBoxFlatStyle }">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding FontTypeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlType" Path="SelectedValue" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <System:String>Arial</System:String>
+                    <System:String>Roboto</System:String>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Grootte -->
+            <StackPanel Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Lettergrootte" FontWeight="Bold" FontSize="16" />
+                <TextBox Name="controlSize" Text="" BorderBrush="#c8c8c8">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding FontSizeChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlSize" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </StackPanel>
+
+            <!-- Styling -->
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Styling" FontWeight="Bold" FontSize="16" />
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="B" Name="controlBold" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Bold">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlBold" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <Button Name="controlUnderline" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Underline">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlUnderline" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                        <TextBlock TextDecorations="Underline" Text="C" />
+                    </Button>
+                    
+                    <Button FontSize="14" Name="controlItalic" Content="I" FontStyle="Italic" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyStyleCommand}" BorderBrush="#c8c8c8" Background="White" Tag="Italic">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlItalic" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Kleur -->
+            <StackPanel Margin="5" Grid.Row="4" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Letterkleur" FontWeight="Bold" FontSize="16" />
+                <xctk:ColorPicker x:Name="controlColor" ColorMode="ColorCanvas" SelectedColor="Black">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedColorChanged">
+                            <i:InvokeCommandAction Command="{Binding FontColorChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlColor" Path="SelectedColor" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </xctk:ColorPicker>
+            </StackPanel>
+
+            <!-- Afbeelding Invoegen -->
+            <StackPanel Margin="5" Grid.Row="5" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Afbeelding Invoegen" FontWeight="Bold" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlImage" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding AddImageCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Background="Transparent" BorderBrush="Transparent">
+                        <Image Source="/Images/Image.png" Stretch="Uniform" Width="25" Height="25"  />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Grafiek Invoegen -->
+            <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsChartVisible, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlLineChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Bar" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Bar_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlBarChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Extra" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlExtraChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Pie" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPieChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Invoegen Resultaten -->
+            <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
+                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
+            </StackPanel>
+
+            <!-- Extra Opties -->
+            <StackPanel Margin="5" Grid.Row="9" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ExtraOptionsCommand}">Extra Opties</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Ander Template -->
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Naar Opdracht -->
+            <StackPanel Margin="5" Grid.Row="11">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ShowJobCommand}">Naar Opdracht</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Opslaan -->
+            <StackPanel Margin="5" Grid.Row="12">
+                <Button FontSize="16" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
+                    <TextBlock TextDecorations="Underline" Text="Opslaan" />
+                </Button>
+            </StackPanel>
+
+            <!-- Downloaden -->
+            <StackPanel Margin="5" Grid.Row="13">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
+                    <TextBlock TextDecorations="Underline" Text="Download" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Alignment -->
+            <StackPanel Margin="5" Grid.Row="0" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Label Content="Positie" FontWeight="Bold" FontSize="16" />
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72B;" Name="controlPositionLeft" FontSize="14" Padding="10, 5" Grid.Column="1" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyLeft">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionLeft" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE740;" Name="controlPositionCenter" FontSize="14" Padding="10, 5" Grid.Column="3" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyCenter">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionCenter" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+
+                    <Button FontFamily="Segoe MDL2 Assets" Content="&#xE72A;" FontSize="14" Name="controlPositionRight" Padding="10, 5" Grid.Column="5" Command="{Binding ApplyAlignmentCommand}" BorderBrush="#c8c8c8" Background="White" Tag="JustifyRight">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlPositionRight" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
+
+            <!-- Unlock -->
+            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
+            </StackPanel>
+
+            <!-- Width -->
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Breedte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlWidth" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding WidthChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlWidth" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+
+            <!-- Height -->
+            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Hoogte" FontWeight="Bold" FontSize="16" Grid.Column="0" />
+                <TextBox Name="controlHeight" Text="" BorderBrush="#c8c8c8" Grid.Column="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding HeightChangedCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiConverter}">
+                                        <Binding ElementName="documentDesigner" />
+                                        <Binding ElementName="controlHeight" Path="Text" />
+                                    </MultiBinding>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

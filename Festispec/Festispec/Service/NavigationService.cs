@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using Festispec.Utility;
+using Festispec.Utility.Builders;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,14 +16,15 @@ namespace Festispec.Service
 {
     public class NavigationService : INavigationService, INotifyPropertyChanged
     {
-        
+
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic;
         private string _currentPageKey;
-        
+        public AppSettings AppSettings { get; set; }
+
         public string CurrentPageKey
         {
-            get =>  _currentPageKey;
+            get => _currentPageKey;
             private set
             {
                 if (_currentPageKey == value)
@@ -37,13 +40,15 @@ namespace Festispec.Service
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
+
+            AppSettings = (new SettingsBuilder()).Build();
         }
         public void GoBack()
         {
             if (_historic.Count > 1)
             {
                 _historic.RemoveAt(_historic.Count - 1);
-                NavigateTo(_historic.Last(), null);
+                NavigateTo(_historic.Last(), Parameter);
             }
         }
         public void NavigateTo(string pageKey)
@@ -59,6 +64,24 @@ namespace Festispec.Service
                     throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
 
                 Frame frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
+
+                if (frame != null)
+                    frame.Source = _pagesByKey[pageKey];
+
+                Parameter = parameter;
+                _historic.Add(pageKey);
+                CurrentPageKey = pageKey;
+            }
+        }
+
+        public virtual void ApplicationNavigateTo(string pageKey, object parameter)
+        {
+            lock (_pagesByKey)
+            {
+                if (!_pagesByKey.ContainsKey(pageKey))
+                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
+
+                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "ApplicationFrame") as Frame;
 
                 if (frame != null)
                     frame.Source = _pagesByKey[pageKey];

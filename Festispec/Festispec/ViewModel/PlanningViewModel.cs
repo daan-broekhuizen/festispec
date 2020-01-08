@@ -1,36 +1,70 @@
-﻿using BingMapsRESTToolkit;
+﻿using Festispec.Model;
+using Festispec.Model.Repositories;
+using Festispec.Service;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Festispec.ViewModel
 {
-    class PlanningViewModel
+    public class PlanningViewModel
     {
-        public async Task<double> CalculateDistance(string origin, string destination)
+        /// <summary>
+        /// Maakt een planning aan voor alle beschikbare inspecteurs
+        /// </summary>
+        /// <param name="id">Het ID van het festival</param>
+        /// <param name="destination">De bestemming van het festival</param>
+        /// <param name="inspectorNeeded">Hoeveelheid benodigde inspectoren</param>
+        /// <returns></returns>
+        public async Task<List<Account>> GetInspectorAsync(int id, string destination, int inspectorNeeded)
         {
-            DistanceMatrixRequest req = new DistanceMatrixRequest()
+            PlanningRepository repo = new PlanningRepository();
+            LocationService service = new LocationService();
+
+            List<Account> accounts = repo.GetFreeInspectors(id);
+            List<Account> inspectors = new List<Account>();
+            string[] tempInspectors = new string[inspectorNeeded];
+            double[] distances = new double[accounts.Count];
+
+            string[] data = new string[accounts.Count];
+
+            // Als er te weinig Inspectors zijn
+            if (accounts.Count < inspectorNeeded)
+                return null;
+
+            // Hier word de afstand berekend
+            for (int i = 0; i < accounts.Count; i++)
             {
-                BingMapsKey = "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
-                Origins = new List<SimpleWaypoint>()
-                {
-                    new SimpleWaypoint(origin)
-                },
-                Destinations = new List<SimpleWaypoint>()
-                {
-                    new SimpleWaypoint(destination)
-                },
-                DistanceUnits = DistanceUnitType.Kilometers,
-                TravelMode = TravelModeType.Driving
-            };
+                string address = accounts[i].Straatnaam + " " + accounts[i].Huisnummer + " " + accounts[i].Stad;
+                distances[i]  = await service.CalculateDistance(address, destination);
+                data[i] = accounts[i].Gebruikersnaam + " " + distances[i];               
+            }
 
-            Response response = await req.Execute();
-            Resource resource = response.ResourceSets[0].Resources[0];
-            DistanceMatrix matrix = resource as DistanceMatrix;
-            DistanceMatrixCell cell = matrix.Results[0];
-            Debug.WriteLine("Afstand: " + cell.TravelDistance.ToString("n1") + " km");
+            distances = distances.OrderBy(d => d).ToArray();
 
-            return cell.TravelDistance;
+            for (int i = 0; i < inspectorNeeded; i++)
+            {
+                double tmp = distances[i];
+
+                for (int y = 0; y < accounts.Count; y++)
+                {
+                    if (data[y].Contains(tmp.ToString()))
+                        tempInspectors[i] = data[y];
+                }
+
+                for(int x = 0; x < accounts.Count; x++)
+                {
+                    if (tempInspectors[i].Contains(accounts[x].Gebruikersnaam))
+                        inspectors.Add(accounts[i]);
+                }
+            }
+
+            // Alles toevoegen aan de ingeplande inspecteurs YA GET MEE
+            foreach (Account result in inspectors)
+                repo.AddToPlanning(result.AccountID, id);
+            
+
+            return inspectors;
         }
     }
 }

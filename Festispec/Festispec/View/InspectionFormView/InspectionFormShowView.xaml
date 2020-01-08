@@ -1,0 +1,555 @@
+﻿<Page x:Class="Festispec.View.InspectionFormView.InspectionFormShowView.InspectionFormShowView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Festispec.View.InspectionFormView"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      DataContext="{Binding InspectionFormList, Source={StaticResource Locator}}"
+      Title="InspectionFormListView">
+
+    <Page.Resources>
+
+        <SolidColorBrush x:Key="ButtonHover" Color="Gray" Opacity="0.8"/>
+
+        <DataTemplate x:Key="OpenQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PictureQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TextEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="250">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MultipleChoiceQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid x:Name="QuestionBox" Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="80" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="13*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="{Binding AnwserNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Background="Gray"/>
+                                        <TextBlock Text="{Binding AnwserTextString}" Grid.Column="1" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ScaleQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid x:Name="StandardView"  Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+                        <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
+                        <Grid MinWidth="{Binding Path=ActualWidth, ElementName=StandardView}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition Width="9*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            
+                        </Grid>
+                    </Viewbox>
+                </Grid>
+
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TableQuestionEdit">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid x:Name="QuestionBox" Background="#FFF4F4F5" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" Margin="1" MaxHeight="316">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="3.2*"/>
+                        <ColumnDefinition Width="1.25*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="1.3*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="4*" MinHeight="150"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="1*" MinHeight="20"/>
+                        <RowDefinition Height="0.5*" MinHeight="10"/>
+                        <RowDefinition Height="2*" MinHeight="100"/>
+                    </Grid.RowDefinitions>
+                    <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                        <Label Margin="1" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
+                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                    </Viewbox>
+                    <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Source="{Binding Image}"/>
+                    </Viewbox>
+
+                    <ListBox Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Black" BorderThickness="1">
+                                    <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="200" Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                        <TextBlock Text="{Binding AnwserTextString}" Grid.Column="0" HorizontalAlignment="Stretch" Background="White" TextWrapping="Wrap" VerticalAlignment="Stretch"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+
+        <local:QuestionDataTemplateSelector x:Key="QuestionTemplateSelector"/>
+
+    </Page.Resources>
+
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="0.75*"/>
+                <RowDefinition Height="8.3*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.1*"/>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Color="White" Opacity="0.6" />
+            </Grid.Background>
+            <ComboBox x:Name="SelectForm" ItemsSource="{Binding InspectionFormsList}" DisplayMemberPath="Titel" SelectedValuePath="Titel" SelectedItem="{Binding SelectedInspectionForm, Mode=TwoWay}" Grid.Row="0" Style="{StaticResource ComboBoxFlatStyle}"/>
+            <Button Grid.Row="1" Command="{Binding DeleteInspectionFormCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/DeleteQuestionLogo.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Verwijder inspectieformulier" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="2" Command="{Binding Path=CreateNewInspectionFormCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/AddQuestionBox.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Nieuw inspectieformulier" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
+            <Button Grid.Row="3" Command="{Binding GenerateScheduleCommand}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/Calendar_black.png" Margin="3,3,3,3" Grid.Column="0" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Planning genereren" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
+            <Grid Grid.Row="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.7*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="1.2*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Inspectie datum" Grid.Row="0"/>
+                <DatePicker SelectedDate="{Binding InspectionDate}" IsTodayHighlighted="True" DisplayDateStart="{Binding MinimalDate}" DisplayDateEnd="{Binding MaximumDate}" Grid.Row="1">
+                    <DatePicker.Resources>
+                        <Style TargetType="DatePickerTextBox">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType=DatePicker}, StringFormat={}{0:dd/MM/yyyy}}" FontSize="12"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                <Label Content="Starttijd" Grid.Row="2" VerticalAlignment="Bottom"/>
+                <xctk:TimePicker Value="{Binding InspectionStartTime, Mode=TwoWay}" FormatString="HH:mm" Grid.Row="3" FontSize="20" Margin="5,0,5,0"/>
+                <Label Content="Eindtijd" Grid.Row="4" VerticalAlignment="Bottom"/>
+                <xctk:TimePicker Value="{Binding InspectionEndTime, Mode=TwoWay}" FormatString="HH:mm" Grid.Row="5" FontSize="20" Margin="5,0,5,0"/>
+                <Label Content="Locatie:" FontWeight="Bold" Grid.Row="6" VerticalAlignment="Bottom"/>
+                <Label Content="Stad"  Grid.Row="7" VerticalAlignment="Bottom"/>
+                <TextBox MaxLength="50" Text="{Binding City}"  Grid.Row="8" Margin="5,0,5,0"/>
+                <Label Content="Straat"  Grid.Row="9"  VerticalAlignment="Bottom"/>
+                <TextBox MaxLength="50" Text="{Binding Street}" Grid.Row="10" Margin="5,0,5,0"/>
+                <Label Content="Huisnummer" Grid.Row="11" VerticalAlignment="Bottom"/>
+                <TextBox MaxLength="4" Text="{Binding HouseNumber}"  Grid.Row="12" Margin="5,0,5,0"/>
+                <Label Content="Aantal benodigde inspecteurs" Grid.Row="13"  VerticalAlignment="Bottom"/>
+                <Viewbox x:Name="InspectorAmount" Grid.Column="3" Grid.Row ="14" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,0,5,0">
+                    <xctk:IntegerUpDown Value="{Binding Path=RequiredInspectors}" MinWidth="{Binding Path = ActualWidth, ElementName=InspectorAmount}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Watermark="Aantal inspecteurs" Minimum="1" Maximum="100" ClipValueToMinMax="True" FontSize="20" FormatString="G" Increment="1"/>
+                </Viewbox>
+                <Button Command="{Binding SaveDetailsCommand}" Grid.Row="16">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style><Label Content="Opslaan" FontWeight="Bold" FontSize="20"/>
+                </Button>
+            </Grid>
+            <Button Grid.Row="5" Command="{Binding Path = ToEditCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10.4,-0.4,-0.4">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="/Images/EditIcon.png" Margin="5,5,5,5" Grid.Column="0"/>
+                    <TextBlock Text="Inspectieformulier aanpassen" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.4*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Border BorderBrush="Black" BorderThickness="1">
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="0.15*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Command="{Binding ToJobCommand}">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="ButtonBackground" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Gray" TargetName="ButtonBackground" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1.4*"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/Images/CloseEditMode.png" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1"/>
+                            <Label Grid.Column="1" Content="Terug naar opdracht" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="8" Grid.Row="2"/>
+                        </Grid>
+                    </Button>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding Path=Title}" Grid.Row="0" FontSize="30"/>
+                        <TextBlock Text="{Binding Path=Description}" Grid.Row="1" FontSize="10"/>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Laatste wijziging:" VerticalAlignment="Center" Grid.Row="0" FontSize="15"/>
+                        <Label Content="{Binding LastChangeDate}" Grid.Row="1" VerticalAlignment="Center" ContentStringFormat="d" FontSize="15"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <ListBox x:Name="QuestionList" Grid.Row="1" ItemsSource="{Binding Questions}" SelectedItem="{Binding SelectedQuestion}"  ItemTemplateSelector="{StaticResource QuestionTemplateSelector}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" ScrollViewer.CanContentScroll="False" ScrollViewer.PanningRatio="2"/>
+        </Grid>
+
+        
+    </Grid>
+
+</Page>

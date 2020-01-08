@@ -1,0 +1,72 @@
+﻿<Page x:Class="Festispec.View.DashboardView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1280"
+      DataContext="{Binding Dashboard,Source={StaticResource Locator}}">
+    <Grid Background="White">
+        <Viewbox Stretch="UniformToFill">
+            <Image Source="/Images/Dashboard_background.png"/>
+        </Viewbox>
+        <Grid Margin="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Viewbox VerticalAlignment="Top" Grid.Row="1">
+                <Image Source="/Images/Festispec_logo.png"/>
+            </Viewbox>
+            <Image Grid.Row="2" HorizontalAlignment="Left" Grid.RowSpan="4" Grid.ColumnSpan="2"  Source="/Images/Dashboard_intro.png"/>
+            <Button Command="{Binding ShowCustomersCommand}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="1">
+                <Image Source="/Images/Dashboard_customers.png"/>
+            </Button>
+            <Button Command="{Binding ShowJobsCommand}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="1">
+                <Image Source="/Images/Dashboard_jobs.png"/>
+            </Button>
+            <Button Command="{Binding ShowQuotationsCommand}" BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="1">
+                <Image Source="/Images/Dashboard_quotations.png"/>
+            </Button>
+            <Button Command="{Binding ShowAddCustomerCommand}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="3">
+                <Image Source="/Images/Dashboard_new_customer.png"/>
+            </Button>
+            <Button  Command="{Binding ShowAddJobCommand}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="3">
+                <Image Source="/Images/Dashboard_new_job.png"/>
+            </Button>
+            <Button  Command="{Binding ShowManagementCommand}" BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="3">
+                <Image Source="/Images/management rapportage.png"/>
+            </Button>
+            <Button Command="{Binding ShowReportTemplates}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="5">
+                <Image Source="/Images/report_template.png"/>
+            </Button>
+            <Button Command="{Binding ShowInspectionTemplates}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="5">
+                <Image Source="/Images/inspectionform_templates.png"/>
+            </Button>
+            <Button BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="5">
+                <Image Source="/Images/Dashboard_schedule.png"/>
+            </Button>
+
+
+        </Grid>
+
+    </Grid>
+
+</Page>
