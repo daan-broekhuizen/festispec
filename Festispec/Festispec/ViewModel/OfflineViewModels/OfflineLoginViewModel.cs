@@ -17,6 +17,6 @@ namespace Festispec.ViewModel.OfflineViewModels
             this.ShowOfflineJobListCommand = new RelayCommand(ShowOfflineJobList);
         }
 
-        private void ShowOfflineJobList() => _navigationService.ApplicationNavigateTo("OfflineJobList", null);
+        private void ShowOfflineJobList() => _navigationService.OfflineNavigation("OfflineJobList", null);
     }
 }

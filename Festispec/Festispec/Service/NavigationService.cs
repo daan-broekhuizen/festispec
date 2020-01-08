@@ -77,6 +77,15 @@ namespace Festispec.Service
             }
         }
 
+        public virtual void OfflineNavigation(string pageKey, object parameter)
+        {
+            lock (_pagesByKey)
+            {
+                SetPageKey(pageKey, "ApplicationFrame");
+                Parameter = parameter;
+            }
+        }
+
         private void SetPageKey(string pageKey, string frameName)
         {
             if (!_pagesByKey.ContainsKey(pageKey))
