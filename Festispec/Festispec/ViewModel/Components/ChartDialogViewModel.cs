@@ -225,7 +225,7 @@ namespace Festispec.ViewModel.Components
             _rapportageRepository = rapportageRepository;
             IsXAxis = true;
 
-            foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv"))
+            foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv" || x.Vraagtype == "sv"))
             {
                 if (vraag.Antwoorden.Count > 0)
                 {
