@@ -296,7 +296,12 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void CreateNewInspectionForm() => _navigationService.NavigateTo("InspectionFormTemplateOverview", new object[2] { EnumTemplateMode.SELECT, _jobID });
 
-        public void ToEditView() => _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
+        public void ToEditView()
+        {
+            if (_selectedInspectionForm == null)
+                return;
+            _navigationService.NavigateTo("InspectionFormEditView", _selectedInspectionForm.InspectionForm);
+        }
 
         public void ToJobView()
         {
