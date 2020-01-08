@@ -192,7 +192,7 @@
                         </Grid>
                     </Viewbox>
                     
-                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="wHITE">
+                    <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
                         <ListBox.ItemTemplate>
                         <DataTemplate>
                                 <Grid Background="#FFF4F4F5" VerticalAlignment="Stretch" Margin="1" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" ScrollViewer.HorizontalScrollBarVisibility="Visible">
@@ -675,6 +675,9 @@
             </Button>
             <Viewbox Grid.Row="11" HorizontalAlignment="Center">
                 <Label  Content="{Binding Path=SaveError}" Foreground="Red"  FontSize="30"  VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
+            </Viewbox>
+            <Viewbox Grid.Row="11" HorizontalAlignment="Center">
+                <Label  Content="{Binding Path=SaveMessage}" Foreground="Green"  FontSize="30"  VerticalContentAlignment="Center"  VerticalAlignment="Center"/>
             </Viewbox>
 
             <Button Command="{Binding SaveCommand}" Grid.Row="12">

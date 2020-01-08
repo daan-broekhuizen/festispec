@@ -113,6 +113,17 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        private string _saveMessage;
+        public string SaveMessage
+        {
+            get => _saveError;
+            set
+            {
+                _saveError = value;
+                RaisePropertyChanged("SaveMessage");
+            }
+        }
+
         private string _description;
 
         public string Description
@@ -362,6 +373,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void Save()
         {
             SaveError = null;
+            SaveMessage = null;
             if (NewInspectionForm)
             {
                 NewInspectionForm = false;
@@ -396,6 +408,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if (Changed)
             {
                 Changed = false;
+                SaveMessage = "Opslaan gelukt";
                 LastChangeDate = DateTime.Now;
                 _repo.UpdateInspectieFormulier(_inspectionForm);
 
@@ -422,6 +435,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.AddPossibleAnswers(newPosAnswers);
+                        SaveMessage = "Opslaan gelukt";
                     }
                 }
                 else if (question.Changed)
@@ -436,10 +450,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.updatePossibleAnswers(newPosAnswers);
+                        SaveMessage = "Opslaan gelukt";
                     }
                 }
                 
             }
+
+            
         }
 
         public void SaveInspectionformDetails() => _repo.UpdateInspectieFormulier(InspectionForm);
