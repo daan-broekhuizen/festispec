@@ -17,7 +17,7 @@ namespace Festispec.WebApplication.Models.Repository
 
                 List<Inspectieformulier> assignments = context.Inspectieformulier
                     .Include("Account")
-                    .Where(i => i.Account.Equals(a) && i.Datum_inspectie >= DateTime.Now.Date)
+                    .Where(i => i.Ingepland.Equals(a) && i.DatumInspectie >= DateTime.Now.Date)
                     .ToList();
 
                 return assignments;

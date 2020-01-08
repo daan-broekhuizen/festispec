@@ -142,6 +142,8 @@ namespace Festispec.WebApplication.Models
                 .HasForeignKey(e => e.Vraagtype)
                 .WillCascadeOnDelete(false);
         }
+
+        public System.Data.Entity.DbSet<Festispec.WebApplication.Models.DTO.PlanningAPIEvent> WebAPIEvents { get; set; }
     }
 }
 

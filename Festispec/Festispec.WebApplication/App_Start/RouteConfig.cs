@@ -16,7 +16,7 @@ namespace Festispec.WebApplication
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "LoginView", id = UrlParameter.Optional }
+                defaults: new { controller = "Credentials", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

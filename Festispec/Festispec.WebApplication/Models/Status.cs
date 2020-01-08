@@ -1,4 +1,4 @@
-namespace Festispec.Model
+namespace Festispec.WebApplication.Models
 {
     using System;
     using System.Collections.Generic;
