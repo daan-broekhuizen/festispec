@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Festispec.ViewModel.RapportageViewModels
 {
@@ -250,6 +251,8 @@ namespace Festispec.ViewModel.RapportageViewModels
                     _repo.UpdateRapportage(_job.JobID, _job.Report);
                 }
             }
+
+            MessageBox.Show("Aanpassingen zijn opgeslagen.");
         }
 
         private void Download(DocumentDesignerViewModel designer)

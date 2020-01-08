@@ -47,8 +47,10 @@ namespace Festispec.View.Components
 
         private static void OnDesignerContentChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
         {
-            if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Runtime && !string.IsNullOrEmpty((string)args.NewValue))
                 ((DocumentDesigner)obj).ViewModel.WebBrowser.NavigateToString((string)args.NewValue);
+            else if (string.IsNullOrEmpty((string)args.NewValue))
+                ((DocumentDesigner)obj).ViewModel.WebBrowser.NavigateToString("<html><body></body></html>");
 
             ((DocumentDesigner)obj).ViewModel.DesignerContent = (string)args.NewValue;
         }

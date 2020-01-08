@@ -208,7 +208,7 @@ namespace Festispec.ViewModel.Components
         {
             Questions = new ObservableCollection<VraagViewModel>();
             SwitchAxisCommand = new RelayCommand<string>(SwitchAxis);
-            AddChartCommand = new RelayCommand<Grid>(AddChart);
+            AddChartCommand = new RelayCommand<object[]>((parameters) => AddChart((Grid)parameters[0], (Window)parameters[1]));
             TitleChangedCommand = new RelayCommand<string>((title) => Title = title);
             ForegroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => ForegroundColor = color);
             BackgroundColorChangedCommand = new RelayCommand<System.Windows.Media.Color>((color) => BackgroundColor = color);
@@ -285,13 +285,17 @@ namespace Festispec.ViewModel.Components
                 ChartViewModel.Update(_rapportageRepository.GetChartData(question.ID));
         }
 
-        public void AddChart(Grid grid)
+        public void AddChart(Grid grid, Window window)
         {
             byte[] data = grid.ToByteArray();
             UploadModel result = (new UploadClient()).UploadImage(new FileData(data));
 
             if (AddRequested != null)
+            {
                 AddRequested.Invoke(Designer, result);
+
+                window.Close();
+            }
         }
     }
 }
