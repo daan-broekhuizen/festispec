@@ -88,7 +88,7 @@ namespace Festispec.ViewModel.QuotationViewModels
             else
             {
                 Messenger.Default.Send("Een verstuurde offerte kan niet gewijzigd worden. " +
-                    "\n Als deze afgewezen is kun je een nieuwe aanmaken door op 'Nieuw' te klikken.", this.GetHashCode());
+                    "\nAls deze offerte afgewezen is kun je een nieuwe aanmaken door op 'Nieuw' te klikken.", this.GetHashCode());
                 return false;
             }
         }
