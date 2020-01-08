@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.WebHost;
@@ -13,7 +14,7 @@ namespace Festispec.WebApplication.App_Start
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            var httpControllerRouteHandler = typeof(HttpControllerRouteHandler).GetField("_instance",
+            FieldInfo httpControllerRouteHandler = typeof(HttpControllerRouteHandler).GetField("_instance",
                     System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
 
             if (httpControllerRouteHandler != null)

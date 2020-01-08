@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Festispec.WebApplication.Controllers.Availability
@@ -15,8 +16,8 @@ namespace Festispec.WebApplication.Controllers.Availability
 
         public IEnumerable<BeschikbaarheidAPIEvent> Get()
         {
-            var session = System.Web.HttpContext.Current.Session;
-            int? userID = (int?)session["user"];
+            HttpContext http = HttpContext.Current;
+            int? userID = (int?)http.Session["user"];
             if (userID.HasValue)
             {
                 return context.BeschikbaarheidInspecteurs
@@ -32,9 +33,9 @@ namespace Festispec.WebApplication.Controllers.Availability
         public IHttpActionResult CreateAvailability(BeschikbaarheidAPIEvent apiEvent)
         {
             BeschikbaarheidInspecteurs beschikbaarheid = (BeschikbaarheidInspecteurs)apiEvent;
-            var session = System.Web.HttpContext.Current.Session;
-            int? userID = (int?)session["user"];
-            if(userID.HasValue)
+            HttpContext http = HttpContext.Current;
+            int? userID = (int?)http.Session["user"];
+            if (userID.HasValue)
             {
                 beschikbaarheid.MedewerkerID = userID.GetValueOrDefault();
                 context.BeschikbaarheidInspecteurs.Add(beschikbaarheid);

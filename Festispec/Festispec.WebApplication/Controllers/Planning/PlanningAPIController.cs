@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Festispec.WebApplication.Controllers.Planning
@@ -15,8 +16,8 @@ namespace Festispec.WebApplication.Controllers.Planning
 
         public IEnumerable<PlanningAPIEvent> Get()
         {
-            var session = System.Web.HttpContext.Current.Session;
-            int? userID = (int?)session["user"];
+            HttpContext http = HttpContext.Current;
+            int? userID = (int?)http.Session["user"];
             if (userID.HasValue)
             {
                 return context.Opdracht
