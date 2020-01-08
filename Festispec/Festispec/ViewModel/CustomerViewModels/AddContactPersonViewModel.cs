@@ -3,16 +3,13 @@ using Festispec.Service;
 using Festispec.Utility.Converters;
 using Festispec.Validators;
 using Festispec.ViewModel.CustomerViewModels;
-using FestiSpec.Domain;
 using FestiSpec.Domain.Repositories;
 using FluentValidation.Results;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -36,14 +33,25 @@ namespace Festispec.ViewModel
             }
         }
 
-        private string _nameError;
-        public string NameError
+        private string _firstNameError;
+        public string FirstNameError
         {
-            get => _nameError;
+            get => _firstNameError;
             set
             {
-                _nameError = value;
-                RaisePropertyChanged("NameError");
+                _firstNameError = value;
+                RaisePropertyChanged("FirstNameError");
+            }
+        }
+
+        private string _lastNameError;
+        public string LastNameError
+        {
+            get => _lastNameError;
+            set
+            {
+                _lastNameError = value;
+                RaisePropertyChanged("LastNameError");
             }
         }
 
@@ -75,7 +83,7 @@ namespace Festispec.ViewModel
             //Create empty contact
             ContactPersonViewModel = new ContactPersonViewModel();
             SaveCustomerCommand = new RelayCommand(SaveCustomer, CanSaveCustomer);
-            SaveContactPersonCommand = new RelayCommand(SaveContactPerson);
+            SaveContactPersonCommand = new RelayCommand(AddContactPerson);
             PreviousPageCommand = new RelayCommand(PreviousPage);
         }
 
@@ -87,6 +95,7 @@ namespace Festispec.ViewModel
             {
                 Naam = CustomerVM.Name,
                 Email = CustomerVM.Email,
+                Vestigingnummer = CustomerVM.Branchnumber,
                 Huisnummer = CustomerVM.HouseNumber,
                 KvKNummer = CustomerVM.KvK,
                 Straatnaam = CustomerVM.Streetname,
@@ -96,39 +105,30 @@ namespace Festispec.ViewModel
                 Telefoonnummer = CustomerVM.Telephone,
                 KlantLogo = ImageByteConverter.PngImageToBytes(CustomerVM.Logo)
             };
-            _customerRepository.CreateCustomer(klant);
 
-            //Create Contacts
-            CustomerVM.Contacts.ToList().ForEach(c =>
-            _customerRepository.CreateContactPerson(new Contactpersoon()
-            {
-                Voornaam = c.Name,
-                Tussenvoegsel = c.Name,
-                Achternaam = c.Name,
-                Email = c.Email,
-                Telefoon = c.Telephone,
-                Notities = c.Note,
-                KlantID = klant.KvKNummer,
-                LaatsteWijziging = DateTime.Now
-            }));
+            klant = _customerRepository.CreateCustomer(klant);
+            CustomerVM.SetCustomer(klant);
+            SaveContacts();
 
-            //Navigate to created CustomerInfo
-            _navigationService.NavigateTo("CustomerInfo", CustomerVM);
+            //Notify & Navigate to customers
+            Messenger.Default.Send("Klantgegevens opgeslagen", this.GetHashCode());
+            _navigationService.NavigateTo("Customers");
         }
-        private bool CanSaveCustomer() => new CustomerValidator(_customerRepository).Validate(CustomerVM).IsValid;
-        private void SaveContactPerson()
+        private bool CanSaveCustomer() => new CustomerValidator().Validate(CustomerVM).IsValid;
+        private void AddContactPerson()
         {
             //Validate & get relevant errors
             List<ValidationFailure> errors = new ContactPersonValidator().Validate(ContactPersonViewModel).Errors.ToList();
-            ValidationFailure telephoneError = errors.Where(e => e.PropertyName.Equals("Telephone")).FirstOrDefault();
-            ValidationFailure emailError = errors.Where(e => e.PropertyName.Equals("Email")).FirstOrDefault();
-            ValidationFailure nameError = errors.Where(e => e.PropertyName.Equals("Name")).FirstOrDefault();
-
+            ValidationFailure telephoneError = errors.FirstOrDefault(e => e.PropertyName.Equals("Telephone"));
+            ValidationFailure emailError = errors.FirstOrDefault(e => e.PropertyName.Equals("Email"));
+            ValidationFailure firstNameError = errors.FirstOrDefault(e => e.PropertyName.Equals("FirstName"));
+            ValidationFailure lastNameError = errors.FirstOrDefault(e => e.PropertyName.Equals("LastName"));
 
             if (errors.Count == 0)
             {
                 //Add contact to customervm and create new contact
                 CustomerVM.Contacts.Add(ContactPersonViewModel);
+                Messenger.Default.Send("Contactpersoon opgeslagen", this.GetHashCode());
                 ContactPersonViewModel = new ContactPersonViewModel();
             }
 
@@ -143,11 +143,37 @@ namespace Festispec.ViewModel
             else
                 EmailError = "";
 
-            if (nameError != null)
-                NameError = nameError.ErrorMessage;
+            if (firstNameError != null)
+                FirstNameError = firstNameError.ErrorMessage;
             else
-                NameError = "";
-        }
+                FirstNameError = "";
 
+            if (lastNameError != null)
+                LastNameError = lastNameError.ErrorMessage;
+            else
+                LastNameError = "";
+        }
+        private void SaveContacts()
+        {
+            //Save contacts
+            CustomerVM.Contacts.ToList().ForEach(c =>
+            {
+                Contactpersoon contact = new Contactpersoon()
+                {
+                    Voornaam = c.FirstName,
+                    Tussenvoegsel = c.Infix,
+                    Achternaam = c.LastName,
+                    Email = c.Email,
+                    Telefoon = c.Telephone,
+                    Notities = c.Note,
+                    Rol = c.Role,
+                    KlantID = CustomerVM.Id,
+                    LaatsteWijziging = DateTime.Now
+                };
+
+                contact = _customerRepository.CreateContactPerson(contact);
+                c.SetContactPerson(contact);
+            });
+        }
     }
 }

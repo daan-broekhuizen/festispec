@@ -20,6 +20,7 @@ namespace Festispec.ViewModel.TemplateViewModels
         public ICommand SearchButtonClickCommand { get; set; }
         public ICommand SelectTemplateCommand { get; set; }
         public ICommand EditTemplateCommand { get; set; }
+        public ICommand DeleteTemplateCommand { get; set; }
 
         public EnumTemplateMode Mode { get; set; }
 
@@ -53,6 +54,7 @@ namespace Festispec.ViewModel.TemplateViewModels
             this.SearchButtonClickCommand = new RelayCommand<string>(SearchButtonClick);
             this.SelectTemplateCommand = new RelayCommand<dynamic>(SelectTemplate);
             this.EditTemplateCommand = new RelayCommand<dynamic>(EditTemplate);
+            this.DeleteTemplateCommand = new RelayCommand<dynamic>(DeleteTemplate);
 
             if (service.Parameter is EnumTemplateMode)
                 Mode = (EnumTemplateMode)service.Parameter;
@@ -74,5 +76,6 @@ namespace Festispec.ViewModel.TemplateViewModels
 
         protected abstract void SelectTemplate(dynamic template);
         protected abstract void EditTemplate(dynamic template);
+        protected abstract void DeleteTemplate(dynamic template);
     }
 }

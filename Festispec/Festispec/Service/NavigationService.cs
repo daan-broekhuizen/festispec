@@ -1,5 +1,7 @@
-﻿using Festispec.Utility;
+﻿using Festispec.Model;
+using Festispec.Utility;
 using Festispec.Utility.Builders;
+using Festispec.ViewModel;
 using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
@@ -20,7 +22,7 @@ namespace Festispec.Service
         private readonly Dictionary<string, Uri> _pagesByKey;
         private readonly List<string> _historic;
         private string _currentPageKey;
-        public AppSettings AppSettings { get; set; }
+        public AppSettings AppSettings { get; private set; }
 
         public string CurrentPageKey
         {
@@ -35,6 +37,7 @@ namespace Festispec.Service
             }
         }
         public object Parameter { get; private set; }
+        public AccountViewModel Account { get; set; }
 
         public NavigationService()
         {
@@ -60,36 +63,41 @@ namespace Festispec.Service
         {
             lock (_pagesByKey)
             {
-                if (!_pagesByKey.ContainsKey(pageKey))
-                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
-
-                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
-
-                if (frame != null)
-                    frame.Source = _pagesByKey[pageKey];
-
+                SetPageKey(pageKey, "MainFrame");
                 Parameter = parameter;
-                _historic.Add(pageKey);
-                CurrentPageKey = pageKey;
             }
         }
 
-        public virtual void ApplicationNavigateTo(string pageKey, object parameter)
+        public virtual void ApplicationNavigateTo(string pageKey, AccountViewModel account)
         {
             lock (_pagesByKey)
             {
-                if (!_pagesByKey.ContainsKey(pageKey))
-                    throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
-
-                Frame frame = GetDescendantFromName(Application.Current.MainWindow, "ApplicationFrame") as Frame;
-
-                if (frame != null)
-                    frame.Source = _pagesByKey[pageKey];
-
-                Parameter = parameter;
-                _historic.Add(pageKey);
-                CurrentPageKey = pageKey;
+                SetPageKey(pageKey, "ApplicationFrame");
+                Account = account;
             }
+        }
+
+        public virtual void OfflineNavigation(string pageKey, object parameter)
+        {
+            lock (_pagesByKey)
+            {
+                SetPageKey(pageKey, "ApplicationFrame");
+                Parameter = parameter;
+            }
+        }
+
+        private void SetPageKey(string pageKey, string frameName)
+        {
+            if (!_pagesByKey.ContainsKey(pageKey))
+                throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
+
+            Frame frame = GetDescendantFromName(Application.Current.MainWindow, frameName) as Frame;
+
+            if (frame != null)
+                frame.Source = _pagesByKey[pageKey];
+
+            _historic.Add(pageKey);
+            CurrentPageKey = pageKey;
         }
 
         public void Configure(string key, Uri pageType)

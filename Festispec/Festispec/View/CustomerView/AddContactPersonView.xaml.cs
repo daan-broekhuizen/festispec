@@ -1,4 +1,5 @@
 ﻿using Festispec.Service;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,10 @@ namespace Festispec.View
         public AddContactPersonView()
         {
             InitializeComponent();
+            Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
+
+        private void ShowWindow(string message) => MessageBox.Show(message);
         private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
 
     }

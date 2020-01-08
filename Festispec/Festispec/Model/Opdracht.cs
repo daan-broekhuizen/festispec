@@ -37,8 +37,7 @@ namespace Festispec.Model
         public DateTime EindDatum { get; set; }
 
         [Required]
-        [StringLength(8)]
-        public string KlantID { get; set; }
+        public int KlantID { get; set; }
 
         public int MedewerkerID { get; set; }
 

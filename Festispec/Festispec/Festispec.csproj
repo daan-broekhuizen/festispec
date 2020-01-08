@@ -166,12 +166,25 @@
     <Compile Include="Migrations\201912081751483_addSP.designer.cs">
       <DependentUpon>201912081751483_addSP.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912201601216_KlantRework.cs" />
+    <Compile Include="Migrations\201912201601216_KlantRework.designer.cs">
+      <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001021153050_VestigingsnummerUpdate.cs" />
+    <Compile Include="Migrations\202001021153050_VestigingsnummerUpdate.designer.cs">
+      <DependentUpon>202001021153050_VestigingsnummerUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001081023536_VestiginsSizeChange.cs" />
+    <Compile Include="Migrations\202001081023536_VestiginsSizeChange.designer.cs">
+      <DependentUpon>202001081023536_VestiginsSizeChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\DTO\JsonJob.cs" />
     <Compile Include="Model\Enums\EnumMonth.cs" />
     <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
@@ -186,12 +199,13 @@
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\OfflineJobRepository.cs" />
     <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
     <Compile Include="Model\Repositories\RapportageRepository.cs" />
     <Compile Include="Model\Repositories\StatusRepository.cs" />
-    <Compile Include="Model\Repositories\ICustomerRepository.cs" />
+    <Compile Include="Model\Repositories\Interfaces\ICustomerRepository.cs" />
     <Compile Include="Model\Repositories\TemplateRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\Rol.cs" />
@@ -219,6 +233,7 @@
     <Compile Include="Utility\Validators\PossibleAnwserValidator.cs" />
     <Compile Include="Utility\Validators\QuestionValidator.cs" />
     <Compile Include="Utility\Validators\QuotationValidator.cs" />
+    <Compile Include="Utility\Validators\RegisterValidator.cs" />
     <Compile Include="Utility\Validators\SaveDialogValidator.cs" />
     <Compile Include="ViewModel\Components\ChartDialogViewModel.cs" />
     <Compile Include="ViewModel\Components\Charts\BarChartViewModel.cs" />
@@ -236,16 +251,22 @@
     <Compile Include="ViewModel\InspectionFormViewModels\PossibleAnwserViewModel.cs" />
     <Compile Include="ViewModel\InspectionFormViewModels\QuestionViewModel.cs" />
     <Compile Include="ViewModel\ManagementViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobInfoViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobListViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineJobViewModel.cs" />
+    <Compile Include="ViewModel\OfflineViewModels\OfflineLoginViewModel.cs" />
     <Compile Include="ViewModel\PlanningViewModel.cs" />
     <Compile Include="ViewModel\QuotationViewModels\ShowQuotationViewModel.cs" />
     <Compile Include="Utility\Validators\JobValidator.cs" />
     <Compile Include="ViewModel\JobViewModels\AddJobViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\VraagViewModel.cs" />
     <Compile Include="ViewModel\RapportageViewModels\RapportageViewModel.cs" />
+    <Compile Include="ViewModel\RollenViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\InspectionFormTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateViewModel.cs" />
+    <Compile Include="ViewModel\UserRightsViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModels\AddContactInfoViewModel.cs" />
@@ -275,6 +296,9 @@
     <Compile Include="Model\Vraag.cs" />
     <Compile Include="Model\VraagType.cs" />
     <Compile Include="Model\VraagMogelijkAntwoord.cs" />
+    <Compile Include="View\AddGebruiker.xaml.cs">
+      <DependentUpon>AddGebruiker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\InspectionFormView\CreateInspectionFormView.xaml.cs">
       <DependentUpon>CreateInspectionFormView.xaml</DependentUpon>
     </Compile>
@@ -346,6 +370,15 @@
     <Compile Include="View\ManagementReport.xaml.cs">
       <DependentUpon>ManagementReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\OfflineView\OfflineJobInfoView.xaml.cs">
+      <DependentUpon>OfflineJobInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineView\OfflineJobsView.xaml.cs">
+      <DependentUpon>OfflineJobsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OfflineView\OfflineLoginView.xaml.cs">
+      <DependentUpon>OfflineLoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuotationView\AddQuotationView.xaml.cs">
       <DependentUpon>AddQuotationView.xaml</DependentUpon>
     </Compile>
@@ -364,6 +397,13 @@
     <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
       <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserRightsView.xaml.cs">
+      <DependentUpon>UserRightsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AddGebruiker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ApplicationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -408,6 +448,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\OfflineView\OfflineJobInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OfflineView\OfflineJobsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OfflineView\OfflineLoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\QuotationView\AddQuotationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -440,6 +492,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserRightsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -463,6 +519,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912081751483_addSP.resx">
       <DependentUpon>201912081751483_addSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912201601216_KlantRework.resx">
+      <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001021153050_VestigingsnummerUpdate.resx">
+      <DependentUpon>202001021153050_VestigingsnummerUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001081023536_VestiginsSizeChange.resx">
+      <DependentUpon>202001081023536_VestiginsSizeChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

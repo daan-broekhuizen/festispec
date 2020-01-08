@@ -1,0 +1,112 @@
+﻿<Page x:Class="Festispec.View.OfflineView.OfflineJobsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View.OfflineView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OfflineJobsView"
+      DataContext="{Binding OfflineJobList, Source={StaticResource Locator}}">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.07*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.45*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
+                <TextBlock Text="Opdrachten"  Foreground="Black" FontWeight="Bold"/>
+            </Viewbox>
+            <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
+                <Image Source="/Images/festispec_logo.png"></Image>
+            </Viewbox>
+        </Grid>
+
+        <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
+            <Button  HorizontalAlignment="Right" Command="{Binding SearchJob}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+
+        <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">
+            <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>
+        </Viewbox>
+
+        <Viewbox  Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <WrapPanel Margin="0,0,20,0">
+                <TextBlock Margin="10" Text="Sorteren op:"  Foreground="Black"/>
+                <ComboBox Margin="10" Width="120" Height="20" SelectedItem="{Binding SelectedBox}">
+                    <ComboBoxItem Content="Naam oplopend"/>
+                    <ComboBoxItem Content="Naam aflopend"/>
+                    <ComboBoxItem Content="Status aflopend"/>
+                    <ComboBoxItem Content="Status oplopend"/>
+
+                </ComboBox>
+            </WrapPanel>
+        </Viewbox>
+        <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
+            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+                <ListBox.ItemTemplate >
+                    <DataTemplate >
+                        <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.09*"/>
+                                <ColumnDefinition Width="0.07*"/>
+                                <ColumnDefinition Width="0.1*"/>
+
+                            </Grid.ColumnDefinitions>
+
+
+                            <Viewbox Margin="20,0,0,0" Grid.Column="0">
+                                <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Viewbox>
+
+                            <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="1" Text="{Binding KlantNaam}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,15"/>
+
+                            <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="3" Text="{Binding OpdrachtNaam}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0"/>
+
+                            <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" MinHeight="10" MinWidth="40"/>
+                            <TextBlock Grid.Column="3" Text="{Binding StartDatum, StringFormat={}{0:dd/MM/yyyy}}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
+
+                            <TextBlock Grid.Column="4" Text="Status" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" MinHeight="10" MinWidth="40"/>
+                            <TextBlock Grid.Column="4" Text="{Binding Status}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+    </Grid>
+</Page>

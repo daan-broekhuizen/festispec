@@ -113,6 +113,17 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
+        private string _saveMessage;
+        public string SaveMessage
+        {
+            get => _saveError;
+            set
+            {
+                _saveError = value;
+                RaisePropertyChanged("SaveMessage");
+            }
+        }
+
         private string _description;
 
         public string Description
@@ -154,12 +165,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if (_questions == null)
                 {
                     _questions = new ObservableCollection<QuestionViewModel>();
+                    
                     foreach (Vraag question in _inspectionForm.Vraag)
                     {
                         _questions.Add(new QuestionViewModel(question, _inspectionForm)); ;
                     }
+                    
                 }
-  
+                _questions = new ObservableCollection<QuestionViewModel>(_questions.OrderBy(x => x.OrderNumber));
                 return _questions;
             }
         }
@@ -360,6 +373,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void Save()
         {
             SaveError = null;
+            SaveMessage = null;
             if (NewInspectionForm)
             {
                 NewInspectionForm = false;
@@ -394,6 +408,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if (Changed)
             {
                 Changed = false;
+                SaveMessage = "Opslaan gelukt";
                 LastChangeDate = DateTime.Now;
                 _repo.UpdateInspectieFormulier(_inspectionForm);
 
@@ -420,6 +435,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.AddPossibleAnswers(newPosAnswers);
+                        SaveMessage = "Opslaan gelukt";
                     }
                 }
                 else if (question.Changed)
@@ -434,10 +450,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.updatePossibleAnswers(newPosAnswers);
+                        SaveMessage = "Opslaan gelukt";
                     }
                 }
                 
             }
+
+            
         }
 
         public void SaveInspectionformDetails() => _repo.UpdateInspectieFormulier(InspectionForm);
@@ -445,12 +464,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void Swap(int index1, int index2)
         {
-            QuestionViewModel memory = Questions[index1];
-            Questions[index1] = Questions[index2];
-            Questions[index2] = memory;
-            SelectedQuestion = Questions[index2];
-            Questions[index1].OrderNumber = index1 + 1;
-            Questions[index2].OrderNumber = index2 + 1;
+            QuestionViewModel memory1 = Questions[index1];
+            QuestionViewModel memory2 = Questions[index2];
+            memory1.OrderNumber = index2 + 1;
+            memory2.OrderNumber = index1 + 1;
+            RaisePropertyChanged("Questions");
         }
 
         public void AddQuestion(Vraag v)

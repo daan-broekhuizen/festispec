@@ -19,32 +19,32 @@ namespace Festispec.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
-        private Klant _klant;
+        private Klant _customer;
         public string Name
         {
-            get => _klant.Naam;
+            get => _customer.Naam;
             set
             {
-                _klant.Naam = value;
+                _customer.Naam = value;
                 RaisePropertyChanged("Name");
             }
         }
         public string Streetname
         {
-            get => _klant.Straatnaam;
+            get => _customer.Straatnaam;
             set
             {
-                _klant.Straatnaam = value;
+                _customer.Straatnaam = value;
                 GetPostalCodeAsync();
                 RaisePropertyChanged("Streetname");
             }
         }
         public string City
         {
-            get => _klant.Stad;
+            get => _customer.Stad;
             set
             {
-                _klant.Stad = value;
+                _customer.Stad = value;
                 GetPostalCodeAsync();
                 RaisePropertyChanged("City");
             }
@@ -53,12 +53,12 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if (_klant.Huisnummer == null) return "";
-                return Regex.Match(_klant.Huisnummer, @"\d+").Value;
+                if (_customer.Huisnummer == null) return "";
+                return Regex.Match(_customer.Huisnummer, @"\d+").Value;
             }
             set
             {
-                _klant.Huisnummer = value + Addition;
+                _customer.Huisnummer = value + Addition;
                 GetPostalCodeAsync();
                 RaisePropertyChanged("HouseNumber");
             }
@@ -67,62 +67,80 @@ namespace Festispec.ViewModel
         {
             get
             {
-                if (_klant.Huisnummer == null) return "";
-                return Regex.Replace(_klant.Huisnummer, @"[^a-zA-Z]+", String.Empty);
+                if (_customer.Huisnummer == null) return "";
+                return Regex.Replace(_customer.Huisnummer, @"[^a-zA-Z]+", String.Empty);
             }
             set
             {
-                _klant.Huisnummer = HouseNumber + value;
+                _customer.Huisnummer = HouseNumber + value;
                 GetPostalCodeAsync();
                 RaisePropertyChanged("Addition");
             }
         }
         public string KvK
         {
-            get => _klant.KvKNummer;
+            get => _customer.KvKNummer;
             set
             {
-                _klant.KvKNummer = value;
+                _customer.KvKNummer = value;
                 RaisePropertyChanged("KvK");
             }
         }
+        public string Branchnumber
+        {
+            get => _customer.Vestigingnummer;
+            set 
+            {
+                _customer.Vestigingnummer = value;
+                RaisePropertyChanged("Branchnumber");
+            } 
+        }
+        public int Id
+        {
+            get => _customer.KlantID;
+        }
         public string Telephone
         {
-            get => _klant.Telefoonnummer;
+            get => _customer.Telefoonnummer;
             set
             {
-                _klant.Telefoonnummer = value;
+                _customer.Telefoonnummer = value;
                 RaisePropertyChanged("Telephone");
             }
         }
         public string Email
         {
-            get => _klant.Email;
+            get => _customer.Email;
             set
             {
-                _klant.Email = value;
+                _customer.Email = value;
                 RaisePropertyChanged("Email");
             }
         }
         public string Website
         {
-            get => _klant.Website;
+            get => _customer.Website;
             set
             {
-                _klant.Website = value;
+                _customer.Website = value;
                 RaisePropertyChanged("Website");
             }
         }
         public ImageSource Logo
         {
-            get => ImageByteConverter.BytesToImage(_klant.KlantLogo);
+            get
+            {
+                ImageSource image = ImageByteConverter.BytesToImage(_customer.KlantLogo);
+                if (image != null)
+                    return image;
+                else
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+            }
             set
             {
                 byte[] image = ImageByteConverter.PngImageToBytes(value);
                 if (image != null)
-                    _klant.KlantLogo = image;
-                else
-                    new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+                    _customer.KlantLogo = image;
                 RaisePropertyChanged("Logo");
 
             }
@@ -142,23 +160,25 @@ namespace Festispec.ViewModel
         public ObservableCollection<ContactPersonViewModel> Contacts { get; set; }
         public CustomerViewModel(Klant klant)
         {
-            _klant = klant;
+            _customer = klant;
             Contacts = new ObservableCollection<ContactPersonViewModel>(klant.Contactpersoon.Select(c => new ContactPersonViewModel(c)));
             GetPostalCodeAsync();
         }
         public CustomerViewModel()
         {
-            _klant = new Klant();
-            Logo = new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+            _customer = new Klant();
             Contacts = new ObservableCollection<ContactPersonViewModel>();
         }
         private async Task GetPostalCodeAsync()
         {
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
-            PostalCode = address.PostalCode;
+            if (address.Locality.Contains(City))
+                PostalCode = address.PostalCode;
+            else
+                PostalCode = "";
 
         }
-
+        public void SetCustomer(Klant customer) => _customer = customer;
     }
 }
