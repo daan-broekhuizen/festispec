@@ -63,5 +63,15 @@ namespace Festispec.Model.Repositories
             return template;
         }
 
+        public void DeleteInspectionFormTemplate(int templateID)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                Inspectieformulier target = context.Inspectieformulier.Where(x => x.InspectieformulierID == templateID).FirstOrDefault();
+                context.Inspectieformulier.Remove(target);
+                context.SaveChanges();
+            }
+        }
+
     }
 }

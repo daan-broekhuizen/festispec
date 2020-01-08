@@ -45,5 +45,10 @@ namespace Festispec.ViewModel.TemplateViewModels
 
             _navigationService.NavigateTo("Rapportage", new object[2] { EnumTemplateMode.EDIT, rapportTemplate });
         }
+
+        protected override void DeleteTemplate(dynamic template)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

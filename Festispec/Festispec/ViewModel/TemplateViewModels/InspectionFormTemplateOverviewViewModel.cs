@@ -61,5 +61,13 @@ namespace Festispec.ViewModel.TemplateViewModels
             Inspectieformulier inspectionTemplate = _repo.GetInspectionFormTemplate(((TemplateViewModel)template).InspectionFormTemplateID);
             _navigationService.NavigateTo("InspectionFormEditView", inspectionTemplate);
         }
+
+        protected override void DeleteTemplate(dynamic template)
+        {
+            _repo.DeleteInspectionFormTemplate(((TemplateViewModel)template).InspectionFormTemplateID);
+            _unfilteredTemplates = _repo.GetInspectieformulierTemplates();
+            SearchButtonClick(null);
+
+        }
     }
 }
