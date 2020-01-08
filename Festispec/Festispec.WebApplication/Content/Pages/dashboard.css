@@ -5,7 +5,7 @@
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
-	padding-top: 70px;
+	padding-top: 80px;
 }
 
 .intro{
@@ -23,15 +23,12 @@
 	width: 50px;
 }
 
-
-
 .task {
-	position: relative;
-	text-align: center;
 	background-color: lightgrey;
-	margin: 20px;
-	line-height: 50px;
-	min-height: 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+	line-height: 60px;
+	min-height: 60px;
 }
 
 
@@ -43,7 +40,7 @@ button {
 
 .upcoming {
 	background-color: white;
-	height: 350px;
+	height: 420px;
 	padding: 10px;
 	margin: 10px;
 

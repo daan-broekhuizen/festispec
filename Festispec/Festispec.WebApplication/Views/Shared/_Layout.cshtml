@@ -17,15 +17,19 @@
 	</div>
 	@if (Session["user"] != null)
 	{
-		<div class="navbar navbar-inverse navbar-fixed-bottom">
-			<div class="container">
-					<ul class="nav navbar-nav" style="align-content:center">
-						@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-item" })
-						@Html.ActionLink("Planning", "AvailabilityView", "Availability", new { area = "" }, new { @class = "navbar-item" })
-						@Html.ActionLink("Beschikbaarheid", "Index", "Credentials", new { area = "" }, new { @class = "navbar-item" })
-						@Html.ActionLink("Opdrachten", "Index", "Inspectionform", new { userId = (int)Session["user"] }, new { @class = "navbar-item" })
-					</ul>
-				</div>
+		<div class="col-xs-12 navbar navbar-inverse navbar-fixed-bottom ">
+				<a class="col-xs-3" href="@Url.Action("Index", "Inspectionform", new { userId = (int)Session["user"] })">
+					<image src="~/Content/Images/jobs_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("Index", "Dashboard")">
+					<image src="~/Content/Images/dashboard_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("AvailabilityView", "Availability")">
+					<image src="~/Content/Images/planning_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action()">
+					<image src="~/Content/Images/availability_icon.png" />
+				</a>
 		</div>
 	}
 

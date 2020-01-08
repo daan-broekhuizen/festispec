@@ -32,13 +32,11 @@
 									<p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.Inspectionform.DatumInspectie)</p>
 								</div>
 								<div class="col-xs-5 col-md-5">
-									<button>
-										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID })
-									</button>
+										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
 								</div>
 							</div>
 						</div>
-						if (counter == 4) { break; }
+						if (counter == 5) { break; }
 					}
 				}
 			</div>

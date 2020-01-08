@@ -12,7 +12,7 @@ namespace Festispec.WebApplication.ViewModels.Inspection
         {
             Inspectionform = form;
         }
-
+ 
         public Inspectieformulier Inspectionform { get; set; }
         public List<QuestionViewModel> Questions { get; set; }
         public string LogoString => Inspectionform.Opdracht.Klant.Klant_logo != null ? Convert.ToBase64String(Inspectionform.Opdracht.Klant.Klant_logo) : null;

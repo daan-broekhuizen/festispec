@@ -29,7 +29,6 @@ namespace Festispec.WebApplication.Controllers
         }
 
         // GET: InspectionForm/Details/5
-
         public ActionResult Details(int inspectionId, int userId)
         {
             Inspectieformulier form = _formRepo.GetInspectionform(inspectionId);
