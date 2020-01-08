@@ -108,7 +108,7 @@ namespace Festispec.ViewModel
                 Email = c.Email,
                 Telefoon = c.Telephone,
                 Notities = c.Note,
-                KlantID = klant.KvKNummer,
+                KlantID = klant.KlantID,
                 LaatsteWijziging = DateTime.Now
             }));
 
