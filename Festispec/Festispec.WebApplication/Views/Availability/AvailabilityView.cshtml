@@ -1,60 +1,71 @@
-﻿
-@section Scripts{
-    <script src="~/Scripts/Calendar/baseCalendar.js" type="text/javascript"></script>
+﻿@section Scripts{
+    <script src="~/Scripts/dhtmlxScheduler/dhtmlxscheduler.js"></script>
+    <script src="~/Scripts/dhtmlxScheduler/locale/locale_nl.js" charset="utf-8"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            // initializing scheduler
+            scheduler.config.header = [
+                "date",
+                "prev",
+                "today",
+                "next"
+            ];
+            scheduler.init("scheduler_here", new Date(), "month");
+            scheduler.config.details_on_dblclick = true;
+            scheduler.attachEvent("onBeforeDrag", function () { return false; })
+
+            // responsive
+            scheduler.config.responsive_lightbox = true;
+
+            // initiating data loading
+            scheduler.load("/api/availabilityapi");
+            // initializing dataProcessor
+            var dp = new dataProcessor("/api/availabilityapi");
+            // and attaching it to scheduler
+            dp.init(scheduler);
+            // setting the REST mode for dataProcessor
+            dp.setTransactionMode("REST");
+        });
+
+            var my_form = document.getElementById("my_form");
+
+            scheduler.showLightbox = function (id) {
+                var ev = scheduler.getEvent(id);
+                scheduler.startLightbox(id, my_form);
+                document.getElementById("description").value = ev.text;
+            }
+
+            function save_form() {
+                var ev = scheduler.getEvent(scheduler.getState().lightbox_id);
+                ev.text = document.getElementById("description").value;
+                scheduler.endLightbox(true, my_form)
+            }
+
+            function close_form() {
+                scheduler.endLightbox(false, my_form);
+            }
+
+    </script>
 }
 
 @section Style{
     <link href="~/Content/CSS Views/Availability.css" rel="stylesheet" />
+    <link href="~/Scripts/dhtmlxScheduler/dhtmlxscheduler.css" rel="stylesheet" />
 }
 
-<div class="container col-sm-4 col-md-7 col-lg-4 mt-5">
-    <div class="card">
-        <h3 class="card-header" id="monthAndYear"></h3>
-        <table class="table table-bordered table-responsive-sm" id="calendar">
-            <thead>
-                <tr>
-                    <th>Zo</th>
-                    <th>Ma</th>
-                    <th>Di</th>
-                    <th>Wo</th>
-                    <th>Do</th>
-                    <th>Vr</th>
-                    <th>Za</th>
-                </tr>
-            </thead>
-
-            <tbody id="calendar-body">
-            </tbody>
-        </table>
-
-        <div class="form-inline">
-
-            <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous</button>
-
-            <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next</button>
-        </div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+</head>
+<body>
+    <div id="my_form" aria-hidden="true">
+        <label name="description" id="description">Beschikbaarheid</label>
         <br />
-        <form class="form-inline">
-            <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
-                <option value=0>Jan</option>
-                <option value=1>Feb</option>
-                <option value=2>Mrt</option>
-                <option value=3>Apr</option>
-                <option value=4>Mei</option>
-                <option value=5>Jun</option>
-                <option value=6>Jul</option>
-                <option value=7>Aug</option>
-                <option value=8>Sep</option>
-                <option value=9>Okt</option>
-                <option value=10>Nov</option>
-                <option value=11>Dec</option>
-            </select>
-
-
-            <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
-                <option value=2019>2019</option>
-                <option value=2020>2020</option>
-            </select>
-        </form>
+        <input type="button" name="save" value="Opslaan" onclick="save_form()" />
+        <input type="button" name="close" value="Sluiten" onclick="close_form()" />
     </div>
-</div>
+    <div id="scheduler_here" class="dhx_cal_container" style='width:85%; height:75vh;'>
+    </div>
+</body>
+</html>
