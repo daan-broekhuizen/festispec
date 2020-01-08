@@ -1,6 +1,7 @@
 ﻿using Festispec.WebApplication.Models;
 using Festispec.WebApplication.Models.Repositories;
 using Festispec.WebApplication.ViewModels.Dashboard;
+using Festispec.WebApplication.ViewModels.Inspection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +33,7 @@ namespace Festispec.WebApplication.Controllers
 
             DashboardViewModel dashboardViewModel = new DashboardViewModel();
             dashboardViewModel.Account = account;
-            dashboardViewModel.Inspectionform = assignmentList;
-            
+            dashboardViewModel.Inspectionform = assignmentList.Select(i => new InspectionformViewModel(i)).ToList();
             return View(dashboardViewModel);
         }
     }

@@ -26,8 +26,9 @@ namespace Festispec.WebApplication.Models.Repositories
         {
             using (FestiSpecContext context = new FestiSpecContext())
             {
-                return context.Account.Include(a => a.Ingepland)
-                    .FirstOrDefault(a => a.AccountID == userId).Ingepland.ToList();
+                Account account = context.Account.Find(userId);
+                return context.Inspectieformulier.Include(a => a.Opdracht.Klant).Include(a => a.Ingepland).Include(a => a.Vraag)
+                    .Where(a => a.Ingepland.Any(i => i.AccountID == userId)).ToList();
             }
         }
         public Vraag GetQuestion(int questionId)

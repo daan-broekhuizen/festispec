@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Festispec.WebApplication.Models;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Festispec.WebApplication.Models
+namespace Festispec.WebApplication.ViewModels.Inspection
 {
     public class QuestionViewModel
     {
