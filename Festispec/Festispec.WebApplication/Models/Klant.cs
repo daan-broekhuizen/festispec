@@ -18,7 +18,8 @@ namespace Festispec.WebApplication.Models
 
         [Key]
         [StringLength(8)]
-        public string KvK_nummer { get; set; }
+        [Column("KvK_nummer")]
+        public string KvKNummer { get; set; }
 
         [Required]
         [StringLength(45)]
@@ -47,10 +48,11 @@ namespace Festispec.WebApplication.Models
         [StringLength(100)]
         public string Website { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] Klant_logo { get; set; }
+        [Column("Klant_logo", TypeName = "image")]
+        public byte[] KlantLogo { get; set; }
 
-        public DateTime Laatste_wijziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contactpersoon> Contactpersoon { get; set; }

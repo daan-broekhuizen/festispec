@@ -37,7 +37,8 @@ namespace Festispec.WebApplication.Models
         [Column(TypeName = "text")]
         public string Notities { get; set; }
 
-        public DateTime Laatste_wijziging { get; set; }
+        [Column("Laatste_wijziging")]
+        public DateTime LaatsteWijziging { get; set; }
 
         public virtual Klant Klant { get; set; }
     }
