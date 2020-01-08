@@ -48,8 +48,7 @@ namespace Festispec.ViewModel
 
         public MainViewModel(NavigationService navigation) : base(navigation)
         {
-            if (_navigationService.Parameter is AccountViewModel)
-                AccountVM = _navigationService.Parameter as AccountViewModel;
+            AccountVM = _navigationService.Account;
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);

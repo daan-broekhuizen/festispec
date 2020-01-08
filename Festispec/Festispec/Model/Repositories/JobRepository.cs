@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Festispec.Model;
+using System.Data.Entity;
 
 namespace FestiSpec.Domain.Repositories
 {
@@ -13,7 +14,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                return context.Opdracht.Include("Klant").ToList();
+                return context.Opdracht.Include(c => c.Klant).Include(c => c.Offerte).ToList();
             }
         }
 

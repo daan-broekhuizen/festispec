@@ -5,6 +5,10 @@
     "username": "HansKlok",
     "password": "ab123"
   },
-  "imageShackApiKey": "X6E8H0ZYe639b3a2f1bfaa23a53d87a08c1d006f",
-  "bingApiKey": "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU"
+  "apiKeys": {
+    "imageShackApiKey": "X6E8H0ZYe639b3a2f1bfaa23a53d87a08c1d006f",
+    "bingApiKey": "AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU",
+    "imageBBApiKey": "5f8df935387cd56ae3c804297fea2850"
+  },
+  "uploadService": "imageshack"
 }

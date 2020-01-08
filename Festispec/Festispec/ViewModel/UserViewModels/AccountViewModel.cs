@@ -22,6 +22,8 @@ namespace Festispec.ViewModel
             _account = new Account();
         }
 
+        public int Id => _account.AccountID;
+
         public string Username
         {
             get => _account.Gebruikersnaam;

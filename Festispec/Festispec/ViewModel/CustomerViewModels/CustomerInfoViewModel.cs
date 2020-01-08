@@ -39,16 +39,18 @@ namespace Festispec.ViewModel
         private void SaveCustomer()
         {
             //Get validation errors, exclude kvk error
-            ValidationResult result =  new CustomerValidator(_customerRepository).Validate(CustomerVM);
-            if(result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))).Count() == 0)
+            ValidationResult result =  new CustomerValidator().Validate(CustomerVM);
+            if(result.Errors.Count() == 0)
             {
                 //if validated update customer
                 _customerRepository.UpdateCustomer(new Klant()
                 {
+                    KlantID = CustomerVM.Id,
                     Naam = CustomerVM.Name,
                     Email = CustomerVM.Email,
                     Huisnummer = CustomerVM.HouseNumber,
                     KvKNummer = CustomerVM.KvK,
+                    Vestigingnummer = CustomerVM.Branchnumber,
                     Straatnaam = CustomerVM.Streetname,
                     Stad = CustomerVM.City,
                     Website = CustomerVM.Website,
@@ -64,14 +66,14 @@ namespace Festispec.ViewModel
             {
                 //Get error messages as string
                 string message = "";
-                foreach(ValidationFailure failure in result.Errors.Where(e => !(e.PropertyName.Equals("KvK"))))
+                foreach(ValidationFailure failure in result.Errors)
                     message += (failure.ErrorMessage + "\n");
                 //Use messenger to send error message to view
                 //(Hashcode to match view and viewmodel - see code behind)
                 Messenger.Default.Send(message, this.GetHashCode());
             }
         }
-        private void ShowAddJob() => _navigationService.NavigateTo("AddJob");
+        private void ShowAddJob() => _navigationService.NavigateTo("AddJob", new JobViewModel() { CustomerID = CustomerVM.Id });
         private void ShowContactPeople() => _navigationService.NavigateTo("ContactPersons", CustomerVM);
         private void ShowCustomerInfo() => _navigationService.NavigateTo("CustomerInfo", CustomerVM);
         private void ShowContactInfo() => _navigationService.NavigateTo("ContactInfo", CustomerVM);

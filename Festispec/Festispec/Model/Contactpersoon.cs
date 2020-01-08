@@ -12,8 +12,7 @@ namespace Festispec.Model
         public int ContactpersoonID { get; set; }
 
         [Required]
-        [StringLength(8)]
-        public string KlantID { get; set; }
+        public int KlantID { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -39,6 +38,10 @@ namespace Festispec.Model
 
         [Column("Laatste_wijziging")]
         public DateTime LaatsteWijziging { get; set; }
+
+        [StringLength(30)]
+        [Column("Rol")]
+        public string Rol { get; set; }
 
         public virtual Klant Klant { get; set; }
     }
