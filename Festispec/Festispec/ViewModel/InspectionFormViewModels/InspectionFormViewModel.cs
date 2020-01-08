@@ -1,4 +1,5 @@
 ﻿using Festispec.Model;
+using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
 using Festispec.Utility.Validators;
@@ -27,8 +28,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public ICommand AddTextCommand { get; set; }
         public ICommand AddPictureQuestionCommand { get; set; }
         public ICommand AddScaleQuestionCommand { get; set; }
-        public ICommand AddTable2QuestionCommand { get; set; }
-        public ICommand AddTable3QuestionCommand { get; set; }
+        public ICommand AddTableQuestionCommand { get; set; }
         public ICommand ToShowModeCommand { get; set; }
         public ICommand QuestionUpCommand { get; set; }
         public ICommand QuestionDownCommand { get; set; }
@@ -42,8 +42,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         private NavigationService _navigationService;
 
-        private bool _editMode;
-
         private QuestionViewModel _selectedVraag;
 
         public bool Changed;
@@ -54,8 +52,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public Inspectieformulier InspectionForm {
             get => _inspectionForm;
-            set {
+            set
+            {
                 _inspectionForm = value;
+                RaisePropertyChanged("InspectionForm");
             }
         }
 
@@ -70,16 +70,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-        public bool EditMode
-        {
-            get => _editMode;
-            set
-            {
-                _editMode = value;
-                RaisePropertyChanged("EditMode");
-            }
-        }
-
         #region InspectionFormVariable
         private String _titel;
 
@@ -87,9 +77,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             get {
                 if (_titel == null)
-                {
                     _titel = _inspectionForm.InspectieFormulierTitel;
-                }
 
                 return _titel;
             }
@@ -98,7 +86,30 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 _titel = value;
                 _inspectionForm.InspectieFormulierTitel = _titel;
                 Changed = true;
+                TitelError = null;
                 RaisePropertyChanged("Titel");
+            }
+        }
+
+        private string _titelError;
+        public string TitelError
+        {
+            get => _titelError;
+            set
+            {
+                _titelError = value;
+                RaisePropertyChanged("TitelError");
+            }
+        }
+
+        private string _saveError;
+        public string SaveError
+        {
+            get => _saveError;
+            set
+            {
+                _saveError = value;
+                RaisePropertyChanged("SaveError");
             }
         }
 
@@ -109,9 +120,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             get
             {
                 if (_description == null)
-                {
                     _description = _inspectionForm.Beschrijving;
-                }
 
                 return _description;
             }
@@ -134,12 +143,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-
-        
-
         #endregion
 
         private ObservableCollection<QuestionViewModel> _questions;
+
         public ObservableCollection<QuestionViewModel> Questions
         {
             get
@@ -158,26 +165,49 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
 
         public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo)
-        {
+        {//deze constructor wordt gebruikt om het vm te maken voor de vragenlijst
             _navigationService = nav;
-                //navragen
-            if (nav.Parameter is Inspectieformulier)
+            _repo = repo;
+            if (nav.Parameter is Inspectieformulier)//als er een al bestaande inspectieformulier wordt meegegeven
             {
-                _inspectionForm = (Inspectieformulier)nav.Parameter;
+                InspectionForm = (Inspectieformulier)nav.Parameter;
+                if (InspectionForm.InspectieformulierID == 0)
+                {
+                    LastChangeDate = DateTime.Now;
+                    NewInspectionForm = true;
+                    Save();
+                }
             }
-            else{//test
+            else if(nav.Parameter is int){//als er geen inspectieformulier wordt meegegeven en een nieuwe moet worden aangemaakt.
                 InspectionForm = new Inspectieformulier();
                 Titel = "Nieuw formulier";
                 Description = "Formulier beschrijving";
-                _inspectionForm.OpdrachtID = 1;
+                _inspectionForm.OpdrachtID = (int)nav.Parameter;
                 LastChangeDate = DateTime.Now;
                 NewInspectionForm = true;
+                Save();
             }
-  
-            _repo = repo;
+            else if(nav.Parameter is null)//dit is het geval bij het aanmaken van een template
+            {
+                InspectionForm = new Inspectieformulier();
+                Titel = "Nieuw formulier template";
+                Description = "Template beschrijving";
+                LastChangeDate = DateTime.Now;
+                NewInspectionForm = true;
+                Save();
+            }
+            
             _removedQuestions = new List<QuestionViewModel>();
             CreateCommands();
-            Save();
+        }
+
+        public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo, Inspectieformulier form)
+        {//deze constructor wordt gebruikt om de vms te maken die de vragenlijsten showen in de list
+            _navigationService = nav;
+            _repo = repo;
+            InspectionForm = form;
+            _removedQuestions = new List<QuestionViewModel>();
+            CreateCommands();
         }
 
         private void CreateCommands()
@@ -188,8 +218,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             AddTextCommand = new RelayCommand(AddText);
             AddPictureQuestionCommand = new RelayCommand(AddPictureQuestion);
             AddScaleQuestionCommand = new RelayCommand(AddScaleQuestion);
-            AddTable2QuestionCommand = new RelayCommand(AddTable2Question);
-            AddTable3QuestionCommand = new RelayCommand(AddTable3Question);
+            AddTableQuestionCommand = new RelayCommand(AddTableQuestion);
             ToShowModeCommand = new RelayCommand(ToShowCommand);
             SaveCommand = new RelayCommand(Save);
             QuestionUpCommand = new RelayCommand(QuestionUp);
@@ -201,14 +230,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         #region Commands
         public void ToEdit()
         {
-            if (EditMode == true)
-            {
-                EditMode = false;
-            }
-            else
-            {
-                EditMode = true;
-            }
+            _navigationService.NavigateTo("InspectionFormEditView", this);
         }
 
         public void AddOpenQuestion()
@@ -260,21 +282,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             AddQuestion(v);
         }
 
-        public void AddTable2Question()
+        public void AddTableQuestion()
         {
             Vraag v = new Vraag
             {
-                Vraagtype = "t2",
-            };
-
-            AddQuestion(v);
-        }
-
-        public void AddTable3Question()
-        {
-            Vraag v = new Vraag
-            {
-                Vraagtype = "t3",
+                Vraagtype = "tv",
             };
 
             AddQuestion(v);
@@ -302,14 +314,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void QuestionDown()
         {
             if(SelectedQuestion == null)
-            {
                 return;
-            }
             int index = Questions.IndexOf(SelectedQuestion);
             if (index == Questions.Count() - 1)
-            {
                 return;
-            }
             else
             {
                 Swap(index, index + 1);
@@ -321,31 +329,21 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void RemoveQuestion()
         {
             if (SelectedQuestion == null)
-            {
                 return;
-            }
             int SelectedIndex = (SelectedQuestion.OrderNumber - 1);
             if (!(SelectedIndex == Questions.Count()))
-            {
                 for (int i = SelectedIndex; i < Questions.Count(); i++)
                 {
                     Questions[i].OrderNumber = Questions[i].OrderNumber - 1;
                 }
-            }
             _removedQuestions.Add(SelectedQuestion);
             Questions.Remove(SelectedQuestion);
             if (SelectedIndex == Questions.Count())
-            {
                 SelectedIndex = Questions.Count() - 1;
-            }
             if (Questions.Count() > 0)
-            {
                 SelectedQuestion = Questions[SelectedIndex];
-            }
             else
-            {
                 SelectedQuestion = null;
-            }
             
             Changed = true;
             RaisePropertyChanged("Questions");
@@ -353,11 +351,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void ToShowCommand()
         {
-            //todo
+            if (_inspectionForm.OpdrachtID == null)
+                _navigationService.NavigateTo("InspectionFormTemplateOverview", EnumTemplateMode.EDIT);
+            else
+                _navigationService.NavigateTo("InspectionFormShowView", InspectionForm.OpdrachtID);
         }
 
         public void Save()
         {
+            SaveError = null;
             if (NewInspectionForm)
             {
                 NewInspectionForm = false;
@@ -365,18 +367,32 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 return;
             }
 
+            bool valid = true;
+
+            foreach (QuestionViewModel question in Questions)
+            {
+                question.Validate();
+                if (!question.Validate())
+                {
+                    valid = false;
+                }
+            }
+            TitelError = null;
+            ValidationResult result = new InspectionFormValidator().Validate(this);
+            if (!result.IsValid)
+            {
+                TitelError = result.Errors.FirstOrDefault().ErrorMessage;
+                valid = false;
+            }
+
+            if (!valid)
+            {
+                SaveError = "Opslaan niet gelukt.";
+                return;
+            }
+
             if (Changed)
             {
-                foreach(QuestionViewModel question in Questions)
-                {
-                    ValidationResult result = new QuestionValidator().Validate(question);
-                    if (!result.IsValid)
-                    {
-                        Messenger.Default.Send(result.ToString(), this.GetHashCode());
-                        return;
-                    }
-                }
-
                 Changed = false;
                 LastChangeDate = DateTime.Now;
                 _repo.UpdateInspectieFormulier(_inspectionForm);
@@ -396,23 +412,35 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     question.Created = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv" || question.QuestionType == "tv")
+                    {
+                        List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
+                        foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
+                        {
+                            newPosAnswers.Add(posAnwser.PossibleAnwser);
+                        }
+                        _repo.AddPossibleAnswers(newPosAnswers);
+                    }
                 }
                 else if (question.Changed)
                 {
                     _repo.UpdateQuestion(question.Question);
                     question.Changed = false;
-                    if (question.QuestionType == "sv" || question.QuestionType == "mv")
+                    if (question.QuestionType == "sv" || question.QuestionType == "mv" || question.QuestionType == "tv")
                     {
                         List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
-                        foreach(PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
+                        foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)
                         {
                             newPosAnswers.Add(posAnwser.PossibleAnwser);
                         }
                         _repo.updatePossibleAnswers(newPosAnswers);
                     }
                 }
+                
             }
         }
+
+        public void SaveInspectionformDetails() => _repo.UpdateInspectieFormulier(InspectionForm);
         #endregion
 
         public void Swap(int index1, int index2)
@@ -430,7 +458,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             QuestionViewModel newQ = new QuestionViewModel(v, _inspectionForm);
             Questions.Add(newQ);
             _inspectionForm.Vraag.Add(v);
-            v.VolgordeNummer = _questions.Count();
+            v.VolgordeNummer = Questions.Count();
             
             SelectedQuestion = newQ;
             Changed = true;

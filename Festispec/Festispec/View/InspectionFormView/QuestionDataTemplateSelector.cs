@@ -33,10 +33,8 @@ namespace Festispec.View.InspectionFormView
                         return element.FindResource("MultipleChoiceQuestionEdit") as DataTemplate;
                     case "sv":
                         return element.FindResource("ScaleQuestionEdit") as DataTemplate;
-                    case "t2":
-                        return element.FindResource("Table2QuestionEdit") as DataTemplate;
-                    case "t3":
-                        return element.FindResource("Table3QuestionEdit") as DataTemplate;
+                    case "tv":
+                        return element.FindResource("TableQuestionEdit") as DataTemplate;
                     default:
                         return null;
                 }

@@ -44,6 +44,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!-- Mode -->
@@ -208,15 +209,7 @@
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlExtraChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Extra" BorderBrush="Transparent" Background="Transparent">
-                        <Image Source="/Images/Extra_Chart.png" Stretch="Uniform" Width="25" Height="25" />
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiConverter}">
-                                <Binding ElementName="documentDesigner" />
-                                <Binding ElementName="controlExtraChart" Path="Tag" />
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                    </Button>
+                    
                     <Button Name="controlPieChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Pie" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Pie_Chart.png" Stretch="Uniform" Width="25" Height="25" />
                         <Button.CommandParameter>
@@ -231,7 +224,11 @@
 
             <!-- Invoegen Resultaten -->
             <StackPanel Margin="5, 10" Grid.Row="7" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
-                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}" Content="Invoegen resultaten" />
+                <CheckBox Name="controlInvoegen" FontSize="16" IsChecked="{Binding ShouldAddResults, Mode=TwoWay}">
+                    <TextBlock>
+                        <AccessText TextWrapping="Wrap" Text="Inspectieresultaten Bijvoegen" />
+                    </TextBlock>
+                </CheckBox>
             </StackPanel>
 
             <!-- Extra Opties -->
@@ -248,16 +245,23 @@
                 </TextBlock>
             </StackPanel>
 
-            <!-- Opslaan -->
+            <!-- Naar Opdracht -->
             <StackPanel Margin="5" Grid.Row="11">
+                <TextBlock>
+                    <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ShowJobCommand}">Naar Opdracht</Hyperlink>
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Opslaan -->
+            <StackPanel Margin="5" Grid.Row="12">
                 <Button FontSize="16" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
                     <TextBlock TextDecorations="Underline" Text="Opslaan" />
                 </Button>
             </StackPanel>
 
             <!-- Downloaden -->
-            <StackPanel Margin="5" Grid.Row="12">
-                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}">
+            <StackPanel Margin="5" Grid.Row="13">
+                <Button FontSize="16" Command="{Binding DownloadCommand}" CommandParameter="{Binding ElementName=documentDesigner}" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
                     <TextBlock TextDecorations="Underline" Text="Download" />
                 </Button>
             </StackPanel>
@@ -315,14 +319,9 @@
                     </Button>
                 </Grid>
             </StackPanel>
-
-            <!-- Unlock -->
-            <StackPanel Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
-                <Button Content="Ontgrendelen" Name="controlUnlock" FontSize="14" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
-            </StackPanel>
-
+            
             <!-- Width -->
-            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <Grid Margin="5" Grid.Row="1" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -345,7 +344,7 @@
             </Grid>
 
             <!-- Height -->
-            <Grid Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+            <Grid Margin="5" Grid.Row="2" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -366,6 +365,11 @@
                     </i:Interaction.Triggers>
                 </TextBox>
             </Grid>
+
+            <!-- Unlock -->
+            <StackPanel Margin="5" Grid.Row="3" Visibility="{Binding IsEditable, Converter={StaticResource BoolToVisibility}}">
+                <Button Content="Vrij Bewegen Afbeelding" Name="controlUnlock" FontSize="10" FontWeight="Bold" Padding="10, 5" Grid.Column="1" Command="{Binding UnlockCommand}" CommandParameter="{Binding ElementName=documentDesigner}" BorderBrush="#c8c8c8" Background="White" Tag="Bold" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

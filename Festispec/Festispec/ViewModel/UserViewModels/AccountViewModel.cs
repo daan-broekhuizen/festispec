@@ -33,6 +33,8 @@ namespace Festispec.ViewModel
             _userRepository = new UserRepository();
         }
 
+        public int Id => _account.AccountID;
+
         public string Username
         {
             get => _account.Gebruikersnaam;

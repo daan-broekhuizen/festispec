@@ -4,21 +4,25 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Xml;
 using Festispec.Model;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
+using Festispec.Service;
 using Festispec.Utility.Extensions;
 using Festispec.ViewModel.Components.Charts;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LiveCharts.Wpf.Charts.Base;
+using Microsoft.Maps.MapControl.WPF;
 
 namespace Festispec.ViewModel
 {
@@ -31,6 +35,7 @@ namespace Festispec.ViewModel
         private QuotationRepository _qRepo;
         private UserRepository _uRepo;
         private CustomerRepository _cRepo;
+        private InspectionFormRepository _iRepo;
 
         private DateTime _startDate;
 
@@ -87,7 +92,7 @@ namespace Festispec.ViewModel
             }
         }
 
-
+        public ObservableCollection<Pushpin> PushpinList { get; set; }
         public IChart PieChartViewModel { get; set; }
 
         public IChart InspectionChartViewModel { get; set; }
@@ -95,12 +100,16 @@ namespace Festispec.ViewModel
         public IChart SalesChartViewModel { get; set; }
         #endregion
 
-        public ManagementViewModel(JobRepository jRepo, QuotationRepository qRepo, UserRepository uRepo, CustomerRepository cRepo)
+        public ManagementViewModel(JobRepository jRepo, QuotationRepository qRepo, UserRepository uRepo, CustomerRepository cRepo, InspectionFormRepository iRepo)
         {
             _jRepo = jRepo;
             _qRepo = qRepo;
             _uRepo = uRepo;
             _cRepo = cRepo;
+            _iRepo = iRepo;
+
+            PushpinList = new ObservableCollection<Pushpin>();
+            SetPushPinsAsync();
 
             ExportCommand = new RelayCommand<FrameworkElement>(Export);
 
@@ -334,6 +343,48 @@ namespace Festispec.ViewModel
                     counter++;
             });
             return counter;
+        }
+
+        public async Task SetPushPinsAsync()
+        {
+            LocationService locationService = new LocationService();
+            _uRepo.GetUsers().ForEach(async e =>
+            {
+                if (e.Stad == null)
+                    return;
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 255, 0, 0)), address);
+
+            });
+
+            _cRepo.GetCustomers().ForEach(async e =>
+            {
+                if (e.Stad == null)
+                    return;
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 255, 0)), address);
+
+            });
+
+            _iRepo.GetAllInspectieFormulieren().ForEach(async e =>
+            {
+                if (e.Stad == null)
+                    return;
+                string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
+                BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
+                AddPushPin(new SolidColorBrush(Color.FromArgb(100, 0, 0, 255)), address);
+            });
+
+        }
+
+        private void AddPushPin(SolidColorBrush color, BingMapsRESTToolkit.Location address)
+        {
+                Pushpin pushpin = new Pushpin();
+                pushpin.Background = color;
+                pushpin.Location = new Location(address.Point.Coordinates[0], address.Point.Coordinates[1]);
+                PushpinList.Add(pushpin);
         }
     }
 }

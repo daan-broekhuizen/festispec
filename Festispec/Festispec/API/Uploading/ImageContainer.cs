@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.API.ImageShack
+namespace Festispec.API.Uploading
 {
     public class ImageContainer
     {
@@ -14,8 +14,8 @@ namespace Festispec.API.ImageShack
 
         public ImageContainer(string imageLocation, string contentType = "image/png")
         {
-            this.ImageLocation = imageLocation;
-            this.ContentType = contentType;
+            ImageLocation = imageLocation;
+            ContentType = contentType;
         }
     }
 }

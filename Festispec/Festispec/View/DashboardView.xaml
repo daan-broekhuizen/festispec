@@ -48,21 +48,18 @@
             <Button Command="{Binding ShowAddCustomerCommand}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="3">
                 <Image Source="/Images/Dashboard_new_customer.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="3">
+            <Button  Command="{Binding ShowAddJobCommand}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="3">
                 <Image Source="/Images/Dashboard_new_job.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="3">
-                <Image Source="/Images/Dashboard_new_quotation.png"/>
+            <Button  Command="{Binding ShowManagementCommand}" BorderThickness="0" Background="Transparent" Grid.Column="7" Grid.Row="3">
+                <Image Source="/Images/management rapportage.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="5">
-                <Image Source="/Images/Dashboard_planning.png"/>
+            <Button Command="{Binding ShowReportTemplates}" BorderThickness="0" Background="Transparent" Grid.Column="3" Grid.Row="5">
+                <Image Source="/Images/report_template.png"/>
             </Button>
-            <Button BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="5">
-                <Image Source="/Images/Dashboard_schedule.png"/>
+            <Button Command="{Binding ShowInspectionTemplates}" BorderThickness="0" Background="Transparent" Grid.Column="5" Grid.Row="5">
+                <Image Source="/Images/inspectionform_templates.png"/>
             </Button>
-
-
-
         </Grid>
 
     </Grid>

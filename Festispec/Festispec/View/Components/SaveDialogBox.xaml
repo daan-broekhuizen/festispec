@@ -8,7 +8,7 @@
         xmlns:Converters="clr-namespace:Festispec.Utility.Converters"
         mc:Ignorable="d"
         Name="windowSave"
-        Title="SaveDialogBox" Height="283.19" Width="551.724">
+        Title="Opslaan" Height="283.19" Width="551.724">
     <Window.Resources>
         <ViewModel:SaveDialogViewModel x:Key="ViewModel" />
         <Converters:MultiConverter x:Key="MultiConverter" />

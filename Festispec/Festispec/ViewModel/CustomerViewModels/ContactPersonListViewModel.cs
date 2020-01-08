@@ -11,6 +11,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using System.Data.Entity;
 
 namespace Festispec.ViewModel
 {
@@ -48,7 +49,7 @@ namespace Festispec.ViewModel
         }
         private void SaveContactPerson()
         {
-            if(SelectedContact == null)
+            if (SelectedContact == null)
             {
                 Messenger.Default.Send("Selecteer een contactpersoon", this.GetHashCode());
                 return;
@@ -63,21 +64,23 @@ namespace Festispec.ViewModel
 
             Contactpersoon newEntity = new Contactpersoon()
             {
-                Voornaam = SelectedContact.Name,
-                Tussenvoegsel = SelectedContact.Name,
-                Achternaam = SelectedContact.Name,
+                Voornaam = SelectedContact.FirstName,
+                Tussenvoegsel = SelectedContact.Infix,
+                Achternaam = SelectedContact.LastName,
                 Email = SelectedContact.Email,
+                Rol = SelectedContact.Role,
                 Telefoon = SelectedContact.Telephone,
                 Notities = SelectedContact.Note,
-                KlantID = CustomerVM.KvK,
+                KlantID = CustomerVM.Id,
                 LaatsteWijziging = DateTime.Now
             };
 
-            Klant klant = _customerRepository.GetCustomers().Where(c => c.KvKNummer == CustomerVM.KvK).FirstOrDefault();
-            if (klant == null) return;
-            if (klant.Contactpersoon.Where(c => c.ContactpersoonID == SelectedContact.Id).FirstOrDefault() == null)
-                _customerRepository.CreateContactPerson(newEntity);
-            else if (klant.Contactpersoon.Where(c => c.ContactpersoonID == SelectedContact.Id).FirstOrDefault() != null)
+            if (SelectedContact.Id == 0)
+            {
+                Contactpersoon contact = _customerRepository.CreateContactPerson(newEntity);
+                SelectedContact.SetContactPerson(contact);
+            }
+            else
             {
                 newEntity.ContactpersoonID = SelectedContact.Id;
                 _customerRepository.UpdateContactPerson(newEntity);

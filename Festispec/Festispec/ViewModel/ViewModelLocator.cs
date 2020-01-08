@@ -22,6 +22,7 @@ using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.ViewModel.InspectionFormViewModels;
+using Festispec.Model;
 
 namespace Festispec.ViewModel
 {
@@ -98,9 +99,9 @@ namespace Festispec.ViewModel
             #endregion
 
             #region JobViews
-            navigationService.Configure("Jobs", new Uri("../View/JobsWindow.xaml", UriKind.Relative));
-            navigationService.Configure("JobInfo", new Uri("../View/JobInfoView.xaml", UriKind.Relative));
-            navigationService.Configure("AddJob", new Uri("../View/AddJobView.xaml", UriKind.Relative));
+            navigationService.Configure("Jobs", new Uri("../View/JobView/JobsWindow.xaml", UriKind.Relative));
+            navigationService.Configure("JobInfo", new Uri("../View/JobView/JobInfoView.xaml", UriKind.Relative));
+            navigationService.Configure("AddJob", new Uri("../View/JobView/AddJobView.xaml", UriKind.Relative));
             #endregion
 
 
@@ -111,6 +112,7 @@ namespace Festispec.ViewModel
 
             #region InspectionFormsViews
             navigationService.Configure("InspectionFormEditView", new Uri("../View/InspectionFormView/InspectionFormEditView.xaml", UriKind.Relative));
+            navigationService.Configure("InspectionFormShowView", new Uri("../View/InspectionFormView/InspectionFormShowView.xaml", UriKind.Relative));
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
@@ -165,10 +167,12 @@ namespace Festispec.ViewModel
         public InspectionFormTemplateOverviewViewModel InspectionFormTemplateOverview => new InspectionFormTemplateOverviewViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), TemplateRepo);
         #endregion
 
-        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo);
+        public ManagementViewModel Management => new ManagementViewModel(JobRepo, QuotationRepo, UserRepo, CustomerRepo, InspectionFormRepo);
+
         #region InspectionFormVM's
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
-       
+        public InspectionFormListViewModel InspectionFormList => new InspectionFormListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
+
         #endregion
 
         //Clean when logging out?

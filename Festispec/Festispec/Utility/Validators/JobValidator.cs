@@ -17,7 +17,7 @@ namespace Festispec.Utility.Validators
         {
             _jobRepositiory = new JobRepository();
             RuleFor(x => x.JobName).NotEmpty().WithMessage("Voer een opdrachtnaam in.");
-            RuleFor(x => x.CustomerName).NotEmpty().WithMessage("Selecteer een klant.");
+            RuleFor(x => x.CustomerID).NotEmpty().WithMessage("Selecteer een klant.");
             RuleFor(x => x.JobName).MaximumLength(45).WithMessage("Voer een geldig opdracht naam in (45 karakters).");
             RuleFor(x => x.Status).NotEmpty().WithMessage("Selecteer een status.");
             RuleFor(x => x.StartDatum).NotEmpty().WithMessage("Selecteer een datum.");

@@ -29,7 +29,7 @@ namespace Festispec.View.CustomerView
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
         private void ShowWindow(string message) => MessageBox.Show(message);
+        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
     }
 }

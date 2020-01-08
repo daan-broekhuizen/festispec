@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Festispec.API.Uploading;
 
 namespace Festispec.API.ImageShack.Tests
 {

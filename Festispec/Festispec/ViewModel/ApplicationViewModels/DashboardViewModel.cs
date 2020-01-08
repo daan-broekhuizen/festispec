@@ -16,10 +16,10 @@ namespace Festispec.ViewModel
         public ICommand ShowQuotationsCommand { get; set; }
         public ICommand ShowAddCustomerCommand { get; set; }
         public ICommand ShowAddJobCommand { get; set; }
-        public ICommand ShowAddQuotationCommand { get; set; }
-        public ICommand ShowPlanningCommand { get; set; }
+        public ICommand ShowManagementCommand { get; set; }
         public ICommand ShowScheduleCommand { get; set; }
-        public ICommand ShowMessagesCommand { get; set; }
+        public ICommand ShowInspectionTemplates { get; set; }
+        public ICommand ShowReportTemplates { get; set; }
 
         public DashboardViewModel(NavigationService service) : base(service)
         {
@@ -27,12 +27,20 @@ namespace Festispec.ViewModel
             ShowCustomersCommand = new RelayCommand(ShowCustomers);
             ShowQuotationsCommand = new RelayCommand(ShowQuotations);
             ShowJobsCommand = new RelayCommand(ShowJobs);
+            ShowAddJobCommand = new RelayCommand(ShowAddJob);
+            ShowManagementCommand = new RelayCommand(ShowManagement);
+            ShowInspectionTemplates = new RelayCommand(ShowFormTemplate);
+            ShowReportTemplates = new RelayCommand(ShowReportTemplate);
+
         }
 
+        private void ShowReportTemplate() => _navigationService.NavigateTo("RapportageTemplateOverview");
+        private void ShowFormTemplate() => _navigationService.NavigateTo("InspectionFormTemplateOverview");
+        private void ShowManagement() => _navigationService.NavigateTo("ManagementReport");
         private void ShowJobs() => _navigationService.NavigateTo("Jobs");
-
         private void ShowAddCustomer() => _navigationService.NavigateTo("AddCustomerInfo");
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");
         private void ShowQuotations() => _navigationService.NavigateTo("QuotationList");
+        private void ShowAddJob() => _navigationService.NavigateTo("AddJob");
     }
 }
