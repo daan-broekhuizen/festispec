@@ -339,8 +339,11 @@ namespace Festispec.ViewModel
 
             jobsWithStatus.Select(e => e.Offerte).ToList().ForEach(e =>
             {
-                if (e.FirstOrDefault().Aanmaakdatum > StartDate && e.FirstOrDefault().Aanmaakdatum < EndDate)
-                    counter++;
+                if (e.FirstOrDefault() != null)
+                {
+                    if (e.FirstOrDefault().Aanmaakdatum > StartDate && e.FirstOrDefault().Aanmaakdatum < EndDate)
+                        counter++;
+                }
             });
             return counter;
         }
