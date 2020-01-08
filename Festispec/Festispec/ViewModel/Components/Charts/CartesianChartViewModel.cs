@@ -36,6 +36,26 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
+        public IList<string> XAxisLabels
+        {
+            get => XAxis != null ? XAxis.Labels : new List<string>();
+            set
+            {
+                if (XAxis != null)
+                    XAxis.Labels = value;
+            }
+        }
+
+        public IList<string> YAxisLabels
+        {
+            get => YAxis != null ? YAxis.Labels : new List<string>();
+            set
+            {
+                if (YAxis != null)
+                    YAxis.Labels = value;
+            }
+        }
+
         public CartesianChartViewModel() : base()
         {
             Labels.Add("Test1");
@@ -92,6 +112,13 @@ namespace Festispec.ViewModel.Components.Charts
                 case EnumChartConfiguration.YAXISTITLE:
                     YAxisTitle = (string)value;
 
+                    break;
+                case EnumChartConfiguration.XAXISLABELS:
+                    XAxisLabels = (List<string>)value;
+
+                    break;
+                case EnumChartConfiguration.YAXISLABELS:
+                    YAxisLabels = (List<string>)value;
                     break;
             }
         }

@@ -63,7 +63,6 @@ namespace Festispec.ViewModel.Components.Charts
                     BackgroundColor = new SolidColorBrush((Color)value);
 
                     break;
-
             }
         }
 
@@ -71,6 +70,5 @@ namespace Festispec.ViewModel.Components.Charts
         {
             BackgroundColor = new SolidColorBrush((Color)Configuration[EnumChartConfiguration.BACKGROUNDCOLOR]);
         }
-
     }
 }

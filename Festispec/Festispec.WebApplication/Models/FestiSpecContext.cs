@@ -5,10 +5,10 @@ namespace Festispec.WebApplication.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class FestispecContext : DbContext
+    public partial class FestiSpecContext : DbContext
     {
-        public FestispecContext()
-            : base("name=FestiSpecEntities")
+        public FestiSpecContext()
+           : base("name=FestiSpecEntities")
         {
         }
 
@@ -144,3 +144,4 @@ namespace Festispec.WebApplication.Models
         }
     }
 }
+

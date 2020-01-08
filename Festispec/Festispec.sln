@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.Tests", "Festispe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.WebApplication", "Festispec.WebApplication\Festispec.WebApplication.csproj", "{1E84009F-12DD-43DA-B4B6-FB95681693DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.WebApplication.Tests", "Festispec.WebApplication.Tests\Festispec.WebApplication.Tests.csproj", "{CF648E15-C7A4-46D7-A854-BAE668F8FF58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF648E15-C7A4-46D7-A854-BAE668F8FF58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF648E15-C7A4-46D7-A854-BAE668F8FF58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF648E15-C7A4-46D7-A854-BAE668F8FF58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF648E15-C7A4-46D7-A854-BAE668F8FF58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

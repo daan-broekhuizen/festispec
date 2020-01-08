@@ -1,0 +1,74 @@
+﻿body 
+{
+    background: lightblue url("../Images/Dashboard_background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+img 
+{
+    width: 100%;
+}
+
+
+#logo img 
+{
+    width: 100%;
+	margin: 20px 0;
+	left: 0;
+}
+
+.task
+{
+
+}
+
+.task img 
+{
+    max-height: 20px;
+	max-width:40px;
+}
+
+.col-md-6 .row 
+{
+    background-color: lightgrey;
+	margin: 20px 20px 10px 20px;
+	padding: 10px;
+	max-height: 45px;
+}
+
+button 
+{
+	margin-right: 10px;
+	border:none;
+	background:none;
+}
+
+.upcoming-tasks 
+{
+	text-align:left;
+	padding: 10px;
+	margin-bottom: 10px;
+    background-color: white;
+	width: 100%;
+	height: 280px;
+}
+
+.all-tasks 
+{
+    font-size: 1.4em;
+	position: absolute;
+	padding: 10px;
+	bottom: 5px;
+}
+
+.big-buttons 
+{
+	height: 20%;
+	bottom: 0;
+}
+
+.big-buttons img
+{
+    width: 100%;
+}

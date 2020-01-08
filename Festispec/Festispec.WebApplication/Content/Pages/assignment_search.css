@@ -1,0 +1,23 @@
+﻿#logo 
+{
+    max-width: 50%;
+    margin-top: 10px;
+}
+
+#zoekbalk 
+{
+    min-width: 100%;
+}
+
+.assignment img 
+{
+    width: 150px;
+}
+
+.result 
+{
+    background-color: lightgrey;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}

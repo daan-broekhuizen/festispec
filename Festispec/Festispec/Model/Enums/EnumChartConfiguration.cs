@@ -12,6 +12,8 @@ namespace Festispec.Model.Enums
         BACKGROUNDCOLOR = 1,
         AXIS = 2,
         XAXISTITLE = 3,
-        YAXISTITLE = 4
+        YAXISTITLE = 4,
+        XAXISLABELS = 5,
+        YAXISLABELS = 6
     }
 }
