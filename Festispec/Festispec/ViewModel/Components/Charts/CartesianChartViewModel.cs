@@ -1,4 +1,5 @@
 ﻿using Festispec.Model.Enums;
+using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -56,6 +57,8 @@ namespace Festispec.ViewModel.Components.Charts
             }
         }
 
+        public LegendLocation LegendLocation { get; set; }
+
         public CartesianChartViewModel() : base()
         {
             Labels.Add("Test1");
@@ -75,11 +78,21 @@ namespace Festispec.ViewModel.Components.Charts
             {
                 Series = Collection,
                 AxisX = new AxesCollection(),
-                AxisY = new AxesCollection()
+                AxisY = new AxesCollection(),
+                LegendLocation = LegendLocation
             };
+
+            if(LegendLocation > 0)
+                cc.LegendLocation = LegendLocation;
 
             XAxis = new Axis();
             YAxis = new Axis();
+
+            if (Labels != null && Labels.Count > 0)
+            {
+                XAxis.ShowLabels = true;
+                XAxis.Labels = Labels;
+            }
 
             cc.AxisX.Clear();
             cc.AxisX.Add(XAxis);
