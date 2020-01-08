@@ -51,7 +51,14 @@ namespace Festispec.Model.Repositories
             {
                 Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
                 if (target != null)
+                {
+                    List<VraagMogelijkAntwoord> vma = context.VraagMogelijkAntwoord.Where(x => x.VraagID == question.VraagID).ToList();
+                    context.VraagMogelijkAntwoord.RemoveRange(vma);
+                    List<Antwoorden> a = context.Antwoorden.Where(x => x.VraagID == question.VraagID).ToList();
+                    context.Antwoorden.RemoveRange(a);
                     context.Vraag.Remove(target);
+                }
+                    
                 context.SaveChanges();
             }
         }
