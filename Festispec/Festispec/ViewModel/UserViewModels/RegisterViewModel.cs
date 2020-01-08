@@ -66,7 +66,8 @@ namespace Festispec.ViewModel
                     Achternaam = AccountVM.LastName,
                     Straatnaam = AccountVM.StreetName,
                     Huisnummer = AccountVM.HouseNumber,
-                    Stad = AccountVM.City
+                    Stad = AccountVM.City,
+                    LaatsteWijziging = DateTime.Now
                 };
 
                 _user.Register(newAccount);

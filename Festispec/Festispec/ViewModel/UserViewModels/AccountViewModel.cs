@@ -65,7 +65,7 @@ namespace Festispec.ViewModel
 
         public string FirstName
         {
-            get => _account.Gebruikersnaam;
+            get => _account.Voornaam;
             set
             {
                 _account.Voornaam = value;
@@ -117,7 +117,7 @@ namespace Festispec.ViewModel
 
         public string StreetName
         {
-            get => _account.Huisnummer;
+            get => _account.Straatnaam;
             set
             {
                 _account.Straatnaam = value;
@@ -130,7 +130,7 @@ namespace Festispec.ViewModel
             get => _account.Stad;
             set
             {
-                _account.Straatnaam = value;
+                _account.Stad = value;
                 RaisePropertyChanged("City");
             }
         }
