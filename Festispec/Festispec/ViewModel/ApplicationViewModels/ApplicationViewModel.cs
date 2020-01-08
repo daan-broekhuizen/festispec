@@ -1,4 +1,5 @@
-﻿using Festispec.Service;
+﻿using Festispec.Model;
+using Festispec.Service;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,26 @@ namespace Festispec.ViewModel
 
         private void ShowLogin()
         {
-            _navigationService.ApplicationNavigateTo("Login", null);
+            if (IsDatabaseOnline())
+                _navigationService.ApplicationNavigateTo("Login", null);
+            else
+                _navigationService.ApplicationNavigateTo("OfflineLogin", null);
+        }
+
+        private bool IsDatabaseOnline()
+        {
+            using(FestispecContext context = new FestispecContext())
+            {
+                try
+                {
+                    context.Database.Connection.Open();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
         }
     }
 }

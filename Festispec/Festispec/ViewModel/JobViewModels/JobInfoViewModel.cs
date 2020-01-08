@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model;
+using Festispec.Model.DTO;
 using Festispec.Model.Enums;
 using Festispec.Model.Repositories;
 using Festispec.Service;
@@ -16,6 +18,7 @@ using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Newtonsoft.Json;
 
 namespace Festispec.ViewModel
 {
@@ -30,6 +33,7 @@ namespace Festispec.ViewModel
         public ICommand ShowQuotationCommand { get; set; }
         public ICommand ShowInspectionFormsCommand { get; set; }
         public ICommand ShowRapportageCommand { get; set; }
+        public ICommand SaveJobOfflineCommand { get; set; }
         public DateTime MinimumDate
         {
             get => DateTime.Today;
@@ -101,6 +105,7 @@ namespace Festispec.ViewModel
             ShowQuotationCommand = new RelayCommand(ShowQuotation);
             ShowInspectionFormsCommand = new RelayCommand(ShowInspectionForms);
             ShowRapportageCommand = new RelayCommand(ShowRapportage);
+            SaveJobOfflineCommand = new RelayCommand(SaveJobOffline);
             _navigationService = service;
             _quotationRepo = quotationRepo;
             _jobRepo = Jrepo;
@@ -209,6 +214,37 @@ namespace Festispec.ViewModel
             }
             else CustomerWishesError = "";
 
+        }
+
+        private void SaveJobOffline()
+        {
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/Resources/opdrachten.json";
+            List<JsonJob> jsonarray = new List<JsonJob>();
+            JsonJob jobToSave = (JsonJob)Jrepo.GetSingleJob(JobVM.JobID);
+            if (!File.Exists(path))
+            {
+                jsonarray.Add(jobToSave);
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(JsonConvert.SerializeObject(jsonarray));
+                }
+            }
+            else
+            {
+                string newJson;
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    string json = sr.ReadToEnd();
+                    List<JsonJob> jsonJobs = JsonConvert.DeserializeObject<List<JsonJob>>(json);
+                    if(jsonJobs.Contains(jobToSave))
+                        jsonJobs.Add(jobToSave);
+                    newJson = JsonConvert.SerializeObject(jsonJobs);
+                }
+                using (StreamWriter sw = new StreamWriter(path, false))
+                {
+                    sw.WriteLine(newJson);
+                }
+            }
         }
     }
 }
