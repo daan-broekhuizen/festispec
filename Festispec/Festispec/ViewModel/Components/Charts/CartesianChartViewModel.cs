@@ -61,11 +61,11 @@ namespace Festispec.ViewModel.Components.Charts
 
         public CartesianChartViewModel() : base()
         {
-            Labels.Add("Test1");
-            Labels.Add("Test2");
+            Labels.Add("");
+            Labels.Add("");
 
-            Values.Add(10);
-            Values.Add(20);
+            Values.Add(1);
+            Values.Add(1);
         }
 
         public CartesianChartViewModel(List<string> labels, List<double> values) : base(labels, values)
