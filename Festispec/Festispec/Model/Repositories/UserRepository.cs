@@ -28,6 +28,23 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
+        public void UpdateAccount(Account account)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                context.Entry(context.Account.Where(c => c.AccountID == account.AccountID).First()).CurrentValues.SetValues(account);
+                context.SaveChanges();
+            }
+        }
+
+        public List<Rol> GetRols()
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Rol.ToList();
+            }
+        }
+
         public List<Account> GetUsers()
         {
             using (FestispecContext context = new FestispecContext())

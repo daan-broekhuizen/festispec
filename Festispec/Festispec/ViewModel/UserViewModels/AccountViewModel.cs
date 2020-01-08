@@ -1,7 +1,9 @@
 ﻿using Festispec.Model;
+using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +13,24 @@ namespace Festispec.ViewModel
     public class AccountViewModel : ViewModelBase
     {
         private Account _account;
+        private UserRepository _userRepository;
 
         public AccountViewModel(Account account)
         {
             _account = account;
+            Rollen = new ObservableCollection<string>();
+            _userRepository = new UserRepository();
+            Rollen.Add("Admin");
+            Rollen.Add("Inspecteur");
+            Rollen.Add("Management");
+            Rollen.Add("Operationeelmedewerker");
+            Rollen.Add("Salesmedewerker");
         }
 
         public AccountViewModel()
         {
             _account = new Account();
+            _userRepository = new UserRepository();
         }
 
         public int Id => _account.AccountID;
@@ -56,7 +67,7 @@ namespace Festispec.ViewModel
 
         public string FirstName
         {
-            get => _account.Gebruikersnaam;
+            get => _account.Voornaam;
             set
             {
                 _account.Voornaam = value;
@@ -103,6 +114,26 @@ namespace Festispec.ViewModel
             {
                 _account.Huisnummer = value;
                 RaisePropertyChanged("HouseNumber");
+            }
+        }
+
+        public string StreetName
+        {
+            get => _account.Straatnaam;
+            set
+            {
+                _account.Straatnaam = value;
+                RaisePropertyChanged("StreetName");
+            }
+        }
+
+        public string City
+        {
+            get => _account.Stad;
+            set
+            {
+                _account.Stad = value;
+                RaisePropertyChanged("City");
             }
         }
 
@@ -153,6 +184,58 @@ namespace Festispec.ViewModel
             {
                 _account.IBAN = value;
                 RaisePropertyChanged("IBAN");
+            }
+        }
+
+        public ObservableCollection<string> Rollen { get; set; }
+
+
+        public string RoleComplete
+        {
+            get
+            {
+                switch(Role)
+                {
+                    case "ad":
+                        return "Admin";
+                    case "in":
+                        return "Inspecteur";
+                    case "ma":
+                        return "Management";
+                    case "om":
+                        return "Operationeelmedewerker";
+                    case "sm":
+                        return "Salesmedewerker";
+                }
+
+                return Role;
+            }
+
+            set
+            {
+                switch (value)
+                {
+                    case "Admin":
+                        Role = "ad";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Inspecteur":
+                        Role = "in";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Management":
+                        Role = "ma";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Operationeelmedewerker":
+                        Role = "om";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Salesmedewerker":
+                        Role = "sm";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                }
             }
         }
     }
