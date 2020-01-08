@@ -49,9 +49,11 @@ namespace Festispec.Utility.Converters
                 gfx.DrawString("FestiSpec.", fontText, XBrushes.Black, new XRect(20, -20, page.Width, page.Height), XStringFormats.BottomLeft);
                 gfx.DrawString("1.", fontText, XBrushes.Black, new XRect(-20, -20, page.Width, page.Height), XStringFormats.BottomRight);
 
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Title = "Save";
-                saveFileDialog.Filter = "PDF Files (*.pdf) " + "|";
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    Title = "Save",
+                    Filter = "PDF Files (*.pdf) " + "|"
+                };
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     documentName = saveFileDialog.FileName;
                 
