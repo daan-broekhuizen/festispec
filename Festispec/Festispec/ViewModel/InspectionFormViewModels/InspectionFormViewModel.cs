@@ -154,12 +154,14 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if (_questions == null)
                 {
                     _questions = new ObservableCollection<QuestionViewModel>();
+                    
                     foreach (Vraag question in _inspectionForm.Vraag)
                     {
                         _questions.Add(new QuestionViewModel(question, _inspectionForm)); ;
                     }
+                    
                 }
-  
+                _questions = new ObservableCollection<QuestionViewModel>(_questions.OrderBy(x => x.OrderNumber));
                 return _questions;
             }
         }
@@ -445,12 +447,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         public void Swap(int index1, int index2)
         {
-            QuestionViewModel memory = Questions[index1];
-            Questions[index1] = Questions[index2];
-            Questions[index2] = memory;
-            SelectedQuestion = Questions[index2];
-            Questions[index1].OrderNumber = index1 + 1;
-            Questions[index2].OrderNumber = index2 + 1;
+            QuestionViewModel memory1 = Questions[index1];
+            QuestionViewModel memory2 = Questions[index2];
+            memory1.OrderNumber = index2 + 1;
+            memory2.OrderNumber = index1 + 1;
+            RaisePropertyChanged("Questions");
         }
 
         public void AddQuestion(Vraag v)
