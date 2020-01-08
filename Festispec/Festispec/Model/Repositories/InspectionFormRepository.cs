@@ -52,10 +52,10 @@ namespace Festispec.Model.Repositories
                 Vraag target = context.Vraag.Where(v => v.VraagID == question.VraagID).FirstOrDefault();
                 if (target != null)
                 {
-                    List<VraagMogelijkAntwoord> vraagMogelijkAntwoord = context.VraagMogelijkAntwoord.Where(x => x.VraagID == question.VraagID).ToList();
-                    context.VraagMogelijkAntwoord.RemoveRange(vraagMogelijkAntwoord);
-                    List<Antwoorden> antwoorden = context.Antwoorden.Where(x => x.VraagID == question.VraagID).ToList();
-                    context.Antwoorden.RemoveRange(antwoorden);
+                    List<VraagMogelijkAntwoord> possibleAnwsers = context.VraagMogelijkAntwoord.Where(x => x.VraagID == question.VraagID).ToList();
+                    context.VraagMogelijkAntwoord.RemoveRange(possibleAnwsers);
+                    List<Antwoorden> anwsers = context.Antwoorden.Where(x => x.VraagID == question.VraagID).ToList();
+                    context.Antwoorden.RemoveRange(anwsers);
                     context.Vraag.Remove(target);
                 }
                     
