@@ -7,15 +7,17 @@
         xmlns:local="clr-namespace:Festispec.View.Components"
         xmlns:ViewModel="clr-namespace:Festispec.ViewModel.Components"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:converters="clr-namespace:Festispec.Utility.Converters"
+        xmlns:Converters="clr-namespace:Festispec.Utility.Converters"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="ChartDialogBox" Height="640" Width="800">
+        x:Name="main"
+        Title="Grafiek Genereren" Height="640" Width="800">
     <Window.Resources>
         <ViewModel:ChartDialogViewModel x:Key="ViewModel" />
-        <converters:BoolToBoldConverter x:Key="BoolToBoldConverter" />
-        <converters:ConfigurationToVisibilityConverter x:Key="ConfigurationToVisibilityConverter" />
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Converters:BoolToBoldConverter x:Key="BoolToBoldConverter" />
+        <Converters:ConfigurationToVisibilityConverter x:Key="ConfigurationToVisibilityConverter" />
+        <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Converters:MultiConverter x:Key="MultiConverter" />
     </Window.Resources>
     <Grid DataContext="{StaticResource ViewModel}">
         <Grid.RowDefinitions>
@@ -156,7 +158,14 @@
                     </TextBox>
                 </Grid>
 
-                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}" CommandParameter="{Binding ElementName=controlGridChart}" />
+                <Button Grid.Row="6" Content="Invoegen" Command="{Binding AddChartCommand}">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiConverter}">
+                            <Binding ElementName="controlGridChart" />
+                            <Binding ElementName="main" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
             </Grid>
         </Grid>
     </Grid>
