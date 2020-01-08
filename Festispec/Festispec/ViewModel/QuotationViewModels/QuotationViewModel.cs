@@ -114,7 +114,7 @@ namespace Festispec.ViewModel.QuotationViewModels
                 }
             } 
         }
-        public ImageSource Logo { get => ImageByteConverter.BytesToImage(_quotation.Opdracht.Klant.KlantLogo); }
+        public ImageSource Logo => ImageByteConverter.BytesToImage(_quotation.Opdracht.Klant.KlantLogo);
         public QuotationViewModel(Offerte quotation, QuotationRepository repo)
         {
             _quotation = quotation;

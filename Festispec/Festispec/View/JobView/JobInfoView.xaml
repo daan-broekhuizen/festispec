@@ -33,7 +33,7 @@
                 <TextBlock Text="Opdracht"  Foreground="Black" FontWeight="Bold"/>
             </Viewbox>
             <Viewbox Grid.Column="3" Grid.Row="1" Stretch="Uniform"  HorizontalAlignment="Center" MaxWidth="200">
-                <Image Source="/Images/festispec_logo.png"></Image>
+                <Image Source="{Binding JobVM.Logo}"></Image>
             </Viewbox>
         </Grid>
 
@@ -116,9 +116,6 @@
             <Viewbox Grid.Row="6" Grid.Column="1">
                 <Label Content="{Binding EndDateError}" Foreground="Red" />
             </Viewbox>
-            <Viewbox Grid.Row="3" Grid.Column="0">
-                <Label Content="{Binding CustomerNameError}" Foreground="Red" />
-            </Viewbox>
             <Viewbox Grid.Row="3" Grid.Column="1">
                 <Label Content="{Binding JobNameError}" Foreground="Red" />
             </Viewbox>
@@ -144,18 +141,17 @@
         </Grid>
         <Grid Grid.Row="5">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.30*"/>
                 <ColumnDefinition Width="0.20*"/>
                 <ColumnDefinition Width="0.20*"/>
                 <ColumnDefinition Width="0.20*"/>
-                <ColumnDefinition Width="0.20*"/>
-                <ColumnDefinition Width="0.20*"/>
-                <ColumnDefinition Width="0.20*" />
+                <ColumnDefinition Width="0.10*"/>
                 <ColumnDefinition Width="0.20*"/>
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="1" HorizontalAlignment="Right">
                 <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding ShowQuotationCommand}">
-                    Offerte (formulier)
+                    Offerte
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="2" HorizontalAlignment="Right">
@@ -164,11 +160,6 @@
                 </Button>
             </Viewbox>
             <Viewbox Grid.Column="3" HorizontalAlignment="Right">
-                <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding COMMAND}">
-                    Inspectieresultaten
-                </Button>
-            </Viewbox>
-            <Viewbox Grid.Column="4" HorizontalAlignment="Right">
                 <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding ShowRapportageCommand}">
                     Rapportage
                 </Button>

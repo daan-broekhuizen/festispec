@@ -22,13 +22,31 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Email");
             }
         }
-        public string Name
+        public string FirstName
         {
             get => _contactPerson.Voornaam;
             set
             {
                 _contactPerson.Voornaam = value;
-                RaisePropertyChanged("Name");
+                RaisePropertyChanged("FirstName");
+            }
+        }
+        public string Infix
+        {
+            get => _contactPerson.Tussenvoegsel;
+            set
+            {
+                _contactPerson.Tussenvoegsel = value;
+                RaisePropertyChanged("Infix");
+            }
+        }
+        public string LastName
+        {
+            get => _contactPerson.Achternaam;
+            set
+            {
+                _contactPerson.Achternaam = value;
+                RaisePropertyChanged("LastName");
             }
         }
         public string Telephone
@@ -49,6 +67,15 @@ namespace Festispec.ViewModel
                 RaisePropertyChanged("Note");
             }
         }
+        public string Role
+        {
+            get => _contactPerson.Rol;
+            set
+            {
+                _contactPerson.Rol = value;
+                RaisePropertyChanged("Role");
+            }
+        }
 
         public ContactPersonViewModel(Contactpersoon contact)
         {
@@ -57,6 +84,11 @@ namespace Festispec.ViewModel
         public ContactPersonViewModel()
         {
             _contactPerson = new Contactpersoon();
+        }
+
+        public void SetContactPerson(Contactpersoon contact)
+        {
+            _contactPerson = contact;
         }
     }
 }

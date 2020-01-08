@@ -28,12 +28,13 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
-        public void CreateCustomer(Klant klant)
+        public Klant CreateCustomer(Klant klant)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.Klant.Add(klant);
+                Klant customer = context.Klant.Add(klant);
                 context.SaveChanges();
+                return customer;
             }
         }
 
@@ -47,13 +48,13 @@ namespace FestiSpec.Domain.Repositories
             }
         }
 
-        public void CreateContactPerson(Contactpersoon contactpersoon)
+        public Contactpersoon CreateContactPerson(Contactpersoon contactpersoon)
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Klant klant = context.Klant.Where(k => k.KlantID == contactpersoon.KlantID).FirstOrDefault();
-                klant.Contactpersoon.Add(contactpersoon);
+                Contactpersoon contact = context.Contactpersoon.Add(contactpersoon);
                 context.SaveChanges();
+                return contact;
             }
         }
     }

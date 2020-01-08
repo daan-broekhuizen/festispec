@@ -10,9 +10,8 @@ namespace Festispec.Model.Repositories
     {
         List<Klant> GetCustomers();
         void UpdateCustomer(Klant klant);
-        void CreateCustomer(Klant klant);
+        Klant CreateCustomer(Klant klant);
         void UpdateContactPerson(Contactpersoon contact);
-        void CreateContactPerson(Contactpersoon contactpersoon);
-
+        Contactpersoon CreateContactPerson(Contactpersoon contactpersoon);
     }
 }

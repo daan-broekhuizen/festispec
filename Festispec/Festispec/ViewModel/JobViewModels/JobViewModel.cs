@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Festispec.Model;
 using Festispec.Model.Repositories;
 using Festispec.Utility.Converters;
@@ -170,12 +171,14 @@ namespace Festispec.ViewModel
 
         public ImageSource Logo
         {
-            get => ImageByteConverter.BytesToImage(_opdracht.Klant.KlantLogo);
-            set
+            get 
             {
-                _opdracht.Klant.KlantLogo = ImageByteConverter.PngImageToBytes(value);
-                RaisePropertyChanged("Logo");
-            }
+                ImageSource image = ImageByteConverter.BytesToImage(_opdracht.Klant.KlantLogo);
+                if (image != null)
+                    return image;
+                else
+                    return new BitmapImage(new Uri(@"pack://application:,,,/Images/add_customer_logo.png"));
+            } 
         }
 
 

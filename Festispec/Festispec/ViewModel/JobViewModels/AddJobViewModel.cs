@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,10 +20,11 @@ namespace Festispec.ViewModel
     {
         private NavigationService _navigationService;
         private JobRepository _jobRepo;
+        private CustomerRepository _customerRepo;
         public JobViewModel JobVM { get; set; }
         public ICommand SaveJobCommand { get; set; }
+        public Dictionary<int, string> Customers { get; private set; }
         public ICommand PreviousPageCommand { get; set; }
-        public List<string> Customers { get; set; }
         public List<string> Status { get; set; }
         public DateTime MinimalDate
         {
@@ -102,20 +104,27 @@ namespace Festispec.ViewModel
         {
             _navigationService = service;
             _jobRepo = repo;
+            _customerRepo = Crepo;
 
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
             else
                 JobVM = new JobViewModel();
 
-            SaveJobCommand = new RelayCommand(CanSaveJob);
-            PreviousPageCommand = new RelayCommand(PreviousPage);
-            Customers = new List<string>();
+            //Set customers
+            Customers = new Dictionary<int, string>();
+            _customerRepo.GetCustomers().ForEach(c => Customers.Add(c.KlantID, c.Naam));
+
+            //Set statusses
             Status = new List<string>();
-            Crepo.GetCustomers().ForEach(e => Customers.Add(e.Naam));
             Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+            JobVM.Status = Status.FirstOrDefault(s => s.Equals("Nieuwe opdracht"));
+
             JobVM.StartDatum = DateTime.Today;
             JobVM.EindDatum = DateTime.Today;
+            SaveJobCommand = new RelayCommand(CanSaveJob);
+            PreviousPageCommand = new RelayCommand(PreviousPage);
+
 
         }
 
@@ -126,17 +135,15 @@ namespace Festispec.ViewModel
 
         private void SaveJob()
         {
-            string name = JobVM.CustomerName;
-            StatusRepository repo = new StatusRepository();
             Opdracht opdracht = new Opdracht()
             {
                 OpdrachtNaam = JobVM.JobName,
                 Status = JobVM.Status,
-                KlantID = new CustomerRepository().GetCustomers().Where(e => e.Naam == JobVM.CustomerName).FirstOrDefault().KlantID,
+                KlantID = JobVM.CustomerID,
                 Klantwensen = JobVM.CustomerWishes,
                 LaatsteWijziging = DateTime.Now,
                 CreatieDatum = DateTime.Now,
-                MedewerkerID = 2,
+                MedewerkerID = _navigationService.Account.Id,
                 StartDatum = JobVM.StartDatum,
                 EindDatum = JobVM.EindDatum
 
@@ -149,7 +156,7 @@ namespace Festispec.ViewModel
         {
             List<ValidationFailure> errors = new JobValidator().Validate(JobVM).Errors.ToList();
             ValidationFailure jobnameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
-            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerName")).FirstOrDefault();
+            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerID")).FirstOrDefault();
             ValidationFailure begindateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
             ValidationFailure enddateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
             ValidationFailure statusError = errors.Where(e => e.PropertyName.Equals("Status")).FirstOrDefault();
