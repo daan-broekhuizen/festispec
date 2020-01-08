@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OfflineJobInfoView"
-      DataContext ="{Binding OfflineJobInfo, Source={StaticResource Locator}}">
+      DataContext ="{Binding OfflineJob, Source={StaticResource Locator}}">
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -75,7 +75,7 @@
             </Viewbox>
 
             <Viewbox Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left">
-                <DatePicker IsEnabled="False" SelectedDate="{Binding JobVM.StartDatum}" DisplayDateStart="{Binding MinimumDate}">
+                <DatePicker IsHitTestVisible="False" IsEnabled="False" SelectedDate="{Binding JobVM.StartDatum}" DisplayDateStart="{Binding MinimumDate}">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
@@ -91,7 +91,7 @@
             </Viewbox>
 
             <Viewbox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <DatePicker IsEnabled="False" SelectedDate="{Binding JobVM.EindDatum}" DisplayDateStart="{Binding MinimumDate}">
+                <DatePicker IsHitTestVisible="False" IsEnabled="False" SelectedDate="{Binding JobVM.EindDatum}" DisplayDateStart="{Binding MinimumDate}">
                     <DatePicker.Resources >
                         <Style TargetType="DatePickerTextBox">
                             <Setter Property="Template">
@@ -108,7 +108,7 @@
 
             <TextBox Text="{Binding JobVM.KlantNaam}" IsReadOnly="True" Grid.Row="2"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
             <TextBox Text="{Binding JobVM.OpdrachtNaam}" IsReadOnly="True" FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
-            <ComboBox Name="ComboBoxStatus" ItemsSource="{Binding JobVM.Status}" IsReadOnly="True" FontSize="15" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0" Grid.Column="2" Grid.Row="2" SelectedItem="{Binding JobVM.Status}"/>
+            <TextBox Text="{Binding JobVM.Status}" IsReadOnly="True" FontSize="15" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
 
         </Grid>
 

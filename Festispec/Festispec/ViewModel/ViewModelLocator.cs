@@ -57,6 +57,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<TemplateRepository>();
             SimpleIoc.Default.Register<RapportageRepository>();
             SimpleIoc.Default.Register<InspectionFormRepository>();
+            SimpleIoc.Default.Register<OfflineJobRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()

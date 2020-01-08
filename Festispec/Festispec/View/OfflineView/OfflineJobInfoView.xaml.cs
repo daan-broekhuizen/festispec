@@ -25,10 +25,8 @@ namespace Festispec.View
         public OfflineJobInfoView()
         {
             InitializeComponent();
-            Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
         }
 
-        private void ShowWindow(string message) => MessageBox.Show(message);
 
     }
 }
