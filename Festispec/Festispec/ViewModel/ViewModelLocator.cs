@@ -182,7 +182,7 @@ namespace Festispec.ViewModel
         #region OfflineVM's
         public OfflineLoginViewModel OfflineLogin => new OfflineLoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
         public OfflineJobListViewModel OfflineJobList => new OfflineJobListViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
-        public OfflineJobInfoViewModel OfflineJobInfo => new OfflineJobInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), OfflineJobRepo);
+        public OfflineJobInfoViewModel OfflineJob => new OfflineJobInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), OfflineJobRepo);
         #endregion
 
         //Clean when logging out?

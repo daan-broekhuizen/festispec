@@ -231,7 +231,8 @@ namespace Festispec.ViewModel
                 {
                     string json = sr.ReadToEnd();
                     List<JsonJob> jsonJobs = JsonConvert.DeserializeObject<List<JsonJob>>(json);
-                    jsonJobs.Add(jobToSave);
+                    if(jsonJobs.Contains(jobToSave))
+                        jsonJobs.Add(jobToSave);
                     newJson = JsonConvert.SerializeObject(jsonJobs);
                 }
                 using (StreamWriter sw = new StreamWriter(path, false))

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Festispec.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="JobInfoView"
+      Title="OfflineJobInfoView"
       DataContext ="{Binding OfflineJobInfo, Source={StaticResource Locator}}">
 
     <Grid Background="White">
