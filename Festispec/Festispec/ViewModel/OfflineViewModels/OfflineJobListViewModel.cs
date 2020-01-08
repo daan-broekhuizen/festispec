@@ -89,7 +89,7 @@ namespace Festispec.ViewModel.OfflineViewModels
         public void ShowOfflineJobInfo()
         {
             if (SelectedJob != null)
-                _navigationService.ApplicationNavigateTo("OfflineJob", SelectedJob);
+                _navigationService.OfflineNavigation("OfflineJob", SelectedJob);
         }
 
         public void FilterOfflineJobs()

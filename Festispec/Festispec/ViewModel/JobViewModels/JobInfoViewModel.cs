@@ -220,7 +220,7 @@ namespace Festispec.ViewModel
         {
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/Resources/opdrachten.json";
             List<JsonJob> jsonarray = new List<JsonJob>();
-            JsonJob jobToSave = (JsonJob)Jrepo.GetSingleJob(JobVM.JobID);
+            JsonJob jobToSave = (JsonJob)_jobRepo.GetSingleJob(JobVM.JobID);
             if (!File.Exists(path))
             {
                 jsonarray.Add(jobToSave);

@@ -184,6 +184,7 @@
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\DTO\JsonJob.cs" />
     <Compile Include="Model\Enums\EnumMonth.cs" />
     <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\OfflineJobRepository.cs" />
     <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
