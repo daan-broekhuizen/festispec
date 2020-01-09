@@ -79,7 +79,7 @@ namespace Festispec.ViewModel.OfflineViewModels
             Jobs = OfflineJobRepo
                     .GetOfflineOpdrachten(Directory.GetParent(Directory
                     .GetCurrentDirectory()).Parent.FullName + 
-                    "/Resources/opdrachten.json")
+                    "/bin/opdrachten.json")
                     .Select(c => new OfflineJobViewModel(c)).ToList();
             FilteredJobs = Jobs;
             SearchJob = new RelayCommand(FilterOfflineJobs);
