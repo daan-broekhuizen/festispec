@@ -23,7 +23,6 @@ namespace Festispec.Utility.Validators
             RuleFor(c => c.Password).NotEmpty().WithMessage("Voer een wachtwoord in.");
             RuleFor(c => c.PhoneNumber).NotEmpty().WithMessage("Voer een telefoonnummer in.");
             RuleFor(c => c.PhoneNumber).Length(10).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
-            RuleFor(c => c.PhoneNumber).Must(IsNumericalSequence).WithMessage("Voer een geldig telefoonnummer in (10 cijfers).");
             RuleFor(c => c.Username).Must(IsValidLength).WithMessage("Maak de gebruikersnaam niet langer dan 25 karakters.");
             RuleFor(c => c.Password).Must(IsValidLength).WithMessage("Maak het wachtwoord niet langer dan 25 karakters.");
             RuleFor(c => c.Email).NotEmpty().WithMessage("Voer een email in.");
