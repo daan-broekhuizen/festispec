@@ -104,13 +104,11 @@ namespace Festispec.Utility
                 {
                     Antwoorden answer = answers[index];
 
-                    Console.Write(answer.AntwoordText + "|");
                     gfx.DrawString(answer.AntwoordText, font, XBrushes.Black, new XRect(currentX, currentY, page.Width, page.Height), XStringFormats.TopLeft);
                     currentX += cellWidth + 20;
 
                     index++;
                 }
-                Console.WriteLine();
             }
             currentY += 40;
 
