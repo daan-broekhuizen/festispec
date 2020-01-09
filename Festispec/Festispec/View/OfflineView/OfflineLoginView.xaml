@@ -35,6 +35,7 @@
             <Image Grid.Column="0" Grid.Row="1" Source="/Images/festispec_logo.png"></Image>
             <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Geen verbinding met de database"></Label>
             <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Applicatie opgestart in offline-modus"></Label>
+            <Label Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Als u opdrachten heeft opgeslagen, kunt de onderstaande knop gebruiken om deze te bekijken"></Label>
             <Button  Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Opdrachtenoverzicht" FontSize="16" Command="{Binding ShowOfflineJobListCommand}"></Button>
 
         </Grid>
