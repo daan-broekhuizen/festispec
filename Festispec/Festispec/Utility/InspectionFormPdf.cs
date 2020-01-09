@@ -62,7 +62,7 @@ namespace Festispec.Utility
                 switch (question.Vraagtype)
                 {
                     case "tv":
-                        currentY = DrawTableQuestionAnswer(gfx, page, answers, italicFont, currentY);
+                        currentY = DrawTableQuestionAnswer(gfx, page, answers, question.VraagMogelijkAntwoord.Count, italicFont, currentY);
 
                         break;
                     case "av":
@@ -81,7 +81,7 @@ namespace Festispec.Utility
             return currentQuestion;
         }
 
-        private int DrawTableQuestionAnswer(XGraphics gfx, PdfPage page, List<Antwoorden> answers, XFont font, int currentY)
+        private int DrawTableQuestionAnswer(XGraphics gfx, PdfPage page, List<Antwoorden> answers, int columnSize, XFont font, int currentY)
         {
             int cellWidth = 0;
 
