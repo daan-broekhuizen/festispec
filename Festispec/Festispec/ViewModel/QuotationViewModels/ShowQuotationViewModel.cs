@@ -130,7 +130,6 @@ namespace Festispec.ViewModel.QuotationViewModels
                 Beschrijving = QuotationVM.Description,
                 Totaalbedrag = price,
                 KlantbeslissingReden = QuotationVM.Decision,
-                Aanmaakdatum = QuotationVM.CreationDate,
                 LaatsteWijziging = DateTime.Now,
             });
             if (QuotationVM.IsSent)

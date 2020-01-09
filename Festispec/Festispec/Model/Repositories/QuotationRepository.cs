@@ -71,6 +71,7 @@ namespace Festispec.Model.Repositories
             using(FestispecContext context = new FestispecContext())
             {
                 Offerte toUpdate = context.Offerte.FirstOrDefault(q => q.OfferteID == quotation.OfferteID);
+                quotation.Aanmaakdatum = toUpdate.Aanmaakdatum;
                 context.Entry(toUpdate).CurrentValues.SetValues(quotation);
                 context.SaveChanges();
             }
