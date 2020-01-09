@@ -141,6 +141,10 @@ namespace Festispec.Model
                 .WithRequired(e => e.VraagtypeLookup)
                 .HasForeignKey(e => e.Vraagtype)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Account>()
+                .HasIndex(e => e.Gebruikersnaam)
+                .IsUnique();
         }
     }
 }
