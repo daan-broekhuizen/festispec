@@ -44,5 +44,17 @@ namespace FestiSpec.Domain.Repositories
                 context.SaveChanges();
             }
         }
+
+        public Opdracht GetSingleJob(int ID)
+        {
+            using (FestispecContext context = new FestispecContext())
+            {
+                return context.Opdracht
+                    .Include("Klant")
+                    .Include("StatusLookup")
+                    .Where(c => c.OpdrachtID == ID).FirstOrDefault();
+            }
+
+        }
     }
 }
