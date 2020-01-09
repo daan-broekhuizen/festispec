@@ -11,6 +11,7 @@ using Festispec.ViewModel.InspectionFormViewModels;
 using Festispec.ViewModel.RapportageViewModels;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
@@ -225,7 +226,7 @@ namespace Festispec.ViewModel.Components
             _rapportageRepository = rapportageRepository;
             IsXAxis = true;
 
-            foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv"))
+            foreach (Vraag vraag in opdracht.Inspectieformulier.FirstOrDefault().Vraag.Where(x => x.Vraagtype == "mv" || x.Vraagtype == "sv"))
             {
                 if (vraag.Antwoorden.Count > 0)
                 {
@@ -243,7 +244,10 @@ namespace Festispec.ViewModel.Components
 
                     break;
                 case "Line":
-                    ChartViewModel = new LineChartViewModel();
+                    ChartViewModel = new LineChartViewModel()
+                    {
+                        LegendLocation = LegendLocation.Right
+                    };
 
                     break;
                 case "Pie":

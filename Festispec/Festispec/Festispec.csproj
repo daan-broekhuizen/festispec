@@ -227,6 +227,7 @@
     <Compile Include="Utility\Extensions\FrameworkExtension.cs" />
     <Compile Include="Utility\ObservableDictionary.cs" />
     <Compile Include="Utility\InspectionFormPdf.cs" />
+    <Compile Include="Utility\PdfTextFormatter.cs" />
     <Compile Include="Utility\Validators\ContactPersonValidator.cs" />
     <Compile Include="Utility\Validators\CustomerValidator.cs" />
     <Compile Include="Utility\Validators\InspectionFormValidator.cs" />
