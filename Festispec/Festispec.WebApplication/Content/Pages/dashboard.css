@@ -1,64 +1,58 @@
 ﻿body 
 {
-    background: lightblue url("../Images/Dashboard_background.png");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    background: url("../Images/Dashboard_background.png");
+	background-clip: border-box;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding-top: 80px;
 }
 
-img 
-{
-    width: 100%;
+
+.intro img {
+	width: 100%;
+	margin-bottom: 10px;
+	min-width: 350px;
 }
 
 
-#logo img 
+
+.task img
 {
-    width: 100%;
-	margin: 20px 0;
-	left: 0;
+	position: relative;
+	max-height: 40px;
+	width:100%;
 }
 
-.task
-{
-
+.task {
+	text-align:left;
+	background-color: lightgrey;
+	margin-left: 20px;
+	margin-right: 20px;
+	line-height: 60px;
+	min-height: 60px;
 }
 
-.task img 
-{
-    max-height: 20px;
-	max-width:40px;
-}
 
-.col-md-6 .row 
-{
-    background-color: lightgrey;
-	margin: 20px 20px 10px 20px;
-	padding: 10px;
-	max-height: 45px;
-}
-
-button 
-{
+button {
 	margin-right: 10px;
 	border:none;
 	background:none;
 }
 
-.upcoming-tasks 
-{
-	text-align:left;
+.upcoming {
+	background-color: white;
+	min-height:350px;
+	max-height:420px;
+	min-width:350px;
 	padding: 10px;
-	margin-bottom: 10px;
-    background-color: white;
-	width: 100%;
-	height: 280px;
+	
 }
 
 .all-tasks 
 {
     font-size: 1.4em;
 	position: absolute;
-	padding: 10px;
 	bottom: 5px;
 }
 

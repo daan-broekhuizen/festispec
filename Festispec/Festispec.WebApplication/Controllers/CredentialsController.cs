@@ -28,6 +28,10 @@ namespace Festispec.WebApplication.Controllers
 
         public ActionResult Login()
         {
+            if(Session["user"] != null)
+            {
+                Session.Remove("user");
+            }
             return View();
         }
 
@@ -76,10 +80,12 @@ namespace Festispec.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                account.Rol = "in";
+                account.LaatsteWijziging = DateTime.Now;
                 _context.Account.Add(account);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Login", "Credentials");
             }
 
             ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis", account.Rol);

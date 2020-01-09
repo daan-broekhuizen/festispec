@@ -1,5 +1,5 @@
 ﻿body {
-	background-image: url('Dashboard_background.png');
+	background-image: url("../Images/Dashboard_background.png");
 	background-clip: border-box;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -112,10 +112,8 @@ progress::-webkit-progress-value {
 }
 
 .inspection-data img {
-	position: absolute;
-	right: 40px;
-	top: 90px;
-	width: 15%;
+	position: relative;
+	top:20px;
 }
 
 .inspection-info {

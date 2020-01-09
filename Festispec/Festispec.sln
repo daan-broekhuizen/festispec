@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec", "Festispec\Festispec.csproj", "{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.Tests", "Festispec.Tests\Festispec.Tests.csproj", "{45A77E96-A016-4818-B59E-7EAEA77C0AE3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.WebApplication", "Festispec.WebApplication\Festispec.WebApplication.csproj", "{1E84009F-12DD-43DA-B4B6-FB95681693DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.WebApplication.Tests", "Festispec.WebApplication.Tests\Festispec.WebApplication.Tests.csproj", "{CF648E15-C7A4-46D7-A854-BAE668F8FF58}"
@@ -17,14 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C35328A7-7AE5-4739-8E5D-BACA0B1F3D00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45A77E96-A016-4818-B59E-7EAEA77C0AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45A77E96-A016-4818-B59E-7EAEA77C0AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45A77E96-A016-4818-B59E-7EAEA77C0AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45A77E96-A016-4818-B59E-7EAEA77C0AE3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E84009F-12DD-43DA-B4B6-FB95681693DE}.Release|Any CPU.ActiveCfg = Release|Any CPU

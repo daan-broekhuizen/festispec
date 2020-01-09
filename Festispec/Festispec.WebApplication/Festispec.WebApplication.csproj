@@ -146,6 +146,7 @@
     <Content Include="Content\Images\addImageIcon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\availability_icon.png" />
     <Content Include="Content\Images\Bar_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -164,6 +165,7 @@
     <Content Include="Content\Images\Dashboard_customers.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\dashboard_icon.png" />
     <Content Include="Content\Images\Dashboard_intro.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -191,6 +193,7 @@
     <Content Include="Content\Images\Dashboard_schedule.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\errores.jpg" />
     <Content Include="Content\Images\Extra_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -203,6 +206,7 @@
     <Content Include="Content\Images\Jobs.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\jobs_icon.png" />
     <Content Include="Content\Images\Line_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -212,6 +216,7 @@
     <Content Include="Content\Images\Pie_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\planning_icon.png" />
     <Content Include="Content\Images\Plus_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -474,6 +479,7 @@
     <Compile Include="Controllers\Availability\AvailabilityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\InspectionformController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\Planning\PlanningAPIController.cs" />
@@ -492,11 +498,11 @@
     <Compile Include="Models\DTO\PlanningAPIEvent.cs" />
     <Compile Include="Models\FestiSpecContext.cs" />
     <Compile Include="Models\Inspectieformulier.cs" />
-    <Compile Include="Models\InspectionformViewModel.cs" />
+    <Compile Include="ViewModels\Inspection\InspectionformViewModel.cs" />
     <Compile Include="Models\Klant.cs" />
     <Compile Include="Models\Offerte.cs" />
     <Compile Include="Models\Opdracht.cs" />
-    <Compile Include="Models\QuestionViewModel.cs" />
+    <Compile Include="ViewModels\Inspection\QuestionViewModel.cs" />
     <Compile Include="Models\RapportTemplate.cs" />
     <Compile Include="Models\Repositories\AssignmentRepository.cs" />
     <Compile Include="Models\Repositories\AvailabilityRepository.cs" />
@@ -504,7 +510,7 @@
     <Compile Include="Models\Repositories\UserRepository.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\TableAnswerViewModel.cs" />
+    <Compile Include="ViewModels\Inspection\TableAnswerViewModel.cs" />
     <Compile Include="Models\Vraag.cs" />
     <Compile Include="Models\VraagType.cs" />
     <Compile Include="Models\VraagMogelijkAntwoord.cs" />
@@ -538,6 +544,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Assignment\Search.cshtml" />
     <Content Include="Views\Planning\PlanningView.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -17,9 +17,15 @@ namespace Festispec.WebApplication.Models
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int KlantID { get; set; }
+
+        [Required]
         [StringLength(8)]
         [Column("KvK_nummer")]
         public string KvKNummer { get; set; }
+
+        public string Vestigingnummer { get; set; }
 
         [Required]
         [StringLength(45)]

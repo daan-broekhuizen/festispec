@@ -1,99 +1,52 @@
 ﻿@model IEnumerable<Festispec.WebApplication.Models.Inspectieformulier>
 
-@{
-    Layout = null;
+<link href="~/Content/Pages/assignment_search.css" rel="stylesheet" />
+
+<h2>Jouw opdrachten</h2>
+
+<hr />
+
+<div class="row">
+	<form>
+		<input id="zoekbalk" class="form-control" type="text" placeholder="Zoek opdrachtnaam" />
+	</form>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<h2>Zoekresultaten</h2>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label for="sort">Sorteren op:</label>
+			<select class="form-control" id="sort">
+				<option>Datum</option>
+				<option>Stad</option>
+				<option>Klantnaam</option>
+			</select>
+		</div>
+	</div>
+</div>
+
+@foreach (var item in Model)
+{
+	<div class="row result">
+		<div class="col-md-12">
+			<div class="col-md-3">
+				Klant: @Html.DisplayFor(modelItem => item.Opdracht.OpdrachtNaam)
+			</div>
+			<div class="col-md-3">
+				Stad: @Html.DisplayFor(modelItem => item.Stad)
+			</div>
+			<div class="col-md-3">
+				Datum: @String.Format("{0:d/MM/yyyy}", @item.DatumInspectie)
+
+			</div>
+			<div class="col-md-3">
+				<button>
+					@Html.ActionLink("Meer info", "Details", "Inspectionform", new { inspectionId = item.InspectieformulierID, userId = (int?)Session["user"] }, null)
+				</button>
+			</div>
+		</div>
+	</div>
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Opdracht.OpdrachtNaam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InspectieFormulierTitel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatumInspectie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTijd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EindTijd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Straatnaam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Huisnummer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beschrijving)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LaatsteWijziging)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BenodigdeInspecteurs)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Opdracht.OpdrachtNaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InspectieFormulierTitel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatumInspectie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTijd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EindTijd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Straatnaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Huisnummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschrijving)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LaatsteWijziging)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BenodigdeInspecteurs)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id=item.InspectieformulierID }) 
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>

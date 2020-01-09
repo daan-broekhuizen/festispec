@@ -3,44 +3,61 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+	<title>@ViewBag.Title - Festispec web-portal</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/fontawesome")
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Planning", "PlanningView", "Planning", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Beschikbaarheid", "AvailabilityView", "Availability", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Opdrachten", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Meldingen", "Index", "Credentials", new { area = "" }, new { @class = "navbar-brand" })
-                </ul>
-            </div>
-        </div>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:lightgray; border-color:lightgray;">
+		<div>
+			<a class="navbar-brand">
+				<img src="../Content/Images/festispec logo.png" height="25" />
+			</a>
+		</div>
+		
+		@if (Session["user"] != null)
+		{
+			<div class="navbar-right" style="padding-top:15px; position:absolute; right:20px;">
+				@Html.ActionLink("Uitloggen", "Login", "Credentials")
+			</div>
+			
+		}
 
-    <div class="container body-content">
-        @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+	</div>
+	@if (Session["user"] != null)
+	{
+		<div class="navbar navbar-inverse navbar-fixed-bottom" style="display:inline-block; padding-top : 5px; background-color:gray;  border-color:grey;">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-4 col-md-4 col-md-offset-4">
+				<a class="col-xs-3" href="@Url.Action("Index", "Dashboard")">
+					<image style="padding-top: 2px" src="~/Content/Images/dashboard_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("Index", "Inspectionform", new { userId = (int)Session["user"] })">
+					<image style="padding-top: 2px" src="~/Content/Images/jobs_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("PlanningView", "Planning")">
+					<image src="~/Content/Images/planning_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("AvailabilityView", "Availability")">
+					<image src="~/Content/Images/availability_icon.png" />
+				</a>
+			</div>
+				
+		</div>
+	}
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    @RenderSection("Scripts", false)
-    @RenderSection("Style", false)
+
+	<div class="container body-content">
+		@RenderBody()
+		<footer style="bottom:50px;">
+			<p>&copy; @DateTime.Now.Year - FestispecQ </p>
+		</footer>
+	</div>
+
+	<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	@RenderSection("Scripts", false)
+	@RenderSection("Style", false)
 </body>
 </html>

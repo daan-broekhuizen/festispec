@@ -1,6 +1,7 @@
 ﻿using Festispec.WebApplication.Models;
 using Festispec.WebApplication.Models.Repositories;
 using Festispec.WebApplication.ViewModels.Dashboard;
+using Festispec.WebApplication.ViewModels.Inspection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Index()
         {
             int? userId = (int?) Session["user"];
+            if (userId == null) 
+                return RedirectToAction("Error", "Error");
             Account account = null;
             InspectionformRepository repo = new InspectionformRepository();
             List<Inspectieformulier> assignmentList;
@@ -30,10 +33,11 @@ namespace Festispec.WebApplication.Controllers
             else
                 assignmentList = new List<Inspectieformulier>();
 
-            DashboardViewModel dashboardViewModel = new DashboardViewModel();
-            dashboardViewModel.Account = account;
-            dashboardViewModel.Inspectionform = assignmentList;
-            
+            DashboardViewModel dashboardViewModel = new DashboardViewModel
+            {
+                Account = account,
+                Inspectionform = assignmentList.Select(i => new InspectionformViewModel(i)).ToList()
+            };
             return View(dashboardViewModel);
         }
     }
