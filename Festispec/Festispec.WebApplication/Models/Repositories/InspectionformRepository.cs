@@ -40,7 +40,7 @@ namespace Festispec.WebApplication.Models.Repositories
                 List<Inspectieformulier> list = context.Inspectieformulier.Include(a => a.Opdracht.Klant).Include(a => a.Ingepland).Include(a => a.Vraag)
                 .Where(a => a.Ingepland.Any(i => i.AccountID == userId)).ToList();
 
-                return list.Where(e => e.DatumInspectie >= DateTime.Now).OrderBy(e => e.DatumInspectie).ToList();
+                return list.Where(e => e.DatumInspectie >= DateTime.Now.Date).OrderBy(e => e.DatumInspectie).ToList();
             }
         }
 
