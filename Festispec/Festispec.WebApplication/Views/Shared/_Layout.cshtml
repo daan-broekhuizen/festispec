@@ -30,11 +30,11 @@
 	{
 		<div class="navbar navbar-inverse navbar-fixed-bottom" style="display:inline-block; padding-top : 5px; background-color:gray;  border-color:grey;">
 			<div class="col-xs-10 col-xs-offset-1 col-sm-5 col-sm-offset-4 col-md-4 col-md-offset-4">
-				<a class="col-xs-3" href="@Url.Action("Index", "Inspectionform", new { userId = (int)Session["user"] })">
-					<image style="padding-top: 2px" src="~/Content/Images/jobs_icon.png" />
-				</a>
 				<a class="col-xs-3" href="@Url.Action("Index", "Dashboard")">
 					<image style="padding-top: 2px" src="~/Content/Images/dashboard_icon.png" />
+				</a>
+				<a class="col-xs-3" href="@Url.Action("Index", "Inspectionform", new { userId = (int)Session["user"] })">
+					<image style="padding-top: 2px" src="~/Content/Images/jobs_icon.png" />
 				</a>
 				<a class="col-xs-3" href="@Url.Action("PlanningView", "Planning")">
 					<image src="~/Content/Images/planning_icon.png" />
