@@ -25,18 +25,16 @@
 						counter++;
 						<div class="row">
 							<div class="task">
-								<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 customer-logo">
+								<div class="col-xs-2 col-sm-2 col-md-4 col-lg-2 customer-logo">
 									<img src="@String.Format("data:image/jpg;base64,{0}", item.LogoString)" />
 								</div>
-								<div class="col-xs-5 col-md-4">
-									<p>In <b>@item.Inspectionform.Stad</b></p>
+								<div class="col-xs-8 col-md-8">
+									@item.Inspectionform.Stad op @String.Format("{0:d/MM}", @item.Inspectionform.DatumInspectie)
 								</div>
-								<div class="col-xs-5 col-md-4">
-									<p>
-										op <b>
-											@String.Format("{0:d/MM}", @item.Inspectionform.DatumInspectie)  @Html.ActionLink("Meer", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
-									</b>
-								</p>
+
+								<div class="col-xs-2 col-md-2">
+									@Html.ActionLink("Meer", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
+
 								</div>
 							</div>
 						</div>

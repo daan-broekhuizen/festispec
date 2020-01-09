@@ -24,7 +24,7 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Index(int userId)
         {
             List<Inspectieformulier> formList = _formRepo.GetInspectionforms(userId);
-            formList.ForEach(i => i.Vraag.OrderBy(q => q.VolgordeNummer));
+            formList.Select(i => i.Vraag = i.Vraag.OrderBy(q => q.VolgordeNummer).ToList());
             return View(formList);
         }
 
