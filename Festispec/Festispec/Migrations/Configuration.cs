@@ -45,6 +45,7 @@
                 { "ma", "Management" },
                 { "om", "Operationeelmedewerker" },
                 { "sm", "Salesmedewerker" },
+                { "ng", "NieuweGebruiker" }
             };
 
             foreach (KeyValuePair<string, string> role in roles)
