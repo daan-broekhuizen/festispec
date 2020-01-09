@@ -3,6 +3,7 @@ using Festispec.Model.Repositories;
 using Festispec.Service;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -79,6 +80,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 PlanningViewModel pvm = new PlanningViewModel();
                 int ri = RequiredInspectors ?? default(int);
                 pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri);
+                Messenger.Default.Send("Planning gegenereerd", this.GetHashCode());
             }
             
         }
@@ -311,7 +313,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         public void SaveInspectionFormDetailsAsync()
         {
             if (_selectedInspectionForm != null)
+            {
                 _selectedInspectionForm.SaveInspectionformDetails();
+                Messenger.Default.Send("Inspectiedetails opgeslagen", this.GetHashCode());
+            }
+                
         }
     }
 }
