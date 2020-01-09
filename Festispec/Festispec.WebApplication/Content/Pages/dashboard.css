@@ -20,6 +20,7 @@
 .task img
 {
 	position: relative;
+	max-height: 40px;
 	width:100%;
 }
 
