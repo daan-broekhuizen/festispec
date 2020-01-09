@@ -85,10 +85,10 @@
                         <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.06*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.04*"/>
+                                <ColumnDefinition Width="0.04*"/>
+                                <ColumnDefinition Width="0.07*"/>
+                                <ColumnDefinition Width="0.07*"/>
                             </Grid.ColumnDefinitions>
 
 

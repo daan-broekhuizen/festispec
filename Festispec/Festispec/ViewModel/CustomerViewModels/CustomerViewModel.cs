@@ -173,7 +173,7 @@ namespace Festispec.ViewModel
         {
             string query = $"{Streetname} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
-            if (address.AddressLine.ToLower().Contains(Streetname))
+            if (address.AddressLine.ToLower().Contains(Streetname.ToLower()))
                 PostalCode = address.PostalCode;
             else
                 PostalCode = "";
