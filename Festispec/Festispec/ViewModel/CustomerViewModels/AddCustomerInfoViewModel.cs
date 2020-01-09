@@ -41,7 +41,7 @@ namespace Festispec.ViewModel
             //Init error messages
             ErrorMessages = new ObservableDictionary<string, string>()
             {
-                ["Name"] = "",
+                ["User"] = "",
                 ["KvK"] = "",
                 ["Branchnumber"] = "",
                 ["Streetname"] = "",
