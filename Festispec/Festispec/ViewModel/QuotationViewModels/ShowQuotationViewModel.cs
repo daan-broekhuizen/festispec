@@ -154,8 +154,8 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         private void DownloadQuotation()
         {
-            string title = "test";
-            new PDFConverter().Export(title, QuotationVM.Description, QuotationVM.Price);
+            string title = $"Offerte";
+            new PDFConverter().Export(QuotationVM, title);
         }
         private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");
         private void CancelJob() => RegisterCustomerDecision("Opdracht geannuleerd");

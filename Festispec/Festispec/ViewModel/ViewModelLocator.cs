@@ -77,7 +77,8 @@ namespace Festispec.ViewModel
             navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
             navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
             navigationService.Configure("ManagementReport", new Uri("../View/ManagementReport.xaml", UriKind.Relative));
-
+            navigationService.Configure("UserRights", new Uri("../View/UserRightsView.xaml", UriKind.Relative));
+            navigationService.Configure("AddUser", new Uri("../View/AddGebruiker.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -144,6 +145,8 @@ namespace Festispec.ViewModel
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), RapportageRepo);
         public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public UserRightsViewModel UserRights => new UserRightsViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
+        public RegisterViewModel Register => new RegisterViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         #endregion
 
         #region CustomerVM's

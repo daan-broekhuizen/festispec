@@ -41,7 +41,7 @@ namespace Festispec.ViewModel.Components.Charts
             {
                 new ColumnSeries()
                 {
-                    Values = new ChartValues<double>(Values),
+                    Values = new ChartValues<double>(Values)
                 }
             };
         }
@@ -55,8 +55,8 @@ namespace Festispec.ViewModel.Components.Charts
 
         public override void OnConfigurationOptionChanged(EnumChartConfiguration key, object value)
         {
-
             base.OnConfigurationOptionChanged(key, value);
+
             switch (key)
             {
                 case EnumChartConfiguration.BACKGROUNDCOLOR:
