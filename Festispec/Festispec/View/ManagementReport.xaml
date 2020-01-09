@@ -64,15 +64,41 @@
                 <ColumnDefinition Width="40*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
                 <RowDefinition Height="1*" />
+                <RowDefinition Height="0.2*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <ContentControl x:Name="controlPieChart" Content="{Binding PieChartControl}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
-            <ContentControl x:Name="controlInspectionChart" Content="{Binding InspectionChartControl}" Grid.Row="0" Grid.Column="2" />
-            <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  />
+            <ContentControl x:Name="controlPieChart" Content="{Binding PieChartControl}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+            <ContentControl x:Name="controlInspectionChart" Content="{Binding InspectionChartControl}" Grid.Row="1" Grid.Column="2" />
+            <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  />
 
-            <Grid x:Name="LayoutRoot" Background="White" Grid.Row="1" Grid.Column="2">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Status van offertes" Grid.Column="0" Grid.Row="0"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Cerficering inspecteurs" Grid.Column="2" Grid.Row="0"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Omzet" Grid.Column="0" Grid.Row="2"/>
+
+            <Grid Grid.Row="2" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Kaart met" Grid.Column="1" Grid.Row="0"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="Inspecteurs" Grid.Column="0" Grid.Row="1" Foreground="Red"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="Klanten" Grid.Column="1" Grid.Row="1" Foreground="Green"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="Inspecties" Grid.Column="2" Grid.Row="1" Foreground="Blue"/>
+
+
+            </Grid>
+
+
+            <Grid x:Name="LayoutRoot" Background="White" Grid.Row="3" Grid.Column="2">
                 <m:Map CredentialsProvider="AjUhVNG2ZqZGCCTbumwOX2Z4c2bGI3LwaqaMUz7WiRgxGWtv8VuE9X7Va89MQ7SU" 
                Center="52.147540, 5.258791" ZoomLevel="6" Margin="0,0,0,-0.4">
                     <m:Map.Children>
