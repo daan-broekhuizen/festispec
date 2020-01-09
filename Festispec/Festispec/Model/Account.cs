@@ -42,18 +42,23 @@ namespace Festispec.Model
         [StringLength(30)]
         public string Achternaam { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Stad { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Straatnaam { get; set; }
 
+        [Required]
         [StringLength(4)]
         public string Huisnummer { get; set; }
 
+        [Required]
         [StringLength(120)]
         public string Email { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string Telefoonnummer { get; set; }
 
@@ -63,6 +68,7 @@ namespace Festispec.Model
         [Column("Einddatum_certificering", TypeName = "date")]
         public DateTime? EinddatumCertificering { get; set; }
 
+        [Required]
         [StringLength(18)]
         public string IBAN { get; set; }
 
