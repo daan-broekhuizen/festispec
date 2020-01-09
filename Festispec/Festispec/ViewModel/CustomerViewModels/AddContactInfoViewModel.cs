@@ -47,7 +47,7 @@ namespace Festispec.ViewModel
         private CustomerValidator _customerValidator;
         public AddContactInfoViewModel(NavigationService service, CustomerRepository repo) : base(service)
         {
-            _customerValidator = new CustomerValidator(repo);
+            _customerValidator = new CustomerValidator();
             NextPageCommand = new RelayCommand(NextPage);
             PreviousPageCommand = new RelayCommand(PreviousPage);
         }

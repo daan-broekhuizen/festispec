@@ -23,6 +23,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using Festispec.ViewModel.InspectionFormViewModels;
 using Festispec.Model;
+using Festispec.ViewModel.OfflineViewModels;
 
 namespace Festispec.ViewModel
 {
@@ -56,6 +57,7 @@ namespace Festispec.ViewModel
             SimpleIoc.Default.Register<TemplateRepository>();
             SimpleIoc.Default.Register<RapportageRepository>();
             SimpleIoc.Default.Register<InspectionFormRepository>();
+            SimpleIoc.Default.Register<OfflineJobRepository>();
         }
         //Register singeltonviews here
         private static void RegisterViewModels()
@@ -75,7 +77,8 @@ namespace Festispec.ViewModel
             navigationService.Configure("Rapportage", new Uri("../View/RapportageView/RapportageView.xaml", UriKind.Relative));
             navigationService.Configure("CreateInspectionForm", new Uri("../View/InspectionFormView/CreateInspectionFormView.xaml", UriKind.Relative));
             navigationService.Configure("ManagementReport", new Uri("../View/ManagementReport.xaml", UriKind.Relative));
-
+            navigationService.Configure("UserRights", new Uri("../View/UserRightsView.xaml", UriKind.Relative));
+            navigationService.Configure("AddUser", new Uri("../View/AddGebruiker.xaml", UriKind.Relative));
 
             #region CustomerViews
             navigationService.Configure("Customers", new Uri("../View/CustomerView/CustomerListView.xaml", UriKind.Relative));
@@ -103,7 +106,6 @@ namespace Festispec.ViewModel
             navigationService.Configure("AddJob", new Uri("../View/JobView/AddJobView.xaml", UriKind.Relative));
             #endregion
 
-
             #region TemplateViews
             navigationService.Configure("RapportageTemplateOverview", new Uri("../View/TemplateView/RapportageTemplateOverviewView.xaml", UriKind.Relative));
             navigationService.Configure("InspectionFormTemplateOverview", new Uri("../View/TemplateView/InspectionFormTemplateOverviewView.xaml", UriKind.Relative));
@@ -112,6 +114,12 @@ namespace Festispec.ViewModel
             #region InspectionFormsViews
             navigationService.Configure("InspectionFormEditView", new Uri("../View/InspectionFormView/InspectionFormEditView.xaml", UriKind.Relative));
             navigationService.Configure("InspectionFormShowView", new Uri("../View/InspectionFormView/InspectionFormShowView.xaml", UriKind.Relative));
+            #endregion
+
+            #region OfflineViews
+            navigationService.Configure("OfflineLogin", new Uri("../View/OfflineView/OfflineLoginView.xaml", UriKind.Relative));
+            navigationService.Configure("OfflineJobList", new Uri("../View/OfflineView/OfflineJobsView.xaml", UriKind.Relative));
+            navigationService.Configure("OfflineJob", new Uri("../View/OfflineView/OfflineJobInfoView.xaml", UriKind.Relative));
             #endregion
 
             SimpleIoc.Default.Register<NavigationService>(() => navigationService);
@@ -127,6 +135,7 @@ namespace Festispec.ViewModel
         public TemplateRepository TemplateRepo => ServiceLocator.Current.GetInstance<TemplateRepository>();
         public RapportageRepository RapportageRepo => ServiceLocator.Current.GetInstance<RapportageRepository>();
         public InspectionFormRepository InspectionFormRepo => ServiceLocator.Current.GetInstance<InspectionFormRepository>();
+        public OfflineJobRepository OfflineJobRepo => ServiceLocator.Current.GetInstance<OfflineJobRepository>();
       
         // Viewmodels used for datacontext
         #region Singleton VM's
@@ -136,6 +145,8 @@ namespace Festispec.ViewModel
         public LoginViewModel Login => new LoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         public RapportageViewModel Rapportage => new RapportageViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), RapportageRepo);
         public CreateInspectionFormViewModel CreateInspectionForm => new CreateInspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public UserRightsViewModel UserRights => new UserRightsViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
+        public RegisterViewModel Register => new RegisterViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), UserRepo);
         #endregion
 
         #region CustomerVM's
@@ -170,6 +181,12 @@ namespace Festispec.ViewModel
         public InspectionFormViewModel InspectionForm => new InspectionFormViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
         public InspectionFormListViewModel InspectionFormList => new InspectionFormListViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), InspectionFormRepo);
 
+        #endregion
+
+        #region OfflineVM's
+        public OfflineLoginViewModel OfflineLogin => new OfflineLoginViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public OfflineJobListViewModel OfflineJobList => new OfflineJobListViewModel(ServiceLocator.Current.GetInstance<NavigationService>());
+        public OfflineJobInfoViewModel OfflineJob => new OfflineJobInfoViewModel(ServiceLocator.Current.GetInstance<NavigationService>(), OfflineJobRepo);
         #endregion
 
         //Clean when logging out?

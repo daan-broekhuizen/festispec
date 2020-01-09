@@ -32,7 +32,6 @@ namespace Festispec.ViewModel
             ShowInspectionTemplates = new RelayCommand(ShowFormTemplate);
             ShowReportTemplates = new RelayCommand(ShowReportTemplate);
 
-
         }
 
         private void ShowReportTemplate() => _navigationService.NavigateTo("RapportageTemplateOverview");

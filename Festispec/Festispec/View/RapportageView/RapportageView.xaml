@@ -189,21 +189,21 @@
             <StackPanel Margin="5" Grid.Row="6" Visibility="{Binding IsChartVisible, Converter={StaticResource BoolToVisibility}}">
                 <Label Content="Grafiek Invoegen" FontWeight="Bold" FontSize="16" />
                 <StackPanel Orientation="Horizontal">
-                    <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
-                        <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
-                        <Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource MultiConverter}">
-                                <Binding ElementName="documentDesigner" />
-                                <Binding ElementName="controlLineChart" Path="Tag" />
-                            </MultiBinding>
-                        </Button.CommandParameter>
-                    </Button>
                     <Button Name="controlBarChart" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Command="{Binding CreateChartCommand}" Tag="Bar" BorderBrush="Transparent" Background="Transparent">
                         <Image Source="/Images/Bar_Chart.png" Stretch="Uniform" Width="25" Height="25" />
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource MultiConverter}">
                                 <Binding ElementName="documentDesigner" />
                                 <Binding ElementName="controlBarChart" Path="Tag" />
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Name="controlLineChart" Command="{Binding CreateChartCommand}" FontSize="14" FontWeight="Bold" Padding="10, 5" Margin="0, 5, 5, 5" Tag="Line" BorderBrush="Transparent" Background="Transparent">
+                        <Image Source="/Images/Line_Chart.png" Stretch="Uniform" Width="25" Height="25" />
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource MultiConverter}">
+                                <Binding ElementName="documentDesigner" />
+                                <Binding ElementName="controlLineChart" Path="Tag" />
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>

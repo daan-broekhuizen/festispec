@@ -80,7 +80,7 @@
                 <TextBlock  VerticalAlignment="Bottom" Text="Begin Datum"/>
             </Viewbox>
 
-            <ComboBox Name="ComboBoxCustomers" ItemsSource="{Binding Customers}" IsEditable="True" IsTextSearchEnabled="True" SelectedValue="{Binding JobVM.CustomerName}" Grid.Row="2"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
+            <ComboBox Name="ComboBoxCustomers" ItemsSource="{Binding Customers}" IsEditable="True" IsTextSearchEnabled="True" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding JobVM.CustomerID, Mode=TwoWay}" Grid.Row="2"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
             <TextBox Text="{Binding JobVM.JobName}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
             <ComboBox Name="ComboBoxStatus" ItemsSource="{Binding Status}"  SelectedValue="{Binding JobVM.Status}"  FontSize="15" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0" Grid.Column="2" Grid.Row="2"/>
 

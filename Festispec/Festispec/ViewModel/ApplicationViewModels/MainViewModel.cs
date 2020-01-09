@@ -31,8 +31,7 @@ namespace Festispec.ViewModel
         public ICommand ShowJobsView { get; set; }
         public ICommand ShowQuotationsView { get; set; }
         public ICommand ShowDashboardView { get; set; }
-        public ICommand ShowMessagesView { get; set; }
-        public ICommand ShowScheduleView { get; set; }
+        public ICommand ShowUserRights { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         private AccountViewModel _accountVM;
@@ -48,13 +47,14 @@ namespace Festispec.ViewModel
 
         public MainViewModel(NavigationService navigation) : base(navigation)
         {
-            if (_navigationService.Parameter is AccountViewModel)
-                AccountVM = _navigationService.Parameter as AccountViewModel;
+            AccountVM = _navigationService.Account;
 
             ShowCustomersView = new RelayCommand(ShowCustomers);
             ShowDashboardView = new RelayCommand(ShowDashboard);
             ShowQuotationsView = new RelayCommand(ShowQuotations);
             ShowJobsView = new RelayCommand(ShowJobs);
+            ShowUserRights = new RelayCommand(ShowUserRightsView);
+
             LogoutCommand = new RelayCommand(Logout);
 
             if (navigation.AppSettings.DebugMode && !string.IsNullOrEmpty(navigation.AppSettings.StartupPage))
@@ -67,6 +67,7 @@ namespace Festispec.ViewModel
         private void ShowCustomers() => _navigationService.NavigateTo("Customers");
         private void ShowQuotations() => _navigationService.NavigateTo("QuotationList");
         private void ShowJobs() => _navigationService.NavigateTo("Jobs");
+        private void ShowUserRightsView() => _navigationService.NavigateTo("UserRights");
     }
 
 }

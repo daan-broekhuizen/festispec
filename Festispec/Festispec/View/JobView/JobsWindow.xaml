@@ -79,34 +79,33 @@
             </WrapPanel>
         </Viewbox>
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="CustomerList" Padding="0,0,20,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.05*"/>
+                                <ColumnDefinition Width="0.06*"/>
+                                <ColumnDefinition Width="0.05*"/>
                                 <ColumnDefinition Width="0.1*"/>
-                                <ColumnDefinition Width="0.1*"/>
-                                <ColumnDefinition Width="0.09*"/>
-                                <ColumnDefinition Width="0.07*"/>
-                                <ColumnDefinition Width="0.1*"/>
-
                             </Grid.ColumnDefinitions>
 
 
-                            <Viewbox Margin="20,0,0,0" Grid.Column="0">
+                            <Viewbox Grid.Column="0">
                                 <Image Margin="40" Source="{Binding Logo}"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Viewbox>
 
-                            <TextBlock Grid.Column="1" Text="KlantNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="1" Text="Klantnaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
                             <TextBlock Grid.Column="1" Text="{Binding CustomerName}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,0,15"/>
 
-                            <TextBlock Grid.Column="2" Text="OpdrachtNaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="2" Text="Opdrachtnaam:" FontWeight="Bold" Margin="0,15,0,0" VerticalAlignment="Top" />
                             <TextBlock Grid.Column="3" Text="{Binding JobName}" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0"/>
 
                             <TextBlock Grid.Column="2" Text="Aanmaak datum:" FontWeight="Bold" Margin="0,0,0,15" VerticalAlignment="Bottom" MinHeight="10" MinWidth="40"/>
                             <TextBlock Grid.Column="3" Text="{Binding CreationDate, StringFormat={}{0:dd/MM/yyyy}}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
 
-                            <TextBlock Grid.Column="4" Text="Status" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" MinHeight="10" MinWidth="40"/>
+                            <TextBlock Grid.Column="4" Text="Status:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" MinHeight="10" MinWidth="40"/>
                             <TextBlock Grid.Column="4" Text="{Binding Status}" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Margin="0,0,35,15" MinHeight="10" MinWidth="40"/>
 
 
