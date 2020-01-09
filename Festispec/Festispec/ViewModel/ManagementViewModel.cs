@@ -216,7 +216,7 @@ namespace Festispec.ViewModel
                 {
                     case "Week":
                         case "Maand":
-                            _uRepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Date >= StartDate && e.DatumCertificering.Value.Date <= EndDate).ToList().ForEach(e =>
+                            _uRepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering != null && e.DatumCertificering.Value.Date >= StartDate && e.DatumCertificering.Value.Date <= EndDate).ToList().ForEach(e =>
                             {
                                 for (int i = 0; i < InspectionChartViewModel.Labels.Count; i++)
                                 {
@@ -227,7 +227,8 @@ namespace Festispec.ViewModel
                             break;
                     case "Jaar":
                         inspectorValues = new int[12];
-                        _uRepo.GetUsers().Where(e => e.Rol.Equals("in") && e.DatumCertificering.Value.Year == StartDate.Year).ToList().ForEach(e =>
+                        
+                        _uRepo.GetUsers().Where(e => e.Rol.Equals("in")&& e.DatumCertificering != null && e.DatumCertificering.Value.Year == StartDate.Year).ToList().ForEach(e =>
                         {
                             inspectorValues[e.DatumCertificering.Value.Month - 1] += 1;
                         });
@@ -277,6 +278,7 @@ namespace Festispec.ViewModel
                     case "Jaar":
                         _qRepo.GetQuotations().Where(e => e.Aanmaakdatum.Year == StartDate.Year).OrderByDescending(e => e.Aanmaakdatum).GroupBy(e => e.OpdrachtID).ToList().ForEach(e =>
                         {
+                            e.FirstOrDefault();
                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
                             {
                                 salesValues[e.FirstOrDefault().Aanmaakdatum.Month - 1] += (double)e.FirstOrDefault().Totaalbedrag;
@@ -353,7 +355,7 @@ namespace Festispec.ViewModel
             LocationService locationService = new LocationService();
             _uRepo.GetUsers().ForEach(async e =>
             {
-                if (e.Stad == null)
+                if (e.Stad == null || !e.Rol.Equals("in"))
                     return;
                 string query = $"{e.Straatnaam} {e.Huisnummer} {e.Stad}";
                 BingMapsRESTToolkit.Location address = await locationService.GetLocation(query);
