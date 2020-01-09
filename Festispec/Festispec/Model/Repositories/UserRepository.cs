@@ -22,7 +22,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Account acc = context.Account.Where(u => u.Gebruikersnaam == account.Gebruikersnaam
+                Account acc = context.Account.Include("RolType").Where(u => u.Gebruikersnaam == account.Gebruikersnaam
                  && u.Wachtwoord == account.Wachtwoord).FirstOrDefault();
                 return acc;
             }
