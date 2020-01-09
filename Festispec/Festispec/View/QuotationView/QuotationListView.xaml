@@ -17,8 +17,8 @@
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="0.05*"/>
             <RowDefinition Height="0.07*"/>
-            <RowDefinition Height="0.02*"/>
-            <RowDefinition Height="0.48*"/>
+            <RowDefinition Height="0.05*"/>
+            <RowDefinition Height="0.45*"/>
         </Grid.RowDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -68,6 +68,34 @@
             </WrapPanel>
         </Viewbox>
 
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox Grid.Column="5" Margin="10">
+                <TextBlock Text="Afgewezen" Foreground="Red"/>
+            </Viewbox>
+            <Viewbox Grid.Column="4" Margin="10">
+                <TextBlock Text="Geannuleerd" Foreground="Black"/>
+            </Viewbox>
+            <Viewbox Grid.Column="3" Margin="10">
+                <TextBlock Text="Geaccepteerd" Foreground="Green"/>
+            </Viewbox>
+            <Viewbox Grid.Column="2" Margin="11">
+                <TextBlock Text="Verstuurd" Foreground="Goldenrod"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1" Margin="0,0,10,0">
+                <TextBlock Text="Nieuwe opdracht" Foreground="Blue"/>
+            </Viewbox>
+        </Grid>
+        
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
             <ListBox x:Name="QuotationList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredQuotations}" SelectedItem="{Binding SelectedQuotation}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
