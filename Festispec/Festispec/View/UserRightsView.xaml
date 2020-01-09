@@ -67,7 +67,7 @@
         </Viewbox>
 
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}"  SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}"  SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}" ScrollViewer.PanningRatio="7">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="70" Width="{Binding ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
