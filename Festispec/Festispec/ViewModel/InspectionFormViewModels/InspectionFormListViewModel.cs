@@ -98,12 +98,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Fout adres ingevuld", this.GetHashCode());
                 }
-                
-                
-                
-                    
-
-
             }
             
         }
