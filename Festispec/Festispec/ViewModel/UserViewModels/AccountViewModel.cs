@@ -1,8 +1,11 @@
-﻿using Festispec.Model;
+﻿using BingMapsRESTToolkit;
+using Festispec.Model;
+using Festispec.Service;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Festispec.ViewModel
 {
@@ -21,6 +24,7 @@ namespace Festispec.ViewModel
             Rollen.Add("Management");
             Rollen.Add("Operationeelmedewerker");
             Rollen.Add("Salesmedewerker");
+            GetPostalCodeAsync();
         }
 
         public AccountViewModel()
@@ -109,6 +113,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Huisnummer = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("HouseNumber");
             }
         }
@@ -119,6 +124,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Straatnaam = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("StreetName");
             }
         }
@@ -129,6 +135,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Stad = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("City");
             }
         }
@@ -181,6 +188,18 @@ namespace Festispec.ViewModel
                 _account.IBAN = value;
                 RaisePropertyChanged("IBAN");
             }
+        }
+
+        private async Task GetPostalCodeAsync()
+        {
+            string street = StreetName.Remove(StreetName.Length - 1, 1);
+            string query = $"{street} {HouseNumber} {City}";
+            Address address = await new LocationService().GetFullAdress(query);
+            if (address.AddressLine.ToLower().Contains(StreetName.ToLower()))
+                PostalCode = address.PostalCode;
+            else
+                PostalCode = "";
+
         }
 
         public ObservableCollection<string> Rollen { get; set; }

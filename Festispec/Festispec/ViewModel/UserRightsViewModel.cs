@@ -54,7 +54,7 @@ namespace Festispec.ViewModel
             {
                 selectedAccount = value;
                 RaisePropertyChanged("SelectedAccount");
-                //ShowCustomerInfo();
+                ShowUserInfo();
             }
         }
 
@@ -96,6 +96,12 @@ namespace Festispec.ViewModel
                     FilteredAccounts = FilteredAccounts.OrderByDescending(e => e.Username).ToList();
                     break;
             }
+        }
+
+        private void ShowUserInfo()
+        {
+            if (SelectedAccount != null)
+                navigationService.NavigateTo("AccountInfo", SelectedAccount);
         }
     }
 }
