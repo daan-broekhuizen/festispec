@@ -426,8 +426,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 if (question.Created)
                 {
                     question.Created = false;
+                    question.Changed = false;
                     question.QuestionID = _repo.AddQuestion(question.Question);
-                    if (question.QuestionType == "sv" || question.QuestionType == "mv" || question.QuestionType == "tv")
+                    if (question.QuestionType == "mv" || question.QuestionType == "tv")
                     {
                         List<VraagMogelijkAntwoord> newPosAnswers = new List<VraagMogelijkAntwoord>();
                         foreach (PossibleAnwserViewModel posAnwser in question.PossibleAnwsers)

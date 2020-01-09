@@ -38,11 +38,13 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} open vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
 
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -71,10 +73,12 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} foto vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -103,10 +107,12 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tekst"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -136,10 +142,12 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="80" VerticalAlignment="Center" ContentStringFormat="NR. {0} meerkeuze vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
 
                     <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
@@ -187,10 +195,12 @@
                         <Label Margin="10" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontSize="120" FontWeight="Bold" VerticalAlignment="Center" ContentStringFormat="NR. {0} schaal vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                     <Viewbox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
                         <Grid MinWidth="{Binding Path=ActualWidth, ElementName=StandardView}">
@@ -242,10 +252,12 @@
                         <Label Margin="1" HorizontalContentAlignment="Right" Content="{Binding Path=OrderNumber}" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" ContentStringFormat="NR. {0} tabel vraag"/>
                     </Viewbox>
                     <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                        <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
+                        <ScrollViewer MinHeight="150" MaxHeight="350" Width="{Binding Path=ActualWidth, ElementName=QuestionList}">
+                            <TextBlock Width="Auto" TextWrapping="Wrap" Text="{Binding Path=QuestionText}" FontSize="40"/>
+                        </ScrollViewer>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
 
                     <ListBox Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">

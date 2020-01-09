@@ -130,7 +130,6 @@ namespace Festispec.ViewModel.QuotationViewModels
                 Beschrijving = QuotationVM.Description,
                 Totaalbedrag = price,
                 KlantbeslissingReden = QuotationVM.Decision,
-                Aanmaakdatum = QuotationVM.CreationDate,
                 LaatsteWijziging = DateTime.Now,
             });
             if (QuotationVM.IsSent)
@@ -155,7 +154,8 @@ namespace Festispec.ViewModel.QuotationViewModels
         private void DownloadQuotation()
         {
             string title = $"Offerte";
-            new PDFConverter().Export(QuotationVM, title);
+            if (!new PDFConverter().Export(QuotationVM, title))
+                Messenger.Default.Send("Offerte kan niet gedownload worden, het bestand staat al open.\nSluit het bestand of geef het bestand een andere naam.", this.GetHashCode());
         }
         private void RejectQuotation() => RegisterCustomerDecision("Offerte geweigerd");
         private void CancelJob() => RegisterCustomerDecision("Opdracht geannuleerd");
