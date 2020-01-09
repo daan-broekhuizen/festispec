@@ -8,12 +8,12 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-6 col-lg-6" >	
 			<div class="intro">
-				<img  src="~/Content/Images/dashboard_image.png" />
+				<img src="~/Content/Images/dashboard_image.png" />
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class=" col-md-offset-6">
 			<div class="upcoming">
 				<h3 class="text-center">Aankomende opdrachten</h3>
 				@*Start opdracht*@
@@ -25,23 +25,28 @@
 						counter++;
 						<div class="row">
 							<div class="task">
+								<div class="col-xs-1 col-md-2 customer-logo">
+									<img src="@String.Format("data:image/jpg;base64,{0}", item.LogoString)" />
+								</div>
 								<div class="col-xs-2 col-md-2">
-									<img id="logo" src="@String.Format("data:image/jpg;base64,{0}", item.LogoString)"/>
+									<b>@String.Format("{0:d/MM}", @item.Inspectionform.DatumInspectie)</b>
 								</div>
 								<div class="col-xs-5 col-md-5">
-									<p><b>Datum: </b>@String.Format("{0:d/MM/yyyy}", @item.Inspectionform.DatumInspectie)</p>
+									<p>@item.Inspectionform.Stad</p>
 								</div>
-								<div class="col-xs-5 col-md-5">
-										@Html.ActionLink("Inspectieformulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
+
+								<div class="col-xs-2 col-md-2">
+									@Html.ActionLink("Formulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
 								</div>
 							</div>
 						</div>
-						if (counter == 5) { break; }
+						if (counter == 3) { break; }
 					}
 				}
 			</div>
-			
+
 		</div>
 	</div>
+		
     
 </div>

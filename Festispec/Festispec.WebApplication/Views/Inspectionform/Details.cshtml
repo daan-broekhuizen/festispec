@@ -32,9 +32,10 @@
 					<img src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
 
 				}
-				<h3><b>@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
-				<p><b>Datum inspectie:</b>@Model.Inspectionform.DatumInspectie om @Model.Inspectionform.StartTijd</p>
-				<p>
+				<h3><b class="col-xs-10">@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
+				<br /><br />
+				<b>Datum: </b>@String.Format("{0:d/MM}", @Model.Inspectionform.DatumInspectie) om @Model.Inspectionform.StartTijd.Value.ToString(@"hh\:mm")</p>
+				
 					<b>Festival locatie:</b>
 					@Model.Inspectionform.Straatnaam
 					@Model.Inspectionform.Huisnummer in

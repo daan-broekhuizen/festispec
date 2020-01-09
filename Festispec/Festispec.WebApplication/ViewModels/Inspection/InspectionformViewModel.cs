@@ -19,6 +19,5 @@ namespace Festispec.WebApplication.ViewModels.Inspection
         public int CompletedQuestions { get; set; }
         public bool IsEditable => DateTime.Now.Date == Inspectionform.DatumInspectie;
         
-        
     }
 }
