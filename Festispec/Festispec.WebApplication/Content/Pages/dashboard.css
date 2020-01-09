@@ -48,6 +48,7 @@ button {
 	background-color: white;
 	min-height:350px;
 	max-height:420px;
+	min-width:350px;
 	padding: 10px;
 	
 }

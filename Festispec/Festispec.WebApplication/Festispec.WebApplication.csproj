@@ -193,6 +193,7 @@
     <Content Include="Content\Images\Dashboard_schedule.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\errores.jpg" />
     <Content Include="Content\Images\Extra_Chart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -478,6 +479,7 @@
     <Compile Include="Controllers\Availability\AvailabilityController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\InspectionformController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\Planning\PlanningAPIController.cs" />
@@ -542,6 +544,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Assignment\Search.cshtml" />
     <Content Include="Views\Planning\PlanningView.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
