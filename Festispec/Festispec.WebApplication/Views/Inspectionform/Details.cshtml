@@ -62,7 +62,7 @@
 			<div class="col-md-12">
 				<div class="question-container">
 					<button type="button" class="@(questionVM.IsAnswered ? "collapsible-answered" : "collapsible")">
-						#@questionVM.Question.VraagID @questionVM.Question.Vraagstelling
+						#@questionVM.Question.VolgordeNummer @questionVM.Question.Vraagstelling
 					</button>
 					<div class="content">
 						@using (Html.BeginForm("Details", "Inspectionform", questionVM, FormMethod.Post, new { enctype = "multipart/form-data" }))
