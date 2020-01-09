@@ -1,0 +1,152 @@
+﻿<Page x:Class="Festispec.View.UserInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserInfo"
+      DataContext ="{Binding UserInfo, Source={StaticResource Locator}}">
+
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2.5*"/>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="5.9*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition MaxHeight="50" Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Grid.Row="1" Grid.Column="0" Stretch="Uniform" HorizontalAlignment="Center" >
+                <TextBlock Text="Gebruiker"  Foreground="Black" FontWeight="Bold"/>
+            </Viewbox>
+        </Grid>
+
+        <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
+        <Viewbox  Grid.Row="1" HorizontalAlignment="Left">
+            <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Gebruiker"/>
+        </Viewbox>
+        <Grid Margin="20,10,20,10" Grid.Row="2" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition MinHeight="20"/>
+                <RowDefinition MinHeight="40" Height="2*"/>
+                <RowDefinition  Height="2*"/>
+                <RowDefinition MinHeight="20"/>
+                <RowDefinition MinHeight="25" Height="2*"/>
+                <RowDefinition  Height="2*"/>
+                <RowDefinition MinHeight="20"/>
+                <RowDefinition MinHeight="30" Height="2*"/>
+                <RowDefinition  Height="2*"/>
+                <RowDefinition MinHeight="20"/>
+                <RowDefinition MinHeight="30" Height="2*"/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="1" HorizontalAlignment="Left">
+                <TextBlock VerticalAlignment="Bottom" Text="Voornaam"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Left">
+                <TextBlock VerticalAlignment="Bottom" Text="Tussenvoegsel"/>
+            </Viewbox>
+            <Viewbox Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Achternaam"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="1"  Grid.Row="4" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Stad"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="0"  Grid.Row="4" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Straatnaam"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2"  Grid.Row="4" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Huisnummer"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="0"  Grid.Row="7" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Postcode"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="1"  Grid.Row="10" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Email"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="0"  Grid.Row="10" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="Telefoonnummer"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2"  Grid.Row="10" HorizontalAlignment="Left">
+                <TextBlock  VerticalAlignment="Bottom" Text="IBAN"/>
+            </Viewbox>
+            <TextBox Text="{Binding AccountVM.FirstName}" IsReadOnly="True" Grid.Row="2"  FontSize="15" VerticalContentAlignment="Center" FontStretch="UltraExpanded"  VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,5,20,0"/>
+            <TextBox Text="{Binding AccountVM.Infix}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding AccountVM.LastName}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="2" Grid.Row="2"/>
+            <TextBox Text="{Binding AccountVM.StreetName}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="0" Grid.Row="5"/>
+            <TextBox Text="{Binding AccountVM.City}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="5"/>
+            <TextBox Text="{Binding AccountVM.HouseNumber}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="2" Grid.Row="5"/>
+            <TextBox Text="{Binding AccountVM.PhoneNumber}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="0" Grid.Row="11"/>
+            <TextBox Text="{Binding AccountVM.Email}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="11"/>
+            <TextBox Text="{Binding AccountVM.IBAN}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="2" Grid.Row="11"/>
+            <TextBox Text="{Binding AccountVM.PostalCode}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="0" Grid.Row="8"/>
+
+
+
+
+
+            <Viewbox Grid.Row="6" Grid.Column="0">
+                <Label Content="{Binding BeginDateError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="6" Grid.Column="1">
+                <Label Content="{Binding EndDateError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="3" Grid.Column="1">
+                <Label Content="{Binding JobNameError}" Foreground="Red" />
+            </Viewbox>
+            <Viewbox Grid.Row="3" Grid.Column="2">
+                <Label Content="{Binding StatusError}" Foreground="Red" />
+            </Viewbox>
+
+        </Grid>
+
+        <Viewbox Grid.Row="5" HorizontalAlignment="Center">
+            <WrapPanel Orientation="Horizontal" Margin="5">
+                <Button Background="White" BorderThickness="0" Command="{Binding ShowAccountInfoCommand}">
+                    <WrapPanel Orientation="Vertical">
+                        <Label BorderThickness="1" Background="White" BorderBrush="Black"/>
+                        <Label Content=" Accountgegevens "/>
+                    </WrapPanel>
+                </Button>
+                <Button Background="White" BorderThickness="0">
+                    <WrapPanel Orientation="Vertical" Margin="10,0,10,0">
+                        <Label BorderThickness="1" Background="Black" BorderBrush="Black"/>
+                        <Label Content=" Gebruikergegevens "/>
+                    </WrapPanel>
+                </Button>
+            </WrapPanel>
+        </Viewbox>
+        
+        <Viewbox Grid.Row="5" HorizontalAlignment="Right">
+            <Button  Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveAccountInfoCommand}">
+                Wijzigingen opslaan
+            </Button>
+        </Viewbox>
+
+    </Grid>
+</Page>
