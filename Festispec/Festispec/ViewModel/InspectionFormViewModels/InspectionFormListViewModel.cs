@@ -70,17 +70,20 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             SaveDetailsCommand = new RelayCommand(SaveInspectionFormDetailsAsync);
             ToJobCommand = new RelayCommand(ToJobView);
             DeleteInspectionFormCommand = new RelayCommand(DeleteInspectionForm);
-            GenerateScheduleCommand = new RelayCommand(GenerateSchedule);
+            GenerateScheduleCommand = new RelayCommand(GenerateScheduleAsync);
         }
 
-        public void GenerateSchedule()
+        public async void GenerateScheduleAsync()
         {
             if (City != null && Street != null && HouseNumber != null && RequiredInspectors != null)
             {
                 PlanningViewModel pvm = new PlanningViewModel();
                 int ri = RequiredInspectors ?? default(int);
-                pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri);
-                Messenger.Default.Send("Planning gegenereerd", this.GetHashCode());
+
+                if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
+                    Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
+                else
+                    Messenger.Default.Send($"Planning gegenereerd", this.GetHashCode());
             }
             
         }
