@@ -28,6 +28,13 @@ namespace Festispec.ViewModel
 
             string[] data = new string[accounts.Count];
 
+            // Role check
+            for (int i = 0; i < accounts.Count; i++)
+            {
+                if (accounts[i].Rol != "in")
+                    accounts.Remove(accounts[i]);
+            }
+
             // Als er te weinig Inspectors zijn
             if (accounts.Count < inspectorNeeded)
                 return null;

@@ -21,6 +21,7 @@ namespace Festispec.ViewModel
             Rollen.Add("Management");
             Rollen.Add("Operationeelmedewerker");
             Rollen.Add("Salesmedewerker");
+            Rollen.Add("Nieuwe Gebruiker");
         }
 
         public AccountViewModel()
@@ -202,6 +203,8 @@ namespace Festispec.ViewModel
                         return "Operationeelmedewerker";
                     case "sm":
                         return "Salesmedewerker";
+                    case "ng":
+                            return "Nieuwe Gebruiker";
                 }
 
                 return Role;
@@ -229,6 +232,10 @@ namespace Festispec.ViewModel
                         break;
                     case "Salesmedewerker":
                         Role = "sm";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Nieuwe Gebruiker":
+                        Role = "ng";
                         _userRepository.UpdateAccount(_account);
                         break;
                 }

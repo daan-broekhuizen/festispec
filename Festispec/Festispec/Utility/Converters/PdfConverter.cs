@@ -2,10 +2,12 @@
 using Festispec.ViewModel.QuotationViewModels;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
 namespace Festispec.Utility.Converters
 {
     public class PDFConverter
@@ -119,26 +121,35 @@ namespace Festispec.Utility.Converters
 
         private string[] GetLines(string arg)
         {
+            
             int chars = arg.Length;
             string tmp = arg;
 
             for (int i = 0; i < tmp.Length; i++)
-                tmp = Regex.Replace(tmp, @"\t|\n|\r", "");
+                tmp = Regex.Replace(tmp, @"\t|\n|\r", " ");
 
-            string[] lines = new string[chars / 80];
+            string[] lines;
+            if (Between(chars, 80, 160))
+                lines = new string[2];
+            else
+                lines = new string[(chars + 80) / 80];
+
 
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = tmp.Substring(0, 80);
-                tmp = tmp.Remove(0, 80);
-
-
-                if(tmp.Length < 80)
+                if (tmp.Length < 80)
                     lines[i] = tmp.Substring(0, tmp.Length);
+                else
+                {
+                    lines[i] = tmp.Substring(0, 80);
+                    tmp = tmp.Remove(0, 80);
+                }   
             }
 
             return lines;
         }
+
+        public bool Between(int num, int min, int max) => min < num && num < max;
 
         private bool DidSaveFailed(PdfDocument file, string documentName)
         {
