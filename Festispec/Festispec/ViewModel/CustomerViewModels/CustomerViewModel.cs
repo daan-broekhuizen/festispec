@@ -178,7 +178,6 @@ namespace Festispec.ViewModel
                 PostalCode = address.PostalCode;
             else
                 PostalCode = "";
-            System.Console.WriteLine($"addresline: {address.AddressLine.ToLower()} postcode: {address.PostalCode} streetname: {Streetname.ToLower()} true: { address.AddressLine.ToLower().Contains(Streetname.ToLower())}");
 
         }
         public void SetCustomer(Klant customer) => _customer = customer;
