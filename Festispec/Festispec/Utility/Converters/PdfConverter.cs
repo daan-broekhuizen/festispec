@@ -1,8 +1,10 @@
 ﻿
 using Festispec.ViewModel.QuotationViewModels;
+using GalaSoft.MvvmLight.Messaging;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 namespace Festispec.Utility.Converters
 {
@@ -15,7 +17,7 @@ namespace Festispec.Utility.Converters
         /// <param name="documentName">Name of the document when saved</param>
         /// <param name="description">Despription of the offerte</param>
         /// <param name="price"></param>
-        public void Export(QuotationViewModel vm, string title)
+        public bool Export(QuotationViewModel vm, string title)
         {
             using (PdfDocument document = new PdfDocument())
             {
@@ -35,14 +37,12 @@ namespace Festispec.Utility.Converters
                 gfx.DrawString("Prijs: " + vm.Price + "€", fontText, XBrushes.Black, new XRect(20, -120, page.Width, page.Height), XStringFormats.BottomLeft);
                 gfx.DrawLine(lineBlack, 20, 700, 400, 700);
                 // Description
-                gfx.DrawString(" Omschrijving: " + vm.Description, fontText, XBrushes.Black, new XRect(20, 100, page.Width, page.Height), XStringFormats.TopLeft);
-                gfx.DrawLine(lineBlack, 20, 120, 400, 120);
-                // Decission
-                gfx.DrawString(" Klant keuze: " + vm.Decision, fontText, XBrushes.Black, new XRect(20, 160, page.Width, page.Height), XStringFormats.TopLeft);
-                gfx.DrawLine(lineBlack, 20, 180, 400, 180);
+                gfx.DrawString(" Omschrijving: " + vm.Description, fontText, XBrushes.Black, new XRect(20, 140, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawLine(lineBlack, 20, 160, 400, 160);
                 // Jobs
-                gfx.DrawString(" Opdracht: " + vm.Job, fontText, XBrushes.Black, new XRect(20, 220, page.Width, page.Height), XStringFormats.TopLeft);
-                gfx.DrawLine(lineBlack, 20, 240, 400, 240);
+                gfx.DrawString(" Opdracht: " + vm.Job, fontText, XBrushes.Black, new XRect(20, 100, page.Width, page.Height), XStringFormats.TopLeft);
+                gfx.DrawLine(lineBlack, 20, 120, 400, 120);
+
                 // Logo
                 DrawImage(gfx, @"..\..\Images/festispec_logo.png", 20, 20, 100, 25);
                 // Info
@@ -59,9 +59,13 @@ namespace Festispec.Utility.Converters
                 
                 if (!documentName.Contains(".pdf"))
                     documentName += ".pdf";
-                
-                document.Save(documentName);
-                StartPDF(documentName);
+
+                if (!Save(document, documentName))
+                    StartPDF(documentName);
+                else
+                    return false;
+
+                return true;
             }
         }
 
@@ -71,6 +75,20 @@ namespace Festispec.Utility.Converters
         {
             XImage image = XImage.FromFile(path);
             gfx.DrawImage(image, x, y, width, height);
+        }
+
+        private bool Save(PdfDocument file, string documentName)
+        {
+            try
+            {
+                file.Save(documentName);
+            }
+            catch (IOException)
+            { 
+                return true;
+            }
+
+            return false;
         }
     }
 }
