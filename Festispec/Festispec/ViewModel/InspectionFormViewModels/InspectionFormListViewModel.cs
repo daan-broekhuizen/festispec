@@ -122,7 +122,9 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 
 
             }
-            
+            else
+                Messenger.Default.Send($"Voer eerst alle verplichte velden in.\nEn het aantal benodigde inspecteurs.", this.GetHashCode());
+
         }
         private void GetInspectionForms()
         {
