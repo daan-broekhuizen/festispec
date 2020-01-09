@@ -316,7 +316,7 @@
             klanten[2] = new Klant()
             {
                 KvKNummer = "03810391",
-                Vestigingnummer = "1294265598",
+                Vestigingnummer = "129426559898",
                 Naam = "Appelpop",
                 Stad = "Tilburg",
                 Straatnaam = "Wolvenweg",
@@ -330,7 +330,7 @@
             klanten[3] = new Klant()
             {
                 KvKNummer = "29183110",
-                Vestigingnummer = "31555664892",
+                Vestigingnummer = "315556648928",
                 Naam = "American day",
                 Stad = "Amsterdam",
                 Straatnaam = "Noordhollandstraat",
@@ -361,7 +361,7 @@
                 Vestigingnummer = "897573986248",
                 Naam = "Electric Jungle",
                 Stad = "Groningen",
-                Straatnaam = "Regentesstraat",
+                Straatnaam = "regentessestraat",
                 Huisnummer = "128",
                 Telefoonnummer = "0495034831",
                 Email = "electricjungle@hotmail.com",
