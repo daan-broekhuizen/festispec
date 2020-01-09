@@ -12,29 +12,24 @@
 .intro img {
 	width: 100%;
 	margin-bottom: 10px;
+	min-width: 350px;
 }
 
-.logo #img
-{
-	max-width: 10px;
-}
+
 
 .task img
 {
 	position: relative;
-	width: 20px;
+	width:100%;
 }
 
 .task {
+	text-align:left;
 	background-color: lightgrey;
 	margin-left: 20px;
 	margin-right: 20px;
 	line-height: 60px;
 	min-height: 60px;
-}
-
-.task customer-logo{
-	max-height:30px;
 }
 
 

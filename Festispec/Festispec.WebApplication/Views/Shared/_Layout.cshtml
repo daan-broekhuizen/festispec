@@ -10,19 +10,31 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<a class="navbar-brand">
-			<img src= "../Content/Images/festispec logo.png" height="25"/>
-		</a>
+	<div class="navbar navbar-inverse navbar-fixed-top" style="background-color:lightgray; border-color:white;">
+		<div>
+			<a class="navbar-brand">
+				<img src="../Content/Images/festispec logo.png" height="25" />
+			</a>
+		</div>
+		
+		@if (Session["user"] != null)
+		{
+			<div class="navbar-right" style="padding-top:15px; position:absolute; right:20px;">
+				@Html.ActionLink("Uitloggen", "Login", "Credentials")
+			</div>
+			
+		}
+
 	</div>
 	@if (Session["user"] != null)
 	{
-		<div class="col-xs-12 navbar navbar-inverse navbar-fixed-bottom ">
+		<div class="navbar navbar-inverse navbar-fixed-bottom" style="display:inline-block; padding-top : 5px; background-color:gray;  border-color:grey;">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4 col-md-6 col-md-offset-3">
 				<a class="col-xs-3" href="@Url.Action("Index", "Inspectionform", new { userId = (int)Session["user"] })">
-					<image src="~/Content/Images/jobs_icon.png" />
+					<image style="padding-top: 2px" src="~/Content/Images/jobs_icon.png" />
 				</a>
 				<a class="col-xs-3" href="@Url.Action("Index", "Dashboard")">
-					<image src="~/Content/Images/dashboard_icon.png" />
+					<image style="padding-top: 2px" src="~/Content/Images/dashboard_icon.png" />
 				</a>
 				<a class="col-xs-3" href="@Url.Action("PlanningView", "Planning")">
 					<image src="~/Content/Images/planning_icon.png" />
@@ -30,13 +42,15 @@
 				<a class="col-xs-3" href="@Url.Action("AvailabilityView", "Availability")">
 					<image src="~/Content/Images/availability_icon.png" />
 				</a>
+			</div>
+				
 		</div>
 	}
 
 
 	<div class="container body-content">
 		@RenderBody()
-		<footer>
+		<footer style="bottom:50px;">
 			<p>&copy; @DateTime.Now.Year - FestispecQ </p>
 		</footer>
 	</div>

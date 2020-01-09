@@ -390,7 +390,9 @@ fieldset[disabled] .btn-danger.active {
 .navbar-static-top,
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  border-radius: 0;
+  border-radius: 10px;
+  margin-top: 10px;
+
 }
 @media (max-width: 767px) {
   .navbar .navbar-nav .open .dropdown-menu > .active > a,

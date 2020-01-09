@@ -16,6 +16,8 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Index()
         {
             int? userId = (int?) Session["user"];
+            if (userId == null) 
+                return RedirectToAction("Error", "Error");
             Account account = null;
             InspectionformRepository repo = new InspectionformRepository();
             List<Inspectieformulier> assignmentList;
