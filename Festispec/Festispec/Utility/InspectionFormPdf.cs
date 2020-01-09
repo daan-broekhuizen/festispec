@@ -94,22 +94,23 @@ namespace Festispec.Utility
 
             gfx.DrawString("Antwoord:", font, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
 
-            int square = (int)Math.Sqrt(answers.Count);
             int index = 0;
-            for (int y = 0; y < square; y++)
+            for (int y = 0; y < answers.Count / columnSize; y++)
             {
                 int currentX = 20;
                 currentY += 20;
 
-                Antwoorden answer = answers[index];
-
-                for (int x = 0; x < square; x++)
+                for (int x = 0; x < columnSize; x++)
                 {
+                    Antwoorden answer = answers[index];
+
+                    Console.Write(answer.AntwoordText + "|");
                     gfx.DrawString(answer.AntwoordText, font, XBrushes.Black, new XRect(currentX, currentY, page.Width, page.Height), XStringFormats.TopLeft);
                     currentX += cellWidth + 20;
 
                     index++;
                 }
+                Console.WriteLine();
             }
             currentY += 40;
 
