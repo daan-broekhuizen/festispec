@@ -35,7 +35,8 @@ namespace Festispec.Validators
         private bool IsValidEmail(string arg)
         {
             if (arg == null) return false;
-            return new Regex(@"/.+@.+\..+/ i").Match(arg).Success;
+            string regex = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
+            return Regex.IsMatch(arg, regex, RegexOptions.IgnoreCase);
         }
     }
 }

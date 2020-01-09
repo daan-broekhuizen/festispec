@@ -98,7 +98,7 @@ namespace Festispec.ViewModel
 
         public void FilterJobs()
         {
-            FilteredJobs = Jobs.Where(e => e.JobName.Contains(FilterJob)).ToList();
+            FilteredJobs = Jobs.Where(e => e.JobName.ToLower().Contains(FilterJob.ToLower())).ToList();
             SortJobs();
         }
 

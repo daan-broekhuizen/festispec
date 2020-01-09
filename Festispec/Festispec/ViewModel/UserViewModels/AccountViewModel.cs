@@ -1,11 +1,10 @@
-﻿using Festispec.Model;
+﻿using BingMapsRESTToolkit;
+using Festispec.Model;
+using Festispec.Service;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Festispec.ViewModel
@@ -25,6 +24,8 @@ namespace Festispec.ViewModel
             Rollen.Add("Management");
             Rollen.Add("Operationeelmedewerker");
             Rollen.Add("Salesmedewerker");
+            GetPostalCodeAsync();
+            Rollen.Add("Nieuwe Gebruiker");
         }
 
         public AccountViewModel()
@@ -95,7 +96,6 @@ namespace Festispec.ViewModel
             }
         }
 
-        //TODO implement (see customerviewmodel + locationservice)
         private string _postalCode;
         public string PostalCode
         {
@@ -113,6 +113,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Huisnummer = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("HouseNumber");
             }
         }
@@ -123,6 +124,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Straatnaam = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("StreetName");
             }
         }
@@ -133,6 +135,7 @@ namespace Festispec.ViewModel
             set
             {
                 _account.Stad = value;
+                GetPostalCodeAsync();
                 RaisePropertyChanged("City");
             }
         }
@@ -187,6 +190,18 @@ namespace Festispec.ViewModel
             }
         }
 
+        private async Task GetPostalCodeAsync()
+        {
+            string street = StreetName.Remove(StreetName.Length - 1, 1);
+            string query = $"{street} {HouseNumber} {City}";
+            Address address = await new LocationService().GetFullAdress(query);
+            if (address.AddressLine.ToLower().Contains(StreetName.ToLower()))
+                PostalCode = address.PostalCode;
+            else
+                PostalCode = "";
+
+        }
+
         public ObservableCollection<string> Rollen { get; set; }
 
 
@@ -206,6 +221,8 @@ namespace Festispec.ViewModel
                         return "Operationeelmedewerker";
                     case "sm":
                         return "Salesmedewerker";
+                    case "ng":
+                            return "Nieuwe Gebruiker";
                 }
 
                 return Role;
@@ -233,6 +250,10 @@ namespace Festispec.ViewModel
                         break;
                     case "Salesmedewerker":
                         Role = "sm";
+                        _userRepository.UpdateAccount(_account);
+                        break;
+                    case "Nieuwe Gebruiker":
+                        Role = "ng";
                         _userRepository.UpdateAccount(_account);
                         break;
                 }

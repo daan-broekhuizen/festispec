@@ -67,32 +67,36 @@
         </Viewbox>
 
         <Border x:Name="SizeHelperPanel" Grid.Row="5" Margin="40,0">
-            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}"  SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}">
+            <ListBox x:Name="CustomerList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredAccounts}"  SelectedItem="{Binding SelectedAccount}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=SizeHelperPanel}" ScrollViewer.PanningRatio="7">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
                         <Grid MaxHeight="70" Width="{Binding ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="0.2*"/>
                                 <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.3*"/>
+
                             </Grid.ColumnDefinitions>
                             <Viewbox Grid.Column="0">
                                 <Label Margin="10" HorizontalContentAlignment="Right" Content="Gebruikersnaam:" FontWeight="Bold" VerticalAlignment="Center"/>
                             </Viewbox>
-                            <Viewbox Margin="10" Grid.Column="1" Grid.ColumnSpan="1" HorizontalAlignment="Left">
+                            <Viewbox MaxHeight="40"  Grid.Column="1" HorizontalAlignment="Left">
                                 <Label HorizontalContentAlignment="Left" Content="{Binding Username}" VerticalAlignment="Center" />
                             </Viewbox>
                             <Viewbox Grid.Column="2">
-                                <Label Margin="0" Content="Rol:" HorizontalContentAlignment="Right" FontWeight="Bold" VerticalAlignment="Center" />
+                                <Label Content="Rol:" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Center" />
                             </Viewbox>
-                            <Viewbox Grid.Column="3" HorizontalAlignment="Left">
-                                <ComboBox SelectedItem="{Binding RoleComplete, Mode=TwoWay}" ItemsSource="{Binding Rollen}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="5">
-
+                            <Viewbox Margin="20" Grid.Column="3" HorizontalAlignment="Left">
+                                <ComboBox
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    SelectedItem="{Binding RoleComplete, Mode=TwoWay}" 
+                                    ItemsSource="{Binding Rollen}">
                                 </ComboBox>
                             </Viewbox>
+                                
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

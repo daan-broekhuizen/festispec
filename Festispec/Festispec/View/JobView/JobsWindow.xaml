@@ -82,13 +82,13 @@
             <ListBox x:Name="CustomerList" Padding="0,0,20,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding FilteredJobs}" SelectedItem="{Binding SelectedJob}" BorderThickness="0" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=SizeHelperPanel}">
                 <ListBox.ItemTemplate >
                     <DataTemplate >
-                        <Grid MaxHeight="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
+                        <Grid Height="70" Width="{Binding Path=ActualWidth, ElementName=CustomerList}" Background="#FFF4F4F5" Margin="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.06*"/>
-                                <ColumnDefinition Width="0.05*"/>
-                                <ColumnDefinition Width="0.1*"/>
+                                <ColumnDefinition Width="0.04*"/>
+                                <ColumnDefinition Width="0.04*"/>
+                                <ColumnDefinition Width="0.07*"/>
+                                <ColumnDefinition Width="0.07*"/>
                             </Grid.ColumnDefinitions>
 
 

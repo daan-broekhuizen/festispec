@@ -171,9 +171,10 @@ namespace Festispec.ViewModel
         }
         private async Task GetPostalCodeAsync()
         {
-            string query = $"{Streetname} {HouseNumber}{Addition} {City}";
+            string street = Streetname.Remove(Streetname.Length - 1, 1);
+            string query = $"{street} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
-            if (address.Locality.Contains(City))
+            if (address.AddressLine.ToLower().Contains(Streetname.ToLower()))
                 PostalCode = address.PostalCode;
             else
                 PostalCode = "";
