@@ -28,7 +28,7 @@
 		<div class="inspection-info">
 			<div class="inspection-data">
 				<div class="row">
-					<div  class="col-xs-9 col-sm-10">
+					<div  class="col-xs-9 col-sm-10 col-md-11 col-lg-11">
 						<h3><b>@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
 						<b>Datum: </b>@String.Format("{0:d/MM}", @Model.Inspectionform.DatumInspectie) om @Model.Inspectionform.StartTijd.Value.ToString(@"hh\:mm")</p>
 
@@ -39,7 +39,7 @@
 					</div>
 						@if (Model.LogoString != null)
 						{
-							<img class="col-xs-3 col-sm-2" src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
+							<img class="col-xs-3 col-sm-2 col-md-1 col-lg-1" style="max-height:100px;" src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
 						}
 					</div>
 			</div>
