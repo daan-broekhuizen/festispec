@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model.Enums;
+using BingMapsRESTToolkit;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -80,10 +81,29 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 PlanningViewModel pvm = new PlanningViewModel();
                 int ri = RequiredInspectors ?? default(int);
 
-                if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
-                    Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
-                else
-                    Messenger.Default.Send($"Planning gegenereerd", this.GetHashCode());
+                string street = Street.Remove(Street.Length - 1, 1);
+                string query = $"{street} {HouseNumber} {City}";
+                try
+                {
+                    Address address = await new LocationService().GetFullAdress(query);
+                    if (address.AddressLine.ToLower().Contains(Street.ToLower()))
+                    {
+                        if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
+                            Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
+                        else
+                            Messenger.Default.Send($"Planning gegenereerd", this.GetHashCode());
+                    }
+                }
+                catch
+                {
+                    Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Fout adres ingevuld", this.GetHashCode());
+                }
+                
+                
+                
+                    
+
+
             }
             
         }
