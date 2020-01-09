@@ -27,18 +27,21 @@
 
 		<div class="inspection-info">
 			<div class="inspection-data">
-				<h3><b class="col-md-10">@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
-				@if (Model.LogoString != null)
-				{
-					<img class="col-md-2" src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
-				}
-				<b>Datum: </b>@String.Format("{0:d/MM}", @Model.Inspectionform.DatumInspectie) om @Model.Inspectionform.StartTijd.Value.ToString(@"hh\:mm")</p>
+				<div class="row">
+					<div  class="col-xs-9 col-sm-10">
+						<h3><b>@Model.Inspectionform.Opdracht.OpdrachtNaam</b></h3>
+						<b>Datum: </b>@String.Format("{0:d/MM}", @Model.Inspectionform.DatumInspectie) om @Model.Inspectionform.StartTijd.Value.ToString(@"hh\:mm")</p>
 
-				<b>Festival locatie:</b>
-				@Model.Inspectionform.Straatnaam
-				@Model.Inspectionform.Huisnummer in
-				@Model.Inspectionform.Stad
-				</p>
+						<b>Festival locatie:</b>
+						@Model.Inspectionform.Straatnaam
+						@Model.Inspectionform.Huisnummer in
+						@Model.Inspectionform.Stad
+					</div>
+						@if (Model.LogoString != null)
+						{
+							<img class="col-xs-3 col-sm-2" src="@String.Format("data:image/jpg;base64,{0}", Model.LogoString)" />
+						}
+					</div>
 			</div>
 
 			<div class="description-container">

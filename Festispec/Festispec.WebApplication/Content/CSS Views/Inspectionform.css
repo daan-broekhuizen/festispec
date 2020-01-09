@@ -112,10 +112,8 @@ progress::-webkit-progress-value {
 }
 
 .inspection-data img {
-	position: absolute;
-	right: 40px;
-	top: 80px;
-	height: 15%;
+	position: relative;
+	top:20px;
 }
 
 .inspection-info {
