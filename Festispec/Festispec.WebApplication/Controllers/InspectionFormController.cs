@@ -31,6 +31,9 @@ namespace Festispec.WebApplication.Controllers
         // GET: InspectionForm/Details/5
         public ActionResult Details(int inspectionId, int userId)
         {
+            int? user = (int?)Session["user"];
+            if (user == null)
+                return RedirectToAction("Error", "Error");
             Inspectieformulier form = _formRepo.GetInspectionform(inspectionId);
             return View(GetViewModel(form, userId));
         }

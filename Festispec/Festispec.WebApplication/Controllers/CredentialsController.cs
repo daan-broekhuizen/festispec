@@ -80,7 +80,7 @@ namespace Festispec.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                account.Rol = "in";
+                account.Rol = "ng";
                 account.LaatsteWijziging = DateTime.Now;
                 _context.Account.Add(account);
                 _context.SaveChanges();
