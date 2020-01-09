@@ -13,21 +13,33 @@ namespace Festispec.WebApplication.Models.DTO
         public string start_date { get; set; }
         public string end_date { get; set; }
 
-        public static explicit operator PlanningAPIEvent(Opdracht opdracht)
+        public static explicit operator PlanningAPIEvent(Inspectieformulier inspectie)
         {
-            if (opdracht!= null)
+            DateTime startdate = inspectie.DatumInspectie
+                .GetValueOrDefault()
+                .Add(inspectie.StartTijd.GetValueOrDefault());
+            DateTime enddate;
+            if (inspectie.EindTijd.GetValueOrDefault() < inspectie.StartTijd.GetValueOrDefault())
             {
-                return new PlanningAPIEvent
-                {
-                    id = opdracht.OpdrachtID,
-                    text = opdracht.OpdrachtNaam,
-                    start_date = opdracht.StartDatum.ToString("yyyy-MM-dd HH:mm"),
-                    end_date = opdracht.EindDatum.ToString("yyyy-MM-dd HH:mm")
-                };
+                enddate = inspectie.DatumInspectie
+                    .GetValueOrDefault()
+                    .AddDays(1)
+                    .Add(inspectie.EindTijd.GetValueOrDefault());
             }
-            else
-                return null;
-        }
+            else 
+            {
+                enddate = inspectie.DatumInspectie
+                    .GetValueOrDefault()
+                    .Add(inspectie.EindTijd.GetValueOrDefault());
+            }
 
+            return new PlanningAPIEvent
+            {
+                id = inspectie.InspectieformulierID,
+                text = inspectie.InspectieFormulierTitel,
+                start_date = startdate.ToString(),
+                end_date = enddate.ToString()
+            };
+        }
     }
 }

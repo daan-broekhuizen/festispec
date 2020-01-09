@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace Festispec.WebApplication.Controllers.Planning
 {
@@ -20,10 +21,16 @@ namespace Festispec.WebApplication.Controllers.Planning
             int? userID = (int?)http.Session["user"];
             if (userID.HasValue)
             {
-                return context.Opdracht
-                    .ToList()
-                    .Where(e => e.MedewerkerID == userID.GetValueOrDefault())
-                    .Select(e => (PlanningAPIEvent)e);
+                using(context)
+                {
+                    Account account = context.Account.Find(userID);
+                    return context.Inspectieformulier
+                        .Include(c => c.Opdracht)
+                        .Include(c => c.Ingepland)
+                        .ToList()
+                        .Where(c => c.Ingepland.Any(i => i.AccountID == userID))
+                        .Select(c => (PlanningAPIEvent)c);
+                }
             }
             else
                 return null;
@@ -32,7 +39,14 @@ namespace Festispec.WebApplication.Controllers.Planning
 
         public PlanningAPIEvent Get(int id)
         {
-            return (PlanningAPIEvent)context.Opdracht.Find(id);
+            HttpContext http = HttpContext.Current;
+            int? userID = (int?)http.Session["user"];
+            if (userID.HasValue)
+                return (PlanningAPIEvent)context.Inspectieformulier
+                    .Where(e => e.OpdrachtID == id)
+                    .Select(e => (PlanningAPIEvent)e);
+            else
+                return null;
         }
     }
 }
