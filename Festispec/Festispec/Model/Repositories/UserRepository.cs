@@ -32,7 +32,8 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.Entry(context.Account.Where(c => c.AccountID == account.AccountID).First()).CurrentValues.SetValues(account);
+                Account toUpdate = context.Account.Where(c => c.AccountID == account.AccountID).FirstOrDefault();
+                context.Entry(toUpdate).CurrentValues.SetValues(account);
                 context.SaveChanges();
             }
         }

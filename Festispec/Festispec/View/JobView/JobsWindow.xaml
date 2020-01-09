@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Festispec.View"
+      xmlns:components="clr-namespace:Festispec.View.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="JobsWindow"
@@ -37,28 +38,8 @@
             </Viewbox>
         </Grid>
 
-        <Rectangle Grid.Row="1" Fill="#FFF4F4F5" Stroke="Black" StrokeThickness="0"/>
-        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <components:OverviewSearchBar x:Name="searchBar" Grid.Row="1" ButtonActionCommand="{Binding ShowAddJobCommand}" ButtonText="Nieuwe opdracht" SearchActionCommand="{Binding SearchButtonClickCommand}" SearchTextChangedCommand="{Binding SearchTextChangedCommand}" />
 
-            <TextBox Padding="10,0" Text="{Binding FilterJob}" VerticalContentAlignment="Center" FontSize="20" Margin="100,15,20,15"  BorderThickness="0"/>
-            <Button  HorizontalAlignment="Right" Command="{Binding SearchJob}">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Width="40" Margin="10,20,30,20" Source="/Images/Search.png"/>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
-            <Viewbox HorizontalAlignment="Center" Grid.Column="1" >
-                <Button Padding="10,5" Margin="15" Background="White" Command="{Binding ShowAddJobCommand}">
-                    Opdracht aanmaken
-                </Button>
-            </Viewbox>
-        </Grid>
 
         <Viewbox Grid.Row="3" Stretch="Uniform" HorizontalAlignment="Left">
             <TextBlock Margin="20,0,0,0" Padding="5" Text="Zoek Resultaten"  Foreground="Black" FontWeight="Bold"/>

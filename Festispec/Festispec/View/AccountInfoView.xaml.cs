@@ -1,7 +1,4 @@
-﻿using Festispec.Service;
-using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,21 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 
-namespace Festispec.View.CustomerView
+namespace Festispec.View
 {
     /// <summary>
-    /// Interaction logic for ContactInfoView.xaml
+    /// Interaction logic for UserInfoView.xaml
     /// </summary>
-    public partial class ContactInfoView : Page
+    public partial class UserInfoView : Page
     {
-        public ContactInfoView()
+        public UserInfoView()
         {
             InitializeComponent();
             Messenger.Default.Register<string>(this, DataContext.GetHashCode(), ShowWindow);
+
         }
 
-        private void ShowWindow(string message) => MessageBox.Show(message, "FestiSpec");
-        private void Button_Click(object sender, RoutedEventArgs e) => CustomerLogo.Source = new ImageSelectService().SelectPngImage();
+        private void ShowWindow(string message) => MessageBox.Show(message);
+
     }
 }
