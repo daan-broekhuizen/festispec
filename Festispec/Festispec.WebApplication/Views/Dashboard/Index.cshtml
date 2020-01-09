@@ -13,7 +13,7 @@
 				<img src="~/Content/Images/dashboard_image.png" />
 			</div>
 		</div>
-		<div class=" col-md-offset-6">
+		<div class=" col-md-6">
 			<div class="upcoming">
 				<h3 class="text-center">Aankomende opdrachten</h3>
 				@*Start opdracht*@
@@ -28,14 +28,13 @@
 								<div class="col-xs-1 col-md-2 customer-logo">
 									<img src="@String.Format("data:image/jpg;base64,{0}", item.LogoString)" />
 								</div>
-								<div class="col-xs-2 col-md-2">
-									<b>@String.Format("{0:d/MM}", @item.Inspectionform.DatumInspectie)</b>
+								<div class="col-xs-3 col-md-3">
+									<p>Op <b>@String.Format("{0:d/MM}", @item.Inspectionform.DatumInspectie)</b></p>
 								</div>
-								<div class="col-xs-5 col-md-5">
-									<p>@item.Inspectionform.Stad</p>
+								<div class="col-xs-4 col-md-4">
+									<p>in <b>@item.Inspectionform.Stad</b></p>
 								</div>
-
-								<div class="col-xs-2 col-md-2">
+								<div class="col-xs-1 col-md-1">
 									@Html.ActionLink("Formulier", "Details", "Inspectionform", new { inspectionId = item.Inspectionform.InspectieformulierID, userId = @Model.Account.AccountID }, null)
 								</div>
 							</div>
