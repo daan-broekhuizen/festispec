@@ -171,12 +171,14 @@ namespace Festispec.ViewModel
         }
         private async Task GetPostalCodeAsync()
         {
-            string query = $"{Streetname} {HouseNumber}{Addition} {City}";
+            string street = Streetname.Remove(Streetname.Length - 1, 1);
+            string query = $"{street} {HouseNumber}{Addition} {City}";
             Address address = await new LocationService().GetFullAdress(query);
             if (address.AddressLine.ToLower().Contains(Streetname.ToLower()))
                 PostalCode = address.PostalCode;
             else
                 PostalCode = "";
+            System.Console.WriteLine($"addresline: {address.AddressLine.ToLower()} postcode: {address.PostalCode} streetname: {Streetname.ToLower()} true: { address.AddressLine.ToLower().Contains(Streetname.ToLower())}");
 
         }
         public void SetCustomer(Klant customer) => _customer = customer;
