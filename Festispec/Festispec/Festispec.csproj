@@ -170,6 +170,10 @@
     <Compile Include="Migrations\201912201601216_KlantRework.designer.cs">
       <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912291651291_Vestigigsnummer_fix.cs" />
+    <Compile Include="Migrations\201912291651291_Vestigigsnummer_fix.Designer.cs">
+      <DependentUpon>201912291651291_Vestigigsnummer_fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202001021153050_VestigingsnummerUpdate.cs" />
     <Compile Include="Migrations\202001021153050_VestigingsnummerUpdate.designer.cs">
       <DependentUpon>202001021153050_VestigingsnummerUpdate.cs</DependentUpon>
@@ -184,6 +188,7 @@
     <Compile Include="Model\BeschikbaarheidInspecteurs.cs" />
     <Compile Include="Model\ChartData.cs" />
     <Compile Include="Model\Contactpersoon.cs" />
+    <Compile Include="Model\DTO\JsonJob.cs" />
     <Compile Include="Model\Enums\EnumMonth.cs" />
     <Compile Include="Model\Enums\EnumProvince.cs" />
     <Compile Include="Model\Enums\EnumChartConfiguration.cs" />
@@ -198,6 +203,7 @@
     <Compile Include="Model\Repositories\GraphRepository.cs" />
     <Compile Include="Model\Repositories\InspectionFormRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IInspectionFormRepository.cs" />
+    <Compile Include="Model\Repositories\OfflineJobRepository.cs" />
     <Compile Include="Model\Repositories\PlanningRepository.cs" />
     <Compile Include="Model\Repositories\QuotationRepository.cs" />
     <Compile Include="Model\Repositories\JobRepository.cs" />
@@ -503,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912201601216_KlantRework.resx">
       <DependentUpon>201912201601216_KlantRework.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912291651291_Vestigigsnummer_fix.resx">
+      <DependentUpon>201912291651291_Vestigigsnummer_fix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001021153050_VestigingsnummerUpdate.resx">
       <DependentUpon>202001021153050_VestigingsnummerUpdate.cs</DependentUpon>
