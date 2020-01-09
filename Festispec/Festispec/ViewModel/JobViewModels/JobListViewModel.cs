@@ -66,23 +66,21 @@ namespace Festispec.ViewModel
             }
 
         }
-
-        public string FilterJob { get; set; }
-
         private JobRepository JobRepository { get; set; }
-
         public ICommand SearchJob { get; set; }
         public ICommand ShowAddJobCommand { get; set; }
         private NavigationService _navigationService;
+        public ICommand SearchButtonClickCommand { get; set; }
+        public ICommand SearchTextChangedCommand { get; set; }
         public JobListViewModel(NavigationService service)
         {
             _navigationService = service;
             JobRepository = new JobRepository();
             Jobs = JobRepository.GetOpdrachten().Select(c => new JobViewModel(c)).ToList();
             FilteredJobs = Jobs;
-            SearchJob = new RelayCommand(FilterJobs);
             ShowAddJobCommand = new RelayCommand(ShowAddJob);
-            FilterJob = "";
+            SearchButtonClickCommand = new RelayCommand<string>(FilterJobs);
+            SearchTextChangedCommand = new RelayCommand<string>(FilterJobs);
         }
 
         public void ShowAddJob()
@@ -96,9 +94,9 @@ namespace Festispec.ViewModel
                 _navigationService.NavigateTo("JobInfo", SelectedJob);
         }
 
-        public void FilterJobs()
+        public void FilterJobs(string searchText)
         {
-            FilteredJobs = Jobs.Where(e => e.JobName.ToLower().Contains(FilterJob.ToLower())).ToList();
+            FilteredJobs = Jobs.Where(e => e.JobName.ToLower().Contains(searchText)).ToList();
             SortJobs();
         }
 
