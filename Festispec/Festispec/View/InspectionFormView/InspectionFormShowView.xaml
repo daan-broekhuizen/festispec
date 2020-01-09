@@ -42,7 +42,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -74,7 +74,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -106,7 +106,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                 </Grid>
             </Border>
@@ -139,7 +139,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
 
                     <ListBox Grid.Row="5" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
@@ -190,7 +190,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
                     <Viewbox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="6">
                         <Grid MinWidth="{Binding Path=ActualWidth, ElementName=StandardView}">
@@ -245,7 +245,7 @@
                         <TextBlock Text="{Binding Path=QuestionText}" TextWrapping="Wrap" FontSize="30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding Path=ActualWidth, ElementName=QuestionList}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MinHeight="150" MaxHeight="300"/>
                     </Viewbox>
                     <Viewbox Grid.Column="4" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding Image}" Margin="30, 30, 30, 30"/>
                     </Viewbox>
 
                     <ListBox Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6" ItemsSource="{Binding PossibleAnwsers}" VerticalContentAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ActualWidth}" Background="White">
