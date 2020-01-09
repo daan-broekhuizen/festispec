@@ -83,7 +83,7 @@ namespace Festispec.WebApplication.Controllers
                 _context.Account.Add(account);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             ViewBag.Rol = new SelectList(_context.Rol, "Afkorting", "Betekenis", account.Rol);
