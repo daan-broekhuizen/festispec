@@ -95,7 +95,6 @@ namespace Festispec.ViewModel
             }
         }
 
-        //TODO implement (see customerviewmodel + locationservice)
         private string _postalCode;
         public string PostalCode
         {

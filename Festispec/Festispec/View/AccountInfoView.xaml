@@ -105,19 +105,6 @@
             <TextBox Text="{Binding AccountVM.Password}"  FontSize="15" FontStretch="UltraExpanded" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,20,0" Grid.Column="1" Grid.Row="2"/>
             <ComboBox Name="ComboBoxStatus" ItemsSource="{Binding Rol}" FontSize="15" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,0" Grid.Column="2" Grid.Row="2" SelectedItem="{Binding AccountVM.RoleComplete}"/>
 
-            <Viewbox Grid.Row="6" Grid.Column="0">
-                <Label Content="{Binding BeginDateError}" Foreground="Red" />
-            </Viewbox>
-            <Viewbox Grid.Row="6" Grid.Column="1">
-                <Label Content="{Binding EndDateError}" Foreground="Red" />
-            </Viewbox>
-            <Viewbox Grid.Row="3" Grid.Column="1">
-                <Label Content="{Binding JobNameError}" Foreground="Red" />
-            </Viewbox>
-            <Viewbox Grid.Row="3" Grid.Column="2">
-                <Label Content="{Binding StatusError}" Foreground="Red" />
-            </Viewbox>
-
         </Grid>
 
         <Viewbox Grid.Row="5" HorizontalAlignment="Center">
