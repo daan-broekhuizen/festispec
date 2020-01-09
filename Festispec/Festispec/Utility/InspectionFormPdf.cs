@@ -1,6 +1,7 @@
 ﻿using Festispec.Model;
 using Festispec.Model.Repositories;
 using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -17,52 +18,71 @@ namespace Festispec.Utility
         {
             foreach (Account account in repo.GetInspectorsWithFilledAnswers())
             {
-                PdfPage page = document.AddPage();
-                XGraphics gfx = XGraphics.FromPdfPage(page);
-
-                // Fonts
-                XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
-                XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
-                XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
-
-                // Inspecteur
-                gfx.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
-
-                // Vragen
-                int currentY = 60;
                 List<Vraag> questions = repo.GetQuestionsFromInspector(account.AccountID, jobId);
 
-                for (int i = 0; i < questions.Count; i++)
+                int questionAmount = questions.Count;
+                int latestQuestion = 0;
+
+                while(questionAmount != latestQuestion)
+                    latestQuestion = AddPage(document, repo, account, jobId, questions, latestQuestion);
+            }
+        }
+
+        private int AddPage(PdfDocument document, RapportageRepository repo, Account account, int jobId, List<Vraag> questions, int latestQuestion)
+        {
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            XTextFormatter txtFormatter = new XTextFormatter(gfx);
+
+            // Fonts
+            XFont normalFont = new XFont("Arial", 14, XFontStyle.Regular);
+            XFont boldFont = new XFont("Arial", 14, XFontStyle.Bold);
+            XFont titleFont = new XFont("Arial", 20, XFontStyle.Bold);
+            XFont italicFont = new XFont("Arial", 14, XFontStyle.Italic);
+
+            // Inspecteur
+            txtFormatter.DrawString($"Inspecteur: {account.Voornaam} {account.Tussenvoegsel} {account.Achternaam}", titleFont, XBrushes.Black, new XRect(20, 20, page.Width, page.Height), XStringFormats.TopLeft);
+
+            // Vragen
+            int currentY = 60;
+
+            int currentQuestion = latestQuestion;
+            int sizeLeft = 2000;
+
+            while ((currentQuestion < questions.Count && sizeLeft > 200))
+            {
+                Vraag question = questions[currentQuestion];
+
+                int textHeight = txtFormatter.DrawString($"Vraag {currentQuestion + 1}: {question.Vraagstelling}", boldFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+
+                currentY += textHeight;
+
+                List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
+
+                switch (question.Vraagtype)
                 {
-                    Vraag question = questions[i];
+                    case "tv":
+                        currentY = DrawTableQuestionAnswer(gfx, page, answers, italicFont, currentY);
 
-                    gfx.DrawString($"Vraag {i + 1}: {question.Vraagstelling}", normalFont, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
-                    currentY += 20;
+                        break;
+                    case "av":
+                        currentY = DrawImageQuestionAnswer(gfx, page, answers, currentY);
 
-                    List<Antwoorden> answers = question.Antwoorden.Where(x => x.InspecteurID == account.AccountID).ToList();
-
-                    switch(question.Vraagtype)
-                    {
-                        case "tv":
-                            currentY = DrawTableQuestionAnswer(gfx, page, answers, italicFont, currentY);
-
-                            break;
-                        case "av":
-                            currentY = DrawImageQuestionAnswer(gfx, page, answers, currentY);
-
-                            break;
-                        default:
-                            currentY = DrawQuestionAnswer(gfx, page, answers, italicFont, currentY);
-                            break;
-                    }
+                        break;
+                    default:
+                        currentY = DrawQuestionAnswer(txtFormatter, page, answers, italicFont, currentY);
+                        break;
                 }
+
+                sizeLeft -= currentY;
+                currentQuestion++;
             }
 
+            return currentQuestion;
         }
 
         private int DrawTableQuestionAnswer(XGraphics gfx, PdfPage page, List<Antwoorden> answers, XFont font, int currentY)
         {
-            // Calculate Largest Answer
             int cellWidth = 0;
 
             foreach (Antwoorden answer in answers)
@@ -106,11 +126,11 @@ namespace Festispec.Utility
                 {
                     using (MemoryStream ms = new MemoryStream(answer.AntwoordImage))
                     {
-                        XImage xImage = XImage.FromStream(ms);
-
-                        gfx.DrawImage(xImage, new XRect(20, currentY, xImage.PixelWidth, xImage.PixelHeight));
-
-                        currentY += xImage.PixelHeight;
+                        using (XImage xImage = XImage.FromStream(ms))
+                        {
+                            gfx.DrawImage(xImage, new XRect(20, currentY, xImage.PixelWidth > 200 ? 200 : xImage.PixelWidth, xImage.PixelHeight > 200 ? 200 : xImage.PixelHeight));
+                            currentY += xImage.PixelHeight > 200 ? 200 : xImage.PixelHeight;
+                        }
                     }
                 }
 
@@ -120,13 +140,13 @@ namespace Festispec.Utility
             return currentY + 20;
         }
 
-        private int DrawQuestionAnswer(XGraphics gfx, PdfPage page, List<Antwoorden> answers, XFont font, int currentY)
+        private int DrawQuestionAnswer(XTextFormatter txtFormatter, PdfPage page, List<Antwoorden> answers, XFont font, int currentY)
         {
             for (int j = 0; j < answers.Count; j++)
             {
-                gfx.DrawString($"Antwoord: {answers[j].AntwoordText}", font, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
+                int height = txtFormatter.DrawString($"Antwoord: {answers[j].AntwoordText}", font, XBrushes.Black, new XRect(20, currentY, page.Width, page.Height), XStringFormats.TopLeft);
 
-                currentY += 20;
+                currentY += height;
             }
 
             return currentY + 20;
