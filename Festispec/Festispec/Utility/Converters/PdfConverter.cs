@@ -60,7 +60,7 @@ namespace Festispec.Utility.Converters
                 if (!documentName.Contains(".pdf"))
                     documentName += ".pdf";
 
-                if (!Save(document, documentName))
+                if (!DidSaveFailed(document, documentName))
                     StartPDF(documentName);
                 else
                     return false;
@@ -77,7 +77,7 @@ namespace Festispec.Utility.Converters
             gfx.DrawImage(image, x, y, width, height);
         }
 
-        private bool Save(PdfDocument file, string documentName)
+        private bool DidSaveFailed(PdfDocument file, string documentName)
         {
             try
             {
