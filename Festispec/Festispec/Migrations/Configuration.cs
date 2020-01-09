@@ -1098,7 +1098,7 @@
             {
                 InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
                 Vraagstelling = "Hoe druk bezocht zijn de veschillende optredens? Gebruik je schattings technieken.",
-                Vraagtype = context.VraagType.First(x => x.Afkorting == "sv").Afkorting,
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 3
 
             };
