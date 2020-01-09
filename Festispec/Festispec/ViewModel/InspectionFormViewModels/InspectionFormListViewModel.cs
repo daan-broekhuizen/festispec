@@ -79,11 +79,26 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 PlanningViewModel pvm = new PlanningViewModel();
                 int ri = RequiredInspectors ?? default(int);
+                List<Account> ingeplandeInspecteurs = await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri);
 
-                if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
+                if (ingeplandeInspecteurs == null)
                     Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
                 else
-                    Messenger.Default.Send($"Planning gegenereerd", this.GetHashCode());
+                {
+                    string msg = "Planning gegenereerd \n";
+                    StringBuilder sb = new StringBuilder(msg);
+                    sb.AppendLine("De volgende inspecteurs zijn ingepland: \n");
+                    for (int i = 0; i < ingeplandeInspecteurs.Count; i++)
+                    {
+                        if (ingeplandeInspecteurs[i].Tussenvoegsel == string.Empty)
+                            sb.AppendLine($"{ingeplandeInspecteurs[i].Voornaam} {ingeplandeInspecteurs[i].Achternaam} stad: {ingeplandeInspecteurs[i].Stad} \n");
+                        else
+                            sb.AppendLine($"{ingeplandeInspecteurs[i].Voornaam} {ingeplandeInspecteurs[i].Tussenvoegsel} {ingeplandeInspecteurs[i].Achternaam} stad: {ingeplandeInspecteurs[i].Stad} \n");
+                    }
+
+                    Messenger.Default.Send(sb.ToString(), this.GetHashCode());
+                }
+
             }
             
         }

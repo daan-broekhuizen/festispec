@@ -252,7 +252,7 @@ namespace Festispec.ViewModel.RapportageViewModels
                 }
             }
 
-            MessageBox.Show("Aanpassingen zijn opgeslagen.");
+            MessageBox.Show("Aanpassingen zijn opgeslagen.", "FestiSpec");
         }
 
         private void Download(DocumentDesignerViewModel designer)
