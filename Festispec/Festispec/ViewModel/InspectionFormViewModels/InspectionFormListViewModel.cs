@@ -118,9 +118,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 {
                     Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Fout adres ingevuld", this.GetHashCode());
                 }
-                
-                
-
             }
             else
                 Messenger.Default.Send($"Voer eerst alle verplichte velden in.\nEn het aantal benodigde inspecteurs.", this.GetHashCode());
