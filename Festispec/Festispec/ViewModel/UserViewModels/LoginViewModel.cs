@@ -2,6 +2,8 @@
 using Festispec.Service;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
+using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -75,11 +77,17 @@ namespace Festispec.ViewModel
             };
 
             Account account = _userRepository.GetAccount(currentAccount);
-            if (account != null)
+            if (account != null && CanAccess(account))
                 _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }
 
+        private bool CanAccess(Account account)
+        {
+            List<string> validRoles = new List<string> { "ad", "ma", "om", "sm" };
+
+            return validRoles.Contains(account.RolType.Afkorting);
+        }
     }
 }
