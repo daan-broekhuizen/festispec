@@ -3,6 +3,7 @@ using Festispec.Service;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Festispec.ViewModel
         {
             if (IsDatabaseOnline())
                 _navigationService.ApplicationNavigateTo("Login", null);
-            else
+            else 
                 _navigationService.ApplicationNavigateTo("OfflineLogin", null);
         }
 

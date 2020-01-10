@@ -218,7 +218,7 @@ namespace Festispec.ViewModel
 
         private void SaveJobOffline()
         {
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/Resources/opdrachten.json";
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/bin/opdrachten.json";
             List<JsonJob> jsonarray = new List<JsonJob>();
             JsonJob jobToSave = (JsonJob)_jobRepo.GetSingleJob(JobVM.JobID);
             if (!File.Exists(path))
@@ -236,7 +236,7 @@ namespace Festispec.ViewModel
                 {
                     string json = sr.ReadToEnd();
                     List<JsonJob> jsonJobs = JsonConvert.DeserializeObject<List<JsonJob>>(json);
-                    if(jsonJobs.Contains(jobToSave))
+                    if(!jsonJobs.Contains(jobToSave))
                         jsonJobs.Add(jobToSave);
                     newJson = JsonConvert.SerializeObject(jsonJobs);
                 }

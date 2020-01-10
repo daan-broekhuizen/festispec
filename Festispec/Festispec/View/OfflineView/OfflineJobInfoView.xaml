@@ -122,7 +122,7 @@
                 <RowDefinition Height="0.8*"/>
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
-                <TextBox TextWrapping="Wrap" Text="{Binding JobVM.KlantWensen}" FontSize="20" Margin="20" AcceptsReturn="True"  ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <TextBox IsReadOnly="True" TextWrapping="Wrap" Text="{Binding JobVM.KlantWensen}" FontSize="20" Margin="20" AcceptsReturn="True"  ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
         </Grid>
         <Grid Grid.Row="5">

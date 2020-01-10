@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,11 @@ namespace Festispec.ViewModel.OfflineViewModels
         public ICommand ShowOfflineJobListCommand { get; set; }
         public OfflineLoginViewModel(NavigationService service) : base(service)
         {
-            this.ShowOfflineJobListCommand = new RelayCommand(ShowOfflineJobList);
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/bin/opdrachten.json";
+            if (File.Exists(path))
+                this.ShowOfflineJobListCommand = new RelayCommand(ShowOfflineJobList);
+            else
+                this.ShowOfflineJobListCommand = null;
         }
 
         private void ShowOfflineJobList() => _navigationService.OfflineNavigation("OfflineJobList", null);

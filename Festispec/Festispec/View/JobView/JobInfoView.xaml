@@ -41,6 +41,11 @@
         <Viewbox  Grid.Row="1" HorizontalAlignment="Left">
             <TextBlock FontWeight="Bold" Padding="20,10,10,10" Text="Opdracht"/>
         </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+            <Button Background="#FFF4F4F5" FontSize="8" Padding="2.5" Margin="40,10" Command="{Binding SaveJobOfflineCommand}">
+                Offline synchroniseren
+            </Button>
+        </Viewbox>
         <Grid Margin="20,10,20,10" Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -174,11 +179,7 @@
                     Wijzigingen opslaan
                 </Button>
             </Viewbox>
-            <Viewbox Grid.Column="6" HorizontalAlignment="Right">
-                <Button Background="#FFF4F4F5" Padding="10,5" Margin="40,10" Command="{Binding SaveJobOfflineCommand}">
-                    Offline synchroniseren
-                </Button>
-            </Viewbox>
+
         </Grid>
     </Grid>
 </Page>
