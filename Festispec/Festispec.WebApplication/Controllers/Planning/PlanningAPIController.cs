@@ -8,12 +8,12 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Data.Entity;
+using System.Web.UI.WebControls;
 
 namespace Festispec.WebApplication.Controllers.Planning
 {
     public class PlanningAPIController : ApiController
     {
-        private FestiSpecContext context = new FestiSpecContext();
 
         public IEnumerable<PlanningAPIEvent> Get()
         {
@@ -21,15 +21,14 @@ namespace Festispec.WebApplication.Controllers.Planning
             int? userID = (int?)http.Session["user"];
             if (userID.HasValue)
             {
-                using(context)
+                using(FestiSpecContext context = new FestiSpecContext())
                 {
-                    Account account = context.Account.Find(userID);
-                    return context.Inspectieformulier
-                        .Include(c => c.Opdracht)
+                    IEnumerable<PlanningAPIEvent> list = context.Inspectieformulier
                         .Include(c => c.Ingepland)
-                        .ToList()
                         .Where(c => c.Ingepland.Any(i => i.AccountID == userID))
+                        .ToList()
                         .Select(c => (PlanningAPIEvent)c);
+                    return list;
                 }
             }
             else
@@ -42,9 +41,12 @@ namespace Festispec.WebApplication.Controllers.Planning
             HttpContext http = HttpContext.Current;
             int? userID = (int?)http.Session["user"];
             if (userID.HasValue)
-                return (PlanningAPIEvent)context.Inspectieformulier
-                    .Where(e => e.OpdrachtID == id)
-                    .Select(e => (PlanningAPIEvent)e);
+                using (FestiSpecContext context = new FestiSpecContext())
+                {
+                    return (PlanningAPIEvent)context.Inspectieformulier
+                        .Where(e => e.OpdrachtID == id)
+                        .Select(e => (PlanningAPIEvent)e);
+                }
             else
                 return null;
         }

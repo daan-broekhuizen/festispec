@@ -37,8 +37,8 @@ namespace Festispec.WebApplication.Models.DTO
             {
                 id = inspectie.InspectieformulierID,
                 text = inspectie.InspectieFormulierTitel,
-                start_date = startdate.ToString(),
-                end_date = enddate.ToString()
+                start_date = startdate.ToString("yyyy-MM-dd HH:mm"),
+                end_date = enddate.ToString("yyyy-MM-dd HH:mm")
             };
         }
     }
