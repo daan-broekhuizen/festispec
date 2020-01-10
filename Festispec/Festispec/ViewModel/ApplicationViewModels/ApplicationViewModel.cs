@@ -21,9 +21,9 @@ namespace Festispec.ViewModel
 
         private void ShowLogin()
         {
-          /*  if (IsDatabaseOnline())
+            if (IsDatabaseOnline())
                 _navigationService.ApplicationNavigateTo("Login", null);
-            else */
+            else 
                 _navigationService.ApplicationNavigateTo("OfflineLogin", null);
         }
 
