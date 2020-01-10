@@ -21,11 +21,19 @@ namespace Festispec.WebApplication.Controllers
                 "image/png"
             };
         // GET: InspectionForm
-        public ActionResult Index(int userId)
+        public ActionResult Index(string search)
         {
-            List<Inspectieformulier> formList = _formRepo.GetInspectionforms(userId);
+            int? userId = (int?)Session["user"];
+            if (userId == null)
+                return RedirectToAction("Error", "Error");
+            else
+            {
+                List<Inspectieformulier> formList = _formRepo.GetInspectionforms((int)userId);
+                formList = formList.OrderByDescending(i => i.DatumInspectie).ToList();
+                if (search == null) search = "";
+                return View(formList.Where(i => i.Opdracht.OpdrachtNaam.ToLower().Contains(search.ToLower())).ToList());
+            }
             
-            return View(formList);
         }
 
         // GET: InspectionForm/Details/5

@@ -6,25 +6,25 @@
 
 <hr />
 
-<div class="row">
-	<form>
-		<input id="zoekbalk" class="form-control" type="text" placeholder="Zoek opdrachtnaam" />
-	</form>
-</div>
+@using (Html.BeginForm("Index", "Inspectionform", FormMethod.Get))
+{
+		<div class="col-md-12" style="display:inline-flex">
+			<div class="col-md-11">
+				@Html.TextBox("search", null, new { @class = "form-control", style = "width: 100%;"})
+
+			</div>
+			<div class="pull-right col-md-1">
+				<input type="submit" value="Search" class="btn btn-default" />
+			</div>
+		</div>
+	
+	
+
+}
 
 <div class="row">
 	<div class="col-md-6">
 		<h2>Zoekresultaten</h2>
-	</div>
-	<div class="col-md-6">
-		<div class="form-group">
-			<label for="sort">Sorteren op:</label>
-			<select class="form-control" id="sort">
-				<option>Datum</option>
-				<option>Stad</option>
-				<option>Klantnaam</option>
-			</select>
-		</div>
 	</div>
 </div>
 
