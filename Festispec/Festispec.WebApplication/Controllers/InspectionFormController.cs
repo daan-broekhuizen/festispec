@@ -24,7 +24,7 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Index(int userId)
         {
             List<Inspectieformulier> formList = _formRepo.GetInspectionforms(userId);
-            formList.Select(i => i.Vraag = i.Vraag.OrderBy(q => q.VolgordeNummer).ToList());
+            
             return View(formList);
         }
 
@@ -104,7 +104,7 @@ namespace Festispec.WebApplication.Controllers
             {
                 Question = q,
                 Answer = q.Antwoorden.FirstOrDefault(a => a.Account.AccountID == userId)
-            }).ToList();
+            }).OrderBy(q => q.Question.VolgordeNummer).ToList();
 
             InspectionformViewModel formVM = new InspectionformViewModel(form)
             {
