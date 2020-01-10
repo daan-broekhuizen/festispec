@@ -31,7 +31,7 @@ namespace Festispec.WebApplication.Controllers
                 List<Inspectieformulier> formList = _formRepo.GetInspectionforms((int)userId);
                 formList = formList.OrderByDescending(i => i.DatumInspectie).ToList();
                 if (search == null) search = "";
-                return View(formList.Where(i => i.Opdracht.OpdrachtNaam.ToLower().Contains(search.ToLower()) || i.Stad.ToLower().Contains(search)).ToList());
+                return View(formList.Where(i => i.Opdracht.OpdrachtNaam.ToLower().Contains(search.ToLower()) || i.Stad.ToLower().Contains(search.ToLower())).ToList());
             }
             
         }
