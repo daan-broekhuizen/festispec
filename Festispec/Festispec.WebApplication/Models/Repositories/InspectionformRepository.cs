@@ -31,6 +31,19 @@ namespace Festispec.WebApplication.Models.Repositories
                     .Where(a => a.Ingepland.Any(i => i.AccountID == userId)).ToList();
             }
         }
+
+        public List<Inspectieformulier> GetUpcomingForms(int userId)
+        {
+            using (FestiSpecContext context = new FestiSpecContext())
+            {
+                Account account = context.Account.Find(userId);
+                List<Inspectieformulier> list = context.Inspectieformulier.Include(a => a.Opdracht.Klant).Include(a => a.Ingepland).Include(a => a.Vraag)
+                .Where(a => a.Ingepland.Any(i => i.AccountID == userId)).ToList();
+
+                return list.Where(e => e.DatumInspectie >= DateTime.Now.Date).OrderBy(e => e.DatumInspectie).ToList();
+            }
+        }
+
         public Vraag GetQuestion(int questionId)
         {
             using (FestiSpecContext context = new FestiSpecContext())

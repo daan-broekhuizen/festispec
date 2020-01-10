@@ -24,13 +24,16 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Index(int userId)
         {
             List<Inspectieformulier> formList = _formRepo.GetInspectionforms(userId);
-            formList.ForEach(i => i.Vraag.OrderBy(q => q.VolgordeNummer));
+            
             return View(formList);
         }
 
         // GET: InspectionForm/Details/5
         public ActionResult Details(int inspectionId, int userId)
         {
+            int? user = (int?)Session["user"];
+            if (user == null)
+                return RedirectToAction("Error", "Error");
             Inspectieformulier form = _formRepo.GetInspectionform(inspectionId);
             return View(GetViewModel(form, userId));
         }
@@ -101,7 +104,7 @@ namespace Festispec.WebApplication.Controllers
             {
                 Question = q,
                 Answer = q.Antwoorden.FirstOrDefault(a => a.Account.AccountID == userId)
-            }).ToList();
+            }).OrderBy(q => q.Question.VolgordeNummer).ToList();
 
             InspectionformViewModel formVM = new InspectionformViewModel(form)
             {

@@ -28,7 +28,7 @@ namespace Festispec.WebApplication.Controllers
                     account = context.Account.Find(userId);
                 }
                 int userIdInt = userId.Value;
-                assignmentList = repo.GetInspectionforms(userIdInt);
+                assignmentList = repo.GetUpcomingForms(userIdInt);
             }
             else
                 assignmentList = new List<Inspectieformulier>();
