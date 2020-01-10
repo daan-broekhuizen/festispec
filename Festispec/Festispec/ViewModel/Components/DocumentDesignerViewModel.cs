@@ -175,7 +175,7 @@ namespace Festispec.ViewModel.Components
                 ExecuteCommand("AbsolutePosition", true);
             }
             else
-                MessageBox.Show("Er is geen afbeelding geselecteerd");
+                MessageBox.Show("Er is geen afbeelding geselecteerd", "FestiSpec");
         }
 
         /// <summary>

@@ -109,7 +109,7 @@ namespace Festispec.Model.Repositories
 
             using(FestispecContext context = new FestispecContext())
             {
-                unfilteredQuestions = context.Antwoorden.Where(x => x.InspecteurID == inspectorID).Select(x => x.Vraag).Include(x => x.Antwoorden).ToList();
+                unfilteredQuestions = context.Antwoorden.Where(x => x.InspecteurID == inspectorID).Select(x => x.Vraag).Include(x => x.Antwoorden).Include(x => x.VraagMogelijkAntwoord).ToList();
             }
 
             foreach (Vraag vraag in unfilteredQuestions)

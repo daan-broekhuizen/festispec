@@ -38,8 +38,8 @@
             <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center"  Content="Gebruikersnaam:" FontSize="24"></Label>
             <TextBox Text="{Binding Username}" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
             <Label Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Wachtwoord:" FontSize="24"></Label>
-            <TextBox Text="{Binding Password}" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></TextBox>
-            <Button  Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}"></Button>
+            <PasswordBox Name="password" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200"></PasswordBox>
+            <Button  Grid.Column="0" Grid.Row="8" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="200" Content="Inloggen" FontSize="16" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=password}"></Button>
 
         </Grid>
     </Grid>

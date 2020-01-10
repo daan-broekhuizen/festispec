@@ -182,6 +182,10 @@
     <Compile Include="Migrations\202001081023536_VestiginsSizeChange.designer.cs">
       <DependentUpon>202001081023536_VestiginsSizeChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001091927585_UniqueUsername.cs" />
+    <Compile Include="Migrations\202001091927585_UniqueUsername.designer.cs">
+      <DependentUpon>202001091927585_UniqueUsername.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\Antwoorden.cs" />
@@ -271,6 +275,8 @@
     <Compile Include="ViewModel\TemplateViewModels\RapportageTemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateOverviewViewModel.cs" />
     <Compile Include="ViewModel\TemplateViewModels\TemplateViewModel.cs" />
+    <Compile Include="ViewModel\AccountInfoViewModel.cs" />
+    <Compile Include="ViewModel\UserInfoViewModel.cs" />
     <Compile Include="ViewModel\UserRightsViewModel.cs" />
     <Compile Include="ViewModel\UserViewModels\AccountViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModels\ApplicationViewModel.cs" />
@@ -402,6 +408,12 @@
     <Compile Include="View\TemplateView\RapportageTemplateOverviewView.xaml.cs">
       <DependentUpon>RapportageTemplateOverviewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AccountInfoView.xaml.cs">
+      <DependentUpon>AccountInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserInfoView.xaml.cs">
+      <DependentUpon>UserInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserRightsView.xaml.cs">
       <DependentUpon>UserRightsView.xaml</DependentUpon>
     </Compile>
@@ -497,6 +509,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AccountInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserRightsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -536,6 +556,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001081023536_VestiginsSizeChange.resx">
       <DependentUpon>202001081023536_VestiginsSizeChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001091927585_UniqueUsername.resx">
+      <DependentUpon>202001091927585_UniqueUsername.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -45,6 +45,7 @@
                 { "ma", "Management" },
                 { "om", "Operationeelmedewerker" },
                 { "sm", "Salesmedewerker" },
+                { "ng", "NieuweGebruiker" }
             };
 
             foreach (KeyValuePair<string, string> role in roles)
@@ -316,7 +317,7 @@
             klanten[2] = new Klant()
             {
                 KvKNummer = "03810391",
-                Vestigingnummer = "1294265598",
+                Vestigingnummer = "129426559898",
                 Naam = "Appelpop",
                 Stad = "Tilburg",
                 Straatnaam = "Wolvenweg",
@@ -330,7 +331,7 @@
             klanten[3] = new Klant()
             {
                 KvKNummer = "29183110",
-                Vestigingnummer = "31555664892",
+                Vestigingnummer = "315556648928",
                 Naam = "American day",
                 Stad = "Amsterdam",
                 Straatnaam = "Noordhollandstraat",
@@ -361,7 +362,7 @@
                 Vestigingnummer = "897573986248",
                 Naam = "Electric Jungle",
                 Stad = "Groningen",
-                Straatnaam = "Regentesstraat",
+                Straatnaam = "regentessestraat",
                 Huisnummer = "128",
                 Telefoonnummer = "0495034831",
                 Email = "electricjungle@hotmail.com",
@@ -551,7 +552,7 @@
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now.AddMonths(2),
                 EindDatum = DateTime.Now.AddMonths(3).AddDays(3),
-                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "1294265598").KlantID,
+                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "129426559898").KlantID,
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,
@@ -565,7 +566,7 @@
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now.AddMonths(1).AddDays(-7),
                 EindDatum = DateTime.Now.AddMonths(1).AddDays(-4),
-                KlantID = context.Klant.First(x => x.Naam == "American day" && x.Vestigingnummer == "31555664892").KlantID,
+                KlantID = context.Klant.First(x => x.Naam == "American day" && x.Vestigingnummer == "315556648928").KlantID,
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,
@@ -649,7 +650,7 @@
                 CreatieDatum = DateTime.Now,
                 StartDatum = DateTime.Now.AddMonths(-1).AddDays(12),
                 EindDatum = DateTime.Now.AddMonths(-1).AddDays(15),
-                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "1294265598").KlantID,
+                KlantID = context.Klant.First(x => x.Naam == "Appelpop" && x.Vestigingnummer == "129426559898").KlantID,
                 MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FransDeWanks").AccountID,
                 GebruikteRechtsgebieden = null,
                 LaatsteWijziging = DateTime.Now,
@@ -1097,7 +1098,7 @@
             {
                 InspectieFormulierID = context.Inspectieformulier.First(x => x.InspectieFormulierTitel == "Inspectie Appelpop najaar 2019").InspectieformulierID,
                 Vraagstelling = "Hoe druk bezocht zijn de veschillende optredens? Gebruik je schattings technieken.",
-                Vraagtype = context.VraagType.First(x => x.Afkorting == "sv").Afkorting,
+                Vraagtype = context.VraagType.First(x => x.Afkorting == "tv").Afkorting,
                 VolgordeNummer = 3
 
             };
@@ -1320,7 +1321,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "FreddyJohnson").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i -100)
                 };
             }
 
@@ -1329,7 +1330,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "StijnSmulders").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 200)
                 };
             }
 
@@ -1338,7 +1339,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "AdrianaPitts").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 300)
                 };
             }
 
@@ -1347,7 +1348,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "HarvieDeBakker").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 400)
                 };
             }
 
@@ -1356,7 +1357,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "MargotRowland").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 500)
                 };
             }
 
@@ -1365,7 +1366,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "SanjeevPike").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 600)
                 };
             }
 
@@ -1374,7 +1375,7 @@
                 beschikbaarheid[i] = new BeschikbaarheidInspecteurs()
                 {
                     MedewerkerID = context.Account.First(x => x.Gebruikersnaam == "WillCollier").AccountID,
-                    Datum = DateTime.Now.AddDays(i)
+                    Datum = DateTime.Now.AddDays(i - 700)
                 };
             }
 

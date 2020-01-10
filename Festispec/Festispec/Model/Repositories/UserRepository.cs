@@ -22,7 +22,7 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                Account acc = context.Account.Where(u => u.Gebruikersnaam == account.Gebruikersnaam
+                Account acc = context.Account.Include("RolType").Where(u => u.Gebruikersnaam == account.Gebruikersnaam
                  && u.Wachtwoord == account.Wachtwoord).FirstOrDefault();
                 return acc;
             }
@@ -32,7 +32,8 @@ namespace FestiSpec.Domain.Repositories
         {
             using (FestispecContext context = new FestispecContext())
             {
-                context.Entry(context.Account.Where(c => c.AccountID == account.AccountID).First()).CurrentValues.SetValues(account);
+                Account toUpdate = context.Account.Where(c => c.AccountID == account.AccountID).FirstOrDefault();
+                context.Entry(toUpdate).CurrentValues.SetValues(account);
                 context.SaveChanges();
             }
         }

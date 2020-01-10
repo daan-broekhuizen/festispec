@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Festispec.Model.Enums;
+using BingMapsRESTToolkit;
 
 namespace Festispec.ViewModel.InspectionFormViewModels
 {
@@ -79,13 +80,48 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             {
                 PlanningViewModel pvm = new PlanningViewModel();
                 int ri = RequiredInspectors ?? default(int);
+                List<Account> ingeplandeInspecteurs = await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri);
 
-                if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
+
+                if (ingeplandeInspecteurs == null)
                     Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
-                else
-                    Messenger.Default.Send($"Planning gegenereerd", this.GetHashCode());
+
+                string street = Street.Remove(Street.Length - 1, 1);
+                string query = $"{street} {HouseNumber} {City}";
+                try
+                {
+                    Address address = await new LocationService().GetFullAdress(query);
+                    if (address.AddressLine.ToLower().Contains(Street.ToLower()))
+                    {
+                        if (await pvm.GetInspectorAsync(_selectedInspectionForm.InspectionForm.InspectieformulierID, City + " " + Street + " " + HouseNumber, ri) == null)
+                            Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Er zijn te weinig beschikbare inspecteurs", this.GetHashCode());
+                        else
+                        {
+                            string msg = "Planning gegenereerd \n";
+                            StringBuilder sb = new StringBuilder(msg);
+                            sb.AppendLine("De volgende inspecteurs zijn ingepland: \n");
+                            for (int i = 0; i < ingeplandeInspecteurs.Count; i++)
+                            {
+                                if (ingeplandeInspecteurs[i].Tussenvoegsel == string.Empty)
+                                    sb.AppendLine($"{ingeplandeInspecteurs[i].Voornaam} {ingeplandeInspecteurs[i].Achternaam} stad: {ingeplandeInspecteurs[i].Stad} \n");
+                                else
+                                    sb.AppendLine($"{ingeplandeInspecteurs[i].Voornaam} {ingeplandeInspecteurs[i].Tussenvoegsel} {ingeplandeInspecteurs[i].Achternaam} stad: {ingeplandeInspecteurs[i].Stad} \n");
+                            }
+
+                            Messenger.Default.Send(sb.ToString(), this.GetHashCode());
+                        }
+                    }
+                    else
+                        Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Fout adres ingevuld", this.GetHashCode());
+                }
+                catch
+                {
+                    Messenger.Default.Send($"Planning kan niet gegenereerd worden.\n Fout adres ingevuld", this.GetHashCode());
+                }
             }
-            
+            else
+                Messenger.Default.Send($"Voer eerst alle verplichte velden in.\nEn het aantal benodigde inspecteurs.", this.GetHashCode());
+
         }
         private void GetInspectionForms()
         {

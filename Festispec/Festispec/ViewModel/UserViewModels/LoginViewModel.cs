@@ -2,6 +2,9 @@
 using Festispec.Service;
 using FestiSpec.Domain.Repositories;
 using GalaSoft.MvvmLight.CommandWpf;
+using System;
+using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Festispec.ViewModel
@@ -24,20 +27,6 @@ namespace Festispec.ViewModel
             }
         }
 
-        private string _password;
-        public string Password
-        {
-            get { return this._password; }
-            set
-            {
-                if (!string.Equals(this._password, value))
-                {
-                    _password = value;
-                    RaisePropertyChanged("Password");
-                }
-            }
-        }
-
         private string _errorFeedback;
         public string ErrorFeedback
         {
@@ -54,32 +43,41 @@ namespace Festispec.ViewModel
         public LoginViewModel(NavigationService service, UserRepository repo) : base(service)
         {
             _userRepository = repo;
-            LoginCommand = new RelayCommand(Login);
+            LoginCommand = new RelayCommand<PasswordBox>(Login);
 
             if (service.AppSettings.DebugMode)
             {
                 _username = service.AppSettings.Account.Username;
-                _password = service.AppSettings.Account.Password;
 
-                Login();
+                Login(service.AppSettings.Account.Password);
             }
         }
 
-
-        private void Login()
+        private void Login(string password)
         {
             Account currentAccount = new Account()
             {
                 Gebruikersnaam = _username,
-                Wachtwoord = _password
+                Wachtwoord = password
             };
 
             Account account = _userRepository.GetAccount(currentAccount);
-            if (account != null)
+            if (account != null && CanAccess(account))
                 _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
         }
 
+        private void Login(PasswordBox password)
+        {
+            Login(password.Password);
+        }
+
+        private bool CanAccess(Account account)
+        {
+            List<string> validRoles = new List<string> { "ad", "ma", "om", "sm" };
+
+            return validRoles.Contains(account.RolType.Afkorting);
+        }
     }
 }

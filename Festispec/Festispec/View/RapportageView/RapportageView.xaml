@@ -239,14 +239,14 @@
             </StackPanel>
 
             <!-- Ander Template -->
-            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsSelectMode, Converter={StaticResource BoolToVisibility}}">
+            <StackPanel Margin="5" Grid.Row="10" Visibility="{Binding IsChartVisible, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding SwitchTemplateCommand}">Ander template</Hyperlink>
                 </TextBlock>
             </StackPanel>
 
             <!-- Naar Opdracht -->
-            <StackPanel Margin="5" Grid.Row="11">
+            <StackPanel Margin="5" Grid.Row="11" Visibility="{Binding IsChartVisible, Converter={StaticResource BoolToVisibility}}">
                 <TextBlock>
                     <Hyperlink TextDecorations="Underline" Foreground="Black" FontSize="16" Command="{Binding ShowJobCommand}">Naar Opdracht</Hyperlink>
                 </TextBlock>
