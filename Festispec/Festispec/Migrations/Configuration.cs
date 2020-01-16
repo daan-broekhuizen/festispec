@@ -96,7 +96,7 @@
 
         private void SeedAccount(FestispecContext context)
         {
-            Account[] accounts = new Account[10];
+            Account[] accounts = new Account[11];
 
             accounts[0] = new Account()
             {
@@ -107,8 +107,8 @@
                 Tussenvoegsel = null,
                 Achternaam = "Klok",
                 Stad = "Amsterdam",
-                Straatnaam = "Dom H. van der Laanstraat",
-                Huisnummer = "10",
+                Straatnaam = "Jan van Houthof",
+                Huisnummer = "4",
                 Email = "HansKlok@gmail.be",
                 Telefoonnummer = "0495555555",
                 DatumCertificering = DateTime.Now,
@@ -275,6 +275,25 @@
                 DatumCertificering = DateTime.Now.AddMonths(-23).AddDays(3),
                 EinddatumCertificering = DateTime.Now.AddMonths(2),
                 IBAN = "NLRABO0098228",
+                LaatsteWijziging = DateTime.Now,
+            };
+
+            accounts[10] = new Account()
+            {
+                Gebruikersnaam = "Admin",
+                Wachtwoord = "ab123",
+                Rol = context.Rol.First(x => x.Afkorting == "ad").Afkorting,
+                Voornaam = "admin",
+                Tussenvoegsel = null,
+                Achternaam = "admin",
+                Stad = null,
+                Straatnaam = null,
+                Huisnummer = null,
+                Email = null,
+                Telefoonnummer = null,
+                DatumCertificering = null,
+                EinddatumCertificering = null,
+                IBAN = null,
                 LaatsteWijziging = DateTime.Now,
             };
 

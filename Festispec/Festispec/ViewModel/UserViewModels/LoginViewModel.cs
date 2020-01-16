@@ -64,7 +64,9 @@ namespace Festispec.ViewModel
             Account account = _userRepository.GetAccount(currentAccount);
             if (account != null && CanAccess(account))
                 _navigationService.ApplicationNavigateTo("Main", new AccountViewModel(account));
-            if(!CanAccess(account))
+            else if (account == null)
+                ErrorFeedback = "Onbekend account, heeft u uw gebruikersnaam correct geschreven?";
+            else if (!CanAccess(account))
                 ErrorFeedback = "Account heeft niet de juiste rechten";
             else
                 ErrorFeedback = "Gebruikersnaam wachtwoord combinatie is ongeldig";
