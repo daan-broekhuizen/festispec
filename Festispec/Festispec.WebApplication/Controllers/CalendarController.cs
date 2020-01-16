@@ -23,7 +23,7 @@ namespace Festispec.WebApplication.Controllers
             _repo.CreateAvailability(bi);
 
             return Ok(new
-                { 
+            { 
                 tid = bi.MedewerkerID,
                 action = "inserted"
             });
