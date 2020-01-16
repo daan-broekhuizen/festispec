@@ -58,7 +58,7 @@
     <ApplicationIcon>festispec logo image.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>1FD026EE4841D1EA8E26A960BC4F9782D188287D</ManifestCertificateThumbprint>
