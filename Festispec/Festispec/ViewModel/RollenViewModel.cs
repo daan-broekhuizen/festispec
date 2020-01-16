@@ -12,7 +12,7 @@ namespace Festispec.ViewModel
 {
     public class RollenViewModel : ViewModelBase
     {
-        private Rol rol;
+        private Rol _rol;
 
         public RollenViewModel()
         {
@@ -21,25 +21,25 @@ namespace Festispec.ViewModel
 
         public RollenViewModel(Rol rol)
         {
-            this.rol = rol;
+            this._rol = rol;
         }
 
         public string Afkorting
         {
-            get => rol.Afkorting;
+            get => _rol.Afkorting;
             set
             {
-                rol.Afkorting = value;
+                _rol.Afkorting = value;
                 RaisePropertyChanged("Afkorting");
             }
         }
 
         public string Betekenis
         {
-            get => rol.Betekenis;
+            get => _rol.Betekenis;
             set
             {
-                rol.Betekenis = value;
+                _rol.Betekenis = value;
                 RaisePropertyChanged("Betekenis");
             }
         }

@@ -55,8 +55,8 @@ namespace Festispec.ViewModel.QuotationViewModels
             get => "€" + Convert.ToString(_quotation.Totaalbedrag);
             set
             {
-                Decimal price;
-                if (Decimal.TryParse(value.Trim('€'), out price))
+                decimal price;
+                if (decimal.TryParse(value.Trim('€'), out price))
                 {
                     _quotation.Totaalbedrag = price;
                     RaisePropertyChanged("Price");

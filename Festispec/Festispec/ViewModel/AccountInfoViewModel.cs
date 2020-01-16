@@ -17,8 +17,8 @@ namespace Festispec.ViewModel
 {
     public class AccountInfoViewModel : ViewModelBase
     {
-        private NavigationService navigationService;
-        private UserRepository userRepo;
+        private NavigationService _navigationService;
+        private UserRepository _userRepo;
         public AccountViewModel AccountVM { get; set; }
         public List<string> Rol { get; set; }
 
@@ -26,8 +26,8 @@ namespace Festispec.ViewModel
         public ICommand SaveAccountInfoCommand { get; set; }
         public AccountInfoViewModel(NavigationService navigationService, UserRepository userRepo)
         {
-            this.navigationService = navigationService;
-            this.userRepo = userRepo;
+            this._navigationService = navigationService;
+            this._userRepo = userRepo;
 
             if (navigationService.Parameter is AccountViewModel)
                 AccountVM = navigationService.Parameter as AccountViewModel;
@@ -39,7 +39,7 @@ namespace Festispec.ViewModel
             SaveAccountInfoCommand = new RelayCommand(CanSaveAccount);
         }
 
-        private void ShowUserInfo() => navigationService.NavigateTo("UserInfo", AccountVM);
+        private void ShowUserInfo() => _navigationService.NavigateTo("UserInfo", AccountVM);
 
         private void CanSaveAccount()
         {
@@ -48,7 +48,7 @@ namespace Festispec.ViewModel
             if (result.Errors.Count() == 0)
             {
                 //if validated update account
-                userRepo.UpdateAccount(new Account()
+                _userRepo.UpdateAccount(new Account()
                 {
                     AccountID = AccountVM.Id,
                     Gebruikersnaam = AccountVM.Username,

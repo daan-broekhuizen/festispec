@@ -100,11 +100,11 @@ namespace Festispec.ViewModel
             }
         }
         #endregion
-        public AddJobViewModel(NavigationService service, JobRepository repo, CustomerRepository Crepo, StatusRepository Srepo)
+        public AddJobViewModel(NavigationService service, JobRepository repo, CustomerRepository cRepo, StatusRepository sRepo)
         {
             _navigationService = service;
             _jobRepo = repo;
-            _customerRepo = Crepo;
+            _customerRepo = cRepo;
 
             if (service.Parameter is JobViewModel)
                 JobVM = service.Parameter as JobViewModel;
@@ -117,15 +117,13 @@ namespace Festispec.ViewModel
 
             //Set statusses
             Status = new List<string>();
-            Srepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
+            sRepo.GetAllStatus().ForEach(e => Status.Add(e.Betekenis));
             JobVM.Status = Status.FirstOrDefault(s => s.Equals("Nieuwe opdracht"));
 
             JobVM.StartDatum = DateTime.Today;
             JobVM.EindDatum = DateTime.Today;
             SaveJobCommand = new RelayCommand(CanSaveJob);
             PreviousPageCommand = new RelayCommand(PreviousPage);
-
-
         }
 
         private void PreviousPage()
@@ -155,50 +153,49 @@ namespace Festispec.ViewModel
         private void CanSaveJob()
         {
             List<ValidationFailure> errors = new JobValidator().Validate(JobVM).Errors.ToList();
-            ValidationFailure jobnameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
-            ValidationFailure customernameError = errors.Where(e => e.PropertyName.Equals("CustomerID")).FirstOrDefault();
-            ValidationFailure begindateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
-            ValidationFailure enddateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
+            ValidationFailure jobnNameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
+            ValidationFailure customerNameError = errors.Where(e => e.PropertyName.Equals("CustomerID")).FirstOrDefault();
+            ValidationFailure beginDateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
+            ValidationFailure endDateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
             ValidationFailure statusError = errors.Where(e => e.PropertyName.Equals("Status")).FirstOrDefault();
-            ValidationFailure customerwishesError = errors.Where(e => e.PropertyName.Equals("CustomerWishes")).FirstOrDefault();
+            ValidationFailure customerWishesError = errors.Where(e => e.PropertyName.Equals("CustomerWishes")).FirstOrDefault();
 
-
-            if (jobnameError == null && customernameError == null && begindateError == null && enddateError == null && statusError == null && customerwishesError == null)
+            if (jobnNameError == null && customerNameError == null && beginDateError == null && endDateError == null && statusError == null && customerWishesError == null)
             {
                 SaveJob();
                 _navigationService.NavigateTo("Jobs");
                 return;
             }
 
-            if (jobnameError != null)
-            {
-                JobNameError = jobnameError.ErrorMessage;
-            }
-            else JobNameError = "";
-            if (customernameError != null)
-            {
-                CustomerNameError = customernameError.ErrorMessage;
-            }
-            else CustomerNameError = "";
-            if (begindateError != null)
-            {
-                BeginDateError = begindateError.ErrorMessage;
-            }
-            else BeginDateError = "";
-            if (enddateError != null)
-            {
-                EndDateError = enddateError.ErrorMessage;
-            }
-            else EndDateError = "";
+            if (jobnNameError != null)
+                JobNameError = jobnNameError.ErrorMessage;
+            else
+                JobNameError = "";
+
+            if (customerNameError != null)
+                CustomerNameError = customerNameError.ErrorMessage;
+            else
+                CustomerNameError = "";
+
+            if (beginDateError != null)
+                BeginDateError = beginDateError.ErrorMessage;
+            else
+                BeginDateError = "";
+
+            if (endDateError != null)
+                EndDateError = endDateError.ErrorMessage;
+            else
+                EndDateError = "";
+
             if (statusError != null)
-            {
                 StatusError = statusError.ErrorMessage;
-            }
-            else StatusError = "";
-            if(customerwishesError != null) {
-                CustomerWishesError = customerwishesError.ErrorMessage;
-            }
-            else CustomerWishesError = "";
+            else
+                StatusError = "";
+
+            if(customerWishesError != null)
+                CustomerWishesError = customerWishesError.ErrorMessage;
+            else
+                CustomerWishesError = "";
 
         }
     }

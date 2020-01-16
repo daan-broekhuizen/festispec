@@ -84,7 +84,8 @@ namespace Festispec.ViewModel.QuotationViewModels
         private bool CanCreate() => QuotationVM.Status == "Offerte geweigerd" && QuotationVM.IsLatestQuotation == true;
         private bool CanEdit()
         {
-            if (IsSendable) return true;
+            if (IsSendable)
+                return true;
             else
             {
                 Messenger.Default.Send("Een verstuurde offerte kan niet gewijzigd worden. " +
@@ -95,7 +96,8 @@ namespace Festispec.ViewModel.QuotationViewModels
         private bool CanRegisterDecision() => QuotationVM.Status == "Offerte verstuurt";
         private void SaveQuotation()
         {
-            if (!CanEdit()) return;
+            if (!CanEdit())
+                return;
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
             if(result.IsValid)
             {
@@ -122,7 +124,7 @@ namespace Festispec.ViewModel.QuotationViewModels
         }
         private void UpdateQuotation()
         {
-            Decimal.TryParse(QuotationVM.Price.Trim('€'), out decimal price);
+            decimal.TryParse(QuotationVM.Price.Trim('€'), out decimal price);
             _quotationRepository.UpdateQuotation(new Offerte()
             {
                 OfferteID = QuotationVM.QuotationId,
