@@ -65,7 +65,8 @@ namespace Festispec.WebApplication.Controllers
         {
             foreach (TableAnswerViewModel a in questionVM.TableAnswers)
             {
-                if (a.Text == null) continue;
+                if (a.Text == null)
+                    continue;
                 questionVM.Answer.AntwoordText = a.Text;
                 questionVM.Answer.AntwoordNummer = a.Id;
                 Antwoorden toUpdate = _formRepo.GetAnswer(questionVM.Answer);

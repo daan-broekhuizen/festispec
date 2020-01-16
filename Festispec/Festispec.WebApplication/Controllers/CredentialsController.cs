@@ -29,9 +29,8 @@ namespace Festispec.WebApplication.Controllers
         public ActionResult Login()
         {
             if(Session["user"] != null)
-            {
                 Session.Remove("user");
-            }
+
             return View();
         }
 
