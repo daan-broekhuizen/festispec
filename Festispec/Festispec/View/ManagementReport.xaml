@@ -75,7 +75,7 @@
             <ContentControl x:Name="controlSalesChart" Content="{Binding SalesChartControl}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  />
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Status van offertes" Grid.Column="0" Grid.Row="0"/>
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Cerficering inspecteurs" Grid.Column="2" Grid.Row="0"/>
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Certificering inspecteurs" Grid.Column="2" Grid.Row="0"/>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" Text="Omzet" Grid.Column="0" Grid.Row="2"/>
 
             <Grid Grid.Row="2" Grid.Column="2">

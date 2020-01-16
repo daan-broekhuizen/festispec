@@ -122,7 +122,7 @@ namespace Festispec.ViewModel
             SalesChartViewModel = new BarChartViewModel();
             SalesChartControl = SalesChartViewModel.BuildControl();
 
-            StartDate = new DateTime(2019, 11, 11);
+            StartDate = DateTime.Now;
 
             UpdateCharts();
         }
@@ -237,9 +237,7 @@ namespace Festispec.ViewModel
             }
 
             for (int i = 0; i < inspectorValues.Length; i++)
-            {
                 response.Add(inspectorValues[i]);
-            }
 
             return response;
         }
@@ -280,18 +278,14 @@ namespace Festispec.ViewModel
                         {
                             e.FirstOrDefault();
                             if (e.FirstOrDefault().Opdracht.Status.Equals("Offerte geaccepteerd"))
-                            {
                                 salesValues[e.FirstOrDefault().Aanmaakdatum.Month - 1] += (double)e.FirstOrDefault().Totaalbedrag;
-                            }
                         });
                         break;
                 }
             }
 
             for (int i = 0; i < salesValues.Length; i++)
-            {
                 response.Add(salesValues[i]);
-            }
 
             return response;
         }
