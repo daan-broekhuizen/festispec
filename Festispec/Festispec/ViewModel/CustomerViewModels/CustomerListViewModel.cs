@@ -19,13 +19,13 @@ namespace Festispec.ViewModel
     {
         #region BindingProperties
         public ObservableCollection<CustomerViewModel> Customers { get; set; }
-        private List<CustomerViewModel> filteredcustomers;
+        private List<CustomerViewModel> _filteredcustomers;
         public List<CustomerViewModel> FilteredCustomers
         {
-            get => filteredcustomers;
+            get => _filteredcustomers;
             set
             {
-                filteredcustomers = value;
+                _filteredcustomers = value;
                 RaisePropertyChanged("FilteredCustomers");
             }
         }

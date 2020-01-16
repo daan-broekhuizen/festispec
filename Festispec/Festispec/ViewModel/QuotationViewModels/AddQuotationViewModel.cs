@@ -60,14 +60,17 @@ namespace Festispec.ViewModel.QuotationViewModels
             Opdracht job = _quotationRepository.GetJob(QuotationVM.JobId);
             _navigationService.NavigateTo("JobInfo", new JobViewModel(job));
         }
+
         private void SaveQuotation()
         {
-            if (QuotationVM.JobId < 1) return;
+            if (QuotationVM.JobId < 1)
+                return;
+
             ValidationResult result = new QuotationValidator().Validate(QuotationVM);
             if (result.IsValid)
             {
                 decimal price;
-                Decimal.TryParse(QuotationVM.Price.Trim('€'), out price);
+                decimal.TryParse(QuotationVM.Price.Trim('€'), out price);
                 Offerte quotation = new Offerte()
                 {
                     OpdrachtID = QuotationVM.JobId,
@@ -87,12 +90,14 @@ namespace Festispec.ViewModel.QuotationViewModels
             else
             {
                 ValidationFailure descriptionError = result.Errors.Where(e => e.PropertyName == "Description").FirstOrDefault();
+
                 if (descriptionError != null)
                     DescriptionError = descriptionError.ToString();
                 else
                     DescriptionError = "";
 
                 ValidationFailure priceError = result.Errors.Where(e => e.PropertyName == "Price").FirstOrDefault();
+
                 if (priceError != null)
                     PriceError = priceError.ToString();
                 else

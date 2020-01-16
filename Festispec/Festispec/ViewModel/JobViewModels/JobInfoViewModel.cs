@@ -43,13 +43,13 @@ namespace Festispec.ViewModel
         public List<string> Status { get; set; }
 
         #region ErrorProperties
-        private string _jobnameError;
+        private string _jobNameError;
         public string JobNameError
         {
-            get => _jobnameError;
+            get => _jobNameError;
             set
             {
-                _jobnameError = value;
+                _jobNameError = value;
                 RaisePropertyChanged("JobNameError");
             }
         }
@@ -87,13 +87,13 @@ namespace Festispec.ViewModel
             }
         }
 
-        private string _customerwishesError;
+        private string _customerWishesError;
         public string CustomerWishesError
         {
-            get => _customerwishesError;
+            get => _customerWishesError;
             set
             {
-                _customerwishesError = value;
+                _customerWishesError = value;
                 RaisePropertyChanged("CustomerWishesError");
             }
         }
@@ -119,10 +119,13 @@ namespace Festispec.ViewModel
 
         private void ShowQuotation()
         {
-            if (JobVM == null) return;
+            if (JobVM == null)
+                return;
+
             Offerte latest = _quotationRepo.GetQuotations()
                 .Where(q => q.OpdrachtID == JobVM.JobID)
-                .OrderByDescending(q => q.OfferteID).FirstOrDefault(); //TODO: ERROR
+                .OrderByDescending(q => q.OfferteID).FirstOrDefault();
+
             if (latest != null)
                 _navigationService.NavigateTo("ShowQuotation", new QuotationViewModel(latest, _quotationRepo));
             else
@@ -174,59 +177,57 @@ namespace Festispec.ViewModel
         private void CanSaveJob()
         {
             List<ValidationFailure> errors = new JobValidator().Validate(JobVM).Errors.ToList();
-            ValidationFailure jobnameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
-            ValidationFailure begindateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
-            ValidationFailure enddateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
+            ValidationFailure jobNameError = errors.Where(e => e.PropertyName.Equals("JobName")).FirstOrDefault();
+            ValidationFailure beginDateError = errors.Where(e => e.PropertyName.Equals("StartDatum")).FirstOrDefault();
+            ValidationFailure endDateError = errors.Where(e => e.PropertyName.Equals("EindDatum")).FirstOrDefault();
             ValidationFailure statusError = errors.Where(e => e.PropertyName.Equals("Status")).FirstOrDefault();
-            ValidationFailure customerwishesError = errors.Where(e => e.PropertyName.Equals("CustomerWishes")).FirstOrDefault();
+            ValidationFailure customerWishesError = errors.Where(e => e.PropertyName.Equals("CustomerWishes")).FirstOrDefault();
 
 
-            if (jobnameError == null && begindateError == null && enddateError == null && statusError == null && customerwishesError == null)
+            if (jobNameError == null && beginDateError == null && endDateError == null && statusError == null && customerWishesError == null)
             {
                 SaveJob();
                 _navigationService.NavigateTo("Jobs");
                 return;
             }
 
-            if (jobnameError != null)
-            {
-                JobNameError = jobnameError.ErrorMessage;
-            }
-            else JobNameError = "";
-            if (begindateError != null)
-            {
-                BeginDateError = begindateError.ErrorMessage;
-            }
-            else BeginDateError = "";
-            if (enddateError != null)
-            {
-                EndDateError = enddateError.ErrorMessage;
-            }
-            else EndDateError = "";
-            if (statusError != null)
-            {
-                StatusError = statusError.ErrorMessage;
-            }
-            else StatusError = "";
-            if (customerwishesError != null)
-            {
-                CustomerWishesError = customerwishesError.ErrorMessage;
-            }
-            else CustomerWishesError = "";
+            if (jobNameError != null)
+                JobNameError = jobNameError.ErrorMessage;
+            else
+                JobNameError = "";
 
+            if (beginDateError != null)
+                BeginDateError = beginDateError.ErrorMessage;
+            else
+                BeginDateError = "";
+
+            if (endDateError != null)
+                EndDateError = endDateError.ErrorMessage;
+            else
+                EndDateError = "";
+
+            if (statusError != null)
+                StatusError = statusError.ErrorMessage;
+            else
+                StatusError = "";
+
+            if (customerWishesError != null)
+                CustomerWishesError = customerWishesError.ErrorMessage;
+            else
+                CustomerWishesError = "";
         }
 
         private void SaveJobOffline()
         {
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "/bin/opdrachten.json";
-            List<JsonJob> jsonarray = new List<JsonJob>();
+            List<JsonJob> jsonArray = new List<JsonJob>();
             JsonJob jobToSave = (JsonJob)_jobRepo.GetSingleJob(JobVM.JobID);
             if (!File.Exists(path))
             {
-                jsonarray.Add(jobToSave);
+                jsonArray.Add(jobToSave);
                 using (StreamWriter sw = File.CreateText(path))
                 {
-                    sw.WriteLine(JsonConvert.SerializeObject(jsonarray));
+                    sw.WriteLine(JsonConvert.SerializeObject(jsonArray));
                 }
             }
             else

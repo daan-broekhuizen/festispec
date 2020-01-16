@@ -14,19 +14,21 @@ namespace Festispec.ViewModel.QuotationViewModels
 {
     public class QuotationListViewModel : NavigatableViewModel
     {
-        private QuotationViewModel selectedQuotation;
+        private QuotationViewModel _selectedQuotation;
         public QuotationViewModel SelectedQuotation 
         { 
-            get => selectedQuotation;
+            get => _selectedQuotation;
             set
             {
-                selectedQuotation = value;
+                _selectedQuotation = value;
                 RaisePropertyChanged("SelectedQuotation");
                 ShowQuotation();
             }
         }
         public ObservableCollection<QuotationViewModel> Quotations { get; set; }
+
         private List<QuotationViewModel> _filteredQuotations;
+
         public List<QuotationViewModel> FilteredQuotations
         {
             get => _filteredQuotations;
@@ -43,7 +45,6 @@ namespace Festispec.ViewModel.QuotationViewModels
 
         private Color[] _colorOrderAsc = { Colors.Green, Colors.Yellow, Colors.Blue, Colors.Red, Colors.Black };
         private Color[] _colorOrderDsc = { Colors.Red, Colors.Blue, Colors.Yellow, Colors.Green, Colors.Black };
-
 
         private QuotationRepository _quotationRepository;
         public QuotationListViewModel(NavigationService service, QuotationRepository repo) : base(service)
@@ -82,17 +83,16 @@ namespace Festispec.ViewModel.QuotationViewModels
                     break;
             }
         }
+
         private void FilterQuotations(string searchText)
         {
             FilteredQuotations = Quotations.Where(q => q.Job.ToLower().Contains(searchText.ToLower()) || q.Status.ToLower() == searchText.ToLower()).ToList();
         }
+
         private void ShowQuotation()
         {
             if(SelectedQuotation != null)
                 _navigationService.NavigateTo("ShowQuotation", SelectedQuotation);
         }
-
-
-
     }
 }

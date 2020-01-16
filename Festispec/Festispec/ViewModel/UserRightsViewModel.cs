@@ -15,10 +15,10 @@ namespace Festispec.ViewModel
         public ObservableCollection<AccountViewModel> Accounts;
         public ObservableCollection<RollenViewModel> Roles { get; set; }
         public ObservableCollection<string> RolItems { get; set; }
-        private List<AccountViewModel> filteredAccounts;
-        private List<RollenViewModel> currentRollen;
+        private List<AccountViewModel> _filteredAccounts;
+        private List<RollenViewModel> _currentRollen;
         public List<string> RolsString;
-        private NavigationService navigationService;
+        private NavigationService _navigationService;
         public ICommand AddUser { get; set; }
 
 
@@ -28,31 +28,31 @@ namespace Festispec.ViewModel
 
         public List<AccountViewModel> FilteredAccounts
         {
-            get => filteredAccounts;
+            get => _filteredAccounts;
             set
             {
-                filteredAccounts = value;
+                _filteredAccounts = value;
                 RaisePropertyChanged("FilteredAccounts");
             }
         }
 
         public List<RollenViewModel> CurrentRoles
         {
-            get => currentRollen;
+            get => _currentRollen;
             set
             {
-                currentRollen = value;
+                _currentRollen = value;
                 RaisePropertyChanged("FilteredAccounts");
             }
         }
 
-        private AccountViewModel selectedAccount;
+        private AccountViewModel _selectedAccount;
         public AccountViewModel SelectedAccount
         {
-            get => selectedAccount;
+            get => _selectedAccount;
             set
             {
-                selectedAccount = value;
+                _selectedAccount = value;
                 RaisePropertyChanged("SelectedAccount");
                 ShowUserInfo();
             }
@@ -64,7 +64,7 @@ namespace Festispec.ViewModel
 
         public UserRightsViewModel(NavigationService service, UserRepository repo) 
         {
-            navigationService = service;
+            _navigationService = service;
             Accounts = new ObservableCollection<AccountViewModel>(repo.GetUsers().Select(c => new AccountViewModel(c)).ToList());
             Roles = new ObservableCollection<RollenViewModel>(repo.GetRols().Select(c => new RollenViewModel(c)).ToList());
 
@@ -82,7 +82,7 @@ namespace Festispec.ViewModel
 
         private void OpenAddUser()
         {
-            navigationService.NavigateTo("AddUser");
+            _navigationService.NavigateTo("AddUser");
         }
 
         private void ChangeSort(int sortMode)
@@ -101,7 +101,7 @@ namespace Festispec.ViewModel
         private void ShowUserInfo()
         {
             if (SelectedAccount != null)
-                navigationService.NavigateTo("AccountInfo", SelectedAccount);
+                _navigationService.NavigateTo("AccountInfo", SelectedAccount);
         }
     }
 }

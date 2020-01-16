@@ -15,26 +15,26 @@ namespace Festispec.ViewModel.OfflineViewModels
 {
     public class OfflineJobListViewModel : ViewModelBase
     {
-        private List<OfflineJobViewModel> jobs;
+        private List<OfflineJobViewModel> _jobs;
 
         public List<OfflineJobViewModel> Jobs
         {
-            get => jobs;
+            get => _jobs;
             set
             {
-                jobs = value;
+                _jobs = value;
                 RaisePropertyChanged("Jobs");
             }
         }
 
-        private List<OfflineJobViewModel> filteredJobs;
+        private List<OfflineJobViewModel> _filteredJobs;
 
         public List<OfflineJobViewModel> FilteredJobs
         {
-            get => filteredJobs;
+            get => _filteredJobs;
             set
             {
-                filteredJobs = value;
+                _filteredJobs = value;
                 RaisePropertyChanged("FilteredJobs");
             }
         }
@@ -69,14 +69,14 @@ namespace Festispec.ViewModel.OfflineViewModels
 
         public string FilterJob { get; set; }
         
-        private OfflineJobRepository OfflineJobRepo { get; set; }
+        private OfflineJobRepository _offlineJobRepo { get; set; }
         public ICommand SearchJob { get; set; }
         private NavigationService _navigationService;
         public OfflineJobListViewModel(NavigationService service)
         {
             _navigationService = service;
-            OfflineJobRepo = new OfflineJobRepository();
-            Jobs = OfflineJobRepo
+            _offlineJobRepo = new OfflineJobRepository();
+            Jobs = _offlineJobRepo
                     .GetOfflineOpdrachten(Directory.GetParent(Directory
                     .GetCurrentDirectory()).Parent.FullName + 
                     "/bin/opdrachten.json")

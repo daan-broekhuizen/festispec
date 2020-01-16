@@ -29,7 +29,6 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         private Vraag _question;
         public bool Changed;
         public bool Created;
-        
 
         public ICommand ImageButton { get; set; }
 
@@ -39,20 +38,17 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             InspectionFormID = inspec.InspectieformulierID;
             Changed = false;
             if (_question.VraagMogelijkAntwoord.Count() > 0)
-            {
                 AddPossibleAnwsersCreate();
-            }
             else
-            {
                 AddPossibleAnwsers();
-            }
+
             if (_question.AfbeeldingURL != null)
             {
                 WebRequest webRequest = WebRequest.CreateDefault(new Uri("http://" + _question.AfbeeldingURL, UriKind.Absolute));
                 webRequest.ContentType = "image/jpeg";
                 WebResponse webResponse = webRequest.GetResponse();
 
-                var image = new BitmapImage();
+                BitmapImage image = new BitmapImage();
                 image.CreateOptions = BitmapCreateOptions.None;
                 image.CacheOption = BitmapCacheOption.OnLoad;
                 image.BeginInit();
@@ -75,9 +71,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 Changed = true;
                 if (PossibleAnwsers != null)
                     foreach(var anwser in PossibleAnwsers)
-                    {
                         anwser.QuestionNumber = _question.VraagID;
-                    }
                 
                 RaisePropertyChanged("QuestionID");
             }
@@ -194,10 +188,13 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 int oldSize = PossibleAnwsers.Count();
                 for (int i = MultipleAnwsersAmount; i < oldSize; i++)
                 {
-                    if (updateModel){_question.VraagMogelijkAntwoord.Remove(PossibleAnwsers[MultipleAnwsersAmount].PossibleAnwser);}
+                    if (updateModel)
+                        _question.VraagMogelijkAntwoord.Remove(PossibleAnwsers[MultipleAnwsersAmount].PossibleAnwser);
+
                     PossibleAnwsers.RemoveAt(MultipleAnwsersAmount);
                 } 
-            }else if(MultipleAnwsersAmount > PossibleAnwsers.Count())
+            }
+            else if(MultipleAnwsersAmount > PossibleAnwsers.Count())
             {
                 int oldSize = PossibleAnwsers.Count();
                 for (int i = oldSize; i < MultipleAnwsersAmount; i++)
@@ -226,7 +223,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if (_question.Vraagtype == "mv" || _question.Vraagtype == "tv")
             {
                 List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
-                foreach (var answer in _question.VraagMogelijkAntwoord)
+                foreach (VraagMogelijkAntwoord answer in _question.VraagMogelijkAntwoord)
                 {
                     PossibleAnwserViewModel answerModelnew = new PossibleAnwserViewModel(new VraagMogelijkAntwoord
                     {
@@ -266,15 +263,15 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                         amount = 2;
                         break;
                 }
-                    
 
                 List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
                 bool updateModelDirect = false;
                 if (_question.VraagMogelijkAntwoord.Count != 0)
-                    {
+                {
                     _question.VraagMogelijkAntwoord.Clear();
                     updateModelDirect = true;
-                    }
+                }
+
                 for (int i = 1; i < amount+1; i++)
                 {
                     PossibleAnwserViewModel answerModelnew = new PossibleAnwserViewModel(new VraagMogelijkAntwoord
@@ -283,7 +280,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                         AntwoordNummer = i,
                         AntwoordText = (i).ToString()
                     });
-                    if (updateModelDirect){_question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);}
+                    if (updateModelDirect)
+                        _question.VraagMogelijkAntwoord.Add(answerModelnew.PossibleAnwser);
                     newPosAnwsers.Add(answerModelnew);
                 }
                 PossibleAnwsers = new ObservableCollection<PossibleAnwserViewModel>(newPosAnwsers);
@@ -297,9 +295,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             if(ScaleSize == 0){return;}
             List<PossibleAnwserViewModel> newPosAnwsers = new List<PossibleAnwserViewModel>();
             if (_question.VraagMogelijkAntwoord.Count() != 0)
-            {
                 _question.VraagMogelijkAntwoord.Clear();
-            }
             
             for (int i = 0; i < ScaleSize; i++)
             {
@@ -340,7 +336,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     bm.EndInit();
                     return bm;
                 }
-                else{return _image;}
+                else
+                    return _image;
             }
             set
             {
@@ -421,7 +418,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         {
             ImageSelectService selectionService = new ImageSelectService();
             BitmapImage image = selectionService.SelectPngImage();
-            if(image.UriSource == null){return;}
+            if(image.UriSource == null)
+                return;
 
             Image = image;
             string fileLocation = Image.UriSource.AbsolutePath;

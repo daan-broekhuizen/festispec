@@ -178,10 +178,10 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
 
         public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo)
-        {//deze constructor wordt gebruikt om het vm te maken voor de vragenlijst
+        {
             _navigationService = nav;
             _repo = repo;
-            if (nav.Parameter is Inspectieformulier)//als er een al bestaande inspectieformulier wordt meegegeven
+            if (nav.Parameter is Inspectieformulier)
             {
                 InspectionForm = (Inspectieformulier)nav.Parameter;
                 if (InspectionForm.InspectieformulierID == 0)
@@ -191,7 +191,8 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                     Save();
                 }
             }
-            else if(nav.Parameter is int){//als er geen inspectieformulier wordt meegegeven en een nieuwe moet worden aangemaakt.
+            else if(nav.Parameter is int)
+            {
                 InspectionForm = new Inspectieformulier();
                 Titel = "Nieuw formulier";
                 Description = "Formulier beschrijving";
@@ -200,7 +201,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
                 NewInspectionForm = true;
                 Save();
             }
-            else if(nav.Parameter is null)//dit is het geval bij het aanmaken van een template
+            else if(nav.Parameter is null)
             {
                 InspectionForm = new Inspectieformulier();
                 Titel = "Nieuw formulier template";
@@ -215,7 +216,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
         }
 
         public InspectionFormViewModel(NavigationService nav, InspectionFormRepository repo, Inspectieformulier form)
-        {//deze constructor wordt gebruikt om de vms te maken die de vragenlijsten showen in de list
+        {
             _navigationService = nav;
             _repo = repo;
             InspectionForm = form;

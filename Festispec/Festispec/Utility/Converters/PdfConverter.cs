@@ -121,7 +121,6 @@ namespace Festispec.Utility.Converters
 
         private string[] GetLines(string arg)
         {
-            
             int chars = arg.Length;
             string tmp = arg;
 

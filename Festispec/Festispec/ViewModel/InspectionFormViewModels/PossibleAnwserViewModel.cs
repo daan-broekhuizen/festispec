@@ -27,7 +27,7 @@ namespace Festispec.ViewModel.InspectionFormViewModels
             }
         }
 
-        public String AnwserTextString
+        public string AnwserTextString
         {
             get => _possibleAnwser.AntwoordText;
             set

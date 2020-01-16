@@ -15,7 +15,11 @@ namespace Festispec.ViewModel.InspectionFormViewModels
 
         private Inspectieformulier _template;
 
-        public Inspectieformulier Template { get => _template; set => _template = value; }
+        public Inspectieformulier Template
+        {
+            get => _template;
+            set => _template = value;
+        }
 
         public CreateInspectionFormViewModel(NavigationService navigationService)
         {

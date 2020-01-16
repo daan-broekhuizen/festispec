@@ -66,7 +66,7 @@ namespace Festispec.ViewModel
             }
 
         }
-        private JobRepository JobRepository { get; set; }
+        private JobRepository _jobRepository { get; set; }
         public ICommand SearchJob { get; set; }
         public ICommand ShowAddJobCommand { get; set; }
         private NavigationService _navigationService;
@@ -75,8 +75,8 @@ namespace Festispec.ViewModel
         public JobListViewModel(NavigationService service)
         {
             _navigationService = service;
-            JobRepository = new JobRepository();
-            Jobs = JobRepository.GetOpdrachten().Select(c => new JobViewModel(c)).ToList();
+            _jobRepository = new JobRepository();
+            Jobs = _jobRepository.GetOpdrachten().Select(c => new JobViewModel(c)).ToList();
             FilteredJobs = Jobs;
             ShowAddJobCommand = new RelayCommand(ShowAddJob);
             SearchButtonClickCommand = new RelayCommand<string>(FilterJobs);
